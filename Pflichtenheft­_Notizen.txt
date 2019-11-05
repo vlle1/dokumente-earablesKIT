@@ -1,0 +1,47 @@
+Pflichtenheft:
+
+Zielbestimmung:
+Musskriterien
+o	Bluetooth Verbindung
+o	Bibliothek für Schritterkennung (Frequenz)
+o	Gerätedaten auslesen (parsen, etc.)
+o	GUI Anwendung
+
+Wunschkriterien
+o	Daten visualisieren
+o	Situps/Liegestützen erkennen
+o	Sprachanweisung in Bezug auf Trainingsprogramm
+
+Abgrenzungskriterien
+o	Musik nicht veränderbar
+o	Datenspeicherung nur auf dem Device
+o	Bewusstes Austricksen der Messungen werden nicht beachtet
+
+Funktionale Anordnungen
+-	Messung konfigurieren
+-	Der User kann seine Einstellungen als Datei exportieren/importieren
+-	Der Benutzer kann Liegestützen/Situps für einen zählen lassen
+
+Nichtfunktionale Anforderungen
+-	Die GUI muss ansprechend wirken
+-	Package lost behandeln?
+
+
+Produktdaten:
+-	Es werden die Trainingsdaten auf dem Gerät gespeichert  
+
+GUI:
+1.	Messdaten anzeigen
+2.	Setting Website
+3.	Lauf tracken
+4.	Situps/Liegestützen zählen
+5.	Trainingsprogramm per Text to Speech
+
+Fragen an Kunden:
+-	Wie genau Schritterkennung? Echtzeit?
+-	Können wir die Funktionalität flexibler gestalten?
+-	Müssen wir die Musik anpassen können? Essenziell?
+-	Nichtfunktionale Anforderungen? Welche genau? Woher kann man die Realisierbarkeit abschätzen? Wie lange muss es dauern?
+-	Was genau ist das Architekturdiagramm
+-	Kann man die Struktur des Lastenheftes verändern?
+-	
