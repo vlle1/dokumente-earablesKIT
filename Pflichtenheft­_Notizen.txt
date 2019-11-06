@@ -5,7 +5,8 @@ Musskriterien
 o	Bluetooth Verbindung
 o	Bibliothek für Schritterkennung (Frequenz)
 o	Gerätedaten auslesen (parsen, etc.)
-o	GUI Anwendung
+o	Cross-Plattform GUI Anwendung
+(o   Open-Source im Sinne der MIT Lizenz)
 
 Wunschkriterien
 o	Daten visualisieren
@@ -16,10 +17,11 @@ Abgrenzungskriterien
 o	Musik nicht veränderbar
 o	Datenspeicherung nur auf dem Device
 o	Bewusstes Austricksen der Messungen werden nicht beachtet
+o   Nur von Xamarin unterstütze Geräte werden unterstützt
 
 Funktionale Anordnungen
--	Messung konfigurieren
--	Der User kann seine Einstellungen als Datei exportieren/importieren
+-	Der Benutzer muss die Parameter der Messung konfigurieren können
+-	Der Benutzer kann seine Einstellungen als Datei exportieren/importieren
 -	Der Benutzer kann Liegestützen/Situps für einen zählen lassen
 
 Nichtfunktionale Anforderungen
@@ -28,7 +30,7 @@ Nichtfunktionale Anforderungen
 
 
 Produktdaten:
--	Es werden die Trainingsdaten auf dem Gerät gespeichert  
+-	Die Trainingsdaten werden von der Anwendung auf dem Gerät gespeichert  
 
 GUI:
 1.	Messdaten anzeigen
@@ -45,3 +47,16 @@ Fragen an Kunden:
 -	Was genau ist das Architekturdiagramm
 -	Kann man die Struktur des Lastenheftes verändern?
 -	
+
+
+
+
+###############################
+Glossar:
+
+GUI:        grafische Benutzeroberfläche
+Benutzer:   Verwender der Anwendung/Bibliotheken. Nicht der Product-Owner
+Cross-Plattform:    Die Anwendung und Bibliothek müssen auf allen von Xamarin unterstützten Geräten funktionsfähig sein
+
+
+###############################
