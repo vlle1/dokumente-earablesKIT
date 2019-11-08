@@ -39,6 +39,10 @@ GUI:
 4.	Situps/Liegestützen zählen
 5.	Trainingsprogramm per Text to Speech
 
+Definitionen von Begriffen 
+-   statt Echtzeit lieber "live" verwenden, live := mit einer Verzögerung von maximal 3 Sekunden
+
+
 Fragen an Kunden:
 -	Wie genau Schritterkennung? Echtzeit?
 -	Können wir die Funktionalität flexibler gestalten?

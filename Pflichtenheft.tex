@@ -80,48 +80,106 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-
+TODO Erwin
+was ist die motivation? "smarte kopfhörer sind heute zugänglich", relevanz,...
 \section{Zielbestimmung}
+TODO Erwin
+
+Cross-Plattform:    Die Anwendung und Bibliothek müssen auf allen von Xamarin unterstützten Geräten funktionsfähig sein
+
+Einsatzort, was wollen wir machen? App, die Crossplattform, wo wir die Kopfhörer nutzen um 
+Aktivität zu messen, u.a. die man auch mit Smartphone /Watch schlecht messen kann (Liegestütze).
 \subsection{Musskriterien}
+-> ausformulierte Stichpunkte
+-> noch mal in originaltext schauen und sachen möglichst präzise formulieren, Gliedern in Bibliothek, App und Anwendungsfall
+1. Bibliothek: Bluetooth Verbindung bauen, Messdaten auslesen (Verbindung mit 6 Achsen IMU zur Datenübertragung), Änderung der Steuerungsparameter 
+(Gerätedaten auslesen (parsen, etc.))
+2. Erweiterungsmodul (Bibliothek) (Schritterkennung (Start/Stopp))
+3. APP: Cross-Plattform GUI Anwendung mit Datenanzeige (Laufen/Stehen anzeigen) und Möglichkeit, Steuerungsparameter anzupassen. (Glossareintrag Steuerungsparameter: wie oft gemessen wird)
+dazu Glossareintrag: GUI:        grafische Benutzeroberfläche
 \subsection{Wunschkriterien}
-\subsection{Abgrenzungskriterien}
+1. in Bib nichts\dots
+2. Erweiterungsmodul: Schrittfrequenz, Distanzmessung und Schrittanzahl, Situps, Liegestützen erkennen, 
+3. App: verschiedene Modi: 
+
+  livedaten: Erkennung Daten visualisieren
+  counter: Zählen von Situps / Liegestützen
+  musik starten/stoppen (laufen/anhalten)
+	listen and perform: Trainingsplan manuell zusammenstellen, Sprachanweisung in Bezug auf Trainingsprogramm, Erkennung wann einzelne Aktivität fertig usw. 
+  es soll in der app einstellungen geben (Sprache, Name), steuerungsparameter sollen manuell anpassbar sein
+
+  Exportieren und Importieren von Trainingsdaten
+  \subsection{Abgrenzungskriterien}
+  o	Musikgeschwindigkeit nicht veränderbar
+o	Datenspeicherung nur auf dem Device, keine Rohdaten
+o	Bewusstes Austricksen der Messungen werden nicht beachtet
+
 % Was will ich bewusst nicht umsetzen?
 % Was soll es nicht sein?
 
 \section{Produkteinsatz}
+TODO David 
+Benutzer:   Verwender der Anwendung/Bibliotheken. Nicht der Product-Owner
 % Zielgruppe
 % Anwendungsbereiche
 % Betriebsbedinugen
 % Wer? Was? Wozu?
 
 \section{Produktumgebung}
+TODO David
+handy: nach xamarin richten. konkret hier rein schreiben, wie alt ca. geräte, iOS/Android
 % Unter welcher Software / Hardware läuft es?
 
 \section{Funktionale Anforderungen}
+TODO Valle Koordination
 % Was soll das Produkt machen können
+gliedern in muss und wunsch:
+  \subsection{Mussanforderungen}
+    \subsubsection{Bibliothek}
+    \subsubsection{Erweiterungsmodul}
+    \subsubsection{App}
+  \subsection{Wunschanforderungen}
+    \subsubsection{Erweiterungsmodul}
+    \subsubsection{App}
+
+-	Der Benutzer muss die Parameter der Messung konfigurieren können
+-	Der Benutzer kann seine Einstellungen als Datei exportieren/importieren
+-	Der Benutzer kann Liegestützen/Situps für einen zählen lassen
 
 \section{Produktdaten}
+TODO Benni
 % Was soll gespeichert werden?
 
-\subsection{Personendaten}
-\subsection{Messdaten}
-
 \section{Nichtfunktionale Anforderungen}
+TODO Jan Koordination
+Glossareintrag "live": statt Echtzeit lieber "live" verwenden, live := mit einer Verzögerung von maximal 3 Sekunden
+  nur zum brainstorm alle Punkte zu denen es sachen geben könnte:
+  {Mussanforderungen}
+      {Bibliothek}
+      {Erweiterungsmodul}
+      {App}
+    {Wunschanforderungen}
+      {Erweiterungsmodul}
+      {App}
+
 \subsection{Laufzeitverhalten}
 \subsection{Speicherplatz}
 \subsection{Stabilität}
 
 \section{Systemmodelle}
-
+TODO Jan
+  \subsection{Architekturdiagramm}
+  \subsection{Use-Case-Diagramme}
 \section{Benutzeroberfläche}
-
+TODO Benni auseinandersetzen
 \section{Globale Testfälle und Szenarien}
-\subsection{Globale Testfälle}
-\subsubsection{Grundlegende Testfälle}
-\subsubsection{Erweiterte Testfälle}
-\subsection{Szenarien}
+TODO David
+  \subsection{Globale Testfälle}
+  \subsection{Szenarien}
 \section{Entwicklungsumgebung}
-
+TODO valle
+\Gls{nir}
+\gls{nir}
 \clearpage
 \input{Glossar}
 \end{document}
