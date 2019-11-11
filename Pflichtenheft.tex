@@ -29,9 +29,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Variablen                                 						 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\authorName}{Worschiboiz}
-\newcommand{\auftraggeber}{Karlsruhe Institute of Technology (IPD Schnellting)}
-\newcommand{\auftragnehmer}{Teco}
+\newcommand{\authorName}{uuoof}
+\newcommand{\auftraggeber}{Karlsruhe Institute of Technology (Teco)}
+\newcommand{\auftragnehmer}{wir}
 \newcommand{\projektName}{Earables}
 \newcommand{\tags}{\authorName, Pflichtenheft, KIT, Informatik, PSE}
 \newcommand{\glossarName}{Glossar}
@@ -134,18 +134,52 @@ handy: nach xamarin richten. konkret hier rein schreiben, wie alt ca. geräte, i
 \section{Funktionale Anforderungen}
 TODO Valle Koordination
 % Was soll das Produkt machen können
-gliedern in muss und wunsch:
+
   \subsection{Mussanforderungen}
+  TODO alle: Man sollte hier funktionale Anforderungen \textbf{angeben und ergänzen}. Dabei nummeriert man in 10er Schritten.
     \subsubsection{Bibliothek}
+    \begin{itemize}
+      \item[/F010/] \textsf{Daten auslesen und aufzeichnen:} 
+      \item[] \textsf{Steuerungsparameter ändern:}
+    \end{itemize}
     \subsubsection{Erweiterungsmodul}
+    \begin{itemize}
+      \item[] \textsf{Schritterkennung:} ("start stopp") satz.
+    \end{itemize}
     \subsubsection{App}
+    %%TODO valle Glossareintrag Vorgang: "aktiv in modus"
+    \begin{itemize}
+      \item[] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten.
+      \item[] \textsf{Modus auswählen / wechseln:} Nutzer kann zwischen allen verfügbaren Modi einen Modus auswählen (also mindestens der Modus 'Laufen/Stehen anzeigen'). Dabei kann jederzeit zwischen den Modi gewechselt werden (ist noch ein Vorgang aktiv, wird dieser gestoppt).
+      \item[] \textsf{Modus Datenanzeige laufen / stehen:} Dieser Modus zeigt dem Nutzer live auf dem Bildschirm, ob gerade 'laufen' oder 'stehen' erkannt wird.
+      \item[] \textsf{Vorgang starten:} Der Nutzer kann in einem Modus einen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus 'Livedaten'.
+      \item[] \textsf{Vorgang stoppen:} Nach dem Stoppen eines Vorgangs wird das Ergebnis dem Vorgang entsprechend angezeigt, bis ein neuer Vorgang gestartet oder ein anderer Modus ausgewählt ist.  
+    \end{itemize}
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
+    \begin{itemize}
+      
+      \item[] \textsf{Schrittfrequenzerkennung:}
+      \item[] \textsf{Distanzmessung:}
+      \item[] \textsf{Zähler der Schrittanzahl:}
+      \item[] \textsf{Erkennung Situps:}
+      \item[] \textsf{Erkennung Liegestütze:}   
+    \end{itemize}
     \subsubsection{App}
+    \begin{itemize}
+      
+      \item[] \textsf{Modus Livedaten:}
+      \item[] \textsf{Modus Counter:}
+      \item[] \textsf{Modus Musik Start/Stopp:}
+      \item[] \textsf{Modus listen\&perform:} Im Modus listen\&perform (kurz l\&p) kann der Nutzer sein Trainingsprogramm zusammenstellen (siehe..) und im Vorgang ausführen (siehe...). 
+      \item[] \textsf{l\&p Auswahlfeld:} Vor dem Starten des Vorgangs wird dem Nutzer ein Textfeld angezeigt, in das er eine Trainingsliste (eine Liste an einzelnen Übungen) nach einer angezeigten Syntax eingeben kann.
+      \item[] \textsf{l\&p aktiver Vorgang:} Für jeden Eintrag der Trainingsliste (der Reihe nach) wird über eine Sprachanweisung über die Kopfhöhrer die nächste Übung angesagt. Danach wartet erkennt die App, wann die Übung erfüllt ist und geht zur nächsten Übung.
+      \item[] \textsf{l\&p Zusammenfassung:} Nach dem Ende des Vorgangs wird dem Nutzer angezeigt, wie lange er für welche Übung gebraucht hat.
+      \item[] \textsf{Funktionen der Einstellungen:} Der Benutzer kann in der App unter dem Punkt 'Einstellungen' seinen Namen und die Anzeigesprache angeben, sowie die Steuerungsparameter anpassen und die gespeicherten Trainingsdaten löchen.
+      \item[] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App unter dem Punkt 'Extortieren und Importieren' seine gesamten Trainingsdaten exportieren und importieren.
+      \item[] \textsf{Speichern der Vorgänge:} Alle Vorgänge, die gestartet und gestoppt worden sind, werden auf dem Smartphone gespeichert mit Datum, Uhrzeit und dem Wert, der der Funktion entspricht (keine Rohdaten).   
+    \end{itemize}
 
--	Der Benutzer muss die Parameter der Messung konfigurieren können
--	Der Benutzer kann seine Einstellungen als Datei exportieren/importieren
--	Der Benutzer kann Liegestützen/Situps für einen zählen lassen
 
 \section{Produktdaten}
 TODO Benni
@@ -162,7 +196,9 @@ Glossareintrag "live": statt Echtzeit lieber "live" verwenden, live := mit einer
     {Wunschanforderungen}
       {Erweiterungsmodul}
       {App}
-
+\begin{itemize}
+  \item[/N010/] \textsf{TODO}
+\end{itemize}
 \subsection{Laufzeitverhalten}
 \subsection{Speicherplatz}
 \subsection{Stabilität}
@@ -179,8 +215,12 @@ TODO David
   \subsection{Szenarien}
 \section{Entwicklungsumgebung}
 TODO valle
-\Gls{nir}
-\gls{nir}
+
+Wir arbeiten an dem Projekt mit Visual Studio 2019, sodass alle eine einheitliche Entwicklungsumgebung verwenden.
+%%TODO vllt noch mal diskutieren:
+Dabei kommt der .NET Standard 2.0 zum Einsatz, der C\# 7.2 verwendet. Wir arbeiten außerdem mit Xamarin Forms.
+
+Zur Versionskontrolle und zur Projektübersicht wird Git verwendet, das Repository liegt öffentlich auf Github\footnote{\url{https://github.com/vlle1/earablesKIT}}.
 \clearpage
 \input{Glossar}
 \end{document}
