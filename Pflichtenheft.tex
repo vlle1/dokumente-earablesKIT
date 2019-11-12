@@ -24,7 +24,7 @@
 \DeclareGraphicsRule{*}{mps}{*}{}
 \fi
 
-\makeglossary
+\makeglossaries
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Variablen                                 						 %
@@ -104,17 +104,29 @@ Was wir nicht umsetzen wollen ist die Speicherung von Rohdaten, da dies zur Folg
 % Was soll es nicht sein?
 
 \section{Produkteinsatz}
-TODO David 
-Benutzer:   Verwender der Anwendung/Bibliotheken. Nicht der Product-Owner
-% Zielgruppe
-% Anwendungsbereiche
-% Betriebsbedinugen
-% Wer? Was? Wozu?
+  \subsection{Zielgruppe}
+  \begin{itemize}
+    \item\textsf{Bibliothek:} Softwareentwickler
+    \item\textsf{Erweiterungsmodul:} Softwareentwickler
+    \item\textsf{App:} Hobbysportler
+  \end{itemize}
+  \subsection{Anwendungsbereiche}
+    \begin{itemize}
+      \item\textsf{Bibliothek} Softwareentwicklung für eSense Wearables
+      \item\textsf{Erweiterungsmodul} Softwareentwicklung im Bereich Schritterkennung
+      \item\textsf{App} Heimtraining, Sport,\dots
+    \end{itemize}
+  \subsection{Betriebsbedinugen}
+  % TODO %
+    \begin{itemize}
+      \item\textsf{Bibliothek} 
+      \item\textsf{Erweiterungsmodul}
+      \item\textsf{App}
+    \end{itemize}
 
 \section{Produktumgebung}
-TODO David
-handy: nach xamarin richten. konkret hier rein schreiben, wie alt ca. geräte, iOS/Android
-% Unter welcher Software / Hardware läuft es?
+\subsection{Hardware} \textsf{Minimale Anforderungen:} Smartphone mit Bluetooth LE Unterstützung.
+\subsection{Software} \textsf{Betriebssystem:} Android > 8.0 und iOS > 12.0
 
 \section{Funktionale Anforderungen}
 TODO Valle Koordination
@@ -125,7 +137,7 @@ TODO Valle Koordination
     \subsubsection{Bibliothek}
     \begin{itemize}
       \item[/F010/] Daten der IMU-Achse auslesen und in Echtzeit zur Verfügung stellen
-      \item[] Steuerungsparameter ändern %%konkreter: Abtastrate (oder ???)
+      \item[/F020/] Messparameter (Abtastrate etc.) ändern %%konkreter: Abtastrate (oder ???)
     \end{itemize}
     \subsubsection{Erweiterungsmodul}
     \begin{itemize}
@@ -162,7 +174,7 @@ TODO Valle Koordination
       \item[] \textsf{Modus Musik Start/Stopp:} Musik läuft genau, wenn man selbst läuft
       \item[] \textsf{Modus lauschen\&agieren:} Im Modus listen\&perform (kurz l\&p) kann der Nutzer sein Trainingsprogramm zusammenstellen (siehe..) und im Vorgang ausführen (siehe...). 
       \item[] \textsf{l\&p Auswahlfeld:} Vor dem Starten des Vorgangs wird dem Nutzer eine Liste angezeigt, in das er eine Trainingsliste (eine Liste an einzelnen Übungen) nach einer angezeigten Syntax eingeben kann.
-      \item[] \textsf{l\&p aktiver Vorgang:} Für jeden Eintrag der Trainingsliste (der Reihe nach) wird über eine Sprachanweisung über die Kopfhöhrer die nächste Übung angesagt. Danach wartet erkennt die App, wann die Übung erfüllt ist und geht zur nächsten Übung.
+      \item[] \textsf{l\&p aktiver Vorgang:} Für jeden Eintrag der Trainingsliste (der Reihe nach) wird über eine Sprachanweisung über die Kopfhörer die nächste Übung angesagt. Danach wartet erkennt die App, wann die Übung erfüllt ist und geht zur nächsten Übung.
       \item[] \textsf{l\&p Zusammenfassung:} Nach dem Ende des Vorgangs wird dem Nutzer angezeigt, wie lange er für welche Übung gebraucht hat.
       \item[] \textsf{Funktionen der Einstellungen:} Der Benutzer kann in der App unter dem Punkt 'Einstellungen' seinen Namen und die Anzeigesprache angeben, sowie die Steuerungsparameter anpassen und die gespeicherten Trainingsdaten löchen.
       \item[] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App unter dem Punkt 'Extortieren und Importieren' seine gesamten Trainingsdaten exportieren und importieren.
@@ -176,7 +188,7 @@ TODO Benni
 
 \section{Nichtfunktionale Anforderungen}
 TODO Jan Koordination
-Glossareintrag "live": statt Echtzeit lieber "live" verwenden, live := mit einer Verzögerung von maximal 3 Sekunden
+Glossareintrag \glqq live\grqq{}: statt Echtzeit lieber \glqq live\grqq{} verwenden, live := mit einer Verzögerung von maximal 3 Sekunden
   nur zum brainstorm alle Punkte zu denen es sachen geben könnte:
   {Mussanforderungen}
       {Bibliothek}
@@ -201,7 +213,24 @@ TODO Benni auseinandersetzen
 \section{Globale Testfälle und Szenarien}
 TODO David
   \subsection{Globale Testfälle}
+  \subsubsection{Schritterkennung beim Gehen:}
+  \begin{itemize}
+    \item[]Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
+    \item[]Die App wird gestartet.
+    \item[]Nach starten der App wird in den Modus \glqq Datenanzeige gehen/stehen\grqq{} gewechselt.
+    \item[]Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
+    \item[]Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an.
+    \item[]Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an.
+    \item[]Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. 
+  \end{itemize}
+  \subsubsection{Schritterkennung beim Gehen:}
+  \begin{itemize}
+    \item[] 
+    \item[] 
+  \end{itemize}
   \subsection{Szenarien}
+
+
 \section{Entwicklungsumgebung}
 TODO valle
 
