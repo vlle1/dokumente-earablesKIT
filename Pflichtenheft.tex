@@ -81,18 +81,23 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-Earables gehören zu den Wearable Computings. Sie sind also nichts anderes als intelligente Kopfhörer. Je nach dem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen austattung von  Lautsprechern, Mikrophon und Bluetooth Low Energy besitzen sie in unserem Fall zusätzlich ein 6-Achsen IMU (Beschleunigungssensor und Gyroskop) . Mit seiner Hilfe ist man in der Lage die (Kopf)bewegung des Nutzers zu tracken um mit den gewonnenen Messdaten  beispielsweise die Atemfrequenz zu ermitteln. Earebles bilden also eine Schnittstelle von Mensch und Computer. Mit ihnen kann man unauffällig medizinische Daten im Altag sammeln. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind haben sie bereits ein hohe soziale akzeptans in der Gesellschaft erlangt, im Gegensatz zu beispielsweise den smart Glasses. Mit der Entwicklung und Forschung dieser Art von Earables beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der Earables gesucht, wodurch auch dieses Projekt seinen Weg in diese Welt gefunden hat.
+Earables gehören zu den Wearable Computings. Sie sind also nichts anderes als intelligente Kopfhörer. Je nach dem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Austattung von  Lautsprechern, Mikrophon und Bluetooth Low Energy besitzen sie in unserem Fall zusätzlich ein 6-Achsen IMU (Beschleunigungssensor und Gyroskop) . Mit seiner Hilfe ist man in der Lage die (Kopf-)Bewegung des Nutzers zu tracken um mit den gewonnenen Messdaten  beispielsweise die Atemfrequenz zu ermitteln. Earebles bilden also eine Schnittstelle von Mensch und Computer. Mit ihnen kann man unauffällig medizinische Daten im Altag sammeln. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind haben sie bereits ein hohe soziale akzeptans in der Gesellschaft erlangt, im Gegensatz zu beispielsweise den smart Glasses. Mit der Entwicklung und Forschung dieser Art von Earables beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der Earables gesucht, wodurch auch dieses Projekt seinen Weg in diese Welt gefunden hat.
 \section{Zielbestimmung}
-Die Ziele dieses Projektes lassen sich in zwei Bereiche gliedern:\\
+Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:\\
 
 1. Es soll eine Cross-Plattform Bibliothek (Android/IOS)  für die Earables der Plattform eSense entwickelt werden mit der es möglich ist, die Messdaten des Gerätes aufzuzeichnen und verschiedene Steuerungsparameter zu verändern.\\
 
-2. Es soll ein Erweiteungsmodul (eine App) entwickelt werden, mit der es Möglich ist festzustellen, ob der Nutzer gerade läuft oder steht und gegebenenfalls die Schrittfrequenz anzeigt.
+2. Es soll ein Erweiteungsmodul entwickelt werden, mit der es Möglich ist gewisse Daten der Kopf auszuwerten, beispielsweise ob der Nutzer gerade läuft oder steht.
+
+3. %%app todo
 \subsection{Musskriterien}
-Das Ziel der Bibliothek ist es Kern-Funktionen zu beinhalten, um Messdaten einzulesen und die Steuerungsparameter zu verändern. Besonders wichtig ist, dass man in der Lage sein soll die Daten des 6-Achsen IMU einzulesen. Bezüglich des Erweiterungsmoduls soll es in der Lage sein zu erkennen ob der Nutzer gerade läuft oder steht und dies, über eine ansprechende GUI, auszugeben. Außerdem soll die GUI so benutzerfreundlich gestaltet werden, so dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der Earables verändern kann.
+%%bitte stichpunkte
+Das Ziel der Bibliothek ist es, Kern-Funktionen zu beinhalten, um Messdaten einzulesen und die Steuerungsparameter zu verändern. Besonders wichtig ist, dass man in der Lage sein soll die Daten des 6-Achsen IMU einzulesen. Bezüglich des Erweiterungsmoduls soll es in der Lage sein zu erkennen ob der Nutzer gerade läuft oder steht und dies, über eine ansprechende GUI, auszugeben. Außerdem soll die GUI so benutzerfreundlich gestaltet werden, so dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der Earables verändern kann.
 \subsection{Wunschkriterien}
+%%bitte stichpunkte
 Als Wunschkriterium soll die App die Schrittfrequenz des Nutzers anzeigen und das im besten Fall in Echtzeit. Mit einer kurzen Verzögerung von ein paar Sekunden wird jedoch gerechnet. Zusätzlich soll die Anzahl der Schritte ausgegeben werden wodurch man die zurückgelegten Distanz ermitteln kann. Diese wird ebenfalls ausgegeben. Des weiteren sind 3 verschiedene Modi geplant. Im Modus „Counter“ zählt die App wie viele Liegestützen oder Sit Ups der Nutzer macht. Über den Modus „Listen and Perform“ ist der Nutzer in der Lage seinen eigenen Trainingsplan individuell für sich zu erstellen. Dieser wird dann, mit Hilfe von Text to Speech ausgegeben. Im letzten Modus Namens „Musik Run“ wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, sobald der Nutzer damit beginnt weiter zu laufen. Die App wird auf deutsch sein, aber der Nutzer kann weitere Sprachen durch Sprachpaket-Plugins hinzufügen. Zum Abschluss soll es für den Nutzer möglich sein seine Trainingsdaten zu speichern, importieren und exportieren, um so mehrere „Projekte“ anzulegen.
   \subsection{Abgrenzungskriterien}
+  %%bitte stichpunkte
 Was wir nicht umsetzen wollen ist die Speicherung von Rohdaten, da dies zur Folge haben könnte, dass sich einige Nutzer ausspioniert fühlen. Generell wird die Speicherung von Daten nur auf dem Smartphone erfolgen und nicht auf dem Speicher der Earables. Das Ziel, die Geschwindigkeit der Musik an die Schrittfrequenz des Nutzers anzupassen, wird nicht verfolgt. Im Modus Liegestützen oder Sit Ups zählen wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit Ups macht und nicht versucht das System auszutricksen.
 
 % Was will ich bewusst nicht umsetzen?
@@ -119,18 +124,21 @@ TODO Valle Koordination
   TODO alle: Man sollte hier funktionale Anforderungen \textbf{angeben und ergänzen}. Dabei nummeriert man in 10er Schritten.
     \subsubsection{Bibliothek}
     \begin{itemize}
-      \item[/F010/] \textsf{Daten auslesen und aufzeichnen:} 
-      \item[] \textsf{Steuerungsparameter ändern:}
+      \item[/F010/] Daten der IMU-Achse auslesen und in Echtzeit zur Verfügung stellen
+      \item[] Steuerungsparameter ändern %%konkreter: Abtastrate (oder ???)
     \end{itemize}
     \subsubsection{Erweiterungsmodul}
     \begin{itemize}
-      \item[] \textsf{Schritterkennung:} ("start stopp") satz.
+      \item[] Schritterkennung, ob der Nutzer steht oder läuft
     \end{itemize}
     \subsubsection{App}
     %%TODO valle Glossareintrag Vorgang: "aktiv in modus"
     \begin{itemize}
-      \item[] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten.
-      \item[] \textsf{Modus auswählen / wechseln:} Nutzer kann zwischen allen verfügbaren Modi einen Modus auswählen (also mindestens der Modus 'Laufen/Stehen anzeigen'). Dabei kann jederzeit zwischen den Modi gewechselt werden (ist noch ein Vorgang aktiv, wird dieser gestoppt).
+      %%alles kürzer schreiben, nur je 1 Stichpunkt
+      \item[] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. %%weglassen?
+      \item[] \textsf{Modus auswählen / wechseln:} der Nutzer kann zwischen allen verfügbaren Modi einen Modus auswählen (also mindestens der Modus 'Laufen/Stehen anzeigen'). 
+      \item[] Es kann jederzeit zwischen den Modi gewechselt werden 
+      \item[] (ist noch ein Vorgang aktiv, wird dieser gestoppt).
       \item[] \textsf{Modus Datenanzeige laufen / stehen:} Dieser Modus zeigt dem Nutzer live auf dem Bildschirm, ob gerade 'laufen' oder 'stehen' erkannt wird.
       \item[] \textsf{Vorgang starten:} Der Nutzer kann in einem Modus einen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus 'Livedaten'.
       \item[] \textsf{Vorgang stoppen:} Nach dem Stoppen eines Vorgangs wird das Ergebnis dem Vorgang entsprechend angezeigt, bis ein neuer Vorgang gestartet oder ein anderer Modus ausgewählt ist.  
@@ -138,8 +146,9 @@ TODO Valle Koordination
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
     \begin{itemize}
-      
-      \item[] \textsf{Schrittfrequenzerkennung:}
+      %%stichpunkte
+      \item[] 
+      \item[] \textsf{Schrittfrequenzerkennung:} 
       \item[] \textsf{Distanzmessung:}
       \item[] \textsf{Zähler der Schrittanzahl:}
       \item[] \textsf{Erkennung Situps:}
@@ -148,11 +157,11 @@ TODO Valle Koordination
     \subsubsection{App}
     \begin{itemize}
       
-      \item[] \textsf{Modus Livedaten:}
-      \item[] \textsf{Modus Counter:}
-      \item[] \textsf{Modus Musik Start/Stopp:}
-      \item[] \textsf{Modus listen\&perform:} Im Modus listen\&perform (kurz l\&p) kann der Nutzer sein Trainingsprogramm zusammenstellen (siehe..) und im Vorgang ausführen (siehe...). 
-      \item[] \textsf{l\&p Auswahlfeld:} Vor dem Starten des Vorgangs wird dem Nutzer ein Textfeld angezeigt, in das er eine Trainingsliste (eine Liste an einzelnen Übungen) nach einer angezeigten Syntax eingeben kann.
+      \item[] \textsf{versteckter Modus Livedaten:} Visualisieren der Sensorrohdaten als Graphen    
+      \item[] \textsf{Modus Zähler:} zählt Liegestützen bzw. Situps
+      \item[] \textsf{Modus Musik Start/Stopp:} Musik läuft genau, wenn man selbst läuft
+      \item[] \textsf{Modus lauschen\&agieren:} Im Modus listen\&perform (kurz l\&p) kann der Nutzer sein Trainingsprogramm zusammenstellen (siehe..) und im Vorgang ausführen (siehe...). 
+      \item[] \textsf{l\&p Auswahlfeld:} Vor dem Starten des Vorgangs wird dem Nutzer eine Liste angezeigt, in das er eine Trainingsliste (eine Liste an einzelnen Übungen) nach einer angezeigten Syntax eingeben kann.
       \item[] \textsf{l\&p aktiver Vorgang:} Für jeden Eintrag der Trainingsliste (der Reihe nach) wird über eine Sprachanweisung über die Kopfhöhrer die nächste Übung angesagt. Danach wartet erkennt die App, wann die Übung erfüllt ist und geht zur nächsten Übung.
       \item[] \textsf{l\&p Zusammenfassung:} Nach dem Ende des Vorgangs wird dem Nutzer angezeigt, wie lange er für welche Übung gebraucht hat.
       \item[] \textsf{Funktionen der Einstellungen:} Der Benutzer kann in der App unter dem Punkt 'Einstellungen' seinen Namen und die Anzeigesprache angeben, sowie die Steuerungsparameter anpassen und die gespeicherten Trainingsdaten löchen.
