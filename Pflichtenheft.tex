@@ -83,16 +83,20 @@
 \section{Einleitung}
 Earables gehören zu den Wearable Computings. Sie sind also nichts anderes als intelligente Kopfhörer. Je nach dem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Austattung von  Lautsprechern, Mikrophon und Bluetooth Low Energy besitzen sie in unserem Fall zusätzlich ein 6-Achsen IMU (Beschleunigungssensor und Gyroskop) . Mit seiner Hilfe ist man in der Lage die (Kopf-)Bewegung des Nutzers zu tracken um mit den gewonnenen Messdaten  beispielsweise die Atemfrequenz zu ermitteln. Earebles bilden also eine Schnittstelle von Mensch und Computer. Mit ihnen kann man unauffällig medizinische Daten im Altag sammeln. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind haben sie bereits ein hohe soziale akzeptans in der Gesellschaft erlangt, im Gegensatz zu beispielsweise den smart Glasses. Mit der Entwicklung und Forschung dieser Art von Earables beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der Earables gesucht, wodurch auch dieses Projekt seinen Weg in diese Welt gefunden hat.
 \section{Zielbestimmung}
-Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:\\
+Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
+\begin{enumerate}
 
-1. Es soll eine Cross-Plattform Bibliothek (Android/IOS)  für die Earables der Plattform eSense entwickelt werden mit der es möglich ist, die Messdaten des Gerätes aufzuzeichnen und verschiedene Steuerungsparameter zu verändern.\\
+  \item Es soll eine Cross-Plattform Bibliothek (Android/IOS) für die Earables der Plattform eSense entwickelt werden mit der es möglich ist, die Messdaten des Gerätes aufzuzeichnen und verschiedene Steuerungsparameter zu verändern.
+  
+  \item Es soll ein Erweiteungsmodul entwickelt werden, mit der es Möglich ist gewisse Daten der Kopf auszuwerten, beispielsweise ob der Nutzer gerade läuft oder steht.
+  
+  \item %%app todo
 
-2. Es soll ein Erweiteungsmodul entwickelt werden, mit der es Möglich ist gewisse Daten der Kopf auszuwerten, beispielsweise ob der Nutzer gerade läuft oder steht.
+\end{enumerate}
 
-3. %%app todo
 \subsection{Musskriterien}
 %%bitte stichpunkte
-Das Ziel der Bibliothek ist es, Kern-Funktionen zu beinhalten, um Messdaten einzulesen und die Steuerungsparameter zu verändern. Besonders wichtig ist, dass man in der Lage sein soll die Daten des 6-Achsen IMU einzulesen. Bezüglich des Erweiterungsmoduls soll es in der Lage sein zu erkennen ob der Nutzer gerade läuft oder steht und dies, über eine ansprechende GUI, auszugeben. Außerdem soll die GUI so benutzerfreundlich gestaltet werden, so dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der Earables verändern kann.
+Das Ziel der Bibliothek ist es, Kern-Funktionen zu beinhalten, um Messdaten auzulesen und die Steuerungsparameter zu verändern. Besonders wichtig ist, dass man in der Lage sein soll die Daten des 6-Achsen IMU auzulesen. Bezüglich des Erweiterungsmoduls soll es in der Lage sein zu erkennen ob der Nutzer gerade läuft oder steht und dies, über eine ansprechende GUI, auszugeben. Außerdem soll die GUI so benutzerfreundlich gestaltet werden, so dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der Earables verändern kann.
 \subsection{Wunschkriterien}
 %%bitte stichpunkte
 Als Wunschkriterium soll die App die Schrittfrequenz des Nutzers anzeigen und das im besten Fall in Echtzeit. Mit einer kurzen Verzögerung von ein paar Sekunden wird jedoch gerechnet. Zusätzlich soll die Anzahl der Schritte ausgegeben werden wodurch man die zurückgelegten Distanz ermitteln kann. Diese wird ebenfalls ausgegeben. Des weiteren sind 3 verschiedene Modi geplant. Im Modus „Counter“ zählt die App wie viele Liegestützen oder Sit Ups der Nutzer macht. Über den Modus „Listen and Perform“ ist der Nutzer in der Lage seinen eigenen Trainingsplan individuell für sich zu erstellen. Dieser wird dann, mit Hilfe von Text to Speech ausgegeben. Im letzten Modus Namens „Musik Run“ wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, sobald der Nutzer damit beginnt weiter zu laufen. Die App wird auf deutsch sein, aber der Nutzer kann weitere Sprachen durch Sprachpaket-Plugins hinzufügen. Zum Abschluss soll es für den Nutzer möglich sein seine Trainingsdaten zu speichern, importieren und exportieren, um so mehrere „Projekte“ anzulegen.
@@ -117,7 +121,7 @@ Was wir nicht umsetzen wollen ist die Speicherung von Rohdaten, da dies zur Folg
       \item\textsf{App} Heimtraining, Sport,\dots
     \end{itemize}
   \subsection{Betriebsbedinugen}
-  % TODO %
+  TODO
     \begin{itemize}
       \item\textsf{Bibliothek} 
       \item\textsf{Erweiterungsmodul}
@@ -148,12 +152,12 @@ TODO Valle Koordination
     \begin{itemize}
       %%alles kürzer schreiben, nur je 1 Stichpunkt
       \item[] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. %%weglassen?
-      \item[] \textsf{Modus auswählen / wechseln:} der Nutzer kann zwischen allen verfügbaren Modi einen Modus auswählen (also mindestens der Modus 'Laufen/Stehen anzeigen'). 
+      \item[] \textsf{Modus auswählen / wechseln:} der Nutzer kann zwischen allen verfügbaren Modi einen Modus auswählen (also mindestens der Modus \glqq Laufen/Stehen anzeigen\grqq). 
       \item[] Es kann jederzeit zwischen den Modi gewechselt werden 
       \item[] (ist noch ein Vorgang aktiv, wird dieser gestoppt).
-      \item[] \textsf{Modus Datenanzeige laufen / stehen:} Dieser Modus zeigt dem Nutzer live auf dem Bildschirm, ob gerade 'laufen' oder 'stehen' erkannt wird.
-      \item[] \textsf{Vorgang starten:} Der Nutzer kann in einem Modus einen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus 'Livedaten'.
-      \item[] \textsf{Vorgang stoppen:} Nach dem Stoppen eines Vorgangs wird das Ergebnis dem Vorgang entsprechend angezeigt, bis ein neuer Vorgang gestartet oder ein anderer Modus ausgewählt ist.  
+      \item[] \textsf{Modus Datenanzeige laufen / stehen:} Dieser Modus zeigt dem Nutzer live auf dem Bildschirm, ob gerade \glqq laufen\grqq{} oder \glqq stehen\grqq{} erkannt wird.
+      \item[] \textsf{Vorgang starten:} Der Nutzer kann in einem Modus einen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
+      \item[] \textsf{Vorgang stoppen:} Nach dem Stoppen eines Vorgangs wird das Ergebnis dem Vorgang entsprechend angezeigt, bis ein neuer Vorgang gestartet oder ein anderer Modus ausgewählt ist.
     \end{itemize}
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
@@ -213,7 +217,7 @@ TODO Benni auseinandersetzen
 \section{Globale Testfälle und Szenarien}
 TODO David
   \subsection{Globale Testfälle}
-  \subsubsection{Schritterkennung beim Gehen:}
+  \subsubsection{Schritterkennung beim Gehen}
   \begin{itemize}
     \item[]Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
     \item[]Die App wird gestartet.
@@ -223,12 +227,13 @@ TODO David
     \item[]Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an.
     \item[]Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. 
   \end{itemize}
-  \subsubsection{Schritterkennung beim Gehen:}
+  \subsubsection{Schritte zählen}
   \begin{itemize}
-    \item[] 
+    \item[]
     \item[] 
   \end{itemize}
   \subsection{Szenarien}
+    \subsubsection{Bibliotheksnutzung}
 
 
 \section{Entwicklungsumgebung}
