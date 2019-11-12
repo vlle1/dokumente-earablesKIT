@@ -81,39 +81,19 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-TODO Erwin
-was ist die motivation? "smarte kopfhörer sind heute zugänglich", relevanz,...
+Earables gehören zu den Wearable Computings. Sie sind also nichts anderes als intelligente Kopfhörer. Je nach dem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen austattung von  Lautsprechern, Mikrophon und Bluetooth Low Energy besitzen sie in unserem Fall zusätzlich ein 6-Achsen IMU (Beschleunigungssensor und Gyroskop) . Mit seiner Hilfe ist man in der Lage die (Kopf)bewegung des Nutzers zu tracken um mit den gewonnenen Messdaten  beispielsweise die Atemfrequenz zu ermitteln. Earebles bilden also eine Schnittstelle von Mensch und Computer. Mit ihnen kann man unauffällig medizinische Daten im Altag sammeln. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind haben sie bereits ein hohe soziale akzeptans in der Gesellschaft erlangt, im Gegensatz zu beispielsweise den smart Glasses. Mit der Entwicklung und Forschung dieser Art von Earables beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der Earables gesucht, wodurch auch dieses Projekt seinen Weg in diese Welt gefunden hat.
 \section{Zielbestimmung}
-TODO Erwin
+Die Ziele dieses Projektes lassen sich in zwei Bereiche gliedern:\\
 
-Cross-Plattform:    Die Anwendung und Bibliothek müssen auf allen von Xamarin unterstützten Geräten funktionsfähig sein
+1. Es soll eine Cross-Plattform Bibliothek (Android/IOS)  für die Earables der Plattform eSense entwickelt werden mit der es möglich ist, die Messdaten des Gerätes aufzuzeichnen und verschiedene Steuerungsparameter zu verändern.\\
 
-Einsatzort, was wollen wir machen? App, die Crossplattform, wo wir die Kopfhörer nutzen um 
-Aktivität zu messen, u.a. die man auch mit Smartphone /Watch schlecht messen kann (Liegestütze).
+2. Es soll ein Erweiteungsmodul (eine App) entwickelt werden, mit der es Möglich ist festzustellen, ob der Nutzer gerade läuft oder steht und gegebenenfalls die Schrittfrequenz anzeigt.
 \subsection{Musskriterien}
--> ausformulierte Stichpunkte
--> noch mal in originaltext schauen und sachen möglichst präzise formulieren, Gliedern in Bibliothek, App und Anwendungsfall
-1. Bibliothek: Bluetooth Verbindung bauen, Messdaten auslesen (Verbindung mit 6 Achsen IMU zur Datenübertragung), Änderung der Steuerungsparameter 
-(Gerätedaten auslesen (parsen, etc.))
-2. Erweiterungsmodul (Bibliothek) (Schritterkennung (Start/Stopp))
-3. APP: Cross-Plattform GUI Anwendung mit Datenanzeige (Laufen/Stehen anzeigen) und Möglichkeit, Steuerungsparameter anzupassen. (Glossareintrag Steuerungsparameter: wie oft gemessen wird)
-dazu Glossareintrag: GUI:        grafische Benutzeroberfläche
+Das Ziel der Bibliothek ist es Kern-Funktionen zu beinhalten, um Messdaten einzulesen und die Steuerungsparameter zu verändern. Besonders wichtig ist, dass man in der Lage sein soll die Daten des 6-Achsen IMU einzulesen. Bezüglich des Erweiterungsmoduls soll es in der Lage sein zu erkennen ob der Nutzer gerade läuft oder steht und dies, über eine ansprechende GUI, auszugeben. Außerdem soll die GUI so benutzerfreundlich gestaltet werden, so dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der Earables verändern kann.
 \subsection{Wunschkriterien}
-1. in Bib nichts\dots
-2. Erweiterungsmodul: Schrittfrequenz, Distanzmessung und Schrittanzahl, Situps, Liegestützen erkennen, 
-3. App: verschiedene Modi: 
-
-  livedaten: Erkennung Daten visualisieren
-  counter: Zählen von Situps / Liegestützen
-  musik starten/stoppen (laufen/anhalten)
-	listen and perform: Trainingsplan manuell zusammenstellen, Sprachanweisung in Bezug auf Trainingsprogramm, Erkennung wann einzelne Aktivität fertig usw. 
-  es soll in der app einstellungen geben (Sprache, Name), steuerungsparameter sollen manuell anpassbar sein
-
-  Exportieren und Importieren von Trainingsdaten
+Als Wunschkriterium soll die App die Schrittfrequenz des Nutzers anzeigen und das im besten Fall in Echtzeit. Mit einer kurzen Verzögerung von ein paar Sekunden wird jedoch gerechnet. Zusätzlich soll die Anzahl der Schritte ausgegeben werden wodurch man die zurückgelegten Distanz ermitteln kann. Diese wird ebenfalls ausgegeben. Des weiteren sind 3 verschiedene Modi geplant. Im Modus „Counter“ zählt die App wie viele Liegestützen oder Sit Ups der Nutzer macht. Über den Modus „Listen and Perform“ ist der Nutzer in der Lage seinen eigenen Trainingsplan individuell für sich zu erstellen. Dieser wird dann, mit Hilfe von Text to Speech ausgegeben. Im letzten Modus Namens „Musik Run“ wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, sobald der Nutzer damit beginnt weiter zu laufen. Die App wird auf deutsch sein, aber der Nutzer kann weitere Sprachen durch Sprachpaket-Plugins hinzufügen. Zum Abschluss soll es für den Nutzer möglich sein seine Trainingsdaten zu speichern, importieren und exportieren, um so mehrere „Projekte“ anzulegen.
   \subsection{Abgrenzungskriterien}
-  o	Musikgeschwindigkeit nicht veränderbar
-o	Datenspeicherung nur auf dem Device, keine Rohdaten
-o	Bewusstes Austricksen der Messungen werden nicht beachtet
+Was wir nicht umsetzen wollen ist die Speicherung von Rohdaten, da dies zur Folge haben könnte, dass sich einige Nutzer ausspioniert fühlen. Generell wird die Speicherung von Daten nur auf dem Smartphone erfolgen und nicht auf dem Speicher der Earables. Das Ziel, die Geschwindigkeit der Musik an die Schrittfrequenz des Nutzers anzupassen, wird nicht verfolgt. Im Modus Liegestützen oder Sit Ups zählen wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit Ups macht und nicht versucht das System auszutricksen.
 
 % Was will ich bewusst nicht umsetzen?
 % Was soll es nicht sein?
