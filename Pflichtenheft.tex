@@ -140,38 +140,33 @@ TODO Valle Koordination
   TODO alle: Man sollte hier funktionale Anforderungen \textbf{angeben und ergänzen}. Dabei nummeriert man in 10er Schritten.
     \subsubsection{Bibliothek}
     \begin{itemize}
-      \item[/F010/] Daten der IMU-Achse auslesen und in Echtzeit zur Verfügung stellen
-      \item[/F020/] Messparameter (Abtastrate etc.) ändern %%konkreter: Abtastrate (oder ???)
-    \end{itemize}
+      \item[/F010/] Daten des Gyroskops auslesen und in Echtzeit zur Verfügung stellen
+      \item[/F020/] Daten des Beschleunigungssensors auslesen und in Echtzeit zur Verfügung stellen
+      \item[/F030/] Messparameter (Abtastrate etc.) ändern %%konkreter: Abtastrate (oder ???)
+      \item[/F040/] Datenaufnahme des IMU starten und stoppen
+      \item[/F050/] BLE Charakteristiken unterstützen %%besprechen!!!
     \subsubsection{Erweiterungsmodul}
-    \begin{itemize}
-      \item[] Schritterkennung, ob der Nutzer steht oder läuft
-    \end{itemize}
+     Auswertung der ausgelesenen Daten:
+      \item[/F060/] Schritterkennung (Stehen/Laufen des Nutzers)
     \subsubsection{App}
     %%TODO valle Glossareintrag Vorgang: "aktiv in modus"
-    \begin{itemize}
       %%alles kürzer schreiben, nur je 1 Stichpunkt
-      \item[] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. %%weglassen?
-      \item[] \textsf{Modus auswählen / wechseln:} der Nutzer kann zwischen allen verfügbaren Modi einen Modus auswählen (also mindestens der Modus \glqq Laufen/Stehen anzeigen\grqq). 
-      \item[] Es kann jederzeit zwischen den Modi gewechselt werden 
-      \item[] (ist noch ein Vorgang aktiv, wird dieser gestoppt).
-      \item[] \textsf{Modus Datenanzeige laufen / stehen:} Dieser Modus zeigt dem Nutzer live auf dem Bildschirm, ob gerade \glqq laufen\grqq{} oder \glqq stehen\grqq{} erkannt wird.
-      \item[] \textsf{Vorgang starten:} Der Nutzer kann in einem Modus einen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
-      \item[] \textsf{Vorgang stoppen:} Nach dem Stoppen eines Vorgangs wird das Ergebnis dem Vorgang entsprechend angezeigt, bis ein neuer Vorgang gestartet oder ein anderer Modus ausgewählt ist.
-    \end{itemize}
+      \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. %%weglassen?
+      \item[/F080/] \textsf{Modus auswählen:} Auswahl eines Modus aus allen verfügbaren Modi (also mindestens der Modus \glqq Laufen/Stehen anzeigen\grqq) 
+      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi während ein Modus aktiv ist %%aktueller Modus stoppt, nichtfunktionale Anforderung? 
+      \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}
+      \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
+      \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen Vorgang stoppen.
+      \item[/F130/] Nach Stoppen Anzeigen des Vorgansresultats bis neuer Vorgang gestartet wird.
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
-    \begin{itemize}
       %%stichpunkte
-      \item[] 
       \item[] \textsf{Schrittfrequenzerkennung:} 
       \item[] \textsf{Distanzmessung:}
       \item[] \textsf{Zähler der Schrittanzahl:}
       \item[] \textsf{Erkennung Situps:}
       \item[] \textsf{Erkennung Liegestütze:}   
-    \end{itemize}
     \subsubsection{App}
-    \begin{itemize}
       
       \item[] \textsf{versteckter Modus Livedaten:} Visualisieren der Sensorrohdaten als Graphen    
       \item[] \textsf{Modus Zähler:} zählt Liegestützen bzw. Situps
