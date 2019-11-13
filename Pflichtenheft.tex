@@ -140,21 +140,21 @@ TODO Valle Koordination
   TODO alle: Man sollte hier funktionale Anforderungen \textbf{angeben und ergänzen}. Dabei nummeriert man in 10er Schritten.
     \subsubsection{Bibliothek}
     \begin{itemize}
-      \item[/F010/] Daten des Gyroskops auslesen und in Echtzeit zur Verfügung stellen
-      \item[/F020/] Daten des Beschleunigungssensors auslesen und in Echtzeit zur Verfügung stellen
-      \item[/F030/] Messparameter (Abtastrate etc.) ändern %%konkreter: Abtastrate (oder ???)
-      \item[/F040/] Datenaufnahme des IMU starten und stoppen
+      \item[/F010/] Daten des Gyroskops auslesen und in Echtzeit zur Verfügung stellen.
+      \item[/F020/] Daten des Beschleunigungssensors auslesen und in Echtzeit zur Verfügung stellen.
+      \item[/F030/] Messparameter (Abtastrate etc.) ändern. %%konkreter: Abtastrate (oder ???)
+      \item[/F040/] Datenaufnahme des IMU starten und stoppen.
       \item[/F050/] BLE Charakteristiken unterstützen %%besprechen!!!
     \subsubsection{Erweiterungsmodul}
      Auswertung der ausgelesenen Daten:
-      \item[/F060/] Schritterkennung (Stehen/Laufen des Nutzers)
+      \item[/F060/] Schritterkennung (Stehen/Laufen des Nutzers).
     \subsubsection{App}
     %%TODO valle Glossareintrag Vorgang: "aktiv in modus"
       %%alles kürzer schreiben, nur je 1 Stichpunkt
       \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. %%weglassen? Startbildschirmanzeige?
-      \item[/F080/] \textsf{Modus auswählen:} Auswahl eines Modus aus allen verfügbaren Modi (also mindestens der Modus \glqq Laufen/Stehen anzeigen\grqq) 
-      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi während ein Modus aktiv ist %%aktueller Modus stoppt, nichtfunktionale Anforderung? 
-      \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}
+      \item[/F080/] \textsf{Modus auswählen:} Auswahl eines Modus aus allen verfügbaren Modi (also mindestens der Modus \glqq Laufen/Stehen anzeigen\grqq). 
+      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi während ein Modus aktiv ist. %%aktueller Modus stoppt, nichtfunktionale Anforderung? 
+      \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
       \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
       \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen Vorgang stoppen.
       \item[/F130/] Nach Stoppen Anzeigen des Vorgansresultats bis neuer Vorgang gestartet wird.
@@ -163,24 +163,25 @@ TODO Valle Koordination
       %%stichpunkte
       Weitere Datenauswertung:
       %%Redundante Erklärung der Funktionen
-      \item[/F140/] \textsf{Schrittfrequenzerkennung:} Erkennung der Schrittfrequenz des Nutzers
-      \item[/F150/] \textsf{Distanzmessung:} Erkennung der zurückgelegten Distanz des Nutzers
+      \item[/F140/] \textsf{Schrittfrequenzerkennung:} Erkennung der Schrittfrequenz des Nutzers.
+      \item[/F150/] \textsf{Distanzmessung:} Erkennung der zurückgelegten Distanz des Nutzers.
       \item[/F160/] \textsf{Zähler der Schrittanzahl:} Zählen der Schritte des Nutzers.
-      \item[/F170/] \textsf{Erkennung Situps:} Erkennung von Situps
-      \item[/F180/] \textsf{Erkennung Liegestütze:} Erkennung von Liegestütze
+      \item[/F170/] \textsf{Erkennung Situps:} Erkennung von Situps.
+      \item[/F180/] \textsf{Erkennung Liegestütze:} Erkennung von Liegestütze.
     \subsubsection{App}
       Weitere Modi:
-      \item[/F190/] \textsf{Modus Livedaten: \textit{(versteckt)}} Visualisieren der Sensorrohdaten als Graphen    
+      \item[/F190/] \textsf{Modus Livedaten: \textit{(versteckt)}} Visualisieren der Sensorrohdaten als Graphen.    
       \item[/F200/] \textsf{Zählmodus:} Zählen von Liegestützen oder Sit-ups. %%(Sitz-auf)
       \item[/F210/] \textsf{Start/Stopp Musikmodus:} Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft.
       %%Weitere Funktionen von lauschen&agieren anders Gliedern?
-      \item[/F220/] \textsf{Modus Lauschen\&Agieren:} Zusammenstellen eines Trainingsablaufs (Liegestütze, Sit-ups, Laufen) 
-      \item[/F230/] \textsf {Modus Lauschen\&Agieren:} Sprachanweisungen für die nächste Übung während des Trainings
+      \item[/F220/] \textsf{Modus Lauschen\&Agieren:} Zusammenstellen eines Trainingsablaufs (Liegestütze, Sit-ups, Laufen). 
+      \item[/F230/] \textsf {Modus Lauschen\&Agieren:} Sprachanweisungen für die nächste Übung während des Trainings.
       \item[/F240/] \textsf {Modus Lauschen\&Agieren:} Anzeige der Zeitdauer jeder Übung nach Ablaufsende, siehe F130.
       \item[/F250/] \textsf {Einstellungen:} Der Nutzer kann seinen Namen abgeben und ändern.
       \item[/F260/] \textsf {Einstellungen:} Der Nutzer kann die Sprache der App anpassen.
       \item[/F270/] \textsf {Einstellungen:} Der Nutzer kann die gespeicherten Trainingsdaten löschen.
-      \item[/F280/] \textsf {Einstellungen:}Der Nutzer kann die Steuerungsparameter anpassen. %%Genauere Spezifikation
+      \item[/F280/] \textsf {Einstellungen:} Der Nutzer kann die Steuerungsparameter anpassen. %%Genauere Spezifikation
+      \item[/F290/] \textsf {Erstnutzung:} Aufforderung der Angabe von Name und in-App Sprache bei Erstnutzung.
       \item[/F290/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
       \item[/F300/] \textsf{Speichern der Vorgänge:} Speicherung aller Vorgänge die aktiv waren mit Datum, Uhrzeit und dem Wert, der der Funktion entspricht (keine Rohdaten).   %%Gehört das nicht unter Produkdaten??????
     \end{itemize}
@@ -202,7 +203,14 @@ Glossareintrag \glqq live\grqq{}: statt Echtzeit lieber \glqq live\grqq{} verwen
       {Erweiterungsmodul}
       {App}
 \begin{itemize}
-  \item[/N010/] \textsf{TODO}
+  \item[/NF010/] Beim Ausführen der Funktion /F030/ soll die Datenaufnahme der IMU gestoppt werden.
+  \item[/NF020/] Die Funktionen /F060/ und /F100/ (Laufmodus) soll maximal eine Verzögerung von zwei Sekunden aufweisen. %%Genaue Zeitangabe definieren
+  \item[/NF030/] Beim Wechseln zwischen Modi (/F090/) soll der aktuelle Modus terminiert werden.
+  \item[/NF040/] Der Start eines Modus nach seiner Auswahl (/F080/) soll nicht länger als zwei Sekunden benötigen.
+  \item[/NF050/] Die Einblendung des Vorgangsresultats (/F130/) soll nicht länger als zwei Sekunden benötigen.
+  \item[/NF060/] Nach Ausführung der Funktion  Sprachänderung (/F260/) muss die App neu gestartet werden.
+  \item[/NF070/] Bei negative Anzahl Angaben (/F220/) wird das Starten des Vorgangs verhindert.
+  \item[/NF080/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe ev. /F300/) nicht verändert.
 \end{itemize}
 \subsection{Laufzeitverhalten}
 \subsection{Speicherplatz}
@@ -212,6 +220,9 @@ Glossareintrag \glqq live\grqq{}: statt Echtzeit lieber \glqq live\grqq{} verwen
 TODO Jan
   \subsection{Architekturdiagramm}
   \subsection{Use-Case-Diagramme}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{Vorlaeufiges Use-Case Diagram.pdf}
+\end{center}
 \section{Benutzeroberfläche}
 TODO Benni auseinandersetzen
 \section{Globale Testfälle und Szenarien}
