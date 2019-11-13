@@ -151,7 +151,7 @@ TODO Valle Koordination
     \subsubsection{App}
     %%TODO valle Glossareintrag Vorgang: "aktiv in modus"
       %%alles kürzer schreiben, nur je 1 Stichpunkt
-      \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. %%weglassen?
+      \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. %%weglassen? Startbildschirmanzeige?
       \item[/F080/] \textsf{Modus auswählen:} Auswahl eines Modus aus allen verfügbaren Modi (also mindestens der Modus \glqq Laufen/Stehen anzeigen\grqq) 
       \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi während ein Modus aktiv ist %%aktueller Modus stoppt, nichtfunktionale Anforderung? 
       \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}
@@ -161,23 +161,28 @@ TODO Valle Koordination
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
       %%stichpunkte
-      \item[] \textsf{Schrittfrequenzerkennung:} 
-      \item[] \textsf{Distanzmessung:}
-      \item[] \textsf{Zähler der Schrittanzahl:}
-      \item[] \textsf{Erkennung Situps:}
-      \item[] \textsf{Erkennung Liegestütze:}   
+      Weitere Datenauswertung:
+      %%Redundante Erklärung der Funktionen
+      \item[/F140/] \textsf{Schrittfrequenzerkennung:} Erkennung der Schrittfrequenz des Nutzers
+      \item[/F150/] \textsf{Distanzmessung:} Erkennung der zurückgelegten Distanz des Nutzers
+      \item[/F160/] \textsf{Zähler der Schrittanzahl:} Zählen der Schritte des Nutzers.
+      \item[/F170/] \textsf{Erkennung Situps:} Erkennung von Situps
+      \item[/F180/] \textsf{Erkennung Liegestütze:} Erkennung von Liegestütze
     \subsubsection{App}
-      
-      \item[] \textsf{versteckter Modus Livedaten:} Visualisieren der Sensorrohdaten als Graphen    
-      \item[] \textsf{Modus Zähler:} zählt Liegestützen bzw. Situps
-      \item[] \textsf{Modus Musik Start/Stopp:} Musik läuft genau, wenn man selbst läuft
-      \item[] \textsf{Modus lauschen\&agieren:} Im Modus listen\&perform (kurz l\&p) kann der Nutzer sein Trainingsprogramm zusammenstellen (siehe..) und im Vorgang ausführen (siehe...). 
-      \item[] \textsf{l\&p Auswahlfeld:} Vor dem Starten des Vorgangs wird dem Nutzer eine Liste angezeigt, in das er eine Trainingsliste (eine Liste an einzelnen Übungen) nach einer angezeigten Syntax eingeben kann.
-      \item[] \textsf{l\&p aktiver Vorgang:} Für jeden Eintrag der Trainingsliste (der Reihe nach) wird über eine Sprachanweisung über die Kopfhörer die nächste Übung angesagt. Danach wartet erkennt die App, wann die Übung erfüllt ist und geht zur nächsten Übung.
-      \item[] \textsf{l\&p Zusammenfassung:} Nach dem Ende des Vorgangs wird dem Nutzer angezeigt, wie lange er für welche Übung gebraucht hat.
-      \item[] \textsf{Funktionen der Einstellungen:} Der Benutzer kann in der App unter dem Punkt 'Einstellungen' seinen Namen und die Anzeigesprache angeben, sowie die Steuerungsparameter anpassen und die gespeicherten Trainingsdaten löchen.
-      \item[] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App unter dem Punkt 'Extortieren und Importieren' seine gesamten Trainingsdaten exportieren und importieren.
-      \item[] \textsf{Speichern der Vorgänge:} Alle Vorgänge, die gestartet und gestoppt worden sind, werden auf dem Smartphone gespeichert mit Datum, Uhrzeit und dem Wert, der der Funktion entspricht (keine Rohdaten).   
+      Weitere Modi:
+      \item[/F190/] \textsf{Modus Livedaten: \textit{(versteckt)}} Visualisieren der Sensorrohdaten als Graphen    
+      \item[/F200/] \textsf{Zählmodus:} Zählen von Liegestützen oder Sit-ups. %%(Sitz-auf)
+      \item[/F210/] \textsf{Start/Stopp Musikmodus:} Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft.
+      %%Weitere Funktionen von lauschen&agieren anders Gliedern?
+      \item[/F220/] \textsf{Modus Lauschen\&Agieren:} Zusammenstellen eines Trainingsablaufs (Liegestütze, Sit-ups, Laufen) 
+      \item[/F230/] \textsf {Modus Lauschen\&Agieren:} Sprachanweisungen für die nächste Übung während des Trainings
+      \item[/F240/] \textsf {Modus Lauschen\&Agieren:} Anzeige der Zeitdauer jeder Übung nach Ablaufsende, siehe F130.
+      \item[/F250/] \textsf {Einstellungen:} Der Nutzer kann seinen Namen abgeben und ändern.
+      \item[/F260/] \textsf {Einstellungen:} Der Nutzer kann die Sprache der App anpassen.
+      \item[/F270/] \textsf {Einstellungen:} Der Nutzer kann die gespeicherten Trainingsdaten löschen.
+      \item[/F280/] \textsf {Einstellungen:}Der Nutzer kann die Steuerungsparameter anpassen. %%Genauere Spezifikation
+      \item[/F290/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
+      \item[/F300/] \textsf{Speichern der Vorgänge:} Speicherung aller Vorgänge die aktiv waren mit Datum, Uhrzeit und dem Wert, der der Funktion entspricht (keine Rohdaten).   %%Gehört das nicht unter Produkdaten??????
     \end{itemize}
 
 
