@@ -72,7 +72,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%sollte 'eigentlich' funktionieren... tut es nur leider nicht aber naja.
 
-\newglossaryentry{Echtzeit}{name=Echtzeit, description={mit einer durch die Verarbeitung bedingten Verzögerung von bis zu 3 Sekunden zwischen dem Anfallen der (Roh-)Daten und der Ausgabe bzw. Visualisierung.}}
+\newglossaryentry{Echtzeit}{name=Echtzeit, description={mit einer durch die Verarbeitung bedingten Verzögerung von bis zu ca. 3 Sekunden zwischen dem Anfallen der (Roh-)Daten und der Ausgabe bzw. Visualisierung.}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -168,7 +168,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   %%TODO alle: Man sollte hier funktionale Anforderungen \textbf{angeben und ergänzen}. Dabei nummeriert man in 10er Schritten.
     \subsubsection{Bibliothek}
     \begin{itemize}
-      \item[/F010/] Daten des Gyroskops auslesen und in Echtzeit zur Verfügung stellen.
+      \item[/F010/] Daten des Gyroskops auslesen und in \Gls{Echtzeit} zur Verfügung stellen.
       \item[/F020/] Daten des Beschleunigungssensors auslesen und in Echtzeit zur Verfügung stellen.
       \item[/F030/] Messparameter (Abtastrate etc.) ändern. %%konkreter: Abtastrate (oder ???)
       \item[/F040/] Datenaufnahme des IMU starten und stoppen.
@@ -182,6 +182,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \subsubsection{App}
     %%TODO valle Glossareintrag Vorgang: "aktiv in modus"
       %%alles kürzer schreiben, nur je 1 Stichpunkt
+      \begin{itemize}
       \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.%%!! hatten wir uns glaube ich drauf geeinigt (?) - valle
       \item[/F080/] \textsf{Modus auswählen:} Auswahl eines Modus aus allen verfügbaren Modi (also mindestens der Modus \glqq Laufen/Stehen anzeigen\grqq). 
       \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi, während ein Modus aktiv ist. %%aktueller Modus stoppt, nichtfunktionale Anforderung? - nicht der Modus, sondern der Vorgang stoppt (valle)
@@ -327,6 +328,6 @@ Dabei kommt der .NET Standard 2.0 zum Einsatz, der C\# 7.2 verwendet. Wir arbeit
 
 Zur Versionskontrolle und zur Projektübersicht wird Git verwendet, das Repository liegt öffentlich auf Github\footnote{\url{https://github.com/vlle1/earablesKIT}}.
 \clearpage
-\input{Glossar}
 \printglossaries
+\stepcounter{section}
 \end{document}
