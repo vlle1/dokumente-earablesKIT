@@ -222,7 +222,7 @@ TODO Jan
   \subsection{Architekturdiagramm}
   \subsection{Use-Case-Diagramme}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{Vorlaeufiges Use-Case Diagram.pdf}
+% \includegraphics[width=0.8\textwidth]{Vorlaeufiges Use-Case Diagram.pdf}
 \end{center}
 \section{Benutzeroberfläche}
 TODO Benni auseinandersetzen
@@ -230,21 +230,34 @@ TODO Benni auseinandersetzen
 \section{Globale Testfälle und Szenarien}
 TODO David
   \subsection{Globale Testfälle}
-  \subsubsection{Schritterkennung beim Gehen}
-  \begin{itemize}
-    \item[]Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
-    \item[]Die App wird gestartet.
-    \item[]Nach starten der App wird in den Modus \glqq Datenanzeige gehen/stehen\grqq{} gewechselt.
-    \item[]Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
-    \item[]Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an.
-    \item[]Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an.
-    \item[]Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. 
-  \end{itemize}
-  \subsubsection{Schritte zählen}
-  \begin{itemize}
-    \item[]
-    \item[] 
-  \end{itemize}
+  \subsubsection{Mussanforderungen}
+  \textbf{Schritterkennung beim Gehen}
+  \begin{enumerate}
+    \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
+    \item Die App wird gestartet.
+    \item Nach dem Startvorgang der App wird in den Modus \glqq Laufmodus\grqq{}(/F100/) gewechselt.
+    \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
+    \item Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an.
+    \item Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an.
+    \item Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. 
+  \end{enumerate}
+
+  \textbf{Start/Stop Musikmodus}
+  \begin{enumerate}
+    \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
+    \item Der Nutzer spielt Musik mit der vorinstallierten Musik-App ab.
+    \item Die App wird gestartet.
+    \item Nach dem Startvorgang der App wird in den Modus \glqq Start/Stop Musikmodus\grqq{} (/F210/) gewechselt.
+    \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
+    \item Der Nutzer beginnt zu gehen.
+    \item Der Nutzer startet den gewählten Modus.
+    \item Der Nutzer hört auf zu gehen.
+    \item Die Musik wird pausiert.
+    \item Der Nutzer geht weiter.
+    \item Die Musik startet automatisch wieder.
+  \end{enumerate}
+
+  
   \subsection{Szenarien}
     \subsubsection{Bibliotheksnutzung}
 
