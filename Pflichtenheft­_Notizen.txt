@@ -1,60 +1,3 @@
-Pflichtenheft:
-
-Zielbestimmung:
-Musskriterien
-o	Bluetooth Verbindung
-o	Bibliothek für Schritterkennung (Frequenz)
-o	Gerätedaten auslesen (parsen, etc.)
-o	Cross-Plattform GUI Anwendung
-(o   Open-Source im Sinne der MIT Lizenz)
-
-Wunschkriterien
-o	Daten visualisieren
-o	Situps/Liegestützen erkennen
-o	Sprachanweisung in Bezug auf Trainingsprogramm
-
-Abgrenzungskriterien
-o	Musik nicht veränderbar
-o	Datenspeicherung nur auf dem Device
-o	Bewusstes Austricksen der Messungen werden nicht beachtet
-o   Nur von Xamarin unterstütze Geräte werden unterstützt
-
-Funktionale Anordnungen
--	Der Benutzer muss die Parameter der Messung konfigurieren können
--	Der Benutzer kann seine Einstellungen als Datei exportieren/importieren
--	Der Benutzer kann Liegestützen/Situps für einen zählen lassen
-
-Nichtfunktionale Anforderungen
--	Die GUI muss ansprechend wirken
--	Package lost behandeln?
-
-
-Produktdaten:
--	Die Trainingsdaten werden von der Anwendung auf dem Gerät gespeichert  
-
-GUI:
-1.	Messdaten anzeigen
-2.	Setting Website
-3.	Lauf tracken
-4.	Situps/Liegestützen zählen
-5.	Trainingsprogramm per Text to Speech
-
-Definitionen von Begriffen 
--   statt Echtzeit lieber "live" verwenden, live := mit einer Verzögerung von maximal 3 Sekunden
-
-
-Fragen an Kunden:
--	Wie genau Schritterkennung? Echtzeit?
--	Können wir die Funktionalität flexibler gestalten?
--	Müssen wir die Musik anpassen können? Essenziell?
--	Nichtfunktionale Anforderungen? Welche genau? Woher kann man die Realisierbarkeit abschätzen? Wie lange muss es dauern?
--	Was genau ist das Architekturdiagramm
--	Kann man die Struktur des Lastenheftes verändern?
--	
-
-
-
-
 ###############################
 Glossar:
 
@@ -64,3 +7,49 @@ Cross-Plattform:    Die Anwendung und Bibliothek müssen auf allen von Xamarin u
 
 
 ###############################
+
+Notizen 14.11.19
+
+Pflichtenheft
+-	IOS/Android Versionen überprüfen (Marktanteil)
+-	Funktionale Anforderungen keinen expliziten Namn
+-	C# Version kann 8 verwendet werden -> Bei Problemen 7.2
+-	Testfälle genau zu jeder Funktionalen Anforderung
+
+-	MVC oder Schichtenmodell angeben
+-	Im Fokus der App
+-	Use – Case Diagramm nur auf App bezogen
+
+
+-	Überprüfen, was gespeichert werden muss
+-	Digitalisieren, Sketch, Moq up, Invision für interaktive Screenshots
+-	Für Beispiele: Dribbble  
+-	
+
+Präsentation
+-	Für Präsentation: ca. 10 min
+-	Nicht zu genau in jede Anforderung
+-	Warum haben wir uns 
+-	„Wir haben verstanden was umgesetzt werden soll“
+-	Eher keine Testfälle, dafür auf Muss/Wunsch-kriterien eingehen
+
+
+
+Steuerungsparameter:
+-	Sampling rate
+-	Bluetooth Ebene
+
+Schrittfrequenz:
+- 	Schrittfrequenz wenigstens in Erweiterungstool
+-	"returns die Schrittfrequenz der letzten 30 sec."
+-	Eher nicht auf App Ebene (evtl. als last Wunschkriterium)
+
+
+
+TODO:
+-	GUI digitalisieren
+- 	Pflichtenheft erweitern
+- 	Musskriterien/Wunschkriterien in Stichpunkte
+-	Redundanzen Funktionale Anforderungen
+- 	Glossar erstellen
+- 	Qualitästssicherungen

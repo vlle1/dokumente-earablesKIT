@@ -13,7 +13,7 @@
 
 % glossar, see http://en.wikibooks.org/wiki/LaTeX/Glossary
 % has to be loaded AFTER hyperref so that entries are clickable
-\usepackage[nonumberlist]{glossaries}
+\usepackage{glossaries}
 
 % The following is needed in order to make the code compatible
 % with both latex/dvips and pdflatex.
@@ -67,6 +67,12 @@
 {\hline\end{tabular}}
 
 \usepackage{microtype}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% GLOSSARY ENTRIES                 	                              	 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%sollte 'eigentlich' funktionieren... tut es nur leider nicht aber naja.
+
+\newglossaryentry{Echtzeit}{name=Echtzeit, description={mit einer durch die Verarbeitung bedingten Verzögerung von bis zu ca. 3 Sekunden zwischen dem Anfallen der (Roh-)Daten und der Ausgabe bzw. Visualisierung.}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -81,31 +87,53 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-Earables gehören zu den Wearable Computings. Sie sind also nichts anderes als intelligente Kopfhörer. Je nach dem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Austattung von  Lautsprechern, Mikrophon und Bluetooth Low Energy besitzen sie in unserem Fall zusätzlich ein 6-Achsen IMU (Beschleunigungssensor und Gyroskop) . Mit seiner Hilfe ist man in der Lage die (Kopf-)Bewegung des Nutzers zu tracken um mit den gewonnenen Messdaten  beispielsweise die Atemfrequenz zu ermitteln. Earebles bilden also eine Schnittstelle von Mensch und Computer. Mit ihnen kann man unauffällig medizinische Daten im Altag sammeln. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind haben sie bereits ein hohe soziale akzeptans in der Gesellschaft erlangt, im Gegensatz zu beispielsweise den smart Glasses. Mit der Entwicklung und Forschung dieser Art von Earables beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der Earables gesucht, wodurch auch dieses Projekt seinen Weg in diese Welt gefunden hat.
+Earables gehören zu den Wearable Computings. Sie sind also nichts anderes als intelligente Kopfhörer. Je nach dem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Austattung von  Lautsprechern, Mikrophon und Bluetooth Low Energy besitzen sie in unserem Fall zusätzlich ein 6-Achsen IMU (Beschleunigungssensor und Gyroskop). Mit seiner Hilfe ist man in der Lage die (Kopf-)Bewegung des Nutzers zu tracken um mit den gewonnenen Messdaten  beispielsweise die Atemfrequenz zu ermitteln. Earebles bilden also eine Schnittstelle von Mensch und Computer. Mit ihnen kann man unauffällig medizinische Daten im Altag sammeln. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind haben sie bereits ein hohe soziale akzeptans in der Gesellschaft erlangt, im Gegensatz zu beispielsweise den smart Glasses. Mit der Entwicklung und Forschung dieser Art von Earables beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der Earables gesucht, wodurch auch dieses Projekt seinen Weg in diese Welt gefunden hat.
 \section{Zielbestimmung}
 Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \begin{enumerate}
 
   \item Es soll eine Cross-Plattform Bibliothek (Android/IOS) für die Earables der Plattform eSense entwickelt werden mit der es möglich ist, die Messdaten des Gerätes aufzuzeichnen und verschiedene Steuerungsparameter zu verändern.
   
-  \item Es soll ein Erweiteungsmodul entwickelt werden, mit der es Möglich ist gewisse Daten der Kopf auszuwerten, beispielsweise ob der Nutzer gerade läuft oder steht.
+  \item Es soll ein Erweiteungsmodul entwickelt werden, mit dem die übermittelten  Rohdaten automatisch verarbeitet und ausgewertet werden, um so festzustellen ob der Nutzer gerade läuft oder steht.
   
-  \item %%app todo
+  \item Es soll eine App mit einer GUI entwickelt werden, die anzeigt ob der Nutzer gerade läuft oder steht.
 
 \end{enumerate}
 
 \subsection{Musskriterien}
-%%bitte stichpunkte
-Das Ziel der Bibliothek ist es, Kern-Funktionen zu beinhalten, um Messdaten auzulesen und die Steuerungsparameter zu verändern. Besonders wichtig ist, dass man in der Lage sein soll die Daten des 6-Achsen IMU auzulesen. Bezüglich des Erweiterungsmoduls soll es in der Lage sein zu erkennen ob der Nutzer gerade läuft oder steht und dies, über eine ansprechende GUI, auszugeben. Außerdem soll die GUI so benutzerfreundlich gestaltet werden, so dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der Earables verändern kann.
-\subsection{Wunschkriterien}
-%%bitte stichpunkte
-Als Wunschkriterium soll die App die Schrittfrequenz des Nutzers anzeigen und das im besten Fall in Echtzeit. Mit einer kurzen Verzögerung von ein paar Sekunden wird jedoch gerechnet. Zusätzlich soll die Anzahl der Schritte ausgegeben werden wodurch man die zurückgelegten Distanz ermitteln kann. Diese wird ebenfalls ausgegeben. Des weiteren sind 3 verschiedene Modi geplant. Im Modus „Counter“ zählt die App wie viele Liegestützen oder Sit Ups der Nutzer macht. Über den Modus „Listen and Perform“ ist der Nutzer in der Lage seinen eigenen Trainingsplan individuell für sich zu erstellen. Dieser wird dann, mit Hilfe von Text to Speech ausgegeben. Im letzten Modus Namens „Musik Run“ wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, sobald der Nutzer damit beginnt weiter zu laufen. Die App wird auf deutsch sein, aber der Nutzer kann weitere Sprachen durch Sprachpaket-Plugins hinzufügen. Zum Abschluss soll es für den Nutzer möglich sein seine Trainingsdaten zu speichern, importieren und exportieren, um so mehrere „Projekte“ anzulegen.
-  \subsection{Abgrenzungskriterien}
-  %%bitte stichpunkte
-Was wir nicht umsetzen wollen ist die Speicherung von Rohdaten, da dies zur Folge haben könnte, dass sich einige Nutzer ausspioniert fühlen. Generell wird die Speicherung von Daten nur auf dem Smartphone erfolgen und nicht auf dem Speicher der Earables. Das Ziel, die Geschwindigkeit der Musik an die Schrittfrequenz des Nutzers anzupassen, wird nicht verfolgt. Im Modus Liegestützen oder Sit Ups zählen wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit Ups macht und nicht versucht das System auszutricksen.
 
-% Was will ich bewusst nicht umsetzen?
-% Was soll es nicht sein?
+  \begin{itemize}
+    \item\text Die Cross-Plattform Bibliothek soll in der Lage sein die gesammelten Daten der Earables aufzuzeichnen
+    \item\text Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen Steuerungsparameter zu setzen z.B. die Abtastrate Rate
+    \item\text Das Erweiterungsmodul kann erkennen ob der Nutzer gerade „läuft“ oder „steht“
+    \item\text Die App soll anzeigen können ob der Nutzer gerade läuft oder steht
+    \item\text Die GUI der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der Earables verändert
+  \end{itemize}
+\subsection{Wunschkriterien}
+  \begin{itemize}
+    \item\text Die App soll die Schrittfrequenz des Nutzers anzeigen
+    \item\text Die App soll die Anzahl der zurückgelegten Schritte anzeigen
+    \item\text Die App soll die zurückgelegte Distanz anzeigen
+    \item\text Die App soll über 3 verschiedene Modi verfügen
+      \begin{itemize}
+        \item\text Im Modus „Zähler“  zählt die App wie viele Liegestützen oder Sit Ups der Nutzer macht
+        \item\text  Im Modus „Lauschen \& Agieren“ kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird
+        \item\text  Im Modus „Musikmodus“ wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, wenn der Nutzer weiterläuft
+      \end{itemize}
+%% hier noch ide 3 modi reinpacken
+%%--- Im Modus „Zähler“  zählt die App wie viele Liegestützen oder Sit Ups der Nutzer macht
+%%--- Im Modus „Lauschen & Agieren“ kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird
+%%--- Im Modus „Musikmodus“ wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, wenn der Nutzer weiterläuft
+    \item\text Die App wird auf deutsch sein, aber der Nutzer kann weitere Sprachen durch Sprachpaket-Plugins hinzufügen
+    \item\text Der Nutzer kann seine Trainingsdaten speichern, importieren und exportieren
+  \end{itemize}
+  \subsection{Abgrenzungskriterien}
+  \begin{itemize}
+    \item\text Es werden keine Rohdaten gespeichert
+    \item\text Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den Earables
+    \item\text Die Musik passt sich nicht der Schrittfrequenz des Nutzers an
+    \item\text Im Modus „Zählen“ wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit Ups macht und nicht versucht das System auszutricksen indem er beispielsweise die Earables, mit der Hand, hoch und runter bewegt
+  \end{itemize}
 
 \section{Produkteinsatz}
   \subsection{Zielgruppe}
@@ -133,43 +161,49 @@ Was wir nicht umsetzen wollen ist die Speicherung von Rohdaten, da dies zur Folg
 \subsection{Software} \textsf{Betriebssystem:} Android > 8.0 und iOS > 12.0
 
 \section{Funktionale Anforderungen}
-TODO Valle Koordination
+%%TODO Valle Koordination
 % Was soll das Produkt machen können
 
   \subsection{Mussanforderungen}
-  TODO alle: Man sollte hier funktionale Anforderungen \textbf{angeben und ergänzen}. Dabei nummeriert man in 10er Schritten.
+  %%TODO alle: Man sollte hier funktionale Anforderungen \textbf{angeben und ergänzen}. Dabei nummeriert man in 10er Schritten.
     \subsubsection{Bibliothek}
     \begin{itemize}
-      \item[/F010/] Daten des Gyroskops auslesen und in Echtzeit zur Verfügung stellen.
+      \item[/F010/] Daten des Gyroskops auslesen und in \Gls{Echtzeit} zur Verfügung stellen.
       \item[/F020/] Daten des Beschleunigungssensors auslesen und in Echtzeit zur Verfügung stellen.
       \item[/F030/] Messparameter (Abtastrate etc.) ändern. %%konkreter: Abtastrate (oder ???)
       \item[/F040/] Datenaufnahme des IMU starten und stoppen.
       \item[/F050/] BLE Charakteristiken unterstützen %%besprechen!!!
+    \end{itemize}
     \subsubsection{Erweiterungsmodul}
      Auswertung der ausgelesenen Daten:
+     \begin{itemize}
       \item[/F060/] Schritterkennung (Stehen/Laufen des Nutzers).
+    \end{itemize}
     \subsubsection{App}
     %%TODO valle Glossareintrag Vorgang: "aktiv in modus"
       %%alles kürzer schreiben, nur je 1 Stichpunkt
-      \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. %%weglassen? Startbildschirmanzeige?
+      \begin{itemize}
+      \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.%%!! hatten wir uns glaube ich drauf geeinigt (?) - valle
       \item[/F080/] \textsf{Modus auswählen:} Auswahl eines Modus aus allen verfügbaren Modi (also mindestens der Modus \glqq Laufen/Stehen anzeigen\grqq). 
-      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi während ein Modus aktiv ist. %%aktueller Modus stoppt, nichtfunktionale Anforderung? 
+      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi, während ein Modus aktiv ist. %%aktueller Modus stoppt, nichtfunktionale Anforderung? - nicht der Modus, sondern der Vorgang stoppt (valle)
       \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
       \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
       \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen Vorgang stoppen.
       \item[/F130/] \textsf{Resultat anzeigen:}Nach Stoppen Anzeigen des Vorgansresultats bis neuer Vorgang gestartet wird.
+    \end{itemize}
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
-      %%stichpunkte
       Weitere Datenauswertung:
-      %%Redundante Erklärung der Funktionen
-      \item[/F140/] \textsf{Schrittfrequenzerkennung:} Erkennung der Schrittfrequenz des Nutzers. %%Ungenutzt??
-      \item[/F150/] \textsf{Distanzmessung:} Erkennung der zurückgelegten Distanz des Nutzers.
-      \item[/F160/] \textsf{Schrittanzahlzähler:} Zählen der Schritte des Nutzers.
-      \item[/F170/] \textsf{Erkennung Situps:} Erkennung von Situps.
-      \item[/F180/] \textsf{Erkennung Liegestütze:} Erkennung von Liegestütze.
+      \begin{itemize}
+      \item[/F140/] \textsf{Schrittfrequenzerkennung}%%Ungenutzt?? - geklärt. wird beibehalten (valle) (siehe Protokoll 14.11.)
+      \item[/F150/] \textsf{Schrittzahlzähler} Zählen der Schritte des Nutzers. %%getauscht wegen logischer Reihenfolge!!
+      \item[/F160/] \textsf{Distanzmessung} Anzeige während und nach des Vorgangs in z.B. Metern, umgerechnet aus der Anzahl der Schritte.
+      \item[/F170/] \textsf{Erkennung Situps}
+      \item[/F180/] \textsf{Erkennung Liegestütze}
+      \end{itemize} 
     \subsubsection{App}
       Weitere Modi:
+      \begin{itemize}
       \item[/F190/] \textsf{Modus Livedaten: \textit{(versteckt)}} Visualisieren der Sensorrohdaten als Graphen.    
       \item[/F200/] \textsf{Zählmodus:} Zählen von Liegestützen oder Sit-ups. %%(Sitz-auf)
       \item[/F210/] \textsf{Start/Stopp Musikmodus:} Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft.
@@ -184,7 +218,7 @@ TODO Valle Koordination
       \item[/F290/] \textsf {Erstnutzung:} Aufforderung der Angabe von Name und in-App Sprache bei Erstnutzung.
       \item[/F300/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
       \item[/F310/] \textsf{Speichern der Vorgänge:} Speicherung aller Vorgänge die aktiv waren mit Datum, Uhrzeit und dem Wert, der der Funktion entspricht (keine Rohdaten).   %%Gehört das nicht unter Produkdaten??????
-    \end{itemize}
+      \end{itemize}
 
 
 \section{Produktdaten}
@@ -198,16 +232,17 @@ TODO Valle Koordination
 
 
 \section{Nichtfunktionale Anforderungen}
-TODO Jan Koordination
-Glossareintrag \glqq live\grqq{}: statt Echtzeit lieber \glqq live\grqq{} verwenden, live := mit einer Verzögerung von maximal 3 Sekunden
-  nur zum brainstorm alle Punkte zu denen es sachen geben könnte:
-  {Mussanforderungen}
-      {Bibliothek}
-      {Erweiterungsmodul}
-      {App}
-    {Wunschanforderungen}
-      {Erweiterungsmodul}
-      {App}
+%TODO Jan Koordination
+
+%  Glossareintrag \glqq Echtzeit \grqq{} := mit einer Verzögerung von maximal 3 Sekunden
+%  nur zum brainstorm alle Punkte zu denen es sachen geben könnte:
+%  {Mussanforderungen}
+%      {Bibliothek}
+%      {Erweiterungsmodul}
+%      {App}
+%    {Wunschanforderungen}
+%      {Erweiterungsmodul}
+%      {App}
 \begin{itemize}
   \item[/NF010/] Beim Ausführen der Funktion /F030/ soll die Datenaufnahme der IMU gestoppt werden.
   \item[/NF020/] Die Funktionen /F060/ und /F100/ (Laufmodus) soll maximal eine Verzögerung von zwei Sekunden aufweisen. %%Genaue Zeitangabe definieren
@@ -224,20 +259,21 @@ Glossareintrag \glqq live\grqq{}: statt Echtzeit lieber \glqq live\grqq{} verwen
 \subsection{Stabilität}
 
 \section{Systemmodelle}
-TODO Jan
+%%TODO Jan
   \subsection{Architekturdiagramm}
   \subsection{Use-Case-Diagramme}
 \begin{center}
 %\includegraphics[width=0.8\textwidth]{Vorlaeufiges Use-Case Diagram.pdf}
 \end{center}
 \section{Benutzeroberfläche}
-TODO Benni auseinandersetzen
-\section{Qualitätszielbestimmungen} %%Wasn hiermit? Stand noch in der Mail als Unterpunkt. https://www.sosy-lab.org/Teaching/2015-WS-SEP/samples/pflichtenheft.pdf Seite 13 sieht man so eine Tabelle, wie ist das gemeint?
+%%TODO Benni auseinandersetzen
+\section{Qualitätszielbestimmungen}
+ %%!! Wasn hiermit? Stand noch in der Mail als Unterpunkt. https://www.sosy-lab.org/Teaching/2015-WS-SEP/samples/pflichtenheft.pdf Seite 13 sieht man so eine Tabelle, wie ist das gemeint?
 \section{Globale Testfälle und Szenarien}
-TODO David
+%%TODO David
   \subsection{Globale Testfälle}
   \subsubsection{Mussanforderungen}
-  \paragraph{Schritterkennung beim Gehen}
+  \paragraph{Schritterkennung beim Gehen}%%bitte Namen der Funktionalen Anf. verwenden!!
   \begin{enumerate}
     \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
     \item Die App wird gestartet.
@@ -263,7 +299,22 @@ TODO David
     \item Die Musik startet automatisch wieder.
   \end{enumerate}
 
-  
+  \subsubsection{Schritterkennung beim Gehen}
+  %%vielleicht ohne absätze als Fließtext? -valle
+    \begin{itemize}
+    \item[]Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
+    \item[]Die App wird gestartet.
+    \item[]Nach starten der App wird in den Modus \glqq Datenanzeige gehen/stehen\grqq{} gewechselt.
+    \item[]Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
+    \item[]Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an.
+    \item[]Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an.
+    \item[]Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. 
+  \end{itemize}
+  \subsubsection{Schritte zählen}
+  \begin{itemize}
+    \item[]
+    \item[] 
+  \end{itemize}
   \subsection{Szenarien}
     \subsubsection{Bibliotheksnutzung}
 
@@ -277,5 +328,6 @@ Dabei kommt der .NET Standard 2.0 zum Einsatz, der C\# 7.2 verwendet. Wir arbeit
 
 Zur Versionskontrolle und zur Projektübersicht wird Git verwendet, das Repository liegt öffentlich auf Github\footnote{\url{https://github.com/vlle1/earablesKIT}}.
 \clearpage
-\input{Glossar}
+\printglossaries
+\stepcounter{section}
 \end{document}
