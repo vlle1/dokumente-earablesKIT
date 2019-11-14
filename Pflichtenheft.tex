@@ -157,15 +157,15 @@ TODO Valle Koordination
       \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
       \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
       \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen Vorgang stoppen.
-      \item[/F130/] Nach Stoppen Anzeigen des Vorgansresultats bis neuer Vorgang gestartet wird.
+      \item[/F130/] \textsf{Resultat anzeigen:}Nach Stoppen Anzeigen des Vorgansresultats bis neuer Vorgang gestartet wird.
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
       %%stichpunkte
       Weitere Datenauswertung:
       %%Redundante Erklärung der Funktionen
-      \item[/F140/] \textsf{Schrittfrequenzerkennung:} Erkennung der Schrittfrequenz des Nutzers.
+      \item[/F140/] \textsf{Schrittfrequenzerkennung:} Erkennung der Schrittfrequenz des Nutzers. %%Ungenutzt??
       \item[/F150/] \textsf{Distanzmessung:} Erkennung der zurückgelegten Distanz des Nutzers.
-      \item[/F160/] \textsf{Zähler der Schrittanzahl:} Zählen der Schritte des Nutzers.
+      \item[/F160/] \textsf{Schrittanzahlzähler:} Zählen der Schritte des Nutzers.
       \item[/F170/] \textsf{Erkennung Situps:} Erkennung von Situps.
       \item[/F180/] \textsf{Erkennung Liegestütze:} Erkennung von Liegestütze.
     \subsubsection{App}
@@ -182,14 +182,20 @@ TODO Valle Koordination
       \item[/F270/] \textsf {Einstellungen:} Der Nutzer kann die gespeicherten Trainingsdaten löschen.
       \item[/F280/] \textsf {Einstellungen:} Der Nutzer kann die Steuerungsparameter anpassen. %%Genauere Spezifikation
       \item[/F290/] \textsf {Erstnutzung:} Aufforderung der Angabe von Name und in-App Sprache bei Erstnutzung.
-      \item[/F290/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
-      \item[/F300/] \textsf{Speichern der Vorgänge:} Speicherung aller Vorgänge die aktiv waren mit Datum, Uhrzeit und dem Wert, der der Funktion entspricht (keine Rohdaten).   %%Gehört das nicht unter Produkdaten??????
+      \item[/F300/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
+      \item[/F310/] \textsf{Speichern der Vorgänge:} Speicherung aller Vorgänge die aktiv waren mit Datum, Uhrzeit und dem Wert, der der Funktion entspricht (keine Rohdaten).   %%Gehört das nicht unter Produkdaten??????
     \end{itemize}
 
 
 \section{Produktdaten}
-TODO Benni
-% Was soll gespeichert werden?
+\begin{itemize}
+	\item[/PD010/] Es werden keine rohen Messdaten gespeichert.
+	\item[/PD020/] Die Einstellungen (Sprache, Steuerungsparameter, Messeinstellungen) sind zu speichern. 
+	\item[/PD030/] Es sind relevante Daten über den Nutzer, wie den Benutzernamen, zu speichern.
+	\item[/PD040/] Die Trainingsdaten (Bestenliste und letzte Trainingseinheit) sind zu speichern. % Genauer definieren, was alles?
+	\item[/PD050/] Speicherung aller Vorgänge, die aktiv waren mit Datum, Uhrzeit und dem letzten Resultat (/F300/) (TODO abklären, ob umsetzen)
+\end{itemize}
+
 
 \section{Nichtfunktionale Anforderungen}
 TODO Jan Koordination
