@@ -70,9 +70,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GLOSSARY ENTRIES                 	                              	 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%sollte 'eigentlich' funktionieren... tut es nur leider nicht aber naja.
 
-\newglossaryentry{Echtzeit}{name=Echtzeit, description={mit einer durch die Verarbeitung bedingten Verzögerung von bis zu ca. 3 Sekunden zwischen dem Anfallen der (Roh-)Daten und der Ausgabe bzw. Visualisierung.}}
+\newglossaryentry{Echtzeit}{name=Echtzeit, description={Bereitstellen/Anzeigen von Daten mit einer durch die Verarbeitung bedingten Verzögerung von bis zu ca. 2 Sekunden zwischen dem Anfallen der (Roh-)Daten und der Ausgabe bzw. Visualisierung.}}
+\newglossaryentry{Vorgang}{name=Vorgang, description={Als Vorgang wird in diesem Pflichtenheft bezeichnet, wenn ein Modus ausgewählt ist und Start gedrückt wurde. Der Vorgang endet mit dem Drücken von Stopp bzw. wird mit dem Wechseln des Modus.}} %%brauchen wir noch ne abbrechen Taste in der gui? haben wir so was schon?
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -120,10 +120,6 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
         \item\text  Im Modus „Lauschen \& Agieren“ kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird
         \item\text  Im Modus „Musikmodus“ wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, wenn der Nutzer weiterläuft
       \end{itemize}
-%% hier noch ide 3 modi reinpacken
-%%--- Im Modus „Zähler“  zählt die App wie viele Liegestützen oder Sit Ups der Nutzer macht
-%%--- Im Modus „Lauschen & Agieren“ kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird
-%%--- Im Modus „Musikmodus“ wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, wenn der Nutzer weiterläuft
     \item\text Die App wird auf deutsch sein, aber der Nutzer kann weitere Sprachen durch Sprachpaket-Plugins hinzufügen
     \item\text Der Nutzer kann seine Trainingsdaten speichern, importieren und exportieren
   \end{itemize}
@@ -145,11 +141,12 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \subsection{Anwendungsbereiche}
     \begin{itemize}
       \item\textsf{Bibliothek} Softwareentwicklung für eSense Wearables
-      \item\textsf{Erweiterungsmodul} Softwareentwicklung im Bereich Schritterkennung
+      \item\textsf{Erweiterungsmodul} Softwareentwicklung im Bereich Schritterkennung %%Vorschlag: Nutzung von Sensordaten als Nutzereingabe in einer App, z.b. im Fittness, aber auch für andere interaktive Apps ? (valle)
       \item\textsf{App} Heimtraining, Sport,\dots
     \end{itemize}
-  \subsection{Betriebsbedinugen}
-  TODO
+  \subsection{Betriebsbedinugen} %%macht nur für app sinn oder?
+  %%TODO
+  %mögliche Punkte: physikalische Umgebung (Training alleine, Umgebung egal), Betriebsdauer ("Akkuabhängig", keine weitere Grenzen), Qualifikation des Benutzers (keine besondere? sollte Sportübungen selbstständig ausführen), Handy und Kopfhörer sollten nicht über 10 Meter entfernt werden, sodass Bluetooth-Verbindung möglich ist
     \begin{itemize}
       \item\textsf{Bibliothek} 
       \item\textsf{Erweiterungsmodul}
@@ -158,19 +155,15 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 
 \section{Produktumgebung}
 \subsection{Hardware} \textsf{Minimale Anforderungen:} Smartphone mit Bluetooth LE Unterstützung.
-\subsection{Software} \textsf{Betriebssystem:} Android >= 7 und iOS >= 10
+\subsection{Software} \textsf{Betriebssystem:} Android >= 7 und iOS >= 10 %%review: vollständigkeit prüfen!!, Darstellung?
 
 \section{Funktionale Anforderungen}
-%%TODO Valle Koordination
-% Was soll das Produkt machen können
-
   \subsection{Mussanforderungen}
-  %%TODO alle: Man sollte hier funktionale Anforderungen \textbf{angeben und ergänzen}. Dabei nummeriert man in 10er Schritten.
     \subsubsection{Bibliothek}
     \begin{itemize}
       \item[/F010/] Daten des Gyroskops auslesen und in \Gls{Echtzeit} zur Verfügung stellen.
       \item[/F020/] Daten des Beschleunigungssensors auslesen und in Echtzeit zur Verfügung stellen.
-      \item[/F030/] Messparameter (Abtastrate etc.) ändern. %%konkreter: Abtastrate (oder ???)
+      \item[/F030/] Messparameter (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. %%orientiert an http://www.esense.io/share/eSense-BLE-Specification.pdf - valle
       \item[/F040/] Datenaufnahme des IMU starten und stoppen.
       \item[/F050/] BLE Charakteristiken unterstützen %%besprechen!!!
     \end{itemize}
@@ -180,12 +173,11 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       \item[/F060/] Schritterkennung (Stehen/Laufen des Nutzers).
     \end{itemize}
     \subsubsection{App}
-    %%TODO valle Glossareintrag Vorgang: "aktiv in modus"
-      %%alles kürzer schreiben, nur je 1 Stichpunkt
+      %%alles kürzer schreiben, nur je 1 Stichpunkt - würde es jetzt so lassen (valle)
       \begin{itemize}
       \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.%%!! hatten wir uns glaube ich drauf geeinigt (?) - valle
       \item[/F080/] \textsf{Modus auswählen:} Auswahl eines Modus aus allen verfügbaren Modi (also mindestens der Modus \glqq Laufen/Stehen anzeigen\grqq). 
-      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi, während ein Modus aktiv ist. %%aktueller Modus stoppt, nichtfunktionale Anforderung? - nicht der Modus, sondern der Vorgang stoppt (valle)
+      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi über ein einblendbares Menü, während ein Modus ausgewählt ist. %%aktueller Modus stoppt, nichtfunktionale Anforderung? - nicht der Modus, sondern der Vorgang stoppt, ausgewählt statt aktiv (valle)
       \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
       \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
       \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen Vorgang stoppen.
@@ -204,7 +196,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \subsubsection{App}
       Weitere Modi:
       \begin{itemize}
-      \item[/F190/] \textsf{Modus Livedaten: \textit{(versteckt)}} Visualisieren der Sensorrohdaten als Graphen.    
+      \item[/F190/] \textsf{Modus Livedaten: \textit{(versteckt)}} Visualisieren der Sensorrohdaten als Graphen.
       \item[/F200/] \textsf{Zählmodus:} Zählen von Liegestützen oder Sit-ups. %%(Sitz-auf)
       \item[/F210/] \textsf{Start/Stopp Musikmodus:} Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft.
       %%Weitere Funktionen von lauschen&agieren anders Gliedern?
@@ -214,10 +206,12 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       \item[/F250/] \textsf {Einstellungen:} Der Nutzer kann seinen Namen abgeben und ändern.
       \item[/F260/] \textsf {Einstellungen:} Der Nutzer kann die Sprache der App anpassen.
       \item[/F270/] \textsf {Einstellungen:} Der Nutzer kann die gespeicherten Trainingsdaten löschen.
-      \item[/F280/] \textsf {Einstellungen:} Der Nutzer kann die Steuerungsparameter anpassen. %%Genauere Spezifikation
-      \item[/F290/] \textsf {Erstnutzung:} Aufforderung der Angabe von Name und in-App Sprache bei Erstnutzung.
+      \item[/F280/] \textsf {Einstellungen:} Der Nutzer kann die Steuerungsparameter anpassen. %%Genauere Spezifikation, was genau soll der Nutzer anpassen können?? bei Treffen klären.
+      \item[/F290/] \textsf {Erstnutzung:} Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
       \item[/F300/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
-      \item[/F310/] \textsf{Speichern der Vorgänge:} Speicherung aller Vorgänge die aktiv waren mit Datum, Uhrzeit und dem Wert, der der Funktion entspricht (keine Rohdaten).   %%Gehört das nicht unter Produkdaten??????
+      %% Treffen: sollen wir die Funktionen noch mal umstrukturieren, diese beiden sollten weiter nach oben, aber dann passen die Testfälle nicht mehr 
+      \item[/F310/] \textsf{Speichern der Vorgänge: \textit{Zusatz zu F120}} Speicherung aller Vorgänge die aktiv waren mit Datum, Uhrzeit und dem Wert, der der Funktion entspricht (keine Rohdaten).   %%Gehört das nicht unter Produkdaten?????? nein, ist ein Zusatz zu F120. aber es sollte weiter oben kommen.. 
+      \item[/F320/] \textsf{Einstellungen:} Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.%%ist auch neu
       \end{itemize}
 
 
@@ -227,22 +221,13 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 	\item[/PD020/] Die Einstellungen (Sprache, Steuerungsparameter, Messeinstellungen) sind zu speichern. 
 	\item[/PD030/] Es sind relevante Daten über den Nutzer, wie den Benutzernamen, zu speichern.
 	\item[/PD040/] Die Trainingsdaten (Bestenliste und letzte Trainingseinheit) sind zu speichern. % Genauer definieren, was alles?
-	\item[/PD050/] Speicherung aller Vorgänge, die aktiv waren mit Datum, Uhrzeit und dem letzten Resultat (/F300/) (TODO abklären, ob umsetzen)
+	\item[/PD050/] Speicherung aller Vorgänge, die aktiv waren mit Datum, Uhrzeit und dem letzten Resultat (/F300/)%%nächstes Treffen: abklären, ob umsetzen
 \end{itemize}
 
 
 \section{Nichtfunktionale Anforderungen}
 %TODO Jan Koordination
 
-%  Glossareintrag \glqq Echtzeit \grqq{} := mit einer Verzögerung von maximal 3 Sekunden
-%  nur zum brainstorm alle Punkte zu denen es sachen geben könnte:
-%  {Mussanforderungen}
-%      {Bibliothek}
-%      {Erweiterungsmodul}
-%      {App}
-%    {Wunschanforderungen}
-%      {Erweiterungsmodul}
-%      {App}
 \begin{itemize}
   \item[/NF010/] Beim Ausführen der Funktion /F030/ soll die Datenaufnahme der IMU gestoppt werden.
   \item[/NF020/] Die Funktionen /F060/ und /F100/ (Laufmodus) soll maximal eine Verzögerung von zwei Sekunden aufweisen. %%Genaue Zeitangabe definieren
