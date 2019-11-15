@@ -230,16 +230,17 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 
 \begin{itemize}
   \item[/NF010/] Beim Ausführen der Funktion /F030/ soll die Datenaufnahme der IMU gestoppt werden.
-  \item[/NF020/] Die Funktionen /F060/ und /F100/ (Laufmodus) soll maximal eine Verzögerung von zwei Sekunden aufweisen. %%Genaue Zeitangabe definieren
+  \item[/NF020/] Die Funktionen /F060/ und /F100/ (Laufmodus) soll maximal eine Verzögerung von zwei Sekunden aufweisen. %%Laufzeitverhalten
   \item[/NF030/] Beim Wechseln zwischen Modi (/F090/) soll der aktuelle Modus terminiert werden.
-  \item[/NF040/] Der Start eines Modus nach seiner Auswahl (/F080/) soll nicht länger als zwei Sekunden benötigen.
-  \item[/NF050/] Die Einblendung des Vorgangsresultats (/F130/) soll nicht länger als zwei Sekunden benötigen.
+  \item[/NF040/] Der Start eines Modus nach seiner Auswahl (/F080/) soll nicht länger als zwei Sekunden benötigen. %%Laufzeitverhalten
+  \item[/NF050/] Die Einblendung des Vorgangsresultats (/F130/) soll nicht länger als zwei Sekunden benötigen.%%Laufzeitverhalten
   \item[/NF060/] Nach Ausführung der Funktion  Sprachänderung (/F260/) muss die App neu gestartet werden.
-  \item[/NF070/] Bei negative Anzahl Angaben (/F220/) wird das Starten des Vorgangs verhindert.
+  \item[/NF070/] Bei unsinnvollen Angaben (z.B. negativen Werten in /F220/) wird das Starten des Vorgangs verhindert.
   \item[/NF080/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe ev. /F300/) nicht verändert.
   \item[/NF090/] Bei Namensgebung sind nur Groß- und Kleinbuchstaben ohne Umlaute und Sonderzeichen erlaubt.
 \end{itemize}
 \subsection{Laufzeitverhalten}
+%%Nächste besprechung: habe oben die Punkte gekennzeichnet, die man hier runter schieben könnte. Sollten das aber zusammen überlegen, da sich dann wieder alle Nummern ändern würden. 
 \subsection{Speicherplatz}
 \subsection{Stabilität}
 
