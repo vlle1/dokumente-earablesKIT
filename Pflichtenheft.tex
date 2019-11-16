@@ -29,7 +29,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Variablen                                 						 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\authorName}{uuoof}
+\newcommand{\authorName}{Test, Test, Test, Test, Test, Test, test}
 \newcommand{\auftraggeber}{Karlsruhe Institute of Technology (Teco)}
 \newcommand{\auftragnehmer}{wir}
 \newcommand{\projektName}{Earables}
@@ -114,7 +114,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \begin{itemize}
     \item\text Die Cross-Platform Bibliothek soll in der Lage sein die gesammelten Daten der Earables aufzuzeichnen
     \item\text Die Cross-Platform Bibliothek soll in der Lage sein die verschiedenen Steuerungsparameter zu setzen z.B. die Abtastrate Rate
-    \item\text Das Erweiterungsmodul kann erkennen ob der Nutzer gerade „läuft“ oder „steht“
+    \item\text Das Erweiterungsmodul kann erkennen ob der Nutzer gerade \glqq läuft\grqq{}oder \glqq steht\grqq
     \item\text Die App soll anzeigen können ob der Nutzer gerade läuft oder steht
     \item\text Die GUI der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der Earables verändert
   \end{itemize}
@@ -125,9 +125,9 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \item\text Die App soll die zurückgelegte Distanz anzeigen
     \item\text Die App soll über 3 verschiedene Modi verfügen
       \begin{itemize}
-        \item\text Im Modus „Zähler“  zählt die App wie viele Liegestützen oder Sit Ups der Nutzer macht
-        \item\text  Im Modus „Lauschen \& Agieren“ kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird
-        \item\text  Im Modus „Musikmodus“ wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, wenn der Nutzer weiterläuft
+        \item\text Im Modus \glqq Zähler\grqq{} zählt die App wie viele Liegestützen oder Sit Ups der Nutzer macht
+        \item\text  Im Modus \glqq Lauschen \& Agieren\grqq{}kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird
+        \item\text  Im Modus \glqq Musikmodus\grqq{}wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, wenn der Nutzer weiterläuft
       \end{itemize}
     \item\text Die App wird auf deutsch sein, aber der Nutzer kann weitere Sprachen durch Sprachpaket-Plugins hinzufügen
     \item\text Der Nutzer kann seine Trainingsdaten speichern, importieren und exportieren
@@ -137,7 +137,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \item\text Es werden keine Rohdaten gespeichert
     \item\text Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den Earables
     \item\text Die Musik passt sich nicht der Schrittfrequenz des Nutzers an
-    \item\text Im Modus „Zählen“ wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit Ups macht und nicht versucht das System auszutricksen indem er beispielsweise die Earables, mit der Hand, hoch und runter bewegt
+    \item\text Im Modus \glqq Zählen\grqq{}wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit Ups macht und nicht versucht das System auszutricksen indem er beispielsweise die Earables, mit der Hand, hoch und runter bewegt
   \end{itemize}
 
 \section{Produkteinsatz}
@@ -216,11 +216,11 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       \item[/F260/] \textsf {Einstellungen:} Der Nutzer kann die Sprache der App anpassen.
       \item[/F270/] \textsf {Einstellungen:} Der Nutzer kann die gespeicherten Trainingsdaten löschen.
       \item[/F280/] \textsf {Einstellungen:} Der Nutzer kann die Steuerungsparameter anpassen. %%Genauere Spezifikation, was genau soll der Nutzer anpassen können?? bei Treffen klären.
+      \item[/F285/] \textsf {Einstellungen:} Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.%%ist auch neu
       \item[/F290/] \textsf {Erstnutzung:} Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
       \item[/F300/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
       %% Treffen: sollen wir die Funktionen noch mal umstrukturieren, diese beiden sollten weiter nach oben, aber dann passen die Testfälle nicht mehr 
       \item[/F310/] \textsf{Speichern der Vorgänge: \textit{Zusatz zu F120}} Speicherung aller Vorgänge die aktiv waren mit Datum, Uhrzeit und dem Wert, der der Funktion entspricht (keine Rohdaten).   %%Gehört das nicht unter Produkdaten?????? nein, ist ein Zusatz zu F120. aber es sollte weiter oben kommen.. 
-      \item[/F320/] \textsf{Einstellungen:} Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.%%ist auch neu
       \end{itemize}
 
 
@@ -270,7 +270,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 %%TODO David
   \subsection{Globale Testfälle}
   \subsubsection{Mussanforderungen}
-  \paragraph{Schritterkennung beim Gehen}%%bitte Namen der Funktionalen Anf. verwenden!!
+  \paragraph{Laufmodus (/F100/)}
   \begin{enumerate}
     \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
     \item Die App wird gestartet.
@@ -281,37 +281,38 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \item Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. 
   \end{enumerate}
 
-  \paragraph{Start/Stop Musikmodus}
-  \begin{enumerate}
-    \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
-    \item Der Nutzer spielt Musik mit der vorinstallierten Musik-App ab.
-    \item Die App wird gestartet.
-    \item Nach dem Startvorgang der App wird in den Modus \glqq Start/Stop Musikmodus\grqq{} (/F210/) gewechselt.
-    \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
-    \item Der Nutzer beginnt zu gehen.
-    \item Der Nutzer startet den gewählten Modus.
-    \item Der Nutzer hört auf zu gehen.
-    \item Die Musik wird pausiert.
-    \item Der Nutzer geht weiter.
-    \item Die Musik startet automatisch wieder.
-  \end{enumerate}
-
-  \subsubsection{Schritterkennung beim Gehen}
+  \subsubsection{Wunschanforderungen}
   %%vielleicht ohne absätze als Fließtext? -valle
-    \begin{itemize}
-    \item[]Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
-    \item[]Die App wird gestartet.
-    \item[]Nach starten der App wird in den Modus \glqq Datenanzeige gehen/stehen\grqq{} gewechselt.
-    \item[]Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
-    \item[]Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an.
-    \item[]Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an.
-    \item[]Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. 
-  \end{itemize}
-  \subsubsection{Schritte zählen}
+  \paragraph{Start/Stop Musikmodus (/F210/)}
   \begin{itemize}
-    \item[]
-    \item[] 
+    \item[] Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
+    \item[] Der Nutzer spielt Musik mit der vorinstallierten Musik-App ab.
+    \item[] Die App wird gestartet.
+    \item[] Nach dem Startvorgang der App wird in den Modus \glqq Start/Stop Musikmodus\grqq{} (/F210/) gewechselt.
+    \item[] Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
+    \item[] Der Nutzer beginnt zu gehen.
+    \item[] Der Nutzer startet den gewählten Modus.
+    \item[] Der Nutzer hört auf zu gehen.
+    \item[] Die Musik wird pausiert.
+    \item[] Der Nutzer geht weiter.
+    \item[] Die Musik startet automatisch wieder.
   \end{itemize}
+  
+  \paragraph{Zählmodus (/F200/)}
+
+  \paragraph{Livedaten (/F190/)}
+  
+  \paragraph{Lauschen\&Agieren (/F220/)}
+
+  \paragraph{Einstellungen (/F250/ bis /F285/)}
+
+  \paragraph{Erstnutzung (/F290/)}
+
+  \paragraph{Importieren/Exportieren (/F300/)}
+
+  \paragraph{Importieren/Exportieren (/F300/)}
+
+
   \subsection{Szenarien}
     \subsubsection{Bibliotheksnutzung}
 
