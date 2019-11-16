@@ -103,43 +103,43 @@ Earables gehören zu den \Gls{Wearable Computings}, sie sind also nichts anderes
 Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \begin{enumerate}
 
-  \item Es soll eine \Gls{Cross-Platform Bibliothek} (Android/IOS) für die Earables der Plattform eSense entwickelt werden mit der es möglich ist, die Messdaten des Gerätes aufzuzeichnen und verschiedene \Gls{Steuerungsparameter} zu verändern.
+  \item Es soll eine Cross-Plattform Bibliothek (Android/IOS) für die Earables der Plattform eSense entwickelt werden mit der es möglich ist, die Messdaten des Gerätes aufzuzeichnen und verschiedene \Gls{Steuerungsparameter} zu verändern.
   
-  \item Es soll ein Erweiteungsmodul entwickelt werden, mit dem die übermittelten  \Gls{Rohdaten} automatisch verarbeitet und ausgewertet werden, um so festzustellen ob der Nutzer gerade läuft oder steht.
+  \item Es soll ein Erweiterungsmodul entwickelt werden, mit dem die übermittelten  \Gls{Rohdaten} automatisch verarbeitet und ausgewertet werden, um so festzustellen, ob der Nutzer gerade läuft oder steht.
   
-  \item Es soll eine App mit einer \Gls{GUI} entwickelt werden, die anzeigt ob der Nutzer gerade läuft oder steht.
+  \item Es soll eine App mit einer \Gls{GUI} entwickelt werden, die über verschiedene Modi verfügt, insbesondere über einen der anzeigt, ob der Nutzer gerade läuft oder steht. 
 
 \end{enumerate}
 
 \subsection{Musskriterien}
 
   \begin{itemize}
-    \item\text Die Cross-Platform Bibliothek soll in der Lage sein die gesammelten Daten der Earables aufzuzeichnen
-    \item\text Die Cross-Platform Bibliothek soll in der Lage sein die verschiedenen Steuerungsparameter zu setzen z.B. die Abtastrate Rate
-    \item\text Das Erweiterungsmodul kann erkennen ob der Nutzer gerade \glqq läuft\grqq{}oder \glqq steht\grqq
-    \item\text Die App soll anzeigen können ob der Nutzer gerade läuft oder steht
-    \item\text Die GUI der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der Earables verändert
+    \item\text Die Cross-Plattform Bibliothek soll in der Lage sein die gesammelten Daten der Earables aufzuzeichnen.
+    \item\text Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen Steuerungsparameter zu verändern.
+    \item\text Das Erweiterungsmodul soll erkennen ob der Nutzer gerade \glqq läuft\grqq{}oder \glqq steht\grqq.
+    \item\text Die App soll anzeigen können ob der Nutzer gerade läuft oder steht.
+    \item\text Die GUI der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der Earables verändert.
   \end{itemize}
 \subsection{Wunschkriterien}
   \begin{itemize}
-    \item\text Die App soll die \Gls{Schrittfrequenz} des Nutzers anzeigen
-    \item\text Die App soll die Anzahl der zurückgelegten Schritte anzeigen
-    \item\text Die App soll die zurückgelegte Distanz anzeigen
-    \item\text Die App soll über 3 verschiedene Modi verfügen
+    \item\text Die App soll die \Gls{Schrittfrequenz} des Nutzers anzeigen.
+    \item\text Die App soll die Anzahl der zurückgelegten Schritte anzeigen. %%Täglich? Gesamt?
+    \item\text Die App soll die zurückgelegte Distanz anzeigen. %%Täglich? Gesamt?
+    \item\text Die App soll über drei weitere Modi verfügen.
       \begin{itemize}
-        \item\text Im Modus \glqq Zähler\grqq{} zählt die App wie viele Liegestützen oder Sit Ups der Nutzer macht
-        \item\text  Im Modus \glqq Lauschen \& Agieren\grqq{}kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird
-        \item\text  Im Modus \glqq Musikmodus\grqq{}wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, wenn der Nutzer weiterläuft
+        \item\text Im Modus \glqq Zählmodus\grqq{} zählt die App wie viele Liegestützen oder Sit-ups der Nutzer macht.
+        \item\text  Im Modus \glqq Lauschen\&Agieren\grqq{}kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird.
+        \item\text  Im Modus \glqq Musikmodus\grqq{}wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, wenn der Nutzer weiterläuft.
       \end{itemize}
-    \item\text Die App wird auf deutsch sein, aber der Nutzer kann weitere Sprachen durch Sprachpaket-Plugins hinzufügen
-    \item\text Der Nutzer kann seine Trainingsdaten speichern, importieren und exportieren
+    \item\text Die App wird standardmäßig auf Deutsch sein, der Nutzer soll weitere Sprachen durch Sprachpaket-Plugins hinzufügen können.
+    \item\text Trainingsdaten werden automatisch gespeichert, Importieren und Exportieren soll möglich sein. %%Besprechen!
   \end{itemize}
   \subsection{Abgrenzungskriterien}
   \begin{itemize}
-    \item\text Es werden keine Rohdaten gespeichert
-    \item\text Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den Earables
-    \item\text Die Musik passt sich nicht der Schrittfrequenz des Nutzers an
-    \item\text Im Modus \glqq Zählen\grqq{}wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit Ups macht und nicht versucht das System auszutricksen indem er beispielsweise die Earables, mit der Hand, hoch und runter bewegt
+    \item\text Es werden keine Rohdaten längerfristig gespeichert. %%längerfristig ergänzt
+    \item\text Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den Earables.
+    \item\text Die Musik passt sich nicht der Schrittfrequenz des Nutzers an.
+    \item\text Im Modus \glqq Zählen\grqq{}wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit-ups macht. Das bewusste Austricksen des Systems durch andere Bewegungen wird nicht behandelt.
   \end{itemize}
 
 \section{Produkteinsatz}
