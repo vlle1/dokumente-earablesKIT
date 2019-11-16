@@ -95,31 +95,32 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-Earables gehören zu den Wearable Computings. Sie sind also nichts anderes als intelligente Kopfhörer. Je nach dem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Austattung von  Lautsprechern, Mikrophon und Bluetooth Low Energy besitzen sie in unserem Fall zusätzlich ein 6-Achsen IMU. Mit seiner Hilfe ist man in der Lage die (Kopf-)Bewegung des Nutzers zu tracken um mit den gewonnenen Messdaten  beispielsweise die Atemfrequenz zu ermitteln. Earebles bilden also eine Schnittstelle von Mensch und Computer. Mit ihnen kann man unauffällig medizinische Daten im Altag sammeln. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind haben sie bereits ein hohe soziale akzeptans in der Gesellschaft erlangt, im Gegensatz zu beispielsweise den smart Glasses. Mit der Entwicklung und Forschung dieser Art von Earables beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der Earables gesucht, wodurch auch dieses Projekt seinen Weg in diese Welt gefunden hat.
+%% BLE glossareintrag konflikt
+Earables gehören zu den \Gls{Wearable Computings}. Sie sind also nichts anderes als intelligente Kopfhörer. Je nach dem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Austattung von  Lautsprechern, Mikrophon und Bluetooth Low Energy besitzen sie in unserem Fall zusätzlich ein \Gls{6-Achsen IMU}. Mit seiner Hilfe ist man in der Lage die (Kopf-)Bewegung des Nutzers zu tracken um mit den gewonnenen Messdaten  beispielsweise die Atemfrequenz zu ermitteln. Earebles bilden also eine Schnittstelle von Mensch und Computer. Mit ihnen kann man unauffällig medizinische Daten im Altag sammeln. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind haben sie bereits ein hohe soziale akzeptans in der Gesellschaft erlangt, im Gegensatz zu beispielsweise den smart Glasses. Mit der Entwicklung und Forschung dieser Art von Earables beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der Earables gesucht, wodurch auch dieses Projekt seinen Weg in diese Welt gefunden hat.
 \section{Zielbestimmung}
 Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \begin{enumerate}
 
-  \item Es soll eine Cross-Plattform Bibliothek (Android/IOS) für die Earables der Plattform eSense entwickelt werden mit der es möglich ist, die Messdaten des Gerätes aufzuzeichnen und verschiedene Steuerungsparameter zu verändern.
+  \item Es soll eine \Gls{Cross-Platform Bibliothek} (Android/IOS) für die Earables der Plattform eSense entwickelt werden mit der es möglich ist, die Messdaten des Gerätes aufzuzeichnen und verschiedene \Gls{Steuerungsparameter} zu verändern.
   
-  \item Es soll ein Erweiteungsmodul entwickelt werden, mit dem die übermittelten  Rohdaten automatisch verarbeitet und ausgewertet werden, um so festzustellen ob der Nutzer gerade läuft oder steht.
+  \item Es soll ein Erweiteungsmodul entwickelt werden, mit dem die übermittelten  \Gls{Rohdaten} automatisch verarbeitet und ausgewertet werden, um so festzustellen ob der Nutzer gerade läuft oder steht.
   
-  \item Es soll eine App mit einer GUI entwickelt werden, die anzeigt ob der Nutzer gerade läuft oder steht.
+  \item Es soll eine App mit einer \Gls{GUI} entwickelt werden, die anzeigt ob der Nutzer gerade läuft oder steht.
 
 \end{enumerate}
 
 \subsection{Musskriterien}
 
   \begin{itemize}
-    \item\text Die Cross-Plattform Bibliothek soll in der Lage sein die gesammelten Daten der Earables aufzuzeichnen
-    \item\text Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen Steuerungsparameter zu setzen z.B. die Abtastrate Rate
+    \item\text Die Cross-Platform Bibliothek soll in der Lage sein die gesammelten Daten der Earables aufzuzeichnen
+    \item\text Die Cross-Platform Bibliothek soll in der Lage sein die verschiedenen Steuerungsparameter zu setzen z.B. die Abtastrate Rate
     \item\text Das Erweiterungsmodul kann erkennen ob der Nutzer gerade „läuft“ oder „steht“
     \item\text Die App soll anzeigen können ob der Nutzer gerade läuft oder steht
     \item\text Die GUI der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der Earables verändert
   \end{itemize}
 \subsection{Wunschkriterien}
   \begin{itemize}
-    \item\text Die App soll die Schrittfrequenz des Nutzers anzeigen
+    \item\text Die App soll die \Gls{Schrittfrequenz} des Nutzers anzeigen
     \item\text Die App soll die Anzahl der zurückgelegten Schritte anzeigen
     \item\text Die App soll die zurückgelegte Distanz anzeigen
     \item\text Die App soll über 3 verschiedene Modi verfügen
