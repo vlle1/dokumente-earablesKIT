@@ -188,7 +188,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       %%alles kürzer schreiben, nur je 1 Stichpunkt - würde es jetzt so lassen (valle)
       \begin{itemize}
       \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.%%!! hatten wir uns glaube ich drauf geeinigt (?) - valle
-      \item[/F080/] \textsf{Modus auswählen:} Auswahl eines Modus aus allen verfügbaren Modi (also mindestens der Modus \glqq Laufen/Stehen anzeigen\grqq). 
+      \item[/F080/] \textsf{Modus auswählen:} Auswahl eines Modus aus allen verfügbaren Modi (also mindestens der Modus \glqq Laufmodus\grqq). 
       \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi über ein einblendebares Menü, während ein Modus ausgewählt ist. %%aktueller Modus stoppt, nichtfunktionale Anforderung? - nicht der Modus, sondern der Vorgang stoppt, ausgewählt statt aktiv (valle)
       \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
       \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
@@ -301,8 +301,8 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \paragraph{Laufmodus (/F100/)}
   \begin{enumerate}
     \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
-    \item Die App wird gestartet.
-    \item Nach dem Startvorgang der App wird in den Modus \glqq Laufmodus\grqq{} gewechselt.
+    \item Der Nutzer startet die App.
+    \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Laufmodus\grqq .
     \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
     \item Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an.
     \item Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an.
@@ -315,8 +315,8 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \begin{itemize}
     \item[] Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
     \item[] Der Nutzer spielt Musik mit der vorinstallierten Musik-App ab.
-    \item[] Die App wird gestartet.
-    \item[] Nach dem Startvorgang der App wird in den Modus \glqq Start/Stop Musikmodus\grqq{} gewechselt.
+    \item[] Der Nutzer startet die App.
+    \item[] Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Start/Stop Musikmodus\grqq .
     \item[] Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
     \item[] Der Nutzer beginnt zu gehen.
     \item[] Der Nutzer startet den gewählten Modus.
@@ -329,8 +329,8 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \paragraph{Zählmodus (/F200/)}
   \begin{itemize}
     \item[] Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
-    \item[] Die App wird gestartet.
-    \item[] Nach dem Startvorgang der App wird in den Modus \glqq Zählmodus\grqq{} gewechselt.
+    \item[] Der Nutzer startet die App.
+    \item[] Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Zählmodus\grqq .
     \item[] Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
     \item[] Der Nutzer wählt eine verfügbare Übung aus. 
     \item[] Der Nutzer startet den gewählten Modus.
@@ -342,8 +342,8 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \paragraph{Livedaten (/F190/)}
   \begin{itemize}
     \item[] Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
-    \item[] Die App wird gestartet.
-    \item[] Nach dem Startvorgang der App wird in den Modus \glqq Livedaten\grqq{} gewechselt.
+    \item[] Der Nutzer startet die App.
+    \item[] Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Livedaten\grqq .
     \item[] Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
     \item[] Der Nutzer startet den gewählten Modus.
     \item[] Die App zeigt die korrekten Sensordaten 
@@ -352,8 +352,8 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \paragraph{Lauschen\&Agieren (/F220/)}
   \begin{itemize}
     \item[] Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
-    \item[] Die App wird gestartet.
-    \item[] Nach dem Startvorgang der App wird in den Modus \glqq Lauschen\&Agieren\grqq{} gewechselt.
+    \item[] Der Nutzer startet die App.
+    \item[] Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Lauschen\&Agieren\grqq .
     \item[] Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
     \item[] Der Nutzer stellt sich ein Training aus den verfügbaren Übungen zusammen (/F220/).
     \item[] Der Nutzer startet den gewählten Modus.
@@ -365,6 +365,21 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \end{itemize}
 
   \paragraph{Einstellungen (/F250/ bis /F285/)}
+  \textit{Voraussetzung: Test zu /F220/}
+  \begin{itemize}
+    \item[] Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
+    \item[] Der Nutzer startet die App.
+    \item[] Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Einstellungen\grqq .
+    \item[] Der Nutzer ändert seinen Namen (/F250/).
+    \item[] Der Nutzer ändert die Sprache (/F260/).
+    \item[] Dem Nutzer löscht die gespeicherten Trainingsdaten (/F270/).
+    \item[] Dem Nutzer ändert die Steuerungsparameter (/F280/).
+    \item[] Der Nutzer ändert seine Schrittlänge (/F285/).
+    \item[] Der Nutzer beendet die App.
+    \item[] Der Nutzer startet die App.
+    \item[] Der Nutzer wechselt in den Modus \glqq Einstellungen\grqq .
+    \item[] Die Einstellungen sind exakt so, wie sie vorher eingestellt wurden.
+  \end{itemize}
 
   \paragraph{Erstnutzung (/F290/)}
 
