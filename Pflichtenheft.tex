@@ -255,6 +255,9 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \item[/NF070/] Bei unsinnvollen Angaben (z.B. negativen Werten in /F220/) wird das Starten des Vorgangs verhindert.
   \item[/NF080/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe ev. /F300/) nicht verändert.
   \item[/NF090/] Bei Namensgebung sind nur Groß- und Kleinbuchstaben ohne Umlaute und Sonderzeichen erlaubt.
+  \item[/NF100/] Die App soll eine Größe von 50 MByte nicht überschreiten.
+  \item[/NF110/] Die gespeicherten Daten sollen nicht mehr als 50 MByte umfassen.
+  \item[/NF120/] Die App soll bei herkömmlicher Nutzung nicht öfter als zweimal pro Woche abstürzen.
 \end{itemize}
 \subsection{Laufzeitverhalten}
 %%Nächste besprechung: habe oben die Punkte gekennzeichnet, die man hier runter schieben könnte. Sollten das aber zusammen überlegen, da sich dann wieder alle Nummern ändern würden. 
@@ -266,7 +269,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \subsection{Architekturdiagramm}
   \subsection{Use-Case-Diagramme}
 \begin{center}
-\includegraphics[width=0.8\textwidth]{Vorlaeufiges Use-Case Diagram.pdf}
+\includegraphics[width=0.8\textwidth]{Vorlaeufiges Use-Case Diagram.pdf} %%Textuelle Beschreibung wird noch ergänzt.
 \end{center}
 \section{Benutzeroberfläche}
 %%TODO Benni auseinandersetzen
@@ -302,8 +305,8 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \begin{enumerate}
     \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
     \item Die App wird gestartet.
-    \item Nach dem Startvorgang der App wird in den Modus \glqq Laufmodus\grqq{} gewechselt.
-    \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
+    \item Nach dem Startvorgang der App wird in den Modus \glqq Laufmodus\grqq{} gewechselt. %%Automatisch im Laufmodus?
+    \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht. %%Würde ich als ersten Schritt machen, da durch das Anbringen der Kopfhörer laufend angezeigt werden könnte
     \item Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an.
     \item Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an.
     \item Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. 
