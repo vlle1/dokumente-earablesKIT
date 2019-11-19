@@ -28,14 +28,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Variablen                                 						 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newcommand{\authorName}{Test, Test, Test, Test, Test, Test, test}
+\newcommand{\authorName}{David Höglinger, Jan Ettrich, Erwin Müller, Benedikt Rittner, Valentin Quapil}
 \newcommand{\auftraggeber}{Karlsruhe Institute of Technology (Teco)}
-\newcommand{\auftragnehmer}{wir}
-\newcommand{\projektName}{Earables}
+\newcommand{\auftragnehmer}{\authorName}
+\newcommand{\projektName}{Pflichtenheft Earables}
 \newcommand{\tags}{\authorName, Pflichtenheft, KIT, Informatik, PSE}
 \newcommand{\glossarName}{Glossar}
-\title{\projektName~(Pflichtenheft)}
-\author{\authorName}
+\title{\projektName}
 \date{\today}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -44,7 +43,7 @@
 \hypersetup{
   pdfauthor   = {\authorName},
   pdfkeywords = {\tags},
-  pdftitle    = {\projektName~(Pflichtenheft)}
+  pdftitle    = {\projektName)}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,7 +95,7 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-\Gls{Earables} gehören zu den \Gls{Wearable Computings}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und Bluetooth Low Energy besitzen sie in unserem Fall zusätzlich eine \Gls{6-Achsen IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die Schrittfrequenz zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, so wurde auch dieses Projekt initiiert.
+\Gls{Earables} gehören zu den \Gls{Wearable Computings}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{6-Achsen IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die Schrittfrequenz zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, so wurde auch dieses Projekt initiiert.
 \section{Zielbestimmung}
 Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \begin{enumerate}
@@ -127,8 +126,9 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       \begin{itemize}
         \item\text Im Modus \glqq Zählmodus\grqq{} zählt die App wie viele Liegestützen oder Sit-ups der Nutzer macht.
         \item\text  Im Modus \glqq Lauschen\&Agieren\grqq{}kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird.
-        \item\text  Im Modus \glqq Musikmodus\grqq{}wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, wenn der Nutzer weiterläuft.
+        \item\text  Der \glqq Laufmodus \grqq{} wird mit dem \glqq Musikmodus\grqq{} erweitert so dass, Musik abgespielt wird, wenn der Nutzer läuft. Wenn der Nutzer stehen bleibt wird die Musik automatisch gestoppt.
       \end{itemize}
+    \item\text Im \glqq Laufmodus \grqq{} wird die aktuelle Schrittanzahl und die zurückgelegte Distanz life angezeigt.
     \item\text Die App wird standardmäßig auf Deutsch sein, als weitere Sprache steht dem Nutzer Englisch zur Auswahl.
     \item\text Trainingsdaten werden automatisch gespeichert; Importieren und Exportieren soll möglich sein.
   \end{itemize}
