@@ -71,9 +71,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newglossaryentry{Echtzeit}{name=Echtzeit, description={Bereitstellen/Anzeigen von Daten mit einer durch die Verarbeitung bedingten Verzögerung von bis zu ca. 2 Sekunden zwischen dem Anfallen der (Roh-)Daten und der Ausgabe bzw. Visualisierung.}}
-\newglossaryentry{Vorgang}{name=Vorgang, description={Als Vorgang wird in diesem Pflichtenheft bezeichnet, wenn ein Modus ausgewählt ist und Start gedrückt wurde. Der Vorgang endet mit dem Drücken von Stopp bzw. wird mit dem Wechseln des Modus.}} %%brauchen wir noch ne abbrechen Taste in der gui? haben wir so was schon?
+\newglossaryentry{Vorgang}{name=Vorgang, description={Als Vorgang wird in diesem Pflichtenheft bezeichnet, wenn ein Modus ausgewählt ist und Start gedrückt wurde. Der Vorgang endet mit dem Drücken von Stopp bzw. wird mit dem Wechseln des Modus.}}
 \newglossaryentry{BLE}{name=BLE, description={Bluetooth Low Energy ist eine Technologie, die Teil des Industriestandards Bluetooth ist und eine energiesparende, kabellose Kommunikation zwischen Geräten in einer Entfernung von bis zu ca. 10 Metern ermöglicht.}}
-\newglossaryentry{Wearable Computings}{name=Wearable Computings, description={Unterdem Begriff Wearable Computings versthet man, Computerysyteme die am Körper, unter der Kleidung oder als Implantat unter der Haut getragen werden können.}}
+\newglossaryentry{Wearable Computings}{name=Wearable Computings, description={Unter dem Begriff Wearable Computings versthet man, Computerysyteme die am Körper, unter der Kleidung oder als Implantat unter der Haut getragen werden können.}}
 \newglossaryentry{6-Achsen IMU}{name=6-Achsen IMU, description={Ein 6-Achsen IMU ist ein Beschleunigungssensor mit Gyroskop.}}
 \newglossaryentry{GUI}{name=GUI, description={GUI ist die Abkürzung für den englischen Begriff "graphical user interface". Sie ist die Schnittstelle zwischen Mensch und Maschine und ermöglicht dem Nutzer die Eingabe/Steuerung, der Maschine.}}
 \newglossaryentry{Cross-Platform Bibliothek}{name=Cross-Platform Bibliothek, description={Eine Cross-Platform Bibliothek ist nichts weiter als eine Bibliothek die auf Rechnersystemen mit verschiedener Architektur laufen kann.}}
@@ -81,7 +81,7 @@
 \newglossaryentry{Schrittfrequenz}{name=Schrittfrequenz, description={Die Schrittfrequenz gibt an wie viele Schritte pro Zeiteinheit gemacht werden.}}
 \newglossaryentry{Rohdaten}{name=Rohdaten, description={Als Rohdaten werden unverarbeitete Daten bezeichnet.}}
 \newglossaryentry{TTS}{name=Text-To-Speech, description={Ein Text-to-Speech-System (TTS) (oder Vorleseautomat) wandelt Fließtext in eine akustische Sprachausgabe um.}}
-\newglossaryentry{Earables}{name=Earables, description={Eine Amalgamierung des Wortes Wearable und Earphone. Dabei handelt es sich um Kopfhörer, die mit Sensoren ausgestattet sind.}}
+\newglossaryentry{Earables}{name=Earables, description={Eine Zusammenschließung des Wortes Wearable und Earphone. Dabei handelt es sich um Kopfhörer, die mit Sensoren ausgestattet sind.}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,10 +96,7 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-%% BLE glossareintrag konflikt
-%%Wearable Computing ist laut wikipedia das Forschungsgebiet der Wearables/Wearable Computer...
-%%Atemfrequenz durch Schrittfrequenz ersetzt
-\Gls{Earables} gehören zu den \Gls{Wearable Computings}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und Bluetooth Low Energy besitzen sie in unserem Fall zusätzlich eine \Gls{6-Achsen IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die Schrittfrequenz zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, wodurch auch dieses Projekt seinen Weg in diese Welt gefunden hat. %%Initiiert?
+\Gls{Earables} gehören zu den \Gls{Wearable Computings}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und Bluetooth Low Energy besitzen sie in unserem Fall zusätzlich eine \Gls{6-Achsen IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die Schrittfrequenz zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, so wurde auch dieses Projekt initiiert.
 \section{Zielbestimmung}
 Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \begin{enumerate}
@@ -124,20 +121,20 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \subsection{Wunschkriterien}
   \begin{itemize}
     \item\text Die App soll die \Gls{Schrittfrequenz} des Nutzers anzeigen.
-    \item\text Die App soll die Anzahl der zurückgelegten Schritte anzeigen. %%Täglich? Gesamt?
-    \item\text Die App soll die zurückgelegte Distanz anzeigen. %%Täglich? Gesamt?
+    \item\text Die App soll die Anzahl der zurückgelegten Schritte anzeigen.
+    \item\text Die App soll die zurückgelegte Distanz anzeigen.
     \item\text Die App soll über drei weitere Modi verfügen.
       \begin{itemize}
         \item\text Im Modus \glqq Zählmodus\grqq{} zählt die App wie viele Liegestützen oder Sit-ups der Nutzer macht.
         \item\text  Im Modus \glqq Lauschen\&Agieren\grqq{}kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird.
         \item\text  Im Modus \glqq Musikmodus\grqq{}wird die Musik automatisch gestoppt, wenn der Nutzer steht und wieder gestartet, wenn der Nutzer weiterläuft.
       \end{itemize}
-    \item\text Die App wird standardmäßig auf Deutsch sein, der Nutzer soll weitere Sprachen durch Sprachpaket-Plugins hinzufügen können.
-    \item\text Trainingsdaten werden automatisch gespeichert, Importieren und Exportieren soll möglich sein. %%Besprechen!
+    \item\text Die App wird standardmäßig auf Deutsch sein, als weitere Sprache steht dem Nutzer Englisch zur Auswahl.
+    \item\text Trainingsdaten werden automatisch gespeichert; Importieren und Exportieren soll möglich sein.
   \end{itemize}
   \subsection{Abgrenzungskriterien}
   \begin{itemize}
-    \item\text Es werden keine Rohdaten längerfristig gespeichert. %%längerfristig ergänzt
+    \item\text Es werden keine Rohdaten längerfristig gespeichert.
     \item\text Die Musik passt sich nicht der Schrittfrequenz des Nutzers an.
     \item\text Im Modus \glqq Zählen\grqq{}wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit-ups macht. Das bewusste Austricksen des Systems durch andere Bewegungen wird nicht behandelt.
     \item\text Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den \Gls{Earables}
@@ -153,18 +150,13 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \subsection{Anwendungsbereiche}
     \begin{itemize}
       \item\textsf{Bibliothek} Softwareentwicklung für eSense Wearables
-      \item\textsf{Erweiterungsmodul} Softwareentwicklung im Bereich Schritterkennung %%Vorschlag: Nutzung von Sensordaten als Nutzereingabe in einer App, z.b. im Fitness, aber auch für andere interaktive Apps ? (valle)
+      \item\textsf{Erweiterungsmodul} Softwareentwicklung im Bereich Schritterkennung 
+      %% valle ergänzen: Vorschlag: Nutzung von Sensordaten z.B. einer App , z.b. im Fitness, aber auch als Nutzereingabe für andere interaktive Apps ? (valle)
       \item\textsf{App} Heimtraining, Sport,\dots
     \end{itemize}
-  \subsection{Betriebsbedingungen} %%macht nur für app sinn oder?
-  %%TODO
+  \subsection{Betriebsbedingungen der App}
   %mögliche Punkte: physikalische Umgebung (Training alleine, Umgebung egal), Betriebsdauer ("Akkuabhängig", keine weitere Grenzen), Qualifikation des Benutzers (keine besondere? sollte Sportübungen selbstständig ausführen), Handy und Kopfhörer sollten nicht über 10 Meter entfernt werden, sodass Bluetooth-Verbindung möglich ist
-    \begin{itemize}
-      \item\textsf{Bibliothek} 
-      \item\textsf{Erweiterungsmodul}
-      \item\textsf{App}
-    \end{itemize}
-
+    
 \section{Produktumgebung}
 \subsection{Hardware} \textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung.
 \subsection{Software} \textsf{Betriebssystem:} Unterstützung nur von Android ab Version 7 und iOS ab Version 10.
@@ -173,11 +165,9 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \subsection{Mussanforderungen}
     \subsubsection{Bibliothek}
     \begin{itemize}
-      \item[/F010/] Daten des Gyroskops auslesen und in \Gls{Echtzeit} zur Verfügung stellen.
-      \item[/F020/] Daten des Beschleunigungssensors auslesen und in Echtzeit zur Verfügung stellen.
-      \item[/F030/] Messparameter (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. %%orientiert an http://www.esense.io/share/eSense-BLE-Specification.pdf - valle
+      \item[/F010/] Daten des %%\Gls{IMU} und in \Gls{Echtzeit} zur Verfügung stellen.
+      \item[/F030/] Messparameter (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. 
       \item[/F040/] Datenaufnahme des IMU starten und stoppen.
-      \item[/F050/] BLE Charakteristiken unterstützen %%besprechen!!!
     \end{itemize}
     \subsubsection{Erweiterungsmodul}
      Auswertung der ausgelesenen Daten:
@@ -185,10 +175,9 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       \item[/F060/] Schritterkennung (Stehen/Laufen des Nutzers).
     \end{itemize}
     \subsubsection{App}
-      %%alles kürzer schreiben, nur je 1 Stichpunkt - würde es jetzt so lassen (valle)
       \begin{itemize}
-      \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.%%!! hatten wir uns glaube ich drauf geeinigt (?) - valle
-      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi über ein einblendebares Menü, während ein Modus ausgewählt ist. %%aktueller Modus stoppt, nichtfunktionale Anforderung? - nicht der Modus, sondern der Vorgang stoppt, ausgewählt statt aktiv (valle)
+      \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.
+      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi über ein einblendebares Menü, während ein Modus ausgewählt ist.
       \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
       \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
       \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen Vorgang stoppen.
@@ -198,19 +187,17 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \subsubsection{Erweiterungsmodul}
       Weitere Datenauswertung:
       \begin{itemize}
-      \item[/F140/] \textsf{Schrittfrequenzerkennung}%%Ungenutzt?? - geklärt. wird beibehalten (valle) (siehe Protokoll 14.11.)
-      \item[/F150/] \textsf{Schrittzahlzähler} Zählen der Schritte des Nutzers. %%getauscht wegen logischer Reihenfolge!!
-      \item[/F160/] \textsf{Distanzmessung} Anzeige während und nach des Vorgangs in z.B. Metern, umgerechnet aus der Anzahl der Schritte.
-      \item[/F170/] \textsf{Erkennung Situps}
+      \item[/F140/] \textsf{Schrittfrequenzerkennung}
+      \item[/F150/] \textsf{Schrittzahlzähler} Zählen der Schritte des Nutzers.
+      \item[/F170/] \textsf{Erkennung Sit-ups}
       \item[/F180/] \textsf{Erkennung Liegestütze}
       \end{itemize} 
     \subsubsection{App}
       Weitere Modi:
       \begin{itemize}
       \item[/F190/] \textsf{Modus Livedaten: \textit{(versteckt)}} Visualisieren der Sensorrohdaten als Graphen.
-      \item[/F200/] \textsf{Zählmodus:} Zählen von Liegestützen oder Sit-ups. %%(Sitz-auf)
-      \item[/F210/] \textsf{Start/Stopp Musikmodus:} Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft.
-      %%Weitere Funktionen von lauschen&agieren anders Gliedern?
+      \item[/F200/] \textsf{Zählmodus:} Zählen von Liegestützen oder Sit-ups.
+      \item[/F210/] \textsf{Start/Stopp Musikmodus:} Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft. Bei diesem Modus werden keine Resultate angezeigt.
       \item[/F220/]{
         Modus \glqq Lauschen\&Agieren\grqq
         \begin{itemize}
@@ -222,12 +209,11 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       \item[/F250/] \textsf {Einstellungen:} Der Nutzer kann seinen Namen abgeben und ändern.
       \item[/F260/] \textsf {Einstellungen:} Der Nutzer kann die Sprache der App anpassen.
       \item[/F270/] \textsf {Einstellungen:} Der Nutzer kann die gespeicherten Trainingsdaten löschen.
-      \item[/F280/] \textsf {Einstellungen:} Der Nutzer kann die Steuerungsparameter anpassen. %%Genauere Spezifikation, was genau soll der Nutzer anpassen können?? bei Treffen klären.
-      \item[/F285/] \textsf {Einstellungen:} Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.%%ist auch neu
+      \item[/F280/] \textsf {Einstellungen:} Der Nutzer kann die Steuerungsparameter anpassen. 
+      \item[/F285/] \textsf {Einstellungen:} Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.
       \item[/F290/] \textsf {Erstnutzung:} Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
       \item[/F300/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
-      %% Treffen: sollen wir die Funktionen noch mal umstrukturieren, diese beiden sollten weiter nach oben, aber dann passen die Testfälle nicht mehr 
-      \item[/F310/] \textsf{Speichern der Vorgänge: \textit{Zusatz zu F120}} Speicherung aller Vorgänge die aktiv waren mit Datum, Uhrzeit und dem Wert, der der Funktion entspricht (keine Rohdaten).   %%Gehört das nicht unter Produktdaten?????? nein, ist ein Zusatz zu F120. aber es sollte weiter oben kommen.. 
+      \item[/F310/] \textsf{Speichern der erkannten Vorgangsdaten: \textit{Zusatz zu F120}} Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein Vorgang aktiv war (keine Rohdaten).
       \end{itemize}
 
 
@@ -251,20 +237,16 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \item[/NF040/] Der Start eines Modus nach seiner Auswahl (/F080/) soll nicht länger als zwei Sekunden benötigen. %%Laufzeitverhalten
   \item[/NF050/] Die Einblendung des Vorgangsresultats (/F130/) soll nicht länger als zwei Sekunden benötigen.%%Laufzeitverhalten
   \item[/NF060/] Nach Ausführung der Funktion  Sprachänderung (/F260/) muss die App neu gestartet werden.
-  \item[/NF070/] Bei unsinnvollen Angaben (z.B. negativen Werten in /F220/) wird das Starten des Vorgangs verhindert.
+  \item[/NF070/] Bei nicht sinnvollen Angaben (z.B. negativen Werten in /F220/) wird das Starten des Vorgangs verhindert.
   \item[/NF080/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe ev. /F300/) nicht verändert.
   \item[/NF090/] Bei Namensgebung sind nur Groß- und Kleinbuchstaben ohne Umlaute und Sonderzeichen erlaubt.
-  \item[/NF100/] Die App soll eine Größe von 50 MByte nicht überschreiten.
-  \item[/NF110/] Die gespeicherten Daten sollen nicht mehr als 50 MByte umfassen.
-  \item[/NF120/] Die App soll bei herkömmlicher Nutzung nicht öfter als zweimal pro Woche abstürzen.
+  \item[/NF100/] Die App soll eine Größe von 100 MByte nicht überschreiten. %speicher
+  \item[/NF110/] Die gespeicherten Daten sollen nicht mehr als 50 MByte umfassen. %speicher
+  \item[/NF120/] Die App soll bei herkömmlicher Nutzung nicht öfter als zweimal bei zehnmaliger Benutzung. %stabilität
 \end{itemize}
-\subsection{Laufzeitverhalten}
-%%Nächste besprechung: habe oben die Punkte gekennzeichnet, die man hier runter schieben könnte. Sollten das aber zusammen überlegen, da sich dann wieder alle Nummern ändern würden. 
-\subsection{Speicherplatz}
-\subsection{Stabilität}
 
 \section{Systemmodelle}
-%%TODO Jan
+%%TODO Jan!!
   \subsection{Architekturdiagramm}
   \subsection{Use-Case-Diagramme}
 \begin{center}
@@ -278,17 +260,17 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \textbf{Kriterium} & \textbf{Sehr Wichtig} & \textbf{Wichtig} & \textbf{Weniger Wichtig} & \textbf{Unwichtig}\\
   \hline
   \hline
-  Korrektheit & x & & &\\
+  Korrektheit & x & & &\\ %%sehr
   \hline
-  Zuverlässigkeit & x & & &\\
+  Zuverlässigkeit & & x & &\\ %%weniger
   \hline
-  Robustheit & x & & &\\
+  Robustheit & & & x &\\  %%weniger
   \hline
-  Effizienz & x & & &\\
+  Effizienz & & x & &\\ %%wichtig
   \hline
-  Benutzerfreundlichkeit & x & & &\\
+  Benutzerfreundlichkeit & x & & &\\ %%sehr
   \hline
-  Vertrauenswürdigkeit & x & & &\\
+  Vertrauenswürdigkeit & & & x &\\ %%un
   \hline
 
 \end{tabular}
