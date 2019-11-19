@@ -1,0 +1,18 @@
+MVC:
+
+Model: Daten die von der Bib ausgelesen und vom EWM umgewandelt werden,
+       in App gespeichert.
+       Änderungen der Daten durch Beobachter-Muster aus EWM aufnehmen
+View:  App-Anzeige für den Nutzer, aktualisiert sich mit Beobachter
+Controller: Auswertung der Nutzerinteraktionen, Unterscheidung zwischen
+	    Aktivitäten und App-Eingaben
+
+
+App-Eingabe in View -> Controller (der view beobachtet) verarbeitet 
+Änderungen -> Pusht Änderungen ins Model 
+
+Nutzeraktivität generiert neue Daten -> Controller registriert
+Veränderung -> View verändert seine Präsentation (pull-Beobachter)
+
+Rohdatenauslese nur durch Bib 
+Datenumwandlung von Rohdaten durch EWM zu Aktivitätsdaten des Nutzers.
