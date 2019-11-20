@@ -248,18 +248,86 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \section{Systemmodelle}
 %%TODO Jan!!
   \subsection{Architekturdiagramm}
-  \begin{center}
-  	\vspace{100px}
-  	\includegraphics[width=0.8\textwidth]{Architekturdiagramm.png}
-  	\caption{Architekturdiagramm.png}
-  \end{center}
   
   \subsection{Use-Case-Diagramme}
 \begin{center}
 \includegraphics[width=0.8\textwidth]{Vorlaeufiges Use-Case Diagram.pdf} %%Textuelle Beschreibung wird noch ergänzt.
 \end{center}
+
 \section{Benutzeroberfläche}
-%%TODO Benni auseinandersetzen
+Die \Gls{GUI} wird durch die App realisiert. Dabei kann man die einzelnen Modi über das Navigationsmenu auswählen. Jeder Modus hat zwei Seiten; eine Übersichtsseite und eine aktive Seite, welche während des aktiven \Gls{Vorgang} angezeigt wird. Für die weiteren Funktionen(Einstellungen, Dateienexport/-import) bietet die Applikation ebenfalls spezielle Seiten an.
+Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools "Mock-up" über den angegebenen Link in der Fußnote \footnote[1]{Mock-Up Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0}
+
+
+\begin{figure}[ht!]
+	\centering
+
+	
+		\begin{minipage}[b]{0.4\textwidth}
+			\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Laufmodus.png}
+			\caption{Laufmodus}
+		\end{minipage}
+			\hfill
+		\begin{minipage}[b]{0.4\textwidth}
+			\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Laufmodus_aktiv.png}
+			\caption{aktiver Laufmodus}
+		\end{minipage}
+		\begin{minipage}[b]{0.4\textwidth}
+			\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Musikmodus.png}
+			\caption{Musikmodus}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[b]{0.4\textwidth}
+			\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Musikmodus_aktiv.png}
+			\caption{aktiver Musikmodus}
+		\end{minipage}
+\end{figure}
+
+\begin{figure}[ht!]
+	
+	\centering
+	\begin{minipage}[b]{0.4\textwidth}
+		\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Lauschen_und_Agieren.png}
+		\caption{Lauschen und Agieren}
+	\end{minipage}
+\hfill
+	\begin{minipage}[b]{0.4\textwidth}
+		\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Lauschen_und_Agieren_aktiv.png}
+		\caption{Lauschen und Agieren aktiv}
+	\end{minipage}
+	\begin{minipage}[b]{0.4\textwidth}
+		\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Zaehlmodus.png}
+		\caption{Zählmodus}		
+	\end{minipage}
+\hfill
+	\begin{minipage}[b]{0.4\textwidth}	
+		\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Zaehlmodus_aktiv.png}
+		\caption{Zählmodus aktiv}
+		
+	\end{minipage}
+\end{figure}
+\begin{figure}[ht!]
+	\centering
+	\begin{minipage}[b]{0.4\textwidth}
+		\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Sidemenu.png}
+		\caption{Navigationsmenu}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.4\textwidth}
+		\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Datenuebersicht.png}
+		\caption{Datenübersicht}
+	\end{minipage}
+	\begin{minipage}[b]{0.4\textwidth}
+		\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Import_Export.png}
+		\caption{Import und Export}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.4\textwidth}
+		\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Settings.png}
+		\caption{Einstellungen}
+	\end{minipage}
+\end{figure}
+
 \section{Qualitätszielbestimmungen}
 \begin{tabular}[t]{|c|c|c|c|c|c|}
   \hline
