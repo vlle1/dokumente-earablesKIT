@@ -76,7 +76,7 @@
 \newglossaryentry{6-Achsen IMU}{name=6-Achsen IMU, description={Ein 6-Achsen IMU ist ein Beschleunigungssensor mit Gyroskop.}}
 \newglossaryentry{GUI}{name=GUI, description={GUI ist die Abkürzung für den englischen Begriff "graphical user interface". Sie ist die Schnittstelle zwischen Mensch und Maschine und ermöglicht dem Nutzer die Eingabe/Steuerung, der Maschine.}}
 \newglossaryentry{Cross-Platform Bibliothek}{name=Cross-Platform Bibliothek, description={Eine Cross-Platform Bibliothek ist nichts weiter als eine Bibliothek die auf Rechnersystemen mit verschiedener Architektur laufen kann.}}
-\newglossaryentry{Steuerungsparameter}{name=Steuerungsparameter, description={Steuerungsparameter sind Parameter, mit denen ein Programm eingestellt werden kann, um auf eine bestimmte Art und weiße zu arbeiten.}}
+\newglossaryentry{Steuerungsparameter}{name=Steuerungsparameter, description={Unter Steuerungsparametern fassen wir die Länge der Verbindungsintervalle zwischen Kopfhöhrern und Handy sowie die Abtastrate und den Wertebereich von integriertem Gyroskop und Beschleunigungssensor zusammen.}}
 \newglossaryentry{Schrittfrequenz}{name=Schrittfrequenz, description={Die Schrittfrequenz gibt an wie viele Schritte pro Zeiteinheit gemacht werden.}}
 \newglossaryentry{Rohdaten}{name=Rohdaten, description={Als Rohdaten werden unverarbeitete Daten bezeichnet.}}
 \newglossaryentry{TTS}{name=Text-To-Speech, description={Ein Text-to-Speech-System (TTS) (oder Vorleseautomat) wandelt Fließtext in eine akustische Sprachausgabe um.}}
@@ -206,7 +206,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
           \item[/F223/] Anzeige der Zeitdauer jeder Übung nach Ablaufsende, siehe F130.
         \end{itemize}
       }
-      \item[/F250/] \textsf {Einstellungen:} Der Nutzer kann seinen Namen abgeben und ändern.
+      \item[/F250/] \textsf {Einstellungen:} Der Nutzer kann seinen Namen angeben und ändern.
       \item[/F260/] \textsf {Einstellungen:} Der Nutzer kann die Sprache der App anpassen.
       \item[/F270/] \textsf {Einstellungen:} Der Nutzer kann die gespeicherten Trainingsdaten löschen.
       \item[/F280/] \textsf {Einstellungen:} Der Nutzer kann die Steuerungsparameter anpassen. 
@@ -214,6 +214,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       \item[/F290/] \textsf {Erstnutzung:} Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
       \item[/F300/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
       \item[/F310/] \textsf{Speichern der erkannten Vorgangsdaten: \textit{Zusatz zu F120}} Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein Vorgang aktiv war (keine Rohdaten).
+      \item[/F320/] Anzeigen der gespeicherten Daten aus /F310/
       \end{itemize}
 
 
@@ -231,19 +232,28 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 
 \begin{itemize}
   \item[/NF010/] Beim Ausführen der Funktion /F030/ soll die Datenaufnahme der IMU gestoppt werden.
-  \item[/NF020/] Die Funktionen /F060/ und /F100/ (Laufmodus) soll maximal eine Verzögerung von zwei Sekunden aufweisen. %%Laufzeitverhalten
-  \item[/NF030/] Beim Wechseln zwischen Modi (/F090/) soll der aktuelle Modus terminiert werden.
-  \item[/NF040/] Der Start eines Modus nach seiner Auswahl (/F080/) soll nicht länger als zwei Sekunden benötigen. %%Laufzeitverhalten
-  \item[/NF050/] Die Einblendung des Vorgangsresultats (/F130/) soll nicht länger als zwei Sekunden benötigen.%%Laufzeitverhalten
-  \item[/NF060/] Nach Ausführung der Funktion  Sprachänderung (/F260/) muss die App neu gestartet werden.
-  \item[/NF070/] Bei nicht sinnvollen Angaben (z.B. negativen Werten in /F220/) wird das Starten des Vorgangs verhindert.
-  \item[/NF080/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe ev. /F300/) nicht verändert.
-  \item[/NF090/] Bei Namensgebung sind nur Groß- und Kleinbuchstaben ohne Umlaute und Sonderzeichen erlaubt.
-  \item[/NF100/] Die App soll eine Größe von 100 MByte nicht überschreiten. %speicher
-  \item[/NF110/] Die gespeicherten Daten sollen nicht mehr als 50 MByte umfassen. %speicher
-  \item[/NF120/] Die App soll bei herkömmlicher Nutzung nicht öfter als zweimal bei zehnmaliger Benutzung. %stabilität
+  \item[/NF020/] Beim Wechseln zwischen Modi (/F090/) soll der aktuelle Modus terminiert werden.
+  \item[/NF030/] Nach Ausführung der Funktion  Sprachänderung (/F260/) muss die App neu gestartet werden.
+  \item[/NF040/] Bei nicht sinnvollen Angaben (z.B. negativen Werten in /F220/) wird das Starten des Vorgangs verhindert.
+  \item[/NF050/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe ev. /F300/) nicht verändert.
+  \item[/NF060/] Bei Namensgebung sind nur Groß- und Kleinbuchstaben ohne Umlaute und Sonderzeichen erlaubt.
 \end{itemize}
+\subsection{Stabilität}
+\begin{itemize}
+  \item[/NF070/] Die App soll bei herkömmlicher Nutzung nicht öfter als zweimal bei zehnmaliger Benutzung. %stabilität
+\end{itemize}
+\subsection{Speicherplatz}
+\begin{itemize}
+  \item[/NF080/] Die App soll eine Größe von 100 MByte nicht überschreiten. %speicher
+  \item[/NF090/] Die gespeicherten Daten sollen nicht mehr als 50 MByte umfassen. %speicher] 
+\end{itemize}
+\subsection{Laufzeitverhalten}
+\begin{itemize}
+  \item[/NF100/] Die Funktionen /F060/ und /F100/ (Laufmodus) soll maximal eine Verzögerung von zwei Sekunden aufweisen. %%Laufzeitverhalten
+  \item[/NF110/] Der Start eines Modus nach seiner Auswahl (/F080/) soll nicht länger als zwei Sekunden benötigen. %%Laufzeitverhalten] 
+  \item[/NF120/] Die Einblendung des Vorgangsresultats (/F130/) soll nicht länger als zwei Sekunden benötigen.%%Laufzeitverhalten
 
+\end{itemize}
 \section{Systemmodelle}
 %%TODO Jan!!
   \subsection{Architekturdiagramm}
@@ -295,14 +305,21 @@ Kurzbeschreibung: Beim Starten der App durch den Nutzer startet automatisch der 
     \end{enumerate}
 
     \subsubsection{Wunschanforderungen}
-      \paragraph{Start/Stop Musikmodus (/F210/)}
-      \begin{itemize}
-        \item[/T030/] 
-        \item[/T040/] 
-        \item[/T050/] 
-        \item[/T060/] 
-        \item[/T070/] 
-      \end{itemize}
+    \begin{itemize}
+	\item[/Txxx/] Die Sensorrohdaten werden als Graphen angezeigt. (/190/)
+	\item[/Txxx/] Die Liegestützen oder Sit-ups werden von der App gezählt. (/200/)
+	\item[/Txxx/] Einen Trainingsplan zusammenstellen. (/F221/)
+	\item[/Txxx/] Die App gibt dem Nutzer über Sprachanweisung aus was die nächste Übung ist. (/F222/)
+	\item[/Txxx/] Nach der Übung wird die benötigte Zeit angezeigt. (/F223/)
+	\item[/Txxx/] Der Nutzer ändert seinen Namen. (/F250/)
+	\item[/Txxx/] Der Nutzer ändert die Sprache. (/F260/)
+	\item[/Txxx/] Trainingsdaten löschen. (F270)
+	\item[/Txxx/] Die Samplingrate verändern. (/F280/)
+	\item[/Txxx/] Die Schrittlänge verändern. (/F285/)
+	\item[/Txxx/] Bei der Erstnutzung wird der Nutzer aufgefordert seinen Namen, seine Schrittlänge und die Sprache zu setzen. (/F290/, /F250/)
+	\item[/Txxx/] Trainingsdaten importieren und expotrieren. (/F300/)
+	\item[/Txxx/] Die gespeicherten Trainingsdaten ansehen. (/310/, /320/)
+   \end{itemize}
       
 
   \subsection{Szenarien}
