@@ -72,7 +72,7 @@
 \newglossaryentry{Echtzeit}{name=Echtzeit, description={Bereitstellen/Anzeigen von Daten mit einer durch die Verarbeitung bedingten Verzögerung von bis zu ca. 2 Sekunden zwischen dem Anfallen der (Roh-)Daten und der Ausgabe bzw. Visualisierung.}}
 \newglossaryentry{Vorgang}{name=Vorgang, description={Als Vorgang wird in diesem Pflichtenheft bezeichnet, wenn ein Modus ausgewählt ist und Start gedrückt wurde. Der Vorgang endet mit dem Drücken von Stopp bzw. wird mit dem Wechseln des Modus.}}
 \newglossaryentry{BLE}{name=BLE, description={Bluetooth Low Energy ist eine Technologie, die Teil des Industriestandards Bluetooth ist und eine energiesparende, kabellose Kommunikation zwischen Geräten in einer Entfernung von bis zu ca. 10 Metern ermöglicht.}}
-\newglossaryentry{Wearable Computings}{name=Wearable Computings, description={Unter dem Begriff Wearable Computings versthet man, Computerysyteme die am Körper, unter der Kleidung oder als Implantat unter der Haut getragen werden können.}}
+\newglossaryentry{Wearable Computer}{name=Wearable Computer, description={Unter dem Begriff Wearable Computer versteht man Computersysteme, die am Körper, unter der Kleidung oder als Implantat unter der Haut getragen werden können.}}
 \newglossaryentry{6-Achsen IMU}{name=6-Achsen IMU, description={Ein 6-Achsen IMU ist ein Beschleunigungssensor mit Gyroskop.}}
 \newglossaryentry{GUI}{name=GUI, description={GUI ist die Abkürzung für den englischen Begriff "graphical user interface". Sie ist die Schnittstelle zwischen Mensch und Maschine und ermöglicht dem Nutzer die Eingabe/Steuerung, der Maschine.}}
 \newglossaryentry{Cross-Platform Bibliothek}{name=Cross-Platform Bibliothek, description={Eine Cross-Platform Bibliothek ist nichts weiter als eine Bibliothek die auf Rechnersystemen mit verschiedener Architektur laufen kann.}}
@@ -95,7 +95,7 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-\Gls{Earables} gehören zu den \Gls{Wearable Computings}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{6-Achsen IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die Schrittfrequenz zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, so wurde auch dieses Projekt initiiert.
+\Gls{Earables} gehören zu den \Gls{Wearable Computer}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{6-Achsen IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die Schrittfrequenz zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, wodurch auch dieses Projekt initiiert wurde.
 \section{Zielbestimmung}
 Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \begin{enumerate}
@@ -222,8 +222,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 	\item[/PD010/] Es werden keine rohen Messdaten gespeichert.
 	\item[/PD020/] Die Einstellungen (Sprache, Steuerungsparameter, Messeinstellungen) sind zu speichern. 
 	\item[/PD030/] Es sind relevante Daten über den Nutzer, wie den Benutzernamen, zu speichern.
-	\item[/PD040/] Die Trainingsdaten (Bestenliste und letzte Trainingseinheit) sind zu speichern. % Genauer definieren, was alles?
-	\item[/PD050/] Speicherung aller Vorgänge, die aktiv waren mit Datum, Uhrzeit und dem letzten Resultat (/F300/)%%nächstes Treffen: abklären, ob umsetzen
+	\item[/PD040/] Die Vorgangsdaten werden in der Form (Datum;Schritte;Liegestütze;Sit-ups) gespeichert. Für den Nutzer sind nur die Daten des letzten Monats aufsummiert zu sehen.
 \end{itemize}
 
 
