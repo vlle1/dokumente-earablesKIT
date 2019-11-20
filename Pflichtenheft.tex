@@ -73,7 +73,7 @@
 \newglossaryentry{Vorgang}{name=Vorgang, description={Als Vorgang wird in diesem Pflichtenheft bezeichnet, wenn ein Modus ausgewählt ist und Start gedrückt wurde. Der Vorgang endet mit dem Drücken von Stopp bzw. wird mit dem Wechseln des Modus.}}
 \newglossaryentry{BLE}{name=BLE, description={Bluetooth Low Energy ist eine Technologie, die Teil des Industriestandards Bluetooth ist und eine energiesparende, kabellose Kommunikation zwischen Geräten in einer Entfernung von bis zu ca. 10 Metern ermöglicht.}}
 \newglossaryentry{Wearable Computer}{name=Wearable Computer, description={Unter dem Begriff Wearable Computer versteht man Computersysteme, die am Körper, unter der Kleidung oder als Implantat unter der Haut getragen werden können.}}
-\newglossaryentry{6-Achsen IMU}{name=6-Achsen IMU, description={Ein 6-Achsen IMU ist ein Beschleunigungssensor mit Gyroskop.}}
+\newglossaryentry{IMU}{name=6-Achsen IMU, description={Ein 6-Achsen IMU ist ein Beschleunigungssensor mit Gyroskop.}}
 \newglossaryentry{GUI}{name=GUI, description={GUI ist die Abkürzung für den englischen Begriff "graphical user interface". Sie ist die Schnittstelle zwischen Mensch und Maschine und ermöglicht dem Nutzer die Eingabe/Steuerung, der Maschine.}}
 \newglossaryentry{Cross-Platform Bibliothek}{name=Cross-Platform Bibliothek, description={Eine Cross-Platform Bibliothek ist nichts weiter als eine Bibliothek die auf Rechnersystemen mit verschiedener Architektur laufen kann.}}
 \newglossaryentry{Steuerungsparameter}{name=Steuerungsparameter, description={Unter Steuerungsparametern fassen wir die Länge der Verbindungsintervalle zwischen Kopfhöhrern und Handy sowie die Abtastrate und den Wertebereich von integriertem Gyroskop und Beschleunigungssensor zusammen.}}
@@ -96,7 +96,7 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-\Gls{Earables} gehören zu den \Gls{Wearable Computer}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{6-Achsen IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die Schrittfrequenz zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, wodurch auch dieses Projekt initiiert wurde.
+\Gls{Earables} gehören zu den \Gls{Wearable Computer}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die Schrittfrequenz zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, wodurch auch dieses Projekt initiiert wurde.
 \section{Zielbestimmung}
 Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \begin{enumerate}
@@ -166,9 +166,9 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \subsection{Mussanforderungen}
     \subsubsection{Bibliothek}
     \begin{itemize}
-      \item[/F010/] Daten des %%\Gls{IMU} und in \Gls{Echtzeit} zur Verfügung stellen.
+      \item[/F010/] Daten des \Gls{IMU} und in \Gls{Echtzeit} zur Verfügung stellen.
       \item[/F030/] Messparameter (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. 
-      \item[/F040/] Datenaufnahme des IMU starten und stoppen.
+      \item[/F040/] Datenaufnahme des \Gls{IMU} starten und stoppen.
     \end{itemize}
     \subsubsection{Erweiterungsmodul}
      Auswertung der ausgelesenen Daten:
@@ -238,7 +238,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 %TODO Jan Koordination
 
 \begin{itemize}
-  \item[/NF010/] Beim Ausführen der Funktion /F030/ soll die Datenaufnahme der IMU gestoppt werden.
+  \item[/NF010/] Beim Ausführen der Funktion /F030/ soll die Datenaufnahme der \Gls{IMU} gestoppt werden.
   \item[/NF020/] Beim Wechseln zwischen Modi (/F090/) soll der aktuelle Modus terminiert werden.
   \item[/NF030/] Nach Ausführung der Funktion  Sprachänderung (/F260/) muss die App neu gestartet werden.
   \item[/NF040/] Bei nicht sinnvollen Angaben (z.B. negativen Werten in /F220/) wird das Starten des Vorgangs verhindert.
@@ -274,7 +274,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 	\includegraphics[width=0.8\textwidth]{Use-CaseDiagramm.png} 
   \end{center}
 
-Kurzbeschreibung: Beim Starten der App durch den Nutzer startet automatisch der Laufmodus. Der Nutzer kann nun entweder den Modus wechseln oder einen Vorgang starten. Nach Beendigung oder Stoppen des Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem die Vorgangsdaten des letzten Monats einsehen und seine Daten importieren/exportieren. Das Ändern von Einstellungen und der damit verbundenen Steuerungsparameter der Earables ist ebenfalls möglich.
+Kurzbeschreibung: Beim Starten der App durch den Nutzer startet automatisch der Laufmodus. Der Nutzer kann nun entweder den Modus wechseln oder einen Vorgang starten. Nach Beendigung oder Stoppen des Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem die Vorgangsdaten des letzten Monats einsehen und seine Daten importieren/exportieren. Das Ändern von Einstellungen und der damit verbundenen Steuerungsparameter der \Gls{Earables} ist ebenfalls möglich.
 \section{Benutzeroberfläche}
 Die \Gls{GUI} wird durch die App realisiert. Dabei kann man die einzelnen Modi über das Navigationsmenu auswählen. Jeder Modus hat zwei Seiten; eine Übersichtsseite und eine aktive Seite, welche während des aktiven \Gls{Vorgang} angezeigt wird. Für die weiteren Funktionen(Einstellungen, Dateienexport/-import) bietet die Applikation ebenfalls spezielle Seiten an.
 Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools "Mock-up" über den angegebenen Link in der Fußnote \footnote[1]{Mock-Up Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0}
@@ -385,28 +385,48 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools "Mock-up" über den
 \section{Globale Testfälle und Szenarien}
 %%TODO David
   \subsection{Globale Testfälle}
-    \subsubsection{Mussanforderungen}
-    \paragraph{Laufmodus (/F100/)}
-    \begin{enumerate}
-      \item[/T010/] Der Nutzer rennt.
-      \item[/T020/]
-    \end{enumerate}
-
-    \subsubsection{Wunschanforderungen}
+  \subsubsection{Bibliothek}
+  \begin{itemize}
+    \item[/T010/] Die Bibliothek kann die Daten des \Gls{IMU} in \Gls{Echtzeit} zur Verfügung stellen.
+    \item[/T030/] Mithilfe der Bibliothek lassen sich (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. 
+    \item[/T040/] Die Bibliothek erlaubt es die Datenaufnahme des \Gls{IMU} zu starten und zu stoppen.
+  \end{itemize}
+  \subsubsection{Erweiterungsmodul}
+  \begin{itemize}
+    \item[/T060/] Das Erweiterungsmodul erkennt Schritte.
+  \end{itemize}
+  \subsubsection{App}
     \begin{itemize}
-	\item[/Txxx/] Die Sensorrohdaten werden als Graphen angezeigt. (/190/)
-	\item[/Txxx/] Die Liegestützen oder Sit-ups werden von der App gezählt. (/200/)
-	\item[/Txxx/] Einen Trainingsplan zusammenstellen. (/F221/)
-	\item[/Txxx/] Die App gibt dem Nutzer über Sprachanweisung aus was die nächste Übung ist. (/F222/)
-	\item[/Txxx/] Nach der Übung wird die benötigte Zeit angezeigt. (/F223/)
-	\item[/Txxx/] Der Nutzer ändert seinen Namen. (/F250/)
-	\item[/Txxx/] Der Nutzer ändert die Sprache. (/F260/)
-	\item[/Txxx/] Trainingsdaten löschen. (F270)
-	\item[/Txxx/] Die Samplingrate verändern. (/F280/)
-	\item[/Txxx/] Die Schrittlänge verändern. (/F285/)
-	\item[/Txxx/] Bei der Erstnutzung wird der Nutzer aufgefordert seinen Namen, seine Schrittlänge und die Sprache zu setzen. (/F290/, /F250/)
-	\item[/Txxx/] Trainingsdaten importieren und expotrieren. (/F300/)
-	\item[/Txxx/] Die gespeicherten Trainingsdaten ansehen. (/310/, /320/)
+    \item[/T070/] Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.
+    \item[/T090/] Der Nutzer kann die Modi über ein einblendebares Menü wechseln, während ein Modus ausgewählt ist.
+    \item[/T100/] Der Nutzer kann sehen, ob er gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
+    \item[/T110/] Der Nutzer kann den modusspezifischen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
+    \item[/T120/] Der Nutzer kann den modusspezifischen Vorgang stoppen.
+    \item[/T130/] Die App zeigt nach Stoppen des Vorgangs das Vorgansresultats an bis neuer Vorgang gestartet wird.
+  \end{itemize}
+\subsection{Wunschanforderungen}
+  \subsubsection{Erweiterungsmodul}
+    \begin{itemize}
+    \item[/T140/] Ermittelt die aktuelle Schrittfrequenz korrekt.
+    \item[/T150/] Zählt die Schritte des Nutzers.
+    \item[/T170/] Erkennt Sit-ups.
+    \item[/T180/] Erkennt Liegestütze.
+  \end{itemize}
+  \subsubsection{App}
+  \begin{itemize}
+    \item[/Txxx/] Die Sensorrohdaten werden als Graphen angezeigt. (/190/)
+    \item[/Txxx/] Die Liegestützen oder Sit-ups werden von der App gezählt. (/200/)
+    \item[/Txxx/] Einen Trainingsplan zusammenstellen. (/F221/)
+    \item[/Txxx/] Die App gibt dem Nutzer über Sprachanweisung aus was die nächste Übung ist. (/F222/)
+    \item[/Txxx/] Nach der Übung wird die benötigte Zeit angezeigt. (/F223/)
+    \item[/Txxx/] Der Nutzer ändert seinen Namen. (/F250/)
+    \item[/Txxx/] Der Nutzer ändert die Sprache. (/F260/)
+    \item[/Txxx/] Trainingsdaten löschen. (F270)
+    \item[/Txxx/] Die Samplingrate verändern. (/F280/)
+    \item[/Txxx/] Die Schrittlänge verändern. (/F285/)
+    \item[/Txxx/] Bei der Erstnutzung wird der Nutzer aufgefordert seinen Namen, seine Schrittlänge und die Sprache zu setzen. (/F290/, /F250/)
+    \item[/Txxx/] Trainingsdaten importieren und exportieren. (/F300/)
+    \item[/Txxx/] Die gespeicherten Trainingsdaten ansehen. (/310/, /320/)
    \end{itemize}
       
 
