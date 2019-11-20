@@ -206,7 +206,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
           \item[/F223/] Anzeige der Zeitdauer jeder Übung nach Ablaufsende, siehe F130.
         \end{itemize}
       }
-      \item[/F250/] \textsf {Einstellungen:} Der Nutzer kann seinen Namen abgeben und ändern.
+      \item[/F250/] \textsf {Einstellungen:} Der Nutzer kann seinen Namen angeben und ändern.
       \item[/F260/] \textsf {Einstellungen:} Der Nutzer kann die Sprache der App anpassen.
       \item[/F270/] \textsf {Einstellungen:} Der Nutzer kann die gespeicherten Trainingsdaten löschen.
       \item[/F280/] \textsf {Einstellungen:} Der Nutzer kann die Steuerungsparameter anpassen. 
@@ -214,6 +214,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       \item[/F290/] \textsf {Erstnutzung:} Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
       \item[/F300/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
       \item[/F310/] \textsf{Speichern der erkannten Vorgangsdaten: \textit{Zusatz zu F120}} Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein Vorgang aktiv war (keine Rohdaten).
+      \item[/F320/] Anzeigen der gespeicherten Daten aus /F310/
       \end{itemize}
 
 
@@ -302,14 +303,21 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \end{enumerate}
 
     \subsubsection{Wunschanforderungen}
-      \paragraph{Start/Stop Musikmodus (/F210/)}
-      \begin{itemize}
-        \item[/T030/] 
-        \item[/T040/] 
-        \item[/T050/] 
-        \item[/T060/] 
-        \item[/T070/] 
-      \end{itemize}
+    \begin{itemize}
+	\item[/Txxx/] Die Sensorrohdaten werden als Graphen angezeigt. (/190/)
+	\item[/Txxx/] Die Liegestützen oder Sit-ups werden von der App gezählt. (/200/)
+	\item[/Txxx/] Einen Trainingsplan zusammenstellen. (/F221/)
+	\item[/Txxx/] Die App gibt dem Nutzer über Sprachanweisung aus was die nächste Übung ist. (/F222/)
+	\item[/Txxx/] Nach der Übung wird die benötigte Zeit angezeigt. (/F223/)
+	\item[/Txxx/] Der Nutzer ändert seinen Namen. (/F250/)
+	\item[/Txxx/] Der Nutzer ändert die Sprache. (/F260/)
+	\item[/Txxx/] Trainingsdaten löschen. (F270)
+	\item[/Txxx/] Die Samplingrate verändern. (/F280/)
+	\item[/Txxx/] Die Schrittlänge verändern. (/F285/)
+	\item[/Txxx/] Bei der Erstnutzung wird der Nutzer aufgefordert seinen Namen, seine Schrittlänge und die Sprache zu setzen. (/F290/, /F250/)
+	\item[/Txxx/] Trainingsdaten importieren und expotrieren. (/F300/)
+	\item[/Txxx/] Die gespeicherten Trainingsdaten ansehen. (/310/, /320/)
+   \end{itemize}
       
 
   \subsection{Szenarien}
