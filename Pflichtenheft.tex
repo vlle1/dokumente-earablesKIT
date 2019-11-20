@@ -221,7 +221,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       
       Sonstiges:
       \item[/F290/] Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
-      \item[/F300/] Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren und importieren.
+      \item[/F300/] Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren, importieren und löschen.
       \item[/F310/] Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein Vorgang aktiv war (keine Rohdaten).
       \item[/F320/] Anzeigen der gespeicherten Daten aus /F310/
       \end{itemize}
@@ -430,7 +430,7 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
     \item[/T280/] Die Samplingrate verändern.
     \item[/T285/] Die Schrittlänge verändern.
     \item[/T290/] Bei der Erstnutzung wird der Nutzer aufgefordert seinen Namen, seine Schrittlänge und die Sprache zu setzen.
-    \item[/T300/] Trainingsdaten importieren und exportieren.
+    \item[/T300/] Trainingsdaten importieren, exportieren und löschen.
     \item[/T320/] Die gespeicherten Trainingsdaten ansehen.
    \end{itemize}
    
@@ -532,7 +532,14 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
       \end{enumerate}
 
       \paragraph{Vorgangsdaten importieren/exportieren (/T300/)}
-
+      \begin{enumerate}
+        \item Der Nutzer startet die App. (/T070/)
+        \item Der Nutzer wählt über das Hamburgermenü den Reiter \glqq{}Import/Export \grqq{}.
+        \item Der Nutzer exportiert seine Daten. (/T300/)
+        \item Der Nutzer löscht seine Daten. (/T300/)
+        \item Der Nutzer importiert seine Daten. (/T300/)
+        \item Die Daten sind alle wieder vorhanden so als ob der Nutzer sie nie gelöscht hätte.
+      \end{enumerate}
 
 \section{Entwicklungsumgebung}
 Wir arbeiten an dem Projekt mit Visual Studio 2019, sodass alle eine einheitliche Entwicklungsumgebung verwenden.\\
