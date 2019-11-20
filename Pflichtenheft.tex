@@ -74,7 +74,7 @@
 \newglossaryentry{BLE}{name=BLE, description={Bluetooth Low Energy ist eine Technologie, die Teil des Industriestandards Bluetooth ist und eine energiesparende, kabellose Kommunikation zwischen Geräten in einer Entfernung von bis zu ca. 10 Metern ermöglicht.}}
 \newglossaryentry{Wearable Computer}{name=Wearable Computer, description={Unter dem Begriff Wearable Computer versteht man Computersysteme, die am Körper, unter der Kleidung oder als Implantat unter der Haut getragen werden können.}}
 \newglossaryentry{IMU}{name=6-Achsen IMU, description={Ein 6-Achsen IMU ist ein Beschleunigungssensor mit Gyroskop.}}
-\newglossaryentry{GUI}{name=GUI, description={GUI ist die Abkürzung für den englischen Begriff "graphical user interface". Sie ist die Schnittstelle zwischen Mensch und Maschine und ermöglicht dem Nutzer die Eingabe/Steuerung, der Maschine.}}
+\newglossaryentry{GUI}{name=GUI, description={GUI ist die Abkürzung für den englischen Begriff \glqq graphical user interface\grqq . Sie ist die Schnittstelle zwischen Mensch und Maschine und ermöglicht dem Nutzer die Eingabe/Steuerung, der Maschine.}}
 \newglossaryentry{Cross-Platform Bibliothek}{name=Cross-Platform Bibliothek, description={Eine Cross-Platform Bibliothek ist nichts weiter als eine Bibliothek die auf Rechnersystemen mit verschiedener Architektur laufen kann.}}
 \newglossaryentry{Steuerungsparameter}{name=Steuerungsparameter, description={Unter Steuerungsparametern fassen wir die Länge der Verbindungsintervalle zwischen Kopfhöhrern und Handy sowie die Abtastrate und den Wertebereich von integriertem Gyroskop und Beschleunigungssensor zusammen.}}
 \newglossaryentry{Schrittfrequenz}{name=Schrittfrequenz, description={Die Schrittfrequenz gibt an wie viele Schritte pro Zeiteinheit gemacht werden.}}
@@ -156,8 +156,12 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       \item\textsf{App} Heimtraining, Sport,\dots
     \end{itemize}
   \subsection{Betriebsbedingungen der App}
-  %mögliche Punkte: physikalische Umgebung (Training alleine, Umgebung egal), Betriebsdauer ("Akkuabhängig", keine weitere Grenzen), Qualifikation des Benutzers (keine besondere? sollte Sportübungen selbstständig ausführen), Handy und Kopfhörer sollten nicht über 10 Meter entfernt werden, sodass Bluetooth-Verbindung möglich ist
-    
+    \subsection{physikalische Umgebung}
+      Handy und Kopfhörer sollten nicht über zehn Meter voneinander entfernt werden, sodass eine Bluetooth-Verbindung möglich ist.
+    \subsection{Sonstiges:}
+      Betriebsdauer: "Akkuabhängig", keine weitere Grenzen
+      Qualifikation des Benutzers: sollte Sportübungen selbstständig ausführen können
+      
 \section{Produktumgebung}
 \subsection{Hardware} \textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung.
 \subsection{Software} \textsf{Betriebssystem:} Unterstützung nur von Android ab Version 7 und iOS ab Version 10.
@@ -277,7 +281,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 Kurzbeschreibung: Beim Starten der App durch den Nutzer startet automatisch der Laufmodus. Der Nutzer kann nun entweder den Modus wechseln oder einen Vorgang starten. Nach Beendigung oder Stoppen des Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem die Vorgangsdaten des letzten Monats einsehen und seine Daten importieren/exportieren. Das Ändern von Einstellungen und der damit verbundenen Steuerungsparameter der \Gls{Earables} ist ebenfalls möglich.
 \section{Benutzeroberfläche}
 Die \Gls{GUI} wird durch die App realisiert. Dabei kann man die einzelnen Modi über das Navigationsmenü auswählen. Jeder Modus hat zwei Seiten; eine Übersichtsseite und eine aktive Seite, welche während des aktiven \Gls{Vorgang} angezeigt wird. Für die weiteren Funktionen(Einstellungen, Dateienexport/-import) bietet die Applikation ebenfalls spezielle Seiten an.
-Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools "Mock-up" über den angegebenen Link in der Fußnote \footnote[1]{Mock-Up Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0}
+Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{} über den angegebenen Link in der Fußnote \footnote[1]{Mock-Up Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0}
 
 
 \begin{figure}[ht!]
