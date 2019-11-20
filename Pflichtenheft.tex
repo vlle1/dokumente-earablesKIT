@@ -96,7 +96,7 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-\Gls{Earables} gehören zu den \Gls{Wearable Computer}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die Schrittfrequenz zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, wodurch auch dieses Projekt initiiert wurde.
+\Gls{Earables} gehören zu den \Gls{Wearable Computer}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die \Gls{Schrittfrequenz} zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, wodurch auch dieses Projekt initiiert wurde.
 \section{Zielbestimmung}
 Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \begin{enumerate}
@@ -112,9 +112,9 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \subsection{Musskriterien}
 
   \begin{itemize}
-    \item Die Cross-Platform Bibliothek soll in der Lage sein die gesammelten Daten der \Gls{Earables} aufzuzeichnen
-    \item Die GUI der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der \Gls{Earables} verändert
-    \item Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen Steuerungsparameter zu verändern.
+    \item Die \Gls{Cross-Platform Bibliothek} soll in der Lage sein die gesammelten Daten der \Gls{Earables} aufzuzeichnen
+    \item Die \Gls{GUI} der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die \Gls{Steuerungsparameter} der \Gls{Earables} verändert
+    \item Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen \Gls{Steuerungsparameter} zu verändern.
     \item Das Erweiterungsmodul soll erkennen ob der Nutzer gerade \glqq läuft\grqq{}oder \glqq steht\grqq.
     \item Die App soll anzeigen können ob der Nutzer gerade läuft oder steht.
   \end{itemize}
@@ -135,8 +135,8 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \end{itemize}
   \subsection{Abgrenzungskriterien}
   \begin{itemize}
-    \item Es werden keine Rohdaten längerfristig gespeichert.
-    \item Die Musik passt sich nicht der Schrittfrequenz des Nutzers an.
+    \item Es werden keine \Gls{Rohdaten} längerfristig gespeichert.
+    \item Die Musik passt sich nicht der \Gls{Schrittfrequenz} des Nutzers an.
     \item Im Modus \glqq Zählen\grqq{}wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit-ups macht. Das bewusste Austricksen des Systems durch andere Bewegungen wird nicht behandelt.
     \item Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den \Gls{Earables}
   \end{itemize}
@@ -151,16 +151,21 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \subsection{Anwendungsbereiche}
     \begin{itemize}
       \item\textsf{Bibliothek} Softwareentwicklung für eSense Wearables
-      \item\textsf{Erweiterungsmodul} Softwareentwicklung im Bereich Schritterkennung 
-      %% valle ergänzen: Vorschlag: Nutzung von Sensordaten z.B. einer App , z.b. im Fitness, aber auch als Nutzereingabe für andere interaktive Apps ? (valle)
+      \item\textsf{Erweiterungsmodul}
+      \begin{itemize}
+        \item[] Softwareentwicklung im Bereich Schritterkennung 
+        \item[] Auswerten der von \Gls{Earables} generierten Daten für die Verwendung in einer App z.B. im Bereich Fitness
+      \end{itemize}
       \item\textsf{App} Heimtraining, Sport,\dots
     \end{itemize}
   \subsection{Betriebsbedingungen der App}
     \subsection{physikalische Umgebung}
       Handy und Kopfhörer sollten nicht über zehn Meter voneinander entfernt werden, sodass eine Bluetooth-Verbindung möglich ist.
     \subsection{Sonstiges:}
-      Betriebsdauer: "Akkuabhängig", keine weitere Grenzen
-      Qualifikation des Benutzers: sollte Sportübungen selbstständig ausführen können
+    \begin{itemize}
+      \item[] Betriebsdauer: "Akkuabhängig", keine weitere Grenzen 
+      \item[] Qualifikation des Benutzers: Sollte Sportübungen selbstständig ausführen können
+    \end{itemize}
       
 \section{Produktumgebung}
 \subsection{Hardware} \textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung.
@@ -184,9 +189,9 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.
       \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi über ein einblendebares Menü, während ein Modus ausgewählt ist.
       \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
-      \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
-      \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen Vorgang stoppen.
-      \item[/F130/] \textsf{Resultat anzeigen:}Nach Stoppen Anzeigen des Vorgansresultats bis neuer Vorgang gestartet wird.
+      \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
+      \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} stoppen.
+      \item[/F130/] \textsf{Resultat anzeigen:}Nach Stoppen Anzeigen des Vorgansresultats bis neuer \Gls{Vorgang} gestartet wird.
     \end{itemize}
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
@@ -216,13 +221,18 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
       \item[/F250/] Der Nutzer kann seinen Namen in den Einstellungen ändern.
       \item[/F260/] Der Nutzer kann die Sprache der App anpassen.
       \item[/F270/] Der Nutzer kann die gespeicherten \Gls{Vorgangsdaten} löschen.
-      \item[/F280/] Der Nutzer kann die Steuerungsparameter anpassen. 
+      \item[/F280/] Der Nutzer kann die \Gls{Steuerungsparameter} anpassen. 
       \item[/F285/] Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.
       
       Sonstiges:
       \item[/F290/] Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
+<<<<<<< Updated upstream
       \item[/F300/] Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren, importieren und löschen.
       \item[/F310/] Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein Vorgang aktiv war (keine Rohdaten).
+=======
+      \item[/F300/] Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren und importieren.
+      \item[/F310/] Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein \Gls{Vorgang} aktiv war (keine \Gls{Rohdaten}).
+>>>>>>> Stashed changes
       \item[/F320/] Anzeigen der gespeicherten Daten aus /F310/
       \end{itemize}
 
@@ -230,7 +240,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \section{Produktdaten}
 \begin{itemize}
 	\item[/PD010/] Es werden keine rohen Messdaten gespeichert.
-	\item[/PD020/] Die Einstellungen (Sprache, Steuerungsparameter, Messeinstellungen) sind zu speichern. 
+	\item[/PD020/] Die Einstellungen (Sprache, \Gls{Steuerungsparameter}, Messeinstellungen) sind zu speichern. 
 	\item[/PD030/] Es sind relevante Daten über den Nutzer, wie den Benutzernamen, zu speichern.
 	\item[/PD040/] Die \Gls{Vorgangsdaten} (Bestenliste und letzte Trainingseinheit) sind zu speichern. % Genauer definieren, was alles?
 	\item[/PD050/] Speicherung aller Vorgänge, die aktiv waren mit Datum, Uhrzeit und dem letzten Resultat (/F300/)%%nächstes Treffen: abklären, ob umsetzen
@@ -278,7 +288,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 	\includegraphics[width=0.8\textwidth]{Use-CaseDiagramm.png} 
   \end{center}
 
-Kurzbeschreibung: Beim Starten der App durch den Nutzer startet automatisch der Laufmodus. Der Nutzer kann nun entweder den Modus wechseln oder einen Vorgang starten. Nach Beendigung oder Stoppen des Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem die Vorgangsdaten des letzten Monats einsehen und seine Daten importieren/exportieren. Das Ändern von Einstellungen und der damit verbundenen Steuerungsparameter der \Gls{Earables} ist ebenfalls möglich.
+Kurzbeschreibung: Beim Starten der App durch den Nutzer startet automatisch der Laufmodus. Der Nutzer kann nun entweder den Modus wechseln oder einen \Gls{Vorgang} starten. Nach Beendigung oder Stoppen des Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem die Vorgangsdaten des letzten Monats einsehen und seine Daten importieren/exportieren. Das Ändern von Einstellungen und der damit verbundenen \Gls{Steuerungsparameter} der \Gls{Earables} ist ebenfalls möglich.
 \section{Benutzeroberfläche}
 Die \Gls{GUI} wird durch die App realisiert. Dabei kann man die einzelnen Modi über das Navigationsmenü auswählen. Jeder Modus hat zwei Seiten; eine Übersichtsseite und eine aktive Seite, welche während des aktiven \Gls{Vorgang} angezeigt wird. Für die weiteren Funktionen(Einstellungen, Dateienexport/-import) bietet die Applikation ebenfalls spezielle Seiten an.
 Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{} über den angegebenen Link in der Fußnote \footnote[1]{Mock-Up Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0}
@@ -404,14 +414,14 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
     \item[/T070/] Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.
     \item[/T090/] Der Nutzer kann die Modi über ein einblendebares Menü wechseln, während ein Modus ausgewählt ist.
     \item[/T100/] Der Nutzer kann sehen, ob er gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
-    \item[/T110/] Der Nutzer kann den modusspezifischen Vorgang starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
-    \item[/T120/] Der Nutzer kann den modusspezifischen Vorgang stoppen.
-    \item[/T130/] Die App zeigt nach Stoppen des Vorgangs das Vorgansresultats an bis neuer Vorgang gestartet wird.
+    \item[/T110/] Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
+    \item[/T120/] Der Nutzer kann den modusspezifischen \Gls{Vorgang} stoppen.
+    \item[/T130/] Die App zeigt nach Stoppen des Vorgangs das Vorgansresultats an bis neuer \Gls{Vorgang} gestartet wird.
   \end{itemize}
 \subsection{Wunschanforderungen}
   \subsubsection{Erweiterungsmodul}
     \begin{itemize}
-    \item[/T140/] Ermittelt die aktuelle Schrittfrequenz korrekt.
+    \item[/T140/] Ermittelt die aktuelle \Gls{Schrittfrequenz} korrekt.
     \item[/T150/] Zählt die Schritte des Nutzers.
     \item[/T170/] Erkennt Sit-ups.
     \item[/T180/] Erkennt Liegestütze.
@@ -455,7 +465,7 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
         \item Der Nutzer startet die App. (/T070/)
         \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Livedaten\grqq . (/F190/)
         \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
-        \item Der Nutzer startet den gewählten Vorgang.
+        \item Der Nutzer startet den gewählten \Gls{Vorgang}.
         \item Die App zeigt die korrekten Sensordaten an. (/T190/)
       \end{enumerate}
 
@@ -467,9 +477,9 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
         \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Zählmodus\grqq . (/F200/)
         \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer wählt eine verfügbare Übung aus. 
-        \item Der Nutzer startet den gewählten Vorgang.
+        \item Der Nutzer startet den gewählten \Gls{Vorgang}.
         \item Der Nutzer führt die Übung X (natürliche Zahl) mal aus.
-        \item Der Nutzer stoppt den laufenden Vorgang.
+        \item Der Nutzer stoppt den laufenden \Gls{Vorgang}.
         \item Die App zeigt X an. (/T200/)
       \end{enumerate}
 
@@ -482,7 +492,7 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
         \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Laufmodus\grqq . (/F210/)
         \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer beginnt zu gehen.
-        \item Der Nutzer startet den gewählten Vorgang.
+        \item Der Nutzer startet den gewählten \Gls{Vorgang}.
         \item Der Nutzer hört auf zu gehen.
         \item Die Musik wird pausiert. (/T210/)
         \item Der Nutzer geht weiter.
@@ -496,11 +506,11 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
         \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Lauschen\&Agieren\grqq . (/F220/)
         \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer stellt sich ein Training aus den verfügbaren Übungen zusammen (/T221/).
-        \item Der Nutzer startet den gewählten Vorgang.
+        \item Der Nutzer startet den gewählten \Gls{Vorgang}.
         \item Dem Nutzer wird per \Gls{TTS} die aktuelle Übung angesagt (/T222/).
         \item Der Nutzer führt die Übung aus.
         \item Die letzten beiden Schritte werden so lange wiederholt, bis alle ausgewählten Übungen erledigt sind.
-        \item Der Vorgang wird automatisch beendet.
+        \item Der \Gls{Vorgang} wird automatisch beendet.
         \item Die App zeigt die benötigten Zeiten pro Übung an (/T223/).
       \end{enumerate}
 
@@ -513,7 +523,7 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
         \item Der Nutzer ändert seinen Namen (/T250/).
         \item Der Nutzer ändert die Sprache (/T260/).
         \item Dem Nutzer löscht die gespeicherten \Gls{Vorgangsdaten} (/T270/).
-        \item Dem Nutzer ändert die Steuerungsparameter (/T280/).
+        \item Dem Nutzer ändert die \Gls{Steuerungsparameter} (/T280/).
         \item Der Nutzer ändert seine Schrittlänge (/T285/).
         \item Der Nutzer beendet die App.
         \item Der Nutzer startet die App. (/T070/)
