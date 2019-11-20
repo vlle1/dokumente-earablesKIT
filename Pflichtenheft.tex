@@ -72,15 +72,16 @@
 \newglossaryentry{Echtzeit}{name=Echtzeit, description={Bereitstellen/Anzeigen von Daten mit einer durch die Verarbeitung bedingten Verzögerung von bis zu ca. 2 Sekunden zwischen dem Anfallen der (Roh-)Daten und der Ausgabe bzw. Visualisierung.}}
 \newglossaryentry{Vorgang}{name=Vorgang, description={Als Vorgang wird in diesem Pflichtenheft bezeichnet, wenn ein Modus ausgewählt ist und Start gedrückt wurde. Der Vorgang endet mit dem Drücken von Stopp bzw. wird mit dem Wechseln des Modus.}}
 \newglossaryentry{BLE}{name=BLE, description={Bluetooth Low Energy ist eine Technologie, die Teil des Industriestandards Bluetooth ist und eine energiesparende, kabellose Kommunikation zwischen Geräten in einer Entfernung von bis zu ca. 10 Metern ermöglicht.}}
-\newglossaryentry{Wearable Computings}{name=Wearable Computings, description={Unter dem Begriff Wearable Computings versthet man, Computerysyteme die am Körper, unter der Kleidung oder als Implantat unter der Haut getragen werden können.}}
+\newglossaryentry{Wearable Computer}{name=Wearable Computer, description={Unter dem Begriff Wearable Computer versteht man Computersysteme, die am Körper, unter der Kleidung oder als Implantat unter der Haut getragen werden können.}}
 \newglossaryentry{6-Achsen IMU}{name=6-Achsen IMU, description={Ein 6-Achsen IMU ist ein Beschleunigungssensor mit Gyroskop.}}
 \newglossaryentry{GUI}{name=GUI, description={GUI ist die Abkürzung für den englischen Begriff "graphical user interface". Sie ist die Schnittstelle zwischen Mensch und Maschine und ermöglicht dem Nutzer die Eingabe/Steuerung, der Maschine.}}
 \newglossaryentry{Cross-Platform Bibliothek}{name=Cross-Platform Bibliothek, description={Eine Cross-Platform Bibliothek ist nichts weiter als eine Bibliothek die auf Rechnersystemen mit verschiedener Architektur laufen kann.}}
-\newglossaryentry{Steuerungsparameter}{name=Steuerungsparameter, description={Steuerungsparameter sind Parameter, mit denen ein Programm eingestellt werden kann, um auf eine bestimmte Art und weiße zu arbeiten.}}
+\newglossaryentry{Steuerungsparameter}{name=Steuerungsparameter, description={Unter Steuerungsparametern fassen wir die Länge der Verbindungsintervalle zwischen Kopfhöhrern und Handy sowie die Abtastrate und den Wertebereich von integriertem Gyroskop und Beschleunigungssensor zusammen.}}
 \newglossaryentry{Schrittfrequenz}{name=Schrittfrequenz, description={Die Schrittfrequenz gibt an wie viele Schritte pro Zeiteinheit gemacht werden.}}
 \newglossaryentry{Rohdaten}{name=Rohdaten, description={Als Rohdaten werden unverarbeitete Daten bezeichnet.}}
 \newglossaryentry{TTS}{name=Text-To-Speech, description={Ein Text-to-Speech-System (TTS) (oder Vorleseautomat) wandelt Fließtext in eine akustische Sprachausgabe um.}}
 \newglossaryentry{Earables}{name=Earables, description={Eine Zusammenschließung des Wortes Wearable und Earphone. Dabei handelt es sich um Kopfhörer, die mit Sensoren ausgestattet sind.}}
+\newglossaryentry{Vorgangsdaten}{name=Vorgangsdaten, description={Daten, die bei der Ausführung eines Vorgangs gespeichert werden (z.B. Schritte, Sit-ups,\dots).}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -95,7 +96,7 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-\Gls{Earables} gehören zu den \Gls{Wearable Computings}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{6-Achsen IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die Schrittfrequenz zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, so wurde auch dieses Projekt initiiert.
+\Gls{Earables} gehören zu den \Gls{Wearable Computer}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{6-Achsen IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die Schrittfrequenz zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, wodurch auch dieses Projekt initiiert wurde.
 \section{Zielbestimmung}
 Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \begin{enumerate}
@@ -111,18 +112,18 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \subsection{Musskriterien}
 
   \begin{itemize}
-    \item\text Die Cross-Platform Bibliothek soll in der Lage sein die gesammelten Daten der \Gls{Earables} aufzuzeichnen
-    \item\text Die GUI der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der \Gls{Earables} verändert
-    \item\text Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen Steuerungsparameter zu verändern.
-    \item\text Das Erweiterungsmodul soll erkennen ob der Nutzer gerade \glqq läuft\grqq{}oder \glqq steht\grqq.
-    \item\text Die App soll anzeigen können ob der Nutzer gerade läuft oder steht.
+    \item Die Cross-Platform Bibliothek soll in der Lage sein die gesammelten Daten der \Gls{Earables} aufzuzeichnen
+    \item Die GUI der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der \Gls{Earables} verändert
+    \item Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen Steuerungsparameter zu verändern.
+    \item Das Erweiterungsmodul soll erkennen ob der Nutzer gerade \glqq läuft\grqq{}oder \glqq steht\grqq.
+    \item Die App soll anzeigen können ob der Nutzer gerade läuft oder steht.
   \end{itemize}
 \subsection{Wunschkriterien}
   \begin{itemize}
-    \item\text Die App soll die \Gls{Schrittfrequenz} des Nutzers anzeigen.
-    \item\text Die App soll die Anzahl der zurückgelegten Schritte anzeigen.
-    \item\text Die App soll die zurückgelegte Distanz anzeigen.
-    \item\text Die App soll über drei weitere Modi verfügen.
+    \item Die App soll die \Gls{Schrittfrequenz} des Nutzers anzeigen.
+    \item Die App soll die Anzahl der zurückgelegten Schritte anzeigen.
+    \item Die App soll die zurückgelegte Distanz anzeigen.
+    \item Die App soll über drei weitere Modi verfügen.
       \begin{itemize}
         \item\text Im Modus \glqq Zählmodus\grqq{} zählt die App wie viele Liegestützen oder Sit-ups der Nutzer macht.
         \item\text  Im Modus \glqq Lauschen\&Agieren\grqq{}kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird.
@@ -134,10 +135,10 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \end{itemize}
   \subsection{Abgrenzungskriterien}
   \begin{itemize}
-    \item\text Es werden keine Rohdaten längerfristig gespeichert.
-    \item\text Die Musik passt sich nicht der Schrittfrequenz des Nutzers an.
-    \item\text Im Modus \glqq Zählen\grqq{}wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit-ups macht. Das bewusste Austricksen des Systems durch andere Bewegungen wird nicht behandelt.
-    \item\text Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den \Gls{Earables}
+    \item Es werden keine Rohdaten längerfristig gespeichert.
+    \item Die Musik passt sich nicht der Schrittfrequenz des Nutzers an.
+    \item Im Modus \glqq Zählen\grqq{}wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit-ups macht. Das bewusste Austricksen des Systems durch andere Bewegungen wird nicht behandelt.
+    \item Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den \Gls{Earables}
   \end{itemize}
 
 \section{Produkteinsatz}
@@ -206,14 +207,19 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
           \item[/F223/] Anzeige der Zeitdauer jeder Übung nach Ablaufsende, siehe F130.
         \end{itemize}
       }
-      \item[/F250/] \textsf {Einstellungen:} Der Nutzer kann seinen Namen abgeben und ändern.
-      \item[/F260/] \textsf {Einstellungen:} Der Nutzer kann die Sprache der App anpassen.
-      \item[/F270/] \textsf {Einstellungen:} Der Nutzer kann die gespeicherten Trainingsdaten löschen.
-      \item[/F280/] \textsf {Einstellungen:} Der Nutzer kann die Steuerungsparameter anpassen. 
-      \item[/F285/] \textsf {Einstellungen:} Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.
-      \item[/F290/] \textsf {Erstnutzung:} Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
-      \item[/F300/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
-      \item[/F310/] \textsf{Speichern der erkannten Vorgangsdaten: \textit{Zusatz zu F120}} Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein Vorgang aktiv war (keine Rohdaten).
+
+      Einstellungen:
+      \item[/F250/] Der Nutzer kann seinen Namen abgeben und ändern.
+      \item[/F260/] Der Nutzer kann die Sprache der App anpassen.
+      \item[/F270/] Der Nutzer kann die gespeicherten \Gls{Vorgangsdaten} löschen.
+      \item[/F280/] Der Nutzer kann die Steuerungsparameter anpassen. 
+      \item[/F285/] Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.
+      
+      Sonstiges:
+      \item[/F290/] Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
+      \item[/F300/] Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren und importieren.
+      \item[/F320/] Anzeigen der gespeicherten Daten aus /F310/
+      \item[/F310/] Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein Vorgang aktiv war (keine Rohdaten).
       \end{itemize}
 
 
@@ -222,8 +228,9 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 	\item[/PD010/] Es werden keine rohen Messdaten gespeichert.
 	\item[/PD020/] Die Einstellungen (Sprache, Steuerungsparameter, Messeinstellungen) sind zu speichern. 
 	\item[/PD030/] Es sind relevante Daten über den Nutzer, wie den Benutzernamen, zu speichern.
-	\item[/PD040/] Die Trainingsdaten (Bestenliste und letzte Trainingseinheit) sind zu speichern. % Genauer definieren, was alles?
+	\item[/PD040/] Die \Gls{Vorgangsdaten} (Bestenliste und letzte Trainingseinheit) sind zu speichern. % Genauer definieren, was alles?
 	\item[/PD050/] Speicherung aller Vorgänge, die aktiv waren mit Datum, Uhrzeit und dem letzten Resultat (/F300/)%%nächstes Treffen: abklären, ob umsetzen
+	\item[/PD040/] Die Vorgangsdaten werden in der Form (Datum;Schritte;Liegestütze;Sit-ups) gespeichert. Für den Nutzer sind nur die Daten des letzten Monats aufsummiert zu sehen.
 \end{itemize}
 
 
@@ -232,28 +239,42 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 
 \begin{itemize}
   \item[/NF010/] Beim Ausführen der Funktion /F030/ soll die Datenaufnahme der IMU gestoppt werden.
-  \item[/NF020/] Die Funktionen /F060/ und /F100/ (Laufmodus) soll maximal eine Verzögerung von zwei Sekunden aufweisen. %%Laufzeitverhalten
-  \item[/NF030/] Beim Wechseln zwischen Modi (/F090/) soll der aktuelle Modus terminiert werden.
-  \item[/NF040/] Der Start eines Modus nach seiner Auswahl (/F080/) soll nicht länger als zwei Sekunden benötigen. %%Laufzeitverhalten
-  \item[/NF050/] Die Einblendung des Vorgangsresultats (/F130/) soll nicht länger als zwei Sekunden benötigen.%%Laufzeitverhalten
-  \item[/NF060/] Nach Ausführung der Funktion  Sprachänderung (/F260/) muss die App neu gestartet werden.
-  \item[/NF070/] Bei nicht sinnvollen Angaben (z.B. negativen Werten in /F220/) wird das Starten des Vorgangs verhindert.
-  \item[/NF080/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe ev. /F300/) nicht verändert.
-  \item[/NF090/] Bei Namensgebung sind nur Groß- und Kleinbuchstaben ohne Umlaute und Sonderzeichen erlaubt.
-  \item[/NF100/] Die App soll eine Größe von 100 MByte nicht überschreiten. %speicher
-  \item[/NF110/] Die gespeicherten Daten sollen nicht mehr als 50 MByte umfassen. %speicher
-  \item[/NF120/] Die App soll bei herkömmlicher Nutzung nicht öfter als zweimal bei zehnmaliger Benutzung. %stabilität
+  \item[/NF020/] Beim Wechseln zwischen Modi (/F090/) soll der aktuelle Modus terminiert werden.
+  \item[/NF030/] Nach Ausführung der Funktion  Sprachänderung (/F260/) muss die App neu gestartet werden.
+  \item[/NF040/] Bei nicht sinnvollen Angaben (z.B. negativen Werten in /F220/) wird das Starten des Vorgangs verhindert.
+  \item[/NF050/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe ev. /F300/) nicht verändert.
+  \item[/NF060/] Bei Namensgebung sind nur Groß- und Kleinbuchstaben ohne Umlaute und Sonderzeichen erlaubt.
 \end{itemize}
+\subsection{Stabilität}
+\begin{itemize}
+  \item[/NF070/] Die App soll bei herkömmlicher Nutzung nicht öfter als zweimal bei zehnmaliger Benutzung. %stabilität
+\end{itemize}
+\subsection{Speicherplatz}
+\begin{itemize}
+  \item[/NF080/] Die App soll eine Größe von 100 MByte nicht überschreiten. %speicher
+  \item[/NF090/] Die gespeicherten Daten sollen nicht mehr als 50 MByte umfassen. %speicher] 
+\end{itemize}
+\subsection{Laufzeitverhalten}
+\begin{itemize}
+  \item[/NF100/] Die Funktionen /F060/ und /F100/ (Laufmodus) soll maximal eine Verzögerung von zwei Sekunden aufweisen. %%Laufzeitverhalten
+  \item[/NF110/] Der Start eines Modus nach seiner Auswahl (/F080/) soll nicht länger als zwei Sekunden benötigen. %%Laufzeitverhalten] 
+  \item[/NF120/] Die Einblendung des Vorgangsresultats (/F130/) soll nicht länger als zwei Sekunden benötigen.%%Laufzeitverhalten
 
+\end{itemize}
 \section{Systemmodelle}
 %%TODO Jan!!
   \subsection{Architekturdiagramm}
+  \begin{center}
+  	\vspace{100px}
+  	\includegraphics[width=0.8\textwidth]{NeuesArchitekturdiagramm.png}
+  \end{center}
   
-  \subsection{Use-Case-Diagramme}
-\begin{center}
-\includegraphics[width=0.8\textwidth]{Vorlaeufiges Use-Case Diagram.pdf} %%Textuelle Beschreibung wird noch ergänzt.
-\end{center}
+  \subsection{Use-Case-Diagramm}
+  \begin{center}
+	\includegraphics[width=0.8\textwidth]{Use-CaseDiagramm.png} 
+  \end{center}
 
+Kurzbeschreibung: Beim Starten der App durch den Nutzer startet automatisch der Laufmodus. Der Nutzer kann nun entweder den Modus wechseln oder einen Vorgang starten. Nach Beendigung oder Stoppen des Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem die Vorgangsdaten des letzten Monats einsehen und seine Daten importieren/exportieren. Das Ändern von Einstellungen und der damit verbundenen Steuerungsparameter der Earables ist ebenfalls möglich.
 \section{Benutzeroberfläche}
 Die \Gls{GUI} wird durch die App realisiert. Dabei kann man die einzelnen Modi über das Navigationsmenu auswählen. Jeder Modus hat zwei Seiten; eine Übersichtsseite und eine aktive Seite, welche während des aktiven \Gls{Vorgang} angezeigt wird. Für die weiteren Funktionen(Einstellungen, Dateienexport/-import) bietet die Applikation ebenfalls spezielle Seiten an.
 Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools "Mock-up" über den angegebenen Link in der Fußnote \footnote[1]{Mock-Up Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0}
@@ -363,14 +384,21 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools "Mock-up" über den
     \end{enumerate}
 
     \subsubsection{Wunschanforderungen}
-      \paragraph{Start/Stop Musikmodus (/F210/)}
-      \begin{itemize}
-        \item[/T030/] 
-        \item[/T040/] 
-        \item[/T050/] 
-        \item[/T060/] 
-        \item[/T070/] 
-      \end{itemize}
+    \begin{itemize}
+	\item[/Txxx/] Die Sensorrohdaten werden als Graphen angezeigt. (/190/)
+	\item[/Txxx/] Die Liegestützen oder Sit-ups werden von der App gezählt. (/200/)
+	\item[/Txxx/] Einen Trainingsplan zusammenstellen. (/F221/)
+	\item[/Txxx/] Die App gibt dem Nutzer über Sprachanweisung aus was die nächste Übung ist. (/F222/)
+	\item[/Txxx/] Nach der Übung wird die benötigte Zeit angezeigt. (/F223/)
+	\item[/Txxx/] Der Nutzer ändert seinen Namen. (/F250/)
+	\item[/Txxx/] Der Nutzer ändert die Sprache. (/F260/)
+	\item[/Txxx/] Trainingsdaten löschen. (F270)
+	\item[/Txxx/] Die Samplingrate verändern. (/F280/)
+	\item[/Txxx/] Die Schrittlänge verändern. (/F285/)
+	\item[/Txxx/] Bei der Erstnutzung wird der Nutzer aufgefordert seinen Namen, seine Schrittlänge und die Sprache zu setzen. (/F290/, /F250/)
+	\item[/Txxx/] Trainingsdaten importieren und expotrieren. (/F300/)
+	\item[/Txxx/] Die gespeicherten Trainingsdaten ansehen. (/310/, /320/)
+   \end{itemize}
       
 
   \subsection{Szenarien}
@@ -449,7 +477,7 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools "Mock-up" über den
         \item[] Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Einstellungen\grqq .
         \item[] Der Nutzer ändert seinen Namen (/F250/).
         \item[] Der Nutzer ändert die Sprache (/F260/).
-        \item[] Dem Nutzer löscht die gespeicherten Trainingsdaten (/F270/).
+        \item[] Dem Nutzer löscht die gespeicherten \Gls{Vorgangsdaten} (/F270/).
         \item[] Dem Nutzer ändert die Steuerungsparameter (/F280/).
         \item[] Der Nutzer ändert seine Schrittlänge (/F285/).
         \item[] Der Nutzer beendet die App.
