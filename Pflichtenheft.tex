@@ -81,6 +81,7 @@
 \newglossaryentry{Rohdaten}{name=Rohdaten, description={Als Rohdaten werden unverarbeitete Daten bezeichnet.}}
 \newglossaryentry{TTS}{name=Text-To-Speech, description={Ein Text-to-Speech-System (TTS) (oder Vorleseautomat) wandelt Fließtext in eine akustische Sprachausgabe um.}}
 \newglossaryentry{Earables}{name=Earables, description={Eine Zusammenschließung des Wortes Wearable und Earphone. Dabei handelt es sich um Kopfhörer, die mit Sensoren ausgestattet sind.}}
+\newglossaryentry{Vorgangsdaten}{name=Vorgangsdaten, description={Daten, die bei der Ausführung eines Vorgangs gespeichert werden (z.B. Schritte, Sit-ups,\dots).}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -111,18 +112,18 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \subsection{Musskriterien}
 
   \begin{itemize}
-    \item\text Die Cross-Platform Bibliothek soll in der Lage sein die gesammelten Daten der \Gls{Earables} aufzuzeichnen
-    \item\text Die GUI der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der \Gls{Earables} verändert
-    \item\text Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen Steuerungsparameter zu verändern.
-    \item\text Das Erweiterungsmodul soll erkennen ob der Nutzer gerade \glqq läuft\grqq{}oder \glqq steht\grqq.
-    \item\text Die App soll anzeigen können ob der Nutzer gerade läuft oder steht.
+    \item Die Cross-Platform Bibliothek soll in der Lage sein die gesammelten Daten der \Gls{Earables} aufzuzeichnen
+    \item Die GUI der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die Steuerungsparameter der \Gls{Earables} verändert
+    \item Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen Steuerungsparameter zu verändern.
+    \item Das Erweiterungsmodul soll erkennen ob der Nutzer gerade \glqq läuft\grqq{}oder \glqq steht\grqq.
+    \item Die App soll anzeigen können ob der Nutzer gerade läuft oder steht.
   \end{itemize}
 \subsection{Wunschkriterien}
   \begin{itemize}
-    \item\text Die App soll die \Gls{Schrittfrequenz} des Nutzers anzeigen.
-    \item\text Die App soll die Anzahl der zurückgelegten Schritte anzeigen.
-    \item\text Die App soll die zurückgelegte Distanz anzeigen.
-    \item\text Die App soll über drei weitere Modi verfügen.
+    \item Die App soll die \Gls{Schrittfrequenz} des Nutzers anzeigen.
+    \item Die App soll die Anzahl der zurückgelegten Schritte anzeigen.
+    \item Die App soll die zurückgelegte Distanz anzeigen.
+    \item Die App soll über drei weitere Modi verfügen.
       \begin{itemize}
         \item\text Im Modus \glqq Zählmodus\grqq{} zählt die App wie viele Liegestützen oder Sit-ups der Nutzer macht.
         \item\text  Im Modus \glqq Lauschen\&Agieren\grqq{}kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird.
@@ -134,10 +135,10 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \end{itemize}
   \subsection{Abgrenzungskriterien}
   \begin{itemize}
-    \item\text Es werden keine Rohdaten längerfristig gespeichert.
-    \item\text Die Musik passt sich nicht der Schrittfrequenz des Nutzers an.
-    \item\text Im Modus \glqq Zählen\grqq{}wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit-ups macht. Das bewusste Austricksen des Systems durch andere Bewegungen wird nicht behandelt.
-    \item\text Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den \Gls{Earables}
+    \item Es werden keine Rohdaten längerfristig gespeichert.
+    \item Die Musik passt sich nicht der Schrittfrequenz des Nutzers an.
+    \item Im Modus \glqq Zählen\grqq{}wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit-ups macht. Das bewusste Austricksen des Systems durch andere Bewegungen wird nicht behandelt.
+    \item Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den \Gls{Earables}
   \end{itemize}
 
 \section{Produkteinsatz}
@@ -206,15 +207,19 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
           \item[/F223/] Anzeige der Zeitdauer jeder Übung nach Ablaufsende, siehe F130.
         \end{itemize}
       }
-      \item[/F250/] \textsf {Einstellungen:} Der Nutzer kann seinen Namen angeben und ändern.
-      \item[/F260/] \textsf {Einstellungen:} Der Nutzer kann die Sprache der App anpassen.
-      \item[/F270/] \textsf {Einstellungen:} Der Nutzer kann die gespeicherten Trainingsdaten löschen.
-      \item[/F280/] \textsf {Einstellungen:} Der Nutzer kann die Steuerungsparameter anpassen. 
-      \item[/F285/] \textsf {Einstellungen:} Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.
-      \item[/F290/] \textsf {Erstnutzung:} Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
-      \item[/F300/] \textsf{Exportieren und Importieren von Trainingsdaten:} Der Nutzer kann in der App seine gesamten Trainingsdaten exportieren und importieren.
-      \item[/F310/] \textsf{Speichern der erkannten Vorgangsdaten: \textit{Zusatz zu F120}} Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein Vorgang aktiv war (keine Rohdaten).
+
+      Einstellungen:
+      \item[/F250/] Der Nutzer kann seinen Namen abgeben und ändern.
+      \item[/F260/] Der Nutzer kann die Sprache der App anpassen.
+      \item[/F270/] Der Nutzer kann die gespeicherten \Gls{Vorgangsdaten} löschen.
+      \item[/F280/] Der Nutzer kann die Steuerungsparameter anpassen. 
+      \item[/F285/] Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.
+      
+      Sonstiges:
+      \item[/F290/] Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
+      \item[/F300/] Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren und importieren.
       \item[/F320/] Anzeigen der gespeicherten Daten aus /F310/
+      \item[/F310/] Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein Vorgang aktiv war (keine Rohdaten).
       \end{itemize}
 
 
@@ -223,6 +228,8 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 	\item[/PD010/] Es werden keine rohen Messdaten gespeichert.
 	\item[/PD020/] Die Einstellungen (Sprache, Steuerungsparameter, Messeinstellungen) sind zu speichern. 
 	\item[/PD030/] Es sind relevante Daten über den Nutzer, wie den Benutzernamen, zu speichern.
+	\item[/PD040/] Die \Gls{Vorgangsdaten} (Bestenliste und letzte Trainingseinheit) sind zu speichern. % Genauer definieren, was alles?
+	\item[/PD050/] Speicherung aller Vorgänge, die aktiv waren mit Datum, Uhrzeit und dem letzten Resultat (/F300/)%%nächstes Treffen: abklären, ob umsetzen
 	\item[/PD040/] Die Vorgangsdaten werden in der Form (Datum;Schritte;Liegestütze;Sit-ups) gespeichert. Für den Nutzer sind nur die Daten des letzten Monats aufsummiert zu sehen.
 \end{itemize}
 
@@ -398,7 +405,7 @@ Kurzbeschreibung: Beim Starten der App durch den Nutzer startet automatisch der 
         \item[] Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Einstellungen\grqq .
         \item[] Der Nutzer ändert seinen Namen (/F250/).
         \item[] Der Nutzer ändert die Sprache (/F260/).
-        \item[] Dem Nutzer löscht die gespeicherten Trainingsdaten (/F270/).
+        \item[] Dem Nutzer löscht die gespeicherten \Gls{Vorgangsdaten} (/F270/).
         \item[] Dem Nutzer ändert die Steuerungsparameter (/F280/).
         \item[] Der Nutzer ändert seine Schrittlänge (/F285/).
         \item[] Der Nutzer beendet die App.
