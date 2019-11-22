@@ -117,11 +117,10 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \item Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen \Gls{Steuerungsparameter} zu verändern.
     \item Das Erweiterungsmodul soll erkennen ob der Nutzer gerade \glqq läuft\grqq{}oder \glqq steht\grqq.
     \item Die App soll anzeigen können ob der Nutzer gerade läuft oder steht.
+    \item Die App soll die aktuelle Schrittfrequenz und die Anzahl der gelaufenen Schritte des Nutzers anzeigen.
   \end{itemize}
 \subsection{Wunschkriterien}
   \begin{itemize}
-    \item Die App soll die \Gls{Schrittfrequenz} des Nutzers anzeigen.
-    \item Die App soll die Anzahl der zurückgelegten Schritte anzeigen.
     \item Die App soll die zurückgelegte Distanz anzeigen.
     \item Die App soll über drei weitere Modi verfügen.
       \begin{itemize}
@@ -182,31 +181,33 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \subsubsection{Erweiterungsmodul}
      Auswertung der ausgelesenen Daten:
      \begin{itemize}
-      \item[/F060/] Schritterkennung (Stehen/Laufen des Nutzers).
+      \item[/F060/] \textsf{Schritterkennung} Es wird erkannt ob der Nutzer ein Schritt tätigt.
+      \item[/F140/] \textsf{Schrittfrequenzerkennung} Während der Nutzer läuft wird die Schrittfrequenz ermittelt.
+      \item[/F150/] \textsf{Schrittanzahl wird gezählt} Die Schritte des Nutzers werden gezählt.
     \end{itemize}
     \subsubsection{App}
       \begin{itemize}
       \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.
-      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi über ein einblendebares Menü, während ein Modus ausgewählt ist.
-      \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
+      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi über ein einblendbares Menü, während ein Modus ausgewählt ist.
+      \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{} mit Hilfe von /F060/.
       \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
       \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} stoppen.
-      \item[/F130/] \textsf{Resultat anzeigen:}Nach Stoppen Anzeigen des Vorgansresultats bis neuer \Gls{Vorgang} gestartet wird.
+      \item[/F130/] \textsf{Resultat anzeigen:}Nach Stoppen Anzeigen des Vorgangsresultats bis neuer \Gls{Vorgang} gestartet wird.
+      \item[/F132/] \textsf {Schrittfrequenz Anzeigen:} Es wird die Schrittfrequenz im Modus \glqq{}Laufmodus\grqq{} angezeigt, sobald der Modus gestartet wird. Die Schrittfrequenz wird mit Hilfe von /F140/ ermittelt.%% lezten Satz in NA ?? das gleiche bei F134
+      \item[/F134/] \textsf {Schrittanzahl Anzeigen:} Es wird die Schrittanzahl im Modus \glqq{}Laufmodus\grqq{} angezeigt, sobald der Modus gestartet wird. Die Schrittanzahl wird mit Hilfe von /F150/ ermittelt. Die Schrittzählung beginnt mit dem starten des Laufmodus.
     \end{itemize}
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
       Weitere Datenauswertung:
       \begin{itemize}
-      \item[/F140/] \textsf{Schrittfrequenzerkennung}
-      \item[/F150/] \textsf{Schrittzahlzähler} Zählen der Schritte des Nutzers.
-      \item[/F170/] \textsf{Erkennung Sit-ups}
-      \item[/F180/] \textsf{Erkennung Liegestütze}
+      \item[/F170/] \textsf{Erkennung Sit-ups} Das Erweiterungsmodul erkennt wann der \gls{Nutzer} Sit-ups macht.
+      \item[/F180/] \textsf{Erkennung Liegestütze} Das Erweiterungsmodul erkennt wann der \gls{Nutzer} Liegestütze macht.
       \end{itemize} 
     \subsubsection{App}
       Weitere Modi:
       \begin{itemize}
       \item[/F190/] \textsf{Modus Livedaten: \textit{(versteckt)}} Visualisieren der Sensorrohdaten als Graphen.
-      \item[/F200/] \textsf{Zählmodus:} Zählen von Liegestützen oder Sit-ups.
+      \item[/F200/] \textsf{Zählmodus:} Zählen von Liegestützen oder Sit-ups mit Hilfe von /F170/ und /F180/. Das Ergebnis wird im Modus \glqq{} Zählmodus \grqq{} anzeigen.
       \item[/F210/] \textsf{Start/Stopp Musikmodus:} Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft. Bei diesem Modus werden keine Resultate angezeigt.
       \item[/F220/]{
         Modus \glqq Lauschen\&Agieren\grqq
@@ -404,6 +405,8 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
   \paragraph{Erweiterungsmodul}
   \begin{itemize}
     \item[/T060/] Das Erweiterungsmodul erkennt Schritte.
+    \item[/T140/] Ermittelt die aktuelle \Gls{Schrittfrequenz} korrekt.
+    \item[/T150/] Zählt die Schritte des Nutzers.
   \end{itemize}
   \paragraph{App}
     \begin{itemize}
@@ -413,20 +416,20 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
     \item[/T110/] Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
     \item[/T120/] Der Nutzer kann den modusspezifischen \Gls{Vorgang} stoppen.
     \item[/T130/] Die App zeigt nach Stoppen des Vorgangs das Vorgansresultats an bis neuer \Gls{Vorgang} gestartet wird.
+    \item[/T132/] Die App zeigt die \gls{Schrittfrequenz} im Modus \glqq{}Laufmodus\grqq{} an, sobald der Laufmodus gestartet wird.
+    \item[/T134/] Die App zeigt die Schrittanzahl im Modus \glqq{}Laufmodus\grqq{} an, sobald der Laufmodus gestartet wird.
   \end{itemize}
 
 \subsubsection{Wunschanforderungen}
   \paragraph{Erweiterungsmodul}
     \begin{itemize}
-    \item[/T140/] Ermittelt die aktuelle \Gls{Schrittfrequenz} korrekt.
-    \item[/T150/] Zählt die Schritte des Nutzers.
-    \item[/T170/] Erkennt Sit-ups.
+    \item[/T170/] Erkennt Sit-ups. 
     \item[/T180/] Erkennt Liegestütze.
   \end{itemize}
   \paragraph{App}
   \begin{itemize}
     \item[/T190/] Die Sensorrohdaten werden als Graphen angezeigt.
-    \item[/T200/] Die Liegestützen oder Sit-ups werden von der App gezählt.
+    \item[/T200/] Die Liegestützen oder Sit-ups werden von der App gezählt und im Modus \glqq{}Zählmodus \grqq{} angezeigt.
     \item[/T210/] Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft.
     \item[/T221/] Einen Trainingsplan zusammenstellen.
     \item[/T222/] Die App gibt dem Nutzer über Sprachanweisung aus was die nächste Übung ist.
