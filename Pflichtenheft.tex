@@ -246,7 +246,7 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
       Sonstiges:
       \item[/F290/] Aufforderung der Angabe von Name und Schrittlänge bei Erstnutzung.
       \item[/F300/] Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren, importieren und löschen. Dabei wird das CSV-Format genutzt. 
-      \item[/F310/] Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein \Gls{Vorgang} aktiv war (keine \Gls{Rohdaten}).
+      \item[/F310/] Speicherung von Sit-ups und Liegestütze für jeden Tag, an dem ein \Gls{Vorgang} aktiv war (keine \Gls{Rohdaten}).
       \item[/F320/] Anzeigen der gespeicherten Daten aus /F310/.
       \end{itemize}
 
@@ -469,24 +469,28 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
    \end{itemize}
    
   \subsection{Szenarien}
+	Vor jedem Szenario wird davon ausgegangen, dass das Smartphone angeschaltet ist und die App noch nicht gestartet wurde. Des weiteren wird angenommen, dass die App nicht zum ersten mal gestartet wird, außer bei dem Szenario \glqq{}Erstnutzung\grqq{}.
     \subsubsection{Mussanforderungen}
       \paragraph{Laufmodus (/T100/)}
       \begin{enumerate}
-        \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
-        \item Der Nutzer startet die App.
+        \item Der Nutzer startet die App. (/T070/)
+        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Nach dem Startvorgang der App wird in den Modus \glqq Laufmodus\grqq{} gewechselt.
+        \item Falls es schon eine Session zuvor gab, werden nun die Anzahl der zurückgelegten Schritte und die zurückgelegte Distanz, der vorherigen Session angezeigt. (/T138/)
         \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
+        \item Der Nutzer startet den Laufmodus.
         \item Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an.
+        \item Die App zeigt dem Nutzer die aktuelle \gls{Schrittfrequenz} und die Anzahl der bisher zurückgelegten Schritte an. (/T132/, /T134/)
         \item Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an.
         \item Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. 
       \end{enumerate}
 
     \subsubsection{Wunschanforderungen}
         
-    \paragraph{Livedaten (/F190/)}
+    \paragraph{Livedaten (/F190/)}%%nicht mehr aktuell??
       \begin{enumerate}
-        \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
         \item Der Nutzer startet die App. (/T070/)
+        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Livedaten\grqq . (/F190/)
         \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer startet den gewählten \Gls{Vorgang}.
@@ -496,8 +500,8 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
     
     \paragraph{Zählmodus (/F200/)}
       \begin{enumerate}
-        \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
         \item Der Nutzer startet die App. (/T070/)
+        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone..
         \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Zählmodus\grqq . (/F200/)
         \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer wählt eine verfügbare Übung aus. 
@@ -510,9 +514,9 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
     
     \paragraph{Start/Stop Musikmodus (/F210/)}
       \begin{enumerate}
-        \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
-        \item Der Nutzer spielt Musik mit der vorinstallierten Musik-App ab.
         \item Der Nutzer startet die App. (/T070/)
+        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
+        \item Der Nutzer spielt Musik mit der vorinstallierten Musik-App ab.
         \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Laufmodus\grqq . (/F210/)
         \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer beginnt zu gehen.
@@ -525,8 +529,8 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
   
       \paragraph{Lauschen\&Agieren (/F220/)}
       \begin{enumerate}
-        \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
         \item Der Nutzer startet die App. (/T070/)
+        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Lauschen\&Agieren\grqq . (/F220/)
         \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer stellt sich ein Training aus den verfügbaren Übungen zusammen (/T221/).
@@ -541,8 +545,8 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
       \paragraph{Einstellungen (/F250/ bis /F285/)}
       \textit{Voraussetzung: /T220/}
       \begin{enumerate}
-        \item Das Smartphone wird per Bluetooth mit den Kopfhörern verbunden.
         \item Der Nutzer startet die App. (/T070/)
+        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Nach dem Startvorgang der App wechselt der Nutzer in die Ansicht \glqq Einstellungen\grqq .
         \item Der Nutzer ändert seinen Namen (/T250/).
         \item Der Nutzer ändert die Sprache auf Englisch (/T260/).
@@ -559,8 +563,10 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
       \begin{enumerate}
         \item Der Nutzer startet die App zum ersten Mal. (/T070/)
         \item Der Nutzer wird aufgefordert seinen Namen und seine Schrittlänge zu setzen. (/T290/)
-        \item Der Nutzer ändert die Sprache auf Englisch.
-        \item Danach wechselt die App in den \glqq Laufmodus\grqq.
+        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
+        \item Der Nutzer wählt im Hamburgermenü den Reiter Eistellungen aus.
+        \item Der Nutzer ändert die Sprache auf Englisch.(/T260/)
+        \item Danach wechselt der Nutzer in den \glqq Laufmodus\grqq.
         \item Der Nutzer schließt die App.
         \item Der Nutzer startet die App erneut und befindet sich nun im \glqq Laufmodus\grqq. (/T070/)
         \item Sein Name, seine Schrittlänge und die in-App Sprache wurden gespeichert.
@@ -569,12 +575,21 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
       \paragraph{Vorgangsdaten importieren/exportieren (/F300/)}
       \begin{enumerate}
         \item Der Nutzer startet die App. (/T070/)
+        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Der Nutzer wählt über das Hamburgermenü den Reiter \glqq{}Import/Export \grqq{}.
         \item Der Nutzer exportiert seine Daten. (/T300/)
         \item Der Nutzer löscht seine Daten. (/T300/)
         \item Der Nutzer importiert seine Daten. (/T300/)
         \item Die Daten sind alle wieder vorhanden so als ob der Nutzer sie nie gelöscht hätte.
       \end{enumerate}
+
+    \paragraph{Trainingsdaten anschauen}
+    \begin{enumerate}
+	\item Der Nutzer startet die App. (/T070/)
+ 	\item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
+ 	\item Der Nutzer wechselt über das Hamburgermenü in die Datenübersicht.
+	\item Dem Nutzer werden die letzten Trainingsdaten der letzten 30 Tage angezeigt. (/T136/, /T320/)
+    \end{enumerate}
 
 \section{Entwicklungsumgebung}
 Wir arbeiten an dem Projekt mit Visual Studio 2017/2019, sodass alle eine einheitliche Entwicklungsumgebung verwenden.\\
