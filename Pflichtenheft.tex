@@ -79,7 +79,7 @@
 \newglossaryentry{Steuerungsparameter}{name=Steuerungsparameter, description={Unter Steuerungsparametern fassen wir die Länge der Verbindungsintervalle zwischen Kopfhöhrern und Handy sowie die Abtastrate und den Wertebereich von integriertem Gyroskop und Beschleunigungssensor zusammen.}}
 \newglossaryentry{Schrittfrequenz}{name=Schrittfrequenz, description={Die Schrittfrequenz gibt an wie viele Schritte pro Zeiteinheit gemacht werden.}}
 \newglossaryentry{Rohdaten}{name=Rohdaten, description={Als Rohdaten werden unverarbeitete Daten bezeichnet.}}
-\newglossaryentry{TTS}{name=Text-To-Speech, description={Ein Text-to-Speech-System (TTS) (oder Vorleseautomat) wandelt Fließtext in eine akustische Sprachausgabe um.}}
+\newglossaryentry{TTS}{name=Text-To-Speech, description={Ein Text-to-Speech-System (TTS) (oder Vorleseautomat) wandelt Fließtext in eine akustische Sprachausgabe um. Dabei erfolgt diese auf Deutsch oder auf Englisch, abhängig davon, was als Sprache eingestellt ist.}}
 \newglossaryentry{Earables}{name=Earables, description={Eine Zusammenschließung des Wortes Wearable und Earphone. Dabei handelt es sich um Kopfhörer, die mit Sensoren ausgestattet sind.}}
 \newglossaryentry{Vorgangsdaten}{name=Vorgangsdaten, description={Daten, die bei der Ausführung eines Vorgangs gespeichert werden (z.B. Schritte, Sit-ups,\dots).}}
 
@@ -128,8 +128,10 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
         \item\text  Im Modus \glqq Lauschen\&Agieren\grqq{}kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird.
         \item\text  Im Modus \glqq Musikmodus\grqq{} wird Musik abgespielt, wenn der Nutzer läuft und automatisch pausiert, wenn der Nutzer steht. Sobald der Nutzer weiter läuft wird die Musik auch wieder weiterlaufen.
       \end{itemize}
-    \item\text Im \glqq Laufmodus \grqq{} wird die aktuelle Schrittanzahl und die zurückgelegte Distanz life angezeigt.
-    \item\text Die App wird standardmäßig auf Deutsch sein, als weitere Sprache steht dem Nutzer Englisch zur Auswahl.
+    \item\text Während der \glqq Laufmodus \grqq{} aktiv ist, wird die aktuelle Schrittanzahl und die zurückgelegte Distanz live angezeigt.
+    \item\text Wenn kein Laufvorgang aktiv ist wird im Laufmodus die Daten (Schritte, Distanz) des letzten Datums angezeigt an dem trainiert wurde.
+    
+    \item\text Die App wird standardmäßig auf der Sprache des Smartphone eingestellt sein. (Bei einem Deutschsprachigem Smartphone Deutsch, sonst Englisch). Die Sprache kann in den Einstellungen zwischen Deutsch und Englisch gewechselt werden. 
     \item\text Trainingsdaten werden automatisch gespeichert; Importieren und Exportieren soll möglich sein.
   \end{itemize}
   \subsection{Abgrenzungskriterien}
@@ -173,7 +175,10 @@ Unser Produkt besteht aus drei Teilen (der Bibliothek, dazu das Erweiterungsmodu
       
 \section{Produktumgebung}
 Es handelt sich bei der App um eine Smartphoneanwendung, daher wird das Produkt als Installationspaket ausgeliefert. Außerdem setzen wir bestimmte Hardware- und Softwarebedingungen voraus.
-\subsection{Hardware} \textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung.
+\subsection{Hardware} 
+	\textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung.
+	\textsf{Leistungsanforderung:} Das Smartphone sollte mindestens 1 gb RAM besitzen
+	\textsf{Speicheranforderung:} Das Smartphone sollte mindestens 100 mb Speicherplatz zur Verfügung haben
 \subsection{Software} \textsf{Betriebssystem:} Unterstützung nur von Android ab Version 7 und iOS ab Version 10.
 
 \section{Funktionale Anforderungen}
@@ -220,20 +225,21 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
         Modus \glqq Lauschen\&Agieren\grqq
         \begin{itemize}
           \item[/F221/] Zusammenstellen eines Trainingsablaufs (Liegestütze, Sit-ups, Laufen). 
-          \item[/F222/] Sprachanweisungen für die nächste Übung während des Trainings.
+          \item[/F222/] Sprachanweisungen für die nächste Übung während des Trainings. 
           \item[/F223/] Anzeige der Zeitdauer jeder Übung nach Ablaufsende, siehe F130.
+          \item[/F224/] Die Sprachanweisung erfolgt in der Sprache der in-App Einstellungen. (Deutsch oder Englisch)
         \end{itemize}
       }
 
       Einstellungen:
       \item[/F250/] Der Nutzer kann seinen Namen in den Einstellungen ändern.
-      \item[/F260/] Der Nutzer kann die Sprache der App anpassen.
+      \item[/F260/] Der Nutzer kann die Sprache der App anpassen. (Möglichkeiten sind Deutsch und Englisch)
       \item[/F270/] Der Nutzer kann die gespeicherten \Gls{Vorgangsdaten} löschen.
       \item[/F280/] Der Nutzer kann die \Gls{Steuerungsparameter} anpassen. 
       \item[/F285/] Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.
       
       Sonstiges:
-      \item[/F290/] Aufforderung der Angabe von Name, Schrittlänge und in-App Sprache bei Erstnutzung.
+      \item[/F290/] Aufforderung der Angabe von Name und Schrittlänge bei Erstnutzung.
       \item[/F300/] Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren, importieren und löschen. Dabei wird das CSV-Format genutzt. 
       \item[/F310/] Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein \Gls{Vorgang} aktiv war (keine \Gls{Rohdaten}).
       \item[/F320/] Anzeigen der gespeicherten Daten aus /F310/.
@@ -442,14 +448,14 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
     \item[/T200/] Die Liegestützen oder Sit-ups werden von der App gezählt und im Modus \glqq{}Zählmodus \grqq{} angezeigt.
     \item[/T210/] Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft.
     \item[/T221/] Einen Trainingsplan zusammenstellen.
-    \item[/T222/] Die App gibt dem Nutzer über Sprachanweisung aus was die nächste Übung ist.
+    \item[/T222/] Die App gibt dem Nutzer über Sprachanweisung (Deutsch) aus was die nächste Übung ist.
     \item[/T223/] Nach der Übung wird die benötigte Zeit angezeigt.
     \item[/T250/] Der Nutzer ändert seinen Namen.
-    \item[/T260/] Der Nutzer ändert die Sprache.
+    \item[/T260/] Der Nutzer ändert die Sprache auf Englisch.
     \item[/T270/] Trainingsdaten löschen.
     \item[/T280/] Die Samplingrate verändern.
     \item[/T285/] Die Schrittlänge verändern.
-    \item[/T290/] Bei der Erstnutzung wird der Nutzer aufgefordert seinen Namen, seine Schrittlänge und die Sprache zu setzen.
+    \item[/T290/] Bei der Erstnutzung wird der Nutzer aufgefordert seinen Namen und seine Schrittlänge zu setzen.
     \item[/T300/] Trainingsdaten importieren, exportieren und löschen.
     \item[/T320/] Die gespeicherten Trainingsdaten ansehen.
    \end{itemize}
@@ -531,7 +537,7 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
         \item Der Nutzer startet die App. (/T070/)
         \item Nach dem Startvorgang der App wechselt der Nutzer in die Ansicht \glqq Einstellungen\grqq .
         \item Der Nutzer ändert seinen Namen (/T250/).
-        \item Der Nutzer ändert die Sprache (/T260/).
+        \item Der Nutzer ändert die Sprache auf Englisch (/T260/).
         \item Dem Nutzer löscht die gespeicherten \Gls{Vorgangsdaten} (/T270/).
         \item Dem Nutzer ändert die \Gls{Steuerungsparameter} (/T280/).
         \item Der Nutzer ändert seine Schrittlänge (/T285/).
@@ -544,7 +550,8 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
       \paragraph{Erstnutzung (/F290/)}
       \begin{enumerate}
         \item Der Nutzer startet die App zum ersten Mal. (/T070/)
-        \item Der Nutzer wird aufgefordert seinen Namen, seine Schrittlänge und die in-App Sprache zu setzen. (/T290/)
+        \item Der Nutzer wird aufgefordert seinen Namen und seine Schrittlänge zu setzen. (/T290/)
+        \item Der Nutzer ändert die Sprache auf Englisch.
         \item Danach wechselt die App in den \glqq Laufmodus\grqq.
         \item Der Nutzer schließt die App.
         \item Der Nutzer startet die App erneut und befindet sich nun im \glqq Laufmodus\grqq. (/T070/)
