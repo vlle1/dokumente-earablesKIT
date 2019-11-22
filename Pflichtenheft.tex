@@ -189,7 +189,7 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
     \subsubsection{Bibliothek}
     \begin{itemize}
       \item[/F010/] Daten des \Gls{IMU} in \Gls{Echtzeit} zur Verfügung stellen.
-      \item[/F030/] Messparameter (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. 
+      \item[/F030/] Messparameter (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. %%die einzigen "Messparameter" die wir ändern können sind die abtastrate und die start/stop des samplings
       \item[/F040/] Datenaufnahme des \Gls{IMU} starten und stoppen.
     \end{itemize}
     \subsubsection{Erweiterungsmodul}
@@ -204,13 +204,17 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
       \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.
       \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi über ein einblendbares Menü, während ein Modus ausgewählt ist.
       \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{} mit Hilfe von /F060/.
-      \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
-      \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} stoppen.
-      \item[/F130/] \textsf{Resultat anzeigen:} Nach Stoppen Anzeigen des Vorgangsresultats bis neuer \Gls{Vorgang} gestartet wird.
+      \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.%% wir haben keinen Modus live Daten. %% überflüssig? wir haben im muss ja nur ein modi
+      \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} stoppen.%% überflüssig? wir haben im muss ja nur ein modi
+      \item[/F130/] \textsf{Resultat anzeigen:} Nach Stoppen Anzeigen des Vorgangsresultats bis neuer \Gls{Vorgang} gestartet wird.%% überflüssig? wir haben im muss ja nur ein modi
       \item[/F132/] \textsf {Schrittfrequenz Anzeigen:} Es wird die Schrittfrequenz im Modus \glqq{}Laufmodus\grqq{} angezeigt, sobald der Modus gestartet wird. Die Schrittfrequenz wird mit Hilfe von /F140/ ermittelt.
       \item[/F134/] \textsf {Schrittanzahl Anzeigen:} Es wird die Schrittanzahl im Modus \glqq{}Laufmodus\grqq{} angezeigt, sobald der Modus gestartet wird. Die Schrittanzahl wird mit Hilfe von /F150/ ermittelt. Die Schrittzählung beginnt mit dem starten des Laufmodus.
       \item[/F136/] \textsf{Schrittanzahl Speichern:} Die App speichert die Schrittanzahl pro Tag und das für die letzten 30 Tage, an denen der Laufmodus aktiv war.
       \item[/F138/] \textsf{Ergebnisse der letzten Session anzeigen:} Wenn sich die App im Laufmodus befindet und der Laufmodus noch nicht gestartet ist wird angezeigt wie weit der Nutzer das letzte mal gelaufen ist und wie viele Schritte er gemacht hat. Falls es noch keine Einträge gibt wird nichts angezeigt.
+      \item[/F140/] \textsf{Bluetooth Verbindung herstellen} Sobald der Nutzer die App startet erscheint ein Pop Up Fenster über das man sein Smartphone mit den \gls{Earables} verbinden kann.
+      \item[/F150/] \textsf{Bluetooth Verbindung unterbrochen} Falls die App die Verbindung zu den \gls{Earables} verlieren sollte erscheint wieder das Pop Up Fenster aus F140.
+      \item[/F160/] \textsf{Bluetooth Verbindung nicht notwendig} Der Nutzer kann das Pop Up Fenster aus F140 wegklicken.
+      \item[/F165/] \textsf{Bluetooth Verbindung später herstellen} Falls der Nutzer keine Bluetooth Verbindung mit den \gls{Earables} besitzt und eine Modus startet erscheint das Pop Up aus F140 und der Modus wird nicht gestartet.
     \end{itemize}
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
@@ -222,15 +226,18 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
     \subsubsection{App}
       Weitere Modi:
       \begin{itemize}
-      \item[/F190/] \textsf{Modus Livedaten: \textit{(versteckt)}} Visualisieren der Sensorrohdaten als Graphen.
-      \item[/F200/] \textsf{Zählmodus:} Zählen von Liegestützen oder Sit-ups mit Hilfe von /F170/ und /F180/. Das Ergebnis wird im Modus \glqq{} Zählmodus \grqq{} anzeigen.
+      \item[/F190/] \textsf{Modus Livedaten: \textit{(versteckt)}} Visualisieren der Sensorrohdaten als Graphen.%% ist das noch aktuell???
+      \item[/F194/] \textsf{Zählmodus starten} Der Nutzer kann den Zählmodus starten.
+      \item[/F195/] \textsf{Liegestützen/Sit-ups zählen:} Zählen von Liegestützen oder Sit-ups mit Hilfe von /F170/ und /F180/.
+      \item[/F200/] \textsf{Liegestützen/Sit-ups anzeigen:}  Das Ergebnis wird im Modus \glqq{} Zählmodus \grqq{}, nachdem man die Liegestützen/Sit-Ups gemacht hat, angezeigt.
       \item[/F210/] \textsf{Start/Stopp Musikmodus:} Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft. Bei diesem Modus werden keine Resultate angezeigt.
       \item[/F220/]{
         Modus \glqq Lauschen\&Agieren\grqq
         \begin{itemize}
-          \item[/F221/] Zusammenstellen eines Trainingsablaufs (Liegestütze, Sit-ups, Laufen). 
-          \item[/F222/] Sprachanweisungen für die nächste Übung während des Trainings. 
-          \item[/F223/] Anzeige der Zeitdauer jeder Übung nach Ablaufsende, siehe F130.
+          \item[/F220.1/] Der Nutzer kann den Modus Lauschen\&Agieren starten.
+          \item[/F221/]Der Nutzer kann sich einen Trainingsplan zusammenstellen indem er in einer Liste Übungen hinzufügt. (Liegestütze, Sit-ups, Laufen). 
+          \item[/F222/] Der Nutzer erhält Sprachanweisungen für die nächste Übung während des Trainings. Die nächste Sprachanweisung kommt erst wenn der Nutzer die aktuelle Übung vollständig beendet hat.
+          \item[/F223/] Nachdem der Nutzer seinen Trainingsplan abgearbeitet hat wird ihm angezeigt wie lange er dafür gebraucht hat.
           \item[/F224/] Die Sprachanweisung erfolgt in der Sprache der in-App Einstellungen. (Deutsch oder Englisch)
         \end{itemize}
       }
@@ -442,6 +449,10 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
     \item[/T134/] Die App zeigt die Schrittanzahl im Modus \glqq{}Laufmodus\grqq{} an, sobald der Laufmodus gestartet wird.
     \item[/T136/] Die App zeigt auf der Datenübersichtsseite die Anzahl der gelaufenen Schritte an.
     \item[/T138/] Die App befindet sich im Laufmodus und der Laufmodus ist noch nicht gestartet. Es wird angezeigt, wie viele Schritte der Nutzer bei der letzten Session gemacht hat und welche Strecke er dabei zurückgelegt hat.
+    \item[/T140/] Der Nutzer startet die App und verbindet sich mit Hilfe des Pop Ups mit den\gls{ Earables}.
+    \item[/T150/] Das Smartphone verliert seine Verbindung zu den \gls{Earables} und das Pop Up erscheint.
+    \item[/T160/] Der Nutzer klickt das Pop Up weg.
+    \item[/T165/] Das Smartphone besitzt keine Verbindung zu den \gls{Earables} und der Nutzer startet einen Modus. Das Pop Up erscheint und der Modus wird nicht gestartet.
   \end{itemize}
 
 \subsubsection{Wunschanforderungen}
@@ -546,7 +557,6 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
       \textit{Voraussetzung: /T220/}
       \begin{enumerate}
         \item Der Nutzer startet die App. (/T070/)
-        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Nach dem Startvorgang der App wechselt der Nutzer in die Ansicht \glqq Einstellungen\grqq .
         \item Der Nutzer ändert seinen Namen (/T250/).
         \item Der Nutzer ändert die Sprache auf Englisch (/T260/).
@@ -563,7 +573,6 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
       \begin{enumerate}
         \item Der Nutzer startet die App zum ersten Mal. (/T070/)
         \item Der Nutzer wird aufgefordert seinen Namen und seine Schrittlänge zu setzen. (/T290/)
-        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Der Nutzer wählt im Hamburgermenü den Reiter Eistellungen aus.
         \item Der Nutzer ändert die Sprache auf Englisch.(/T260/)
         \item Danach wechselt der Nutzer in den \glqq Laufmodus\grqq.
@@ -575,7 +584,6 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
       \paragraph{Vorgangsdaten importieren/exportieren (/F300/)}
       \begin{enumerate}
         \item Der Nutzer startet die App. (/T070/)
-        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Der Nutzer wählt über das Hamburgermenü den Reiter \glqq{}Import/Export \grqq{}.
         \item Der Nutzer exportiert seine Daten. (/T300/)
         \item Der Nutzer löscht seine Daten. (/T300/)
@@ -586,9 +594,20 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
     \paragraph{Trainingsdaten anschauen}
     \begin{enumerate}
 	\item Der Nutzer startet die App. (/T070/)
- 	\item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
  	\item Der Nutzer wechselt über das Hamburgermenü in die Datenübersicht.
 	\item Dem Nutzer werden die letzten Trainingsdaten der letzten 30 Tage angezeigt. (/T136/, /T320/)
+    \end{enumerate}
+
+    \paragraph{Pop Up}
+    \begin{enumerate}
+	\item Der Nutzer startet die App. (/T070/)
+ 	\item Das Pop Up Fenster erscheint.
+ 	\item Der Nutzer klickt das Pop Up weg. (/T160/)
+ 	\item Der Nutzer startet den Laufmodus.
+ 	\item Das Pop Up erscheint.(/T165/)
+ 	\item Der Nutzer stellt eine Verbindung zu den \gls{Earables} her.
+ 	\item Der Nutzer entfernt sich mit seinem Smartphone von de \gls{Earables}.
+ 	\item Das Smartphone verliert die Bluetooth Verbindung zu den \gls{Earables} und das Pop Up erscheint. (/T150/)
     \end{enumerate}
 
 \section{Entwicklungsumgebung}
