@@ -295,6 +295,7 @@ Wie unten unter dem Punkt Qualitätszielbestimmungen aufgeführt legen wir unser
   \item[/NF100/] Die Funktionen /F060/ und /F100/ (Laufmodus) soll maximal eine Verzögerung von zwei Sekunden aufweisen. %%Laufzeitverhalten
   \item[/NF110/] Der Start eines Modus nach seiner Auswahl (/F080/) soll nicht länger als zwei Sekunden benötigen. %%Laufzeitverhalten] 
   \item[/NF120/] Die Einblendung des Vorgangsresultats (/F130/) soll nicht länger als zwei Sekunden benötigen.%%Laufzeitverhalten
+  \item[/NF130/] Der Verbindungsaufbau mit den \Gls{Earables} darf nicht länger als 5 Sekunden dauern.
 
 \end{itemize}
 \section{Systemmodelle der App}
@@ -333,8 +334,6 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
 
 \begin{figure}[ht!]
 	\centering
-
-	
 		\begin{minipage}{0.4\textwidth}
 			\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/Laufmodus.png}
 			\caption{Laufmodus}
@@ -406,8 +405,17 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
 		\caption{Einstellungen}
 	\end{minipage}
 \end{figure}
-\newpage
+
 \clearpage
+\begin{figure}[ht!]
+	\centering
+	\begin{minipage}{0.4\textwidth}
+		\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/VerbindungsPopUp.png}
+		\caption{VerbindungsPopUp}
+		\vspace{30px}
+	\end{minipage}
+\end{figure}
+
 
 \section{Qualitätszielbestimmungen}
 Der Erste Bestandteil des Projekts ist die Bibliothek mit dem Erweiterungsmodul. Diese sollen als Open Source Projekt einer breiteren Entwicklergemeinschaft zur Verfügung gestellt werden, daher legen wir besonderen Wert auf die Korrektheit und Zuverlässigkeit.\\
@@ -464,7 +472,7 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
     \item[/T134/] Die App zeigt die Schrittanzahl im Modus \glqq{}Laufmodus\grqq{} an, sobald der Laufmodus gestartet wird.
     \item[/T136/] Die App zeigt auf der Datenübersichtsseite die Anzahl der gelaufenen Schritte an.
     \item[/T138/] Die App befindet sich im Laufmodus und der Laufmodus ist noch nicht gestartet. Es wird angezeigt, wie viele Schritte der Nutzer bei der letzten Session gemacht hat und welche Strecke er dabei zurückgelegt hat.
-    \item[/T140/] Der Nutzer startet die App und verbindet sich mit Hilfe des Pop Ups mit den\gls{ Earables}.
+    \item[/T140/] Der Nutzer startet die App und verbindet sich mit Hilfe des Pop Ups mit den\gls{Earables}.
     \item[/T150/] Das Smartphone verliert seine Verbindung zu den \gls{Earables} und das Pop Up erscheint.
     \item[/T160/] Der Nutzer klickt das Pop Up weg.
     \item[/T165/] Das Smartphone besitzt keine Verbindung zu den \gls{Earables} und der Nutzer startet einen Modus. Das Pop Up erscheint und der Modus wird nicht gestartet.
