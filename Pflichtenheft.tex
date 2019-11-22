@@ -96,7 +96,7 @@
  \pagenumbering{arabic}
 
 \section{Einleitung}
-\Gls{Earables} gehören zu den \Gls{Wearable Computer}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die \Gls{Schrittfrequenz} zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem Telecooperation Office (TECO). Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, wodurch auch dieses Projekt initiiert wurde.
+\Gls{Earables} gehören zu den \Gls{Wearable Computer}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die \Gls{Schrittfrequenz} zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem TECO. Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, wodurch auch dieses Projekt initiiert wurde.
 \section{Zielbestimmung}
 Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \begin{enumerate}
@@ -140,6 +140,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \item Die Musik passt sich nicht der \Gls{Schrittfrequenz} des Nutzers an.
     \item Im Modus \glqq Zählen\grqq{}wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit-ups macht. Das bewusste Austricksen des Systems durch andere Bewegungen wird nicht behandelt.
     \item Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den \Gls{Earables}
+    \item Die Daten des Mikrophons werden weder aufgezeichnet noch ausgewertet.
   \end{itemize}
 
 \section{Produkteinsatz}
@@ -234,6 +235,7 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
       Einstellungen:
       \item[/F250/] Der Nutzer kann seinen Namen in den Einstellungen ändern.
       \item[/F260/] Der Nutzer kann die Sprache der App anpassen. (Möglichkeiten sind Deutsch und Englisch)
+      \item[/F265/] Standardmäßig wird sich die Sprache der App automatisch an die Systemsprache des Smartphones des Nutzers anpassen.
       \item[/F270/] Der Nutzer kann die gespeicherten \Gls{Vorgangsdaten} löschen.
       \item[/F280/] Der Nutzer kann die \Gls{Steuerungsparameter} anpassen. 
       \item[/F285/] Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.
@@ -251,7 +253,7 @@ Die App soll dem Nutzer die Möglichkeit zur Verfügung stellen, seine Trainings
 \begin{itemize}
 	\item[/PD010/] Es werden keine rohen Messdaten gespeichert.
 	\item[/PD020/] Die Einstellungen (Sprache, \Gls{Steuerungsparameter}, Benutzernamen) sind zu speichern. 
-	\item[/PD040/] Die \Gls{Vorgangsdaten} werden auf dem Gerät in einer Datenbank gespeichert.
+	\item[/PD040/] Die gesammelten \Gls{Vorgangsdaten} werden auf dem Gerät in einer Datenbank gespeichert, siehe /F310/.
 \end{itemize}
 
 
@@ -569,7 +571,7 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
       \end{enumerate}
 
 \section{Entwicklungsumgebung}
-Wir arbeiten an dem Projekt mit Visual Studio 2019, sodass alle eine einheitliche Entwicklungsumgebung verwenden.\\
+Wir arbeiten an dem Projekt mit Visual Studio 2017/2019, sodass alle eine einheitliche Entwicklungsumgebung verwenden.\\
 Dabei kommt der .NET Standard 2.0 zum Einsatz, der C\# 7.2 verwendet. Wir arbeiten außerdem mit Xamarin Forms.\\
 Zur Versionskontrolle und zur Projektübersicht wird Git verwendet, das Repository liegt öffentlich auf Github\footnote{\url{https://github.com/vlle1/earablesKIT}}.
 \clearpage
