@@ -129,7 +129,9 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
         \item\text  Im Modus \glqq Lauschen\&Agieren\grqq{}kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird.
         \item\text  Im Modus \glqq Musikmodus\grqq{} wird Musik abgespielt, wenn der Nutzer läuft und automatisch pausiert, wenn der Nutzer steht. Sobald der Nutzer weiter läuft wird die Musik auch wieder weiterlaufen.
       \end{itemize}
-    \item\text Im \glqq Laufmodus \grqq{} wird die aktuelle Schrittanzahl und die zurückgelegte Distanz life angezeigt.
+    \item\text Während der \glqq Laufmodus \grqq{} aktiv ist, wird die aktuelle Schrittanzahl und die zurückgelegte Distanz live angezeigt.
+    \item\text Wenn kein Laufvorgang aktiv ist wird im Laufmodus die Daten (Schritte, Distanz) des letzten Datums angezeigt an dem trainiert wurde.
+    
     \item\text Die App wird standardmäßig auf der Sprache des Smartphone eingestellt sein. (Bei einem Deutschsprachigem Smartphone Deutsch, sonst Englisch). Die Sprache kann in den Einstellungen zwischen Deutsch und Englisch gewechselt werden. 
     \item\text Trainingsdaten werden automatisch gespeichert; Importieren und Exportieren soll möglich sein.
   \end{itemize}
@@ -172,7 +174,10 @@ Unser Produkt besteht aus zwei Teilen (der Bibliothek mit Erweiterungsmodul und 
     \end{itemize}
       
 \section{Produktumgebung}
-\subsection{Hardware} \textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung.
+\subsection{Hardware} 
+	\textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung.
+	\textsf{Leistungsanforderung:} Das Smartphone sollte mindestens 1 gb RAM besitzen
+	\textsf{Speicheranforderung:} Das Smartphone sollte mindestens 100 mb Speicherplatz zur Verfügung haben
 \subsection{Software} \textsf{Betriebssystem:} Unterstützung nur von Android ab Version 7 und iOS ab Version 10.
 
 \section{Funktionale Anforderungen}
@@ -216,8 +221,9 @@ Unser Produkt besteht aus zwei Teilen (der Bibliothek mit Erweiterungsmodul und 
         Modus \glqq Lauschen\&Agieren\grqq
         \begin{itemize}
           \item[/F221/] Zusammenstellen eines Trainingsablaufs (Liegestütze, Sit-ups, Laufen). 
-          \item[/F222/] Sprachanweisungen für die nächste Übung während des Trainings. (Der Sprache angepasst)
+          \item[/F222/] Sprachanweisungen für die nächste Übung während des Trainings. 
           \item[/F223/] Anzeige der Zeitdauer jeder Übung nach Ablaufsende, siehe F130.
+          \item[/F224/] Die Sprachanweisung erfolgt in der Sprache der in-App Einstellungen. (Deutsch oder Englisch)
         \end{itemize}
       }
 
