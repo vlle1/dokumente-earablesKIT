@@ -105,7 +105,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   
   \item Es soll ein Erweiterungsmodul entwickelt werden, mit dem die übermittelten  \Gls{Rohdaten} automatisch verarbeitet und ausgewertet werden, um so festzustellen ob der Nutzer gerade läuft oder steht.
   
-  \item Es soll eine App mit einer \Gls{GUI} entwickelt werden, die über verschiedene Modi verfügt, insbesondere über einen der anzeigt, ob der Nutzer gerade läuft oder steht. 
+  \item Es soll eine App mit einer \Gls{GUI} entwickelt werden, die über verschiedene Modi verfügt. Einer dieser Modi soll in der Lage sein anzuzeigen ob der Nutzer gerade läuft oder steht und die \gls{Schrittfrequenz} und die Anzahl der zurückgelegten Schritte anzeigen.
 
 \end{enumerate}
 
@@ -116,8 +116,10 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \item Die \Gls{GUI} der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die \Gls{Steuerungsparameter} der \Gls{Earables} verändert
     \item Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen \Gls{Steuerungsparameter} zu verändern.
     \item Das Erweiterungsmodul soll erkennen ob der Nutzer gerade \glqq läuft\grqq{}oder \glqq steht\grqq.
+    \item Das Erweiterungsmodul soll die \gls{Schrittfrequenz} und die Schrittanzahl ermitteln können.
     \item Die App soll anzeigen können ob der Nutzer gerade läuft oder steht.
     \item Die App soll die aktuelle Schrittfrequenz und die Anzahl der gelaufenen Schritte des Nutzers anzeigen.
+    \item In der App wird die Anzahl der gelaufenen Schritte gespeichert.
   \end{itemize}
 \subsection{Wunschkriterien}
   \begin{itemize}
@@ -129,8 +131,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
         \item\text  Im Modus \glqq Musikmodus\grqq{} wird Musik abgespielt, wenn der Nutzer läuft und automatisch pausiert, wenn der Nutzer steht. Sobald der Nutzer weiter läuft wird die Musik auch wieder weiterlaufen.
       \end{itemize}
     \item\text Während der \glqq Laufmodus \grqq{} aktiv ist, wird die aktuelle Schrittanzahl und die zurückgelegte Distanz live angezeigt.
-    \item\text Wenn kein Laufvorgang aktiv ist wird im Laufmodus die Daten (Schritte, Distanz) des letzten Datums angezeigt an dem trainiert wurde.
-    
+    \item\text Wenn kein Laufvorgang aktiv ist wird im Laufmodus die Daten (Schritte, Distanz) des letzten Datums angezeigt an dem trainiert wurde. %% in die NFA aufnehmen
     \item\text Die App wird standardmäßig auf der Sprache des Smartphone eingestellt sein. (Bei einem Deutschsprachigem Smartphone Deutsch, sonst Englisch). Die Sprache kann in den Einstellungen zwischen Deutsch und Englisch gewechselt werden. 
     \item\text Trainingsdaten werden automatisch gespeichert; Importieren und Exportieren soll möglich sein.
   \end{itemize}
@@ -164,7 +165,7 @@ Unser Produkt besteht aus drei Teilen (der Bibliothek, dazu das Erweiterungsmodu
       \end{itemize}
       \item\textsf{App} Heimtraining, Sport,\dots
     \end{itemize}
-  \subsection{Betriebsbedingungen der App}
+  \subsection{Betriebsbedingungen der App} %% hier wollte David noch was hinzufügen
     \subsection{Physikalische Umgebung}
       Die physikalische Umgebung der Anwendung ist hardwareabhängig.
     \subsection{Sonstiges:}
@@ -205,9 +206,11 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
       \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{} mit Hilfe von /F060/.
       \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.
       \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} stoppen.
-      \item[/F130/] \textsf{Resultat anzeigen:}Nach Stoppen Anzeigen des Vorgangsresultats bis neuer \Gls{Vorgang} gestartet wird.
-      \item[/F132/] \textsf {Schrittfrequenz Anzeigen:} Es wird die Schrittfrequenz im Modus \glqq{}Laufmodus\grqq{} angezeigt, sobald der Modus gestartet wird. Die Schrittfrequenz wird mit Hilfe von /F140/ ermittelt.%% lezten Satz in NA ?? das gleiche bei F134
+      \item[/F130/] \textsf{Resultat anzeigen:} Nach Stoppen Anzeigen des Vorgangsresultats bis neuer \Gls{Vorgang} gestartet wird.
+      \item[/F132/] \textsf {Schrittfrequenz Anzeigen:} Es wird die Schrittfrequenz im Modus \glqq{}Laufmodus\grqq{} angezeigt, sobald der Modus gestartet wird. Die Schrittfrequenz wird mit Hilfe von /F140/ ermittelt.
       \item[/F134/] \textsf {Schrittanzahl Anzeigen:} Es wird die Schrittanzahl im Modus \glqq{}Laufmodus\grqq{} angezeigt, sobald der Modus gestartet wird. Die Schrittanzahl wird mit Hilfe von /F150/ ermittelt. Die Schrittzählung beginnt mit dem starten des Laufmodus.
+      \item[/F136/] \textsf{Schrittanzahl Speichern:} Die App speichert die Schrittanzahl pro Tag und das für die letzten 30 Tage, an denen der Laufmodus aktiv war.
+      \item[/F138/] \textsf{Ergebnisse der letzten Session anzeigen:} Wenn sich die App im Laufmodus befindet und der Laufmodus noch nicht gestartet ist wird angezeigt wie weit der Nutzer das letzte mal gelaufen ist und wie viele Schritte er gemacht hat. Falls es noch keine Einträge gibt wird nichts angezeigt.
     \end{itemize}
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
@@ -269,6 +272,7 @@ Wie unten unter dem Punkt Qualitätszielbestimmungen aufgeführt legen wir unser
   \item[/NF060/] Bei Namensgebung sind nur Groß- und Kleinbuchstaben ohne Umlaute und Sonderzeichen erlaubt.
   \item[/NF065/] Gerät die App durch Minimieren oder Ausschalten des Smartphone Bildschirms in den Hintergrund, wird der aktuelle Vorgang terminiert.
   \item[] Handy und Kopfhörer sollten nicht über zehn Meter voneinander entfernt werden, sodass eine Bluetooth-Verbindung möglich ist. 
+  \item[/NF067/] Beim Ausführen der Funktion /F070/ wird der Laufmodus nicht automatisch gestartet.
 \end{itemize}
 \subsection{Stabilität}
 \begin{itemize}
@@ -436,6 +440,8 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
     \item[/T130/] Die App zeigt nach Stoppen des Vorgangs das Vorgansresultats an bis neuer \Gls{Vorgang} gestartet wird.
     \item[/T132/] Die App zeigt die \gls{Schrittfrequenz} im Modus \glqq{}Laufmodus\grqq{} an, sobald der Laufmodus gestartet wird.
     \item[/T134/] Die App zeigt die Schrittanzahl im Modus \glqq{}Laufmodus\grqq{} an, sobald der Laufmodus gestartet wird.
+    \item[/T136/] Die App zeigt auf der Datenübersichtsseite die Anzahl der gelaufenen Schritte an.
+    \item[/T138/] Die App befindet sich im Laufmodus und der Laufmodus ist noch nicht gestartet. Es wird angezeigt, wie viele Schritte der Nutzer bei der letzten Session gemacht hat und welche Strecke er dabei zurückgelegt hat.
   \end{itemize}
 
 \subsubsection{Wunschanforderungen}
