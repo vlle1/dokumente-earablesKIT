@@ -375,6 +375,8 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
 \clearpage
 
 \section{Qualitätszielbestimmungen}
+Der Erste Bestandteil des Projekts ist die Bibliothek mit dem Erweiterungsmodul. Diese sollen als Open Source Projekt einer breiteren Entwicklergemeinschaft zur Verfügung gestellt werden, daher legen wir besonderen Wert auf die Korrektheit und Zuverlässigkeit.\\
+Dagegen ist bei der App hautpsächlich die Benutzerfreundlichkeit wichtig, während die Robustheit und Zuverlässigkeit der App keine so große Rolle spielen. Generell ergeben sich insgesamt folgende Prioritäten:
 \begin{tabular}[t]{|c|c|c|c|c|c|}
   \hline
   \textbf{Kriterium} & \textbf{Sehr Wichtig} & \textbf{Wichtig} & \textbf{Weniger Wichtig} & \textbf{Unwichtig}\\
@@ -382,7 +384,7 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
   \hline
   Korrektheit & x & & &\\ %%sehr
   \hline
-  Zuverlässigkeit & & x & &\\ %%weniger
+  Zuverlässigkeit & & x & &\\ %%wichtig
   \hline
   Robustheit & & & x &\\  %%weniger
   \hline
@@ -395,10 +397,11 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
 
 \end{tabular}
 
- %%!! Was ist hiermit? Stand noch in der Mail als Unterpunkt. https://www.sosy-lab.org/Teaching/2015-WS-SEP/samples/pflichtenheft.pdf Seite 13 sieht man so eine Tabelle, wie ist das gemeint?
- %%nächstes Treffen: ***kurzes*** Planungspoker mit Korrektheit, Zuverlässigkeit, Robustheit, Effizienz, Benutzerfreundlichkeit und Vertrauenswürdigkeit zwischen sehr wichtig, wichtig, weniger wichtig und unwichtig.
- %% code-standards??
 \section{Globale Testfälle und Szenarien}
+Die Testfälle sollen sicherstellen, dass alle funktionalen Anforderungen korrekt implementiert und umgesetzt wurden.
+Die Nummerierung der globalen Testfälle richtet sich nach der Nummerierung der funktionalen Anforderungen.\\
+Die Szenarien werden verwendet, um alle geforderten und optionalen Funktionen im Kontext einer Nutzerinteraktion zu testen.\\
+Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Produkt bereit für die Abnahme.
 %%TODO David
   \subsection{Globale Testfälle}
   \subsubsection{Mussanforderungen}
