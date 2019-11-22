@@ -144,7 +144,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \end{itemize}
 
 \section{Produkteinsatz}
-Unser Produkt besteht aus zwei Teilen (der Bibliothek mit Erweiterungsmodul und der App), dementsprechend gibt es auch zwei Zielgruppen und Anwendungsbereiche:
+Unser Produkt besteht aus drei Teilen (der Bibliothek, dazu das Erweiterungsmodul und der App), dementsprechend gibt es auch verschiedene Zielgruppen und Anwendungsbereiche:
   \subsection{Zielgruppe}
   \begin{itemize}
     \item\textsf{Bibliothek:} Softwareentwickler
@@ -165,15 +165,17 @@ Unser Produkt besteht aus zwei Teilen (der Bibliothek mit Erweiterungsmodul und 
       \item\textsf{App} Heimtraining, Sport,\dots
     \end{itemize}
   \subsection{Betriebsbedingungen der App}
-    \subsection{physikalische Umgebung}
-      Handy und Kopfhörer sollten nicht über zehn Meter voneinander entfernt werden, sodass eine Bluetooth-Verbindung möglich ist.
+    \subsection{Physikalische Umgebung}
+      Die physikalische Umgebung der Anwendung ist hardwareabhängig.
     \subsection{Sonstiges:}
     \begin{itemize}
-      \item[] Betriebsdauer: "Akkuabhängig", keine weitere Grenzen 
-      \item[] Qualifikation des Benutzers: Sollte Sportübungen selbstständig ausführen können
+      \item \textsf{Betriebsdauer:} \glqq Akkuabhängig\grqq, keine weitere Grenzen.
+      \item \textsf{Qualifikation des Nutzers:} Sollte Sportübungen selbstständig ausführen können.
+      \item \textsf{Vordergrund:} Die App muss im Vordergrund laufen, damit die Vorgänge funktionieren, siehe [/NF065/].
     \end{itemize}
       
 \section{Produktumgebung}
+Es handelt sich bei der App um eine Smartphoneanwendung, daher wird das Produkt als Installationspaket ausgeliefert. Außerdem setzen wir bestimmte Hardware- und Softwarebedingungen voraus.
 \subsection{Hardware} 
 	\textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung.
 	\textsf{Leistungsanforderung:} Das Smartphone sollte mindestens 1 gb RAM besitzen
@@ -181,6 +183,7 @@ Unser Produkt besteht aus zwei Teilen (der Bibliothek mit Erweiterungsmodul und 
 \subsection{Software} \textsf{Betriebssystem:} Unterstützung nur von Android ab Version 7 und iOS ab Version 10.
 
 \section{Funktionale Anforderungen}
+Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt umgesetzt werden muss) und einen Wunschteil (Anforderungen, die umgesetzt werden sollen, aber nicht essenziell sind). Die Funktionalen Anforderungen spezifizieren auf Ebene der Bibliothek, des Erweiterungsmoduls und der App, welche Funktionen umgesetzt werden müssen bzw. können. 
   \subsection{Mussanforderungen}
     \subsubsection{Bibliothek}
     \begin{itemize}
@@ -236,20 +239,18 @@ Unser Produkt besteht aus zwei Teilen (der Bibliothek mit Erweiterungsmodul und 
       
       Sonstiges:
       \item[/F290/] Aufforderung der Angabe von Name und Schrittlänge bei Erstnutzung.
-      \item[/F300/] Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren, importieren und löschen.
+      \item[/F300/] Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren, importieren und löschen. Dabei wird das CSV-Format genutzt. 
       \item[/F310/] Speicherung der Summe der Schritte, Sit-ups und Liegestütze für jeden Tag, an dem ein \Gls{Vorgang} aktiv war (keine \Gls{Rohdaten}).
-      \item[/F320/] Anzeigen der gespeicherten Daten aus /F310/
+      \item[/F320/] Anzeigen der gespeicherten Daten aus /F310/.
       \end{itemize}
 
 
 \section{Produktdaten}
+Die App soll dem Nutzer die Möglichkeit zur Verfügung stellen, seine Trainingsdaten auch nach Beenden der App weiterhin zu Nutzen. Zu diesem Zweck werden die Trainingsdaten auf dem Smartphone gespeichert; immer sobald ein Vorgang abgeschlossen ist.
 \begin{itemize}
 	\item[/PD010/] Es werden keine rohen Messdaten gespeichert.
-	\item[/PD020/] Die Einstellungen (Sprache, \Gls{Steuerungsparameter}, Messeinstellungen) sind zu speichern. 
-	\item[/PD030/] Es sind relevante Daten über den Nutzer, wie den Benutzernamen, zu speichern.
-	\item[/PD040/] Die \Gls{Vorgangsdaten} (Bestenliste und letzte Trainingseinheit) sind zu speichern. % Genauer definieren, was alles?
-	\item[/PD050/] Speicherung aller Vorgänge, die aktiv waren mit Datum, Uhrzeit und dem letzten Resultat (/F300/)%%nächstes Treffen: abklären, ob umsetzen
-	\item[/PD040/] Die Vorgangsdaten werden in der Form (Datum;Schritte;Liegestütze;Sit-ups) gespeichert. Für den Nutzer sind nur die Daten des letzten Monats aufsummiert zu sehen.
+	\item[/PD020/] Die Einstellungen (Sprache, \Gls{Steuerungsparameter}, Benutzernamen) sind zu speichern. 
+	\item[/PD040/] Die \Gls{Vorgangsdaten} werden auf dem Gerät in einer Datenbank gespeichert.
 \end{itemize}
 
 
@@ -263,6 +264,8 @@ Unser Produkt besteht aus zwei Teilen (der Bibliothek mit Erweiterungsmodul und 
   \item[/NF040/] Bei nicht sinnvollen Angaben (z.B. negativen Werten in /F220/) wird das Starten des Vorgangs verhindert.
   \item[/NF050/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe ev. /F300/) nicht verändert.
   \item[/NF060/] Bei Namensgebung sind nur Groß- und Kleinbuchstaben ohne Umlaute und Sonderzeichen erlaubt.
+  \item[/NF065/] Gerät die App durch Minimieren oder Ausschalten des Smartphone Bildschirms in den Hintergrund, wird der aktuelle Vorgang terminiert.
+  \item[] Handy und Kopfhörer sollten nicht über zehn Meter voneinander entfernt werden, sodass eine Bluetooth-Verbindung möglich ist. 
 \end{itemize}
 \subsection{Stabilität}
 \begin{itemize}
