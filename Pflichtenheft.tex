@@ -328,12 +328,14 @@ Wie unter dem Punkt Qualitätszielbestimmungen aufgeführt, legen wir unsere Pri
 	\includegraphics[width=0.8\textwidth]{./Diagramme/Use-CaseDiagramm.png} 
   \end{center}
 
-Kurzbeschreibung: Beim Starten der App landet der Nutzer automatisch im Laufmodus. Bevor ein Modus genutzt werden kann muss der Nutzer eine BLE Verbindung über ein Pop-up Fenster mit den Kopfhörern herstellen. Der Nutzer kann nun entweder den Modus wechseln oder einen \Gls{Vorgang} starten. Nach Beendigung oder Stoppen eines Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem vergangene Vorgangsdaten einsehen und diese auch importieren/exportieren. Das Ändern von Einstellungen der App und der \Gls{Steuerungsparameter} der \Gls{Earables} über die App ist ebenfalls möglich.
+\subsubsection{Beschreibung} 
+Beim Starten der App landet der Nutzer automatisch im Laufmodus. Bevor ein Modus genutzt werden kann muss der Nutzer eine BLE Verbindung über ein Pop-up Fenster mit den Kopfhörern herstellen. Der Nutzer kann nun entweder den Modus wechseln oder einen \Gls{Vorgang} starten. Nach Beendigung oder Stoppen eines Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem vergangene Vorgangsdaten einsehen und diese auch importieren/exportieren. Das Ändern von Einstellungen der App und der \Gls{Steuerungsparameter} der \Gls{Earables} über die App ist ebenfalls möglich.
 \section{Benutzeroberfläche}
+\subsection{Einführung}
 Die \Gls{GUI} wird durch die App realisiert. Dabei kann man die einzelnen Modi über das Navigationsmenü auswählen. Jeder Modus hat zwei Seiten; eine Übersichtsseite und eine aktive Seite, welche während des aktiven \Gls{Vorgang} angezeigt wird. Für die weiteren Funktionen(Einstellungen, Dateienexport/-import) bietet die Applikation ebenfalls spezielle Seiten an.
-Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{} über den angegebenen Link in der Fußnote \footnote[1]{Mock-Up Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0}
-
-
+Online kann bereits eine Mock-Up \Gls{GUI} angesehne werden mithilfe des Design-Tools \glqq Mock-up\grqq{} über den angegebenen Link in der Fußnote \footnote[1]{Mock-Up Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0}
+\subsection{Mock-Up Design}
+Die folgenden Abbildungen zeigen das Design der App.
 \begin{figure}[ht!]
 	\centering
 		\begin{minipage}{0.4\textwidth}
@@ -417,8 +419,22 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
 		\vspace{30px}
 	\end{minipage}
 \end{figure}
-
-
+\subsection{Erläuterungen zur Benutzeroberfläche}
+\begin{itemize}
+  \item Das Auswahlmenü der Modi wird über ein Hamburgermenü realisiert (Button links oben, der ein Menü auf der linken Seite öffnet)
+  \item Jeder Modus verfügt über einen einheitlichen Button, der unten mittig liegt und für das Starten und Stoppen eines Vorgangs zuständig ist.
+  \item {Das VerbindungsPop-Up (Abb. 13) erscheint, wenn 
+  \begin{itemize}
+    \item die App gestartet wird,
+    \item die BLE-Verbindung unterbrochen wurde,
+    \item wenn ein Modus gestartet werden soll oder andere Aktivitäten erfolgen (z.b. Steuerungsparameter anpassen), aber gerade keine BLE-Verbindung existiert.
+  \end{itemize}
+  Die Pop-Up Meldung kann über einen Button jederzeit ausgeblendet werden. 
+  Wird eine BLE-Verbindung erfolgreich hergestellt, verschwindet das Pop-Up.
+  }
+  \item Im Modus Lauschen und Agieren (Abb. 5) wird der Trainingsablaufplan als Liste angezeigt. Die einzelnen Elemente sind in dieser Ansicht manipulierbar, d.h. der Nutzer kann die Reihenfolge der Elemente tauschen und die einzelnen Elemente löschen. Diese Funktionen können z.B. durch gedrückt halten der Elemente oder durch Buttons realisiert werden.
+\end{itemize}
+Die genannten Punkte erhöhen die Nutzerfreundlichkeit, da die verschiedenen Modi so ähnlich zu bedienen sind und der den Nutzern hoffentlich bekannte Navigationsweg über das Menü intuitiv erscheint.
 \section{Qualitätszielbestimmungen}
 Der Erste Bestandteil des Projekts ist die Bibliothek mit dem Erweiterungsmodul. Diese sollen als Open Source Projekt einer breiteren Entwicklergemeinschaft zur Verfügung gestellt werden, daher legen wir besonderen Wert auf die Korrektheit und Zuverlässigkeit.\\
 Dagegen ist bei der App hauptsächlich die Benutzerfreundlichkeit wichtig, während die Robustheit und Zuverlässigkeit der App keine so große Rolle spielen. Generell ergeben sich insgesamt folgende Prioritäten:\\
