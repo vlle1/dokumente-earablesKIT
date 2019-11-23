@@ -126,14 +126,14 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \item Die App soll die zurückgelegte Distanz anzeigen.
     \item Die App soll über drei weitere Modi verfügen.
       \begin{itemize}
-        \item\text Im Modus \glqq Zählmodus\grqq{} zählt die App wie viele Liegestütze oder Sit-ups der Nutzer macht.
-        \item\text Im Modus \glqq Lauschen\&Agieren\grqq{} kann der Nutzer seinen eigenen Trainingsablaufplan erstellen, welcher dann über Text-to-Speech (\Gls{TTS}) ausgegeben wird.
-        \item\text Im Modus \glqq Musikmodus\grqq{} wird Musik abgespielt, wenn der Nutzer läuft und automatisch pausiert, wenn der Nutzer steht. Sobald der Nutzer weiter läuft wird die Musik auch wieder weiterlaufen.
+        \item Im Modus \glqq Zählmodus\grqq{} zählt die App wie viele Liegestütze oder Sit-ups der Nutzer macht.
+        \item Im Modus \glqq Lauschen\&Agieren\grqq{} kann der Nutzer seinen eigenen Trainingsablaufplan erstellen, welcher dann über Text-to-Speech (\Gls{TTS}) ausgegeben wird.
+        \item Im Modus \glqq Musikmodus\grqq{} wird Musik abgespielt, wenn der Nutzer läuft und automatisch pausiert, wenn der Nutzer steht. Sobald der Nutzer weiter läuft wird die Musik auch wieder weiterlaufen.
       \end{itemize}
-    \item\text Während der \glqq Laufmodus\grqq{} aktiv ist, wird die aktuelle Schrittanzahl und die zurückgelegte Distanz live angezeigt.
-    \item\text Wenn kein Laufvorgang aktiv ist, wird im Laufmodus die Daten (Schritte, Distanz) des letzten Datums angezeigt, an dem trainiert wurde. %% in die NFA aufnehmen
-    \item\text Die App wird standardmäßig auf die Sprache des Smartphone eingestellt sein. Die Sprache kann in den Einstellungen auf Deutsch oder Englisch gewechselt werden. 
-    \item\text Vorgangsdaten werden automatisch gespeichert; Importieren und Exportieren soll möglich sein.
+    \item Während der \glqq Laufmodus\grqq{} aktiv ist, wird die aktuelle Schrittanzahl und die zurückgelegte Distanz live angezeigt.
+    \item Wenn kein Laufvorgang aktiv ist, wird im Laufmodus die Daten (Schritte, Distanz) des letzten Datums angezeigt, an dem trainiert wurde. %% in die NFA aufnehmen
+    \item Die App wird standardmäßig auf die Sprache des Smartphone eingestellt sein. Die Sprache kann in den Einstellungen auf Deutsch oder Englisch gewechselt werden. Sollte die Sprache des Smartphones nicht unterstützt werden wird standardmäßig Englisch verwendet. 
+    \item Vorgangsdaten werden automatisch gespeichert; Importieren und Exportieren soll möglich sein.
   \end{itemize}
   \subsection{Abgrenzungskriterien}
   \begin{itemize}
@@ -316,11 +316,11 @@ Wie unter dem Punkt Qualitätszielbestimmungen aufgeführt, legen wir unsere Pri
     \item \textsf{\glqq View\grqq{}} enthält alle grafisch angezeigten Elemente, also die Datenanzeige und Bedienoberfläche der App.
     \item {\textsf{\glqq Model\grqq{}} enthält die Geschäftslogik der App und ist stark nach außen abgekapselt. In diesen Bereich fallen die meisten komplexen Teile der App, die als Dienste (Services) vom Viewmodel aus verwaltet werden sollen. Wesentlich sind dabei (vollständige Angabe im Entwurf): \begin{itemize}
       \item Die Verwaltung der anfallenden Produktdaten (Abruf und Bereitstellung der gespeicherten Daten in der Datenbank, im CSV-Format) über ein Datenmodul
-      \item Die Bibliothek, die für die Kommunikation mit den Kopfhöhrern (Verbindungsaufbau, Start und Stopp des Samplings, Konfiguration der \Gls{Steuerungsparameter}, Auslesen der Sensordaten) zuständig ist. Dazu wird eine externe Bibliothek\footnote{https://github.com/xabre/xamarin-bluetooth-le} verwendet.
+      \item Die Bibliothek, die für die Kommunikation mit den Kopfhörern (Verbindungsaufbau, Start und Stopp des Samplings, Konfiguration der \Gls{Steuerungsparameter}, Auslesen der Sensordaten) zuständig ist. Dazu wird eine externe Bibliothek\footnote{https://github.com/xabre/xamarin-bluetooth-le} verwendet.
       \item Das Erweiterungsmodul, das sich um die Aktivitätserkennung kümmert. Dieses nutzt dabei die Schnittstellen der Bibliothek.
     \end{itemize}
     Die Services sind dabei jeweils unabhängig vom restlichen Model funktionsfähig und dadurch leichter testbar.}
-    \item \textsf{\glqq Viewmodel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der UI, wird also bei Benutzerinteraktion vom View aufgerufen. Es gibt dann die entsprechenden Anweisungen an das Model weiter. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die Anzeige der App angepasst wird, zum Beispiel bei Verbindungsabbruch zu den Kopfhöhrern. 
+    \item \textsf{\glqq Viewmodel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der UI, wird also bei Benutzerinteraktion vom View aufgerufen. Es gibt dann die entsprechenden Anweisungen an das Model weiter. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die Anzeige der App angepasst wird, zum Beispiel bei Verbindungsabbruch zu den Kopfhörern. 
     
   \end{itemize}
   Der Vorteil dieser Architektur ist eine klare Trennung von Benutzerinteraktion und Programmlogik sowie eine lose Kopplung zwischen einzelnen Funktionalitäten, was die Flexibilität und das modulare Testen deutlich erleichtert.
@@ -422,7 +422,7 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
 
 \section{Qualitätszielbestimmungen}
 Der Erste Bestandteil des Projekts ist die Bibliothek mit dem Erweiterungsmodul. Diese sollen als Open Source Projekt einer breiteren Entwicklergemeinschaft zur Verfügung gestellt werden, daher legen wir besonderen Wert auf die Korrektheit und Zuverlässigkeit.\\
-Dagegen ist bei der App hautpsächlich die Benutzerfreundlichkeit wichtig, während die Robustheit und Zuverlässigkeit der App keine so große Rolle spielen. Generell ergeben sich insgesamt folgende Prioritäten:\\
+Dagegen ist bei der App hauptsächlich die Benutzerfreundlichkeit wichtig, während die Robustheit und Zuverlässigkeit der App keine so große Rolle spielen. Generell ergeben sich insgesamt folgende Prioritäten:\\
 \begin{tabular}[t]{|c|c|c|c|c|c|}
   \hline
   \textbf{Kriterium} & \textbf{Sehr Wichtig} & \textbf{Wichtig} & \textbf{Weniger Wichtig} & \textbf{Unwichtig}\\
