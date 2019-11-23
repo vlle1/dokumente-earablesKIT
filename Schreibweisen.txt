@@ -1,0 +1,21 @@
+Earables statt Kopfhörer/Gerät
+Cross-Platform statt Cross-Plattform 
+TTS statt Text-to-Speech, außer bei der ersten Nennung in Wunschkriterien
+Sit-up(s)
+Pop-up Fenster
+Vorgangsdaten statt Daten wenn es um Vorgangsdaten geht
+-> gleiches gilt für Rohdaten
+Smartphone statt Device, Endgerät....
+Referenzierung auf Funktion o.Ä. durch /FaXXX/, wahlweise in runden Klammern
+Nach jedem Satz/Stichpunktende einen Punkt setzen
+Vorgang statt Session/Training
+Aktivität statt Übung
+Steuerungsparamter statt Messparameter
+Trainingsablaufplan statt Trainigsplan
+BLE-Verbindung statt Bluetooth Verbindung
+Unterschied zwischen Modus (Ausgewählte App-Seite) und aktiver Vorgang (zb Zähler)
+WIR STARTEN EINEN VORGANG; ABER WIR WECHSELN ZU EINEM MODUS.
+
+ACHTUNG: FA Nummerierung von Vorgang starten, stoppen, Resultat
+anzeigen, Schrittfrequenzerkennung, Schrittanzahlzählung geändert, 
+sonst ergibt die Reihenfolge keinen Sinn

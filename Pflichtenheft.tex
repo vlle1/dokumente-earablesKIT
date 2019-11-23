@@ -101,51 +101,51 @@
 Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
 \begin{enumerate}
 
-  \item Es soll eine \Gls{Cross-Platform Bibliothek} (Android/IOS) für die \Gls{Earables} der Plattform eSense entwickelt werden mit der es möglich ist, die Messdaten des Gerätes aufzuzeichnen und verschiedene \Gls{Steuerungsparameter} zu verändern.
+  \item Es soll eine \Gls{Cross-Platform Bibliothek} (Android/IOS) für die \Gls{Earables} der Plattform eSense entwickelt werden mit der es möglich ist, die gemessenen Rohdaten der \Gls{Earables} aufzuzeichnen und verschiedene \Gls{Steuerungsparameter} zu verändern.
   
-  \item Es soll ein Erweiterungsmodul entwickelt werden, mit dem die übermittelten  \Gls{Rohdaten} automatisch verarbeitet und ausgewertet werden, um so festzustellen ob der Nutzer gerade läuft oder steht.
+  \item Es soll ein Erweiterungsmodul entwickelt werden, mit dem die übermittelten  \Gls{Rohdaten} automatisch verarbeitet und ausgewertet werden, um so festzustellen, ob der Nutzer gerade läuft oder steht.
   
-  \item Es soll eine App mit einer \Gls{GUI} entwickelt werden, die über verschiedene Modi verfügt. Einer dieser Modi soll in der Lage sein anzuzeigen ob der Nutzer gerade läuft oder steht und die \gls{Schrittfrequenz} und die Anzahl der zurückgelegten Schritte anzeigen.
+  \item Es soll eine App mit einer \Gls{GUI} entwickelt werden, die über verschiedene Modi verfügt. Einer dieser Modi soll anzeigen ob der Nutzer gerade läuft oder steht. Die \gls{Schrittfrequenz} des Nutzers und die Anzahl der zurückgelegten Schritte sollen auch angezeigt werden.
 
 \end{enumerate}
 
 \subsection{Musskriterien}
 
   \begin{itemize}
-    \item Die \Gls{Cross-Platform Bibliothek} soll in der Lage sein die gesammelten Daten der \Gls{Earables} aufzuzeichnen
-    \item Die \Gls{GUI} der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die \Gls{Steuerungsparameter} der \Gls{Earables} verändert
-    \item Die Cross-Plattform Bibliothek soll in der Lage sein die verschiedenen \Gls{Steuerungsparameter} zu verändern.
+    \item Die \Gls{Cross-Platform Bibliothek} soll in der Lage sein, die gesammelten Daten der \Gls{Earables} aufzuzeichnen.
+    \item Die \Gls{Cross-Platform Bibliothek} soll in der Lage sein die verschiedenen \Gls{Steuerungsparameter} zu verändern.
     \item Das Erweiterungsmodul soll erkennen ob der Nutzer gerade \glqq läuft\grqq{}oder \glqq steht\grqq.
     \item Das Erweiterungsmodul soll die \gls{Schrittfrequenz} und die Schrittanzahl ermitteln können.
     \item Die App soll anzeigen können ob der Nutzer gerade läuft oder steht.
-    \item Die App soll die aktuelle Schrittfrequenz und die Anzahl der gelaufenen Schritte des Nutzers anzeigen.
+    \item Die App soll die aktuelle Schrittfrequenz anzeigen.
     \item In der App wird die Anzahl der gelaufenen Schritte gespeichert.
+    \item Die \Gls{GUI} der App muss so benutzerfreundlich gestaltet werden, dass der Benutzer intuitiv weiß wie man die \Gls{Steuerungsparameter} der \Gls{Earables} verändert.
   \end{itemize}
 \subsection{Wunschkriterien}
   \begin{itemize}
     \item Die App soll die zurückgelegte Distanz anzeigen.
     \item Die App soll über drei weitere Modi verfügen.
       \begin{itemize}
-        \item\text Im Modus \glqq Zählmodus\grqq{} zählt die App wie viele Liegestützen oder Sit-ups der Nutzer macht.
-        \item\text  Im Modus \glqq Lauschen\&Agieren\grqq{}kann der Nutzer seinen eigenen Trainingsplan erstellen, welcher dann über Text to Speech ausgegeben wird.
-        \item\text  Im Modus \glqq Musikmodus\grqq{} wird Musik abgespielt, wenn der Nutzer läuft und automatisch pausiert, wenn der Nutzer steht. Sobald der Nutzer weiter läuft wird die Musik auch wieder weiterlaufen.
+        \item\text Im Modus \glqq Zählmodus\grqq{} zählt die App wie viele Liegestütze oder Sit-ups der Nutzer macht.
+        \item\text Im Modus \glqq Lauschen\&Agieren\grqq{} kann der Nutzer seinen eigenen Trainingsablaufplan erstellen, welcher dann über Text-to-Speech (\Gls{TTS}) ausgegeben wird.
+        \item\text Im Modus \glqq Musikmodus\grqq{} wird Musik abgespielt, wenn der Nutzer läuft und automatisch pausiert, wenn der Nutzer steht. Sobald der Nutzer weiter läuft wird die Musik auch wieder weiterlaufen.
       \end{itemize}
-    \item\text Während der \glqq Laufmodus \grqq{} aktiv ist, wird die aktuelle Schrittanzahl und die zurückgelegte Distanz live angezeigt.
-    \item\text Wenn kein Laufvorgang aktiv ist wird im Laufmodus die Daten (Schritte, Distanz) des letzten Datums angezeigt an dem trainiert wurde. %% in die NFA aufnehmen
-    \item\text Die App wird standardmäßig auf der Sprache des Smartphone eingestellt sein. (Bei einem Deutschsprachigem Smartphone Deutsch, sonst Englisch). Die Sprache kann in den Einstellungen zwischen Deutsch und Englisch gewechselt werden. 
-    \item\text Trainingsdaten werden automatisch gespeichert; Importieren und Exportieren soll möglich sein.
+    \item\text Während der \glqq Laufmodus\grqq{} aktiv ist, wird die aktuelle Schrittanzahl und die zurückgelegte Distanz live angezeigt.
+    \item\text Wenn kein Laufvorgang aktiv ist, wird im Laufmodus die Daten (Schritte, Distanz) des letzten Datums angezeigt, an dem trainiert wurde. %% in die NFA aufnehmen
+    \item\text Die App wird standardmäßig auf die Sprache des Smartphone eingestellt sein. Die Sprache kann in den Einstellungen auf Deutsch oder Englisch gewechselt werden. 
+    \item\text Vorgangsdaten werden automatisch gespeichert; Importieren und Exportieren soll möglich sein.
   \end{itemize}
   \subsection{Abgrenzungskriterien}
   \begin{itemize}
-    \item Es werden keine \Gls{Rohdaten} längerfristig gespeichert.
+    \item Es werden keine \Gls{Rohdaten} auf dem Smartphone des Nutzers gespeichert.
     \item Die Musik passt sich nicht der \Gls{Schrittfrequenz} des Nutzers an.
-    \item Im Modus \glqq Zählen\grqq{}wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit-ups macht. Das bewusste Austricksen des Systems durch andere Bewegungen wird nicht behandelt.
-    \item Es werden nur Daten auf dem Smartphone gespeichert und nicht auf den \Gls{Earables}
+    \item Im Modus \glqq Zählen\grqq{} wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit-ups macht. Das bewusste Austricksen des Systems durch andere Bewegungen wird nicht behandelt.
+    \item Es werden nur Vorgangsdaten auf dem Smartphone gespeichert und nicht auf den \Gls{Earables}.
     \item Die Daten des Mikrophons werden weder aufgezeichnet noch ausgewertet.
   \end{itemize}
 
 \section{Produkteinsatz}
-Unser Produkt besteht aus drei Teilen (der Bibliothek, dazu das Erweiterungsmodul und der App), dementsprechend gibt es auch verschiedene Zielgruppen und Anwendungsbereiche:
+Unser Produkt besteht aus drei Teilen (der Bibliothek, dazu das Erweiterungsmodul und der App), dementsprechend gibt es auch verschiedene Zielgruppen und Anwendungsbereiche.
   \subsection{Zielgruppe}
   \begin{itemize}
     \item\textsf{Bibliothek:} Softwareentwickler
@@ -154,108 +154,111 @@ Unser Produkt besteht aus drei Teilen (der Bibliothek, dazu das Erweiterungsmodu
   \end{itemize}
   \subsection{Anwendungsbereiche}
     \begin{itemize}
-      \item\textsf{Bibliothek} \begin{itemize}
-        \item[] Softwareentwicklung für eSense Wearables 
-        \item[] %%! 
+      \item\textsf{Bibliothek} 
+      \begin{itemize}
+        \item Softwareentwicklung für eSense Wearables 
       \end{itemize}
       \item\textsf{Erweiterungsmodul}
       \begin{itemize}
-        \item[] Softwareentwicklung im Bereich Schritterkennung.
-        \item[] Auswerten der von \Gls{Earables} generierten Daten für die Verwendung in einer App z.B. im Bereich Fitness, aber auch als Nutzereingabe für andere interaktive Apps.
+        \item Softwareentwicklung im Bereich Schritterkennung.
+        \item Auswerten der von \Gls{Earables} aufgezeichneten Rohdaten für die Verwendung in einer App, z.B. im Bereich Fitness, aber auch als Nutzereingabe für andere interaktive Apps.
       \end{itemize}
-      \item\textsf{App} Heimtraining, Sport,\dots
+      \item\textsf{App} Heimtraining, Sport, \dots
     \end{itemize}
   \subsection{Betriebsbedingungen der App} %% hier wollte David noch was hinzufügen
     \subsection{Physikalische Umgebung}
       Die physikalische Umgebung der Anwendung ist hardwareabhängig.
-    \subsection{Sonstiges:}
+    \subsection{Sonstiges}
     \begin{itemize}
       \item \textsf{Betriebsdauer:} \glqq Akkuabhängig\grqq, keine weitere Grenzen.
       \item \textsf{Qualifikation des Nutzers:} Sollte Sportübungen selbstständig ausführen können.
-      \item \textsf{Vordergrund:} Die App muss im Vordergrund laufen, damit die Vorgänge funktionieren, siehe [/NF065/].
+      \item \textsf{Vordergrund:} Die App muss im Vordergrund laufen, damit die Vorgänge funktionieren, siehe /NF065/.
     \end{itemize}
       
 \section{Produktumgebung}
 Es handelt sich bei der App um eine Smartphoneanwendung, daher wird das Produkt als Installationspaket ausgeliefert. Außerdem setzen wir bestimmte Hardware- und Softwarebedingungen voraus.
 \subsection{Hardware} 
-	\textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung.
-	\textsf{Leistungsanforderung:} Das Smartphone sollte mindestens 1 GB Arbeitsspeicher besitzen
-	\textsf{Speicheranforderung:} Das Smartphone sollte mindestens 100 MB Speicherplatz zur Verfügung haben
-\subsection{Software} \textsf{Betriebssystem:} Unterstützung nur von Android ab Version 7 und iOS ab Version 10.
+	\textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung. %%Itemizen geht hier iwie nich
+	\textsf{Leistungsanforderung:} Das Smartphone sollte mindestens 1 GB Arbeitsspeicher besitzen.
+	\textsf{Speicheranforderung:} Das Smartphone sollte mindestens 100 MB Speicherplatz zur Verfügung haben.
+\subsection{Software} 
+	\textsf{Betriebssystem:} Unterstützung nur von Android ab Version 7 und iOS ab Version 10.
+
 
 \section{Funktionale Anforderungen}
-Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt umgesetzt werden muss) und einen Wunschteil (Anforderungen, die umgesetzt werden sollen, aber nicht essenziell sind). Die Funktionalen Anforderungen spezifizieren auf Ebene der Bibliothek, des Erweiterungsmoduls und der App, welche Funktionen umgesetzt werden müssen bzw. können. 
+Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt umgesetzt werden muss) und einen Wunschteil (Anforderungen, die umgesetzt werden sollten, aber nicht essenziell sind). Die Funktionalen Anforderungen spezifizieren auf Ebene der Bibliothek, des Erweiterungsmoduls und der App, welche Funktionen umgesetzt werden müssen bzw. können. 
   \subsection{Mussanforderungen}
     \subsubsection{Bibliothek}
     \begin{itemize}
-      \item[/F010/] Daten des \Gls{IMU} in \Gls{Echtzeit} zur Verfügung stellen.
-      \item[/F030/] Messparameter (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. %%die einzigen "Messparameter" die wir ändern können sind die abtastrate und die start/stop des samplings
+      \item[/F010/] Gemessene Rohdaten des \Gls{IMU} in \Gls{Echtzeit} zur Verfügung stellen.
+      \item[/F030/] Steuerungsparameter (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. %%die einzigen "Messparameter" die wir ändern können sind die abtastrate und die start/stop des samplings
       \item[/F040/] Datenaufnahme des \Gls{IMU} starten und stoppen.
     \end{itemize}
     \subsubsection{Erweiterungsmodul}
      Auswertung der ausgelesenen Daten:
      \begin{itemize}
-      \item[/F060/] \textsf{Schritterkennung} Es wird erkannt ob der Nutzer ein Schritt tätigt.
-      \item[/F140/] \textsf{Schrittfrequenzerkennung} Während der Nutzer läuft wird die Schrittfrequenz ermittelt.
-      \item[/F150/] \textsf{Schrittanzahl wird gezählt} Die Schritte des Nutzers werden gezählt.
+      \item[/F060/] \textsf{Schritterkennung:} Es wird erkannt ob der Nutzer ein Schritt tätigt.
+      \item[/F061/] \textsf{Schrittfrequenzerkennung:} Während der Nutzer läuft wird die Schrittfrequenz ermittelt.
+      \item[/F062/] \textsf{Schrittanzahl wird gezählt:} Die Schritte des Nutzers werden gezählt.
+      \item[/F063/] \textsf{Berechnung Distanz:} Die zurückgelegte Distanz des Nutzers soll berechnet werden können.
     \end{itemize}
     \subsubsection{App}
       \begin{itemize}
       \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.
-      \item[/F090/] \textsf{Modus wechseln:} Wechseln zwischen Modi über ein einblendbares Menü, während ein Modus ausgewählt ist.
-      \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{} mit Hilfe von /F060/.
-      \item[/F110/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus nach seiner Beschreibung aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.%% wir haben keinen Modus live Daten. %% überflüssig? wir haben im muss ja nur ein modi
-      \item[/F120/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} stoppen.%% überflüssig? wir haben im muss ja nur ein modi
-      \item[/F130/] \textsf{Resultat anzeigen:} Nach Stoppen Anzeigen des Vorgangsresultats bis neuer \Gls{Vorgang} gestartet wird.%% überflüssig? wir haben im muss ja nur ein modi
-      \item[/F132/] \textsf {Schrittfrequenz Anzeigen:} Es wird die Schrittfrequenz im Modus \glqq{}Laufmodus\grqq{} angezeigt, sobald der Modus gestartet wird. Die Schrittfrequenz wird mit Hilfe von /F140/ ermittelt.
-      \item[/F134/] \textsf {Schrittanzahl Anzeigen:} Es wird die Schrittanzahl im Modus \glqq{}Laufmodus\grqq{} angezeigt, sobald der Modus gestartet wird. Die Schrittanzahl wird mit Hilfe von /F150/ ermittelt. Die Schrittzählung beginnt mit dem starten des Laufmodus.
-      \item[/F136/] \textsf{Schrittanzahl Speichern:} Die App speichert die Schrittanzahl pro Tag und das für die letzten 30 Tage, an denen der Laufmodus aktiv war.
-      \item[/F138/] \textsf{Ergebnisse der letzten Session anzeigen:} Wenn sich die App im Laufmodus befindet und der Laufmodus noch nicht gestartet ist wird angezeigt wie weit der Nutzer das letzte mal gelaufen ist und wie viele Schritte er gemacht hat. Falls es noch keine Einträge gibt wird nichts angezeigt.
-      \item[/F140/] \textsf{Bluetooth Verbindung herstellen} Sobald der Nutzer die App startet erscheint ein Pop Up Fenster über das man sein Smartphone mit den \gls{Earables} verbinden kann.
-      \item[/F150/] \textsf{Bluetooth Verbindung unterbrochen} Falls die App die Verbindung zu den \gls{Earables} verlieren sollte erscheint wieder das Pop Up Fenster aus F140.
-      \item[/F160/] \textsf{Bluetooth Verbindung nicht notwendig} Der Nutzer kann das Pop Up Fenster aus F140 wegklicken.
-      \item[/F165/] \textsf{Bluetooth Verbindung später herstellen} Falls der Nutzer keine Bluetooth Verbindung mit den \gls{Earables} besitzt und eine Modus startet erscheint das Pop Up aus F140 und der Modus wird nicht gestartet.
+      \item[/F075/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus seiner Beschreibung nach aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.%% wir haben keinen Modus live Daten.
+      \item[/F080/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} stoppen.
+      \item[/F085/] \textsf{Resultat anzeigen:} Nach Stoppen wird das Vorgangsresultat angezeigt, bis ein neuer \Gls{Vorgang} gestartet wird.
+      \item[/F090/] \textsf{Modus wechseln:} Der Nutzer kann zwischen Modi über ein einblendbares Menü wechseln, auch während ein Vorgang aktiv ist.
+      \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob der Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}, mit Hilfe von /F060/.
+      \item[/F101/] \textsf {Schrittfrequenz anzeigen:} Im Modus \glqq{}Laufmodus\grqq{} wird die Schrittfrequenz des Nutzers angezeigt, sobald der Vorgang gestartet wird. Die Schrittfrequenz wird mit Hilfe von /F061/ ermittelt.
+      \item[/F102/] \textsf {Schrittanzahl anzeigen:} Im Modus \glqq{}Laufmodus\grqq{} wird die Schrittanzahl des Nutzers angezeigt, sobald der Vorgang gestartet wird. Die Schrittanzahl wird mit Hilfe von /F062/ ermittelt. Die Schrittzählung beginnt/endet mit dem Starten/Stoppen des Vorgangs.
+      \item[/F103/] \textsf{Schrittanzahl Speichern:} Die App speichert die Schrittanzahl pro Tag für die letzten 30 Tage an denen der Laufmodus aktiv war.
+      \item[/F104/] \textsf{Ergebnisse des letzten Vorgangs anzeigen:} Wenn sich die App im Laufmodus befindet und der Vorgang noch nicht gestartet wurde, wird angezeigt wie weit der Nutzer beim letzten Vorgang gelaufen ist und wie viele Schritte er gemacht hat. Falls es noch keine Einträge gibt werden Nullwerte angezeigt.
+      \item[/F140/] \textsf{BLE-Verbindung herstellen:} Sobald der Nutzer die App startet erscheint ein Pop-up Fenster, über das der Nutzer sein Smartphone mit den \gls{Earables} verbinden kann. Ohne BLE-Verbindung kann der Nutzer zu keinem Modus wechseln und keinen Vorgang starten.
+      \item[/F150/] \textsf{Bluetooth Verbindung unterbrochen:} Falls die App die Verbindung zu den \gls{Earables} verlieren sollte, erscheint wieder das Pop-up Fenster aus /F140/.
+      \item[/F160/] \textsf{Bluetooth Verbindung nicht notwendig:} Der Nutzer kann das Pop-up Fenster aus /F140/ wegklicken.
+      \item[/F165/] \textsf{Bluetooth Verbindung später herstellen:} Falls der Nutzer keine Bluetooth Verbindung mit den \gls{Earables} besitzt und zu einem Modus wechselt oder einen Vorgang startet, so erscheint zunächst das Pop-up Fenster aus /F140/.
     \end{itemize}
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
       Weitere Datenauswertung:
       \begin{itemize}
-      \item[/F170/] \textsf{Erkennung Sit-ups} Das Erweiterungsmodul erkennt wann der Nutzer Sit-ups macht.
-      \item[/F180/] \textsf{Erkennung Liegestütze} Das Erweiterungsmodul erkennt wann der Nutzer Liegestütze macht.
+      \item[/F170/] \textsf{Erkennung Sit-ups} Das Erweiterungsmodul kann erkennen, ob der Nutzer Sit-ups macht.
+      \item[/F180/] \textsf{Erkennung Liegestütze} Das Erweiterungsmodul kann erkennen, ob der Nutzer Liegestütze macht.
       \end{itemize} 
     \subsubsection{App}
       Weitere Modi:
       \begin{itemize}
       \item[/F190/] \textsf{Modus Livedaten: \textit{(versteckt)}} Visualisieren der Sensorrohdaten als Graphen.%% ist das noch aktuell???
-      \item[/F194/] \textsf{Zählmodus starten} Der Nutzer kann den Zählmodus starten.
-      \item[/F195/] \textsf{Liegestützen/Sit-ups zählen:} Zählen von Liegestützen oder Sit-ups mit Hilfe von /F170/ und /F180/.
-      \item[/F200/] \textsf{Liegestützen/Sit-ups anzeigen:}  Das Ergebnis wird im Modus \glqq{} Zählmodus \grqq{}, nachdem man die Liegestützen/Sit-Ups gemacht hat, angezeigt.
+      \item[/F200/] \textsf{Zählmodus:} Zählen von Liegestützen oder Sit-ups mit Hilfe von /F170/ und /F180/.
       \item[/F210/] \textsf{Start/Stopp Musikmodus:} Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft. Bei diesem Modus werden keine Resultate angezeigt.
-      \item[/F220/]{
-        Modus \glqq Lauschen\&Agieren\grqq
+      \item[/F220/]
+ 	\textsf{Modus \glqq Lauschen\&Agieren\grqq:}
         \begin{itemize}
-          \item[/F220.1/] Der Nutzer kann den Modus Lauschen\&Agieren starten.
-          \item[/F221/]Der Nutzer kann sich einen Trainingsplan zusammenstellen indem er in einer Liste Übungen hinzufügt. (Liegestütze, Sit-ups, Laufen). 
-          \item[/F222/] Der Nutzer erhält Sprachanweisungen für die nächste Übung während des Trainings. Die nächste Sprachanweisung kommt erst wenn der Nutzer die aktuelle Übung vollständig beendet hat.
-          \item[/F223/] Nachdem der Nutzer seinen Trainingsplan abgearbeitet hat wird ihm angezeigt wie lange er dafür gebraucht hat.
-          \item[/F224/] Die Sprachanweisung erfolgt in der Sprache der in-App Einstellungen. (Deutsch oder Englisch)
+          \item[/F221/]Der Nutzer kann sich einen Trainingsablaufplan zusammenstellen, indem er in einer Liste Aktivitäten hinzufügt. (Liegestütze, Sit-ups, Laufen). 
+          \item[/F222/] Der Nutzer erhält Sprachanweisungen per TTS für die nächste Übung während des Vorgangs. Die nächste Sprachanweisung kommt erst, wenn der Nutzer die aktuelle Aktivität vollständig beendet hat.
+          \item[/F223/] Neben dem Vorgangsresultat wird dem Nutzer nach Beenden des Vorgangs auch die Zeit angezeigt, in der er die Aktivitäten absolviert hat.
+          \item[/F224/] Die Sprachanweisung erfolgt in der Sprache der in-App Einstellungen. 
         \end{itemize}
-      }
+      \end{itemize}
 
       Einstellungen:
+       \begin{itemize}
       \item[/F250/] Der Nutzer kann seinen Namen in den Einstellungen ändern.
-      \item[/F260/] Der Nutzer kann die Sprache der App anpassen. (Möglichkeiten sind Deutsch und Englisch)
+      \item[/F260/] Der Nutzer kann die Sprache der App verändern. (Möglichkeiten sind Deutsch und Englisch)
       \item[/F265/] Standardmäßig wird sich die Sprache der App automatisch an die Systemsprache des Smartphones des Nutzers anpassen.
       \item[/F270/] Der Nutzer kann die gespeicherten \Gls{Vorgangsdaten} löschen.
       \item[/F280/] Der Nutzer kann die \Gls{Steuerungsparameter} anpassen. 
-      \item[/F285/] Der Nutzer kann die Schrittlänge für den Modus Distanzmessung anpassen.
-      
-      Sonstiges:
-      \item[/F290/] Aufforderung der Angabe von Name und Schrittlänge bei Erstnutzung.
-      \item[/F300/] Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren, importieren und löschen. Dabei wird das CSV-Format genutzt. 
-      \item[/F310/] Speicherung von Sit-ups und Liegestütze für jeden Tag, an dem ein \Gls{Vorgang} aktiv war (keine \Gls{Rohdaten}).
-      \item[/F320/] Anzeigen der gespeicherten Daten aus /F310/.
+      \item[/F285/] Der Nutzer kann die Schrittlänge für die Distanzmessung anpassen.
       \end{itemize}
+      Sonstiges:
+\begin{itemize}
+      \item[/F290/] Aufforderung der Angabe von Name und Schrittlänge bei Erstnutzung.
+      \item[/F300/] Der Nutzer kann in der App seine gesamten \Gls{Vorgangsdaten} exportieren, importieren und löschen. Dabei wird das CSV-Format genutzt. 
+      \item[/F310/] Speicherung von Sit-ups, Liegestütze und Schrittanzahl für jeden Tag, an dem ein \Gls{Vorgang} aktiv war.
+      \item[/F320/] Der Nutzer kann die gespeicherten Vorgangsdaten /F310/ der letzten 30 Tage, an denen mindestens ein Vorgang gestartet wurde, einsehen. 
+\end{itemize}
+      
 
 
 \section{Produktdaten}
@@ -268,33 +271,33 @@ Die App soll dem Nutzer die Möglichkeit zur Verfügung stellen, seine Trainings
 
 
 \section{Nichtfunktionale Anforderungen}
-Wie unten unter dem Punkt Qualitätszielbestimmungen aufgeführt legen wir unsere Priorität vor allem auf Korrektheit und Benutzerfreundlichkeit. Um die Benutzerfreundlichkeit zu gewährleisten, werden hier einige Anforderungen an die Stabilität, den Speicherplatz und das Laufzeitverhalten gestellt. Für das korrekte Funktionieren werden weitere allgemeine Anforderungen formuliert.
+Wie unter dem Punkt Qualitätszielbestimmungen aufgeführt, legen wir unsere Priorität vor allem auf Korrektheit und Benutzerfreundlichkeit. Um die Benutzerfreundlichkeit zu gewährleisten, werden hier einige Anforderungen an die Stabilität, den Speicherplatz und das Laufzeitverhalten gestellt. Für das korrekte Funktionieren werden weitere allgemeine Anforderungen formuliert.
 \subsection{Allgemein}
 \begin{itemize}
-  \item[/NF010/] Beim Ausführen der Funktion /F030/ soll die Datenaufnahme der \Gls{IMU} gestoppt werden.
-  \item[/NF020/] Beim Wechseln zwischen Modi (/F090/) soll der aktuelle Modus terminiert werden.
-  \item[/NF030/] Nach Ausführung der Funktion  Sprachänderung (/F260/) muss die App neu gestartet werden.
-  \item[/NF040/] Bei nicht sinnvollen Angaben (z.B. negativen Werten in /F220/) wird das Starten des Vorgangs verhindert.
-  \item[/NF050/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe ev. /F300/) nicht verändert.
+  \item[/NF010/] Beim Änderung der Steuerungsparameter (/F030/) soll die Datenaufnahme der \Gls{IMU} gestoppt werden.
+  \item[/NF020/] Beim Wechseln zwischen Modi (/F090/) soll der aktuelle Vorgang terminiert werden.
+  \item[/NF030/] Nach dem Ändern der Sprache der App (/F260/) muss die App neu gestartet werden.
+  \item[/NF040/] Bei nicht sinnvollen Angaben (z.B. negativen Werten in /F221/) wird das Starten des Vorgangs verhindert.
+  \item[/NF050/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe /F300/) nicht verändert.
   \item[/NF060/] Bei Namensgebung sind nur Groß- und Kleinbuchstaben ohne Umlaute und Sonderzeichen erlaubt.
   \item[/NF065/] Gerät die App durch Minimieren oder Ausschalten des Smartphone Bildschirms in den Hintergrund, wird der aktuelle Vorgang terminiert.
-  \item[] Handy und Kopfhörer sollten nicht über zehn Meter voneinander entfernt werden, sodass eine Bluetooth-Verbindung möglich ist. 
-  \item[/NF067/] Beim Ausführen der Funktion /F070/ wird der Laufmodus nicht automatisch gestartet.
+  \item[/NF066/] Handy und Kopfhörer sollten nicht über zehn Meter voneinander entfernt werden, sodass eine Bluetooth-Verbindung möglich ist. 
+  \item[/NF067/] Beim Starten der App /F070/ wird der Vorgang im Laufmodus nicht automatisch gestartet.
 \end{itemize}
 \subsection{Stabilität}
 \begin{itemize}
-  \item[/NF070/] Die App soll bei herkömmlicher Nutzung nicht öfter als zweimal bei zehnmaliger Benutzung. %stabilität
+  \item[/NF070/] Die App soll bei herkömmlicher Nutzung nicht öfter als zweimal bei zehnmaliger Benutzung abstürzen. 
 \end{itemize}
 \subsection{Speicherplatz}
 \begin{itemize}
-  \item[/NF080/] Die App soll eine Größe von 100 MByte nicht überschreiten. %speicher
-  \item[/NF090/] Die gespeicherten Daten sollen nicht mehr als 50 MByte umfassen. %speicher] 
+  \item[/NF080/] Die App soll eine Größe von 100 MByte nicht überschreiten. 
+  \item[/NF090/] Die gespeicherten Daten sollen nicht mehr als 50 MByte umfassen. 
 \end{itemize}
 \subsection{Laufzeitverhalten}
 \begin{itemize}
-  \item[/NF100/] Die Funktionen /F060/ und /F100/ (Laufmodus) soll maximal eine Verzögerung von zwei Sekunden aufweisen. %%Laufzeitverhalten
-  \item[/NF110/] Der Start eines Modus nach seiner Auswahl (/F080/) soll nicht länger als zwei Sekunden benötigen. %%Laufzeitverhalten] 
-  \item[/NF120/] Die Einblendung des Vorgangsresultats (/F130/) soll nicht länger als zwei Sekunden benötigen.%%Laufzeitverhalten
+  \item[/NF100/] Die Liveanzeige des Laufmodus (/F100/) soll maximal eine Verzögerung von zwei Sekunden aufweisen. 
+  \item[/NF110/] Der Start eines Vorgangs nach seiner Auswahl (/F080/) soll nicht länger als zwei Sekunden benötigen. 
+  \item[/NF120/] Die Einblendung des Vorgangsresultats (/F130/) soll nicht länger als zwei Sekunden benötigen.
   \item[/NF130/] Der Verbindungsaufbau mit den \Gls{Earables} darf nicht länger als 5 Sekunden dauern.
 
 \end{itemize}
@@ -305,13 +308,13 @@ Wie unten unter dem Punkt Qualitätszielbestimmungen aufgeführt legen wir unser
   	\vspace{100px}
   	\includegraphics[width=0.8\textwidth]{./Diagramme/Archi3.png}
   \end{center}
-  \clearpage %%sieht sonst noch zerrissener aus
+  \clearpage %%sieht sonst noch zerrissener aus;    Gehts nicht irgendwie schöner? Sodass das Diagramm ganz oben quasi anliegt?
   \subsection{Kurze Erläuterung zum Architekturdiagramm}
   Wir haben uns bei der Architekturdiagramm für \textsf{Model-View-Viewmodel}, eine Spezialisierung  des Entwurfsmusters Model-View-Controller, entschieden.
   Dabei gibt es folgende Komponenten:
   \begin{itemize}
     \item \textsf{\glqq View\grqq{}} enthält alle grafisch angezeigten Elemente, also die Datenanzeige und Bedienoberfläche der App.
-    \item {\textsf{\glqq Model\grqq{}} enthält die Geschäftslogik der App und ist stark nach außen abgekapselt. In diesen Bereich fallen die meißten komplexen Teile der App, die als Dienste (Services) vom Viewmodel aus verwaltet werden sollen, wesentlich sind dabei (vollständige Angabe im Entwurf): \begin{itemize}
+    \item {\textsf{\glqq Model\grqq{}} enthält die Geschäftslogik der App und ist stark nach außen abgekapselt. In diesen Bereich fallen die meisten komplexen Teile der App, die als Dienste (Services) vom Viewmodel aus verwaltet werden sollen. Wesentlich sind dabei (vollständige Angabe im Entwurf): \begin{itemize}
       \item Die Verwaltung der anfallenden Produktdaten (Abruf und Bereitstellung der gespeicherten Daten in der Datenbank, im CSV-Format) über ein Datenmodul
       \item Die Bibliothek, die für die Kommunikation mit den Kopfhöhrern (Verbindungsaufbau, Start und Stopp des Samplings, Konfiguration der \Gls{Steuerungsparameter}, Auslesen der Sensordaten) zuständig ist. Dazu wird eine externe Bibliothek\footnote{https://github.com/xabre/xamarin-bluetooth-le} verwendet.
       \item Das Erweiterungsmodul, das sich um die Aktivitätserkennung kümmert. Dieses nutzt dabei die Schnittstellen der Bibliothek.
@@ -320,13 +323,13 @@ Wie unten unter dem Punkt Qualitätszielbestimmungen aufgeführt legen wir unser
     \item \textsf{\glqq Viewmodel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der UI, wird also bei Benutzerinteraktion vom View aufgerufen. Es gibt dann die entsprechenden Anweisungen an das Model weiter. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die Anzeige der App angepasst wird, zum Beispiel bei Verbindungsabbruch zu den Kopfhöhrern. 
     
   \end{itemize}
-  Der Vorteil dieser Architektur ist eine klare Trennung von Benutzerinteraktion und Programmlogik sowie eine schwache Kopplung zwischen einzelnen Funktionalitäten, was die Flexibilität und das modulare Testen deutlich erleichtert.
+  Der Vorteil dieser Architektur ist eine klare Trennung von Benutzerinteraktion und Programmlogik sowie eine lose Kopplung zwischen einzelnen Funktionalitäten, was die Flexibilität und das modulare Testen deutlich erleichtert.
   \subsection{Use-Case-Diagramm}
   \begin{center}
 	\includegraphics[width=0.8\textwidth]{./Diagramme/Use-CaseDiagramm.png} 
   \end{center}
 
-Kurzbeschreibung: Beim Starten der App landet der Nutzer automatisch im Laufmodus. Bevor ein Modus genutzt werden kann muss der Nutzer eine BLE Verbindung über ein Pop-up Fenster mit den Kopfhörern herstellen. Der Nutzer kann nun entweder den Modus wechseln oder einen \Gls{Vorgang} starten. Nach Beendigung oder Stoppen eines Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem die Vorgangsdaten des letzten Monats einsehen und seine Daten importieren/exportieren. Das Ändern von Einstellungen und der damit verbundenen \Gls{Steuerungsparameter} der \Gls{Earables} ist ebenfalls möglich.
+Kurzbeschreibung: Beim Starten der App landet der Nutzer automatisch im Laufmodus. Bevor ein Modus genutzt werden kann muss der Nutzer eine BLE Verbindung über ein Pop-up Fenster mit den Kopfhörern herstellen. Der Nutzer kann nun entweder den Modus wechseln oder einen \Gls{Vorgang} starten. Nach Beendigung oder Stoppen eines Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem vergangene Vorgangsdaten einsehen und diese auch importieren/exportieren. Das Ändern von Einstellungen der App und der \Gls{Steuerungsparameter} der \Gls{Earables} über die App ist ebenfalls möglich.
 \section{Benutzeroberfläche}
 Die \Gls{GUI} wird durch die App realisiert. Dabei kann man die einzelnen Modi über das Navigationsmenü auswählen. Jeder Modus hat zwei Seiten; eine Übersichtsseite und eine aktive Seite, welche während des aktiven \Gls{Vorgang} angezeigt wird. Für die weiteren Funktionen(Einstellungen, Dateienexport/-import) bietet die Applikation ebenfalls spezielle Seiten an.
 Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{} über den angegebenen Link in der Fußnote \footnote[1]{Mock-Up Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0}
@@ -411,7 +414,7 @@ Die \Gls{GUI} kann getestet werden mithilfe des Design-Tools \glqq Mock-up\grqq{
 	\centering
 	\begin{minipage}{0.4\textwidth}
 		\includegraphics[width=4cm,height=9cm]{./Benutzeroberflaeche/VerbindungsPopUp.png}
-		\caption{VerbindungsPopUp}
+		\caption{VerbindungsPop-up}
 		\vspace{30px}
 	\end{minipage}
 \end{figure}
