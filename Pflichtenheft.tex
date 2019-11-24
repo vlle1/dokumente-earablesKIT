@@ -128,7 +128,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \item Die App soll über drei weitere Modi verfügen.
       \begin{itemize}
         \item Im Modus \glqq Zählmodus\grqq{} zählt die App wie viele Liegestütze oder Sit-ups der Nutzer macht.
-        \item Im Modus \glqq Lauschen\&Agieren\grqq{} kann der Nutzer seinen eigenen Trainingsablaufplan erstellen, welcher dann über Text-to-Speech (\Gls{TTS}) ausgegeben wird.
+        \item Im Modus \glqq Lauschen\&Agieren\grqq{} kann der Nutzer seinen eigenen Trainingsablaufplan erstellen, welcher dann über \Gls{TTS} ausgegeben wird.
         \item Im Modus \glqq Musikmodus\grqq{} wird Musik abgespielt, wenn der Nutzer läuft und automatisch pausiert, wenn der Nutzer steht. Sobald der Nutzer weiter läuft wird die Musik auch wieder weiterlaufen.
       \end{itemize}
     \item Während der \glqq Laufmodus\grqq{} aktiv ist, wird die aktuelle Schrittanzahl und die zurückgelegte Distanz live angezeigt.
@@ -179,14 +179,16 @@ Unser Produkt besteht aus drei Teilen (der Bibliothek, dazu das Erweiterungsmodu
 \section{Produktumgebung}
 Es handelt sich bei der App um eine Smartphoneanwendung, daher wird das Produkt als Installationspaket ausgeliefert. Außerdem setzen wir bestimmte Hardware- und Softwarebedingungen voraus.
 \subsection{Hardware} 
-	\textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung. %%Itemizen geht hier iwie nich
-	\textsf{Leistungsanforderung:} Das Smartphone sollte mindestens 1 GB Arbeitsspeicher besitzen.
-	\textsf{Speicheranforderung:} Das Smartphone sollte mindestens 100 MB Speicherplatz zur Verfügung haben.
+\begin{itemize}
+  \item \textsf{Minimale Anforderungen:} Smartphone mit \Gls{BLE} Unterstützung. 
+  \item \textsf{Leistungsanforderung:} Das Smartphone sollte mindestens 1 GB Arbeitsspeicher besitzen.
+  \item \textsf{Speicheranforderung:} Das Smartphone sollte mindestens 100 MB Speicherplatz zur Verfügung haben.
+\end{itemize}
+
 \subsection{Software} 
 	\textsf{Betriebssystem:} Unterstützung nur von Android ab Version 7 und iOS ab Version 10.
-\newline
-\newline
-\newline
+
+\vspace{1cm}
 \section{Funktionale Anforderungen}
 Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt umgesetzt werden muss) und einen Wunschteil (Anforderungen, die umgesetzt werden sollten, aber nicht essenziell sind). Die Funktionalen Anforderungen spezifizieren auf Ebene der Bibliothek, des Erweiterungsmoduls und der App, welche Funktionen umgesetzt werden müssen bzw. können. 
   \subsection{Mussanforderungen}
