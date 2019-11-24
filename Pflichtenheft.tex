@@ -76,7 +76,7 @@
 \newglossaryentry{IMU}{name=6-Achsen IMU, description={Ein 6-Achsen IMU ist ein Beschleunigungssensor mit Gyroskop.}}
 \newglossaryentry{GUI}{name=GUI, description={GUI ist die Abkürzung für den englischen Begriff \glqq graphical user interface\grqq . Sie ist die Schnittstelle zwischen Mensch und Maschine und ermöglicht dem Nutzer die Eingabe/Steuerung, der Maschine.}}
 \newglossaryentry{Cross-Platform Bibliothek}{name=Cross-Platform Bibliothek, description={Eine Cross-Platform Bibliothek ist nichts weiter als eine Bibliothek die auf Rechnersystemen mit verschiedener Architektur laufen kann.}}
-\newglossaryentry{Steuerungsparameter}{name=Steuerungsparameter, description={Unter Steuerungsparametern fassen wir die Länge der Verbindungsintervalle zwischen Kopfhöhrern und Handy sowie die Abtastrate und den Wertebereich von integriertem Gyroskop und Beschleunigungssensor zusammen.}}
+\newglossaryentry{Steuerungsparameter}{name=Steuerungsparameter, description={Unter Steuerungsparametern fassen wir die Länge der Verbindungsintervalle zwischen Earables und Smartphone sowie die Abtastrate und den Wertebereich von integriertem Gyroskop und Beschleunigungssensor zusammen.}}
 \newglossaryentry{Schrittfrequenz}{name=Schrittfrequenz, description={Die Schrittfrequenz gibt an wie viele Schritte pro Zeiteinheit gemacht werden.}}
 \newglossaryentry{Rohdaten}{name=Rohdaten, description={Als Rohdaten werden unverarbeitete Daten bezeichnet.}}
 \newglossaryentry{TTS}{name=Text-To-Speech, description={Ein Text-to-Speech-System (TTS) (oder Vorleseautomat) wandelt Fließtext in eine akustische Sprachausgabe um. Dabei erfolgt diese auf Deutsch oder auf Englisch, abhängig davon, was als Sprache eingestellt ist.}}
@@ -193,7 +193,7 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
     \subsubsection{Bibliothek}
     \begin{itemize}
       \item[/F010/] Gemessene Rohdaten des \Gls{IMU} in \Gls{Echtzeit} zur Verfügung stellen.
-      \item[/F030/] Steuerungsparameter (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. %%die einzigen "Messparameter" die wir ändern können sind die abtastrate und die start/stop des samplings
+      \item[/F030/] \Gls{Steuerungsparameter} (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. %%die einzigen "Messparameter" die wir ändern können sind die abtastrate und die start/stop des samplings
       \item[/F040/] Datenaufnahme des \Gls{IMU} starten und stoppen.
     \end{itemize}
     \subsubsection{Erweiterungsmodul}
@@ -276,14 +276,14 @@ Die App soll dem Nutzer die Möglichkeit zur Verfügung stellen, seine Trainings
 Wie unter dem Punkt Qualitätszielbestimmungen aufgeführt, legen wir unsere Priorität vor allem auf Korrektheit und Benutzerfreundlichkeit. Um die Benutzerfreundlichkeit zu gewährleisten, werden hier einige Anforderungen an die Stabilität, den Speicherplatz und das Laufzeitverhalten gestellt. Für das korrekte Funktionieren werden weitere allgemeine Anforderungen formuliert.
 \subsection{Allgemein}
 \begin{itemize}
-  \item[/NF010/] Beim Änderung der Steuerungsparameter (/F030/) soll die Datenaufnahme der \Gls{IMU} gestoppt werden.
+  \item[/NF010/] Beim Änderung der \Gls{Steuerungsparameter} (/F030/) soll die Datenaufnahme der \Gls{IMU} gestoppt werden.
   \item[/NF020/] Beim Wechseln zwischen Modi (/F090/) soll der aktuelle Vorgang terminiert werden.
   \item[/NF030/] Nach dem Ändern der Sprache der App (/F260/) muss die App neu gestartet werden.
   \item[/NF040/] Bei nicht sinnvollen Angaben (z.B. negativen Werten in /F221/) wird das Starten des Vorgangs verhindert.
   \item[/NF050/] Bei Namensänderung (/F250/) werden gespeicherte Daten (siehe /F300/) nicht verändert.
   \item[/NF060/] Bei Namensgebung sind nur Groß- und Kleinbuchstaben ohne Umlaute und Sonderzeichen erlaubt.
   \item[/NF065/] Gerät die App durch Minimieren oder Ausschalten des Smartphone Bildschirms in den Hintergrund, wird der aktuelle Vorgang terminiert.
-  \item[/NF066/] Handy und Kopfhörer sollten nicht über zehn Meter voneinander entfernt werden, sodass eine Bluetooth-Verbindung möglich ist. 
+  \item[/NF066/] Earables und Smartphone sollten nicht über zehn Meter voneinander entfernt werden, sodass eine Bluetooth-Verbindung möglich ist. 
   \item[/NF067/] Beim Starten der App /F070/ wird der Vorgang im Laufmodus nicht automatisch gestartet.
 \end{itemize}
 \subsection{Stabilität}
@@ -430,7 +430,7 @@ Die folgenden Abbildungen zeigen das Design der App.
   \begin{itemize}
     \item die App gestartet wird,
     \item die BLE-Verbindung unterbrochen wurde,
-    \item wenn ein Modus gestartet werden soll oder andere Aktivitäten erfolgen (z.b. Steuerungsparameter anpassen), aber gerade keine BLE-Verbindung existiert.
+    \item wenn ein Modus gestartet werden soll oder andere Aktivitäten erfolgen (z.b. \Gls{Steuerungsparameter} anpassen), aber gerade keine BLE-Verbindung existiert.
   \end{itemize}
   Die Pop-Up Meldung kann über einen Button jederzeit ausgeblendet werden. 
   Wird eine BLE-Verbindung erfolgreich hergestellt, verschwindet das Pop-Up.
