@@ -529,16 +529,16 @@ Erst nach dem Bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
   \subsection{Szenarien}
 	Vor jedem Szenario wird davon ausgegangen, dass das Smartphone angeschaltet ist und die App noch nicht gestartet wurde. Des weiteren wird angenommen, dass die App nicht zum ersten mal gestartet wird, außer bei dem Szenario \glqq{}Erstnutzung\grqq{}.
     \subsubsection{Mussanforderungen}
-      \paragraph{Laufmodus (/T100/)}
+      \paragraph{Laufmodus}
       \begin{enumerate}
         \item Der Nutzer startet die App. (/T070/)
         \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Nach dem Startvorgang der App wird in den Modus \glqq Laufmodus\grqq{} gewechselt.
-        \item Falls es schon eine Session zuvor gab, werden nun die Anzahl der zurückgelegten Schritte und die zurückgelegte Distanz, der vorherigen Session angezeigt. (/T138/)
+        \item Falls es schon einen Laufvorgang zuvor gab, werden nun die Anzahl der zurückgelegten Schritte und die zurückgelegte Distanz angezeigt. (/T104/)
         \item Die \Gls{Earables} werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer startet den Laufmodus.
         \item Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an.
-        \item Die App zeigt dem Nutzer die aktuelle \gls{Schrittfrequenz} und die Anzahl der bisher zurückgelegten Schritte an. (/T132/, /T134/)
+        \item Die App zeigt dem Nutzer die aktuelle \gls{Schrittfrequenz} und die Anzahl der bisher zurückgelegten Schritte an. (/T101/, /T102/)
         \item Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an.
         \item Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. 
       \end{enumerate}
@@ -546,26 +546,26 @@ Erst nach dem Bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
     \subsubsection{Wunschanforderungen}
 
     
-    \paragraph{Zählmodus (/F200/)}
+    \paragraph{Zählmodus}
       \begin{enumerate}
         \item Der Nutzer startet die App. (/T070/)
         \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone..
-        \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Zählmodus\grqq . (/F200/)
+        \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Zählmodus\grqq . (/T090/)
         \item Die \Gls{Earables} werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer wählt eine verfügbare Übung aus. 
         \item Der Nutzer startet den gewählten \Gls{Vorgang}.
-        \item Der Nutzer führt die Übung X (natürliche Zahl) mal aus.
+        \item Der Nutzer führt die Übung 15 (natürliche Zahl) mal aus.
         \item Der Nutzer stoppt den laufenden \Gls{Vorgang}.
-        \item Die App zeigt X an. (/T200/)
+        \item Die App zeigt 15 an. (/T200/)
       \end{enumerate}
 
     
-    \paragraph{Start/Stop Musikmodus (/F210/)}
+    \paragraph{Start/Stop Musikmodus}
       \begin{enumerate}
         \item Der Nutzer startet die App. (/T070/)
         \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Der Nutzer spielt Musik mit der vorinstallierten Musik-App ab.
-        \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Laufmodus\grqq . (/F210/)
+        \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Laufmodus\grqq . (/T090/)
         \item Die \Gls{Earables} werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer beginnt zu gehen.
         \item Der Nutzer startet den gewählten \Gls{Vorgang}.
@@ -575,11 +575,11 @@ Erst nach dem Bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
         \item Die Musik startet automatisch wieder. (/T210/)
       \end{enumerate}
   
-      \paragraph{Lauschen\&Agieren (/F220/)}
+      \paragraph{Lauschen\&Agieren}
       \begin{enumerate}
         \item Der Nutzer startet die App. (/T070/)
         \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
-        \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Lauschen\&Agieren\grqq . (/F220/)
+        \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Lauschen\&Agieren\grqq . (/F090/)
         \item Die \Gls{Earables} werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer stellt sich ein Training aus den verfügbaren Übungen zusammen (/T221/).
         \item Der Nutzer startet den gewählten \Gls{Vorgang}.
@@ -587,18 +587,18 @@ Erst nach dem Bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
         \item Der Nutzer führt die Übung aus.
         \item Die letzten beiden Schritte werden so lange wiederholt, bis alle ausgewählten Übungen erledigt sind.
         \item Der \Gls{Vorgang} wird automatisch beendet.
-        \item Die App zeigt die benötigten Zeiten pro Übung an (/T223/).
+        \item Die App zeigt die benötigte Zeit für den Vorgang an (/T223/).
       \end{enumerate}
 
-      \paragraph{Einstellungen (/F250/ bis /F285/)}
-      \textit{Voraussetzung: /T220/}
+      \paragraph{Einstellungen}
       \begin{enumerate}
         \item Der Nutzer startet die App. (/T070/)
+        \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Nach dem Startvorgang der App wechselt der Nutzer in die Ansicht \glqq Einstellungen\grqq .
         \item Der Nutzer ändert seinen Namen (/T250/).
         \item Der Nutzer ändert die Sprache auf Englisch (/T260/).
         \item Dem Nutzer löscht die gespeicherten \Gls{Vorgangsdaten} (/T270/).
-        \item Dem Nutzer ändert die \Gls{Steuerungsparameter} (/T280/).
+        \item Dem Nutzer ändert die Samplingrate (/T280/).
         \item Der Nutzer ändert seine Schrittlänge (/T285/).
         \item Der Nutzer beendet die App.
         \item Der Nutzer startet die App. (/T070/)
@@ -606,9 +606,9 @@ Erst nach dem Bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
         \item Die Einstellungen sind exakt so, wie sie vorher eingestellt wurden.
       \end{enumerate}
 
-      \paragraph{Erstnutzung (/F290/)}
+      \paragraph{Erstnutzung}
       \begin{enumerate}
-        \item Der Nutzer startet die App zum ersten Mal. (/T070/)
+        \item Der Nutzer startet die App zum ersten Mal. 
         \item Der Nutzer wird aufgefordert seinen Namen und seine Schrittlänge zu setzen. (/T290/)
         \item Der Nutzer wählt im Hamburgermenü den Reiter Einstellungen aus.
         \item Der Nutzer ändert die Sprache auf Englisch.(/T260/)
@@ -618,13 +618,13 @@ Erst nach dem Bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
         \item Sein Name, seine Schrittlänge und die in-App Sprache wurden gespeichert.
       \end{enumerate}
 
-      \paragraph{Vorgangsdaten importieren/exportieren (/F300/)}
+      \paragraph{Vorgangsdaten importieren/exportieren}
       \begin{enumerate}
         \item Der Nutzer startet die App. (/T070/)
         \item Der Nutzer wählt über das Hamburgermenü den Reiter \glqq{}Import/Export \grqq{}.
-        \item Der Nutzer exportiert seine Daten. (/T300/)
-        \item Der Nutzer löscht seine Daten. (/T300/)
-        \item Der Nutzer importiert seine Daten. (/T300/)
+        \item Der Nutzer exportiert seine Daten. 
+        \item Der Nutzer löscht seine Daten. (/T270/)
+        \item Der Nutzer importiert seine Daten aus einer CSV-Datei. (/T300/)
         \item Die Daten sind alle wieder vorhanden so als ob der Nutzer sie nie gelöscht hätte.
       \end{enumerate}
 
@@ -632,19 +632,19 @@ Erst nach dem Bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
     \begin{enumerate}
 	\item Der Nutzer startet die App. (/T070/)
  	\item Der Nutzer wechselt über das Hamburgermenü in die Datenübersicht.
-	\item Dem Nutzer werden die letzten Trainingsdaten der letzten 30 Tage angezeigt. (/T136/, /T320/)
+	\item Dem Nutzer werden die letzten Trainingsdaten der letzten 30 Vorgangstage angezeigt. (/T320/)
     \end{enumerate}
 
-    \paragraph{Pop Up}
+    \paragraph{Pop-up}
     \begin{enumerate}
 	\item Der Nutzer startet die App. (/T070/)
- 	\item Das Pop Up Fenster erscheint.
- 	\item Der Nutzer klickt das Pop Up weg. (/T160/)
- 	\item Der Nutzer startet den Laufmodus.
- 	\item Das Pop Up erscheint.(/T165/)
+ 	\item Das Pop-up Fenster erscheint.
+ 	\item Der Nutzer klickt das Pop-up weg. (/T160/)
+ 	\item Der Nutzer versucht einen Laufvorgang zu starten.
+ 	\item Das Pop-up erscheint. 
  	\item Der Nutzer stellt eine Verbindung zu den \gls{Earables} her.
  	\item Der Nutzer entfernt sich mit seinem Smartphone von de \gls{Earables}.
- 	\item Das Smartphone verliert die Bluetooth Verbindung zu den \gls{Earables} und das Pop Up erscheint. (/T150/)
+ 	\item Das Smartphone verliert die Bluetooth Verbindung zu den \gls{Earables} und das Pop-up erscheint. (/T150/)
     \end{enumerate}
 
 \section{Entwicklungsumgebung}
