@@ -124,15 +124,15 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
   \end{itemize}
 \subsection{Wunschkriterien}
   \begin{itemize}
-    \item Die App soll die zurückgelegte Distanz anzeigen.
     \item Die App soll über drei weitere Modi verfügen.
       \begin{itemize}
         \item Im Modus \glqq Zählmodus\grqq{} zählt die App wie viele Liegestütze oder Sit-ups der Nutzer macht.
         \item Im Modus \glqq Lauschen\&Agieren\grqq{} kann der Nutzer seinen eigenen Trainingsablaufplan erstellen, welcher dann über \Gls{TTS} ausgegeben wird.
         \item Im Modus \glqq Musikmodus\grqq{} wird Musik abgespielt, wenn der Nutzer läuft und automatisch pausiert, wenn der Nutzer steht. Sobald der Nutzer weiter läuft wird die Musik auch wieder weiterlaufen.
       \end{itemize}
-    \item Während der \glqq Laufmodus\grqq{} aktiv ist, wird die aktuelle Schrittanzahl und die zurückgelegte Distanz live angezeigt.
-    \item Wenn kein Laufvorgang aktiv ist, wird im Laufmodus die Daten (Schritte, Distanz) des letzten Datums angezeigt, an dem trainiert wurde. %% in die NFA aufnehmen
+    \item Die App soll die zurückgelegte Distanz anzeigen.
+    \item Während der \glqq Laufmodus\grqq{} aktiv ist, werden die aktuelle Schrittanzahl und die zurückgelegte Distanz live angezeigt.
+    \item Wenn kein Laufvorgang aktiv ist, werden im Laufmodus die Daten (Schritte, Distanz) des letzten Datums angezeigt.
     \item Die App wird standardmäßig auf die Sprache des Smartphone eingestellt sein. Die Sprache kann in den Einstellungen auf Deutsch oder Englisch gewechselt werden. Sollte die Sprache des Smartphones nicht unterstützt werden wird standardmäßig Englisch verwendet. 
     \item Vorgangsdaten werden automatisch gespeichert; Importieren und Exportieren soll möglich sein.
   \end{itemize}
@@ -141,7 +141,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \item Es werden keine \Gls{Rohdaten} auf dem Smartphone des Nutzers gespeichert.
     \item Die Musik passt sich nicht der \Gls{Schrittfrequenz} des Nutzers an.
     \item Im Modus \glqq Zählen\grqq{} wird davon ausgegangen, dass der Nutzer wirklich nur Liegestützen oder Sit-ups macht. Das bewusste Austricksen des Systems durch andere Bewegungen wird nicht behandelt.
-    \item Es werden nur Vorgangsdaten auf dem Smartphone gespeichert und nicht auf den \Gls{Earables}.
+    \item Auf den \Gls{Earables} werden keine Vorgangsdaten gespeichert.
     \item Die Daten des Mikrophons werden weder aufgezeichnet noch ausgewertet.
   \end{itemize}
 \clearpage
@@ -186,7 +186,7 @@ Es handelt sich bei der App um eine Smartphoneanwendung, daher wird das Produkt 
 \end{itemize}
 
 \subsection{Software} 
-	\textsf{Betriebssystem:} Unterstützung nur von Android ab Version 7 und iOS ab Version 10.
+	\textsf{Betriebssystem:} Unterstützung von Android ab Version 7 und iOS ab Version 10.
 
 \vspace{1cm}
 \section{Funktionale Anforderungen}
@@ -194,7 +194,7 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
   \subsection{Mussanforderungen}
     \subsubsection{Bibliothek}
     \begin{itemize}
-      \item[/F010/] Gemessene Rohdaten des \Gls{IMU} in \Gls{Echtzeit} zur Verfügung stellen.
+      \item[/F010/] Gemessene \Gls{Rohdaten} des \Gls{IMU} in \Gls{Echtzeit} zur Verfügung stellen.
       \item[/F030/] \Gls{Steuerungsparameter} (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. %%die einzigen "Messparameter" die wir ändern können sind die abtastrate und die start/stop des samplings
       \item[/F040/] Datenaufnahme des \Gls{IMU} starten und stoppen.
     \end{itemize}
@@ -338,7 +338,7 @@ Beim Starten der App landet der Nutzer automatisch im Laufmodus. Bevor ein Modus
 \section{Benutzeroberfläche}
 \subsection{Einführung}
 Die \Gls{GUI} wird durch die App realisiert. Dabei kann man die einzelnen Modi über das Navigationsmenü auswählen. Jeder Modus hat zwei Seiten; eine Übersichtsseite und eine aktive Seite, welche während des aktiven \Gls{Vorgang} angezeigt wird. Für die weiteren Funktionen(Einstellungen, Dateienexport/-import) bietet die Applikation ebenfalls spezielle Seiten an.
-Online kann bereits eine Mock-Up \Gls{GUI} angesehne werden mithilfe des Design-Tools \glqq Mock-up\grqq{} über den angegebenen Link in der Fußnote \footnote[1]{Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0 (nicht vollständig)}
+Online kann bereits eine Mock-Up \Gls{GUI} angesehen werden mithilfe des Design-Tools \glqq Mock-up\grqq{} über den angegebenen Link in der Fußnote \footnote[1]{Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0 (nicht vollständig)}
 \subsection{Mock-Up Design}
 Die folgenden Abbildungen zeigen das Design der App.
 \begin{figure}[ht!]
@@ -609,7 +609,7 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
       \begin{enumerate}
         \item Der Nutzer startet die App zum ersten Mal. (/T070/)
         \item Der Nutzer wird aufgefordert seinen Namen und seine Schrittlänge zu setzen. (/T290/)
-        \item Der Nutzer wählt im Hamburgermenü den Reiter Eistellungen aus.
+        \item Der Nutzer wählt im Hamburgermenü den Reiter Einstellungen aus.
         \item Der Nutzer ändert die Sprache auf Englisch.(/T260/)
         \item Danach wechselt der Nutzer in den \glqq Laufmodus\grqq.
         \item Der Nutzer schließt die App.
