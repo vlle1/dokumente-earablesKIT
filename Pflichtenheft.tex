@@ -320,11 +320,11 @@ Wie unter dem Punkt Qualitätszielbestimmungen aufgeführt, legen wir unsere Pri
     \item \textsf{\glqq View\grqq{}} enthält alle grafisch angezeigten Elemente, also die Datenanzeige und Bedienoberfläche der App.
     \item {\textsf{\glqq Model\grqq{}} enthält die Geschäftslogik der App und ist stark nach außen abgekapselt. In diesen Bereich fallen die meisten komplexen Teile der App, die als Dienste (Services) vom Viewmodel aus verwaltet werden sollen. Wesentlich sind dabei (vollständige Angabe im Entwurf): \begin{itemize}
       \item Die Verwaltung der anfallenden Produktdaten (Abruf und Bereitstellung der gespeicherten Daten in der Datenbank, im CSV-Format) über ein Datenmodul
-      \item Die Bibliothek, die für die Kommunikation mit den Kopfhörern (Verbindungsaufbau, Start und Stopp des Samplings, Konfiguration der \Gls{Steuerungsparameter}, Auslesen der Sensordaten) zuständig ist. Dazu wird eine externe Bibliothek\footnote{https://github.com/xabre/xamarin-bluetooth-le} verwendet.
+      \item Die Bibliothek, die für die Kommunikation mit den \Gls{Earables} (Verbindungsaufbau, Start und Stopp des Samplings, Konfiguration der \Gls{Steuerungsparameter}, Auslesen der Sensordaten) zuständig ist. Dazu wird eine externe Bibliothek\footnote{https://github.com/xabre/xamarin-bluetooth-le} verwendet.
       \item Das Erweiterungsmodul, das sich um die Aktivitätserkennung kümmert. Dieses nutzt dabei die Schnittstellen der Bibliothek.
     \end{itemize}
     Die Services sind dabei jeweils unabhängig vom restlichen Model funktionsfähig und dadurch leichter testbar.}
-    \item \textsf{\glqq Viewmodel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der UI, wird also bei Benutzerinteraktion vom View aufgerufen. Es gibt dann die entsprechenden Anweisungen an das Model weiter. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die Anzeige der App angepasst wird, zum Beispiel bei Verbindungsabbruch zu den Kopfhörern. 
+    \item \textsf{\glqq Viewmodel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der UI, wird also bei Benutzerinteraktion vom View aufgerufen. Es gibt dann die entsprechenden Anweisungen an das Model weiter. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die Anzeige der App angepasst wird, zum Beispiel bei Verbindungsabbruch zu den \Gls{Earables}. 
     
   \end{itemize}
   Der Vorteil dieser Architektur ist eine klare Trennung von Benutzerinteraktion und Programmlogik sowie eine lose Kopplung zwischen einzelnen Funktionalitäten, was die Flexibilität und das modulare Testen deutlich erleichtert.
@@ -334,7 +334,7 @@ Wie unter dem Punkt Qualitätszielbestimmungen aufgeführt, legen wir unsere Pri
   \end{center}
 
 \subsubsection{Beschreibung} 
-Beim Starten der App landet der Nutzer automatisch im Laufmodus. Bevor ein Modus genutzt werden kann muss der Nutzer eine BLE Verbindung über ein Pop-up Fenster mit den Kopfhörern herstellen. Der Nutzer kann nun entweder den Modus wechseln oder einen \Gls{Vorgang} starten. Nach Beendigung oder Stoppen eines Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem vergangene Vorgangsdaten einsehen und diese auch importieren/exportieren. Das Ändern von Einstellungen der App und der \Gls{Steuerungsparameter} der \Gls{Earables} über die App ist ebenfalls möglich.
+Beim Starten der App landet der Nutzer automatisch im Laufmodus. Bevor ein Modus genutzt werden kann muss der Nutzer eine BLE Verbindung über ein Pop-up Fenster mit den \Gls{Earables} herstellen. Der Nutzer kann nun entweder den Modus wechseln oder einen \Gls{Vorgang} starten. Nach Beendigung oder Stoppen eines Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem vergangene Vorgangsdaten einsehen und diese auch importieren/exportieren. Das Ändern von Einstellungen der App und der \Gls{Steuerungsparameter} der \Gls{Earables} über die App ist ebenfalls möglich.
 \section{Benutzeroberfläche}
 \subsection{Einführung}
 Die \Gls{GUI} wird durch die App realisiert. Dabei kann man die einzelnen Modi über das Navigationsmenü auswählen. Jeder Modus hat zwei Seiten; eine Übersichtsseite und eine aktive Seite, welche während des aktiven \Gls{Vorgang} angezeigt wird. Für die weiteren Funktionen(Einstellungen, Dateienexport/-import) bietet die Applikation ebenfalls spezielle Seiten an.
@@ -534,7 +534,7 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
         \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Nach dem Startvorgang der App wird in den Modus \glqq Laufmodus\grqq{} gewechselt.
         \item Falls es schon eine Session zuvor gab, werden nun die Anzahl der zurückgelegten Schritte und die zurückgelegte Distanz, der vorherigen Session angezeigt. (/T138/)
-        \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
+        \item Die \Gls{Earables} werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer startet den Laufmodus.
         \item Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an.
         \item Die App zeigt dem Nutzer die aktuelle \gls{Schrittfrequenz} und die Anzahl der bisher zurückgelegten Schritte an. (/T132/, /T134/)
@@ -550,7 +550,7 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
         \item Der Nutzer startet die App. (/T070/)
         \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone..
         \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Zählmodus\grqq . (/F200/)
-        \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
+        \item Die \Gls{Earables} werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer wählt eine verfügbare Übung aus. 
         \item Der Nutzer startet den gewählten \Gls{Vorgang}.
         \item Der Nutzer führt die Übung X (natürliche Zahl) mal aus.
@@ -565,7 +565,7 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
         \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Der Nutzer spielt Musik mit der vorinstallierten Musik-App ab.
         \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Laufmodus\grqq . (/F210/)
-        \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
+        \item Die \Gls{Earables} werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer beginnt zu gehen.
         \item Der Nutzer startet den gewählten \Gls{Vorgang}.
         \item Der Nutzer hört auf zu gehen.
@@ -579,7 +579,7 @@ Erst nach dem bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
         \item Der Nutzer startet die App. (/T070/)
         \item Der Nutzer verbindet in der App die \gls{Earables}, über \gls{BLE} mit seinem Smartphone.
         \item Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Lauschen\&Agieren\grqq . (/F220/)
-        \item Die Kopfhörer werden korrekt am Ohr des Nutzers angebracht.
+        \item Die \Gls{Earables} werden korrekt am Ohr des Nutzers angebracht.
         \item Der Nutzer stellt sich ein Training aus den verfügbaren Übungen zusammen (/T221/).
         \item Der Nutzer startet den gewählten \Gls{Vorgang}.
         \item Dem Nutzer wird per \Gls{TTS} die aktuelle Übung angesagt (/T222/).
