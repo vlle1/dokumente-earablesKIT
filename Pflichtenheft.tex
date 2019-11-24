@@ -211,17 +211,17 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
       \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.
       \item[/F075/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus seiner Beschreibung nach aktiv ausgeführt.
       \item[/F080/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} stoppen.
-      \item[/F085/] \textsf{Resultat anzeigen:} Nach Stoppen wird das Vorgangsresultat angezeigt, bis ein neuer \Gls{Vorgang} gestartet wird.
-      \item[/F090/] \textsf{Modus wechseln:} Der Nutzer kann zwischen Modi über ein einblendbares Menü wechseln, auch während ein Vorgang aktiv ist.
+      \item[/F085/] \textsf{Resultat anzeigen:} Nach Stoppen wird das Vorgangsresultat angezeigt.
+      \item[/F090/] \textsf{Modus wechseln:} Der Nutzer kann zwischen Modi über ein einblendbares Menü wechseln.
       \item[/F100/] \textsf{Laufmodus:} Liveanzeige, ob der Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}, mit Hilfe von /F060/.
       \item[/F101/] \textsf {Schrittfrequenz anzeigen:} Im Modus \glqq{}Laufmodus\grqq{} wird die Schrittfrequenz des Nutzers angezeigt, sobald der Vorgang gestartet wird. Die Schrittfrequenz wird mit Hilfe von /F061/ ermittelt.
       \item[/F102/] \textsf {Schrittanzahl anzeigen:} Im Modus \glqq{}Laufmodus\grqq{} wird die Schrittanzahl des Nutzers angezeigt, sobald der Vorgang gestartet wird. Die Schrittanzahl wird mit Hilfe von /F062/ ermittelt. Die Schrittzählung beginnt/endet mit dem Starten/Stoppen des Vorgangs.
       \item[/F103/] \textsf{Schrittanzahl Speichern:} Die App speichert die Schrittanzahl pro Tag für die letzten 30 Tage an denen der Laufmodus aktiv war.
       \item[/F104/] \textsf{Ergebnisse des letzten Vorgangs anzeigen:} Wenn sich die App im Laufmodus befindet und der Vorgang noch nicht gestartet wurde, wird angezeigt wie weit der Nutzer beim letzten Vorgang gelaufen ist und wie viele Schritte er gemacht hat. Falls es noch keine Einträge gibt werden Nullwerte angezeigt.
-      \item[/F140/] \textsf{BLE-Verbindung herstellen:} Sobald der Nutzer die App startet erscheint ein Pop-up Fenster, über das der Nutzer sein Smartphone mit den \gls{Earables} verbinden kann. Ohne BLE-Verbindung kann der Nutzer zu keinem Modus wechseln und keinen Vorgang starten.
+      \item[/F140/] \textsf{BLE-Verbindung herstellen:} Sobald der Nutzer die App startet erscheint ein Pop-up Fenster, über das der Nutzer sein Smartphone mit den \gls{Earables} verbinden kann. Ohne BLE-Verbindung kann der Nutzer keinen Vorgang starten.
       \item[/F150/] \textsf{Bluetooth Verbindung unterbrochen:} Falls die App die Verbindung zu den \gls{Earables} verlieren sollte, erscheint wieder das Pop-up Fenster aus /F140/.
       \item[/F160/] \textsf{Bluetooth Verbindung nicht notwendig:} Der Nutzer kann das Pop-up Fenster aus /F140/ wegklicken.
-      \item[/F165/] \textsf{Bluetooth Verbindung später herstellen:} Falls der Nutzer keine Bluetooth Verbindung mit den \gls{Earables} besitzt und zu einem Modus wechselt oder einen Vorgang startet, so erscheint zunächst das Pop-up Fenster aus /F140/.
+      \item[/F165/] \textsf{Bluetooth Verbindung später herstellen:} Falls der Nutzer keine Bluetooth Verbindung mit den \gls{Earables} besitzt und einen Vorgang startet, so erscheint zunächst das Pop-up Fenster aus /F140/.
     \end{itemize}
   \subsection{Wunschanforderungen}
     \subsubsection{Erweiterungsmodul}
@@ -240,17 +240,18 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
         \item[/F210/] \textsf{Start/Stopp Musikmodus:} Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft. Bei diesem Modus werden keine Resultate angezeigt.
       
  	    \item[/F220/] \textsf{Modus \glqq Lauschen\&Agieren\grqq:}
- 	    
-        \item[/F221/]Der Nutzer kann sich einen Trainingsablaufplan zusammenstellen, indem er in einer Liste Aktivitäten hinzufügt. (Liegestütze, Sit-ups, Laufen). 
-        \item[/F222/] Der Nutzer erhält Sprachanweisungen per TTS für die nächste Übung während des Vorgangs. Die nächste Sprachanweisung kommt erst, wenn der Nutzer die aktuelle Aktivität vollständig beendet hat.
+ 	    \begin{itemize}
+        \item[/F221/]Der Nutzer kann sich einen Trainingsablaufplan zusammenstellen, indem er in einer Liste Aktivitäten hinzufügt (Liegestütze, Sit-ups, Laufen, Pausenzeit). 
+        \item[/F222/] Der Nutzer erhält Sprachanweisungen per \Gls{TTS} für die nächste Übung während des Vorgangs. Die nächste Sprachanweisung kommt erst, wenn der Nutzer die aktuelle Aktivität vollständig beendet hat.
         \item[/F223/] Neben dem Vorgangsresultat wird dem Nutzer nach Beenden des Vorgangs auch die Zeit angezeigt, in der er die Aktivitäten absolviert hat.
         \item[/F224/] Die Sprachanweisung erfolgt in der Sprache der in-App Einstellungen.
+    	\end{itemize}
    \end{itemize}
 		\textsf{Einstellungen:}
    \begin{itemize}
         \item[/F250/] Der Nutzer kann seinen Namen in den Einstellungen ändern.
         \item[/F260/] Der Nutzer kann die Sprache der App verändern. (Möglichkeiten sind Deutsch und Englisch)
-        \item[/F265/] Standardmäßig wird sich die Sprache der App automatisch an die Systemsprache des Smartphones des Nutzers anpassen.
+        \item[/F265/] Die Sprache der App wird sich bei der Erstnutzung an die Systemsprache des Nutzers anpassen. Standardmäßig ist dies Englisch, bei deutscher Systemsprache wird Deutsch eingestellt.
         \item[/F270/] Der Nutzer kann die gespeicherten \Gls{Vorgangsdaten} löschen.
         \item[/F280/] Der Nutzer kann die \Gls{Steuerungsparameter} anpassen. 
         \item[/F285/] Der Nutzer kann die Schrittlänge für die Distanzmessung anpassen.
@@ -270,7 +271,7 @@ Die App soll dem Nutzer die Möglichkeit zur Verfügung stellen, seine Trainings
 \begin{itemize}
 	\item[/PD010/] Es werden keine rohen Messdaten gespeichert.
 	\item[/PD020/] Die Einstellungen (Sprache, \Gls{Steuerungsparameter}, Benutzernamen) sind zu speichern. 
-	\item[/PD040/] Die gesammelten \Gls{Vorgangsdaten} werden auf dem Gerät in einer Datenbank gespeichert, siehe /F310/.
+	\item[/PD030/] Die gesammelten \Gls{Vorgangsdaten} werden auf dem Gerät in einer Datenbank gespeichert, siehe /F310/.
 \end{itemize}
 
 \vspace{1cm}
@@ -294,8 +295,8 @@ Wie unter dem Punkt Qualitätszielbestimmungen aufgeführt, legen wir unsere Pri
 \end{itemize}
 \subsection{Speicherplatz}
 \begin{itemize}
-  \item[/NF080/] Die App soll eine Größe von 100 MByte nicht überschreiten. 
-  \item[/NF090/] Die gespeicherten Daten sollen nicht mehr als 50 MByte umfassen. 
+  \item[/NF080/] Die App soll eine Größe von 100 MB nicht überschreiten. 
+  \item[/NF090/] Die gespeicherten Daten sollen nicht mehr als 50 MB umfassen. 
 \end{itemize}
 \subsection{Laufzeitverhalten}
 \begin{itemize}
@@ -337,7 +338,7 @@ Wie unter dem Punkt Qualitätszielbestimmungen aufgeführt, legen wir unsere Pri
 Beim Starten der App landet der Nutzer automatisch im Laufmodus. Bevor ein Modus genutzt werden kann muss der Nutzer eine BLE Verbindung über ein Pop-up Fenster mit den \Gls{Earables} herstellen. Der Nutzer kann nun entweder den Modus wechseln oder einen \Gls{Vorgang} starten. Nach Beendigung oder Stoppen eines Vorgangs wird das Vorgangsresultat angezeigt. Der Nutzer kann außerdem vergangene Vorgangsdaten einsehen und diese auch importieren/exportieren. Das Ändern von Einstellungen der App und der \Gls{Steuerungsparameter} der \Gls{Earables} über die App ist ebenfalls möglich.
 \section{Benutzeroberfläche}
 \subsection{Einführung}
-Die \Gls{GUI} wird durch die App realisiert. Dabei kann man die einzelnen Modi über das Navigationsmenü auswählen. Jeder Modus hat zwei Seiten; eine Übersichtsseite und eine aktive Seite, welche während des aktiven \Gls{Vorgang} angezeigt wird. Für die weiteren Funktionen(Einstellungen, Dateienexport/-import) bietet die Applikation ebenfalls spezielle Seiten an.
+Die \Gls{GUI} wird durch die App realisiert. Dabei kann man die einzelnen Modi über das Navigationsmenü auswählen. Jeder Modus hat zwei Seiten; eine Übersichtsseite und eine aktive Seite, welche während des aktiven \Gls{Vorgang}s angezeigt wird. Für die weiteren Funktionen(Einstellungen, Dateienexport/-import) bietet die Applikation ebenfalls spezielle Seiten an.
 Online kann bereits eine Mock-Up \Gls{GUI} angesehen werden mithilfe des Design-Tools \glqq Mock-up\grqq{} über den angegebenen Link in der Fußnote \footnote[1]{Prototyp: https://app.moqups.com/448nRiafse/view/page/a70dc1e41?ui=0 (nicht vollständig)}
 \subsection{Mock-Up Design}
 Die folgenden Abbildungen zeigen das Design der App.
@@ -432,7 +433,7 @@ Die folgenden Abbildungen zeigen das Design der App.
   \begin{itemize}
     \item die App gestartet wird,
     \item die BLE-Verbindung unterbrochen wurde,
-    \item wenn ein Modus gestartet werden soll oder andere Aktivitäten erfolgen (z.b. \Gls{Steuerungsparameter} anpassen), aber gerade keine BLE-Verbindung existiert.
+    \item wenn ein Vorgang gestartet werden soll oder andere Aktivitäten erfolgen (z.b. \Gls{Steuerungsparameter} anpassen), aber gerade keine BLE-Verbindung existiert.
   \end{itemize}
   Die Pop-Up Meldung kann über einen Button jederzeit ausgeblendet werden. 
   Wird eine BLE-Verbindung erfolgreich hergestellt, verschwindet das Pop-Up.
