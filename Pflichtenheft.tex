@@ -95,6 +95,7 @@
  \clearpage
  \pagenumbering{arabic}
 
+
 \section{Einleitung}
 \Gls{Earables} gehören zu den \Gls{Wearable Computer}, sie sind also nichts anderes als intelligente Kopfhörer. Je nachdem wie sie ausgestattet werden bringen sie die unterschiedlichsten Funktionen mit sich. Neben der klassischen Ausstattung von Lautsprechern, Mikrophon und \gls{BLE} besitzen sie in unserem Fall zusätzlich eine \Gls{IMU}. Mit ihrer Hilfe ist man in der Lage die Bewegungen des Nutzers zu erkennen und aufzuzeichnen, um mit den gewonnenen Messdaten  beispielsweise die \Gls{Schrittfrequenz} zu messen.  \Gls{Earables} bilden also eine Schnittstelle zwischen Mensch und Computer. Da sie kaum von normalen Bluetooth Kopfhörern zu unterscheiden sind, haben sie bereits jetzt eine hohe soziale Akzeptanz in der Gesellschaft erlangt, im Gegensatz zu beispielsweise Smartglasses. Mit der Entwicklung und Forschung dieser Art von \Gls{Earables} beschäftigt sich das globale eSense Projekt von Nokia Bell Labs in Zusammenarbeit mit dem TECO. Hier wird gemeinsam nach möglichen Anwendungsfällen der \Gls{Earables} gesucht, wodurch auch dieses Projekt initiiert wurde.
 \section{Zielbestimmung}
@@ -143,7 +144,7 @@ Die Ziele dieses Projektes lassen sich in drei Bereiche gliedern:
     \item Es werden nur Vorgangsdaten auf dem Smartphone gespeichert und nicht auf den \Gls{Earables}.
     \item Die Daten des Mikrophons werden weder aufgezeichnet noch ausgewertet.
   \end{itemize}
-
+\clearpage
 \section{Produkteinsatz}
 Unser Produkt besteht aus drei Teilen (der Bibliothek, dazu das Erweiterungsmodul und der App), dementsprechend gibt es auch verschiedene Zielgruppen und Anwendungsbereiche.
   \subsection{Zielgruppe}
@@ -174,7 +175,7 @@ Unser Produkt besteht aus drei Teilen (der Bibliothek, dazu das Erweiterungsmodu
       \item \textsf{Qualifikation des Nutzers:} Sollte Sportübungen selbstständig ausführen können.
       \item \textsf{Vordergrund:} Die App muss im Vordergrund laufen, damit die Vorgänge funktionieren, siehe /NF065/.
     \end{itemize}
-      
+\clearpage
 \section{Produktumgebung}
 Es handelt sich bei der App um eine Smartphoneanwendung, daher wird das Produkt als Installationspaket ausgeliefert. Außerdem setzen wir bestimmte Hardware- und Softwarebedingungen voraus.
 \subsection{Hardware} 
@@ -183,8 +184,9 @@ Es handelt sich bei der App um eine Smartphoneanwendung, daher wird das Produkt 
 	\textsf{Speicheranforderung:} Das Smartphone sollte mindestens 100 MB Speicherplatz zur Verfügung haben.
 \subsection{Software} 
 	\textsf{Betriebssystem:} Unterstützung nur von Android ab Version 7 und iOS ab Version 10.
-
-
+\newline
+\newline
+\newline
 \section{Funktionale Anforderungen}
 Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt umgesetzt werden muss) und einen Wunschteil (Anforderungen, die umgesetzt werden sollten, aber nicht essenziell sind). Die Funktionalen Anforderungen spezifizieren auf Ebene der Bibliothek, des Erweiterungsmoduls und der App, welche Funktionen umgesetzt werden müssen bzw. können. 
   \subsection{Mussanforderungen}
@@ -205,7 +207,7 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
     \subsubsection{App}
       \begin{itemize}
       \item[/F070/] \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.
-      \item[/F075/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus seiner Beschreibung nach aktiv ausgeführt. Dies gilt für jeden Modus außer den Modus \glqq Livedaten\grqq.%% wir haben keinen Modus live Daten.
+      \item[/F075/] \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} starten. Dann wird der Modus seiner Beschreibung nach aktiv ausgeführt.
       \item[/F080/] \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen \Gls{Vorgang} stoppen.
       \item[/F085/] \textsf{Resultat anzeigen:} Nach Stoppen wird das Vorgangsresultat angezeigt, bis ein neuer \Gls{Vorgang} gestartet wird.
       \item[/F090/] \textsf{Modus wechseln:} Der Nutzer kann zwischen Modi über ein einblendbares Menü wechseln, auch während ein Vorgang aktiv ist.
@@ -304,7 +306,7 @@ Wie unter dem Punkt Qualitätszielbestimmungen aufgeführt, legen wir unsere Pri
   \subsection{Architekturdiagramm}
   \begin{center}
   	\vspace{100px}
-  	\includegraphics[width=0.8\textwidth]{./Diagramme/Archi4.png}
+  	\includegraphics[width=0.8\textwidth]{./Diagramme/Achi5.png}
   \end{center}
   \clearpage %%sieht sonst noch zerrissener aus;    Gehts nicht irgendwie schöner? Sodass das Diagramm ganz oben quasi anliegt?
   \subsection{Kurze Erläuterung zum Architekturdiagramm}
