@@ -1,0 +1,68 @@
+\documentclass[a4paper,12pt]{article}
+\author {ab Protokoll 12.3.19}
+\begin{document}
+\section{Klassenstruktur}
+
+\subsection{Model}
+\subsubsection{Dangling}
+- Fassade, die Zugriff auf Services und auf Bibliothek Zugriff hat
+- Dependency Sercvices kann von außen aufgerufen werden (``global'', von Xamarin), verwaltet Singletons
+Folgende Services gibt es:
+\begin{itemize}
+    \item Bibliothek
+    \item Datenkodul
+    \item Erweiterungsmodul
+    \item Datenmodul
+\end{itemize}
+\subsubsection{Bibliothek} 
+Bis jetzt unstrukturiert, schnittstellen noch unklar...
+Bestandteile der Bibliothek:
+%%was die Bibliothek braucht:
+\begin{itemize}
+    \item {
+        get/set Parameter (konstanten)
+        \begin{itemize}
+            \item Samplingrate
+            \item Accelerator/Gyroscope(range/filter)
+        \end{itemize}
+        }
+    \item Daten aufzeichnen %%!!
+    \item Start/Stop Samplingrate
+    \item {
+        Daten verpacken in Format per push (Event) (Beobachter)\\
+        Wann? %%informal
+        \begin{itemize}
+            \item bei ca. 100 Rohdaten
+            \item configs %%??
+        \end{itemize}
+        } 
+\end{itemize}
+
+\subsubsection{Erweiterungsmodul}
+Nach außen:\\
+\textbf{async registerEvent(), unregisterEvent()}\\
+mit Beobachter: man kann sich Registrieren für Schritterkennung, Liegest. und Situpsevents
+Verarbeitung, wenn mindestens ein Listener registriert ist. 
+
+Methoden
+\begin{itemize}
+    \item getStepFrequency()
+    \item getStepAmount()
+\end{itemize}
+%%Schritterkennung/ Situpserkennung / Liegestütze ??
+Events:
+\begin{itemize}
+    \item onWalkingStateChanged(WalkingEvent: e)
+    \item onActivityUpdate(ActivityEvent: e) // 
+\end{itemize}
+Enum ActivityEvent: WalkingStateEvent, PushupEvent, SitupEvent
+
+\subsection{Viewmodel}
+
+\subsection{View}
+
+
+\section{Schnittstellen zwischen Model, Viewmodel und View}
+Verbindung zwischen Bibliothek und Erweiterungsmodul:
+\end{document}
+ 
