@@ -5,14 +5,17 @@
 
 \subsection{Model}
 \subsubsection{Dangling}
-- Fassade, die Zugriff auf Services und auf Bibliothek Zugriff hat
-- Dependency Sercvices kann von außen aufgerufen werden (``global'', von Xamarin), verwaltet Singletons
+- irgendwas muss sich um die Settings kümmern
+- irgendjemand muss Schritte zählen\\
+- Ablauf des Trainingsablaufplans\\
+- Fassade, die Zugriff auf Services und auf Bibliothek Zugriff hat\\
+- Dependency Sercvices kann von außen aufgerufen werden (``global'', von Xamarin), verwaltet Singletons\\
 Folgende Services gibt es:
 \begin{itemize}
     \item Bibliothek
-    \item Datenkodul
     \item Erweiterungsmodul
     \item Datenmodul
+    \item TTS (Text-To-Speech)
 \end{itemize}
 \subsubsection{Bibliothek} 
 Bis jetzt unstrukturiert, schnittstellen noch unklar...
@@ -39,24 +42,29 @@ Bestandteile der Bibliothek:
 \end{itemize}
 
 \subsubsection{Erweiterungsmodul}
-Nach außen:\\
-\textbf{async registerEvent(), unregisterEvent()}\\
-mit Beobachter: man kann sich Registrieren für Schritterkennung, Liegest. und Situpsevents
+Methoden nach außen (EMSchnittstelle):
+\begin{itemize}
+    \item \textbf{async registerEvent()}
+    \item \textbf{async unregisterEvent()}
+\end{itemize}
+innen: TaskHandler und Taskklassen (SitUp, PushUp,...)
+
+mit Beobachter: man kann sich Registrieren für Schritterkennung, Liegest. und Situpsevents\\
 Verarbeitung, wenn mindestens ein Listener registriert ist. 
 
-Methoden
+interface ActivityEvent: 
 \begin{itemize}
-    \item getStepFrequency()
-    \item getStepAmount()
+    \item StepEvent: wenn ein Schritt gemacht wurde, enthält Frequenz
+    \item WalkingEvent: wenn man anfängt / aufhört zu laufen, enthält ob laufen/stehen 
+    \item PushUpEvent: nach PushUp
+    \item SitUpEvent: nach SitUp
 \end{itemize}
-%%Schritterkennung/ Situpserkennung / Liegestütze ??
-Events:
-\begin{itemize}
-    \item onWalkingStateChanged(WalkingEvent: e)
-    \item onActivityUpdate(ActivityEvent: e) // 
-\end{itemize}
-Enum ActivityEvent: WalkingStateEvent, PushupEvent, SitupEvent
 
+\subsubsection{Datenmodul}
+Methoden nach außen: \textbf{GetEntries, SaveDBEntry}
+Kl DatabaseConnection
+Kl DatebaseEntry
+ 
 \subsection{Viewmodel}
 
 \subsection{View}

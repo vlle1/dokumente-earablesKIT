@@ -30,3 +30,10 @@ Tipps:
 - Beim Entwurfsdokument packageweise vorgehen + Mehoden erklären
 
 
+
+
+Schreibweisen:
+CamelCase
+Methoden groß!!!!
+PushUpEvent, SitUpEvent
+ \\TODO: Codestylesheet
