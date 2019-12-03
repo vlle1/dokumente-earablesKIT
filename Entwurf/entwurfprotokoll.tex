@@ -4,6 +4,29 @@
 \section{Klassenstruktur}
 
 \subsection{Model}
+\subsubsection{Fassade}
+    Die Fassade kapselt das Komplette Model von dem Viewmodel ab.
+    Sie enthält keine Geschäftslogik, aber verwaltet alle Services.
+    Methoden: 
+    \begin{itemize}
+        \item \textbf{+startRunning(*)}
+        \item \textbf{+startPushUp(*)}
+        \item \textbf{+startSitUp(*)}
+        \item \textbf{+stopRunning(*)}
+        \item \textbf{+stopPushUp(*)}
+        \item \textbf{+stopSitUp(*)}
+        \item \textbf{+getSamplingrate()}
+        \item \textbf{+setSamplingrate()}
+        \item \textbf{+getAccelerator()}
+        \item \textbf{+setAccelerator()}
+        \item \textbf{+getRecentData(): List<DBEntry>} %%30Tage overview
+        \item \textbf{+getLastData(): DBEntry}  %%neuester Eintrag (nach Beenden einer Aktivität)
+        \item \textbf{+deleteData()}
+        \item \textbf{+importData(inputpath)}
+        \item \textbf{+exportData(outputpath)}
+    \end{itemize}
+%% *: Pointer zu Notify() oder Objekt
+
 \subsubsection{Dangling}
 - irgendwas muss sich um die Settings kümmern
 - irgendjemand muss Schritte zählen\\
@@ -66,7 +89,7 @@ Kl DatabaseConnection
 Kl DatebaseEntry
  
 \subsection{Viewmodel}
-
+%%name speichern..
 \subsection{View}
 
 
