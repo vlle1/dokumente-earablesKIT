@@ -217,7 +217,6 @@ Die Funktionalen Anforderungen gliedern sich in einen Pflichtteil (was unbedingt
       \item[/F101/] \textsf {Schrittfrequenz anzeigen:} Im Modus \glqq{}Laufmodus\grqq{} wird die Schrittfrequenz des Nutzers angezeigt, sobald der Vorgang gestartet wird. Die Schrittfrequenz wird mit Hilfe von /F061/ ermittelt.
       \item[/F102/] \textsf {Schrittanzahl anzeigen:} Im Modus \glqq{}Laufmodus\grqq{} wird die Schrittanzahl des Nutzers angezeigt, sobald der Vorgang gestartet wird. Die Schrittanzahl wird mit Hilfe von /F062/ ermittelt. Die Schrittzählung beginnt/endet mit dem Starten/Stoppen des Vorgangs.
       \item[/F103/] \textsf{Schrittanzahl Speichern:} Die App speichert die Schrittanzahl pro Tag für die letzten 30 Tage an denen der Laufmodus aktiv war.
-      \item[/F104/] \textsf{Ergebnisse des letzten Vorgangs anzeigen:} Wenn sich die App im Laufmodus befindet und der Vorgang noch nicht gestartet wurde, wird angezeigt wie weit der Nutzer beim letzten Vorgang gelaufen ist und wie viele Schritte er gemacht hat. Falls es noch keine Einträge gibt werden Nullwerte angezeigt.
       \item[/F140/] \textsf{BLE-Verbindung herstellen:} Sobald der Nutzer die App startet erscheint ein Pop-up Fenster, über das der Nutzer sein Smartphone mit den \gls{Earables} verbinden kann. Ohne BLE-Verbindung kann der Nutzer keinen Vorgang starten.
       \item[/F150/] \textsf{BLE-Verbindung unterbrochen:} Falls die App die Verbindung zu den \gls{Earables} verlieren sollte, erscheint wieder das Pop-up Fenster aus /F140/.
       \item[/F160/] \textsf{BLE-Verbindung nicht notwendig:} Der Nutzer kann das Pop-up Fenster aus /F140/ wegklicken.
@@ -479,10 +478,10 @@ Erst nach dem Bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
   \end{itemize}
   \paragraph{Erweiterungsmodul}
   \begin{itemize}
-    \item[/T060/] Der Nutzer tätigt einen Schritt. Das Modul registriert diesen korrekt. %changed
+    \item[/T060/] Der Nutzer tätigt einen Schritt. Das Modul registriert einen Schritt.
     \item[/T061/] Der Nutzer läuft mit einem Schritt pro Sekunde.
-    \item[/T062/] Der Nutzer tätigt drei Schritte. Das Modul registriert diese korrekt. %changed
-    \item[/T063/] Der Nutzer läuft einen Meter. %TODO
+    \item[/T062/] Der Nutzer tätigt drei Schritte. Das Modul registriert drei mal einen Schritt. %changed
+    \item[/T063/] Das Erweiterungsmodul berechnet nach 20 Schritten und einer eingestellten Schrittlänge von 70 cm die zurückgelegte Distanz von 14 Metern korrekt.
   \end{itemize}
   \paragraph{App}
     \begin{itemize}
@@ -493,18 +492,18 @@ Erst nach dem Bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
     \item[/T100/] Der Nutzer sieht, ob er gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
     \item[/T101/] Die App zeigt die \gls{Schrittfrequenz} im Modus \glqq{}Laufmodus\grqq{} an, sobald der Laufmodus gestartet wird.
     \item[/T102/] Die App zeigt die Schrittanzahl im Modus \glqq{}Laufmodus\grqq{} an, sobald der Laufmodus gestartet wird.
-    \item[/T104/] Die App befindet sich im Laufmodus und der Laufmodus ist noch nicht gestartet. Es wird angezeigt, wie viele Schritte der Nutzer beim letzten Vorgang gemacht hat und welche Strecke er dabei zurückgelegt hat. %TODO
+    \item[/T104/] Der Nutzer startet den Laufmodus. Er läuft 20 Schritte. Er beendet den Laufmodus. Er beendet die App und startet sie neu. Im Laufmodus wird ihm nun unter anderem die zurückgelegte Anzahl Schritte (20) angezeigt.
     \item[/T140/] Der Nutzer startet die App und verbindet sich mit Hilfe des Pop-ups mit den \gls{Earables}.
     \item[/T150/] Das Smartphone verliert seine Verbindung zu den \gls{Earables} und das Pop Up erscheint.
-    \item[/T160/] Der Nutzer klickt das Pop Up weg. Die App kehrt zum vorherigen Vorgang zurück. %changed
+    \item[/T160/] Der Nutzer klickt das Pop Up weg. Die App zeigt die selbe Ansicht wie vor dem Erscheinen des Popups. %changed
     \item[/T165/] Das Smartphone besitzt keine Verbindung zu den \gls{Earables} und der Nutzer startet einen Vorgang. Das Pop-Up erscheint und der Vorgang wird nicht gestartet.
   \end{itemize}
 
 \subsubsection{Wunschanforderungen}
   \paragraph{Erweiterungsmodul}
     \begin{itemize}
-    \item[/T170/] Der Nutzer macht einen Sit-up. Das Modul registriert diese Aktivität. %changed
-    \item[/T180/] Der Nutzer macht eine Liegestütze. Das Modul registriert diese  Aktivität. %changed
+    \item[/T170/] Der Nutzer macht einen Sit-up. Das Modul erkennt einen Sit-up. %changed
+    \item[/T180/] Der Nutzer macht eine Liegestütze. Das Modul erkennt eine Liegestütze. %changed
   \end{itemize}
   \paragraph{App}
   \begin{itemize}
@@ -516,11 +515,11 @@ Erst nach dem Bestehen aller hier aufgeführten Tests und Szenarien ist das Prod
     \item[/T250/] Der Nutzer ändert seinen Namen.
     \item[/T260/] Der Nutzer ändert die Sprache auf Englisch. Nach Neustart der App sind alle Texte auf Englisch. %changed
     \item[/T265/] Der Nutzer ruft erstmals die App auf. Die Sprache der App passt sich seiner Systemsprache an. %changed
-    \item[/T270/] Der Nutzer löscht die Vorgangsdaten. Die Vorgangsdaten sind danach nicht mehr einsehbar. %changed
+    \item[/T270/] Der Nutzer löscht die Vorgangsdaten. Er wechselt zur Datenansicht und ihm werden keine Einträge angezeigt. %changed
     \item[/T280/] Der Nutzer verändert die Samplingrate. Die Samplingrate wird im \Gls{IMU} auf den korrekten Wert eingestellt. %changed
-    \item[/T285/] Der Nutzer ändert die Schrittlänge. Die App speichert die Änderung. %changed
+    \item[/T285/] Der Nutzer ändert die Schrittlänge. Die App speichert die Änderung korrekt. %changed
     \item[/T290/] Der Nutzer ruft erstmals die App auf, er wird aufgefordert seinen Namen und seine Schrittlänge zu setzen.
-    \item[/T300/] Der Nutzer importiert seine Vorgangsdaten aus einer CSV-Datei. Die Daten sind nun in den einzelnen Vorgängen sichtbar. %changed
+    \item[/T300/] Der Nutzer importiert seine Vorgangsdaten aus einer CSV-Datei. Er wechselt zur Datenansicht und ihm werden die korrekten Einträge angezeigt. %changed
     \item[/T320/] Der Nutzer sieht sich die gespeicherten Trainingsdaten an.
    \end{itemize}
    
