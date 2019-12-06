@@ -307,7 +307,6 @@ Wie unter dem Punkt Qualitätszielbestimmungen aufgeführt, legen wir unsere Pri
 
 \end{itemize}
 \section{Systemmodelle der App}
-%%TODO Jan!!
   \subsection{Architekturdiagramm}
   \begin{center}
   	\vspace{100px}
@@ -469,60 +468,59 @@ Die Testfälle sollen sicherstellen, dass alle funktionalen Anforderungen korrek
 Die Nummerierung der globalen Testfälle richtet sich nach der Nummerierung der funktionalen Anforderungen.\\
 Die Szenarien werden verwendet, um alle geforderten und optionalen Funktionen im Kontext einer Nutzerinteraktion zu testen.\\
 Erst nach dem Bestehen aller hier aufgeführten Tests und Szenarien ist das Produkt bereit für die Abnahme.
-%%TODO David
   \subsection{Globale Testfälle}
   \subsubsection{Mussanforderungen}
   \paragraph{Bibliothek}
   \begin{itemize}
     \item[/T010/] Bei Aufruf der entsprechenden Schnittstelle der Bibliothek werden plausible Rohdaten in \Gls{Echtzeit} zurückgegeben.
-    \item[/T030/] Steuerungsparameter werden geändert. 
-    \item[/T040/] Die Datenaufnahme des \Gls{IMU} wird gestartet.
+    \item[/T030/] Steuerungsparameter werden geändert.
+    \item[/T040/] Die Datenaufnahme des \Gls{IMU} wird gestartet. Die Daten werden korrekt empfangen. %changed
     \item[/T050/] Die Datenaufnahme des \Gls{IMU} wird gestoppt.
   \end{itemize}
   \paragraph{Erweiterungsmodul}
   \begin{itemize}
-    \item[/T060/] Der Nutzer tätigt einen Schritt.
+    \item[/T060/] Der Nutzer tätigt einen Schritt. Das Modul registriert diesen korrekt. %changed
     \item[/T061/] Der Nutzer läuft mit einem Schritt pro Sekunde.
-    \item[/T062/] Der Nutzer tätigt drei Schritte.
-    \item[/T063/] Der Nutzer läuft einen Meter.
+    \item[/T062/] Der Nutzer tätigt drei Schritte. Das Modul registriert diese korrekt. %changed
+    \item[/T063/] Der Nutzer läuft einen Meter. %TODO
   \end{itemize}
   \paragraph{App}
     \begin{itemize}
     \item[/T070/] Der Nutzer startet die App über sein Smartphone und landet im Laufmodus.
-    \item[/T075/] Der Nutzer startet den modusspezifischen \Gls{Vorgang}.
+    \item[/T075/] Der Nutzer startet den modusspezifischen \Gls{Vorgang}. Die App zeigt an, dass der Vorgang läuft. %changed
     \item[/T080/] Der Nutzer stoppt den modusspezifischen \Gls{Vorgang}. Ihm wird das Vorgangsresultat angezeigt.
-    \item[/T090/] Der Nutzer wechselt über ein einblendbares Menü den Modus.
+    \item[/T090/] Der Nutzer wechselt über ein einblendbares Menü den Modus. 
     \item[/T100/] Der Nutzer sieht, ob er gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}.
     \item[/T101/] Die App zeigt die \gls{Schrittfrequenz} im Modus \glqq{}Laufmodus\grqq{} an, sobald der Laufmodus gestartet wird.
     \item[/T102/] Die App zeigt die Schrittanzahl im Modus \glqq{}Laufmodus\grqq{} an, sobald der Laufmodus gestartet wird.
-    \item[/T104/] Die App befindet sich im Laufmodus und der Laufmodus ist noch nicht gestartet. Es wird angezeigt, wie viele Schritte der Nutzer beim letzten Vorgang gemacht hat und welche Strecke er dabei zurückgelegt hat.   
+    \item[/T104/] Die App befindet sich im Laufmodus und der Laufmodus ist noch nicht gestartet. Es wird angezeigt, wie viele Schritte der Nutzer beim letzten Vorgang gemacht hat und welche Strecke er dabei zurückgelegt hat. %TODO
     \item[/T140/] Der Nutzer startet die App und verbindet sich mit Hilfe des Pop-ups mit den \gls{Earables}.
     \item[/T150/] Das Smartphone verliert seine Verbindung zu den \gls{Earables} und das Pop Up erscheint.
-    \item[/T160/] Der Nutzer klickt das Pop Up weg.
+    \item[/T160/] Der Nutzer klickt das Pop Up weg. Die App kehrt zum vorherigen Vorgang zurück. %changed
     \item[/T165/] Das Smartphone besitzt keine Verbindung zu den \gls{Earables} und der Nutzer startet einen Vorgang. Das Pop-Up erscheint und der Vorgang wird nicht gestartet.
   \end{itemize}
 
 \subsubsection{Wunschanforderungen}
   \paragraph{Erweiterungsmodul}
     \begin{itemize}
-    \item[/T170/] Der Nutzer macht einen Sit-up. 
-    \item[/T180/] Der Nutzer macht eine Liegestütze.
+    \item[/T170/] Der Nutzer macht einen Sit-up. Das Modul registriert diese Aktivität. %changed
+    \item[/T180/] Der Nutzer macht eine Liegestütze. Das Modul registriert diese  Aktivität. %changed
   \end{itemize}
   \paragraph{App}
   \begin{itemize}
     \item[/T200/] Die Liegestützen oder Sit-ups werden von der App gezählt und im Modus \glqq{}Zählmodus \grqq{} angezeigt.
-    \item[/T210/] Der Nutzer bleibt stehe, die Musik stoppt. Der Nutzer läuft weiter, die Musik läuft weiter.
+    \item[/T210/] Der Nutzer bleibt stehen, die Musik stoppt. Der Nutzer läuft weiter, die Musik läuft weiter.
     \item[/T221/] Der Nutzer stellt einen Trainingsablaufplan zusammen.
     \item[/T222/] Die App gibt dem Nutzer über Sprachanweisung aus was die nächste Übung ist.
-    \item[/T223/] Nach Vorgangsende wird die benötigte Zeit angezeigt.
+    \item[/T223/] Nach Vorgangsende wird die Zeit angezeigt, die der \Gls{Vorgang} aktiv war. %changed
     \item[/T250/] Der Nutzer ändert seinen Namen.
-    \item[/T260/] Der Nutzer ändert die Sprache auf Englisch.
-    \item[/T265/] Der Nutzer ruft erstmals die App auf, diese passt sich seiner Systemsprache an.
-    \item[/T270/] Der Nutzer löscht Vorgangsdaten.
-    \item[/T280/] Der Nutzer verändert die Samplingrate.
-    \item[/T285/] Der Nutzer ändert die Schrittlänge.
+    \item[/T260/] Der Nutzer ändert die Sprache auf Englisch. Nach Neustart der App sind alle Texte auf Englisch. %changed
+    \item[/T265/] Der Nutzer ruft erstmals die App auf. Die Sprache der App passt sich seiner Systemsprache an. %changed
+    \item[/T270/] Der Nutzer löscht die Vorgangsdaten. Die Vorgangsdaten sind danach nicht mehr einsehbar. %changed
+    \item[/T280/] Der Nutzer verändert die Samplingrate. Die Samplingrate wird im \Gls{IMU} auf den korrekten Wert eingestellt. %changed
+    \item[/T285/] Der Nutzer ändert die Schrittlänge. Die App speichert die Änderung. %changed
     \item[/T290/] Der Nutzer ruft erstmals die App auf, er wird aufgefordert seinen Namen und seine Schrittlänge zu setzen.
-    \item[/T300/] Der Nutzer importiert seine Vorgangsdaten aus einer CSV-Datei.
+    \item[/T300/] Der Nutzer importiert seine Vorgangsdaten aus einer CSV-Datei. Die Daten sind nun in den einzelnen Vorgängen sichtbar. %changed
     \item[/T320/] Der Nutzer sieht sich die gespeicherten Trainingsdaten an.
    \end{itemize}
    
