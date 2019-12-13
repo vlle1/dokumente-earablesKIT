@@ -1,0 +1,119 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc} % Umlaute
+\usepackage[ngerman]{babel} % Umlaute
+\usepackage[T1]{fontenc}    % Umlaute
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{booktabs}
+\usepackage{lmodern}
+
+% Notwendig für Links im Text
+\usepackage{hyperref}
+
+% glossar, see http://en.wikibooks.org/wiki/LaTeX/Glossary
+% muss NACH hyperref geladen werden, sonst funktionieren die Links nicht
+\usepackage[toc]{glossaries}
+
+% Kompatibilität
+\ifx\pdftexversion\undefined
+\usepackage[dvips]{graphicx}
+\else
+\usepackage[pdftex]{graphicx}
+\DeclareGraphicsRule{*}{mps}{*}{}
+\fi
+
+% specify the path to the images
+\graphicspath{{bilder/}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Variablen                                 						 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\authorName}{Tec O'Brain (Entwickler: David Höglinger, Jan Ettrich, Erwin Müller, Benedikt Rittner, Valentin Quapil)}
+\newcommand{\auftraggeber}{Karlsruhe Institute of Technology (Teco)}
+\newcommand{\auftragnehmer}{\authorName}
+\newcommand{\projektName}{Entwurf Earables}
+\newcommand{\tags}{\authorName, Architektur, Entwurf, KIT, Informatik, PSE}
+\newcommand{\glossarName}{Glossar}
+\newcommand{\documentVersion}{0.1}
+\title{\projektName}
+\date{\today}
+\author{Tec O'Brain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PDF Meta information                                 				 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+  pdfauthor   = {\authorName},
+  pdfkeywords = {\tags},
+  pdftitle    = {\projektName)}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Create a shorter version for tables. DO NOT CHANGE               	 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\addrow[2]{#1 &#2\\ }
+
+\newcommand\addheading[2]{#1 &#2\\ \hline}
+\newcommand\tabularhead{\begin{tabular}{lp{13cm}}
+\hline
+}
+
+\newcommand\addmulrow[2]{ \begin{minipage}[t][][t]{2.5cm}#1\end{minipage}%
+   &\begin{minipage}[t][][t]{8cm}
+    \begin{enumerate} #2   \end{enumerate}
+    \end{minipage}\\ }
+
+\newenvironment{usecase}{\tabularhead}
+{\hline\end{tabular}}
+
+\usepackage{microtype}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% GLOSSARY ENTRIES                 	                              	 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeglossaries
+\loadglsentries{Glossar.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE DOCUMENT BEGINS             	                              	 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\pagenumbering{roman}
+ \input{Deckblatt}         % Deckblatt.tex laden und einfügen
+ \setcounter{page}{2}
+ \tableofcontents          % Inhaltsverzeichnis ausgeben
+ \clearpage
+ \pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Einleitung}
+In diesem Dokument wird der Entwurf der \Gls{CPB}, des Erweiterungsmoduls und der App spezifiziert. Außerdem wird die Interaktion der einzelnen Komponenten beschrieben.
+Die verwendete Notation richtet sich nach dem UML-Standard.
+
+\section{Aufbau}
+    \subsection{Architektur}
+    \subsection{Klassendiagramm}
+
+
+\section{Klassenbeschreibung}
+    \subsection{Übersicht}
+    \subsection{Model}
+    \subsection{View}
+    \subsection{View-Model}
+
+\section{Abläufe}
+
+\section{Entwurfdaten}
+
+\section{Klassenindex}
+
+\section{Anhang}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\printglossaries
+\stepcounter{section}
+
+
+\end{document}
