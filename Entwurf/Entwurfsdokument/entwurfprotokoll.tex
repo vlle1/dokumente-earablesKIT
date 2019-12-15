@@ -106,11 +106,14 @@ Die verwendete Notation richtet sich nach dem UML-Standard.
     Die User-Klasse spezifiziert den Benutzer, der die App gerade verwendet.\\
     \paragraph{Attribute:}
     \begin{tabular}{p{5cm}p{12cm}}
-        + String Name & Der Name des Benutzers.\\
-        + int StepLength & Die durchschnittliche Schrittlänge des Benutzers in cm.\\
+        + username: String & Der Name des Benutzers.\\
+        + steplength: String & Die durchschnittliche Schrittlänge des Benutzers in cm.\\
     \end{tabular}
     \paragraph{Methoden:}
-    -
+    \begin{tabular}{p{7cm}p{10cm}}
+        + toString(): String & Wandelt das Objekt in einen String um. (vergleichbar mit JSON).\\
+        + static parseUser(user: String): User & Wandelt JSON-String wieder in Objekt um.\\
+    \end{tabular}
 \section{Klassenbeschreibung View-Model}
 \section{Klassenbeschreibung View}
 \section{Interaktionsdiagramme}
