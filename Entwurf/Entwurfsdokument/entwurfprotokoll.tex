@@ -7,7 +7,7 @@
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{booktabs}
 \usepackage{lmodern}
-
+\usepackage{titlesec}
 % Notwendig für Links im Text
 \usepackage{hyperref}
 
@@ -26,6 +26,8 @@
 % specify the path to the images
 \graphicspath{{bilder/}}
 
+%irgendwas mit section formatierung (titlesec package)
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Variablen                                 						 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,15 +98,21 @@ Die verwendete Notation richtet sich nach dem UML-Standard.
     \subsection{Klassendiagramm}
 
 
-\section{Klassenbeschreibung}
-    \subsection{Übersicht}
-    \subsection{Model}
-    \subsection{Settings Service}
-    %%valle: User machen...
-    %%name, steplength
-    \subsection{View-Model}
-    \subsection{View}
-    
+\section{Klassenübersicht}
+\section{Klassenbeschreibung Model}
+\subsection{Settings Service}
+\subsubsection{User}
+    \paragraph{Klassenbeschreibung:}
+    Die User-Klasse spezifiziert den Benutzer, der die App gerade verwendet.\\
+    \paragraph{Attribute:}
+    \begin{tabular}{p{5cm}p{12cm}}
+        + String Name & Der Name des Benutzers.\\
+        + int StepLength & Die durchschnittliche Schrittlänge des Benutzers in cm.\\
+    \end{tabular}
+    \paragraph{Methoden:}
+    -
+\section{Klassenbeschreibung View-Model}
+\section{Klassenbeschreibung View}
 \section{Interaktionsdiagramme}
 \subsection{Aktivitätsdiagramm Lauschen und Agieren}
 \subsection{Sequenzdiagramme}
