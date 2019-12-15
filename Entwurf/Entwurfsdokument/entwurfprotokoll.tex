@@ -100,6 +100,25 @@ Die verwendete Notation richtet sich nach dem UML-Standard.
 
 \section{Klassenübersicht}
 \section{Klassenbeschreibung Model}
+\subsection{ServiceManager}
+	\paragraph{Klassenbeschreibung:}
+	Der ServiceManager verwaltet alle Services des Models mithilfe eines Serviceproviders. Dies wird von anderen Services des Models, sowie von dem Viewmodel benutzt. Er dient zur Delegierung der Services.\\ 
+	Dabei implementiert der ServiceManager das Interface IManager.
+	Von diesem bekommt er die Methode serviceRegistration() übergeben.
+	Der ServiceManager speichert die Services als Referenzen und achtet, dass diese ein Singleton sind. (Es existiert immer nur eine Instanz des Services).
+	Er selbst implementriert das Singleton Muster.
+	
+	\paragraph{Attribute:}
+	\begin{tabular}{p{7cm}p{10cm}}
+		- static instance : ServiceManager & Die Singleton Instanz, welche benutzt wird \\
+		+ static Instance : ServiceManager & Regelt die Initialisierung von instance und gibt diese zurück\\
+		+ serviceProvider : ServiceProvider & Enthält alle Referenzen auf die Services. Per GetService<T> wird der Service vom Typ T zurückgeliefert.\\
+	\end{tabular}
+	\paragraph{Methoden:}
+	\begin{tabular}{p{7cm}p{10cm}}
+		- Servicemanager() : void & privater Konstruktor, genutzt im Singleton Muster. Aufrufen der Methode serviceRegistration() zur Erstmaligen Registrierung der Services mit einer IServiceCollection und zur Erstellung des ServiceProvider.\\
+	\end{tabular}
+		
 \subsection{Settings Service}
 \subsubsection{User}
     \paragraph{Klassenbeschreibung:}
@@ -114,6 +133,31 @@ Die verwendete Notation richtet sich nach dem UML-Standard.
         + toString(): String & Wandelt das Objekt in einen String um. (vergleichbar mit JSON).\\
         + static parseUser(user: String): User & Wandelt JSON-String wieder in Objekt um.\\
     \end{tabular}
+\subsection{ISettingsService}
+	\paragraph{Interfacebeschreibung:}
+	Das Interface ISettingsService bietet eine Schnittstelle für die Einstellungen der App. Sie implementiert Konstanten zur Identifizierung der Einstellungen und hält die aktuellen Einstellungen als Attribute.
+	\paragraph{Attribute:}
+	\begin{tabular}{p{7cm}p{10cm}}
+		+ activeLanguage: CultureInfo & Die aktuelle Sprache der App (Deutsch oder Englisch)\\
+		+ samplingRate: SamplingRate & Die aktuelle Samplingrate der \Gls{Earables} \\ 
+		- LANGUAGE\_PROPERTY: String & Konstanter Bezeichner für die Einstellung der Sprache \\
+		- USER\_PROPERTY: String & Konstanter Bezeichner für die Einstellung des Nutzers \\
+		- SAMPLINGRATE\_PROPERTY: String & Konstanter Bezeichner für die Einstellung der Samplingrate \\
+	\end{tabular}
+	\paragraph{Methoden:}
+	\begin{tabular}{p{7cm}p{10cm}}
+		- loadSettings():void & Lädt alle Settings aus den Einstellungen in die Attribute.	
+	\end{tabular}
+\subsection{SettingsService}
+	\paragraph{Klassenbeschreibung}
+	Die Klasse SettingsService implementiert die Schnittstelle ISettingsService. In der Implementierung der Funktionen, welche die Speicherung der Einstellungen enthalten, wird die Klasse App.Current.Properties verwendet.
+	Dabei wird immer sofort nach einer Änderung die neue Einstellung gespeichert und nicht erst beim Beenden der Sitzung.
+	
+	
+	TODO: Sollen auch bei den konkreten Klassen die Methoden/Attribute nochmal aufgelistet werden?
+\subsection{IDataBaseConnection}
+	
+
 \section{Klassenbeschreibung View-Model}
 \section{Klassenbeschreibung View}
 \section{Interaktionsdiagramme}
