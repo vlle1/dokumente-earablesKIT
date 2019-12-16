@@ -238,6 +238,22 @@ Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
 	\item[+] \textbf{m/s\^2\_X: float}\\Gibt an um wie viel Meter pro\ Sekunde\^2 sich die Earables in X Richtung beschleunigt haben.
 	\item[+] \textbf{m/s\^2\_Y: float}\\Gibt an um wie viel Meter pro Sekunde \^2 sich die Earables in Y Richtung beschleunigt haben.
 	\item[+] \textbf{m/s\^2\_Z: float}\\Gibt an um wie viel Meter pro Sekunde \^2 sich die Earables in Z Richtung beschleunigt haben.
+	\item[+] \textbf{g\_X: float}\\Gibt an um wie viel G sich die Earables in X Richtung beschleunigt haben.
+	\item[+] \textbf{g\_Y: float}\\Gibt an um wie viel G sich die Earables in Y Richtung beschleunigt haben.
+	\item[+] \textbf{g\_Z: float}\\Gibt an um wie viel G sich die Earables in Z Richtung beschleunigt haben.
+\end{itemize}
+
+
+\subsubsection{Characteristiks}
+In dieser Klasse werden die Charkterisiken gespeichert um sie nicht jedes mal neu zu laden falls sie gebraucht werden.
+
+\paragraph{Attribute:}
+\begin{itemize}
+	\item[+] \textbf{start/stopIMUSamplingChar: ICharacteistic}\\Speichert die Charakteristik um das IMU sampling zu starten oder zu stoppen.
+	\item[+] \textbf{sensordata: ICharacteisticChar}\\Speichert die Charakteristik in der die Sensordaten liegen.
+	\item[+] \textbf{pushbutton: ICharacteisticChar}\\Speichert die Charakteristik in der der Status des Push Button gespeichert wird.
+	\item[+] \textbf{battery: ICharacteisticChar}\\Speichert die Charakteristik in der die verbleibende Battrieladung gespeichert wird.
+	\item[+] \textbf{AccelerometerGyroscopeLPFChar: ICharacteistic}\\Speichert die Charakteristik in der die Konfiguration des LPF für den Accelerometer und das Gyroscope geschrieben wird.
 \end{itemize}
 
 
