@@ -244,7 +244,7 @@ Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
 \end{itemize}
 
 
-\subsubsection{Characteristiks}
+\subsubsection{Characteristics}
 In dieser Klasse werden die Charkterisiken gespeichert um sie nicht jedes mal neu zu laden falls sie gebraucht werden.
 
 \paragraph{Attribute:}
@@ -254,6 +254,40 @@ In dieser Klasse werden die Charkterisiken gespeichert um sie nicht jedes mal ne
 	\item[+] \textbf{pushbutton: ICharacteisticChar}\\Speichert die Charakteristik in der der Status des Push Button gespeichert wird.
 	\item[+] \textbf{battery: ICharacteisticChar}\\Speichert die Charakteristik in der die verbleibende Battrieladung gespeichert wird.
 	\item[+] \textbf{AccelerometerGyroscopeLPFChar: ICharacteistic}\\Speichert die Charakteristik in der die Konfiguration des LPF für den Accelerometer und das Gyroscope geschrieben wird.
+\end{itemize}
+
+
+\subsubsection{DeviceEventArgs}
+Dieses Event benachrichtigt Listener, falls sich der Verbindungsstatus seines Devices ändert.
+
+\paragraph{Attribute:}
+\begin{itemize}
+	\item[+] \textbf{connected: Boolean}\\Ist true falls eine BLE Verbindung mit einem Device existiert und false falls nicht.
+	\item[+] \textbf{deviceName: String}\\Beinhaltet den Devicenamen des Devices, mit dem der Nutzer verbunden ist.
+\end{itemize}
+
+\paragraph{Methoden:}
+\begin{itemize}
+	\item[+] \textbf{<constructor>DeviceEventArgs(connected: Boolean, deviceName: String): void}\\Zusätzlicher Konstruktor um die Attribute setzten zu können
+\end{itemize}
+
+
+\subsubsection{ButtonEventArgs}
+Dieses Event benachrichtigt Listener, falls der Knopf der Earables gedrückt wurde.
+
+
+\subsubsection{DataEventArgs}
+Dieses Event benachrichtigt Listener, falls der neue IMU Daten vorliegen.
+
+\paragraph{Attribute:}
+\begin{itemize}
+	\item[+] \textbf{data: IMUDataEntry}\\Hier handelt es sich um die aktuellen IMU Datenaufzeichnung.
+	\item[+] \textbf{configs: ConfigContainer}\\Hier werden die aktuellen configurationen gespeichert.
+\end{itemize}
+
+\paragraph{Methoden:}
+\begin{itemize}
+	\item[+] \textbf{<constructor>DataEventArgs(connected: Boolean, deviceName: String): void}\\Zusätzlicher Konstruktor um die Attribute setzten zu können
 \end{itemize}
 
 
