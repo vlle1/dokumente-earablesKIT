@@ -207,8 +207,8 @@ Die Klasse CountModeViewmodel enthält die Logik des Stepmodes  und hält Attrib
 \end{tabular}
 \paragraph{Methoden:}
 \begin{itemize}
-	\item[+] \textbf{<<create>> StepModeViewmodel()} Konstruktor, in dem die Commands definiert und die Instanz des Service Managers zugewiesen werden. Die Anzahl der zuletzt gelaufenen Schritte und die Distanz sowie das Datum werden durch Aufruf der Methode updateLastData über den ServiceManager von der DatabaseConnection geupdated. isRunning wird standardmäßig zunächst auf false gesetzt.
-	\item[+] \textbf{StartActivity(): void} Methode die vom StartActivityCommand aufgerufen wird. Holt sich beim Service Manager den ActivityManager, der dann die StepActivity zur Verfügung stellt. Das Viewmodel registriert seine OnActivityDone Event Methode beim Event Handler in der StepActivity Klasse und wechselt zum StepModeActiveView. 
+	\item[+] \textbf{<<create>> StepModeViewmodel()}\\ Konstruktor, in dem die Commands definiert und die Instanz des Service Managers zugewiesen werden. Die Anzahl der zuletzt gelaufenen Schritte und die Distanz sowie das Datum werden durch Aufruf der Methode updateLastData über den ServiceManager von der DatabaseConnection geupdated. isRunning wird standardmäßig zunächst auf false gesetzt.
+	\item[+] \textbf{StartActivity(): void}\\ Methode die vom StartActivityCommand aufgerufen wird. Holt sich beim Service Manager den ActivityManager, der dann die StepActivity zur Verfügung stellt. Das Viewmodel registriert seine OnActivityDone Event Methode beim Event Handler in der StepActivity Klasse und wechselt zum StepModeActiveView. 
 
 \end{itemize}
 \begin{tabular}{p{7cm}p{10cm}}
