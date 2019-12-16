@@ -73,7 +73,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GLOSSARY ENTRIES                 	                              	 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\newglossaryentry{Datenbank}{name={Datenbank},
+	description={Die Datenbank speichert die Trainingsdaten in Form von DBEntries. Dabei wird die Datenbank von dem Plugin SQLite benutzt.}}
+\newglossaryentry{CSV}{name={CSV},
+	description={CSV steht für "Comma-Seperated-Value" ein Dateityp, bei dem die Attribute durch ein Komma getrennt werden. Eine Zeile bildet dabei immer einen Eintrag ab. Das Format ist human-readable und veränderbar.}}
 \makeglossaries
 \loadglsentries{Glossar.tex}
 
@@ -119,7 +122,7 @@ Die verwendete Notation richtet sich nach dem UML-Standard.
 		- Servicemanager() : void & privater Konstruktor, genutzt im Singleton Muster. Aufrufen der Methode serviceRegistration() zur Erstmaligen Registrierung der Services mit einer IServiceCollection und zur Erstellung des ServiceProvider.\\
 	\end{tabular}
 		
-\subsection{Settings Service}
+\subsection{Einstellungen Service}
 \subsubsection{User}
     \paragraph{Klassenbeschreibung:}
     Die User-Klasse spezifiziert den Benutzer, der die App gerade verwendet.\\
@@ -133,7 +136,7 @@ Die verwendete Notation richtet sich nach dem UML-Standard.
         + toString(): String & Wandelt das Objekt in einen String um. (vergleichbar mit JSON).\\
         + static parseUser(user: String): User & Wandelt JSON-String wieder in Objekt um.\\
     \end{tabular}
-\subsection{ISettingsService}
+\subsubsection{ISettingsService}
 	\paragraph{Interfacebeschreibung:}
 	Das Interface ISettingsService bietet eine Schnittstelle für die Einstellungen der App. Sie implementiert Konstanten zur Identifizierung der Einstellungen und hält die aktuellen Einstellungen als Attribute.
 	\paragraph{Attribute:}
@@ -148,16 +151,45 @@ Die verwendete Notation richtet sich nach dem UML-Standard.
 	\begin{tabular}{p{7cm}p{10cm}}
 		- loadSettings():void & Lädt alle Settings aus den Einstellungen in die Attribute.	
 	\end{tabular}
-\subsection{SettingsService}
+\subsubsection{SettingsService}
 	\paragraph{Klassenbeschreibung}
 	Die Klasse SettingsService implementiert die Schnittstelle ISettingsService. In der Implementierung der Funktionen, welche die Speicherung der Einstellungen enthalten, wird die Klasse App.Current.Properties verwendet.
 	Dabei wird immer sofort nach einer Änderung die neue Einstellung gespeichert und nicht erst beim Beenden der Sitzung.
 	
 	
 	TODO: Sollen auch bei den konkreten Klassen die Methoden/Attribute nochmal aufgelistet werden?
-\subsection{IDataBaseConnection}
+\subsection{Datenbank Service}
+\subsubsection{IDataBaseConnection}
+	\paragraph{Interfacebeschreibung}
+	Das Interface IDataBaseConnection ist ein Service, welcher vom ServiceManager verwaltet wird. Dieser regelt Speicherung der Trainingsdaten mittels einer \gls{Datenbank}. Zudem verwaltet sie das Importieren und Exportieren von den Trainingsdaten.
+	Die Datenbankeinträge sind Instanzen der Klasse DBEntry. 
 	
+	\paragraph{Methoden:}
+	\begin{tabular}{p{7cm}p{10cm}}
+		+ saveDBEntry(entry: DBEntry): void & Speichert ein Datenbankeintrag in der \gls{Datenbank}. Falls schon ein Eintrag zu dem Datum existiert, wird dieser aktualisiert\\
+		+ getAllEntriesAsync(): Task<List<DBEntry>> &Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry \\ 
+		+ getMostReentEntriesAsync(amount : int): void &Liefert  die letzten amount Einträge der Datenbank in Form einer Liste mit DBEntry zurück\\
+		+ importTrainingData(file: FileData): void & Liest aus der angegebenen \gls{CSV}-Datei die DBEnries raus und speichert sie in der \gls{Datenbank}.\\
+		+ exportTrainingData(path: String): void& Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
+	\end{tabular}
 
+\subsubsection{DBEntry}
+	\paragraph{Klassenbeschreibung}
+	Die Klasse DBEntry ist ein Datenkontainer, welcher einen Trainingstag darstellt. Dieser wird in der Datenbank gespeichert. DBEntry beinhaltet kein selbstständiges Verhalten.
+	
+	\paragraph{Attribute}
+	\begin{tabular}{p{7cm}p{10cm}}
+	+ Date: DateTime & Das Datum des Trainingstages. Wird als eindeutiger Bezeichner (Primary key) in der Datenbank benutzt.\\
+	+ PushUps: int & Die Anzahl der Liegestützen, welche an dem Tag gemacht wurden \\
+	+ SitUps: int & Die Anzahl der SitUps, welche an dem Tag gemacht wurden \\
+	+ Steps: int & Die Anzahl der Schritte, welche an dem Tag gemacht wurden \\
+	\end{tabular}
+	 
+	 \paragraph{Methoden}
+	 \begin{tabular}{p{7cm}p{10cm}}
+	 + toString(): String & Liefert die Instanz als String zurück. (\gls{CSV}-Format) \\
+	 + static parseDBEntry(entry: String) : DBEntry & Liest aus einem String ein DBEntry Objekt. Falls der String nicht dem Format entspricht, wird null zurückgegeben. \\
+	\end{tabular}
 \section{Klassenbeschreibung View-Model}
 \subsection{StepModeViewmodel}
 \paragraph{Klassenbeschreibung:}
