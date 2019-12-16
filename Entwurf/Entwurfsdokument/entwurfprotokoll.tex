@@ -159,6 +159,99 @@ Die verwendete Notation richtet sich nach dem UML-Standard.
 	
 
 \section{Klassenbeschreibung View-Model}
+\subsection{StepModeViewmodel}
+\paragraph{Klassenbeschreibung:}
+Die Klasse CountModeViewmodel enthält die Logik des Stepmodes  und hält Attribute die per Databinding an die Viewklassen CountModeView und CountModeActiveView gebunden sind. 
+\paragraph{Attribute:}
+\begin{tabular}{p{7cm}p{10cm}}
++ StepsDoneLastTime: string & Hält die Schrittanzahl des letzten aktiven Laufvorgangs. \\
++ DistanceWalkedLastTime: string & Hält die gelaufene Distanz während des letzten aktiven Laufvorgangs. \\
++ LastDatatime: string & Hält das Datum des letzten aktiven Laufvorgangs. \\
++ StepCounter: int & Counter für die Schrittanzahl während des aktiven Laufvorgangs. \\
++ DistanceWalked: int & Bisher gelaufene Distanz. \\
++ isRunning: boolean & True wenn der Nutzer läuft, false wenn er steht. \\
++ StartActivityCommand: Command & Der Command der beim Drücken des Start Buttons ausgeführt wird, um den Laufvorgang zu starten. \\
++ StopActivtiyCommand: Command & Der Command der beim Drücken des Stopp Buttons ausgeführt wird, um den Laufvorgang zu stoppen. \\
+\end{tabular}
+\paragraph{Methoden:}
+\begin{tabular}{p{7cm}p{10cm}}
++ <<create>> StepModeViewmodel() & Konstruktor, in dem die Commands definiert und die Instanz des Service Managers zugewiesen werden. Die Anzahl der zuletzt gelaufenen Schritte und die Distanz sowie das Datum werden durch Aufruf der Methode updateLastData über den ServiceManager von der DatabaseConnection geupdated. isRunning wird standardmäßig zunächst auf false gesetzt.\\
++ StartActivity(): void & Methode die vom StartActivityCommand aufgerufen wird. Holt sich beim Service Manager den ActivityManager, der dann die StepActivity zur Verfügung stellt. Das Viewmodel registriert seine OnActivityDone Event Methode beim Event Handler in der StepActivity Klasse und wechselt zum StepModeActiveView. \\
++ StopActivity(): void & Methode die vom StopActivityCommand aufgerufen wird. Meldet die OnActivityDone Methode vom EventHandler in der StepActivity Klasse ab und setzt isRunning auf false. Zeigt ein PopUp mit der Anzahl der gelaufenen Schritte an, welches der Nutzer wegklicken kann. Danach wird zum StepModeView zurück gewechselt und die Anzeige des letzten Laufvorgangs aktualisiert. \\
++ OnActivityDone(object sender, EventArgs.Empty) & Event Methode, die von der Aktivität bei Erkennung von einem Schritt aufgerufen wird. Sie erhöht den Counter um 1 und setzt isRunning auf True. Ruft danach checkRunning auf \\
++ updateLastData(): void & Wird vom Konstruktor und nach jedem Vorgangsende aufgerufen. Aktualisiert die Attribute StepsDoneLastTime, DistanceWalkedLastTime und LastDatatime, indem über den Service Manager von der DataBaseConnection der letzte Eintrag genommen wird. \\
++ checkRunning(): void & Speichert den aktuellen StepCounter Wert zwischen und vergleicht diesen nach einer Sekunde mit dem neuen StepCounter Wert. Sind diese gleich, so wird isRunning auf false gesetzt. \\
++ showPopUp(): void & Zeigt das PopUp mit den gelaufenen Schritten und der Distanz asynchron an, wegklickbar mit einem Button. \\
+\end{tabular}
+
+\subsection{CountModeViewmodel}
+\paragraph{Klassenbeschreibung:}
+Die Klasse CountModeViewmodel enthält die Logik des Countmodes und hält Attribute die per Databinding an die Viewklassen CountModeView und CountModeActiveView gebunden sind. Sie implementiert die INotifyPropertyChanged Schnittstelle, um das Auswählen einer Aktivität durch den Benutzer in der zugehörigen Viewklasse anzeigen zu können.
+\paragraph{Attribute:}
+\begin{tabular}{p{7cm}p{10cm}}
++ PropertyChanged: PropertyChangedEventHandler & Der Eventhandler der INotifyPropertyChanged Schnittstelle, bei dem die zugehörige View registriert ist. \\
++ selectedActivity: String & Die aktuell vom Nutzer ausgewählte Aktivität. \\
++ timer: Stopwatch & Der Timer, welcher die Trainingszeit des Nutzers misst. \\
++ counter: int & Ein Zähler, der die Anzahl der ausgeführten Wiederholungen des Nutzers zählt. \\
++ Minutes: String & Anzahl Minuten der Ausführungszeit. \\
++ Seconds: String & Anzahl Sekunden der Ausführungszeit. \\
++ Milliseconds: String & Anzahl Sekunden der Ausführungszeit. \\ 
++ StartActivityCommand: Command & Der Command der beim Drücken des Start Buttons ausgeführt wird, um den Zählvorgang zu starten. \\
++ StopActivityCommand: Command & Der Command der beim Drücken des Stopp Buttons ausgeführt wird, um den Zählvorgang zu stoppen. \\
++ Manager: ServiceManager & Die Instanz des ServiceManagers, bei dem Anfragen an Services getätigt werden. \\
+\end{tabular}
+\paragraph{Methoden:}
+\begin{tabular}{p{7cm}p{10cm}}
++ <<create>> CountModeViewmodel() & Konstruktor, in dem die Commands definiert und die Instanz des Service Managers zugewiesen werden. \\
+\# OnPropertyChanged(): void & Methode die beim Eintritt des PropertyChanged Events aufgerufen wird. Sie verändert bei der registrierten View Klasse die Anzeige der ausgewählten Aktivität. \\
++ StartActivity(): void & Methode die vom StartActivityCommand aufgerufen wird. Holt sich beim Service Manager den ActivityManager, der dann die auswählte Activity zur Verfügung stellt. Das Viewmodel registriert seine OnActivityDone Event Methode beim Event Handler in der Activity Klasse und wechselt zum CountModeActiveView; danach wird der Timer gestartet. \\
++ StopActivity(): void & Methode die vom StopActivityCommand aufgerufen wird. Meldet die OnActivityDone Methode vom EventHandler in der Activity Klasse ab und hält den Timer an. Zeigt ein PopUp mit der Anzahl der ausgeführten Aktivität an, welches der Nutzer wegklicken kann. Danach wird zum CountModeView zurück gewechselt. \\
++ StartTimer(): void & Startet den Timer. \\
++ StopTimer(): void & Stoppt den Timer. \\
++ OnActivityDone(): void & Event Methode, die von der Aktivität bei Erkennung der Ausführung von einer Wiederholung aufgerufen wird. Sie erhöht den Counter um 1. \\
++ ShowPopUp(): void & Zeigt das PopUp mit dem Vorgangsresultat asynchron an, wegklickbar mit einem Button. \\
+\end{tabular}
+
+\subsection{ListenAndPerformViewmodel}
+\paragraph{Klassenbeschreibung:}
+Die Klasse ListenAndPerformViewmodel enthält die Logik von Listen\&Perform und hält Attribute die per Databinding an die Viewklassen CountModeView und CountModeActiveView gebunden sind.  Sie implementiert die INotifyPropertyChanged Schnittstelle, um das Erstellen eines Trainingsablaufplans durch den Benutzer in der zugehörigen Viewklasse anzeigen zu können.
+\paragraph{Attribute:}
+\begin{tabular}{p{7cm}p{10cm}}
++ PropertyChanged: PropertyChangedEventHandler & Der Eventhandler der INotifyPropertyChanged Schnittstelle, bei dem die zugehörige View registriert ist. \\
++ StartActivityCommand: Command & Der Command der beim Drücken des Start Buttons ausgeführt wird, um das Training zu starten. \\
++ StopActivityCommand: Command & Der Command der beim Drücken des Stopp Buttons ausgeführt wird, um das Training zu stoppen. \\
++ PushUpCounter: int & Zähler für aktuell ausgeführte Liegestütze. \\
++ SitUpCounter: int & Zähler für aktuell ausgeführte Sit-ups. \\
++ PushUpResult: int & Zähler für insgesamt während des aktuellen Trainings ausgeführte Liegestütze. \\
++ SitUpResult: int & Zähler für insgesamt während des aktuellen Trainings ausgeführte Sit-ups. \\
++ timer: Stopwatch & Der Timer, welcher die Trainingsdauer des Nutzers misst. \\
++ Minutes: String & Anzahl Minuten der Trainingszeit. \\
++ Seconds: String &  Anzahl Sekunden der Trainingszeit. \\
++ Milliseconds: String & Anzahl Sekunden der Trainingszeit. \\ 
++ ActivityList: ObservableCollection<string> & Liste der Aktivitäten die der Nutzer durchführen möchte, die durch ihn anpassbar ist. \\
++ ActivityAmounts: ObservableCollection<int> & Anzahl der Aktivitäten die der Nutzer durchführen möchte, die durch ihn anpassbar sind. \\
++ SelectedActivity: string & Hilfsattribut zum Bearbeiten und Löschen eines Listeneintrags. Per Databinding an die View gebunden; es ist der Eintrag der Liste auf den der Nutzer zuletzt getippt hat. \\
++ AddActivityCommand: Command & Der Command der beim Drücken des AddActivity Buttons ausgeführt wird. \\
++ RemoveActivityCommand: Command & Der Command der beim Drücken des RemoveActivity Buttons ausgeführt wird. \\
++ EditActivityCommand: Command & Der Command der beim Drücken des EditActivity Buttons ausgeführt wird. \\
+\end{tabular}
+\paragraph{Methoden:}
+\begin{tabular}{p{7cm}p{10cm}}
++ <<create>> ListAndPerformViewmodel & Konstruktor, in dem die Commands definiert und die Instanz des Service Managers zugewiesen werden. Die ActityList und ActivityAmounts werden initialisiert.\\
+\# OnPropertyChanged(): void & Methode die beim Eintritt des PropertyChanged Events aufgerufen wird. Sie verändert bei der registrierten View Klasse die Anzeige der ausgewählten Aktivitäten sowie deren Anzahl. \\
++ StartActivity(): void & Methode die vom StartActivityCommand aufgerufen wird, die zur ListenAndPerformActiveView wechselt. Ruft für jeden Listeneintrag in ActivityList nacheinander die DoActivity Methode auf, bis die Liste abgearbeitet ist. \\
++ StopActivity(): void & Methode die vom StopActivityCommand aufgerufen wird. Hält den Timer an und zeigt ein PopUp mit der Anzahl der ausgeführten Aktivitäten an, welches der Nutzer wegklicken kann. Danach wird zum ListenAndPerformView zurück gewechselt. \\
++ startTimer(): void & Startet den Timer. \\
++ stopTimer(): void & Stoppt den Timer. \\
++ DoActivity(): void &  Holt sich  beim Service Manager den ActivityManager, der die entsprechende Activity der ActivityList zur Verfügung stellt, bei dem das Viewmodel seine OnActivityDone Event Methode registriert. Liest die Activity vor und startet den Timer. Nach Erkennung der vorher festgelegten Anzahl Wiederholungen, meldet das Viewmodel seine OnActivityDone Methode ab und zählt den entsprechenden ResultCounter um die ausgeführte Anzahl hoch. \\
++ AddActivity(): void &  Methode die vom AddActivityCommand aufgerufen wird. Ein Popup erscheint, bei dem der Nutzer auf Liegestütze, Situp oder Pause drücken kann. Nach dem Bestätigen wird erscheint ein neues Popup mit der Anzahl. Die Auswahl wird zu den jeweiligen Listen hinzugefügt. \\
++ RemoveActivity(): void &  Methode die vom RemoveActivityCommand aufgerufen wird. Der gehaltene SelectedActivity Eintrag wird entfernt. \\
++ EditActivity(): void & Methode die vom EditActivityCommand aufgerufen wird. \\
++ OnActivityDone(sender: object, EventArgs.Empty) & Event Methode, die von der Aktivität bei Erkennung der Ausführung von einer Wiederholung aufgerufen wird. Sie erhöht den jeweiligen Counter um 1.  \\
++ showPopUp(): void & Zeigt das PopUp mit dem Vorgangsresultat asynchron an, wegklickbar mit einem Button. \\
++ SpeakNextActivity(): void & Liest die nächste Aktivität der ActivityList sowie seine Anzahl asynchron vor. \\
+\end{tabular}
+
 \section{Klassenbeschreibung View}
 \section{Interaktionsdiagramme}
 \subsection{Aktivitätsdiagramm Lauschen und Agieren}
