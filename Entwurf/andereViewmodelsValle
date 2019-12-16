@@ -1,4 +1,4 @@
-<mxfile host="www.draw.io" modified="2019-12-16T14:44:19.114Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36 OPR/65.0.3467.72" etag="nZbdrtaGXefuiP3Fx99O" version="12.4.2" type="github" pages="1">
+<mxfile host="www.draw.io" modified="2019-12-16T14:59:44.046Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36 OPR/65.0.3467.72" etag="uNZp_nP8eHngDQPITxqU" version="12.4.2" type="github" pages="1">
   <diagram id="-bitJ0MVL9VQ1GZcLV4-" name="Page-1">
     <mxGraphModel dx="2209" dy="1932" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -35,13 +35,13 @@
         <mxCell id="idjDKPhBeSDoDh2S4dQ7-13" value="SettingsPageViewmodel" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="540" y="210" width="350" height="230" as="geometry"/>
         </mxCell>
-        <mxCell id="idjDKPhBeSDoDh2S4dQ7-14" value="+ name: String&#xa;+ activeLanguageIsGerman: bool&#xa;+ steplength: int&#xa;+ connectionInterval&#xa;- affectsEarables: bool" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="idjDKPhBeSDoDh2S4dQ7-13" vertex="1">
+        <mxCell id="idjDKPhBeSDoDh2S4dQ7-14" value="+ username: String&#xa;+ steplength: int&#xa;+ connectionInterval&#xa;- affectsEarables: bool&#xa;+ ClickSave: Command" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="idjDKPhBeSDoDh2S4dQ7-13" vertex="1">
           <mxGeometry y="40" width="350" height="80" as="geometry"/>
         </mxCell>
         <mxCell id="idjDKPhBeSDoDh2S4dQ7-15" value="" style="line;strokeWidth=1;fillColor=#dae8fc;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#6c8ebf;" parent="idjDKPhBeSDoDh2S4dQ7-13" vertex="1">
           <mxGeometry y="120" width="350" height="10" as="geometry"/>
         </mxCell>
-        <mxCell id="idjDKPhBeSDoDh2S4dQ7-16" value="&#xa;+ OnSaveClicked(): void&#xa;# OnPropertyChanged(): void&#xa;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="idjDKPhBeSDoDh2S4dQ7-13" vertex="1">
+        <mxCell id="idjDKPhBeSDoDh2S4dQ7-16" value="konstruktor holt sich werte und speichert sie als parameter&#xa;+ OnSaveClicked(): void&#xa;# OnPropertyChanged(): void&#xa;" style="text;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="idjDKPhBeSDoDh2S4dQ7-13" vertex="1">
           <mxGeometry y="130" width="350" height="100" as="geometry"/>
         </mxCell>
         <mxCell id="idjDKPhBeSDoDh2S4dQ7-21" value="Classname" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
@@ -81,7 +81,7 @@
         <mxCell id="n3fgYXRnEkBMSEF-hfhH-6" value="«interface»&lt;br&gt;&lt;b&gt;INotifyPropertyChanged&lt;/b&gt;" style="html=1;" parent="1" vertex="1">
           <mxGeometry x="590" y="72.13" width="155" height="52" as="geometry"/>
         </mxCell>
-        <mxCell id="n3fgYXRnEkBMSEF-hfhH-8" value="alles Properties, getter laufen über serviceManager und SettingsService" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" parent="1" vertex="1">
+        <mxCell id="n3fgYXRnEkBMSEF-hfhH-8" value="alles Properties, getter laufen über serviceManager und SettingsService&lt;br&gt;slider nicht mit binding" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=-6;" parent="1" vertex="1">
           <mxGeometry x="930" y="220" width="353" height="70" as="geometry"/>
         </mxCell>
         <mxCell id="n3fgYXRnEkBMSEF-hfhH-9" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br&gt;&lt;b&gt;ISettingsService&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;+ activeLanguage : CultureInfo&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;+ connectionInterval : SamplingRate&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;- LANGUAGE_PROPERTY : String&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;- USER_PROPERTY : String&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;- SAMPLINGRATE_PROPERTY : String&lt;/p&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;&gt;&lt;p style=&quot;margin: 0px 0px 0px 4px&quot;&gt;&lt;span&gt;- loadSettings()&amp;nbsp;: void&lt;/span&gt;&lt;br&gt;&lt;/p&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
