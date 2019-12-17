@@ -131,8 +131,9 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 	\item[+] \textbf{ButtonPressed: EventHandler <ButtonEventArgs>}\\ Das Attribut buttonPressed ist vom Typ PuttonPressedEventHandler und wird benötigt um das drücken des Knopfes an den Earables weiterzuleiten.
 	\item[+] \textbf{DeviceConnectionStateChanged: EventHandler<DeviceEventArgs>}\\ Das Attribut divceConnectionStateChanged ist vom \\Typ deviceConnectionStateChangedEventHandler und wird benötigt um den aktuellen Verbindungsstatus weiterzuleiten.
 	\item[+] \textbf{Config: ConfigContainer}\\ In diesem Attribut befinden sich die Configurationsvariablen für die Earables.
-	\item[+] \textbf{Character: Characteristics}\\ Das Attribut beinhaltet allle Charakteristiken.
-\end{itemize}
+	\item[+] \textbf{Ble: IBluetoothLE}\\ Wird benötigt um auf das Bluetooth des Smartphones zuzugreifen. Der Typ IBluetooth befindet sich im BLE\_Plugin
+	\item[+] \textbf{Adapter: IAdapter}\\ Wird benötigt um die Bluetoothverbindung aufzubauen. Der Typ  IAdapter befindet sich im BLE\_Plugin
+	\item[+] \textbf{device: IDevice}\\ Wird benötigt um die Bluetoothverbindung aufzubauen. Der Typ  IDevice befindet sich im BLE\_Plugin
 
 \paragraph{Methoden:}
 \begin{itemize}
@@ -158,7 +159,7 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 \subsubsection{EarablesConnetion}
 
 \paragraph{Klassenbeschreibung:}
-Die Klasse EarablesConnection implementiert das IEarablesConnection Interface und ist die konkrete Klasse, die sich um die BLE-Verbindung kümmert.
+Die Klasse EarablesConnection impl
 
 
 \subsubsection{Constants}
@@ -224,7 +225,7 @@ Diese Klasse beinhaltet alle Einstellungsmöglichkeiten für die Earables.
 
 \subsubsection{IMUDataExtractor}
 Diese Klasse Übernimmt das Umwandeln des Bit Strings in verschiedene Einheiten.
-Die Klasse wurde erstellt um der IEarablesConnection Klasse Arbeit abzunehmen und Logik zu entkoppeln, so dass sich die IEarablesConnetion
+Die Klasse wurde erstellt um der EarablesConnection Klasse Arbeit abzunehmen und Logik zu entkoppeln, so dass sich die EarablesConnetion
  Klasse nur um die Kommunikation mit den Earables kümmern muss. Sie ist static da es keinen Sinn macht sie zu instanziieren weil sie nur einen Dienst anbietet.
 
 \paragraph{Methoden:}
@@ -660,59 +661,27 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 \section{Klassenbeschreibung View}
 	\subsection{StepModePage}
 	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
 	
 	\subsection{StepModeActivePage}
 	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
 	
 	\subsection{CountModePage}
 	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
 
 	\subsection{CountModeActivePage}
 	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
 
 	\subsection{ListenAndPerformPage}
 	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
 
 	\subsection{ListenAndPerformActivePage}
 	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
-
+	
 	\subsection{MusicModePage}
-	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
+		\paragraph{Klassenbeschreibung:}
 
 	\subsection{DataOverviewPage}
-	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
+		\paragraph{Klassenbeschreibung:}
 
 	\subsection{class ImportExportPage}
 		\paragraph{Klassenbeschreibung:}
@@ -726,33 +695,10 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 		\end{itemize}
 
 	\subsection{class SettingsPage}
-	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
 
 	\subsection{BluetoothPopUpPage}
-	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
-
 	\subsection{MenuPage}
-	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
-
 	\subsection{PopUpScanningPage}
-	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
-		\begin{itemize}
-			\item
-		\end{itemize}
-
 \section{Interaktionsdiagramme}
 \subsection{Aktivitätsdiagramm Lauschen und Agieren}
 \subsection{Sequenzdiagramme}
