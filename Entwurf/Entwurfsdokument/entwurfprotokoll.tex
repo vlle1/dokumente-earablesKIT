@@ -120,10 +120,10 @@ hier kommt ein mal das Klassendiagramm rein mit Verweis auf den Anhang - valle
 %%\section{Klassenübersicht} brauchen wir nicht, da das bei uns schon alles im Inhaltsverzeichnis aufgelistet wird.
 \section{Klassenbeschreibung Model}
 \subsection{Bibliothek}
-\subsubsection{EarablesConnetion}
+\subsubsection{IEarablesConnetion}
 
 \paragraph{Klassenbeschreibung:}
-Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über die später kommuniziert werden kann. Um eine BLE Verbindung herzustellen benutzt sie das Bluetooth LE Plugin for Xamarin.
+Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über die später kommuniziert werden kann. Um eine BLE Verbindung herzustellen benutzt sie das Bluetooth LE Plugin for Xamarin. Es handelt sich hierbei um ein Interface um Mocking zu ermöglichen. So kann man eine MockKlasse erstellen, die die Klasse IEarables implementiert um so das implementieren und testen zu vereinfachen.
 
 \paragraph{Attribute:}
 \begin{itemize}
@@ -152,6 +152,13 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 	\item[\#] \textbf{OnPushButtonPressed(): void}\\ Falls der Knopf an den Earables gedrückt wurde wird diese Methode aufgerufen und benachrichtigt alle Listener des Events buttonPressed, dass der Knopf gedrückt wurde.
 	\item[\#] \textbf{OnDeviceConnected(): void}\\ Falls eine Verbindung mit einem Device hergestellt wurde oder eine besthenden Verbindung aufgelößt wurde wird diese Methode aufgerufen und benachrichtigt alle Listener des Events deviceConnectionStateChanged, dass sich dert Verbindungsstatus geändert hat.
 \end{itemize}
+
+
+
+\subsubsection{EarablesConnetion}
+
+\paragraph{Klassenbeschreibung:}
+Die Klasse EarablesConnection impl
 
 
 \subsubsection{Constants}
