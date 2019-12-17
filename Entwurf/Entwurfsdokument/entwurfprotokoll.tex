@@ -73,10 +73,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GLOSSARY ENTRIES                 	                              	 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newglossaryentry{Datenbank}{name={Datenbank},
-	description={Die Datenbank speichert die Trainingsdaten in Form von DBEntries. Dabei wird die Datenbank von dem Plugin SQLite benutzt.}}
-\newglossaryentry{CSV}{name={CSV},
-	description={CSV steht für "Comma-Seperated-Value" ein Dateityp, bei dem die Attribute durch ein Komma getrennt werden. Eine Zeile bildet dabei immer einen Eintrag ab. Das Format ist human-readable und veränderbar.}}
 \makeglossaries
 \loadglsentries{Glossar.tex}
 
@@ -641,29 +637,46 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 \subsection{ScanningPopUpViewModel}
 
 \section{Klassenbeschreibung View}
-\subsection{StepModePage}
-\subsection{StepModeActivePage}
-\subsection{CountModePage}
-\subsection{CountModeActivePage}
-\subsection{ListenAndPerformPage}
-\subsection{ListenAndPerformActivePage}
-\subsection{MusicModePage}
-\subsection{DataOverviewPage}
-\subsection{class ImportExportPage}
-\paragraph{Klassenbeschreibung:}
-Die Klasse ImportExportPage beinhaltet eine Seite mit drei Buttons (siehe Abbildung 11 (Seite 13) im Pflichtenheft).
-Das Klicken auf diese Buttons benachrichtigt das ImportExportViewmodel (via Command).
-\paragraph{Attribute}
-\begin{itemize}
-	\item [-]deleteData: Button
-	\item [-]exportData: Button
-	\item [-]importData: Button
-\end{itemize}
-\subsection{class SettingsPage}
+	\subsection{StepModePage}
+	\paragraph{Klassenbeschreibung:}
+	
+	\subsection{StepModeActivePage}
+	\paragraph{Klassenbeschreibung:}
+	
+	\subsection{CountModePage}
+	\paragraph{Klassenbeschreibung:}
 
-\subsection{BluetoothPopUpPage}
-\subsection{MenuPage}
-\subsection{PopUpScanningPage}
+	\subsection{CountModeActivePage}
+	\paragraph{Klassenbeschreibung:}
+
+	\subsection{ListenAndPerformPage}
+	\paragraph{Klassenbeschreibung:}
+
+	\subsection{ListenAndPerformActivePage}
+	\paragraph{Klassenbeschreibung:}
+	
+	\subsection{MusicModePage}
+		\paragraph{Klassenbeschreibung:}
+
+	\subsection{DataOverviewPage}
+		\paragraph{Klassenbeschreibung:}
+
+	\subsection{class ImportExportPage}
+		\paragraph{Klassenbeschreibung:}
+		Die Klasse ImportExportPage beinhaltet eine Seite mit drei Buttons (siehe Abbildung 11 (Seite 13) im Pflichtenheft).
+		Das Klicken auf diese Buttons benachrichtigt das ImportExportViewmodel (via Command).
+		\paragraph{Attribute}
+		\begin{itemize}
+			\item [-]deleteData: Button
+			\item [-]exportData: Button
+			\item [-]importData: Button
+		\end{itemize}
+
+	\subsection{class SettingsPage}
+
+	\subsection{BluetoothPopUpPage}
+	\subsection{MenuPage}
+	\subsection{PopUpScanningPage}
 \section{Interaktionsdiagramme}
 \subsection{Aktivitätsdiagramm Lauschen und Agieren}
 \subsection{Sequenzdiagramme}
