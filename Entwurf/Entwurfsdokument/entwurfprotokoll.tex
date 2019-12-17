@@ -447,6 +447,10 @@ Dieses Event benachrichtigt Listener, falls der neue IMU Daten vorliegen.
 	\paragraph{Klassenbeschreibung}
 	Die Klasse DataBaseConnection implementiert die Schnittstelle IDataBaseConnection. Sie kümmert sich um die Speicherung und Verwaltung der Trainingsdaten. Dabei benutzt die DataBaseConnection die \gls{Datenbank} von SQLite. Es werden Objekte von der Klasse DBEntry gespeichert. 
 	
+	\paragraph{Attribute:}
+	\begin{itemize}
+		\item[-] \textbf{const PATH: string}\\Der Pfad, an dem die Datenbank gespeichert ist. Dabei ist dieser Pfad konstant und kann nicht geändert werden.
+	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item[+] \textbf{<<create>> DataBaseConnection}\\Konstruktor für die Klasse DataBaseConnection. Es wird eine Instanz SQLiteAsyncConnection erstellt und eine Tabelle erstellt. Diese besteht aus zwei Spalten: Da Datum(Primary Key) als Datetype und den Inhalt als String.
