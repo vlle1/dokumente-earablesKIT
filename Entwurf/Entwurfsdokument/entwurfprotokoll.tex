@@ -682,6 +682,12 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 
 	\subsection{Class DataOverviewPage}
 		\paragraph{Klassenbeschreibung:}
+		Diese Seite soll dem Nutzer die Ansicht seiner letzten Trainingsergebnisse ermöglichen.
+		Die Daten werden dabei vom DataOverviewViewModel per Data-Binding bereit gestellt.
+		\paragraph{Attribute:}
+		\begin{itemize}
+			\item[-] contentListView: ListView
+		\end{itemize}
 
 	\subsection{Class ImportExportPage}
 		\paragraph{Klassenbeschreibung:}
@@ -694,7 +700,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 			\item [-]importData: Button
 		\end{itemize}
 
-		\subsection{class SettingsPage}
+	\subsection{Class SettingsPage}
 		\paragraph{Klassenbeschreibung:}
 		Die Einstellungsseite ermöglicht das Verändern und Einsehen der nutzerspezifischen Parameter.
 		Diese beinhalten:
@@ -705,34 +711,35 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 			\item Die Samplerate des \Gls{IMU}
 			\item \dots
 		\end{itemize}
-		(Abbildung 12 im Pflichtenheft)
+		(Abbildung 12 im Pflichtenheft)\\
+		Die Daten werden per Data-Binding mit der Klasse SettingsViewModel synchronisiert.
 		\paragraph{Attribute}
-			\begin{itemize}
-				\item [-]nameEntry: Entry
-				\item [-]languageSwitch: Switch (ich wäre für https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/picker/)
-				\item [-]stepLengthEntry: Entry
-				\item [-]sampleRateEntry: Entry
-				\item [-]\dots
-				\item [-]saveButton: Button
-			\end{itemize}
+		\begin{itemize}
+			\item [-]nameEntry: Entry
+			\item [-]languageSwitch: Switch (ich wäre für https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/picker/)
+			\item [-]stepLengthEntry: Entry
+			\item [-]sampleRateEntry: Entry
+			\item [-]\dots
+			\item [-]saveButton: Button
+		\end{itemize}
 	
-		\subsection{BluetoothPopUpPage}
+	\subsection{Class BluetoothPopUpPage}
 		\paragraph{Klassenbeschreibung:}
 		\paragraph{Attribute}
-			\begin{itemize}
-				\item [-]
-			\end{itemize}
-	
-	\subsection{MenuPage}
-	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
+		\begin{itemize}
+			\item [-]
+		\end{itemize}
+
+	\subsection{class MenuPage}
+		\paragraph{Klassenbeschreibung:}
+		\paragraph{Attribute}
 		\begin{itemize}
 			\item [-]
 		\end{itemize}
 
 	\subsection{PopUpScanningPage}
-	\paragraph{Klassenbeschreibung:}
-	\paragraph{Attribute}
+		\paragraph{Klassenbeschreibung:}
+		\paragraph{Attribute}
 		\begin{itemize}
 			\item [-]
 		\end{itemize}
