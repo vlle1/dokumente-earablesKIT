@@ -279,27 +279,26 @@ In dieser Klasse werden die Charkterisiken gespeichert um sie nicht jedes mal ne
 
 
 \subsubsection{DeviceEventArgs}
-Dieses Event benachrichtigt Listener, falls sich der Verbindungsstatus seines Devices ändert.
-%%?? valle: schreiben wir jetzt gar nicht mehr Klassenbeschreibung drüber?
-%%valle: das ist doch kein Event! 
+Enthält alle relevanten Informationen die benötigt werden, falls sich der Connection Status ändert.
+
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{Connected: Boolean}\\Ist true falls eine BLE Verbindung mit einem Device existiert und false falls nicht.
-	\item[+] \textbf{DeviceName: String}\\Beinhaltet den Devicenamen des Devices, mit dem der Nutzer verbunden ist. %%bitte deutsch
+	\item[+] \textbf{DeviceName: String}\\Beinhaltet den Gerätenamen des Geräts, mit dem der Nutzer verbunden ist. 
 \end{itemize}
 
 \paragraph{Methoden:}
 \begin{itemize}
-	\item[+] \textbf{<<create>r>DeviceEventArgs(connected: Boolean, deviceName: String): void}\\Zusätzlicher Konstruktor um die Attribute setzten zu können
+	\item[+] \textbf{<<create>>DeviceEventArgs(connected: Boolean, deviceName: String): void}\\Zusätzlicher Konstruktor um die Attribute setzten zu können
 \end{itemize}
 
 
 \subsubsection{ButtonEventArgs}
-Dieses Event benachrichtigt Listener, falls der Knopf der Earables gedrückt wurde.
+Enthält alle relevanten Informationen die benötigt werden, falls der Knopf der Earables gedrückt wurde. Momentan werden keine Eventargumente gebraucht, aber diese Klasse existiert bereits falls bei der Weiterentwicklung doch Argumente übergeben werden müssen.
 
 
 \subsubsection{DataEventArgs}
-Dieses Event benachrichtigt Listener, falls der neue IMU Daten vorliegen.
+Enthält alle relevanten Informationen die benötigt werden, falls neue Daten ankamen.
 
 \paragraph{Attribute:}
 \begin{itemize}
