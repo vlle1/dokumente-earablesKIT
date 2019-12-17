@@ -158,7 +158,7 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 \subsubsection{EarablesConnetion}
 
 \paragraph{Klassenbeschreibung:}
-Die Klasse EarablesConnection impl
+Die Klasse EarablesConnection implementiert das IEarablesConnection Interface und ist die konkrete Klasse, die sich um die BLE-Verbindung kümmert.
 
 
 \subsubsection{Constants}
@@ -224,7 +224,7 @@ Diese Klasse beinhaltet alle Einstellungsmöglichkeiten für die Earables.
 
 \subsubsection{IMUDataExtractor}
 Diese Klasse Übernimmt das Umwandeln des Bit Strings in verschiedene Einheiten.
-Die Klasse wurde erstellt um der EarablesConnection Klasse Arbeit abzunehmen und Logik zu entkoppeln, so dass sich die EarablesConnetion
+Die Klasse wurde erstellt um der IEarablesConnection Klasse Arbeit abzunehmen und Logik zu entkoppeln, so dass sich die IEarablesConnetion
  Klasse nur um die Kommunikation mit den Earables kümmern muss. Sie ist static da es keinen Sinn macht sie zu instanziieren weil sie nur einen Dienst anbietet.
 
 \paragraph{Methoden:}
