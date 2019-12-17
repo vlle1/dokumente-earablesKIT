@@ -97,11 +97,32 @@ In diesem Dokument wird der Entwurf der \Gls{CPB}, des Erweiterungsmoduls und de
 Die verwendete Notation richtet sich nach dem UML-Standard.
 
 \section{Aufbau}
-    \subsection{Architektur}
-    \subsection{Klassendiagramm}
-
-
-\section{Klassenübersicht}
+	\subsection{Architekturdiagramm}
+	\begin{center}
+		\vspace{100px}
+		\includegraphics[width=0.8\textwidth]{./Diagramme/Achi5.png}
+	\end{center}
+	\clearpage %%sieht sonst noch zerrissener aus;    Gehts nicht irgendwie schöner? Sodass das Diagramm ganz oben quasi anliegt?
+	\subsection{Kurze Erläuterung zum Architekturdiagramm}
+  Wir haben uns bei der Architekturdiagramm für \textsf{Model-View-Viewmodel}, eine Spezialisierung  des Entwurfsmusters Model-View-Controller, entschieden.
+  Dabei gibt es folgende Komponenten:
+  \begin{itemize}
+    \item \textsf{\glqq View\grqq{}} enthält alle grafisch angezeigten Elemente, also die Datenanzeige und Bedienoberfläche der App.
+    \item {\textsf{\glqq Model\grqq{}} enthält die Geschäftslogik der App und ist stark nach außen abgekapselt. In diesen Bereich fallen die meisten komplexen Teile der App, die als Dienste (Services) vom Viewmodel aus verwaltet werden sollen. Wesentlich sind dabei (vollständige Angabe im Entwurf): \begin{itemize}
+      \item Die Verwaltung der anfallenden Produktdaten (Abruf und Bereitstellung der gespeicherten Daten in der Datenbank, im CSV-Format) über ein Datenmodul
+      \item Die Bibliothek, die für die Kommunikation mit den \Gls{Earables} (Verbindungsaufbau, Start und Stopp des Samplings, Konfiguration der \Gls{Steuerungsparameter}, Auslesen der Sensordaten) zuständig ist. Dazu wird eine externe Bibliothek\footnote{https://github.com/xabre/xamarin-bluetooth-le} verwendet.
+      \item Das Erweiterungsmodul, das sich um die Aktivitätserkennung kümmert. Dieses nutzt dabei die Schnittstellen der Bibliothek.
+    \end{itemize}
+    Die Services sind dabei jeweils unabhängig vom restlichen Model funktionsfähig und dadurch leichter testbar.}
+    \item \textsf{\glqq Viewmodel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der UI, wird also bei Benutzerinteraktion vom View aufgerufen. Es gibt dann die entsprechenden Anweisungen an das Model weiter. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die Anzeige der App angepasst wird, zum Beispiel bei Verbindungsabbruch zu den \Gls{Earables}. 
+    
+  \end{itemize}
+  Der Vorteil dieser Architektur ist eine klare Trennung von Benutzerinteraktion und Programmlogik sowie eine lose Kopplung zwischen einzelnen Funktionalitäten, was die Flexibilität und das modulare Testen deutlich erleichtert.
+\clearpage
+  \subsection{Klassendiagramm}
+hier kommt ein mal das Klassendiagramm rein mit Verweis auf den Anhang - valle
+\clearpage
+%%\section{Klassenübersicht} brauchen wir nicht, da das bei uns schon alles im Inhaltsverzeichnis aufgelistet wird.
 \section{Klassenbeschreibung Model}
 \subsection{Bibliothek}
 \subsubsection{BibMain}
@@ -379,7 +400,7 @@ Dieses Event benachrichtigt Listener, falls der neue IMU Daten vorliegen.
 	 + static parseDBEntry(entry: String) : DBEntry & Liest aus einem String ein DBEntry Objekt. Falls der String nicht dem Format entspricht, wird null zurückgegeben. \\
 	\end{tabular}
 \section{Klassenbeschreibung View-Model}
-\subsection{BasicViewmodel}
+\subsection{BasicViewmodel} %%???
 \subsection{StepModeViewmodel}
 \paragraph{Klassenbeschreibung:}
 Die Klasse CountModeViewmodel enthält die Logik des Stepmodes  und hält Attribute die per Databinding an die Viewklassen CountModeView und CountModeActiveView gebunden sind. 
