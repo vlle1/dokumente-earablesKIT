@@ -597,6 +597,21 @@ Die Klasse ListenAndPerformViewmodel erbt von der abstrakten Klasse BasicViewmod
 \end{itemize}
 
 \subsection{MusicmodeViewModel}
+\paragraph{Klassenbeschreibung:}
+Die Klasse MusicModeViewmodel erbt von der abstrakten Klasse BasicViewmodel und enthält die Logik des Musicmodes.
+\paragraph{Attribute:}
+\begin{itemize}
+	\item[-] \textbf{isRunning: boolean}
+\end{itemize}
+\paragraph{Methoden:}
+\begin{itemize}
+	\item[+] \textbf{<<create>> MusicModeViewmodel} \\
+	\item[+] \textbf{StartActivity(): void} \\ Methode die vom StartActivityCommand aufgerufen wird. Registriert die OnActivityDone Methode beim EventHandler der RunningActivity. 
+	\item[+] \textbf{StopActivity(): void} \\ Methode die vom StopActivityCommand aufgerufen wird. Meldet die OnActivityDone Methode beim EventHandler der RunningActivity ab. 
+	\item[+] \textbf{OnActivityDone(sender: object, e: RunningEventArgs)} \\ Event Methode, die von der Activity aufgerufen wird, die gegebenenfalls isRunning ändert und die Musikmethoden aufruft.
+	\item[+] \textbf{StopMusic(): void} \\ Wird von OnActivityDone aufgrufen wenn der Nutzer stehen bleibt. Hält die Musik an.
+	\item[+] \textbf{RestartMusic(): void} \\ Wird von OnActivityDone aufgrufen wenn der Nutzer weiter läuft. Spielt die Musik weiter ab.
+\end{itemize}
 
 \subsection{DataOverviewViewModel}
 
