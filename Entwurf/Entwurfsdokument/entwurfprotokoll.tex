@@ -73,10 +73,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GLOSSARY ENTRIES                 	                              	 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newglossaryentry{Datenbank}{name={Datenbank},
-	description={Die Datenbank speichert die Trainingsdaten in Form von DBEntries. Dabei wird die Datenbank von dem Plugin SQLite benutzt.}}
-\newglossaryentry{CSV}{name={CSV},
-	description={CSV steht für "Comma-Seperated-Value" ein Dateityp, bei dem die Attribute durch ein Komma getrennt werden. Eine Zeile bildet dabei immer einen Eintrag ab. Das Format ist human-readable und veränderbar.}}
 \makeglossaries
 \loadglsentries{Glossar.tex}
 
@@ -132,7 +128,7 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 
 \paragraph{Attribute:}
 \begin{itemize}
-	\item[+] \textbf{imuDataRecived: EventHandler<DataEventArgs>}\\Das Attribut IMUDataRecieved ist vom Typ IMUDataRecivedEventHandler und beinhaltet die IMU Daten eines Eintrags und die Configration der Earables.
+	\item[+] \textbf{imuDataRecived: EventHandler<DataEventArgs>}\\Das Attribut IMUDataRecieved ist vom Typ IMUDataRecivedEventHandler und beinhaltet die IMU Daten eines Eintrags und die Konfiguration der Earables.
 	\item[+] \textbf{buttonPressed: EventHandler <ButtonEventArgs>}\\ Das Attribut buttonPressed ist vom Typ PuttonPressedEventHandler und wird benötigt um das drücken des Knopfes an den Earables weiterzuleiten.
 	\item[+] \textbf{deviceConnectionStateChanged: EventHandler<DeviceEventArgs>}\\ Das Attribut divceConnectionStateChanged ist vom \\Typ deviceConnectionStateChangedEventHandler und wird benötigt um den aktuellen Verbindungsstatus weiterzuleiten.
 	\item[+] \textbf{configuration: ConfigContainer}\\ In diesem Attribut befinden sich die Configurationsvariablen für die Earables.
@@ -141,37 +137,37 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 
 \paragraph{Methoden:}
 \begin{itemize}
-	\item[+] \textbf{<constructor>BibMain()}\\ Im Construktor werden die Atribute ble und adapter initialisiert.
-	\item[+] \textbf{startScanning(): DeviceList<List>}\\ Diese Methode legt eine neue Liste vom Typ Idivice an, in der sie alle gefundenen Devices speichert und anschließend zurückgibt. Sie benutzt die Mehode DeviceDiscoverd und StartScanningForDevicesAsync aus dem Interface Iadapter und die Methode.
-	\item[+] \textbf{connectToDevice(device: Idevice): Boolean}\\ Mit dieser Methode kann sich der Nutzter mit einem Bluetoothgerät verbinden. Er wählt in der Liste  ein Device aus und übergibt es als Parameter. Falls die Verbindung erfolgreich war wird true zurückgegeben. Konnte keine Verbindung hergestellt werden wird false zurückgegeben. Hierbei wird die Methode ConnectToDeviceAsync aus dem BLE\_Pugin der Klasse IAdapter zur Hilfe genommen. Zusätzlich werden gleich alle benötigten Charakteristiken geladen und abgespeichert um sie nicht immer neu laden zu müssen wenn sie gebracuht werden. Das geschieht mit Hilfe der Methoden GetServicesAsync und GetCharacteristicAsync aus dem BLE\_Plugin.
-	\item[+] \textbf{disconnectFromDevice(): Boolean}\\ Falls man eine Verbindung zu einem Device besitzt wird diese getrennt und es wid true zurückgegeben. Wenn man keine Verbindung besitzt passiert nichts und es wird false zurückgegeben. Zum Trennen der Verbindung wird die Methode DisconnectDeviceAsync aus dem BLE\_Pugin der Klasse Iadapter benutzt.
-	\item[+] \textbf{startSampling(): Boolean}\\ Diese Methode startet die Datenaufzeichnung des IMU. Falls die Datenaufzeichnung erfoglreich gestartet wurde wird true zurückgegeben, ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die charakteristik zu beschreiben. Hinweis: Ist die Samplingrate nicht gesetzt, wird die Standarteinstellung genommen.
-	\item[+] \textbf{stopSampling(): Boolean}\\Die Datenaufzeichnung des IMU wird mit dieser Methode gestoppt. Falls die Datenaufzeichnung erfoglreich gestoppt wurde wird true zurückgegeben, ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die charakteristik zu beschreiben.
-	\item[+] \textbf{setSampligrate(heart int): Boolean}\\Die Samplingrate wird gesetzt und gespeichert. Bei erfolgreichem sezten wird true zurückgegeben ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die charakteristik zu beschreiben.
+	\item[+] \textbf{<constructor>BibMain()}\\ Im Konstruktor werden die Attribute ble und adapter initialisiert.
+	\item[+] \textbf{startScanning(): DeviceList<List>}\\ Diese Methode legt eine neue Liste vom Typ Idivice an, in der sie alle gefundenen Devices speichert und anschließend zurück gibt. Sie benutzt die Mehode DeviceDiscoverd und StartScanningForDevicesAsync aus dem Interface Iadapter und die Methode.
+	\item[+] \textbf{connectToDevice(device: Idevice): Boolean}\\ Mit dieser Methode kann sich der Nutzer mit einem Bluetoothgerät verbinden. Er wählt in der Liste  ein Device aus und übergibt es als Parameter. Falls die Verbindung erfolgreich war wird true zurückgegeben. Konnte keine Verbindung hergestellt werden wird false zurückgegeben. Hierbei wird die Methode ConnectToDeviceAsync aus dem BLE\_Plugin der Klasse IAdapter zur Hilfe genommen. Zusätzlich werden gleich alle benötigten Charakteristiken geladen und abgespeichert um sie nicht immer neu laden zu müssen wenn sie gebracuht werden. Das geschieht mit Hilfe der Methoden GetServicesAsync und GetCharacteristicAsync aus dem BLE\_Plugin.
+	\item[+] \textbf{disconnectFromDevice(): Boolean}\\ Falls man eine Verbindung zu einem Device besitzt wird diese getrennt und es wid true zurückgegeben. Wenn man keine Verbindung besitzt passiert nichts und es wird false zurückgegeben. Zum Trennen der Verbindung wird die Methode DisconnectDeviceAsync aus dem BLE\_Plugin der Klasse Iadapter benutzt.
+	\item[+] \textbf{startSampling(): Boolean}\\ Diese Methode startet die Datenaufzeichnung des IMU. Falls die Datenaufzeichnung erfolgreich gestartet wurde wird true zurückgegeben, ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die charakteristik zu beschreiben. Hinweis: Ist die Samplingrate nicht gesetzt, wird die Standardeinstellung genommen.
+	\item[+] \textbf{stopSampling(): Boolean}\\Die Datenaufzeichnung des IMU wird mit dieser Methode gestoppt. Falls die Datenaufzeichnung erfolgreich gestoppt wurde wird true zurückgegeben, ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die charakteristik zu beschreiben.
+	\item[+] \textbf{setSampligrate(heart int): Boolean}\\Die Samplingrate wird gesetzt und gespeichert. Bei erfolgreichem setzen wird true zurückgegeben ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die charakteristik zu beschreiben.
 	\item[+] \textbf{setLowPassFilterAccelerometer(accelerometerLPF LPF\_Accelerometer): Boolean}\\ Im Konstruktor werden die Attribute ble und adapter initialisiert.
-	\item[+] \textbf{getLowPassFilterAccelerometer(): LPF\_Accelerometer}\\ Im Construktor werden die Atribute ble und adapter initialisiert.
-	\item[+] \textbf{setLowPassFilterGyroscope(gyroscopeLPF LPF\_Gyroscope): Boolean}\\ Mit dieser Methode wird der Low Pass Filter des Gyroscops gesezt. Bei erfolgreichem sezten wird true zurückgegeben ansonsten false. Bei dem Übergabeparameter hadelt es sich um ein Enum, der angibt auf welchen Wert der Low Pass Filter gesetzt werden soll. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die charakteristik zu beschreiben.
+	\item[+] \textbf{getLowPassFilterAccelerometer(): LPF\_Accelerometer}\\ Im Konstruktor werden die Attribute ble und adapter initialisiert.
+	\item[+] \textbf{setLowPassFilterGyroscope(gyroscopeLPF LPF\_Gyroscope): Boolean}\\ Mit dieser Methode wird der Low Pass Filter des Gyroscops gesetzt. Bei erfolgreichem setzen wird true zurückgegeben ansonsten false. Bei dem Übergabeparameter hadelt es sich um ein Enum, der angibt auf welchen Wert der Low Pass Filter gesetzt werden soll. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die charakteristik zu beschreiben.
 	\item[+] \textbf{getLowPassFilterGyroscope(): LPF\_Gyroscope}\\Die Methode gibt an auf was der LPF des Gyroscops momentan gesetzt ist. Er wird in Form des LPF\_Accelerometer Enums zurückgegeben. 
 	\item[+] \textbf{getBatteryVoltage(): int}\\ getBatteryVoltage gibt die voltanzahl der Batterie zurück. Die Methode ReadAsync aus dem BLE\_Plugin ermöglicht es die charakteristik zu lesen.
 	\item[+] \textbf{onIMUDataRecived(): void}\\Falls neue IMU-Daten vorliegen wird diese Methode aufgerufen und benachrichtigt alle Listener des Events IMUDataRecieved, dass neue Daten anliegen.
 	\item[+] \textbf{onPushButtonPressed(): void}\\ Falls der Knopf an den Earables gedrückt wurde wird diese Methode aufgerufen und benachrichtigt alle Listener des Events buttonPressed, dass der Knopf gedrückt wurde.
-	\item[+] \textbf{onDeviceConnected(): void}\\ Falls eine Verbindung mit einem Device hergestellt wurde oder eine besthenden Verbindung aufgelößt wurde wird diese Methode aufgerufen und benachrichtigt alle Listener des Events deviceConnectionStateChanged, dass sich dert Verbindungsstatus geändert hat.
+	\item[+] \textbf{onDeviceConnected(): void}\\ Falls eine Verbindung mit einem Device hergestellt wurde oder eine bestehende Verbindung aufgelöst wurde wird diese Methode aufgerufen und benachrichtigt alle Listener des Events deviceConnectionStateChanged, dass sich der Verbindungsstatus geändert hat.
 \end{itemize}
 
 
 \subsubsection{Constants}
 \paragraph{Klassenbeschreibung:}
-Die Constants Klasse enthält alle Konstanten, die benötigt werden um die entsprechenden Service, Descriptoren und Charakteristiken aus den Earables zu lesen. Sie ist als static gekennzeichnet da es keinen Sinn macht sie zu instanzieren weil sie nur Konstanten bereitstellt.
+Die Constants Klasse enthält alle Konstanten, die benötigt werden um die entsprechenden Service, Descriptoren und Charakteristiken aus den Earables zu lesen. Sie ist als static gekennzeichnet da es keinen Sinn macht sie zu instantiieren weil sie nur Konstanten bereitstellt.
 
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{START/STOP\_IMU\_SAMPLIG\_CHAR: String}\\Dieser String enthält die Beschreibung der Charakteristik um das IMU Daten Sampling zu starten und zu stoppen.
 	\item[+] \textbf{SENSORDATA\_CHAR: String}\\Dieser String enthält die Beschreibung der Charakteristik in dem die IMU Sensordaten gespeichert werden.
-	\item[+] \textbf{PUSHBUTTON\_CHAR: String}\\Dieser String enthält die Beschreibung der Charakteristik in dem der Push Button Status gespeichet wird.
+	\item[+] \textbf{PUSHBUTTON\_CHAR: String}\\Dieser String enthält die Beschreibung der Charakteristik in dem der Push Button Status gespeichert wird.
 	\item[+] \textbf{BATTERY\_CHAR: String}\\Dieser String enthält die Beschreibung der Charakteristik in dem die Batterieladung gespeichert wird.
 	\item[+] \textbf{ACCELEROMETER\_GYROSCOPE\_LPF\_CHAR: String}\\Dieser String enthält die Beschreibung der Charakteristik in um den Low Pass Filter für den Accelerometer und das Gyroscope zu setzen.
-	\item[+] \textbf{NOTIFICATION\_DESCRIPTOR: String}\\Dieser String enthält die Beschreibung des Descriptors um die benachrichtigung über neue IMU Sensordaten oder den Push Button Status ein und aus zu schalten.
-\item[+] \textbf{ACCES\_SERVICE: String}\\Dieser String enthält die Beschreibung des Services Acces-service, der die meisen charakteristiken bereitstellt.
+	\item[+] \textbf{NOTIFICATION\_DESCRIPTOR: String}\\Dieser String enthält die Beschreibung des Descriptors um die Benachrichtigung über neue IMU Sensordaten oder den Push Button Status ein und aus zu schalten.
+\item[+] \textbf{ACCESS\_SERVICE: String}\\Dieser String enthält die Beschreibung des Services Access-Service, der die meisten Charakteristiken bereitstellt.
 \item[+] \textbf{NOCH\_EIN\_SERVICE\_SERVICE: String}\\Muss noch rausfinden welche charakteristiken dieser service bereit stellt.
 \end{itemize}
 
