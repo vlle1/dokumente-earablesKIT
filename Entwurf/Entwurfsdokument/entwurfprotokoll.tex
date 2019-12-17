@@ -374,7 +374,7 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 		
 		
 		
-\subsection{Einstellungen Service}
+\subsection{Settings Service}
 \subsubsection{Class ISettingsService}
 	\paragraph{Schnittstellenbeschreibung:}
 	ISettingsService bietet eine Schnittstelle für die Einstellungen der App. Sie implementiert Konstanten zur Identifizierung der Einstellungen und hält die aktuellen Einstellungen als Attribute.
@@ -492,7 +492,7 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 
 
 \section{Klassenbeschreibung View-Model}
-\subsection{BasicViewmodel} %%???
+\subsection{Class BasicViewmodel} %%???
 \paragraph{Klassenbeschreibung:}
 Die abstrakte Klasse BasicViewmodel hält die einzelnen Activities und die Commands für Buttonclicks, die in jedem ActivityViewModel benötigt werden. Die Methoden die von den Commands aufgerufen werden und die Event Methode werden in den Unterklassen implementiert. 
 \paragraph{Attribute:}
@@ -512,7 +512,7 @@ Die abstrakte Klasse BasicViewmodel hält die einzelnen Activities und die Comma
 \end{itemize}
 
 
-\subsection{StepModeViewmodel}
+\subsection{Class StepModeViewmodel}
 
 \paragraph{Klassenbeschreibung:}
 Die Klasse StepModeViewmodel erbt von der abstrakten Klasse BasicViewmodel, enthält die Logik des Stepmodes  und hält Attribute die per Databinding an die Viewklassen StepModePage und StepModeActivePage gebunden sind. 
@@ -536,7 +536,7 @@ Die Klasse StepModeViewmodel erbt von der abstrakten Klasse BasicViewmodel, enth
 
 \end{itemize}
 
-\subsection{CountModeViewmodel}
+\subsection{Class CountModeViewmodel}
 \paragraph{Klassenbeschreibung:}
 Die Klasse CountModeViewmodel erbt von der abstrakten Klasse BasicViewmodel, enthält die Logik des Countmodes und hält Attribute die per Databinding an die Viewklassen CountModePage und CountModeActivePage gebunden sind.
 \paragraph{Attribute:}
@@ -560,7 +560,7 @@ Die Klasse CountModeViewmodel erbt von der abstrakten Klasse BasicViewmodel, ent
 	\item[+] \textbf{ShowPopUp(): void} \\ Zeigt das PopUp mit dem Vorgangsresultat asynchron an, wegklickbar mit einem Button. 
 \end{itemize}
 
-\subsection{ListenAndPerformViewmodel}
+\subsection{Class ListenAndPerformViewmodel}
 \paragraph{Klassenbeschreibung:}
 Die Klasse ListenAndPerformViewmodel erbt von der abstrakten Klasse BasicViewmodel, enthält die Logik von Listen\&Perform und hält Attribute die per Databinding an die Viewklassen CountModePage und CountModeActivePage gebunden sind.  Sie implementiert die INotifyPropertyChanged Schnittstelle, um das Erstellen eines Trainingsablaufplans durch den Benutzer in der zugehörigen Viewklasse anzeigen zu können.
 \paragraph{Attribute:}
@@ -597,7 +597,7 @@ Die Klasse ListenAndPerformViewmodel erbt von der abstrakten Klasse BasicViewmod
 	\item[+] \textbf{SpeakNextActivity(): void} \\ Liest die nächste Aktivität der ActivityList sowie seine Anzahl asynchron vor. 
 \end{itemize}
 
-\subsection{MusicmodeViewModel}
+\subsection{Class MusicmodeViewModel}
 \paragraph{Klassenbeschreibung:}
 Die Klasse MusicModeViewmodel erbt von der abstrakten Klasse BasicViewmodel und enthält die Logik des Musicmodes.
 \paragraph{Attribute:}
@@ -614,9 +614,9 @@ Die Klasse MusicModeViewmodel erbt von der abstrakten Klasse BasicViewmodel und 
 	\item[+] \textbf{RestartMusic(): void} \\ Wird von OnActivityDone aufgrufen wenn der Nutzer weiter läuft. Spielt die Musik weiter ab.
 \end{itemize}
 
-\subsection{DataOverviewViewModel}
+\subsection{Class DataOverviewViewModel}
 
-\subsection{class ImportExportViewModel}
+\subsection{Class ImportExportViewModel}
 
 \paragraph{Klassenbeschreibung:}
 das ImportExportViewModel verarbeitet das Klicken des Nutzers auf die Buttons  der ImportExportPage.
@@ -635,7 +635,7 @@ Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen
     \item[-] \textbf{DeleteClicked(): void}\\zeigt einen Warning-Dialog an, ob man wirklich alle Vorgangsdaten löschen will. Daraufhin wird bei Bestätigung in IDatabaseConnection deleteTrainingData aufgerufen.
 \end{itemize} 
 
-\subsection{class SettingsViewModel}
+\subsection{Class SettingsViewModel}
 
 \paragraph{Klassenbeschreibung:}
 Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von INotifyPropertyChanged und verwendet für das Speichern der Einstellungen einen Command. Außerdem holt sie sich vom SettingsService alle aktuellen Einstellungen.
@@ -654,36 +654,36 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
     \item[-] \textbf{SaveClicked(): void}\\ wenn diese Methode aufgerufen wird, werden die aktuellen Properties wieder im ISettingsService gespeichert, nachdem alle Werte von Attributen, die über kein Binding verfügen, vom View geholt und aktualisiert werden. Außerdem wird die Schrittlänge ans Erweiterungsmodul und die Samplingrate an die Bibliothek weitergegeben. Bei Auftretenden Exceptions (kein Gerät verbunden) wird eine Fehlermeldung als Popup angezeigt. Liefert needsRestart wahr, wird außerdem ein Hinweis angezeigt, dass die App neu gestartet werden muss, um alle Änderungen zu übernehmen. 
 \end{itemize} 
 
-\subsection{BluetoothPopUpViewmodel}
+\subsection{Class BluetoothPopUpViewmodel}
 
-\subsection{ScanningPopUpViewModel}
+\subsection{Class ScanningPopUpViewModel}
 
 \section{Klassenbeschreibung View}
-	\subsection{StepModePage}
+	\subsection{Class StepModePage}
 	\paragraph{Klassenbeschreibung:}
 	
-	\subsection{StepModeActivePage}
+	\subsection{Class StepModeActivePage}
 	\paragraph{Klassenbeschreibung:}
 	
-	\subsection{CountModePage}
+	\subsection{Class CountModePage}
 	\paragraph{Klassenbeschreibung:}
 
-	\subsection{CountModeActivePage}
+	\subsection{Class CountModeActivePage}
 	\paragraph{Klassenbeschreibung:}
 
-	\subsection{ListenAndPerformPage}
+	\subsection{Class ListenAndPerformPage}
 	\paragraph{Klassenbeschreibung:}
 
-	\subsection{ListenAndPerformActivePage}
+	\subsection{Class ListenAndPerformActivePage}
 	\paragraph{Klassenbeschreibung:}
 	
-	\subsection{MusicModePage}
+	\subsection{Class MusicModePage}
 		\paragraph{Klassenbeschreibung:}
 
-	\subsection{DataOverviewPage}
+	\subsection{Class DataOverviewPage}
 		\paragraph{Klassenbeschreibung:}
 
-	\subsection{class ImportExportPage}
+	\subsection{Class ImportExportPage}
 		\paragraph{Klassenbeschreibung:}
 		Die Klasse ImportExportPage beinhaltet eine Seite mit drei Buttons (siehe Abbildung 11 (Seite 13) im Pflichtenheft).
 		Das Klicken auf diese Buttons benachrichtigt das ImportExportViewmodel (via Command).
