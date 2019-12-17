@@ -510,9 +510,43 @@ Die Klasse ListenAndPerformViewmodel erbt von der abstrakten Klasse BasicViewmod
 
 \subsection{DataOverviewViewModel}
 
-\subsection{ImportExportViewmodel}
+\subsection{class ImportExportViewModel}
 
-\subsection{SettingsViewmodel}
+\paragraph{Klassenbeschreibung:}
+das ImportExportViewModel verarbeitet das Klicken des Nutzers auf die Buttons  der ImportExportPage.
+Die Kommunikation wird dabei mit Commands geregelt (die Klasse erbt von INotifyPropertyChanged).
+\paragraph{Attribute:}
+\begin{itemize}
+	\item[+] \textbf{Export: ICommand}
+	\item[+] \textbf{Import: ICommand}
+	\item[+] \textbf{Delete: ICommand}
+\end{itemize}
+Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen die entsprechende Methode in dieser Klasse aus.
+\paragraph{Methoden:}
+\begin{itemize}
+    \item[-] \textbf{ExportClicked(): void}\\ öffnet einen folderPicker-Dialog und ruft danach in IDataBaseConnection exportTrainingData mit dem vom Nutzer im Dialog ausgewählten Pfad aus.%%??name genau
+    \item[-] \textbf{ImportClicked(): void}\\ öffnet einen filePicker-Dialog und ruft danach in IDataBaseConnection importTrainingData mit dem vom Nutzer ausgewählten file auf.
+    \item[-] \textbf{DeleteClicked(): void}\\zeigt einen Warning-Dialog an, ob man wirklich alle Vorgangsdaten löschen will. Daraufhin wird bei Bestätigung in IDatabaseConnection deleteTrainingData aufgerufen.
+\end{itemize} 
+
+\subsection{class SettingsViewModel}
+
+\paragraph{Klassenbeschreibung:}
+Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von INotifyPropertyChanged und verwendet für das Speichern der Einstellungen einen Command. Außerdem holt sie sich vom SettingsService alle aktuellen Einstellungen.
+\paragraph{Attribute:}
+\begin{itemize}
+	\item[-] \textbf{needsRestart: bool}\\ diese Property verfügt nur über einen privaten getter. Sie ist genau dann wahr, wenn der Nutzer die Sprache geändert hat, also der Zustand des Sliders in der View und der Zustand als in dieser Klasse als Attribut gespeicherten Sprache unterschiedlich sind.
+	\item[+] \textbf{Username: String}\\Der Username verfügt über ein Binding zur View.
+	\item[+] \textbf{StepLength: int}\\Die StepLength verfügt über ein Binding zur View. 
+	\item[+] \textbf{SamplingRate: SamplingRate??}\\Die SamplingRate wird nicht direkt im View gebindet.
+	\item[+] \textbf{Language:CultureInfo}\\Die Language wird nicht direkt im View gebindet. 
+	\item[+] \textbf{ClickSave:Command}\\Bei Ausführen dieses Commands wird die Methode SaveClicked ausgeführt. 
+\end{itemize}
+\paragraph{Methoden:}
+\begin{itemize}
+    \item[+] \textbf{<<create>> SettingsViewModel(): void}\\ Im Konstruktor holt sich die Klasse vom ISettingsService den User, die Sprache und die Samplingrate und speichert die Entsprechenden Werte in den eigenen Properties. Die Werte von Attributen, die über kein Binding verfügen, müssen hier manuell ins View übertragen werden.
+    \item[-] \textbf{SaveClicked(): void}\\ wenn diese Methode aufgerufen wird, werden die aktuellen Properties wieder im ISettingsService gespeichert, nachdem alle Werte von Attributen, die über kein Binding verfügen, vom View geholt und aktualisiert werden. Außerdem wird die Schrittlänge ans Erweiterungsmodul und die Samplingrate an die Bibliothek weitergegeben. Bei Auftretenden Exceptions (kein Gerät verbunden) wird eine Fehlermeldung als Popup angezeigt. Liefert needsRestart wahr, wird außerdem ein Hinweis angezeigt, dass die App neu gestartet werden muss, um alle Änderungen zu übernehmen. 
+\end{itemize} 
 
 \subsection{BluetoothPopUpViewmodel}
 
@@ -525,8 +559,18 @@ Die Klasse ListenAndPerformViewmodel erbt von der abstrakten Klasse BasicViewmod
 \subsection{ListenAndPerformActivePage}
 \subsection{MusicModePage}
 \subsection{DataOverviewPage}
-\subsection{ImportExportPage}
-\subsection{SettingsPage}
+\subsection{class ImportExportPage}
+\paragraph{Klassenbeschreibung:}
+Die Klasse ImportExportPage beinhaltet eine Seite mit drei Buttons (siehe Abbildung 11 (Seite 13) im Pflichtenheft).
+Das Klicken auf diese Buttons benachrichtigt das ImportExportViewmodel (via Command).
+\paragraph{Attribute}
+\begin{itemize}
+	\item [-]deleteData: Button
+	\item [-]exportData: Button
+	\item [-]importData: Button
+\end{itemize}
+\subsection{class SettingsPage}
+
 \subsection{BluetoothPopUpPage}
 \subsection{MenuPage}
 \section{Interaktionsdiagramme}
