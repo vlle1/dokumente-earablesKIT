@@ -504,9 +504,26 @@ Die Klasse ListenAndPerformViewmodel enthält die Logik von Listen\&Perform und 
 
 \subsection{DataOverviewViewModel}
 
-\subsection{ImportExportViewmodel}
+\subsection{class ImportExportViewModel}
 
-\subsection{SettingsViewmodel}
+\paragraph{Klassenbeschreibung:}
+das ImportExportViewModel verarbeitet das Klicken des Nutzers auf die Buttons  der ImportExportPage.
+Die Kommunikation wird dabei mit Commands geregelt (die Klasse erbt von INotifyPropertyChanged).
+\paragraph{Attribute:}
+\begin{itemize}
+	\item[+] \textbf{Export: ICommand}\\
+	\item[+] \textbf{Import: ICommand}\\
+	\item[+] \textbf{Delete: ICommand}\\
+\end{itemize}
+Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen die entsprechende Methode in dieser Klasse aus.
+\paragraph{Methoden:}
+\begin{itemize}
+    \item[-] \textbf{ExportClicked(): void}\\ öffnet einen folderPicker-Dialog und ruft danach in IDataBaseConnection exportTrainingData mit dem vom Nutzer im Dialog ausgewählten Pfad aus.%%??name genau
+    \item[-] \textbf{ImportClicked(): void}\\ öffnet einen filePicker-Dialog und ruft danach in IDataBaseConnection importTrainingData mit dem vom Nutzer ausgewählten file auf.
+    \item[-] \textbf{DeleteClicked(): void}\\zeigt einen Warning-Dialog an, ob man wirklich alle Vorgangsdaten löschen will. Daraufhin wird bei Bestätigung in IDatabaseConnection deleteTrainingData aufgerufen.
+\end{itemize} 
+
+\subsection{SettingsViewModel}
 
 \subsection{BluetoothPopUpViewmodel}
 
@@ -519,8 +536,18 @@ Die Klasse ListenAndPerformViewmodel enthält die Logik von Listen\&Perform und 
 \subsection{ListenAndPerformActivePage}
 \subsection{MusicModePage}
 \subsection{DataOverviewPage}
-\subsection{ImportExportPage}
-\subsection{SettingsPage}
+\subsection{class ImportExportPage}
+\paragraph{Klassenbeschreibung:}
+Die Klasse ImportExportPage beinhaltet eine Seite mit drei Buttons (siehe Abbildung 11 (Seite 13) im Pflichtenheft).
+Das Klicken auf diese Buttons benachrichtigt das ImportExportViewmodel (via Command).
+\paragraph{Attribute}
+\begin{itemize}
+	\item [-]deleteData: Button
+	\item [-]exportData: Button
+	\item [-]importData: Button
+\end{itemize}
+\subsection{class SettingsPage}
+
 \subsection{BluetoothPopUpPage}
 \subsection{MenuPage}
 \section{Interaktionsdiagramme}
