@@ -694,11 +694,49 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 			\item [-]importData: Button
 		\end{itemize}
 
-	\subsection{class SettingsPage}
-
-	\subsection{BluetoothPopUpPage}
+		\subsection{class SettingsPage}
+		\paragraph{Klassenbeschreibung:}
+		Die Einstellungsseite ermöglicht das Verändern und Einsehen der nutzerspezifischen Parameter.
+		Diese beinhalten:
+		\begin{itemize}
+			\item Name des Nutzers
+			\item Sprache der Benutzeroberfläche
+			\item Schrittlänge des Nutzers
+			\item Die Samplerate des \Gls{IMU}
+			\item \dots
+		\end{itemize}
+		(Abbildung 12 im Pflichtenheft)
+		\paragraph{Attribute}
+			\begin{itemize}
+				\item [-]nameEntry: Entry
+				\item [-]languageSwitch: Switch (ich wäre für https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/picker/)
+				\item [-]stepLengthEntry: Entry
+				\item [-]sampleRateEntry: Entry
+				\item [-]\dots
+				\item [-]saveButton: Button
+			\end{itemize}
+	
+		\subsection{BluetoothPopUpPage}
+		\paragraph{Klassenbeschreibung:}
+		\paragraph{Attribute}
+			\begin{itemize}
+				\item [-]
+			\end{itemize}
+	
 	\subsection{MenuPage}
+	\paragraph{Klassenbeschreibung:}
+	\paragraph{Attribute}
+		\begin{itemize}
+			\item [-]
+		\end{itemize}
+
 	\subsection{PopUpScanningPage}
+	\paragraph{Klassenbeschreibung:}
+	\paragraph{Attribute}
+		\begin{itemize}
+			\item [-]
+		\end{itemize}
+
 \section{Interaktionsdiagramme}
 \subsection{Aktivitätsdiagramm Lauschen und Agieren}
 \subsection{Sequenzdiagramme}
