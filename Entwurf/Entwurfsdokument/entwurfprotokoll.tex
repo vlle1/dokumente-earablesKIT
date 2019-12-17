@@ -120,7 +120,7 @@ hier kommt ein mal das Klassendiagramm rein mit Verweis auf den Anhang - valle
 %%\section{Klassenübersicht} brauchen wir nicht, da das bei uns schon alles im Inhaltsverzeichnis aufgelistet wird.
 \section{Klassenbeschreibung Model}
 \subsection{Bibliothek}
-\subsubsection{Class IEarablesConnetion}
+\subsubsection{Interface IEarablesConnetion}
 
 \paragraph{Klassenbeschreibung:}
 Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über die später kommuniziert werden kann. Um eine BLE Verbindung herzustellen benutzt sie das Bluetooth LE Plugin for Xamarin. Es handelt sich hierbei um ein Interface um Mocking zu ermöglichen. So kann man eine MockKlasse erstellen, die die Klasse IEarables implementiert um so das implementieren und testen zu vereinfachen.
@@ -321,9 +321,9 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 
 
 \subsection{Erweiterungsmodul}
-	\subsubsection{Class IManager}
+	\subsubsection{Interface IManager}
 	
-	\subsubsection{Class IActivityManager}
+	\subsubsection{Interface IActivityManager}
 	\subsubsection{Class ActivityManager}
 	
 	\subsubsection{Class Activity}
@@ -375,7 +375,7 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 		
 		
 \subsection{Settings Service}
-\subsubsection{Class ISettingsService}
+\subsubsection{Interface ISettingsService}
 	\paragraph{Schnittstellenbeschreibung:}
 	ISettingsService bietet eine Schnittstelle für die Einstellungen der App. Sie implementiert Konstanten zur Identifizierung der Einstellungen und hält die aktuellen Einstellungen als Attribute.
 	\paragraph{Attribute:}
@@ -397,14 +397,15 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	Das wird gesichert dadurch, dass die Attribute als Properties gespeichert sind, welche beim Setzen (set) stets 'App.Current.Properties[Schlüssel] = value;' benutzen.
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch)\\
+		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch). Attribut aus dem interface ISettingsService\\
 		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables} \\ 
-		\item[-] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache \\
-		\item[-] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers \\
+		\item[-] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache. Attribut aus dem Interface ISettingsService \\
+		\item[-] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers. Konstante aus dem Interface ISettingsService \\
 		\item[-] \textbf{SAMPLINGRATE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
+		\item[+] \textbf{<<create>> SettingsService}\\Konstruktor für die Klasse SettingsService. Dabei wird er als Service vom ServiceManager verwaltet, demnach existiert er nur als Singleton.
 		\item[-] \textbf{LoadSettings():void}\\Lädt alle Einstellungen aus den App.Current.Properties in die Attribute.	
 	\end{itemize}
 \subsubsection{Class User}
@@ -422,9 +423,19 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 		\item[+] \textbf{static ParseUser(user: String): User}\\Statische Methode, welche einen \Gls{CSV}-String wieder in  ein Objekt umwandelt. Das Format ist in der ToString() Methode spezialisiert. Falls der übergeben String nicht dem Format entspricht, so wird 'null' zurückgegeben.\\
 	\end{itemize}
 
-\subsubsection{Class SamplingRate}
+\subsubsection{Enumeration SamplingRate}
 	\paragraph{Enumerationbeschreibung}
-
+	Das Enum SamplingRate gibt dem User die Auswahl die SamplingRate (Anzahl der Stichproben). Dazu gibt es mehrere Einstellungsraten von 1-100 Hz (Herz). Diese aktuelle SamplingRate wird in den App.Properties gespeichert. Dies wird von der Klasse SettingsService verwaltet. 
+	Bei der Änderung wird die Samplerate der Bibliothek geschickt und auf den \Gls{Earables} gesetzt.
+	
+	\paragraph{Werte:}
+	\begin{itemize}
+		\item \textbf{1 Hz}\\SampleRate mit einem Herz. Eine Stichprobe pro Sekunde
+		\item \textbf{20 Hz}\\SampleRate mit zwanzig Herz. 20 Stichproben pro Sekunde
+		\item \textbf{50 Hz}\\SampleRate mit fünfzig Herz. 50 Stichproben pro Sekunde
+		\item \textbf{80 Hz}\\SampleRate mit achtzig Herz. 80 Stichproben pro Sekunde
+		\item \textbf{100 Hz}\\SampleRate mit einhundert Herz. 100 Stichproben pro Sekunde
+	\end{itemize}
 	
 	
 	
@@ -433,7 +444,7 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	
 	
 \subsection{Datenbank Service}
-\subsubsection{Class IDataBaseConnection}
+\subsubsection{Interface IDataBaseConnection}
 	\paragraph{Schnittstellenbeschreibung}
 	Das Interface IDataBaseConnection ist ein Service, welcher vom ServiceManager verwaltet wird. Dieser regelt Speicherung der Trainingsdaten mittels einer \gls{Datenbank}. Zudem verwaltet sie das Importieren und Exportieren von den Trainingsdaten.
 	Die Datenbankeinträge sind Instanzen der Klasse DBEntry. 
@@ -677,6 +688,27 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 \subsection{Class BluetoothPopUpViewmodel}
 
 \subsection{Class ScanningPopUpViewModel}
+	\subsection{Klassenbeschreibung:}
+	Die Klasse ScanningPopUpViewModel ist das ViewModel zu dem View PopUpScanningPage und verwaltet die Logik dieser Komponente mithilfe von verknüpften Commands.
+	Sie benutzt die Erweiterung \Gls{Rg.Plugins.Popup} für das Anzeigen und das Versteckend des Pop-ups.
+	
+	\paragraph{Attribute:}
+	\begin{itemize}
+		\item[+] \textbf{static IsConnected: bool}\\Statisches Attribut, ob das Gerät mit den \gls{Earables} verbunden ist.
+		\item[+] \textbf{ScanDevicesCommand: ICommand}\\Command, welches die Implementierung des Scannen abkapselt. Dieses Command wird ausgeführt, wenn der ScanDevice Button im View betätigt wird. Es wird die private Methode ScanDevices() aufgerufen.
+		\item[+] \textbf{ConnectDeviceCommand: ICommand}\\Command, welches die Implementierung des Verbinden mit einem ausgewählten BLE Gerät aus dem ListView des Pop-ups. Es wird die private Methode ConnectDevice() aufgerufen.
+		\item[+] \textbf{CancelCommand: ICommand}\\Command, welches die Implementierung des Abbrechen abkapselt. Dieses Command wird ausgeführt, wenn der Cancel Button im View betätigt wird. Es wird die public und statische Methode HidePopUp() aufgerufen. 		
+	\end{itemize}
+
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item[+] \textbf{<<create>> ScanningPopUpViewModel()}\\Der Konstruktor für die Klasse ScanningPopUpViewModel. In dieser Methode, werden die Commands initialisiert. Zudem wird sich bei dem EventHandler DeviceConnectionStateChanged in der Klasse EarablesConnection im Model mit der Methode OnDeviceConnectionStateChanged(...) registriert.
+		\item[+] \textbf{OnDeviceConnectionStateChanged(sender: object, args: DeviceEventArgs): void}\\Mit dieser Methode registrierst das ViewModel bei dem EventHandler DeviceConnectionStateChanged. In dieser wird das statische Attribut IsConnected angepasst. Falls sich das Device disconnected hat, wird die Methode ShowPopUp() aufgerufen.
+		\item[-] \textbf{ScanDevices(): void}\\Private Methode, welche im Command ConnectDeviceCommand benutzt wird. In dieser wird die EarableConnection nach erreichbaren Geräten gefragt. Dafür wird die Methode StartScanning() aufgerufen. Die zurückgelieferte Liste an Devices wird in dem Pop-up angezeigt. Dafür wird die ListView aktualisiert. Zudem wird das erste Device in der ListView ausgewählt.
+		\item[-] \textbf{ConnectDevice(): void}\\Private Methode, welche im Command ConnectDeviceCommand aufgerufen wird. Dabei benutzt sie die Methode ConnectToDevice(device: IDevice) der Klasse EarableConnection im Model. Es wird das Device übergeben, welches in der ListView ausgewählt wurde.
+		\item[+] \textbf{static ShowPopUp(): void}\\Statische Methode, welche die View PopUpScanningPage anzeigt. Diese benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Anzeigen geschieht mit der Methode Popupnavigation.Instance.PushAsync(new PopUpScanningPage()). Dabei wird ein neue Instanz der PopUpScanningPage erstellt. Die Methode ist statisch, da die anderen ViewModels bei einem Vorgangstart anzeigen können muss, falls noch keine Verbindung zu den \gls{Earables} besteht.
+		\item[+] \textbf{static HidePopUp(): void}\\Statische Methode, welche dieView PopUpScanningPage verstecken lässt. Diese Methode benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Verstecken der View geschieht mit der Methode Popupnavigation.Instance.popAsync(). 
+	\end{itemize}
 
 \section{Klassenbeschreibung View}
 	\subsection{Class StepModePage}
@@ -760,9 +792,21 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 
 	\subsection{Class PopUpScanningPage}
 		\paragraph{Klassenbeschreibung:}
+		Die Klasse erbt von der Klasse PopupPage aus der Erweiterung \Gls{Rg.Plugins.Popup}, welche die Grundstruktur eines Pop-up Fenster implementiert.\\
+		Die Klasse PopUpScanningPage beinhaltet das Pop-up, welches erscheint, wenn keine Verbindung zu den \gls{Earables} besteht. Dies wird überprüft, wenn die App geöffnet wird oder ein Vorgang gestartet werden soll. Dabei interagiert das Pop-Up mit dem Model (der Bibliothek), welches die Verbindungssuche und die Verbindung implementiert. Bei einer erfolgreichen Verbindung, verschwindet das Pop-Up automatisch; bei einer fehlerhaften Verbindung wird eine Fehlermeldung angezeigt. Der Nutzer kann das Pop-Up mit dem 'Cancel-Button' wegklicken. 
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [-]
+		\item[+] \textbf{Alert: Label}\\Ein Label, welches die Benachrichtigung anzeigt, dass die Verbindung zu den \gls{Earables} nicht besteht. Bei einem fehlgeschlagenen Verbindungsversuch färbt es sich kurzartig rot.
+		\item[+] \textbf{ScanDevices: Button}\\Schickt das Command ab, welches die Bibliothek nach \gls{Earables} suchen lässt.
+		\item[+] \textbf{DevicesAvailable: ListView}\\Liste der \Gls{Earables} mit denen man sich per \gls{BLE} verbinden kann. Es ermöglicht einem einen Eintrag auszuwählen. Die Liste wird von dem Viewmodel ScanningPopUpViewModel aus aktualisiert.
+		\item[+] \textbf{ConnectButton: Button}\\Schickt das Command ab, welches der Bibliothek mitteilt mit den \Gls{Earables} zu verbinden, welche im ListView ausgewählt wurde.
+		\item[+] \textbf{Cancel: Button}\\Schickt das Command ab, welches das Pop-up verschwinden lässt. Es wurde keine Verbindung hergestellt.
+		\item[+] \textbf{BindingContext: ScanningPopUpViewModel}\\Der BindingContext ist vom Typ ScanningPopUpViewModel, welches die einzelnen UI-Komponenten des Pop-ups aktualisiert. Hier sind ebenfalls die Commands implementiert.
+		\end{itemize}
+		
+		\paragraph{Methoden}
+		\begin{itemize}
+		\item[+] \textbf{<<create>> PopUpScanningPage}\\Konstruktor der Klasse PopUpScanningPage. In diesem wird eine Instanz des ViewModels und BindingContext der Klasse ScanningpopUpViewModel erstellt.
 		\end{itemize}
 
 \section{Interaktionsdiagramme}
