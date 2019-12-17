@@ -313,93 +313,177 @@ Dieses Event benachrichtigt Listener, falls der neue IMU Daten vorliegen.
 \end{itemize}
 
 
-\subsection{ServiceManager}
+
+
+
+
+\subsection{Erweiterungsmodul}
+	\subsubsection{IManager}
+	
+	\subsubsection{IActivityManager}
+	\subsubsection{ActivityManager}
+	
+	\subsubsection{Activity}
+	
+	\subsubsection{AbstractSitUpActivity}
+	\subsubsection{SitUpActivityThreshold}
+	
+	\subsubsection{AbstractStepActivity}
+	\subsubsection{StepActivityActivityThreshold}
+	
+	\subsubsection{AbstractRunningActivity}
+	\subsubsection{RunningActivityThreshold}
+	
+	\subsubsection{AbstractPushUpActivity}
+	\subsubsection{PushUpActivityThreshold}
+	
+	\subsubsection{ActivityArgs}
+	\subsubsection{RunningEventArgs}
+	
+	\subsubsection{CountableActivityArgs}
+	\subsubsection{PushUpEventArgs}
+	\subsubsection{StepEventActivity}
+	\subsubsection{SitUpActivity}
+	
+
+\subsection{App}
+\subsubsection{ServiceManager}
 	\paragraph{Klassenbeschreibung:}
-	Der ServiceManager verwaltet alle Services des Models mithilfe eines Serviceproviders. Dies wird von anderen Services des Models, sowie von dem Viewmodel benutzt. Er dient zur Delegierung der Services.\\ 
+	Der ServiceManager verwaltet alle Services des Models mithilfe eines statischen Serviceproviders. Dies wird von anderen Services des Models, sowie von dem Viewmodel benutzt. Er dient zur Delegierung der Services.\\ 
 	Dabei implementiert der ServiceManager das Interface IManager.
 	Von diesem bekommt er die Methode serviceRegistration() übergeben.
 	Der ServiceManager speichert die Services als Referenzen und achtet, dass diese ein Singleton sind. (Es existiert immer nur eine Instanz des Services).
-	Er selbst implementriert das Singleton Muster.
+	Er implementriert das Singleton Muster indem der Serviceprovider nur einmal instanziert wird.
 	
 	\paragraph{Attribute:}
-	\begin{tabular}{p{7cm}p{10cm}}
-		- static instance : ServiceManager & Die Singleton Instanz, welche benutzt wird \\
-		+ static Instance : ServiceManager & Regelt die Initialisierung von instance und gibt diese zurück\\
-		+ serviceProvider : ServiceProvider & Enthält alle Referenzen auf die Services. Per GetService<T> wird der Service vom Typ T zurückgeliefert.\\
-	\end{tabular}
+	\begin{itemize}
+		\item[-] \textbf{static serviceProvider: ServiceProvider}\\Eine private Instanz vom Typ ServiceProvider. Beinhaltet die Referenzen auf die Services und verwaltet die Zugriffe darauf. Dies geschieht per GetService<T>.
+		\item[+] \textbf{static ServiceProvider: ServiceProvider}\\Property für die Instanz serviceProvider. Reguliert, dass der serviceProvider nur einmal existiert. (Singleton-Entwurfsmuster)
+
+	\end{itemize}
 	\paragraph{Methoden:}
-	\begin{tabular}{p{7cm}p{10cm}}
-		- Servicemanager() : void & privater Konstruktor, genutzt im Singleton Muster. Aufrufen der Methode serviceRegistration() zur Erstmaligen Registrierung der Services mit einer IServiceCollection und zur Erstellung des ServiceProvider.\\
-	\end{tabular}
+	\begin{itemize}
+		\item[-] \textbf{<<create>> ServiceProvider()}\\Privater Konstruktor, da es sich um eine statische Klasse handelt ohne Instanzattribute.
+		\item[-] \textbf{serviceRegistration()}\\ Zur Erstmaligen Registrierung der Services mit einer IServiceCollection und zur Erstellung des Attributs serviceProvider.\\
+	\end{itemize}
+		
+		
+		
+		
 		
 \subsection{Einstellungen Service}
-\subsubsection{User}
-    \paragraph{Klassenbeschreibung:}
-    Die User-Klasse spezifiziert den Benutzer, der die App gerade verwendet.\\
-    \paragraph{Attribute:}
-    \begin{tabular}{p{5cm}p{12cm}}
-        + username: String & Der Name des Benutzers.\\
-        + steplength: String & Die durchschnittliche Schrittlänge des Benutzers in cm.\\
-    \end{tabular}
-    \paragraph{Methoden:}
-    \begin{tabular}{p{7cm}p{10cm}}
-        + toString(): String & Wandelt das Objekt in einen String um. (vergleichbar mit JSON).\\
-        + static parseUser(user: String): User & Wandelt JSON-String wieder in Objekt um.\\
-    \end{tabular}
 \subsubsection{ISettingsService}
-	\paragraph{Interfacebeschreibung:}
-	Das Interface ISettingsService bietet eine Schnittstelle für die Einstellungen der App. Sie implementiert Konstanten zur Identifizierung der Einstellungen und hält die aktuellen Einstellungen als Attribute.
+	\paragraph{Schnittstellenbeschreibung:}
+	ISettingsService bietet eine Schnittstelle für die Einstellungen der App. Sie implementiert Konstanten zur Identifizierung der Einstellungen und hält die aktuellen Einstellungen als Attribute.
 	\paragraph{Attribute:}
-	\begin{tabular}{p{7cm}p{10cm}}
-		+ activeLanguage: CultureInfo & Die aktuelle Sprache der App (Deutsch oder Englisch)\\
-		+ samplingRate: SamplingRate & Die aktuelle Samplingrate der \Gls{Earables} \\ 
-		- LANGUAGE\_PROPERTY: String & Konstanter Bezeichner für die Einstellung der Sprache \\
-		- USER\_PROPERTY: String & Konstanter Bezeichner für die Einstellung des Nutzers \\
-		- SAMPLINGRATE\_PROPERTY: String & Konstanter Bezeichner für die Einstellung der Samplingrate \\
-	\end{tabular}
+	\begin{itemize}
+		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch)\\
+		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables} \\ 
+		\item[-] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache \\
+		\item[-] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers \\
+		\item[-] \textbf{SAMPLINGRATE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
+	\end{itemize}
 	\paragraph{Methoden:}
-	\begin{tabular}{p{7cm}p{10cm}}
-		- loadSettings():void & Lädt alle Settings aus den Einstellungen in die Attribute.	
-	\end{tabular}
+	\begin{itemize}
+		\item[-] \textbf{LoadSettings():void}\\Lädt alle Settings aus den Einstellungen in die Attribute.	
+	\end{itemize}
 \subsubsection{SettingsService}
 	\paragraph{Klassenbeschreibung}
-	Die Klasse SettingsService implementiert die Schnittstelle ISettingsService. In der Implementierung der Funktionen, welche die Speicherung der Einstellungen enthalten, wird die Klasse App.Current.Properties verwendet.
+	Die Klasse SettingsService implementiert die Schnittstelle ISettingsService. Zur Speicherung der Einstellungen wird die Klasse App.Current.Properties verwendet.
 	Dabei wird immer sofort nach einer Änderung die neue Einstellung gespeichert und nicht erst beim Beenden der Sitzung.
+	Das wird gesichert dadurch, dass die Attribute als Properties gespeichert sind, welche beim Setzen (set) stets 'App.Current.Properties[Schlüssel] = value;' benutzen.
+	\paragraph{Attribute:}
+	\begin{itemize}
+		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch)\\
+		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables} \\ 
+		\item[-] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache \\
+		\item[-] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers \\
+		\item[-] \textbf{SAMPLINGRATE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
+	\end{itemize}
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item[-] \textbf{LoadSettings():void}\\Lädt alle Einstellungen aus den App.Current.Properties in die Attribute.	
+	\end{itemize}
+\subsubsection{User}
+	\paragraph{Klassenbeschreibung:}
+	Die User-Klasse spezifiziert den Nutzer, der die App gerade verwendet. In dieser werden Attribute gespeichert, welche von Nutzer zu Nutzer anders sind. Falls der Nutzer sein Konto noch nicht eingerichtet hat, wird ein Standardnutzer geladen.\\
+	\paragraph{Attribute:}
+	\begin{itemize}
+		\item[+] \textbf{Username: String}\\Der Name des Nutzers. Dabei ist der Standardname 'Nutzer'\\
+		\item[+] \textbf{Steplength: int}\\Die durchschnittliche Schrittlänge des Nutzers in cm. Die Standardlänge beträgt 70cm.\\
+	\end{itemize}
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item[+] \textbf{ToString(): String}\\Wandelt das Objekt in einen String um. Damit ist geregelt, dass der User als String in den App.Current.Properties gespeichert werden kann. Er wird in ein \Gls{CSV}-Format umgewandelt.\\
+		Beispiel: "Alice van Bob,80"\\
+		\item[+] \textbf{static ParseUser(user: String): User}\\Statische Methode, welche einen \Gls{CSV}-String wieder in  ein Objekt umwandelt. Das Format ist in der ToString() Methode spezialisiert. Falls der übergeben String nicht dem Format entspricht, so wird 'null' zurückgegeben.\\
+	\end{itemize}
+
+\subsubsection{SamplingRate}
+	\paragraph{Enumerationbeschreibung}
+
 	
 	
-	TODO: Sollen auch bei den konkreten Klassen die Methoden/Attribute nochmal aufgelistet werden?
+	
+	
+	
+	
+	
 \subsection{Datenbank Service}
 \subsubsection{IDataBaseConnection}
-	\paragraph{Interfacebeschreibung}
+	\paragraph{Schnittstellenbeschreibung}
 	Das Interface IDataBaseConnection ist ein Service, welcher vom ServiceManager verwaltet wird. Dieser regelt Speicherung der Trainingsdaten mittels einer \gls{Datenbank}. Zudem verwaltet sie das Importieren und Exportieren von den Trainingsdaten.
 	Die Datenbankeinträge sind Instanzen der Klasse DBEntry. 
 	
 	\paragraph{Methoden:}
-	\begin{tabular}{p{7cm}p{10cm}}
-		+ saveDBEntry(entry: DBEntry): void & Speichert ein Datenbankeintrag in der \gls{Datenbank}. Falls schon ein Eintrag zu dem Datum existiert, wird dieser aktualisiert\\
-		+ getAllEntriesAsync(): Task<List<DBEntry>> &Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry \\ 
-		+ getMostReentEntriesAsync(amount : int): void &Liefert  die letzten amount Einträge der Datenbank in Form einer Liste mit DBEntry zurück\\
-		+ importTrainingData(file: FileData): void & Liest aus der angegebenen \gls{CSV}-Datei die DBEnries raus und speichert sie in der \gls{Datenbank}.\\
-		+ exportTrainingData(path: String): void& Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
-	\end{tabular}
+	\begin{itemize}
+		\item[+] \textbf{SaveDBEntry(entry: DBEntry): void}\\Speichert ein Datenbankeintrag in der \gls{Datenbank}. Falls schon ein Eintrag zu dem Datum existiert, wird dieser aktualisiert\\
+		\item[+] \textbf{GetAllEntriesAsync(): Task<List<DBEntry>>}\\Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry \\ 
+		\item[+] \textbf{GetMostRecentEntriesAsync(amount : int): void}\\Liefert  die letzten 'amount' Einträge der Datenbank in Form einer Liste mit DBEntry zurück\\
+		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEnries raus und speichert sie in der \gls{Datenbank}.\\
+		\item[+] \textbf{ExportTrainingData(path: String): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
+	\end{itemize}
 
+\subsubsection{DataBaseConnection}
+	\paragraph{Klassenbeschreibung}
+	Die Klasse DataBaseConnection implementiert die Schnittstelle IDataBaseConnection. Sie kümmert sich um die Speicherung und Verwaltung der Trainingsdaten. Dabei benutzt die DataBaseConnection die \gls{Datenbank} von SQLite. Es werden Objekte von der Klasse DBEntry gespeichert. 
+	
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item[+] \textbf{<<create>> DataBaseConnection}\\Konstruktor für die Klasse DataBaseConnection. Es wird eine Instanz SQLiteAsyncConnection erstellt und eine Tabelle erstellt. Diese besteht aus zwei Spalten: Da Datum(Primary Key) als Datetype und den Inhalt als String.
+		\item[+] \textbf{SaveDBEntry(entry: DBEntry): void}\\Speichert ein Datenbankeintrag in der \gls{Datenbank}. Falls schon ein Eintrag zu dem Datum existiert, wird dieser aktualisiert\\
+		\item[+] \textbf{GetAllEntriesAsync(): Task<List<DBEntry>>}\\Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry. Er erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : String) der Klasse DBEntry\\ 
+		\item[+] \textbf{GetMostRecentEntriesAsync(amount : int): void}\\Liefert  die letzten 'amount' Einträge der Datenbank in Form einer Liste mit DBEntry zurück. Er erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : String) der Klasse DBEntry\\
+		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEnries raus und speichert sie in der \gls{Datenbank}. Er erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : String) der Klasse DBEntry\\
+		\item[+] \textbf{ExportTrainingData(path: String): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
+	\end{itemize}
 \subsubsection{DBEntry}
 	\paragraph{Klassenbeschreibung}
-	Die Klasse DBEntry ist ein Datenkontainer, welcher einen Trainingstag darstellt. Dieser wird in der Datenbank gespeichert. DBEntry beinhaltet kein selbstständiges Verhalten.
+	Die Klasse DBEntry ist ein Datenkontainer, welcher einen Trainingstag darstellt. Dieser wird in der Datenbank gespeichert. DBEntry beinhaltet kein selbstständiges Verhalten. Für die Modularität sind die unterschiedlichen Attribute in einem Dictionary gespeichert.
 	
 	\paragraph{Attribute}
-	\begin{tabular}{p{7cm}p{10cm}}
-	+ Date: DateTime & Das Datum des Trainingstages. Wird als eindeutiger Bezeichner (Primary key) in der Datenbank benutzt.\\
-	+ PushUps: int & Die Anzahl der Liegestützen, welche an dem Tag gemacht wurden \\
-	+ SitUps: int & Die Anzahl der SitUps, welche an dem Tag gemacht wurden \\
-	+ Steps: int & Die Anzahl der Schritte, welche an dem Tag gemacht wurden \\
-	\end{tabular}
+	\begin{itemize}
+		\item[+] \textbf{Date: DateTime}\\Das Datum des Trainingstages. Wird als eindeutiger Bezeichner (Primary key) in der \Gls{Datenbank} benutzt.\\
+			\item[+] \textbf{TraingingsData : Dictionary<String, int>}\\ Beinhaltet die einzelnen Attribute. Dabei ist der String der Bezeichner des Attributes und int die Anzahl der Inhalt. 
+	\end{itemize}
 	 
 	 \paragraph{Methoden}
-	 \begin{tabular}{p{7cm}p{10cm}}
-	 + toString(): String & Liefert die Instanz als String zurück. (\gls{CSV}-Format) \\
-	 + static parseDBEntry(entry: String) : DBEntry & Liest aus einem String ein DBEntry Objekt. Falls der String nicht dem Format entspricht, wird null zurückgegeben. \\
-	\end{tabular}
+	 \begin{itemize}
+	 	\item[+] \textbf{ToString(): String}\\Liefert die Instanz als String zurück. Dabei wird das \gls{CSV}-Format verwendet. Als Attribute werden standardgemäß die Schritte (Steps), Liegestützen (PushUps) und die SitUps gespeichert.
+	 	Beispiel: "11.11.19,PushUps=10,SitUps=2,Steps=242"\\
+	 	\item[+] \textbf{static ParseDBEntry(entry: String) : DBEntry}\\Liest aus einem String ein DBEntry Objekt. Falls der String nicht dem Format entspricht, wird null zurückgegeben. Das Format ist in ToString() festgelegt.\\
+	\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
 \section{Klassenbeschreibung View-Model}
 \subsection{BasicViewmodel} %%???
 \paragraph{Klassenbeschreibung:}
@@ -550,6 +634,8 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 
 \subsection{BluetoothPopUpViewmodel}
 
+\subsection{ScanningPopUpViewModel}
+
 \section{Klassenbeschreibung View}
 \subsection{StepModePage}
 \subsection{StepModeActivePage}
@@ -573,6 +659,7 @@ Das Klicken auf diese Buttons benachrichtigt das ImportExportViewmodel (via Comm
 
 \subsection{BluetoothPopUpPage}
 \subsection{MenuPage}
+\subsection{PopUpScanningPage}
 \section{Interaktionsdiagramme}
 \subsection{Aktivitätsdiagramm Lauschen und Agieren}
 \subsection{Sequenzdiagramme}
