@@ -471,7 +471,7 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	\paragraph{Attribute}
 	\begin{itemize}
 		\item[+] \textbf{Date: DateTime}\\Das Datum des Trainingstages. Wird als eindeutiger Bezeichner (Primary key) in der \Gls{Datenbank} benutzt.\\
-			\item[+] \textbf{TraingingsData : Dictionary<String, int>}\\ Beinhaltet die einzelnen Attribute. Dabei ist der String der Bezeichner des Attributes und int die Anzahl der Inhalt. 
+			\item[+] \textbf{TrainingsData : Dictionary<String, int>}\\ Beinhaltet die einzelnen Attribute. Dabei ist der String der Bezeichner des Attributes und int die Anzahl der Inhalt. 
 	\end{itemize}
 	 
 	 \paragraph{Methoden}
@@ -615,6 +615,18 @@ Die Klasse MusicModeViewmodel erbt von der abstrakten Klasse BasicViewmodel und 
 \end{itemize}
 
 \subsection{Class DataOverviewViewModel}
+\paragraph{Klassenbeschreibung:}
+das DataOverviewViewModel läd die Trainingsdaten des Nutzers über den Datenbank Service und bindet diese an die ListView \textit{contentListView} der DataOverviewPage.
+\paragraph{Attribute:}
+\begin{itemize}
+	\item[+] \textbf{TrainingsData: ObservableCollection<DBEntry>}
+\end{itemize}
+Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen die entsprechende Methode in dieser Klasse aus.
+\paragraph{Methoden:}
+\begin{itemize}
+    \item[-] \textbf{<<create>> DataOverviewViewModel()} \\ Setzt die \textit{ItemsSource} der contentListView auf \textit{TrainingsData} und ruft \textit{init()} auf.
+    \item[-] \textbf{init(): void} \\ Kapselt den asynchronen Aufruf zu \textit{GetMostRecentEntriesAsync} des \textit{IDataBaseConnection} Service.
+\end{itemize} 
 
 \subsection{Class ImportExportViewModel}
 
@@ -686,7 +698,8 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 		Die Daten werden dabei vom DataOverviewViewModel per Data-Binding bereit gestellt.
 		\paragraph{Attribute:}
 		\begin{itemize}
-			\item[-] contentListView: ListView
+			\item[+] contentListView: ListView
+			\item[+] bindingContext: DataOverviewViewModel 
 		\end{itemize}
 
 	\subsection{Class ImportExportPage}
@@ -715,29 +728,29 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 		Die Daten werden per Data-Binding mit der Klasse SettingsViewModel synchronisiert.
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [-]nameEntry: Entry
-			\item [-]languageSwitch: Switch (ich wäre für https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/picker/)
-			\item [-]stepLengthEntry: Entry
-			\item [-]sampleRateEntry: Entry
-			\item [-]\dots
-			\item [-]saveButton: Button
+			\item [+]nameEntry: Entry
+			\item [+]languageSwitch: Switch (ich wäre für https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/picker/)
+			\item [+]stepLengthEntry: Entry
+			\item [+]sampleRateEntry: Entry
+			\item [+]\dots
+			\item [+]saveButton: Button
 		\end{itemize}
 	
 	\subsection{Class BluetoothPopUpPage}
 		\paragraph{Klassenbeschreibung:}
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [-]
+			\item [+]
 		\end{itemize}
 
-	\subsection{class MenuPage}
+	\subsection{Class MenuPage}
 		\paragraph{Klassenbeschreibung:}
 		\paragraph{Attribute}
 		\begin{itemize}
 			\item [-]
 		\end{itemize}
 
-	\subsection{PopUpScanningPage}
+	\subsection{Class PopUpScanningPage}
 		\paragraph{Klassenbeschreibung:}
 		\paragraph{Attribute}
 		\begin{itemize}
