@@ -654,7 +654,7 @@ Die Klasse ListenAndPerformViewmodel erbt von der abstrakten Klasse BaseModeView
 	\item[+] \textbf{SpeakNextActivity(): void} \\ Liest die nächste Aktivität der ActivityList sowie seine Anzahl asynchron vor. 
 \end{itemize}
 
-\subsection{Class MusicmodeViewModel}
+\subsection{Class MusicModeViewmodel}
 \paragraph{Klassenbeschreibung:}
 Die Klasse MusicModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel und enthält die Logik des Musicmodes.
 \paragraph{Attribute:}
@@ -672,9 +672,9 @@ Die Klasse MusicModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel u
 	\item[+] \textbf{RestartMusic(): void} \\ Wird von OnActivityDone aufgrufen wenn der Nutzer weiter läuft. Spielt die Musik weiter ab.
 \end{itemize}
 
-\subsection{Class DataOverviewViewModel}
+\subsection{Class DataOverviewViewmodel}
 \paragraph{Klassenbeschreibung:}
-das DataOverviewViewModel läd die Trainingsdaten des Nutzers über den Datenbank Service und bindet diese an die ListView \textit{contentListView} der DataOverviewPage.
+Das DataOverviewViewmodel läd die Trainingsdaten des Nutzers über den Datenbank Service und bindet diese an die ListView \textit{contentListView} der DataOverviewPage.
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{TrainingsData: ObservableCollection<DBEntry>}
@@ -686,10 +686,10 @@ Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen
     \item[-] \textbf{init(): void} \\ Kapselt den asynchronen Aufruf zu \textit{GetMostRecentEntriesAsync} des \textit{IDataBaseConnection} Service.
 \end{itemize} 
 
-\subsection{Class ImportExportViewModel}
+\subsection{Class ImportExportViewmodel}
 
 \paragraph{Klassenbeschreibung:}
-das ImportExportViewModel verarbeitet das Klicken des Nutzers auf die Buttons  der ImportExportPage.
+Das ImportExportViewModel verarbeitet das Klicken des Nutzers auf die Buttons  der ImportExportPage.
 Die Kommunikation wird dabei mit Commands geregelt (die Klasse erbt von INotifyPropertyChanged).
 \paragraph{Attribute:}
 \begin{itemize}
@@ -715,8 +715,8 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\item[+] \textbf{Username: String}\\Der Username verfügt über ein Binding zur View.
 	\item[+] \textbf{StepLength: int}\\Die StepLength verfügt über ein Binding zur View. 
 	\item[+] \textbf{SamplingRate: SamplingRate??}\\Die SamplingRate wird nicht direkt im View gebindet.
-	\item[+] \textbf{Language:CultureInfo}\\Die Language wird nicht direkt im View gebindet. 
-	\item[+] \textbf{ClickSave:Command}\\Bei Ausführen dieses Commands wird die Methode SaveClicked ausgeführt. 
+	\item[+] \textbf{Language: CultureInfo}\\Die Language wird nicht direkt im View gebindet. 
+	\item[+] \textbf{ClickSave: Command}\\Bei Ausführen dieses Commands wird die Methode SaveClicked ausgeführt. 
 \end{itemize}
 \paragraph{Methoden:}
 \begin{itemize}
@@ -839,8 +839,8 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		Die Daten werden dabei vom DataOverviewViewModel per Data-Binding bereit gestellt.
 		\paragraph{Attribute:}
 		\begin{itemize}
-			\item[+] contentListView: ListView
-			\item[+] bindingContext: DataOverviewViewModel 
+			\item[+] \textbf{ContentListView: ListView}
+			\item[+] \textbf{BindingContext: DataOverviewViewModel} 
 		\end{itemize}
 
 	\subsection{Class ImportExportPage}
@@ -849,34 +849,27 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		Das Klicken auf diese Buttons benachrichtigt das ImportExportViewmodel (via Command).
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [-]deleteData: Button
-			\item [-]exportData: Button
-			\item [-]importData: Button
+			\item[+] \textbf{ImportExportLabel: Label} \\ Anzeige des Pagenamen ImportExportLabel.
+			\item [+]\textbf{DeleteData: Button}
+			\item [+]\textbf{ExportData: Button}
+			\item [+]\textbf{ImportData: Button} %%die anderen haben es auch public gemacht - einheitlich. ist das sinnvoll oder kann das private? -valle
 		\end{itemize}
 
 	\subsection{Class SettingsPage}
 		\paragraph{Klassenbeschreibung:}
-		Die Einstellungsseite ermöglicht das Verändern und Einsehen der nutzerspezifischen Parameter.
-		Diese beinhalten:
-		\begin{itemize}
-			\item Name des Nutzers
-			\item Sprache der Benutzeroberfläche
-			\item Schrittlänge des Nutzers
-			\item Die Samplerate des \Gls{IMU}
-			\item \dots
-		\end{itemize}
-		(Abbildung 12 im Pflichtenheft)\\
-		Die Daten werden per Data-Binding mit der Klasse SettingsViewModel synchronisiert.
+		Die Einstellungsseite ermöglicht das Verändern und Einsehen von Username, Sprache, Schrittlänge und IMU-Samplingrate (Siehe Abb. 12 im Pflichtenheft). Die Daten werden per Data-Binding mit der Klasse SettingsViewModel synchronisiert.
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [+]nameEntry: Entry
-			\item [+]languageSwitch: Switch (ich wäre für https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/picker/)
-			\item [+]stepLengthEntry: Entry
-			\item [+]sampleRateEntry: Entry
-			\item [+]\dots
-			\item [+]saveButton: Button
+			\item [+]\textbf{NameEntry: Entry}
+			\item [+]\textbf{LanguagePicker: Picker} Hier kann der Nutzer zwischen Deutsch und Englisch wählen.
+			\item [+]\textbf{StepLengthEntry: Entry} 
+			\item [+]\textbf{SampleRatePicker: Picker} Hier kann der Nutzer zwischen wenigen angebotenen Samplingraten wählen. Diese entsprechen denen vom Settings Service zur Verfügung gestellten Werte.
+			\item [+]\textbf{SaveButton: Button}
 		\end{itemize}
-	
+		\paragraph{Methoden}
+		\begin{itemize}
+			\item [+]\textbf{<<create>> SettingsPage()} Im Konstruktor werden die Picker mit den richtigen Wertebereichen inizialisiert. Die angezeigten aktuellen Einstellungswerte erfolgen dann vor allem über das Data-Binding.
+		\end{itemize}
 	\subsection{Class BluetoothPopUpPage}
 		\paragraph{Klassenbeschreibung:}
 		\paragraph{Attribute}
