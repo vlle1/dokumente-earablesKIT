@@ -1,3 +1,5 @@
+##asta
+*.asta.lock
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
