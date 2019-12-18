@@ -711,9 +711,9 @@ Die Kommunikation wird dabei mit Commands geregelt (die Klasse erbt von INotifyP
 Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen die entsprechende Methode in dieser Klasse aus.
 \paragraph{Methoden:}
 \begin{itemize}
-    \item[-] \textbf{ExportClicked(): void}\\ öffnet einen folderPicker-Dialog und ruft danach in IDataBaseConnection exportTrainingData mit dem vom Nutzer im Dialog ausgewählten Pfad aus.%%??name genau
-    \item[-] \textbf{ImportClicked(): void}\\ öffnet einen filePicker-Dialog und ruft danach in IDataBaseConnection importTrainingData mit dem vom Nutzer ausgewählten file auf.
-    \item[-] \textbf{DeleteClicked(): void}\\zeigt einen Warning-Dialog an, ob man wirklich alle Vorgangsdaten löschen will. Daraufhin wird bei Bestätigung in IDatabaseConnection deleteTrainingData aufgerufen.
+    \item[-] \textbf{exportClicked(): void}\\ öffnet einen folderPicker-Dialog und ruft danach in IDataBaseConnection exportTrainingData mit dem vom Nutzer im Dialog ausgewählten Pfad aus.%%??name genau von dem filePicker??
+    \item[-] \textbf{importClicked(): void}\\ öffnet einen filePicker-Dialog und ruft danach in IDataBaseConnection importTrainingData mit dem vom Nutzer ausgewählten file auf.
+    \item[-] \textbf{deleteClicked(): void}\\zeigt einen Warning-Dialog an, ob man wirklich alle Vorgangsdaten löschen will. Daraufhin wird bei Bestätigung in IDatabaseConnection deleteTrainingData aufgerufen.
 \end{itemize} 
 
 \subsection{Class SettingsViewModel}
@@ -725,7 +725,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\item[-] \textbf{needsRestart: bool}\\ diese Property verfügt nur über einen privaten getter. Sie ist genau dann wahr, wenn der Nutzer die Sprache geändert hat, also der Zustand des Sliders in der View und der Zustand als in dieser Klasse als Attribut gespeicherten Sprache unterschiedlich sind.
 	\item[+] \textbf{Username: String}\\Der Username verfügt über ein Binding zur View.
 	\item[+] \textbf{StepLength: int}\\Die StepLength verfügt über ein Binding zur View. 
-	\item[+] \textbf{SamplingRate: SamplingRate??}\\Die SamplingRate wird nicht direkt im View gebindet.
+	\item[+] \textbf{SamplingRate: SamplingRate}\\Die SamplingRate wird nicht direkt im View gebindet.
 	\item[+] \textbf{Language: CultureInfo}\\Die Language wird nicht direkt im View gebindet. 
 	\item[+] \textbf{ClickSave: Command}\\Bei Ausführen dieses Commands wird die Methode SaveClicked ausgeführt. 
 \end{itemize}
@@ -769,7 +769,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\end{itemize}
 \subsection{Enumeration MenuItemType}
 	Dieses Enum spezifiziert alle möglichen Typen von Menüeinträgen der MenuPage. Entsprechend gibt es für jede vom Menü aus direkt navigierbare Page einen Wert dieses Enums.
-	\subsection{Werte:}
+	\paragraph{Werte:}
 	\begin{itemize}
         \item CountMode,
         \item DataOverview,
@@ -881,7 +881,7 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		Das Klicken auf diese Buttons benachrichtigt das ImportExportViewmodel (via Command).
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item[+] \textbf{ImportExportLabel: Label} \\ Anzeige des Pagenamen ImportExportLabel.
+			\item[+] \textbf{ImportExportLabel: Label} \\ Anzeige des Pagenamens (Im-/ Export CSV Datei).
 			\item [+]\textbf{DeleteData: Button}
 			\item [+]\textbf{ExportData: Button}
 			\item [+]\textbf{ImportData: Button} %%die anderen haben es auch public gemacht - einheitlich. ist das sinnvoll oder kann das private? -valle
@@ -892,15 +892,12 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		Die Einstellungsseite ermöglicht das Verändern und Einsehen von Username, Sprache, Schrittlänge und IMU-Samplingrate (Siehe Abb. 12 im Pflichtenheft). Die Daten werden per Data-Binding mit der Klasse SettingsViewModel synchronisiert.
 		\paragraph{Attribute}
 		\begin{itemize}
+			\item[+] \textbf{ImportExportLabel: Label} \\ Anzeige des Pagenamens (Settings).
 			\item [+]\textbf{NameEntry: Entry}
 			\item [+]\textbf{LanguagePicker: Picker} Hier kann der Nutzer zwischen Deutsch und Englisch wählen.
 			\item [+]\textbf{StepLengthEntry: Entry} 
 			\item [+]\textbf{SampleRatePicker: Picker} Hier kann der Nutzer zwischen wenigen angebotenen Samplingraten wählen. Diese entsprechen denen vom Settings Service zur Verfügung gestellten Werte.
 			\item [+]\textbf{SaveButton: Button}
-		\end{itemize}
-		\paragraph{Methoden}
-		\begin{itemize}
-			\item [+]\textbf{<<create>> SettingsPage()} Im Konstruktor werden die Picker mit den richtigen Wertebereichen inizialisiert. Die angezeigten aktuellen Einstellungswerte erfolgen dann vor allem über das Data-Binding.
 		\end{itemize}
 	\subsection{Class BluetoothPopUpPage}%%TODO!!???
 		\paragraph{Klassenbeschreibung:}
@@ -934,7 +931,7 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		Bei Klicken auf das Menü-Icon bzw. swipen vom Rand aus öffnet sich automatisch (vererbt von MasterDetailPage) die MenuPage.
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [] \textbf{MenuPages: Dictionary<int, NavigationPage}\\ Dieses Dictionary wird verwendet, um mit dem Klicken auf den Namen einer bestimmten Page die Page selbst zu asoziieren.
+			\item [] \textbf{MenuPages: Dictionary<int, NavigationPage>}\\ Dieses Dictionary wird verwendet, um mit dem Klicken auf den Namen einer bestimmten Page die Page selbst zu asoziieren (bzw. die ihr entsprechende NavigationPage).
 			\item [] \textbf{(xaml) NavigationPage.Icon} Das Menü-Item, das sich für den Nutzer links oben im Eck befindet.
 		\end{itemize}
 		\paragraph{Methoden}
@@ -952,7 +949,7 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\end{itemize}
 		\paragraph{Methoden}
 		\begin{itemize}
-			\item [+] \textbf{<<create>> MenuPage} Im Konstruktor wird menuItems mit allen gewünschten Seiten inizialisiert und den menuItems wird ein Event, das bei Auswählen eines Items gefeuert wird, hinzugefügt. Dieses veranlasst die Navigation zu dieser Seite mittels der MainPage.
+			\item [+] \textbf{<<create>> MenuPage()} Im Konstruktor wird menuItems mit allen gewünschten Seiten inizialisiert und den menuItems wird ein Event, das bei Auswählen eines Items gefeuert wird, hinzugefügt. Dieses veranlasst die Navigation zu dieser Seite mittels der MainPage.
 		\end{itemize}
 \section{Interaktionsdiagramme}
 \subsection{Aktivitätsdiagramm Lauschen und Agieren}
