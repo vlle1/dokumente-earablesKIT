@@ -133,7 +133,7 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 	\item[+] \textbf{Config: ConfigContainer}\\ In diesem Attribut befinden sich die Configurationsvariablen für die Earables.
 	\item[+] \textbf{Ble: IBluetoothLE}\\ Wird benötigt um auf das Bluetooth des Smartphones zuzugreifen. Der Typ IBluetooth befindet sich im BLE\_Plugin
 	\item[+] \textbf{Adapter: IAdapter}\\ Wird benötigt um die Bluetoothverbindung aufzubauen. Der Typ  IAdapter befindet sich im BLE\_Plugin
-	\item[+] \textbf{device: IDevice}\\ Wird benötigt um die Bluetoothverbindung aufzubauen. Der Typ  IDevice befindet sich im BLE\_Plugin
+	\item[+] \textbf{Device: IDevice}\\ Wird benötigt um die Bluetoothverbindung aufzubauen. Der Typ  IDevice befindet sich im BLE\_Plugin
 \end{itemize}
 \paragraph{Methoden:}
 \begin{itemize}
@@ -162,7 +162,7 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 Die Klasse EarablesConnection implementiert das IEarablesConnection Interface und ist die konkrete Klasse, die sich um die BLE-Verbindung kümmert.
 
 
-\subsubsection{Class Constants}
+\subsubsection{Static Class Constants}
 \paragraph{Klassenbeschreibung:}
 Die Constants Klasse enthält alle Konstanten, die benötigt werden um die entsprechenden Service und Charakteristiken aus den Earables zu lesen. Sie ist als static gekennzeichnet da es keinen Sinn macht sie zu instanzieren, da sie nur Konstanten bereitstellt.
 
@@ -222,7 +222,7 @@ Diese Klasse beinhaltet alle Einstellungsmöglichkeiten für die Earables.
 \end{itemize}
 
 
-\subsubsection{Class IMUDataExtractor}
+\subsubsection{Static Class IMUDataExtractor}
 Diese Klasse Übernimmt das Umwandeln des Bit Strings in vernünftige Werte und Einheiten.
 Die Klasse wurde erstellt um dem IEarablesConnection Interface Arbeit abzunehmen und Logik zu entkoppeln, so dass sich das IEarablesConnetion
 Interface nur um die Kommunikation mit den Earables kümmern muss. Sie ist static da es keinen Sinn macht sie zu instanziieren, da sie nur einen Dienst anbietet.
