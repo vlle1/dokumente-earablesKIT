@@ -735,8 +735,6 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
     \item[-] \textbf{SaveClicked(): void}\\ wenn diese Methode aufgerufen wird, werden die aktuellen Properties wieder im ISettingsService gespeichert, nachdem alle Werte von Attributen, die über kein Binding verfügen, vom View geholt und aktualisiert werden. Außerdem wird die Schrittlänge ans Erweiterungsmodul und die Samplingrate an die Bibliothek weitergegeben. Bei Auftretenden Exceptions (kein Gerät verbunden) wird eine Fehlermeldung als Popup angezeigt. Liefert needsRestart wahr, wird außerdem ein Hinweis angezeigt, dass die App neu gestartet werden muss, um alle Änderungen zu übernehmen. 
 \end{itemize} 
 
-\subsection{Class BluetoothPopUpViewmodel}
-
 \subsection{Class ScanningPopUpViewModel}
 	\paragraph{Klassenbeschreibung:}
 	Die Klasse ScanningPopUpViewModel ist das ViewModel zu dem View PopUpScanningPage und verwaltet die Logik dieser Komponente mithilfe von verknüpften Commands.
