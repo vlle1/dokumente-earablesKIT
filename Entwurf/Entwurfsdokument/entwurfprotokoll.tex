@@ -711,26 +711,88 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\end{itemize}
 
 \section{Klassenbeschreibung View}
-	\subsection{Class StepModePage}
-	\paragraph{Klassenbeschreibung:}
-	
-	\subsection{Class StepModeActivePage}
-	\paragraph{Klassenbeschreibung:}
-	
-	\subsection{Class CountModePage}
-	\paragraph{Klassenbeschreibung:}
+\subsection{Class StepModePage}
+\paragraph{Klassenbeschreibung:}
+Diese Klasse stellt die Ansicht des StepModes dar, solange kein Laufvorgang gestartet ist.
+\paragraph{Attribute:}
+	\begin{itemize}
+	\item[+] \textbf{StepMode: Label} \\ Anzeige des Modusnamen Stepmode.
+	\item[+] \textbf{LastTrainingsDate: Label} \\ Anzeige für den letzten Trainingstag, an das Attribut LastDataTime aus dem Viewmodel gebunden.
+	\item[+] \textbf{StepsDoneLastTime: Label} \\ Anzeige für die am letzten Trainingstag gelaufenen Schritte, an das Attribut StepsDoneLastTIme aus dem Viewmodel gebunden.
+	\item[+] \textbf{DistanceWalkedLastTime: Label} \\ Anzeige für die am letzten Trainingstag gelaufene Distanz, an das Attribut DistanceWalkedLastTime aus dem Viewmodel gebunden. 
+	\item[+] \textbf{Start: Button} \\ Button um den Laufvorgang zu starten. Feuert den StartActivityCommand aus dem Viewmodel.
+	\end{itemize}
 
-	\subsection{Class CountModeActivePage}
-	\paragraph{Klassenbeschreibung:}
-
-	\subsection{Class ListenAndPerformPage}
-	\paragraph{Klassenbeschreibung:}
-
-	\subsection{Class ListenAndPerformActivePage}
-	\paragraph{Klassenbeschreibung:}
+\subsection{Class StepModeActivePage}
+\paragraph{Klassenbeschreibung:}
+Diese Klasse stellt die Ansicht des Stepmodes während eines laufenden Laufvorgangs an.
+\paragraph{Attribute:}
+	\begin{itemize}
+	\item[+] \textbf{StepMode: Label} \\ Anzeige des Modusnamen Stepmode.
+	\item[+] \textbf{IsRunning: Label} \\ Zeigt an ob der Nutzer aktuell läuft oder steht, an das Attribut IsRunning aus dem Viewmodel gebunden.
+	\item[+] \textbf{StepCounter: Label} \\ Anzeige für Anzahl bisher gelaufener Schritte, an das Attribut StepCounter aus dem Viewmodel gebunden.
+	\item[+] \textbf{DistanceWalked: Label} \\ Anzeige der bisher gelaufenen Distanz, an das Attribut DistanceWalked aus dem Viewmodel gebunden.
+	\item[+] \textbf{StepFrequency: Label} \\ Anzeige der akutellen Schrittfrequenz, an das Attribut StepFrequency aus dem Viewmodel gebunden.
+	\item[+] \textbf{Stop: Button} \\ Button um den Laufvorgang zu stoppen. Feuert den StopActivityCommand aus dem Viewmodel.
+	\end{itemize}
 	
-	\subsection{Class MusicModePage}
-		\paragraph{Klassenbeschreibung:}
+\subsection{Class CountModePage}
+\paragraph{Klassenbeschreibung:}
+Diese Klasse stellt die Ansicht des Countmodes dar, solange kein Zählvorgang gestartet ist.
+\paragraph{Attribute:}
+	\begin{itemize}
+	\item[+] \textbf{CountMode: Label} \\ Anzeige des Modusnamen CountMode.
+	\item[+] \textbf{Activites: ListView} \\ Anzeige der verfügbaren Activities die auswählbar sind mithilfe einer ListView, an die ObservableCollection PossibleActivities aus dem Viewmodel gebunden.
+	\item[+] \textbf{Start: Button} \\ Button um den Zählvorgang zu starten. Feuert den StartActivityCommand aus dem Viewmodel.
+	\end{itemize}
+
+\subsection{Class CountModeActivePage}
+\paragraph{Klassenbeschreibung:}
+Diese Klasse stellt die Ansicht des Countmodes während eines laufenden Zählvorgangs an.
+\paragraph{Attribute:}
+	\begin{itemize}
+	\item[+] \textbf{CountMode: Label} \\ Anzeige des Modusnamen CountMode.
+	\item[+] \textbf{Timer: Label} \\ Anzeige für die seit dem Zählstart vergangene Zeit. Beinhaltet drei Spans für die Anzeige von Minuten, Sekunden und Millisekunden. Das Spans sind an die Attribute Minuten, Sekunden bzw. Millisekunden gebunden.
+	\item[+] \textbf{Counter: Label} \\ Anzeige für die Anzahl bisher ausgeführter Wiederholungen einer Activity. An das Attribut Counter aus dem Viewmodel gebunden.
+	\item[+] \textbf{SelectedActivity: Label} \\Anzeige für die ausgewählte Übung. An das Attribut SelectedActivity aus dem Viewmodel gebunden.
+	\item[+] \textbf{Stop: Button} \\ Button um den Zählvorgang zu stoppen. Feuert den StopActivityCommand aus dem Viewmodel.
+	\end{itemize}
+
+\subsection{Class ListenAndPerformPage}
+\paragraph{Klassenbeschreibung:}
+Diese Klasse stellt die Ansicht von ListAndPerform dar, solange kein Trainingsvorgang gestartet ist.
+\paragraph{Attribute:}
+	\begin{itemize}
+	\item[+] \textbf{ListenAndPerform: Label} \\ Anzeige des Modusnamen ListenAndPerform.
+	\item[+] \textbf{WorkoutPlan: Label} \\ Anzeige vom Schriftzug Workout plan.
+	\item[+] \textbf{Activites: ListView} \\	Anzeige für den bisher zusammengestellten Trainingsplan mithilfe einer ListView, an das Attribut ActivityList gebunden. 
+	\item[+] \textbf{AddActivity: Button} \\ Button um eine Activity dem Trainingsplan hinzuzufügen. Feuert den AddActivityCommand aus dem Viewmodel.
+	\item[+] \textbf{RemoveActivity: Button} \\ Button um eine Activity aus dem Trainingsplan zu löschen. Feuert den RemoveActivityCommand aus dem Viewmodel.
+	\item[+] \textbf{EditActivity: Button} \\ Button um eine bereits hinzugefügte Activity oder ihre Anzahl zu ändern. Feuert den EditActivityCommand aus dem Viewmodel.
+	\item[+] \textbf{Start: Button} \\ Button um den Trainingsvorgang zu starten. Feuert den StartActivityCommand aus dem Viewmodel.
+	\end{itemize}
+
+\subsection{Class ListenAndPerformActivePage}
+\paragraph{Klassenbeschreibung:}
+Die Klasse stellt die Ansicht von ListenAndPerform während eines laufenden Trainingsvorgangs an.
+\paragraph{Attribute:}
+	\begin{itemize}
+	\item[+] \textbf{ListenAndPerform: Label} \\ Anzeige des Modusnamen ListenAndPerform.
+	\item[+] \textbf{Activity: Label} \\ Anzeige für die aktuell auszuführenden Activity.
+	\item[+] \textbf{Timer: Label} \\ Anzeige für die seit dem Zählstart vergangene Zeit. Beinhaltet drei Spans für die Anzeige von Minuten, Sekunden und Millisekunden. Das Spans sind an die Attribute Minuten, Sekunden bzw. Millisekunden gebunden.
+	\item[+] \textbf{Counter: Label} \\ Anzeige für die Anzahl bisher ausgeführter Wiederholungen einer Activity. An die Attribute PushUpCounter und SitUpCounter aus dem Viewmodel gebunden.
+	\item[+] \textbf{Progress: ProgressBar} \\ Progressbar zum Anzeigen des Fortschritts innerhalb einer Activity.
+	\item[+] \textbf{Stop: Button} \\ Button um den Trainingsvorgang zu stoppen. Feuert den StopActivityCommand aus dem Viewmodel.
+	\end{itemize}
+	
+\subsection{Class MusicModePage}
+\paragraph{Klassenbeschreibung:}
+Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Musikvorgang wird zu keiner Page gewechselt.
+\paragraph{Attribute:}
+	\begin{itemize}
+	\item[+] \textbf{MusicMode: Label} \\ Anzeige des Modusnamen MusicMode.
+	\item[+] \textbf{TwoWayButton: Label} \\ Button um den Musikvorgang zu Starten/Stoppen. Feuert beim Starten/Stoppen den StartActivityCommand und den StopActivityCommand respektive.
+	\end{itemize}
 
 	\subsection{Class DataOverviewPage}
 		\paragraph{Klassenbeschreibung:}
