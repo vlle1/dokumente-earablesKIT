@@ -738,7 +738,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 \subsection{Class BluetoothPopUpViewmodel}
 
 \subsection{Class ScanningPopUpViewModel}
-	\subsection{Klassenbeschreibung:}
+	\paragraph{Klassenbeschreibung:}
 	Die Klasse ScanningPopUpViewModel ist das ViewModel zu dem View PopUpScanningPage und verwaltet die Logik dieser Komponente mithilfe von verknüpften Commands.
 	Sie benutzt die Erweiterung \Gls{Rg.Plugins.Popup} für das Anzeigen und das Versteckend des Pop-ups.
 	
@@ -759,35 +759,29 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 		\item[+] \textbf{static ShowPopUp(): void}\\Statische Methode, welche die View PopUpScanningPage anzeigt. Diese benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Anzeigen geschieht mit der Methode Popupnavigation.Instance.PushAsync(new PopUpScanningPage()). Dabei wird ein neue Instanz der PopUpScanningPage erstellt. Die Methode ist statisch, da die anderen ViewModels bei einem Vorgangstart anzeigen können muss, falls noch keine Verbindung zu den \gls{Earables} besteht.
 		\item[+] \textbf{static HidePopUp(): void}\\Statische Methode, welche dieView PopUpScanningPage verstecken lässt. Diese Methode benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Verstecken der View geschieht mit der Methode Popupnavigation.Instance.popAsync(). 
 	\end{itemize}
-
+\subsection{Class HomeMenuItem}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse spezifiziert einen Eintrag des Menüs (siehe MenuPage). 
+	\paragraph{Attribute:}
+	\begin{itemize}
+		\item [+] \textbf{Id: MenuItemType}\\ Der Typ des Menüeintrags.
+		\item [+] \textbf{Title: string}\\ Der angezeigte Text des Menüeintrags.
+	\end{itemize}
+\subsection{Enumeration MenuItemType}
+	Dieses Enum spezifiziert alle möglichen Typen von Menüeinträgen der MenuPage. Entsprechend gibt es für jede vom Menü aus direkt navigierbare Page einen Wert dieses Enums.
+	\subsection{Werte:}
+	\begin{itemize}
+        \item CountMode,
+        \item DataOverview,
+        \item ImportExport,
+        \item ListenAndPerform,
+        \item MusicMode,
+        \item Settings,
+        \item StepMode
+	\end{itemize}
 \section{Klassenbeschreibung View}
 
-\subsection{Class MainPage}
-\paragraph{Klassenbeschreibung:}
-Die MainPage erbt von MasterDetailPage und stellt die grundlegende angezeigte Struktur zur Verfügung. Das ist im Wesentlichen der Menü-Button (vlg. Preset "MasterDetailPage" in Visual Studio 2019).\\
-Bei Klicken auf das Menü-Icon bzw. swipen vom Rand aus öffnet sich automatisch (vererbt von MasterDetailPage) die MenuPage.
-\paragraph{Attribute}
-\begin{itemize}
-	\item [] \textbf{MenuPages: Dictionary<int, NavigationPage}\\ Dieses Dictionary wird verwendet, um mit dem Klicken auf den Namen einer bestimmten Page die Page selbst zu asoziieren.
-	\item [] \textbf{(xaml) NavigationPage.Icon} Das Menü-Item, das sich für den Nutzer links oben im Eck befindet.
-\end{itemize}
-\paragraph{Methoden}
-\begin{itemize}
-	\item [+] \textbf{<<create>> MainPage: void}\\ Hier wird die Seite inizialisiert. Dazu wird der Laufmodus als aktuelle DetailPage festgelegt.
-	\item [+] \textbf{NavigateFromMenu(int id): Task}\\ Diese Methode setzt die zur angegebenen ID entsprechende Page als neue DetailPage fest.
-\end{itemize}
-\subsection{Class MenuPage}
-\paragraph{Klassenbeschreibung:}
-Die MenuPage ist das Menü, aus dem der Nutzer nach Klicken auf den Menü-Button eine Seite auswählen kann.
-\paragraph{Attribute}
-\begin{itemize}
-	\item [] \textbf{menuItems: List<HomeMenuItem>} Diese Liste enthält alle von der MenuPage aus direkt ansteuerbaren Seiten.
-	\item [] \textbf{RootPage: MainPage} Diese Property verfügt nur über einen Getter, der die aktuelle MainPage zurückgibt.
-\end{itemize}
-\paragraph{Methoden}
-\begin{itemize}
-	\item [+] \textbf{<<create>> MenuPage} Im Konstruktor wird menuItems mit allen gewünschten Seiten inizialisiert und den menuItems wird ein Event, das bei Auswählen eines Items gefeuert wird, hinzugefügt. Dieses veranlasst die Navigation zu dieser Seite mittels der MainPage.
-\end{itemize}
+
 \subsection{Class StepModePage}
 \paragraph{Klassenbeschreibung:}
 Diese Klasse stellt die Ansicht des StepModes dar, solange kein Laufvorgang gestartet ist.
@@ -908,7 +902,7 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\begin{itemize}
 			\item [+]\textbf{<<create>> SettingsPage()} Im Konstruktor werden die Picker mit den richtigen Wertebereichen inizialisiert. Die angezeigten aktuellen Einstellungswerte erfolgen dann vor allem über das Data-Binding.
 		\end{itemize}
-	\subsection{Class BluetoothPopUpPage}
+	\subsection{Class BluetoothPopUpPage}%%TODO!!???
 		\paragraph{Klassenbeschreibung:}
 		\paragraph{Attribute}
 		\begin{itemize}
@@ -934,6 +928,32 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\item[+] \textbf{<<create>> PopUpScanningPage}\\Konstruktor der Klasse PopUpScanningPage. In diesem wird eine Instanz des ViewModels und BindingContext der Klasse ScanningpopUpViewModel erstellt.
 		\end{itemize}
 
+	\subsection{Class MainPage}
+		\paragraph{Klassenbeschreibung:}
+		Die MainPage erbt von MasterDetailPage und stellt die grundlegende angezeigte Struktur zur Verfügung. Das ist im Wesentlichen der Menü-Button (vlg. Preset "MasterDetailPage" in Visual Studio 2019).\\
+		Bei Klicken auf das Menü-Icon bzw. swipen vom Rand aus öffnet sich automatisch (vererbt von MasterDetailPage) die MenuPage.
+		\paragraph{Attribute}
+		\begin{itemize}
+			\item [] \textbf{MenuPages: Dictionary<int, NavigationPage}\\ Dieses Dictionary wird verwendet, um mit dem Klicken auf den Namen einer bestimmten Page die Page selbst zu asoziieren.
+			\item [] \textbf{(xaml) NavigationPage.Icon} Das Menü-Item, das sich für den Nutzer links oben im Eck befindet.
+		\end{itemize}
+		\paragraph{Methoden}
+		\begin{itemize}
+			\item [+] \textbf{<<create>> MainPage: void}\\ Hier wird die Seite inizialisiert. Dazu wird der Laufmodus als aktuelle DetailPage festgelegt.
+			\item [+] \textbf{NavigateFromMenu(int id): Task}\\ Diese Methode setzt die zur angegebenen ID entsprechende Page als neue DetailPage fest.
+		\end{itemize}
+	\subsection{Class MenuPage}
+		\paragraph{Klassenbeschreibung:}
+		Die MenuPage ist das Menü, aus dem der Nutzer nach Klicken auf den Menü-Button eine Seite auswählen kann.
+		\paragraph{Attribute}
+		\begin{itemize}
+			\item [] \textbf{menuItems: List<HomeMenuItem>} Diese Liste enthält alle von der MenuPage aus direkt ansteuerbaren Seiten.
+			\item [] \textbf{RootPage: MainPage} Diese Property verfügt nur über einen Getter, der die aktuelle MainPage zurückgibt.
+		\end{itemize}
+		\paragraph{Methoden}
+		\begin{itemize}
+			\item [+] \textbf{<<create>> MenuPage} Im Konstruktor wird menuItems mit allen gewünschten Seiten inizialisiert und den menuItems wird ein Event, das bei Auswählen eines Items gefeuert wird, hinzugefügt. Dieses veranlasst die Navigation zu dieser Seite mittels der MainPage.
+		\end{itemize}
 \section{Interaktionsdiagramme}
 \subsection{Aktivitätsdiagramm Lauschen und Agieren}
 \subsection{Sequenzdiagramme}
