@@ -131,6 +131,7 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 	\item[+] \textbf{ButtonPressed: EventHandler <ButtonEventArgs>}\\ Das Attribut buttonPressed wird benötigt um das Drücken des Knopfes an den \Gls{Earables} weiterleiten zu können.
 	\item[+] \textbf{DeviceConnectionStateChanged: EventHandler<DeviceEventArgs>}\\ Das Attribut deviceConnectionStateChanged wird benötigt um den aktuellen Verbindungsstatus weiterleiten zu können.
 	\item[+] \textbf{Config: ConfigContainer}\\ In diesem Attribut befinden sich die Konfigurationsvariablen für die \Gls{Earables}.
+	\item[+] \textbf{Characters: Characteristic}\\ Das Attribut enthält alle Charakteristiken die angesprochen werden müssen.
 	\item[+] \textbf{Ble: IBluetoothLE}\\ Wird benötigt um auf das Bluetooth des Smartphones zuzugreifen. Der Typ IBluetooth befindet sich im BLE\_Plugin
 	\item[+] \textbf{Adapter: IAdapter}\\ Wird benötigt um die Bluetoothverbindung aufzubauen. Der Typ  IAdapter befindet sich im BLE\_Plugin
 	\item[+] \textbf{Device: IDevice}\\ Wird benötigt um die Bluetoothverbindung aufzubauen. Der Typ  IDevice befindet sich im BLE\_Plugin
@@ -149,6 +150,7 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 	\item[+] \textbf{SetLowPassFilterGyroscope(gyroscopeLPF LPF\_Gyroscope): Boolean}\\ Mit dieser Methode wird der Low Pass Filter des Gyroskops gesetzt. Bei erfolgreichem setzen wird true zurückgegeben ansonsten false. Bei dem Übergabeparameter handelt es sich um ein Enum, der angibt auf welchen Wert der Low Pass Filter gesetzt werden soll. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die Charakteristik zu beschreiben.
 	\item[+] \textbf{GetLowPassFilterGyroscope(): LPF\_Gyroscope}\\Die Methode gibt an auf was der LPF des Gyroskops momentan gesetzt ist. Er wird in Form des LPF\_Gyroscope Enums zurückgegeben. 
 	\item[+] \textbf{GetBatteryVoltage(): int}\\ Gibt die Voltanzahl der Batterie zurück. Die Methode ReadAsync aus dem BLE\_Plugin ermöglicht es die entsprechende Charakteristik zu lesen.
+	\item[+] \textbf{IsBluetoothOn(): bool}\\ Zeigt an ob Bluetooth auf dem Smartphone aktiviert ist. Gibt true zurück falls es aktiviert ist und false, falls nicht.
 	\item[\#] \textbf{OnIMUDataReceived(): void}\\Falls neue IMU-Daten vorliegen wird diese Methode aufgerufen und benachrichtigt alle Listener des Events IMUDataReceived, dass neue Daten anliegen.
 	\item[\#] \textbf{OnPushButtonPressed(): void}\\ Falls der Knopf an den \Gls{Earables} gedrückt wurde wird diese Methode aufgerufen und benachrichtigt alle Listener des Events buttonPressed, dass der Knopf gedrückt wurde.
 	\item[\#] \textbf{OnDeviceConnected(): void}\\ Falls eine Verbindung mit einem Device hergestellt wurde oder eine bestehende Verbindung aufgelöst wurde wird diese Methode aufgerufen und benachrichtigt alle Listener des Events deviceConnectionStateChanged, dass sich der Verbindungsstatus geändert hat.
@@ -174,7 +176,6 @@ Die Constants Klasse enthält alle Konstanten, die benötigt werden um die entsp
 	\item[+] \textbf{BATTERY\_CHAR: String}\\Dieser String enthält die Beschreibung der Charakteristik in dem die Batterieladung gespeichert wird.
 	\item[+] \textbf{ACCELEROMETER\_GYROSCOPE\_LPF\_CHAR: String}\\Dieser String enthält die Beschreibung der Charakteristik in um den Low Pass Filter für den Accelerometer und das Gyroscope zu setzen.
 \item[+] \textbf{ACCESS\_SERVICE: String}\\Dieser String enthält die Beschreibung des Services Access-Service, der die meisten Charakteristiken bereitstellt.
-\item[+] \textbf{NOCH\_EIN\_SERVICE\_SERVICE: String}\\Muss noch rausfinden welche charakteristiken dieser service bereit stellt.
 \end{itemize}
 
 
