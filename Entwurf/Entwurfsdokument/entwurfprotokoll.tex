@@ -366,37 +366,84 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	
 	\subsubsection{Class Activity}
 	\paragraph{Klassenbeschreibung}
-	Activity ist eine abstrakte Klasse. Hierbei handelt es sich um die Aktivitätserkennungen. Dabei liefert die Klasse Activity die abstrakte Schnittstelle um Methoden vorzudefinieren. Der Algorithmus zur Aktivitätsanalyse wird in der protected abstract Methode analyse() ausgeführt, welche in den Kindsklassen implementiert werden muss.
+	Activity ist eine abstrakte Klasse. Eine Activity ist im Wesentlichen ein Aktivitätserkennungsalgorithmus. Entsprechend des Entwurfsmusters Schablone liefert die Klasse Activity eine vorgefertigte Schablonenmethode DataUpdate. Der Algorithmus zur Aktivitätsanalyse (protected abstract void analyse()) wird nur in konkreten Kindklassen implementiert, was in dem Entwurfsmuster der primitiven Operation entspricht.
 	
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item[+] \textbf{ActivityDone: EventHandler<ActivityArgs>}\\Bei dem EventHandler können sich die ViewModel registrieren Diese werden benachrichtigt, wenn eine Aktivität durchgeführt wurde (Schritt gelaufen, Liegestütze gemacht, etc.). Der EventHandler wird in der Methode analyse() aufgerufen. Als Argumente bei der Eventwurf wird eine Objekt des Types ActivityArgs übergeben.  
+		\item[+] \textbf{ActivityDone: EventHandler<ActivityArgs>}\\Bei dem EventHandler können sich die ViewModel registrieren Diese werden benachrichtigt, wenn eine Aktivität durchgeführt wurde (Schritt gelaufen, Liegestütze gemacht, etc.). Der EventHandler wird in der Methode analyse() aufgerufen. Als Argument bei der Eventwurf wird ein Objekt des Types ActivityArgs übergeben.
 		\item [-] \textbf{buffer: Queue <DataEventArgs>}\\In der Queue werden die ankommenden Dateneinträge gespeichert. Diese werden nach einander von dem Algorithmus in analyse() verwendet. 
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item[+] \textbf{DataUpdate(data: DataEventArgs): void}\\Mit dieser Methode bekommt die Aktivität die neuen Dateneinträge. Dabei ruft die Klasse ActivityManager die Methode auf, wenn sie die neuen Daten bekommt. In dieser Methode wird geschaut, ob sich ein Event bei dem EventHandler ActivityDone registriert hat. Falls ja, wird der Datensatz dem buffer hinugefügt, und der Algorithmus gestartet. Falls nicht, wird der Datensatz ignoriert.
-		\item[\#] \textbf{abstract analyse(): void}\\Der Algorithmus der Aktivitätserkennung wird in dieser Methode ausgeführt. Dabei ist dieser in den Unterklassen implementiert. 
+		\item[\#] \textbf{abstract analyse(): void}\\Der Algorithmus der Aktivitätserkennung wird in dieser Methode ausgeführt. Dabei ist dieser in den Unterklassen implementiert. Er beurteilt nur mithilfe der gesammelten Gyroskop- und Accelerometerdaten, ob das (der Activity entsprechende) Ereignis eingetroffen ist. In diesem Fall feuert er ein Event über den ActivityDone EventHandler. 
 	\end{itemize}
-	\subsubsection{Class AbstractSitUpActivity}
+	\subsubsection{Abstract Class AbstractSitUpActivity}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung von Sit-ups.\\ Es soll nach jedem erkannten Sit-up ein Event gefeuert werden.
 	\subsubsection{Class SitUpActivityThreshold}
-	
-	\subsubsection{Class AbstractStepActivity}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung von Sit-ups.
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item [+]\textbf{<<create>> SitUpActivityThreshold(): void}
+		\item [-]\textbf{analyse(): void} Implementierung der Analyse.
+	\end{itemize}
+	\subsubsection{Abstract Class AbstractStepActivity}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Schritterkennung.\\ Es soll immer ein Event gefeuert werden, wenn ein Schritt getätigt wurde.
 	\subsubsection{Class StepActivityActivityThreshold}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung, wann ein Schritt getätigt wurde.
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item [+]\textbf{<<create>> StepActivityThreshold(): void}
+		\item [-]\textbf{analyse(): void} Implementierung der Analyse.
+	\end{itemize}
 	
-	\subsubsection{Class AbstractRunningActivity}
+	\subsubsection{Abstract Class AbstractRunningActivity}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung, ob der Nutzer läuft oder steht.\\ Es wird immer dann ein Event gefeuert, wenn sich dieser Status ändert.
 	\subsubsection{Class RunningActivityThreshold}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung, ob der Nutzer läuft oder steht.
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item [+]\textbf{<<create>> SitUpActivityThreshold(): void}
+		\item [-]\textbf{analyse(): void} Implementierung der Analyse.
+	\end{itemize}
 	
-	\subsubsection{Class AbstractPushUpActivity}
+	\subsubsection{Abstract Class AbstractPushUpActivity}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung von Push-ups.\\ Es soll immer ein Event gefeuert werden, wenn eine Liegestütze erkannt wurde.
 	\subsubsection{Class PushUpActivityThreshold}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung von Sit-ups.
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item [+]\textbf{<<create>> SitUpActivityThreshold(): void}
+		\item [-]\textbf{analyse(): void} Implementierung der Analyse.
+	\end{itemize}
 	
-	\subsubsection{Class ActivityArgs}
+	\subsubsection{Abstract Class ActivityArgs}
+	\paragraph{Klassenbeschreibung:}
+	ActivityArgs werden beim Feuern eines Events mit dem Event übergeben. Das erkannte Ereignis kann durch die ActivityArgs genauer beschrieben werden.  
 	\subsubsection{Class RunningEventArgs}
-	
-	\subsubsection{Class CountableActivityArgs}
+	\paragraph{Klassenbeschreibung:}
+	Ein Event der RunningActivityThreshold sagt entweder aus, dass der Nutzer stoppt, oder, dass er zu laufen beginnt.
+	\paragraph{Attribute:}
+	\begin{itemize}
+		\item[+] \textbf{running: boolean} Dieses Boolean ist genau dann auf wahr gesetzt, wenn der Nutzer zu laufen beginnt.
+	\end{itemize} 
+	\subsubsection{Interface CountableActivityArgs}
+	\paragraph{Schnittstellenbeschreibung:}
+	Diese Schnittstelle spezifiziert alle EventArgs bei Aktivitäten, bei denen gezählt werden kann. Auch wenn momentan keine weiteren EventArgs verwendet werden stärkt diese Struktur die Erweiterbarkeit und Übersichtlichkeit. Falls für zählbare Aktivitäten weitere Argumente angegeben werden sollen, kann dies gebündelt geschehen.
 	\subsubsection{Class PushUpEventArgs}
+	Aktuell gibt es keine relevanten EventArgs bei Push-ups.
 	\subsubsection{Class StepEventActivity}
+	Aktuell gibt es keine relevanten EventArgs bei der Schritterkennung.
 	\subsubsection{Class SitUpActivity}
+	Aktuell gibt es keine relevanten EventArgs bei Sit-ups.
 	
 
 \subsection{App}
