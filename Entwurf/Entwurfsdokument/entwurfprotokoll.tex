@@ -326,7 +326,7 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[-] \textbf{serviceRegistration(out collection: IServiceCollection)}\\ Private Methode, welche eine IServiceCollection anlegt und die Services dort registriert. Die IServiceCollection wird zurückgegeben. 
+		\item[$-$] \textbf{serviceRegistration(out collection: IServiceCollection)}\\Private Methode, welche eine IServiceCollection anlegt und die Services dort registriert. Die IServiceCollection wird zurückgegeben. 
 	\end{itemize}
 	
 	\subsubsection{Interface IActivityManager}
@@ -341,7 +341,7 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[-] \textbf{serviceRegistration(out collection IServiceCollection)}\\Die Methode wird von der Schnittstelle IManager geerbt. Diese wird benötigt, um einen ServiceProvider zu erstellen (hier für das Attribut ActivityProvider).
+		\item[$-$] \textbf{serviceRegistration(out collection IServiceCollection)}\\Die Methode wird von der Schnittstelle IManager geerbt. Diese wird benötigt, um einen ServiceProvider zu erstellen (hier für das Attribut ActivityProvider).
 		\item[+] \textbf{onIMUDataReceived(sender: object, args: DataEventArgs): void}\\Die öffentliche Methode ist eine EventMethode, welche beim EventHandler IMUDataReceived der Klasse EarablesConnection registriert wird. Die konkreten Unterklassen müssen diese implementieren. 
 	\end{itemize}
 	
@@ -353,12 +353,12 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	
 	\paragraph{Attribute:}
 	\begin{itemize}
+		\item[$-$] \textbf{activities: List<Activity>}\\Es wird eine Liste der registrierten Aktivitäten gespeichert. Bei einer Datenweitergabe muss somit nicht jedes mal vom ActivityProvider die Anfrage kommen, wer registriert ist. 
 		\item[+] \textbf{ActivityProvider: ServiceProvider}\\Das Attribut beinhaltet die einzelnen Services mithilfe eines Dictionaries. Wird in dem Konstruktor instanziiert.
-		\item[-] \textbf{activities: List<Activity>}\\Es wird eine Liste der registrierten Aktivitäten gespeichert. Bei einer Datenweitergabe muss somit nicht jedes mal vom ActivityProvider die Anfrage kommen, wer registriert ist. 
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[-] \textbf{serviceRegistration(out collection IServiceCollection): void}\\Private geerbte Methode der Schnittstelle IManager. In dieser wird eine ServiceCollection angelegt, bei der die Aktiväten registriert werden. Dabei passtiert dies mit der Methode collection.AddSingleton<IT,T>(). IT ist eine Oberklasse/Schnittstelle und T die konkrete Implementierung. IT ist in der Klasse ActivityManager immer vom Typ Activity (abstract).
+		\item[$-$] \textbf{serviceRegistration(out collection IServiceCollection): void}\\Private geerbte Methode der Schnittstelle IManager. In dieser wird eine ServiceCollection angelegt, bei der die Aktiväten registriert werden. Dabei passtiert dies mit der Methode collection.AddSingleton<IT,T>(). IT ist eine Oberklasse/Schnittstelle und T die konkrete Implementierung. IT ist in der Klasse ActivityManager immer vom Typ Activity (abstract).
 		\item[+] \textbf{OnIMUDataReceived(sender: object, args: DataEventArgs): void}\\EventMethode, welche bei dem EventHandler IMUDataReceived der Klasse EarablesConnection registriert wird. Bei dem Aufrufen der Methode werden die Daten an die gespeicherten Aktivitäten weitergegeben. Das passiert per Push-Model (Observer-Muster). Bei den Aktivitäten wir die Methode DataUpdate(data: DataEventArgs) aufgerufen mit den bekommenen Daten als Parameter.%TODO
 		\item[+] \textbf{<<create>> ActivityManager}\\Hier handelt es sich um den Konstruktor der Klasse ActivityManager. In dieser wird sich bei dem EventHandler IMUDataReceived der Klasse EarablesConnection registriert und die private Methode serviceRegistration(...) aufgerufen. Damit findet die Registrierung der Services und die Instanziierung des ActivityProviders statt.
 	\end{itemize}
@@ -366,37 +366,84 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	
 	\subsubsection{Class Activity}
 	\paragraph{Klassenbeschreibung}
-	Activity ist eine abstrakte Klasse. Hierbei handelt es sich um die Aktivitätserkennungen. Dabei liefert die Klasse Activity die abstrakte Schnittstelle um Methoden vorzudefinieren. Der Algorithmus zur Aktivitätsanalyse wird in der protected abstract Methode analyse() ausgeführt, welche in den Kindsklassen implementiert werden muss.
+	Activity ist eine abstrakte Klasse. Eine Activity ist im Wesentlichen ein Aktivitätserkennungsalgorithmus. Entsprechend des Entwurfsmusters Schablone liefert die Klasse Activity eine vorgefertigte Schablonenmethode DataUpdate. Der Algorithmus zur Aktivitätsanalyse (protected abstract void analyse()) wird nur in konkreten Kindklassen implementiert, was in dem Entwurfsmuster der primitiven Operation entspricht.
 	
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item[+] \textbf{ActivityDone: EventHandler<ActivityArgs>}\\Bei dem EventHandler können sich die ViewModel registrieren Diese werden benachrichtigt, wenn eine Aktivität durchgeführt wurde (Schritt gelaufen, Liegestütze gemacht, etc.). Der EventHandler wird in der Methode analyse() aufgerufen. Als Argumente bei der Eventwurf wird eine Objekt des Types ActivityArgs übergeben.  
-		\item [-] \textbf{buffer: Queue <DataEventArgs>}\\In der Queue werden die ankommenden Dateneinträge gespeichert. Diese werden nach einander von dem Algorithmus in analyse() verwendet. 
+		\item[+] \textbf{ActivityDone: EventHandler<ActivityArgs>}\\Bei dem EventHandler können sich die ViewModel registrieren Diese werden benachrichtigt, wenn eine Aktivität durchgeführt wurde (Schritt gelaufen, Liegestütze gemacht, etc.). Der EventHandler wird in der Methode analyse() aufgerufen. Als Argument bei der Eventwurf wird ein Objekt des Types ActivityArgs übergeben.
+		\item [$-$] \textbf{buffer: Queue <DataEventArgs>}\\In der Queue werden die ankommenden Dateneinträge gespeichert. Diese werden nach einander von dem Algorithmus in analyse() verwendet. 
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[+] \textbf{DataUpdate(data: DataEventArgs): void}\\Mit dieser Methode bekommt die Aktivität die neuen Dateneinträge. Dabei ruft die Klasse ActivityManager die Methode auf, wenn sie die neuen Daten bekommt. In dieser Methode wird geschaut, ob sich ein Event bei dem EventHandler ActivityDone registriert hat. Falls ja, wird der Datensatz dem buffer hinzugefügt, und der Algorithmus gestartet. Falls nicht, wird der Datensatz ignoriert.
-		\item[\#] \textbf{abstract analyse(): void}\\Der Algorithmus der Aktivitätserkennung wird in dieser Methode ausgeführt. Dabei ist dieser in den Unterklassen implementiert. 
+		\item[+] \textbf{DataUpdate(data: DataEventArgs): void}\\Mit dieser Methode bekommt die Aktivität die neuen Dateneinträge. Dabei ruft die Klasse ActivityManager die Methode auf, wenn sie die neuen Daten bekommt. In dieser Methode wird geschaut, ob sich ein Event bei dem EventHandler ActivityDone registriert hat. Falls ja, wird der Datensatz dem buffer hinugefügt, und der Algorithmus gestartet. Falls nicht, wird der Datensatz ignoriert.
+		\item[\#] \textbf{abstract analyse(): void}\\Der Algorithmus der Aktivitätserkennung wird in dieser Methode ausgeführt. Dabei ist dieser in den Unterklassen implementiert. Er beurteilt nur mithilfe der gesammelten Gyroskop- und Accelerometerdaten, ob das (der Activity entsprechende) Ereignis eingetroffen ist. In diesem Fall feuert er ein Event über den ActivityDone EventHandler. 
 	\end{itemize}
-	\subsubsection{Class AbstractSitUpActivity}
+	\subsubsection{Abstract Class AbstractSitUpActivity}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung von Sit-ups.\\ Es soll nach jedem erkannten Sit-up ein Event gefeuert werden.
 	\subsubsection{Class SitUpActivityThreshold}
-	
-	\subsubsection{Class AbstractStepActivity}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung von Sit-ups.
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item [+]\textbf{<<create>> SitUpActivityThreshold(): void}
+		\item [$-$]\textbf{analyse(): void} Implementierung der Analyse.
+	\end{itemize}
+	\subsubsection{Abstract Class AbstractStepActivity}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Schritterkennung.\\ Es soll immer ein Event gefeuert werden, wenn ein Schritt getätigt wurde.
 	\subsubsection{Class StepActivityActivityThreshold}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung, wann ein Schritt getätigt wurde.
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item [+]\textbf{<<create>> StepActivityThreshold(): void}
+		\item [$-$]\textbf{analyse(): void} Implementierung der Analyse.
+	\end{itemize}
 	
-	\subsubsection{Class AbstractRunningActivity}
+	\subsubsection{Abstract Class AbstractRunningActivity}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung, ob der Nutzer läuft oder steht.\\ Es wird immer dann ein Event gefeuert, wenn sich dieser Status ändert.
 	\subsubsection{Class RunningActivityThreshold}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung, ob der Nutzer läuft oder steht.
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item [+]\textbf{<<create>> SitUpActivityThreshold(): void}
+		\item [$-$]\textbf{analyse(): void} Implementierung der Analyse.
+	\end{itemize}
 	
-	\subsubsection{Class AbstractPushUpActivity}
+	\subsubsection{Abstract Class AbstractPushUpActivity}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung von Push-ups.\\ Es soll immer ein Event gefeuert werden, wenn eine Liegestütze erkannt wurde.
 	\subsubsection{Class PushUpActivityThreshold}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung von Sit-ups.
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item [+]\textbf{<<create>> SitUpActivityThreshold(): void}
+		\item [$-$]\textbf{analyse(): void} Implementierung der Analyse.
+	\end{itemize}
 	
-	\subsubsection{Class ActivityArgs}
+	\subsubsection{Abstract Class ActivityArgs}
+	\paragraph{Klassenbeschreibung:}
+	ActivityArgs werden beim Feuern eines Events mit dem Event übergeben. Das erkannte Ereignis kann durch die ActivityArgs genauer beschrieben werden.  
 	\subsubsection{Class RunningEventArgs}
-	
-	\subsubsection{Class CountableActivityArgs}
+	\paragraph{Klassenbeschreibung:}
+	Ein Event der RunningActivityThreshold sagt entweder aus, dass der Nutzer stoppt, oder, dass er zu laufen beginnt.
+	\paragraph{Attribute:}
+	\begin{itemize}
+		\item[+] \textbf{running: boolean} Dieses Boolean ist genau dann auf wahr gesetzt, wenn der Nutzer zu laufen beginnt.
+	\end{itemize} 
+	\subsubsection{Interface CountableActivityArgs}
+	\paragraph{Schnittstellenbeschreibung:}
+	Diese Schnittstelle spezifiziert alle EventArgs bei Aktivitäten, bei denen gezählt werden kann. Auch wenn momentan keine weiteren EventArgs verwendet werden stärkt diese Struktur die Erweiterbarkeit und Übersichtlichkeit. Falls für zählbare Aktivitäten weitere Argumente angegeben werden sollen, kann dies gebündelt geschehen.
 	\subsubsection{Class PushUpEventArgs}
+	Aktuell gibt es keine relevanten EventArgs bei Push-ups.
 	\subsubsection{Class StepEventActivity}
+	Aktuell gibt es keine relevanten EventArgs bei der Schritterkennung.
 	\subsubsection{Class SitUpActivity}
+	Aktuell gibt es keine relevanten EventArgs bei Sit-ups.
 	
 
 \subsection{App}
@@ -410,14 +457,14 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item[-] \textbf{static serviceProvider: ServiceProvider}\\Eine private Instanz vom Typ ServiceProvider. Beinhaltet die Referenzen auf die Services und verwaltet die Zugriffe darauf. Dies geschieht per GetService<T>.
+		\item[$-$] \textbf{static serviceProvider: ServiceProvider}\\Eine private Instanz vom Typ ServiceProvider. Beinhaltet die Referenzen auf die Services und verwaltet die Zugriffe darauf. Dies geschieht per GetService<T>.
 		\item[+] \textbf{static ServiceProvider: ServiceProvider}\\Property für die Instanz serviceProvider. Reguliert, dass der serviceProvider nur einmal existiert. (Singleton-Entwurfsmuster)
 
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[-] \textbf{<<create>> ServiceProvider()}\\Privater Konstruktor, da es sich um eine statische Klasse handelt ohne Instanzattribute.
-		\item[-] \textbf{serviceRegistration()}\\ Zur Erstmaligen Registrierung der Services mit einer IServiceCollection und zur Erstellung des Attributs serviceProvider.\\
+		\item[$-$] \textbf{<<create>> ServiceProvider()}\\Privater Konstruktor, da es sich um eine statische Klasse handelt ohne Instanzattribute.
+		\item[$-$] \textbf{serviceRegistration()}\\ Zur Erstmaligen Registrierung der Services mit einer IServiceCollection und zur Erstellung des Attributs serviceProvider.\\
 	\end{itemize}
 		
 		
@@ -432,13 +479,13 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	\begin{itemize}
 		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch)\\
 		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables} \\ 
-		\item[-] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache \\
-		\item[-] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers \\
-		\item[-] \textbf{SAMPLINGRATE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
+		\item[$-$] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache \\
+		\item[$-$] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers \\
+		\item[$-$] \textbf{SAMPLINGRATE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[-] \textbf{LoadSettings():void}\\Lädt alle Settings aus den Einstellungen in die Attribute.	
+		\item[$-$] \textbf{LoadSettings():void}\\Lädt alle Settings aus den Einstellungen in die Attribute.	
 	\end{itemize}
 \subsubsection{Class SettingsService}
 	\paragraph{Klassenbeschreibung}
@@ -449,14 +496,14 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	\begin{itemize}
 		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch). Attribut aus dem interface ISettingsService\\
 		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables} \\ 
-		\item[-] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache. Attribut aus dem Interface ISettingsService \\
-		\item[-] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers. Konstante aus dem Interface ISettingsService \\
-		\item[-] \textbf{SAMPLINGRATE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
+		\item[$-$] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache. Attribut aus dem Interface ISettingsService \\
+		\item[$-$] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers. Konstante aus dem Interface ISettingsService \\
+		\item[$-$] \textbf{SAMPLINGRATE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item[+] \textbf{<<create>> SettingsService}\\Konstruktor für die Klasse SettingsService. Dabei wird er als Service vom ServiceManager verwaltet, demnach existiert er nur als Singleton.
-		\item[-] \textbf{LoadSettings():void}\\Lädt alle Einstellungen aus den App.Current.Properties in die Attribute.	
+		\item[$-$] \textbf{LoadSettings():void}\\Lädt alle Einstellungen aus den App.Current.Properties in die Attribute.	
 	\end{itemize}
 \subsubsection{Class User}
 	\paragraph{Klassenbeschreibung:}
@@ -514,7 +561,7 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 	
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item[-] \textbf{const PATH: string}\\Der Pfad, an dem die Datenbank gespeichert ist. Dabei ist dieser Pfad konstant und kann nicht geändert werden.
+		\item[$-$] \textbf{const PATH: string}\\Der Pfad, an dem die Datenbank gespeichert ist. Dabei ist dieser Pfad konstant und kann nicht geändert werden.
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
@@ -585,7 +632,7 @@ Die Klasse StepModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel, e
 	\item[+] \textbf{DistanceWalked: int} \\  Bisher gelaufene Distanz. 
 	\item[+] \textbf{IsRunning: boolean} \\ True wenn der Nutzer läuft, false wenn er steht. 
 	\item[+] \textbf{StepFrequency: int} \\ Schrittfrequenz des Nutzers
-	\item[-] \textbf{timer: Stopwatch} \\ Timer, um die Schrittfrequenz zu messen
+	\item[$-$] \textbf{timer: Stopwatch} \\ Timer, um die Schrittfrequenz zu messen
 
 \end{itemize}
 \paragraph{Methoden:}
@@ -596,7 +643,7 @@ Die Klasse StepModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel, e
 	\item[+] \textbf{OnActivityDone(sender: object, e: ActivityArgs)} \\ Event Methode, die von der Aktivität bei Erkennung von einem Schritt aufgerufen wird. Sie erhöht den Counter um 1 und setzt isRunning auf True. 
 	\item[+] \textbf{updateLastData(): void} \\ Wird vom Konstruktor und nach jedem Vorgangsende aufgerufen. Aktualisiert die Attribute StepsDoneLastTime, DistanceWalkedLastTime und LastDatatime, indem über den Service Manager von der DataBaseConnection der letzte Eintrag genommen wird. 
 	\item[+] \textbf{ShowPopUp(): void} \\ Zeigt das PopUp mit den gelaufenen Schritten und der Distanz asynchron an, wegklickbar mit einem Button. 
-	\item[-] \textbf{UpdateFrequency(): void} \\ Berechnet nach einer festgelegten Zeit aus der abgelaufenen Zeit und der Schrittanzahl die aktuelle Schrittfrequenz.
+	\item[$-$] \textbf{UpdateFrequency(): void} \\ Berechnet nach einer festgelegten Zeit aus der abgelaufenen Zeit und der Schrittanzahl die aktuelle Schrittfrequenz.
 
 \end{itemize}
 
@@ -609,7 +656,7 @@ Die Klasse CountModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel, 
 	\item[+] \textbf{SitUpActivity: AbstractSitUpActivity} \\ Die vom ServiceManager gelieferte Singleton-Activity.
 	\item[+] \textbf{SelectedActivity: string} \\ Die aktuell vom Nutzer im Menü ausgewählte Aktivität. 
 	\item[+] \textbf{PossibleActivities: OberservableCollection<string>} \\ Die möglichen Aktivitäten die vom Nutzer ausgewählt werden können. 
-	\item[-] \textbf{timer: Stopwatch} \\ Der Timer, welcher die Trainingszeit des Nutzers misst. 
+	\item[$-$] \textbf{timer: Stopwatch} \\ Der Timer, welcher die Trainingszeit des Nutzers misst. 
 	\item[+] \textbf{Minutes: string} \\ Anzahl Minuten der Ausführungszeit. 
 	\item[+] \textbf{Seconds: string} \\ Anzahl Sekunden der Ausführungszeit. 
 	\item[+] \textbf{Milliseconds: string} \\ Anzahl Sekunden der Ausführungszeit. 
@@ -635,9 +682,9 @@ Die Klasse ListenAndPerformViewmodel erbt von der abstrakten Klasse BaseModeView
 	\item[+] \textbf{SitUpActivity: AbstractSitUpActivity} \\ Die vom ServiceManager gelieferte Singleton-Activity.
 	\item[+] \textbf{PushUpCounter: int} \\ Zähler für aktuell ausgeführte Liegestütze. 
 	\item[+] \textbf{SitUpCounter: int} \\ Zähler für aktuell ausgeführte Sit-ups. 
-	\item[-] \textbf{PushUpResult: int} \\ Zähler für insgesamt während des aktuellen Trainings ausgeführte Liegestütze. 
-	\item[-] \textbf{SitUpResult: int} \\ Zähler für insgesamt während des aktuellen Trainings ausgeführte Sit-ups. 
-	\item[-] \textbf{timer: Stopwatch} \\ Der Timer, welcher die Trainingsdauer des Nutzers misst. 
+	\item[$-$] \textbf{PushUpResult: int} \\ Zähler für insgesamt während des aktuellen Trainings ausgeführte Liegestütze. 
+	\item[$-$] \textbf{SitUpResult: int} \\ Zähler für insgesamt während des aktuellen Trainings ausgeführte Sit-ups. 
+	\item[$-$] \textbf{timer: Stopwatch} \\ Der Timer, welcher die Trainingsdauer des Nutzers misst. 
 	\item[+] \textbf{Minutes: String} \\ Anzahl Minuten der Trainingszeit. 
 	\item[+] \textbf{Seconds: String} \\  Anzahl Sekunden der Trainingszeit. 
 	\item[+] \textbf{Milliseconds: String} \\ Anzahl Sekunden der Trainingszeit. 
@@ -670,7 +717,7 @@ Die Klasse ListenAndPerformViewmodel erbt von der abstrakten Klasse BaseModeView
 Die Klasse MusicModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel und enthält die Logik des Musicmodes.
 \paragraph{Attribute:}
 \begin{itemize}
-	\item[-] \textbf{isRunning: boolean}
+	\item[$-$] \textbf{isRunning: boolean}
 	\item[+] \textbf{RunningActivity: AbstractRunningActivity} \\ Die vom ServiceManager gelieferte Singleton-Activity.
 \end{itemize}
 \paragraph{Methoden:}
@@ -693,8 +740,8 @@ Das DataOverviewViewmodel läd die Trainingsdaten des Nutzers über den Datenban
 Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen die entsprechende Methode in dieser Klasse aus.
 \paragraph{Methoden:}
 \begin{itemize}
-    \item[-] \textbf{<<create>> DataOverviewViewModel()} \\ Setzt die \textit{ItemsSource} der contentListView auf \textit{TrainingsData} und ruft \textit{init()} auf.
-    \item[-] \textbf{init(): void} \\ Kapselt den asynchronen Aufruf zu \textit{GetMostRecentEntriesAsync} des \textit{IDataBaseConnection} Service.
+    \item[$-$] \textbf{<<create>> DataOverviewViewModel()} \\ Setzt die \textit{ItemsSource} der contentListView auf \textit{TrainingsData} und ruft \textit{init()} auf.
+    \item[$-$] \textbf{init(): void} \\ Kapselt den asynchronen Aufruf zu \textit{GetMostRecentEntriesAsync} des \textit{IDataBaseConnection} Service.
 \end{itemize} 
 
 \subsection{Class ImportExportViewmodel}
@@ -711,9 +758,9 @@ Die Kommunikation wird dabei mit Commands geregelt (die Klasse erbt von INotifyP
 Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen die entsprechende Methode in dieser Klasse aus.
 \paragraph{Methoden:}
 \begin{itemize}
-    \item[-] \textbf{exportClicked(): void}\\ öffnet einen folderPicker-Dialog und ruft danach in IDataBaseConnection exportTrainingData mit dem vom Nutzer im Dialog ausgewählten Pfad aus.%%??name genau von dem filePicker??
-    \item[-] \textbf{importClicked(): void}\\ öffnet einen filePicker-Dialog und ruft danach in IDataBaseConnection importTrainingData mit dem vom Nutzer ausgewählten file auf.
-    \item[-] \textbf{deleteClicked(): void}\\zeigt einen Warning-Dialog an, ob man wirklich alle Vorgangsdaten löschen will. Daraufhin wird bei Bestätigung in IDatabaseConnection deleteTrainingData aufgerufen.
+    \item[$-$] \textbf{exportClicked(): void}\\ öffnet einen folderPicker-Dialog und ruft danach in IDataBaseConnection exportTrainingData mit dem vom Nutzer im Dialog ausgewählten Pfad aus.%%??name genau von dem filePicker??
+    \item[$-$] \textbf{importClicked(): void}\\ öffnet einen filePicker-Dialog und ruft danach in IDataBaseConnection importTrainingData mit dem vom Nutzer ausgewählten file auf.
+    \item[$-$] \textbf{deleteClicked(): void}\\zeigt einen Warning-Dialog an, ob man wirklich alle Vorgangsdaten löschen will. Daraufhin wird bei Bestätigung in IDatabaseConnection deleteTrainingData aufgerufen.
 \end{itemize} 
 
 \subsection{Class SettingsViewModel}
@@ -722,7 +769,7 @@ Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen
 Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von INotifyPropertyChanged und verwendet für das Speichern der Einstellungen einen Command. Außerdem holt sie sich vom SettingsService alle aktuellen Einstellungen.
 \paragraph{Attribute:}
 \begin{itemize}
-	\item[-] \textbf{needsRestart: bool}\\ diese Property verfügt nur über einen privaten getter. Sie ist genau dann wahr, wenn der Nutzer die Sprache geändert hat, also der Zustand des Sliders in der View und der Zustand als in dieser Klasse als Attribut gespeicherten Sprache unterschiedlich sind.
+	\item[$-$] \textbf{needsRestart: bool}\\ diese Property verfügt nur über einen privaten getter. Sie ist genau dann wahr, wenn der Nutzer die Sprache geändert hat, also der Zustand des Sliders in der View und der Zustand als in dieser Klasse als Attribut gespeicherten Sprache unterschiedlich sind.
 	\item[+] \textbf{Username: String}\\Der Username verfügt über ein Binding zur View.
 	\item[+] \textbf{StepLength: int}\\Die StepLength verfügt über ein Binding zur View. 
 	\item[+] \textbf{SamplingRate: SamplingRate}\\Die SamplingRate wird nicht direkt im View gebindet.
@@ -732,7 +779,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 \paragraph{Methoden:}
 \begin{itemize}
     \item[+] \textbf{<<create>> SettingsViewModel(): void}\\ Im Konstruktor holt sich die Klasse vom ISettingsService den User, die Sprache und die Samplingrate und speichert die Entsprechenden Werte in den eigenen Properties. Die Werte von Attributen, die über kein Binding verfügen, müssen hier manuell ins View übertragen werden.
-    \item[-] \textbf{SaveClicked(): void}\\ wenn diese Methode aufgerufen wird, werden die aktuellen Properties wieder im ISettingsService gespeichert, nachdem alle Werte von Attributen, die über kein Binding verfügen, vom View geholt und aktualisiert werden. Außerdem wird die Schrittlänge ans Erweiterungsmodul und die Samplingrate an die Bibliothek weitergegeben. Bei Auftretenden Exceptions (kein Gerät verbunden) wird eine Fehlermeldung als Popup angezeigt. Liefert needsRestart wahr, wird außerdem ein Hinweis angezeigt, dass die App neu gestartet werden muss, um alle Änderungen zu übernehmen. 
+    \item[$-$] \textbf{SaveClicked(): void}\\ wenn diese Methode aufgerufen wird, werden die aktuellen Properties wieder im ISettingsService gespeichert, nachdem alle Werte von Attributen, die über kein Binding verfügen, vom View geholt und aktualisiert werden. Außerdem wird die Schrittlänge ans Erweiterungsmodul und die Samplingrate an die Bibliothek weitergegeben. Bei Auftretenden Exceptions (kein Gerät verbunden) wird eine Fehlermeldung als Popup angezeigt. Liefert needsRestart wahr, wird außerdem ein Hinweis angezeigt, dass die App neu gestartet werden muss, um alle Änderungen zu übernehmen. 
 \end{itemize} 
 
 \subsection{Class ScanningPopUpViewModel}
@@ -752,8 +799,8 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\begin{itemize}
 		\item[+] \textbf{<<create>> ScanningPopUpViewModel()}\\Der Konstruktor für die Klasse ScanningPopUpViewModel. In dieser Methode, werden die Commands initialisiert. Zudem wird sich bei dem EventHandler DeviceConnectionStateChanged in der Klasse EarablesConnection im Model mit der Methode OnDeviceConnectionStateChanged(...) registriert.
 		\item[+] \textbf{OnDeviceConnectionStateChanged(sender: object, args: DeviceEventArgs): void}\\Mit dieser Methode registrierst das ViewModel bei dem EventHandler DeviceConnectionStateChanged. In dieser wird das statische Attribut IsConnected angepasst. Falls sich das Device disconnected hat, wird die Methode ShowPopUp() aufgerufen.
-		\item[-] \textbf{ScanDevices(): void}\\Private Methode, welche im Command ConnectDeviceCommand benutzt wird. In dieser wird die EarableConnection nach erreichbaren Geräten gefragt. Dafür wird die Methode StartScanning() aufgerufen. Die zurückgelieferte Liste an Devices wird in dem Pop-up angezeigt. Dafür wird die ListView aktualisiert. Zudem wird das erste Device in der ListView ausgewählt.
-		\item[-] \textbf{ConnectDevice(): void}\\Private Methode, welche im Command ConnectDeviceCommand aufgerufen wird. Dabei benutzt sie die Methode ConnectToDevice(device: IDevice) der Klasse EarableConnection im Model. Es wird das Device übergeben, welches in der ListView ausgewählt wurde.
+		\item[$-$] \textbf{ScanDevices(): void}\\Private Methode, welche im Command ConnectDeviceCommand benutzt wird. In dieser wird die EarableConnection nach erreichbaren Geräten gefragt. Dafür wird die Methode StartScanning() aufgerufen. Die zurückgelieferte Liste an Devices wird in dem Pop-up angezeigt. Dafür wird die ListView aktualisiert. Zudem wird das erste Device in der ListView ausgewählt.
+		\item[$-$] \textbf{ConnectDevice(): void}\\Private Methode, welche im Command ConnectDeviceCommand aufgerufen wird. Dabei benutzt sie die Methode ConnectToDevice(device: IDevice) der Klasse EarableConnection im Model. Es wird das Device übergeben, welches in der ListView ausgewählt wurde.
 		\item[+] \textbf{static ShowPopUp(): void}\\Statische Methode, welche die View PopUpScanningPage anzeigt. Diese benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Anzeigen geschieht mit der Methode Popupnavigation.Instance.PushAsync(new PopUpScanningPage()). Dabei wird ein neue Instanz der PopUpScanningPage erstellt. Die Methode ist statisch, da die anderen ViewModels bei einem Vorgangstart anzeigen können muss, falls noch keine Verbindung zu den \gls{Earables} besteht.
 		\item[+] \textbf{static HidePopUp(): void}\\Statische Methode, welche dieView PopUpScanningPage verstecken lässt. Diese Methode benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Verstecken der View geschieht mit der Methode Popupnavigation.Instance.popAsync(). 
 	\end{itemize}
