@@ -127,20 +127,20 @@ Diese Klasse ist das Herz der Bibliothek. Sie ist die Schnittstellen, über die 
 
 \paragraph{Attribute:}
 \begin{itemize}
+	\item[$-$] \textbf{ble: IBluetoothLE}\\ Wird benötigt um auf das Bluetooth des Smartphones zuzugreifen. Der Typ IBluetooth befindet sich im BLE\_Plugin
+	\item[$-$] \textbf{adapter: IAdapter}\\ Wird benötigt um die Bluetoothverbindung aufzubauen. Der Typ  IAdapter befindet sich im BLE\_Plugin
+	\item[$-$] \textbf{device: IDevice}\\ Wird benötigt um die Bluetoothverbindung aufzubauen. Der Typ  IDevice befindet sich im BLE\_Plugin
 	\item[+] \textbf{IMUDataReceived: EventHandler<DataEventArgs>}\\Das Attribut IMUDataReceived beinhaltet die IMU Daten eines Eintrags und die Konfiguration der \Gls{Earables}.
 	\item[+] \textbf{ButtonPressed: EventHandler <ButtonEventArgs>}\\ Das Attribut buttonPressed wird benötigt, um das Drücken des Knopfes an den \Gls{Earables} weiterleiten zu können.
 	\item[+] \textbf{DeviceConnectionStateChanged: EventHandler<DeviceEventArgs>}\\ Das Attribut deviceConnectionStateChanged wird benötigt, um den aktuellen Verbindungsstatus weiterleiten zu können.
 	\item[+] \textbf{Config: ConfigContainer}\\ In diesem Attribut befinden sich die Konfigurationsvariablen für die \Gls{Earables}.
 	\item[+] \textbf{Characters: Characteristic}\\ Das Attribut enthält alle Charakteristiken die angesprochen werden müssen.
-	\item[+] \textbf{Ble: IBluetoothLE}\\ Wird benötigt um auf das Bluetooth des Smartphones zuzugreifen. Der Typ IBluetooth befindet sich im BLE\_Plugin
-	\item[+] \textbf{Adapter: IAdapter}\\ Wird benötigt um die Bluetoothverbindung aufzubauen. Der Typ  IAdapter befindet sich im BLE\_Plugin
-	\item[+] \textbf{Device: IDevice}\\ Wird benötigt um die Bluetoothverbindung aufzubauen. Der Typ  IDevice befindet sich im BLE\_Plugin
 \end{itemize}
 \paragraph{Methoden:}
 \begin{itemize}
 	\item[+] \textbf{<<create>>\Gls{Earables}Connection()}\\ Im Konstruktor werden die Attribute ble und adapter initialisiert.
 	\item[+] \textbf{StartScanning(): DeviceList<List>}\\ Diese Methode legt eine neue Liste vom Typ IDevice an, in der sie alle gefundenen Devices speichert und anschließend zurückgibt. Sie benutzt die Methode DeviceDiscovered und StartScanningForDevicesAsync aus dem Interface IAdapter.
-	\item[+] \textbf{ConnectToDevice(device: Idevice): bool}\\ Mit dieser Methode kann sich der Nutzer mit einem Bluetooth fähigen Gerät verbinden. Er wählt in der Liste  ein Device aus und übergibt es als Parameter. Falls die Verbindung erfolgreich war wird true zurückgegeben. Konnte keine Verbindung hergestellt werden wird false zurückgegeben. Hierbei wird die Methode ConnectToDeviceAsync aus dem BLE\_Pugin der Klasse IAdapter zur Hilfe genommen. Zusätzlich werden gleich alle benötigten Charakteristiken geladen und abgespeichert um sie nicht immer neu laden zu müssen wenn sie gebraucht werden. Das geschieht mit Hilfe der Methoden GetServicesAsync und GetCharacteristicAsync aus dem BLE\_Plugin. Zum Schluss werden noch die Handler für die entsprechenden Events registriert.
+	\item[+] \textbf{ConnectToDevice(device: Idevice): bool}\\ Mit dieser Methode kann sich der Nutzer mit einem Bluetooth fähigen Gerät verbinden. Er wählt in der Liste  ein Device aus und übergibt es als Parameter. Falls die Verbindung erfolgreich war wird true zurückgegeben. Konnte keine Verbindung hergestellt werden wird false zurückgegeben. Hierbei wird die Methode ConnectToDeviceAsync aus dem BLE\_Pugin der Klasse IAdapter zur Hilfe genommen. Zusätzlich werden gleich alle benötigten Charakteristiken geladen und abgespeichert um sie nicht immer neu laden zu müssen, wenn sie gebraucht werden. Das geschieht mit Hilfe der Methoden GetServiceAsync und GetCharacteristicAsync aus dem BLE\_Plugin. Zum Schluss werden noch die Handler für die entsprechenden Events registriert und die Aktualisierung mit der Methode StartUpdatesAsync, aus dem BLE\_Plugin, gestartet.
 	\item[+] \textbf{DisconnectFromDevice(): bool}\\ Falls man eine Verbindung zu einem Device besitzt wird diese getrennt und es wird true zurückgegeben. Wenn man keine Verbindung besitzt passiert nichts und es wird false zurückgegeben. Zum Trennen der Verbindung wird die Methode DisconnectDeviceAsync aus dem BLE\_Pugin der Klasse IAdapter benutzt.
 	\item[+] \textbf{StartSampling(): bool}\\ Diese Methode startet die Datenaufzeichnung des IMU. Falls die Datenaufzeichnung erfolgreich gestartet wurde wird true zurückgegeben, ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die Charakteristik zu beschreiben. Hinweis: Ist die Samplingrate nicht gesetzt, wird die Standarteinstellung genommen.
 	\item[+] \textbf{StopSampling(): bool}\\Die Datenaufzeichnung des IMU wird mit dieser Methode gestoppt. Falls die Datenaufzeichnung erfolgreich gestoppt wurde wird true zurückgegeben, ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die Charakteristik zu beschreiben.
@@ -151,9 +151,9 @@ Diese Klasse ist das Herz der Bibliothek. Sie ist die Schnittstellen, über die 
 	\item[+] \textbf{GetLowPassFilterGyroscope(): LPF\_Gyroscope}\\Die Methode gibt an auf was der LPF des Gyroskops momentan gesetzt ist. Er wird in Form des LPF\_Gyroscope Enums zurückgegeben. 
 	\item[+] \textbf{GetBatteryVoltage(): int}\\ Gibt die Voltanzahl der Batterie zurück. Die Methode ReadAsync aus dem BLE\_Plugin ermöglicht es die entsprechende Charakteristik zu lesen.
 	\item[+] \textbf{IsBluetoothActive(): bool}\\ Zeigt an ob Bluetooth auf dem Smartphone aktiviert ist. Gibt true zurück falls es aktiviert ist und false, falls nicht.
-	\item[\#] \textbf{OnIMUDataReceived(): void}\\Falls neue IMU-Daten vorliegen, wird diese Methode aufgerufen und feuert über den IMUDataReceivedEventHandler ein Event.
-	\item[\#] \textbf{OnPushButtonPressed(): void}\\ Falls der Knopf an den \Gls{Earables} gedrückt wurde, wird diese Methode aufgerufen. Sie lässt den ButtonPressed EventHandler ein Event feuern.
-	\item[\#] \textbf{OnDeviceConnected(): void}\\ Falls eine Verbindung mit einem Device hergestellt wurde oder eine bestehende Verbindung aufgelöst wurde, wird diese Methode aufgerufen. Sie lässt den DeviceConnectionStateChanged EventHandler ein Event feuern.
+	\item[+] \textbf{static OnValueUpdatedIMU(): void}\\Falls neue IMU-Daten vorliegen, wird diese Methode aufgerufen und feuert das Event IMUDataRecieved.
+	\item[+] \textbf{static OnPushButtonPressed(): void}\\ Falls der Knopf an den \Gls{Earables} gedrückt wurde, wird diese Methode aufgerufen und feuert das Event ButtonPressed: EventHandler.
+	\item[+] \textbf{static OnDeviceConnected(): void}\\ Falls eine Verbindung mit einem Device hergestellt wurde oder eine bestehende Verbindung aufgelöst wurde, wird diese Methode aufgerufen und feuert das Event DeviceConnectionStateChanged.
 \end{itemize}
 
 
@@ -270,7 +270,7 @@ Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
 
 
 \subsubsection{Class Characteristics}
-In dieser Klasse werden die Charakteristiken gespeichert um sie nicht jedes mal neu zu laden wenn sie gebraucht werden.
+In dieser Klasse werden die Charakteristiken gespeichert um sie nicht jedes mal neu zu laden wenn sie gebraucht werden. Der Datentyp ICharacteristic befindet sich in dem BLE-Plugin.
 
 \paragraph{Attribute:}
 \begin{itemize}
@@ -283,7 +283,7 @@ In dieser Klasse werden die Charakteristiken gespeichert um sie nicht jedes mal 
 
 
 \subsubsection{Class DeviceEventArgs}
-Enthält alle relevanten Informationen, die über DeviceConnectionStateChanged versendet werden.
+Enthält alle relevanten Informationen, die als Parameter mit dem Event DeviceConnectionStateChanged gefeuert werden.
 
 \paragraph{Attribute:}
 \begin{itemize}
@@ -298,11 +298,11 @@ Enthält alle relevanten Informationen, die über DeviceConnectionStateChanged v
 
 
 \subsubsection{Class ButtonEventArgs}
-Enthält alle relevanten Informationen die benötigt werden, falls der Knopf der \Gls{Earables} gedrückt wurde. Momentan werden keine Eventargumente gebraucht, aber diese Klasse existiert bereits falls bei der Weiterentwicklung doch Argumente übergeben werden müssen.
+Enthält alle relevanten Informationen, die als Parameter mit dem Event ButtonPressed gefeuert werden. Momentan ist diese Klasse leer, aber sie existiert bereits falls bei der Weiterentwicklung des Moduls doch Argumente übergeben werden müssen.
 
 
 \subsubsection{Class DataEventArgs}
-Enthält alle relevanten Informationen, die mit einem DataEvent geschickt werden.
+Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataRecieved gefeuert werden.
 
 \paragraph{Attribute:}
 \begin{itemize}
