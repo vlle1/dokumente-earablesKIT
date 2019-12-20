@@ -10,7 +10,7 @@
 \usepackage{titlesec}
 % Notwendig für Links im Text
 \usepackage{hyperref}
-
+%%\usepackage{svg}
 % glossar, see http://en.wikibooks.org/wiki/LaTeX/Glossary
 % muss NACH hyperref geladen werden, sonst funktionieren die Links nicht
 \usepackage[toc]{glossaries}
@@ -128,8 +128,8 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{IMUDataReceived: EventHandler<DataEventArgs>}\\Das Attribut IMUDataReceived beinhaltet die IMU Daten eines Eintrags und die Konfiguration der \Gls{Earables}.
-	\item[+] \textbf{ButtonPressed: EventHandler <ButtonEventArgs>}\\ Das Attribut buttonPressed wird benötigt um das Drücken des Knopfes an den \Gls{Earables} weiterleiten zu können.
-	\item[+] \textbf{DeviceConnectionStateChanged: EventHandler<DeviceEventArgs>}\\ Das Attribut deviceConnectionStateChanged wird benötigt um den aktuellen Verbindungsstatus weiterleiten zu können.
+	\item[+] \textbf{ButtonPressed: EventHandler <ButtonEventArgs>}\\ Das Attribut buttonPressed wird benötigt, um das Drücken des Knopfes an den \Gls{Earables} weiterleiten zu können.
+	\item[+] \textbf{DeviceConnectionStateChanged: EventHandler<DeviceEventArgs>}\\ Das Attribut deviceConnectionStateChanged wird benötigt, um den aktuellen Verbindungsstatus weiterleiten zu können.
 	\item[+] \textbf{Config: ConfigContainer}\\ In diesem Attribut befinden sich die Konfigurationsvariablen für die \Gls{Earables}.
 	\item[+] \textbf{Characters: Characteristic}\\ Das Attribut enthält alle Charakteristiken die angesprochen werden müssen.
 	\item[+] \textbf{Ble: IBluetoothLE}\\ Wird benötigt um auf das Bluetooth des Smartphones zuzugreifen. Der Typ IBluetooth befindet sich im BLE\_Plugin
@@ -151,9 +151,9 @@ Diese Klasse ist das Herz der Bibliothek. Sie besitzt alle Schnittstellen, über
 	\item[+] \textbf{GetLowPassFilterGyroscope(): LPF\_Gyroscope}\\Die Methode gibt an auf was der LPF des Gyroskops momentan gesetzt ist. Er wird in Form des LPF\_Gyroscope Enums zurückgegeben. 
 	\item[+] \textbf{GetBatteryVoltage(): int}\\ Gibt die Voltanzahl der Batterie zurück. Die Methode ReadAsync aus dem BLE\_Plugin ermöglicht es die entsprechende Charakteristik zu lesen.
 	\item[+] \textbf{IsBluetoothOn(): bool}\\ Zeigt an ob Bluetooth auf dem Smartphone aktiviert ist. Gibt true zurück falls es aktiviert ist und false, falls nicht.
-	\item[\#] \textbf{OnIMUDataReceived(): void}\\Falls neue IMU-Daten vorliegen wird diese Methode aufgerufen und benachrichtigt alle Listener des Events IMUDataReceived, dass neue Daten anliegen.
-	\item[\#] \textbf{OnPushButtonPressed(): void}\\ Falls der Knopf an den \Gls{Earables} gedrückt wurde wird diese Methode aufgerufen und benachrichtigt alle Listener des Events buttonPressed, dass der Knopf gedrückt wurde.
-	\item[\#] \textbf{OnDeviceConnected(): void}\\ Falls eine Verbindung mit einem Device hergestellt wurde oder eine bestehende Verbindung aufgelöst wurde wird diese Methode aufgerufen und benachrichtigt alle Listener des Events deviceConnectionStateChanged, dass sich der Verbindungsstatus geändert hat.
+	\item[\#] \textbf{OnIMUDataReceived(): void}\\Falls neue IMU-Daten vorliegen, wird diese Methode aufgerufen und feuert über den IMUDataReceivedEventHandler ein Event.
+	\item[\#] \textbf{OnPushButtonPressed(): void}\\ Falls der Knopf an den \Gls{Earables} gedrückt wurde, wird diese Methode aufgerufen. Sie lässt den ButtonPressed EventHandler ein Event feuern.
+	\item[\#] \textbf{OnDeviceConnected(): void}\\ Falls eine Verbindung mit einem Device hergestellt wurde oder eine bestehende Verbindung aufgelöst wurde, wird diese Methode aufgerufen. Sie lässt den DeviceConnectionStateChanged EventHandler ein Event feuern.
 \end{itemize}
 
 
@@ -283,7 +283,7 @@ In dieser Klasse werden die Charakteristiken gespeichert um sie nicht jedes mal 
 
 
 \subsubsection{Class DeviceEventArgs}
-Enthält alle relevanten Informationen die benötigt werden, falls sich der Connection Status ändert.
+Enthält alle relevanten Informationen, die über DeviceConnectionStateChanged versendet werden.
 
 \paragraph{Attribute:}
 \begin{itemize}
@@ -302,7 +302,7 @@ Enthält alle relevanten Informationen die benötigt werden, falls der Knopf der
 
 
 \subsubsection{Class DataEventArgs}
-Enthält alle relevanten Informationen die benötigt werden, falls neue Daten ankamen.
+Enthält alle relevanten Informationen, die mit einem DataEvent geschickt werden.
 
 \paragraph{Attribute:}
 \begin{itemize}
@@ -321,6 +321,9 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 
 
 \subsection{Erweiterungsmodul}
+\begin{center}
+	%%TODO \includesvg[width=0.8\textwidth]{bilder/ErweiterungsmodulTest.svg}
+\end{center}
 	\subsubsection{Interface IManager}
 	\paragraph{Schnittstellenbeschreibung:}
 	Die Schnittstelle IManager definiert einen Service-Manager, welcher eine Menge an Services verwaltet. Dabei definiert die Schnittstelle die Methode -serviceRegistration(out collection: IServiceCollection), um die Services bei der Erstanlegung zu registrieren. Diese muss bei einer Nutzung implementiert werden. Dabei implementieren zwei Komponenten die Schnittstelle IManager. (IActivityManager, ServiceManager). Die IServiceCollection ist aus der Erweiterung \Gls{DependencyInjection}
