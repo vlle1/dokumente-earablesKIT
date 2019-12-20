@@ -23,7 +23,6 @@
 \DeclareGraphicsRule{*}{mps}{*}{}
 \fi
 \setlength{\parindent}{0pt}
-% specify the path to the images
 
 
 %irgendwas mit section formatierung (titlesec package)
@@ -322,9 +321,19 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 
 \subsection{Erweiterungsmodul}
 \begin{center}
-	\includegraphics[width=0.8\textwidth]{bilder/ErweiterungsmodulTest.png}
+	\centering
+	\includegraphics[width=15cm]{bilder/ErweiterungsmodulTest.png}
 \end{center}
+
+\begin{minipage}[b]{0.5\textwidth}
 	\subsubsection{Interface IManager}
+	
+	\end{minipage}
+	\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics[width=\textwidth]{bilder/IManager.png}
+\end{minipage}
+
+
 	\paragraph{Schnittstellenbeschreibung:}
 	Die Schnittstelle IManager definiert einen Service-Manager, welcher eine Menge an Services verwaltet. Dabei definiert die Schnittstelle die Methode -serviceRegistration(out collection: IServiceCollection), um die Services bei der Erstanlegung zu registrieren. Diese muss bei einer Nutzung implementiert werden. Dabei implementieren zwei Komponenten die Schnittstelle IManager. (IActivityManager, ServiceManager). Die IServiceCollection ist aus der Erweiterung \Gls{DependencyInjection}
 	
