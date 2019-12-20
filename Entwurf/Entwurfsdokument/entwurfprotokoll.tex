@@ -1126,8 +1126,11 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\begin{itemize}
 			\item [+] \textbf{<<create>> MenuPage()} Im Konstruktor wird menuItems mit allen gewünschten Seiten initialisiert und den menuItems wird ein Event, das bei Auswählen eines Items gefeuert wird, hinzugefügt. Dieses veranlasst die Navigation zu dieser Seite mittels der MainPage.
 		\end{itemize}
+	
+\newpage
 \section{Interaktionsdiagramme}
-\subsection{Aktivitätsdiagramm Lauschen und Agieren}
+\subsection{Aktivitätsdiagramm Lebenszyklus der App}
+\includegraphics[width=1.1\textwidth]{./Diagramme/Appablauf.png}
 \subsection{Sequenzdiagramme}
 
 
@@ -1135,23 +1138,30 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 %brauchen wir den unterpunkt "abläufe in der app" alle sqd die wir haben beziehen sich doch auch auf die App
 \subsubsection{Abläufe in der App}
 
+\paragraph{Start der App}
+
+\includegraphics[width=1.1\textwidth]{./Diagramme/AppstartSeqDia.png}
+
+
 \paragraph{Bluetoothverbindung mit den Earables herstellen:}
 Das folgende Sequenzdiagramm verdeutlicht wie eine Bluetoothverbindung hergestellt werden kann. Es wir davon ausgegangen, dass die App bereits gestartet wurde und noch keine Bluetoothverbindung zu den Earables besteht. Außerdem zeigt die App geraden die Seite des Laufmodus an und das PopUpViemwmodel kennt den Service der EarablesConnection bereits.\\
 
-
-
-
-
 \includegraphics[width=1.1\textwidth]{./Diagramme/Verbindungsaufbausequenzdiagramm.png}
+
+\paragraph{Navigationsmenu Page auswählen}
+
+\includegraphics[width=1.1\textwidth]{./Diagramme/NavigationsMenuSeqDia.png}
+
+
+\paragraph{Zählvorgang}
+\includegraphics[width=1.1\textwidth]{./Diagramme/CountModeSeqDia.png}
+
 
 \paragraph{Export Trainingsdaten:}
 \includegraphics[width=1.1\textwidth]{./Diagramme/TrainingsDatenExport_Sequenz.png}
 
 \paragraph{Änderung der Samplerate:}
 \includegraphics[width=1.1\textwidth]{./Diagramme/SetSampleRateSeqDia.png}
-
-Programmstart
-Sprache Ändern
 
 \section{Entwurfdaten}
 \subsection{Ressourcenverzeichnis}
