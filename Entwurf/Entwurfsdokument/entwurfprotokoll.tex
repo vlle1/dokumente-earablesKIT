@@ -438,11 +438,11 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 
 
 	\paragraph{Schnittstellenbeschreibung:}
-	Die Schnittstelle IManager definiert einen Service-Manager, welcher eine Menge an Services verwaltet. Dabei definiert die Schnittstelle die Methode -serviceRegistration(out collection: IServiceCollection), um die Services bei der Erstanlegung zu registrieren. Diese muss bei einer Nutzung implementiert werden. Dabei implementieren zwei Komponenten die Schnittstelle IManager. (IActivityManager, ServiceManager). Die IServiceCollection ist aus der Erweiterung \Gls{DependencyInjection}
+	Die Schnittstelle IManager definiert einen Service-Manager, welcher eine Menge an Services verwaltet. Dabei definiert die Schnittstelle die private Methode ServiceRegistration(out collection: IServiceCollection), um die Services bei der Erstanlegung zu registrieren. Diese muss bei einer Nutzung implementiert werden. Dabei implementieren zwei Komponenten die Schnittstelle IManager. (IActivityManager, ServiceManager). Die IServiceCollection ist aus der Erweiterung \Gls{DependencyInjection}
 	
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[$-$] \textbf{serviceRegistration(out collection: IServiceCollection)}\\Private Methode, welche eine IServiceCollection anlegt und die Services dort registriert. Die IServiceCollection wird zurückgegeben. 
+		\item[$-$] \textbf{ServiceRegistration(out collection: IServiceCollection)}\\Private Methode, welche eine IServiceCollection anlegt und die Services dort registriert. Die IServiceCollection wird zurückgegeben. 
 	\end{itemize}
 	
 	\subsubsection{Interface IActivityManager}
@@ -457,8 +457,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[$-$] \textbf{serviceRegistration(out collection IServiceCollection)}\\Die Methode wird von der Schnittstelle IManager geerbt. Diese wird benötigt, um einen ServiceProvider zu erstellen (hier für das Attribut ActivityProvider).
-		\item[+] \textbf{onIMUDataReceived(sender: object, args: DataEventArgs): void}\\Die öffentliche Methode ist eine EventMethode, welche beim EventHandler IMUDataReceived der Klasse EarablesConnection registriert wird. Die konkreten Unterklassen müssen diese implementieren. 
+		\item[$-$] \textbf{ServiceRegistration(out collection IServiceCollection)}\\Die Methode wird von der Schnittstelle IManager geerbt. Diese wird benötigt, um einen ServiceProvider zu erstellen (hier für das Attribut ActivityProvider).
+		\item[+] \textbf{OnIMUDataReceived(sender: object, args: DataEventArgs): void}\\Die öffentliche Methode ist eine EventMethode, welche beim EventHandler IMUDataReceived der Klasse EarablesConnection registriert wird. Die konkreten Unterklassen müssen diese implementieren. 
 	\end{itemize}
 	
 	\subsubsection{Class ActivityManager}
@@ -469,30 +469,30 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item[$-$] \textbf{activities: List<Activity>}\\Es wird eine Liste der registrierten Aktivitäten gespeichert. Bei einer Datenweitergabe muss somit nicht jedes mal vom ActivityProvider die Anfrage kommen, wer registriert ist. 
+		\item[+] \textbf{activities: List<Activity>}\\Es wird eine Liste der registrierten Aktivitäten gespeichert. Bei einer Datenweitergabe muss somit nicht jedes mal vom ActivityProvider die Anfrage kommen, wer registriert ist. 
 		\item[+] \textbf{ActivityProvider: ServiceProvider}\\Das Attribut beinhaltet die einzelnen Services mithilfe eines Dictionaries. Wird in dem Konstruktor instanziiert.
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[$-$] \textbf{serviceRegistration(out collection IServiceCollection): void}\\Private geerbte Methode der Schnittstelle IManager. In dieser wird eine ServiceCollection angelegt, bei der die Aktiväten registriert werden. Dabei passtiert dies mit der Methode collection.AddSingleton<IT,T>(). IT ist eine Oberklasse/Schnittstelle und T die konkrete Implementierung. IT ist in der Klasse ActivityManager immer vom Typ Activity (abstract).
-		\item[+] \textbf{OnIMUDataReceived(sender: object, args: DataEventArgs): void}\\EventMethode, welche bei dem EventHandler IMUDataReceived der Klasse EarablesConnection registriert wird. Bei dem Aufrufen der Methode werden die Daten an die gespeicherten Aktivitäten weitergegeben. Das passiert per Push-Model (Observer-Muster). Bei den Aktivitäten wir die Methode DataUpdate(data: DataEventArgs) aufgerufen mit den bekommenen Daten als Parameter.%TODO
-		\item[+] \textbf{<<create>> ActivityManager}\\Hier handelt es sich um den Konstruktor der Klasse ActivityManager. In dieser wird sich bei dem EventHandler IMUDataReceived der Klasse EarablesConnection registriert und die private Methode serviceRegistration(...) aufgerufen. Damit findet die Registrierung der Services und die Instanziierung des ActivityProviders statt.
+		\item[+] \textbf{<<create>> ActivityManager}\\Hier handelt es sich um den Konstruktor der Klasse ActivityManager. In dieser wird sich bei dem EventHandler IMUDataReceived der Klasse EarablesConnection registriert und die private Methode ServiceRegistration(...) aufgerufen. Damit findet die Registrierung der Services und die Instanziierung des ActivityProviders statt.
+		\item[$-$] \textbf{ServiceRegistration(out collection IServiceCollection): void}\\Private geerbte Methode der Schnittstelle IManager. In dieser wird eine ServiceCollection angelegt, bei der die Aktiväten registriert werden. Dabei passtiert dies mit der Methode collection.AddSingleton<IT,T>(). IT ist eine Oberklasse/Schnittstelle und T die konkrete Implementierung. IT ist in der Klasse ActivityManager immer vom Typ Activity (abstract).
+		\item[+] \textbf{OnIMUDataReceived(sender: object, args: DataEventArgs): void}\\EventMethode, welche bei dem EventHandler IMUDataReceived der Klasse EarablesConnection registriert wird. Bei dem Aufrufen der Methode werden die Daten an die gespeicherten Aktivitäten weitergegeben. Das passiert per Push-Model (Observer-Muster). Bei den Aktivitäten wir die Methode DataUpdate(data: DataEventArgs) aufgerufen mit den bekommenen Daten als Parameter.
 	\end{itemize}
 	
 	
 	\subsubsection{Class Activity}
 	\paragraph{Klassenbeschreibung}
-	Activity ist eine abstrakte Klasse. Eine Activity ist im Wesentlichen ein Aktivitätserkennungsalgorithmus. Dabei wird die DataUpdate() Methode implementiert und den Unterklassen zu Verfügung gestellt. Der Algorithmus zur Aktivitätsanalyse (protected abstract void analyse()) wird nur in konkreten Unterklassen implementiert, was in dem Entwurfsmuster der primitiven Operation entspricht.
+	Activity ist eine abstrakte Klasse. Eine Activity ist im Wesentlichen ein Aktivitätserkennungsalgorithmus. Dabei wird die DataUpdate() Methode implementiert und den Unterklassen zu Verfügung gestellt. Der Algorithmus zur Aktivitätsanalyse (protected abstract void Analyse()) wird nur in konkreten Unterklassen implementiert, was in dem Entwurfsmuster der primitiven Operation entspricht.
 	
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item[+] \textbf{ActivityDone: EventHandler<ActivityArgs>}\\Bei dem EventHandler können sich die ViewModel registrieren. Diese werden benachrichtigt, wenn eine Aktivität durchgeführt wurde (Schritt gelaufen, Liegestütze gemacht, etc.). Der EventHandler wird in der Methode analyse() aufgerufen. Als Argument bei der Eventwurf wird ein Objekt des Types ActivityArgs übergeben.
-		\item [$-$] \textbf{buffer: Queue <DataEventArgs>}\\In der Queue werden die ankommenden Dateneinträge gespeichert. Diese werden nach einander von dem Algorithmus in analyse() verwendet. 
+		\item[+] \textbf{ActivityDone: EventHandler<ActivityArgs>}\\Bei dem EventHandler können sich die ViewModel registrieren. Diese werden benachrichtigt, wenn eine Aktivität durchgeführt wurde (Schritt gelaufen, Liegestütze gemacht, etc.). Der EventHandler wird in der Methode Analyse() aufgerufen. Als Argument bei der Eventwurf wird ein Objekt des Types ActivityArgs übergeben.
+		\item [$-$] \textbf{buffer: Queue <DataEventArgs>}\\In der Queue werden die ankommenden Dateneinträge gespeichert. Diese werden nach einander von dem Algorithmus in Analyse() verwendet. 
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item[+] \textbf{DataUpdate(data: DataEventArgs): void}\\Mit dieser Methode bekommt die Aktivität die neuen Dateneinträge. Dabei ruft die Klasse ActivityManager die Methode auf, wenn sie die neuen Daten bekommt. In dieser Methode wird geschaut, ob sich ein Event bei dem EventHandler ActivityDone registriert hat. Falls ja, wird der Datensatz dem buffer hinugefügt, und der Algorithmus gestartet. Falls nicht, wird der Datensatz ignoriert.
-		\item[\#] \textbf{abstract analyse(): void}\\Der Algorithmus der Aktivitätserkennung wird in dieser Methode ausgeführt. Dabei ist dieser in den Unterklassen implementiert. Er beurteilt nur mithilfe der gesammelten Gyroskop- und Accelerometerdaten, ob das (der Activity entsprechende) Ereignis eingetroffen ist. In diesem Fall feuert er ein Event über den ActivityDone EventHandler. 
+		\item[\#] \textbf{abstract Analyse(): void}\\Der Algorithmus der Aktivitätserkennung wird in dieser Methode ausgeführt. Dabei ist dieser in den Unterklassen implementiert. Er beurteilt nur mithilfe der gesammelten Gyroskop- und Accelerometerdaten, ob das (der Activity entsprechende) Ereignis eingetroffen ist. In diesem Fall feuert er ein Event über den ActivityDone EventHandler. 
 	\end{itemize}
 	\subsubsection{Abstract class AbstractStepActivity}
 	\paragraph{Klassenbeschreibung:}
@@ -503,7 +503,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item [+]\textbf{<<create>> StepActivityThreshold(): void}\\Konstruktor der KlasseStepActivityThreshold. Dabei wird der EventHandler ActivityDone initialisiert. 
-		\item [$-$]\textbf{analyse(): void}\\ Implementierung der Analyse für die Schritterkennung. Dabei basiert diese auf dem Threshold Ansatz.  
+		\item [$-$]\textbf{Analyse(): void}\\ Implementierung der Analyse für die Schritterkennung. Dabei basiert diese auf dem Threshold Ansatz.  
 	\end{itemize}
 	
 	\subsubsection{Abstract class AbstractRunningActivity}
@@ -516,7 +516,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item [+]\textbf{<<create>> SitUpActivityThreshold(): void}\\Konstruktor der Klasse RunningActivityThreshold. In diesem wird der EventHandler erstellt.
-		\item [$-$]\textbf{analyse(): void}\\Implementierung der Analyse, ob der Nutzter läuft oder steht. Der EventHandler ActivityDone ruft die Events auf, falls sich der Laufstatus ändert. Das bedeutet, wenn der Nutzer anfängt zu laufen, oder aufhört. 
+		\item [$-$]\textbf{Analyse(): void}\\Implementierung der Analyse, ob der Nutzter läuft oder steht. Der EventHandler ActivityDone ruft die Events auf, falls sich der Laufstatus ändert. Das bedeutet, wenn der Nutzer anfängt zu laufen, oder aufhört. 
 	\end{itemize}
 	
 	
@@ -530,7 +530,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item [+]\textbf{<<create>> PushUpActivityThreshold(): void}\\Konstruktor der Klasse PushUpActicityThreshold(). In diesem wird der EventHandler ActivityDone instanziiert. 
-		\item [$-$]\textbf{analyse(): void}\\Implementierung der Analyse für die Sit-Up-Erkennung. Dabei werden die Daten aus der Queue Buffer benutzt. Der EventHandler ruft die Events auf, wenn eine Liegestütze gemacht wurde.
+		\item [$-$]\textbf{Analyse(): void}\\Implementierung der Analyse für die Sit-Up-Erkennung. Dabei werden die Daten aus der Queue Buffer benutzt. Der EventHandler ruft die Events auf, wenn eine Liegestütze gemacht wurde.
 	\end{itemize}
 
 	\subsubsection{Abstract class AbstractSitUpActivity}
@@ -539,11 +539,11 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	
 	\subsubsection{Class SitUpActivityThreshold}
 	\paragraph{Klassenbeschreibung:}
-	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung von Sit-ups. Hier wird basierend auf den Daten der Earables der Algorithmus in der Methode analyse() ausgeführt.
+	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung von Sit-ups. Hier wird basierend auf den Daten der Earables der Algorithmus in der Methode Analyse() ausgeführt.
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item [+]\textbf{<<create>> SitUpActivityThreshold(): void}\\Konstruktor der Klasse SitUpActivityThreshold. In dieser wird der EventHandler instanziiert. 
-		\item [$-$]\textbf{analyse(): void}\\ Implementierung der Analyse des Ereignisses. Dabei basiert dieser auf einem Threshold Ansatz. Diese wird nur ausgeführt, falls sich ein Event bei ActivityDone registriert hat.
+		\item [$-$]\textbf{Analyse(): void}\\ Implementierung der Analyse des Ereignisses. Dabei basiert dieser auf einem Threshold Ansatz. Diese wird nur ausgeführt, falls sich ein Event bei ActivityDone registriert hat.
 	\end{itemize}
 		
 	
@@ -909,7 +909,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 
 \subsection{Class ScanningPopUpViewModel}
 	\paragraph{Klassenbeschreibung:}
-	Die Klasse ScanningPopUpViewModel ist das ViewModel zu dem View PopUpScanningPage und verwaltet die Logik dieser Komponente mithilfe von verknüpften Commands.
+	Die Klasse ScanningPopUpViewModel ist das ViewModel zu dem View PopUpScanningPage und verwaltet die Logik dieser Komponente mithilfe von verknüpften Commands. Dabei implementiert die Klasse die Schnittstelle INotifyPropertyChanged, um die View zu aktuallisieren.
 	Sie benutzt die Erweiterung \Gls{Rg.Plugins.Popup} für das Anzeigen und das Versteckend des Pop-ups.
 	
 	\paragraph{Attribute:}
@@ -917,12 +917,14 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 		\item[+] \textbf{static IsConnected: bool}\\Statisches Attribut, ob das Gerät mit den \gls{Earables} verbunden ist.
 		\item[+] \textbf{ScanDevicesCommand: ICommand}\\Command, welches die Implementierung des Scannen abkapselt. Dieses Command wird ausgeführt, wenn der ScanDevice Button im View betätigt wird. Es wird die private Methode ScanDevices() aufgerufen.
 		\item[+] \textbf{ConnectDeviceCommand: ICommand}\\Command, welches die Implementierung des Verbinden mit einem ausgewählten BLE Gerät aus dem ListView des Pop-ups. Es wird die private Methode ConnectDevice() aufgerufen.
-		\item[+] \textbf{CancelCommand: ICommand}\\Command, welches die Implementierung des Abbrechen abkapselt. Dieses Command wird ausgeführt, wenn der Cancel Button im View betätigt wird. Es wird die public und statische Methode HidePopUp() aufgerufen. 		
+		\item[+] \textbf{CancelCommand: ICommand}\\Command, welches die Implementierung des Abbrechen abkapselt. Dieses Command wird ausgeführt, wenn der Cancel Button im View betätigt wird. Es wird die public und statische Methode HidePopUp() aufgerufen. 
+		\item[+] \textbf{Devices: ObservableCollection<Device>}\\Die Liste Devices dient zur Aktuallisierung des Views PopUpScanningPage. Die ListView im View setzt Devices als Ressource. Da Devices eine ObservableCollection ist, wird die Listview bei einer Änderung der Deviceliste aktualisiert.
 	\end{itemize}
 
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item[+] \textbf{<<create>> ScanningPopUpViewModel()}\\Der Konstruktor für die Klasse ScanningPopUpViewModel. In dieser Methode, werden die Commands initialisiert. Zudem wird sich bei dem EventHandler DeviceConnectionStateChanged in der Klasse EarablesConnection im Model mit der Methode OnDeviceConnectionStateChanged(...) registriert.
+		\item[\#] \textbf{OnPropertyChanged(): void}\\Die Methode wird von der Schnittstelle INotifyPropertyChanged geerbt. Diese wird benutzt um die View zu aktualisieren und ihr um Bescheid zu geben, wenn sich eine Eigenschaft aus dem ViewModel verändert.
 		\item[+] \textbf{OnDeviceConnectionStateChanged(sender: object, args: DeviceEventArgs): void}\\Mit dieser Methode registrierst das ViewModel bei dem EventHandler DeviceConnectionStateChanged. In dieser wird das statische Attribut IsConnected angepasst. Falls sich das Device disconnected hat, wird die Methode ShowPopUp() aufgerufen.
 		\item[$-$] \textbf{ScanDevices(): void}\\Private Methode, welche im Command ConnectDeviceCommand benutzt wird. In dieser wird die EarableConnection nach erreichbaren Geräten gefragt. Dafür wird die Methode StartScanning() aufgerufen. Die zurückgelieferte Liste an Devices wird in dem Pop-up angezeigt. Dafür wird die ListView aktualisiert. Zudem wird das erste Device in der ListView ausgewählt.
 		\item[$-$] \textbf{ConnectDevice(): void}\\Private Methode, welche im Command ConnectDeviceCommand aufgerufen wird. Dabei benutzt sie die Methode ConnectToDevice(device: IDevice) der Klasse EarableConnection im Model. Es wird das Device übergeben, welches in der ListView ausgewählt wurde.
@@ -948,6 +950,15 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
         \item MusicMode,
         \item Settings,
         \item StepMode
+	\end{itemize}
+
+\subsection{Class ExceptionHandlingViewModel}
+	\paragraph{Klassenbeschreibung:}
+	Die Klasse ExceptionHandlingViewModel ist die zentrale Fehlerverarbeitung. Wenn eine Exception in anderen Komponenten des ViewModels oder des Models wird die Exception gefangen und an die Klasse ExceptionHandlingViewModel weitergeleitet. Diese erstellt nun eine Benachrichtigung in Form eines DisplayAlert, sodass der Nutzer von dieser Exception erfährt. 
+	
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item[+] \textbf{static HandleException(error: Exception): void}\\Die statische Methode HandleException nimmt als Parameter eine Instanz der Klasse Exception. In dieser Methode wird ein DisplayAlert erstellt mit dem Titel der Exception und dessen Inhalt. Dies wird mit einer Referenz auf die MainPage getan.
 	\end{itemize}
 \section{Klassenbeschreibung View}
 
@@ -1068,12 +1079,6 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 			\item [+]\textbf{StepLengthEntry: Entry} 
 			\item [+]\textbf{SampleRatePicker: Picker} Hier kann der Nutzer zwischen wenigen angebotenen Samplingraten wählen. Diese entsprechen denen vom Settings Service zur Verfügung gestellten Werte.
 			\item [+]\textbf{SaveButton: Button}
-		\end{itemize}
-	\subsection{Class BluetoothPopUpPage}%%TODO!!???
-		\paragraph{Klassenbeschreibung:}
-		\paragraph{Attribute}
-		\begin{itemize}
-			\item [+]
 		\end{itemize}
 
 	\subsection{Class PopUpScanningPage}
