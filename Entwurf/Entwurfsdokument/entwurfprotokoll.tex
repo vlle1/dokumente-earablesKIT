@@ -22,7 +22,7 @@
 \usepackage[pdftex]{graphicx}
 \DeclareGraphicsRule{*}{mps}{*}{}
 \fi
-
+\setlength{\parindent}{0pt}
 % specify the path to the images
 
 
@@ -260,9 +260,9 @@ Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
 
 \paragraph{Attribute:}
 \begin{itemize}
-	\item[+] \textbf{M/s\^2\_X: float}\\Gibt an um wie viel Meter pro\ Sekunde\^2 sich die \Gls{Earables} in X Richtung beschleunigt haben.
-	\item[+] \textbf{M/s\^2\_Y: float}\\Gibt an um wie viel Meter pro Sekunde \^2 sich die \Gls{Earables} in Y Richtung beschleunigt haben.
-	\item[+] \textbf{M/s\^2\_Z: float}\\Gibt an um wie viel Meter pro Sekunde \^2 sich die \Gls{Earables} in Z Richtung beschleunigt haben.
+	\item[+] \textbf{M/s$^2$\_X: float}\\Gibt an um wie viel $m/s^2$ sich die \Gls{Earables} in X Richtung beschleunigt haben.
+	\item[+] \textbf{M/s$^2$\_Y: float}\\Gibt an um wie viel $m/s^2$ sich die \Gls{Earables} in Y Richtung beschleunigt haben.
+	\item[+] \textbf{M/s$^2$\_Z: float}\\Gibt an um wie viel $m/s^2$ sich die \Gls{Earables} in Z Richtung beschleunigt haben.
 	\item[+] \textbf{G\_X: float}\\Gibt an um wie viel G sich die \Gls{Earables} in X Richtung beschleunigt haben.
 	\item[+] \textbf{G\_Y: float}\\Gibt an um wie viel G sich die \Gls{Earables} in Y Richtung beschleunigt haben.
 	\item[+] \textbf{G\_Z: float}\\Gibt an um wie viel G sich die \Gls{Earables} in Z Richtung beschleunigt haben.
@@ -312,7 +312,7 @@ Enthält alle relevanten Informationen die benötigt werden, falls neue Daten an
 
 \paragraph{Methoden:}
 \begin{itemize}
-	\item[+] \textbf{<<create>>DataEventArgs(connected: Boolean, deviceName: String): void}\\ Zusätzlicher Konstruktor um die Attribute setzten zu können
+	\item[+] \textbf{<<create>>DataEventArgs(connected: bool, deviceName: String): void}\\ Zusätzlicher Konstruktor um die Attribute setzten zu können
 \end{itemize}
 
 
