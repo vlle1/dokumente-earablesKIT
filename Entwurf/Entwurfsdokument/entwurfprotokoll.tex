@@ -120,13 +120,9 @@ hier kommt ein mal das Klassendiagramm rein mit Verweis auf den Anhang - valle
 \section{Klassenbeschreibung Model}
 \subsection{Bibliothek}
 
-\begin{minipage}[b]{0.3\textwidth}
 	\subsubsection{Interface IEarablesConnection}
 	
-	\end{minipage}
-	\begin{minipage}[c]{0.7\textwidth}
-	\includegraphics[width=1.5\textwidth]{bilder/BibPackageKlassen/IEarablesConnection.png}
-\end{minipage}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/IEarablesConnection.png}
 
 \paragraph{Klassenbeschreibung:}
 Diese Klasse ist das Herz der Bibliothek. Sie ist die Schnittstellen, über die später kommuniziert werden kann. Hierbei handelt es sich um ein Interface um Mocking zu ermöglichen und so das Implementieren und Testen zu vereinfachen. Um eine BLE Verbindung herzustellen benutzt sie das \glqq Bluetooth LE Plugin for Xamarin\grqq{}.
@@ -619,7 +615,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	Das wird gesichert dadurch, dass die Attribute als Properties gespeichert sind, welche beim Setzen (set) stets 'App.Current.Properties[Schlüssel] = value;' benutzen.
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch). Attribut aus dem interface ISettingsService\\
+		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch). Attribut aus dem Interface ISettingsService\\
 		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables} \\ 
 		\item[$-$] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache. Attribut aus dem Interface ISettingsService \\
 		\item[$-$] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers. Konstante aus dem Interface ISettingsService \\
@@ -868,11 +864,17 @@ Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen
     \item[$-$] \textbf{init(): void} \\ Kapselt den asynchronen Aufruf zu \textit{GetMostRecentEntriesAsync} des \textit{IDataBaseConnection} Service.
 \end{itemize} 
 
-\subsection{Class ImportExportViewmodel}
+\begin{minipage}[t]{0.7\textwidth}
 
+	\subsection{Class ImportExportViewmodel}
+
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/ImportExportViewmodel}
+\end{minipage}
 \paragraph{Klassenbeschreibung:}
-Das ImportExportViewModel verarbeitet das Klicken des Nutzers auf die Buttons  der ImportExportPage.
-Die Kommunikation wird dabei mit Commands geregelt (die Klasse erbt von INotifyPropertyChanged).
+Das ImportExportViewmodel verarbeitet das Klicken des Nutzers auf die Buttons  der ImportExportPage.
+Die Kommunikation wird dabei mit Commands geregelt.
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{Export: ICommand}
@@ -887,8 +889,13 @@ Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen
     \item[$-$] \textbf{deleteClicked(): void}\\zeigt einen Warning-Dialog an, ob man wirklich alle Vorgangsdaten löschen will. Daraufhin wird bei Bestätigung in IDatabaseConnection deleteTrainingData aufgerufen.
 \end{itemize} 
 
-\subsection{Class SettingsViewModel}
+\begin{minipage}[b]{0.7\textwidth}
 
+	\subsection{Class SettingsViewModel}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/SettingsViewModel.png}
+\end{minipage}
 \paragraph{Klassenbeschreibung:}
 Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von INotifyPropertyChanged und verwendet für das Speichern der Einstellungen einen Command. Außerdem holt sie sich vom SettingsService alle aktuellen Einstellungen.
 \paragraph{Attribute:}
@@ -903,6 +910,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 \paragraph{Methoden:}
 \begin{itemize}
     \item[+] \textbf{<<create>> SettingsViewModel(): void}\\ Im Konstruktor holt sich die Klasse vom ISettingsService den User, die Sprache und die Samplingrate und speichert die Entsprechenden Werte in den eigenen Properties. Die Werte von Attributen, die über kein Binding verfügen, müssen hier manuell ins View übertragen werden.
+    \item[\#] \textbf{OnPropertyChanged(): void} Die Methode wird von der Schnittstelle INotifyPropertyChanged geerbt. Diese wird benutzt um die View zu aktualisieren und ihr um Bescheid zu geben, wenn sich eine Eigenschaft aus dem ViewModel verändert. 
     \item[$-$] \textbf{SaveClicked(): void}\\ wenn diese Methode aufgerufen wird, werden die aktuellen Properties wieder im ISettingsService gespeichert, nachdem alle Werte von Attributen, die über kein Binding verfügen, vom View geholt und aktualisiert werden. Außerdem wird die Schrittlänge ans Erweiterungsmodul und die Samplingrate an die Bibliothek weitergegeben. Bei Auftretenden Exceptions (kein Gerät verbunden) wird eine Fehlermeldung als Popup angezeigt. Liefert needsRestart wahr, wird außerdem ein Hinweis angezeigt, dass die App neu gestartet werden muss, um alle Änderungen zu übernehmen. 
 \end{itemize} 
 
@@ -930,16 +938,30 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 		\item[+] \textbf{static ShowPopUp(): void}\\Statische Methode, welche die View PopUpScanningPage anzeigt. Diese benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Anzeigen geschieht mit der Methode Popupnavigation.Instance.PushAsync(new PopUpScanningPage()). Dabei wird ein neue Instanz der PopUpScanningPage erstellt. Die Methode ist statisch, da die anderen ViewModels bei einem Vorgangstart anzeigen können muss, falls noch keine Verbindung zu den \gls{Earables} besteht.
 		\item[+] \textbf{static HidePopUp(): void}\\Statische Methode, welche dieView PopUpScanningPage verstecken lässt. Diese Methode benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Verstecken der View geschieht mit der Methode Popupnavigation.Instance.popAsync(). 
 	\end{itemize}
-\subsection{Class HomeMenuItem}
+\begin{minipage}[b]{0.7\textwidth}
+
+	\subsection{Class HomeMenuItem}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/HomeMenuItem.png}
+\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse spezifiziert einen Eintrag des Menüs (siehe MenuPage). 
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item [+] \textbf{Id: MenuItemType}\\ Der Typ des Menüeintrags.
+		\item [+] \textbf{Id: MenuItemType}\\ Der Typ des Menüeintrags (in UML als Assozation dargestellt).
 		\item [+] \textbf{Title: string}\\ Der angezeigte Text des Menüeintrags.
 	\end{itemize}
-\subsection{Enumeration MenuItemType}
-	Dieses Enum spezifiziert alle möglichen Typen von Menüeinträgen der MenuPage. Entsprechend gibt es für jede vom Menü aus direkt navigierbare Page einen Wert dieses Enums.
+\begin{minipage}[b]{0.7\textwidth}
+
+	\subsection{Enumeration MenuItemType}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/MenuItemType.png}
+	\vspace{0.3cm}
+\end{minipage}
+
+	Dieses Enum spezifiziert alle möglichen Typen von Menüeinträgen der MenuPage. Entsprechend gibt es für jede vom Menü aus direkt navigierbare Page einen Wert dieses Enums.\\
 	\paragraph{Werte:}
 	\begin{itemize}
         \item CountMode,
@@ -1055,7 +1077,15 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 			\item[+] \textbf{BindingContext: DataOverviewViewModel} 
 		\end{itemize}
 
+	
+\begin{minipage}[b]{0.7\textwidth}
+
 	\subsection{Class ImportExportPage}
+
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewKlassen/ImportExportPage.png}
+\end{minipage}
 		\paragraph{Klassenbeschreibung:}
 		Die Klasse ImportExportPage beinhaltet eine Seite mit drei Buttons (siehe Abbildung 11 (Seite 13) im Pflichtenheft).
 		Das Klicken auf diese Buttons benachrichtigt das ImportExportViewmodel (via Command).
@@ -1067,7 +1097,13 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 			\item [+]\textbf{ImportData: Button} %%die anderen haben es auch public gemacht - einheitlich. ist das sinnvoll oder kann das private? -valle
 		\end{itemize}
 
-	\subsection{Class SettingsPage}
+	\begin{minipage}[b]{0.7\textwidth}
+
+		\subsection{Class SettingsPage}
+	\end{minipage}
+	\begin{minipage}[c]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{bilder/ViewKlassen/SettingsPage.png}
+	\end{minipage}
 		\paragraph{Klassenbeschreibung:}
 		Die Einstellungsseite ermöglicht das Verändern und Einsehen von Username, Sprache, Schrittlänge und IMU-Samplingrate (Siehe Abb. 12 im Pflichtenheft). Die Daten werden per Data-Binding mit der Klasse SettingsViewModel synchronisiert.
 		\paragraph{Attribute}
@@ -1099,27 +1135,40 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\item[+] \textbf{<<create>> PopUpScanningPage}\\Konstruktor der Klasse PopUpScanningPage. In diesem wird eine Instanz des ViewModels und BindingContext der Klasse ScanningpopUpViewModel erstellt.
 		\end{itemize}
 
-	\subsection{Class MainPage}
+		\begin{minipage}[b]{0.7\textwidth}
+
+			\subsection{Class MainPage}
+		\end{minipage}
+		\begin{minipage}[c]{0.3\textwidth}
+			\includegraphics[width=\textwidth]{bilder/ViewKlassen/MainPage.png}
+		\end{minipage}
 		\paragraph{Klassenbeschreibung:}
 		Die MainPage erbt von MasterDetailPage und stellt die grundlegende angezeigte Struktur zur Verfügung. Das ist im Wesentlichen der Menü-Button (vlg. Preset "MasterDetailPage" in Visual Studio 2019).\\
 		Bei Klicken auf das Menü-Icon bzw. swipen vom Rand aus öffnet sich automatisch (vererbt von MasterDetailPage) die MenuPage.
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [] \textbf{MenuPages: Dictionary<int, NavigationPage>}\\ Dieses Dictionary wird verwendet, um mit dem Klicken auf den Namen einer bestimmten Page die Page selbst zu assoziieren (bzw. die ihr entsprechende NavigationPage).
-			\item [] \textbf{(xaml) NavigationPage.Icon} Das Menü-Item, das sich für den Nutzer links oben im Eck befindet.
+			\item [-] \textbf{MenuPages: Dictionary<int, NavigationPage>}\\ Dieses Dictionary wird verwendet, um mit dem Klicken auf den Namen einer bestimmten Page die Page selbst zu assoziieren (bzw. die ihr entsprechende NavigationPage).
+			\item [-] \textbf{icon: navigationPage.Icon} Das Menü-Item, das sich für den Nutzer links oben im Eck befindet.
 		\end{itemize}
 		\paragraph{Methoden}
 		\begin{itemize}
 			\item [+] \textbf{<<create>> MainPage: void}\\ Hier wird die Seite initialisiert. Dazu wird der Laufmodus als aktuelle DetailPage festgelegt.
 			\item [+] \textbf{NavigateFromMenu(int id): Task}\\ Diese Methode setzt die zur angegebenen ID entsprechende Page als neue DetailPage fest.
 		\end{itemize}
-	\subsection{Class MenuPage}
+	\begin{minipage}[b]{0.7\textwidth}
+
+		\subsection{Class MenuPage}
+	\end{minipage}
+	\begin{minipage}[c]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{bilder/ViewKlassen/MenuPage.png}
+	\end{minipage}
 		\paragraph{Klassenbeschreibung:}
-		Die MenuPage ist das Menü, aus dem der Nutzer nach Klicken auf den Menü-Button eine Seite auswählen kann.
+		Die MenuPage ist das Menü, aus dem der Nutzer nach Klicken des Menü-Buttons eine Seite auswählen kann.
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [] \textbf{menuItems: List<HomeMenuItem>} Diese Liste enthält alle von der MenuPage aus direkt ansteuerbaren Seiten.
-			\item [] \textbf{RootPage: MainPage} Diese Property verfügt nur über einen Getter, der die aktuelle MainPage zurückgibt.
+			\item [+] \textbf{RootPage: MainPage} Diese Property verfügt nur über einen Getter, der die aktuelle MainPage zurückgibt.
+			\item [-] \textbf{menuItems: List<HomeMenuItem>} Diese Liste enthält alle von der MenuPage aus direkt ansteuerbaren Seiten.
+			\item [-] \textbf{menu: ListView} Das menu ist das menuItems entsprechende angezeigte Element auf der Seite.		
 		\end{itemize}
 		\paragraph{Methoden}
 		\begin{itemize}
@@ -1129,38 +1178,91 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 \newpage
 \section{Interaktionsdiagramme}
 \subsection{Aktivitätsdiagramm Lebenszyklus der App}
-\includegraphics[width=1.1\textwidth]{./Diagramme/Appablauf.png}
+
+\includegraphics[width=1.1\textwidth]{./Diagramme/Appablauf.png}\\
+Das Aktivitätsdiagramm verdeutlicht den Appablauf. Dabei ist dieses Diagramm in zwei Partitionen geteilt. Die Partition 'Erweiterungsmodul (EM)', wo die Aktivitätsanalyse mit Erkennungsalgorithmen stattfindet, und die  Partition 'App', was die View der App ist.\\
+Diese Partitionen arbeiten parallel und starten gleichzeitig mit dem Starten der App. Der Ruhezustand ist, dass die Aktivitätsanalyse nicht aktiv ist und eine Aktiviätspage angezeigt wird. (Standardmäßig der Laufmodus).\\
+Wenn nun der Startbutton betätigt wurde, wird geschaut, ob eine Verbindung zu den \Gls{Earables} besteht. Falls nein, wird das ScanningPop-up angezeigt, welches einen dazu auffordert, sich zu verbinden.
+Beim erfolgreichen Verbinden oder dem Wegklicken des Pop-ups gelangt man in den Ruhemodus.\\
+Falls eine Verbindung besteht, beginnt die Aktivität mit der aktiven Aktivitätspage. Im EM registriert sich die App bei dem richtigen Eventhandler, was zur Folge hat, dass die Aktivitätsanalyse startet.\\
+Wenn der Vorgang in der App beendet wird, so wird das Vorgangsresultat per Displayalert angezeigt. Beim Wegklicken dieses gelangt man zur passiven Aktivitätspage. Es wird sich wieder bei dem Eventhandler im EM abgemeldet.\\
+Falls kein Event mehr bei dem EventHandler registriert ist, wird die Analyse gestoppt und man gelangt wieder in den Ruhezustand.\\
+\newpage
 \subsection{Sequenzdiagramme}
 
+\subsubsection{Start der App}
 
-%später:
-%brauchen wir den unterpunkt "abläufe in der app" alle sqd die wir haben beziehen sich doch auch auf die App
-\subsubsection{Abläufe in der App}
-
-\paragraph{Start der App}
-
-\includegraphics[width=1.1\textwidth]{./Diagramme/AppstartSeqDia.png}
-
-
-\paragraph{Bluetoothverbindung mit den Earables herstellen:}
-Das folgende Sequenzdiagramm verdeutlicht wie eine Bluetoothverbindung hergestellt werden kann. Es wir davon ausgegangen, dass die App bereits gestartet wurde und noch keine Bluetoothverbindung zu den Earables besteht. Außerdem zeigt die App geraden die Seite des Laufmodus an und das PopUpViemwmodel kennt den Service der EarablesConnection bereits.\\
-
-\includegraphics[width=1.1\textwidth]{./Diagramme/Verbindungsaufbausequenzdiagramm.png}
-
-\paragraph{Navigationsmenu Page auswählen}
-
-\includegraphics[width=1.1\textwidth]{./Diagramme/NavigationsMenuSeqDia.png}
+\includegraphics[width=1.1\textwidth]{./Diagramme/AppstartSeqDia.png}\\
+Das Sequenzdiagramm verdeutlicht den Ablauf bei dem Start der App. Zunächst wird beim Start die Klasse 'App' erstellt. 
+Im Konstruktor wird die Methode InitializeComponents() aufgerufen, welche die xaml-page aufruft und die dort festgelegten Attribute initialisiert.\\
+Als nächstes muss die Sprache angepasst werden. Das passiert über den Settingsservice.
+Es wird sich zunächst mit der Methode CurrentUICulture() die aktuelle Sprache geholt. dann wird auf der statischen Klasse ServiceManager versucht eine Instanz des SettignsService zu bekommen. Dabei muss zunächst der ServiceProvider angesprochen werden. Dies wird per Propertyaufruf get() gemacht.\\
+Der ServiceManager hält eine Instanz des ServiceProvider, welcher alle Services gelistet hat. Dieser wird als Singleton gespeichert. Es muss daher überprüft werden, ob schon eine Instanz von diesem erstellt wurde. Dies ist nicht der Fall, da die App den ersten Aufruf beim ServiceManager macht.\\
+Um eine Instanz zu erstellen ruft der ServiceManager bei sich die Methode ServiceRegistration() auf. In dieser wird eine ServiceCollection angelegt, bei der die Services registriert werden. Dies passiert per AddSingleton<IT,T>(). \\
+Diese ServiceCollection wird zurückgeliefert und auf dieser wird BuildServiceProvider() aufgerufen, was die ServiceProviderinstanz erstellt.
+Diese wird an die App zurückgeliefert.\\
+Auf dieser Instanz wird nun GetService<ISettingsService>() aufgerufen, was die konkrete Instanz SettingsService zurückliefert.
+Auf dem SettingsService wird die Methode GetActiveLanguage() aufgerufen, was die Sprache zurückliefert, welche bei der letzten Nutzung eingestellt wurde. 
+Diese zurückgelieferte CultureInfo wird auf die aktuelle Sprache gesetzt.\\
+Zuletzt wird im Konstruktor eine Mainpage erstellt. Diese ist für die Initialisierung der Oberfläche zuständig.\\
 
 
-\paragraph{Zählvorgang}
-\includegraphics[width=1.1\textwidth]{./Diagramme/CountModeSeqDia.png}
+\newpage
+\subsubsection{Bluetoothverbindung mit den Earables herstellen:}
+
+\includegraphics[width=1.1\textwidth]{./Diagramme/Verbindungsaufbausequenzdiagramm.png}\\
+Das Sequenzdiagramm verdeutlicht wie eine Bluetoothverbindung hergestellt werden kann. Es wir davon ausgegangen, dass die App bereits gestartet wurde und noch keine Bluetoothverbindung zu den Earables besteht. Außerdem zeigt die App geraden die Seite des Laufmodus an und das PopUpViemwmodel kennt den Service der EarablesConnection bereits.\\
+Beim Start des Vorgangs über den Start Button, fragt das StepModeViewModel zunächst, ob die Verbindung zu den \gls{Earables} besteht. Dieses schlägt fehl, da noch keine Verbindung besteht.
+Jetzt wird die statische Methode ShowPopUp() der Klasse ScanningPopUpViewModel aufgerufen. Diese lässt das PopUp vom Typ PopUpScanningPage erscheinen.\\
+Wenn auf diesem der Nutzer den ScanButton betätigt, wird das Command ScanDevicesCommand ausgeführt. In diesem wird die Methode ScanDevices() aufgerufen. Diese ruft bei der EarbalesConnection, welche sie sich als Attribut gespeichert hat, die Methode StartScanning() auf. 
+Diese schaut, mit welchen Geräten sich verbunden werden kann und liefert eine DeviceList zurück. Das ist eine Liste mit Instanzen vom Type Device.
+Die ListViwe im PopUp wird aktualisiert.\\
+Wenn der Nutzer ein Device ausgewählt hat und auf den Connect Button drückt, wird das Command ConnectDeviceCommand im ViewModel ausgeführt. Dieses ruft die Methode ConnectDevice() auf. In dieser Methode wird die EarablesConnection angesprochen, welche versuchen soll sich mit dem Gerät zu verbinden.\\
+Bei einer erfolgreichen Verbindung erhält das ViewModel true zurück. Zudem wird die Eventmethode OnDeviceConnectionStateChanged() von der EarablesConnection aufgerufen. Diese signalisiert, das die Verbindung hergestellt ist. Das PopUp wird darauf mit der Methode HidePopUp() versteckt.
+
+\newpage
+\subsubsection{Navigationsmenu Page auswählen}
+
+\includegraphics[width=1.1\textwidth]{./Diagramme/NavigationsMenuSeqDia.png}\\
+Das Sequenzdiagramm verdeutlicht den Vorgang, wenn der Nutzer die Seite im Menu wechselt.
+Zunächst befindet sich die App im Laufmodus. Es wird nun der Menu-Button betätigt um auf eine andere Seite zu kommen. Die MenuPage ruft bei sich die Methode OnBackButtonPressed() auf, um die Seite zu wechseln. 
+Die Nutzer klickt dabei auf den Musikmodus. Jede MenuSeite hat ihre eigene ID. Der Musikmodus hat die 5 als ID. Diese ID wird der MainPage beim Aufruf NavigatFromMenu(5) übergeben. Somit weiß die MainPage, welche Seite sie erstellen und anzeigen soll.
+Die Mainpage erstellt im nächsten Schritt eine MusicModePage, welche angezeigt werden soll. Um diese anzuzueigen wird eine NavigationPage erstellt, welche von der MenuPage verwendet wird. Diese bekommt in ihrem Konstruktor die gewünschte Page übergeben. In dem Beispiel die Instanz der MusicModePage. \\
+Die MainPage zeigt nun die NavigationPage an, also den gewünschten Musikmodus.
 
 
-\paragraph{Export Trainingsdaten:}
-\includegraphics[width=1.1\textwidth]{./Diagramme/TrainingsDatenExport_Sequenz.png}
+\subsubsection{Zählvorgang}
 
-\paragraph{Änderung der Samplerate:}
-\includegraphics[width=1.1\textwidth]{./Diagramme/SetSampleRateSeqDia.png}
+\includegraphics[width=1.1\textwidth]{./Diagramme/CountModeSeqDia.png}\\
+Das Sequenzdiagramm zeigt den Ablauf des Zählmodus. Dabei wird auf der CountModePage zunächst die Art der Aktivität ausgesucht. In dem Beispiel soll der Zählvorgang die Liegestützen zählen.
+Die CountModePage setzt im zugehörigen ViewModel CountModelViewModel die SelectedActivity auf "PushUp". Dies wird vom ViewModel registriert und ein OnPropertyChanged() event aufgerufen, was die View wieder aktualisiert.\\
+Wenn der Nutzer nun die Aktivität startet wird das Command StartActivity im ViewModel ausgeführt.\\Dort wird zunächst geschaut, ob eine Verbindung zu den \gls{Earables} besteht. In dem Beispiel besteht schon eine Verbindung.\\
+Als nächstes wird sich bei dem EventHandler ActivityDone der gewünschten Aktivität registriert. Dafür muss die Klasse SitUpActivityThreshold angesprochen werden, welche sich das ViewModel als Attribut zwischengespeichert hat.\\
+Nach dem Erfolgreichen registrieren wird zu der aktiven Zählmodusseite gewechselt und der Timer wird gestartet.\\
+Wenn jetzt die Aktivitätsanalyse SitUpActivityThreshold eine Liegestütze erkennt, so wird die registrierte Eventmethode OnAcivityDone() aufgerufen. 
+Diese aktualisiert bei jedem Aufruf die View, da eine Liegestütze gemacht wurde.\\
+Wenn der Vorgang nun beendet wird, meldet sich das ViewModel bei dem EventHandler wieder ab. Zuletzt wird das Vorgangsresultat angezeigt, welches die Anzahl der Liegestützen anzeigt.\\ 
+
+
+\subsubsection{Export Trainingsdaten:}
+\includegraphics[width=1.1\textwidth]{./Diagramme/TrainingsDatenExport_Sequenz.png}\\
+
+Das Sequenzdiagramm zeigt den Vorgang vom Exportieren der Trainingsdaten. 
+Dabei wird zunächst das Command Export im ViewModel ImportExportViewModel aufgerufen. In diesem wird zunächst ein FilePicker geöffnet, sodass der Nutzer einen Pfad angeben kann, wohin gespeichert werden soll. 
+Die ausgewählte Datei muss ein Ordner sein. \\
+Daraufhin wird sich der Datenbankservice vom ServiceProvider geholt. Das passiert über die Methode GetService<IDataBaseConnection>(). Diese liefert eine konkrete Instanz von der Schnittstelle IDataBaseConnection zurück.
+Als nächstes wird sich das aktuelle Datum geholt und dem Pfad hinzugefügt. Dies passiert mit dem Aufruf Now() der Klasse DateTime.\\
+Zum Schluss wird auf dem Datenbankservice die Methode exportTrainingsData() mit dem Pfad als Argument aufgerufen. In dieser Methode werden sich alle Einträge aus der Datenbank geholt und in einer \gls{CSV}-Datei an dem gewünschten Pfad gespeichert.\\
+
+\subsubsection{Änderung der Samplerate:}
+
+\includegraphics[width=1.1\textwidth]{./Diagramme/SetSampleRateSeqDia.png}\\
+Das Sequenzdiagramm zeigt den Vorgang vom Ändern der Samplerate.
+Zunächst befindet sich die App auf der Settingspage und der Nutzer klickt auf den Button 'Speichern'. Jetzt wird im ViewModel das Command ClickSave ausgeführt. Es wird sich die gespeicherte Instanz vom Typ ISettingsService vom Servicemanager per GetService<ISettingsService>() geholt.\\
+Dann wird auf der Instanz die Property SamplingRate gesetzt. Es wird sich aus dem View die ausgewählten Samplingrate geholt und als Parameter übergeben. Dabei handelt es sich um ein Enumeintrag der Enumeration SampleRate.\\
+In der Setzten Methode wird sich zunächst der EarablesConnection Service vom ServiceManager geholt. 
+Auf diesem wird die Methode setSamplingRate() aufgerufen mit dem passenden Integer als Argument.
+In dieser wird die SamplingRate nun auf den Kopfhörern gesetzt.\\
 
 \section{Entwurfdaten}
 \subsection{Ressourcenverzeichnis}
