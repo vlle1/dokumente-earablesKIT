@@ -1130,38 +1130,85 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 \newpage
 \section{Interaktionsdiagramme}
 \subsection{Aktivitätsdiagramm Lebenszyklus der App}
-\includegraphics[width=1.1\textwidth]{./Diagramme/Appablauf.png}
+
+\includegraphics[width=1.1\textwidth]{./Diagramme/Appablauf.png}\\
+Das Aktivitätsdiagramm verdeutlicht den Appablauf. Dabei ist dieses Diagramm in zwei Partitionen geteilt. Die Partition 'Erweiterungsmodul (EM)', wo die Aktivitätsanalyse mit Erkennungsalgorithmen stattfindet, und die  Partition 'App', was die View der App ist.\\
+Diese Partitionen arbeiten parallel und starten gleichzeitig mit dem Starten der App. Der Ruhezustand ist, dass die Aktivitätsanalyse nicht aktiv ist und eine Aktiviätspage angezeigt wird. (Standardmäßig der Laufmodus).\\
+Wenn nun der Startbutton betätigt wurde, wird geschaut, ob eine Verbindung zu den \Gls{Earables} besteht. Falls nein, wird das ScanningPop-up angezeigt, welches einen dazu auffordert, sich zu verbinden.
+Beim erfolgreichen Verbinden oder dem Wegklicken des Pop-ups gelangt man in den Ruhemodus.\\
+Falls eine Verbindung besteht, beginnt die Aktivität mit der aktiven Aktivitätspage. Im EM registriert sich die App bei dem richtigen Eventhandler, was zur Folge hat, dass die Aktivitätsanalyse startet.\\
+Wenn der Vorgang in der App beendet wird, so wird das Vorgangsresultat per Displayalert angezeigt. Beim Wegklicken dieses gelangt man zur passiven Aktivitätspage. Es wird sich wieder bei dem Eventhandler im EM abgemeldet.\\
+Falls kein Event mehr bei dem EventHandler registriert ist, wird die Analyse gestoppt und man gelangt wieder in den Ruhezustand.\\
+\newpage
 \subsection{Sequenzdiagramme}
 
+\subsubsection{Start der App}
 
-%später:
-%brauchen wir den unterpunkt "abläufe in der app" alle sqd die wir haben beziehen sich doch auch auf die App
-\subsubsection{Abläufe in der App}
-
-\paragraph{Start der App}
-
-\includegraphics[width=1.1\textwidth]{./Diagramme/AppstartSeqDia.png}
-
-
-\paragraph{Bluetoothverbindung mit den Earables herstellen:}
-Das folgende Sequenzdiagramm verdeutlicht wie eine Bluetoothverbindung hergestellt werden kann. Es wir davon ausgegangen, dass die App bereits gestartet wurde und noch keine Bluetoothverbindung zu den Earables besteht. Außerdem zeigt die App geraden die Seite des Laufmodus an und das PopUpViemwmodel kennt den Service der EarablesConnection bereits.\\
-
-\includegraphics[width=1.1\textwidth]{./Diagramme/Verbindungsaufbausequenzdiagramm.png}
-
-\paragraph{Navigationsmenu Page auswählen}
-
-\includegraphics[width=1.1\textwidth]{./Diagramme/NavigationsMenuSeqDia.png}
+\includegraphics[width=1.1\textwidth]{./Diagramme/AppstartSeqDia.png}\\
+Das Sequenzdiagramm verdeutlicht den Ablauf bei dem Start der App. Zunächst wird beim Start die Klasse 'App' erstellt. 
+Im Konstruktor wird die Methode InitializeComponents() aufgerufen, welche die xaml-page aufruft und die dort festgelegten Attribute initialisiert.\\
+Als nächstes muss die Sprache angepasst werden. Das passiert über den Settingsservice.
+Es wird sich zunächst mit der Methode CurrentUICulture() die aktuelle Sprache geholt. dann wird auf der statischen Klasse ServiceManager versucht eine Instanz des SettignsService zu bekommen. Dabei muss zunächst der ServiceProvider angesprochen werden. Dies wird per Propertyaufruf get() gemacht.\\
+Der ServiceManager hält eine Instanz des ServiceProvider, welcher alle Services gelistet hat. Dieser wird als Singleton gespeichert. Es muss daher überprüft werden, ob schon eine Instanz von diesem erstellt wurde. Dies ist nicht der Fall, da die App den ersten Aufruf beim ServiceManager macht.\\
+Um eine Instanz zu erstellen ruft der ServiceManager bei sich die Methode ServiceRegistration() auf. In dieser wird eine ServiceCollection angelegt, bei der die Services registriert werden. Dies passiert per AddSingleton<IT,T>(). \\
+Diese ServiceCollection wird zurückgeliefert und auf dieser wird BuildServiceProvider() aufgerufen, was die ServiceProviderinstanz erstellt.
+Diese wird an die App zurückgeliefert.\\
+Auf dieser Instanz wird nun GetService<ISettingsService>() aufgerufen, was die konkrete Instanz SettingsService zurückliefert.
+Auf dem SettingsService wird die Methode GetActiveLanguage() aufgerufen, was die Sprache zurückliefert, welche bei der letzten Nutzung eingestellt wurde. 
+Diese zurückgelieferte CultureInfo wird auf die aktuelle Sprache gesetzt.\\
+Zuletzt wird im Konstruktor eine Mainpage erstellt. Diese ist für die Initialisierung der Oberfläche zuständig.\\
 
 
-\paragraph{Zählvorgang}
-\includegraphics[width=1.1\textwidth]{./Diagramme/CountModeSeqDia.png}
+\newpage
+\subsubsection{Bluetoothverbindung mit den Earables herstellen:}
+
+\includegraphics[width=1.1\textwidth]{./Diagramme/Verbindungsaufbausequenzdiagramm.png}\\
+Das Sequenzdiagramm verdeutlicht wie eine Bluetoothverbindung hergestellt werden kann. Es wir davon ausgegangen, dass die App bereits gestartet wurde und noch keine Bluetoothverbindung zu den Earables besteht. Außerdem zeigt die App geraden die Seite des Laufmodus an und das PopUpViemwmodel kennt den Service der EarablesConnection bereits.\\
 
 
-\paragraph{Export Trainingsdaten:}
-\includegraphics[width=1.1\textwidth]{./Diagramme/TrainingsDatenExport_Sequenz.png}
+\newpage
+\subsubsection{Navigationsmenu Page auswählen}
 
-\paragraph{Änderung der Samplerate:}
-\includegraphics[width=1.1\textwidth]{./Diagramme/SetSampleRateSeqDia.png}
+\includegraphics[width=1.1\textwidth]{./Diagramme/NavigationsMenuSeqDia.png}\\
+Das Sequenzdiagramm verdeutlicht den Vorgang, wenn der Nutzer die Seite im Menu wechselt.
+Zunächst befindet sich die App im Laufmodus. Es wird nun der Menu-Button betätigt um auf eine andere Seite zu kommen. Die MenuPage ruft bei sich die Methode OnBackButtonPressed() auf, um die Seite zu wechseln. 
+Die Nutzer klickt dabei auf den Musikmodus. Jede MenuSeite hat ihre eigene ID. Der Musikmodus hat die 5 als ID. Diese ID wird der MainPage beim Aufruf NavigatFromMenu(5) übergeben. Somit weiß die MainPage, welche Seite sie erstellen und anzeigen soll.
+Die Mainpage erstellt im nächsten Schritt eine MusicModePage, welche angezeigt werden soll. Um diese anzuzueigen wird eine NavigationPage erstellt, welche von der MenuPage verwendet wird. Diese bekommt in ihrem Konstruktor die gewünschte Page übergeben. In dem Beispiel die Instanz der MusicModePage. \\
+Die MainPage zeigt nun die NavigationPage an, also den gewünschten Musikmodus.
+
+
+\subsubsection{Zählvorgang}
+
+\includegraphics[width=1.1\textwidth]{./Diagramme/CountModeSeqDia.png}\\
+Das Sequenzdiagramm zeigt den Ablauf des Zählmodus. Dabei wird auf der CountModePage zunächst die Art der Aktivität ausgesucht. In dem Beispiel soll der Zählvorgang die Liegestützen zählen.
+Die CountModePage setzt im zugehörigen ViewModel CountModelViewModel die SelectedActivity auf "PushUp". Dies wird vom ViewModel registriert und ein OnPropertyChanged() event aufgerufen, was die View wieder aktualisiert.\\
+Wenn der Nutzer nun die Aktivität startet wird das Command StartActivity im ViewModel ausgeführt.\\Dort wird zunächst geschaut, ob eine Verbindung zu den \gls{Earables} besteht. In dem Beispiel besteht schon eine Verbindung.\\
+Als nächstes wird sich bei dem EventHandler ActivityDone der gewünschten Aktivität registriert. Dafür muss die Klasse SitUpActivityThreshold angesprochen werden, welche sich das ViewModel als Attribut zwischengespeichert hat.\\
+Nach dem Erfolgreichen registrieren wird zu der aktiven Zählmodusseite gewechselt und der Timer wird gestartet.\\
+Wenn jetzt die Aktivitätsanalyse SitUpActivityThreshold eine Liegestütze erkennt, so wird die registrierte Eventmethode OnAcivityDone() aufgerufen. 
+Diese aktualisiert bei jedem Aufruf die View, da eine Liegestütze gemacht wurde.\\
+Wenn der Vorgang nun beendet wird, meldet sich das ViewModel bei dem EventHandler wieder ab. Zuletzt wird das Vorgangsresultat angezeigt, welches die Anzahl der Liegestützen anzeigt.\\ 
+
+
+\subsubsection{Export Trainingsdaten:}
+\includegraphics[width=1.1\textwidth]{./Diagramme/TrainingsDatenExport_Sequenz.png}\\
+
+Das Sequenzdiagramm zeigt den Vorgang vom Exportieren der Trainingsdaten. 
+Dabei wird zunächst das Command Export im ViewModel ImportExportViewModel aufgerufen. In diesem wird zunächst ein FilePicker geöffnet, sodass der Nutzer einen Pfad angeben kann, wohin gespeichert werden soll. 
+Die ausgewählte Datei muss ein Ordner sein. \\
+Daraufhin wird sich der Datenbankservice vom ServiceProvider geholt. Das passiert über die Methode GetService<IDataBaseConnection>(). Diese liefert eine konkrete Instanz von der Schnittstelle IDataBaseConnection zurück.
+Als nächstes wird sich das aktuelle Datum geholt und dem Pfad hinzugefügt. Dies passiert mit dem Aufruf Now() der Klasse DateTime.\\
+Zum Schluss wird auf dem Datenbankservice die Methode exportTrainingsData() mit dem Pfad als Argument aufgerufen. In dieser Methode werden sich alle Einträge aus der Datenbank geholt und in einer \gls{CSV}-Datei an dem gewünschten Pfad gespeichert.\\
+
+\subsubsection{Änderung der Samplerate:}
+
+\includegraphics[width=1.1\textwidth]{./Diagramme/SetSampleRateSeqDia.png}\\
+Das Sequenzdiagramm zeigt den Vorgang vom Ändern der Samplerate.
+Zunächst befindet sich die App auf der Settingspage und der Nutzer klickt auf den Button 'Speichern'. Jetzt wird im ViewModel das Command ClickSave ausgeführt. Es wird sich die gespeicherte Instanz vom Typ ISettingsService vom Servicemanager per GetService<ISettingsService>() geholt.\\
+Dann wird auf der Instanz die Property SamplingRate gesetzt. Es wird sich aus dem View die ausgewählten Samplingrate geholt und als Parameter übergeben. Dabei handelt es sich um ein Enumeintrag der Enumeration SampleRate.\\
+In der Setzten Methode wird sich zunächst der EarablesConnection Service vom ServiceManager geholt. 
+Auf diesem wird die Methode setSamplingRate() aufgerufen mit dem passenden Integer als Argument.
+In dieser wird die SamplingRate nun auf den Kopfhörern gesetzt.\\
 
 \section{Entwurfdaten}
 \subsection{Ressourcenverzeichnis}
