@@ -169,19 +169,17 @@ Diese Klasse ist das Herz der Bibliothek. Sie ist die Schnittstelle, über die s
 	
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/EarablesConnection.png}
+	\includegraphics[width=0.6\textwidth]{bilder/BibPackageKlassen/EarablesConnection.png}
 \end{minipage}
 
 \paragraph{Klassenbeschreibung:}
 Die Klasse EarablesConnection implementiert das IEarablesConnection Interface und ist die konkrete Klasse, die sich um die BLE-Verbindung kümmert.\\
 
-\begin{minipage}[b]{0.5\textwidth}
+
 	\subsubsection{Static Class Constants}
 	
-	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=1.4\textwidth]{bilder/BibPackageKlassen/Constants.png}
-\end{minipage}
+	\includegraphics[width=0.5\textwidth]{bilder/BibPackageKlassen/Constants.png}
+
 
 \paragraph{Klassenbeschreibung:}
 Die Constants Klasse enthält alle Konstanten, die benötigt werden, um die entsprechenden Service und Charakteristiken aus den \Gls{Earables} zu lesen. Sie ist als static gekennzeichnet, da sie nur Konstanten bereitstellt und sonst keine weitere Funktionalität beinhaltet.
@@ -200,7 +198,7 @@ Die Constants Klasse enthält alle Konstanten, die benötigt werden, um die ents
 	\subsubsection{Enumeration LPF\_Gyroscope}
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/LPF_Gyrosope.png}
+	\includegraphics[width=0.6\textwidth]{bilder/BibPackageKlassen/LPF_Gyrosope.png}
 \end{minipage}
 
 \paragraph{Klassenbeschreibung:}
@@ -225,7 +223,7 @@ Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Gyroscope
 	
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/LPF_Accelerometer.png}
+	\includegraphics[width=0.6\textwidth]{bilder/BibPackageKlassen/LPF_Accelerometer.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Accelerometer annehmen kann.
@@ -245,7 +243,7 @@ Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Accelerom
 \begin{minipage}[b]{0.5\textwidth}
 	\subsubsection{Class ConfigContainer}
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
+	\begin{minipage}[c]{0.6\textwidth}
 	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/ConfigContainer.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
@@ -258,12 +256,11 @@ Diese Klasse beinhaltet alle Einstellungsmöglichkeiten für die \Gls{Earables}.
 	\item[+] \textbf{AccelerometerLPF: LPF\_Accelerometer}\\Dieses Attribut enthält den aktuell eingestellten LPF für den Accelerometer.
 \end{itemize}
 
-\begin{minipage}[b]{0.5\textwidth}
+
 	\subsubsection{Static Class IMUDataExtractor}
-	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/IMUDataExtractor.png}
-\end{minipage}
+
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/IMUDataExtractor.png}
+
 \paragraph{Klassenbeschreibung:}
 Diese Klasse übernimmt das Umwandeln des Bit strings in vernünftige Werte und Einheiten.
 Die Klasse wurde erstellt um dem IEarablesConnection Interface Arbeit abzunehmen und Logik zu entkoppeln, sodass sich das IEarablesConnection
@@ -298,7 +295,7 @@ Diese Klasse besitzt alle ausgewerteten IMU Informationen, die in einem Datensat
 	
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/Gyroscope.png}
+	\includegraphics[width=0.6\textwidth]{bilder/BibPackageKlassen/Gyroscope.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Diese Klasse besitzt alle ausgewerteten Gyroskopdaten.
@@ -315,7 +312,7 @@ Diese Klasse besitzt alle ausgewerteten Gyroskopdaten.
 	
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/Accelerometer.png}
+	\includegraphics[width=0.6\textwidth]{bilder/BibPackageKlassen/Accelerometer.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
@@ -330,13 +327,11 @@ Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
 	\item[+] \textbf{G\_Z: float}\\Gibt an um wie viel G sich die \Gls{Earables} in Z Richtung beschleunigt haben.
 \end{itemize}
 
-\begin{minipage}[b]{0.5\textwidth}
+
 	\subsubsection{Class Characteristics}
 	
-	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/Characteristics.png}
-\end{minipage}
+		\includegraphics[width=0.5\textwidth]{bilder/BibPackageKlassen/Characteristics.png}
+
 \paragraph{Klassenbeschreibung:}
 In dieser Klasse werden die Charakteristiken gespeichert, um sie nicht jedes Mal neu laden zu müssen, wenn sie gebraucht werden. Der Datentyp ICharacteristic befindet sich in dem BLE\_Plugin.
 
@@ -354,7 +349,7 @@ In dieser Klasse werden die Charakteristiken gespeichert, um sie nicht jedes Mal
 	
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/DeviceEventArgs.png}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/DeviceEventArgs.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Enthält alle relevanten Informationen, die als Parameter mit dem Event DeviceConnectionStateChanged gefeuert werden.
@@ -375,7 +370,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event DeviceCo
 	
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/ButtonEventArgs.png}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/ButtonEventArgs.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Enthält alle relevanten Informationen, die als Parameter mit dem Event ButtonPressed gefeuert werden. Momentan ist diese Klasse leer, aber sie existiert bereits, falls bei der Weiterentwicklung des Moduls doch Argumente übergeben werden müssen.
@@ -385,7 +380,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event ButtonPr
 	
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/DataEventArgs.png}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/DataEventArgs.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataRecieved gefeuert werden.
