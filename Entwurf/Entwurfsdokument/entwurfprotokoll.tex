@@ -619,7 +619,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	Das wird gesichert dadurch, dass die Attribute als Properties gespeichert sind, welche beim Setzen (set) stets 'App.Current.Properties[Schlüssel] = value;' benutzen.
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch). Attribut aus dem interface ISettingsService\\
+		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch). Attribut aus dem Interface ISettingsService\\
 		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables} \\ 
 		\item[$-$] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache. Attribut aus dem Interface ISettingsService \\
 		\item[$-$] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers. Konstante aus dem Interface ISettingsService \\
@@ -869,11 +869,17 @@ Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen
     \item[$-$] \textbf{init(): void} \\ Kapselt den asynchronen Aufruf zu \textit{GetMostRecentEntriesAsync} des \textit{IDataBaseConnection} Service.
 \end{itemize} 
 
-\subsection{Class ImportExportViewmodel}
+\begin{minipage}[t]{0.7\textwidth}
 
+	\subsection{Class ImportExportViewmodel}
+
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/ImportExportViewmodel}
+\end{minipage}
 \paragraph{Klassenbeschreibung:}
-Das ImportExportViewModel verarbeitet das Klicken des Nutzers auf die Buttons  der ImportExportPage.
-Die Kommunikation wird dabei mit Commands geregelt (die Klasse erbt von INotifyPropertyChanged).
+Das ImportExportViewmodel verarbeitet das Klicken des Nutzers auf die Buttons  der ImportExportPage.
+Die Kommunikation wird dabei mit Commands geregelt.
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{Export: ICommand}
@@ -888,8 +894,13 @@ Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen
     \item[$-$] \textbf{deleteClicked(): void}\\zeigt einen Warning-Dialog an, ob man wirklich alle Vorgangsdaten löschen will. Daraufhin wird bei Bestätigung in IDatabaseConnection deleteTrainingData aufgerufen.
 \end{itemize} 
 
-\subsection{Class SettingsViewModel}
+\begin{minipage}[b]{0.7\textwidth}
 
+	\subsection{Class SettingsViewModel}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/SettingsViewModel.png}
+\end{minipage}
 \paragraph{Klassenbeschreibung:}
 Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von INotifyPropertyChanged und verwendet für das Speichern der Einstellungen einen Command. Außerdem holt sie sich vom SettingsService alle aktuellen Einstellungen.
 \paragraph{Attribute:}
@@ -904,6 +915,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 \paragraph{Methoden:}
 \begin{itemize}
     \item[+] \textbf{<<create>> SettingsViewModel(): void}\\ Im Konstruktor holt sich die Klasse vom ISettingsService den User, die Sprache und die Samplingrate und speichert die Entsprechenden Werte in den eigenen Properties. Die Werte von Attributen, die über kein Binding verfügen, müssen hier manuell ins View übertragen werden.
+    \item[#] \textbf{OnPropertyChanged(): void} Die Methode wird von der Schnittstelle INotifyPropertyChanged geerbt. Diese wird benutzt um die View zu aktualisieren und ihr um Bescheid zu geben, wenn sich eine Eigenschaft aus dem ViewModel verändert. 
     \item[$-$] \textbf{SaveClicked(): void}\\ wenn diese Methode aufgerufen wird, werden die aktuellen Properties wieder im ISettingsService gespeichert, nachdem alle Werte von Attributen, die über kein Binding verfügen, vom View geholt und aktualisiert werden. Außerdem wird die Schrittlänge ans Erweiterungsmodul und die Samplingrate an die Bibliothek weitergegeben. Bei Auftretenden Exceptions (kein Gerät verbunden) wird eine Fehlermeldung als Popup angezeigt. Liefert needsRestart wahr, wird außerdem ein Hinweis angezeigt, dass die App neu gestartet werden muss, um alle Änderungen zu übernehmen. 
 \end{itemize} 
 
@@ -931,16 +943,30 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 		\item[+] \textbf{static ShowPopUp(): void}\\Statische Methode, welche die View PopUpScanningPage anzeigt. Diese benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Anzeigen geschieht mit der Methode Popupnavigation.Instance.PushAsync(new PopUpScanningPage()). Dabei wird ein neue Instanz der PopUpScanningPage erstellt. Die Methode ist statisch, da die anderen ViewModels bei einem Vorgangstart anzeigen können muss, falls noch keine Verbindung zu den \gls{Earables} besteht.
 		\item[+] \textbf{static HidePopUp(): void}\\Statische Methode, welche dieView PopUpScanningPage verstecken lässt. Diese Methode benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Verstecken der View geschieht mit der Methode Popupnavigation.Instance.popAsync(). 
 	\end{itemize}
-\subsection{Class HomeMenuItem}
+\begin{minipage}[b]{0.7\textwidth}
+
+	\subsection{Class HomeMenuItem}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/HomeMenuItem.png}
+\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse spezifiziert einen Eintrag des Menüs (siehe MenuPage). 
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item [+] \textbf{Id: MenuItemType}\\ Der Typ des Menüeintrags.
+		\item [+] \textbf{Id: MenuItemType}\\ Der Typ des Menüeintrags (in UML als Assozation dargestellt).
 		\item [+] \textbf{Title: string}\\ Der angezeigte Text des Menüeintrags.
 	\end{itemize}
-\subsection{Enumeration MenuItemType}
-	Dieses Enum spezifiziert alle möglichen Typen von Menüeinträgen der MenuPage. Entsprechend gibt es für jede vom Menü aus direkt navigierbare Page einen Wert dieses Enums.
+\begin{minipage}[b]{0.7\textwidth}
+
+	\subsection{Enumeration MenuItemType}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/MenuItemType.png}
+	\vspace{0.3cm}
+\end{minipage}
+
+	Dieses Enum spezifiziert alle möglichen Typen von Menüeinträgen der MenuPage. Entsprechend gibt es für jede vom Menü aus direkt navigierbare Page einen Wert dieses Enums.\\
 	\paragraph{Werte:}
 	\begin{itemize}
         \item CountMode,
@@ -1056,7 +1082,15 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 			\item[+] \textbf{BindingContext: DataOverviewViewModel} 
 		\end{itemize}
 
+	
+\begin{minipage}[b]{0.7\textwidth}
+
 	\subsection{Class ImportExportPage}
+
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewKlassen/ImportExportPage.png}
+\end{minipage}
 		\paragraph{Klassenbeschreibung:}
 		Die Klasse ImportExportPage beinhaltet eine Seite mit drei Buttons (siehe Abbildung 11 (Seite 13) im Pflichtenheft).
 		Das Klicken auf diese Buttons benachrichtigt das ImportExportViewmodel (via Command).
@@ -1068,7 +1102,13 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 			\item [+]\textbf{ImportData: Button} %%die anderen haben es auch public gemacht - einheitlich. ist das sinnvoll oder kann das private? -valle
 		\end{itemize}
 
-	\subsection{Class SettingsPage}
+	\begin{minipage}[b]{0.7\textwidth}
+
+		\subsection{Class SettingsPage}
+	\end{minipage}
+	\begin{minipage}[c]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{bilder/ViewKlassen/SettingsPage.png}
+	\end{minipage}
 		\paragraph{Klassenbeschreibung:}
 		Die Einstellungsseite ermöglicht das Verändern und Einsehen von Username, Sprache, Schrittlänge und IMU-Samplingrate (Siehe Abb. 12 im Pflichtenheft). Die Daten werden per Data-Binding mit der Klasse SettingsViewModel synchronisiert.
 		\paragraph{Attribute}
@@ -1100,27 +1140,40 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\item[+] \textbf{<<create>> PopUpScanningPage}\\Konstruktor der Klasse PopUpScanningPage. In diesem wird eine Instanz des ViewModels und BindingContext der Klasse ScanningpopUpViewModel erstellt.
 		\end{itemize}
 
-	\subsection{Class MainPage}
+		\begin{minipage}[b]{0.7\textwidth}
+
+			\subsection{Class MainPage}
+		\end{minipage}
+		\begin{minipage}[c]{0.3\textwidth}
+			\includegraphics[width=\textwidth]{bilder/ViewKlassen/MainPage.png}
+		\end{minipage}
 		\paragraph{Klassenbeschreibung:}
 		Die MainPage erbt von MasterDetailPage und stellt die grundlegende angezeigte Struktur zur Verfügung. Das ist im Wesentlichen der Menü-Button (vlg. Preset "MasterDetailPage" in Visual Studio 2019).\\
 		Bei Klicken auf das Menü-Icon bzw. swipen vom Rand aus öffnet sich automatisch (vererbt von MasterDetailPage) die MenuPage.
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [] \textbf{MenuPages: Dictionary<int, NavigationPage>}\\ Dieses Dictionary wird verwendet, um mit dem Klicken auf den Namen einer bestimmten Page die Page selbst zu assoziieren (bzw. die ihr entsprechende NavigationPage).
-			\item [] \textbf{(xaml) NavigationPage.Icon} Das Menü-Item, das sich für den Nutzer links oben im Eck befindet.
+			\item [-] \textbf{MenuPages: Dictionary<int, NavigationPage>}\\ Dieses Dictionary wird verwendet, um mit dem Klicken auf den Namen einer bestimmten Page die Page selbst zu assoziieren (bzw. die ihr entsprechende NavigationPage).
+			\item [-] \textbf{icon: navigationPage.Icon} Das Menü-Item, das sich für den Nutzer links oben im Eck befindet.
 		\end{itemize}
 		\paragraph{Methoden}
 		\begin{itemize}
 			\item [+] \textbf{<<create>> MainPage: void}\\ Hier wird die Seite initialisiert. Dazu wird der Laufmodus als aktuelle DetailPage festgelegt.
 			\item [+] \textbf{NavigateFromMenu(int id): Task}\\ Diese Methode setzt die zur angegebenen ID entsprechende Page als neue DetailPage fest.
 		\end{itemize}
-	\subsection{Class MenuPage}
+	\begin{minipage}[b]{0.7\textwidth}
+
+		\subsection{Class MenuPage}
+	\end{minipage}
+	\begin{minipage}[c]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{bilder/ViewKlassen/MenuPage.png}
+	\end{minipage}
 		\paragraph{Klassenbeschreibung:}
-		Die MenuPage ist das Menü, aus dem der Nutzer nach Klicken auf den Menü-Button eine Seite auswählen kann.
+		Die MenuPage ist das Menü, aus dem der Nutzer nach Klicken des Menü-Buttons eine Seite auswählen kann.
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [] \textbf{menuItems: List<HomeMenuItem>} Diese Liste enthält alle von der MenuPage aus direkt ansteuerbaren Seiten.
-			\item [] \textbf{RootPage: MainPage} Diese Property verfügt nur über einen Getter, der die aktuelle MainPage zurückgibt.
+			\item [+] \textbf{RootPage: MainPage} Diese Property verfügt nur über einen Getter, der die aktuelle MainPage zurückgibt.
+			\item [-] \textbf{menuItems: List<HomeMenuItem>} Diese Liste enthält alle von der MenuPage aus direkt ansteuerbaren Seiten.
+			\item [-] \textbf{menu: ListView} Das menu ist das menuItems entsprechende angezeigte Element auf der Seite.		
 		\end{itemize}
 		\paragraph{Methoden}
 		\begin{itemize}
