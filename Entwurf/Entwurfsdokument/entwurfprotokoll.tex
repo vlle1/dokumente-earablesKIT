@@ -100,17 +100,17 @@ Die genaue Interaktion der Klassen und Schnittstellen werden mit Hilfe von Seque
 	\end{center}
 	\clearpage %%sieht sonst noch zerrissener aus;    Gehts nicht irgendwie schöner? Sodass das Diagramm ganz oben quasi anliegt?
 	\subsection{Kurze Erläuterung zum Architekturdiagramm}
-Wir haben uns bei der Architekturdiagramm für \textsf{Model-View-Viewmodel}, eine Spezialisierung des Entwurfsmusters Model-View-Controller, entschieden. Dabei wurden im Vergleich zum Architekturdiagramm im Pflichtenheft einige kleinere Änderungen vorgenommen. Es folgt eine Beschreibung der Komponenten:
+Wir haben uns bei der Architekturdiagramm für \textsf{Model-View-ViewModel}, eine Spezialisierung des Entwurfsmusters Model-View-Controller, entschieden. Dabei wurden im Vergleich zum Architekturdiagramm im Pflichtenheft einige kleinere Änderungen vorgenommen. Es folgt eine Beschreibung der Komponenten:
   \begin{itemize}
   	\item \textsf{\glqq View\grqq{}} enthält alle grafisch angezeigten Elemente, also die Datenanzeige und Bedienoberfläche der App.
  	\item \textsf{\glqq Model\grqq{}} enthält die Geschäftslogik der App und ist durch die neu hinzugefügte zentrale Schnittstelle des ServiceManagers stark nach außen abgekapselt. Benötigte Services können beim Programmstart im ServiceManager registriert werden, sodass bei Bedarf eine Singleton-Instanz des Service zur Verfügung gestellt werden kann. Wesentlich sind dabei folgende Services: 
 \begin{itemize}
       \item Die Verwaltung der anfallenden Aktivitätsdaten (Abruf und Bereitstellung der gespeicherten Daten in der Datenbank, im CSV-Format) über ein Datenmodul.
       \item Die Bibliothek, die für die Kommunikation mit den \Gls{Earables} (Verbindungsaufbau, Start und Stopp des Samplings, Konfiguration der \Gls{Steuerungsparameter}, Auslesen der Sensordaten) zuständig ist. Dazu wird eine externe Bibliothek\footnote{https://github.com/xabre/xamarin-bluetooth-le} verwendet. Die ausgelesenen Sensordaten werden per Event an die einzelnen Aktivitätsanalysen weiter geschickt. 
-      \item Das Erweiterungsmodul, das sich um die Aktivitätserkennung kümmert. Es definiert die unterschiedlichen Analysemethoden für die Aktivitäten, die aufgrund der Servicestruktur leicht austauschbar sind und nutzt die Schnittstellen der Bibliothek. Die erkannten Aktivitätsdaten werden ebenfalls per Event an das Viewmodel weiter geschickt. 
+      \item Das Erweiterungsmodul, das sich um die Aktivitätserkennung kümmert. Es definiert die unterschiedlichen Analysemethoden für die Aktivitäten, die aufgrund der Servicestruktur leicht austauschbar sind und nutzt die Schnittstellen der Bibliothek. Die erkannten Aktivitätsdaten werden ebenfalls per Event an das ViewModel weiter geschickt. 
 \end{itemize}
 Die Services sind dabei jeweils unabhängig vom restlichen Model funktionsfähig und dadurch leichter testbar.
-\item \textsf{\glqq Viewmodel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der Nutzeroberfläche, wird also bei Benutzerinteraktion von der View benachrichtigt. Dabei benutzen wir unter anderem eine Befehlsstruktur, um beispielsweise Buttonklicks zu registrieren und an das Viewmodel weiter zu delegieren. Das Viewmodel interagiert mit dem Model über die neu hinzugefügte Schnittstelle des ServiceManagers und kann bei ihm Anfragen an benötigte Services wie Aktivitätsanalysen stellen. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die View angepasst wird, zum Beispiel bei Verbindungsabbruch zu den \Gls{Earables} und beim Empfangen von neuen Aktivitätsdaten. Dies erfolgt über Databinding und der von Xamarin angebotenen NotifyPropertyChanged Schnittstelle.
+\item \textsf{\glqq ViewModel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der Nutzeroberfläche, wird also bei Benutzerinteraktion von der View benachrichtigt. Dabei benutzen wir unter anderem eine Befehlsstruktur, um beispielsweise Buttonklicks zu registrieren und an das ViewModel weiter zu delegieren. Das ViewModel interagiert mit dem Model über die neu hinzugefügte Schnittstelle des ServiceManagers und kann bei ihm Anfragen an benötigte Services wie Aktivitätsanalysen stellen. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die View angepasst wird, zum Beispiel bei Verbindungsabbruch zu den \Gls{Earables} und beim Empfangen von neuen Aktivitätsdaten. Dies erfolgt über Databinding und der von Xamarin angebotenen NotifyPropertyChanged Schnittstelle.
 \end{itemize}
   Der Vorteil dieser Architektur ist eine klare Trennung von Benutzerinteraktion und Programmlogik sowie eine lose Kopplung zwischen einzelnen Funktionalitäten insbesondere durch die Eventstruktur, was die Flexibilität und das modulare Testen deutlich erleichtert.
 \clearpage
@@ -554,7 +554,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 
 \subsection{Class ServiceManager}
 	\paragraph{Klassenbeschreibung:}
-	Der ServiceManager verwaltet alle Services des Models mithilfe eines statischen Serviceproviders. Dies wird von anderen Services des Models, sowie von dem Viewmodel benutzt. Er dient zur Delegierung der Services.\\ 
+	Der ServiceManager verwaltet alle Services des Models mithilfe eines statischen Serviceproviders. Dies wird von anderen Services des Models, sowie von dem ViewModel benutzt. Er dient zur Delegierung der Services.\\ 
 	Dabei implementiert der ServiceManager das Interface IManager.
 	Von diesem bekommt er die Methode serviceRegistration() übergeben.
 	Der ServiceManager speichert die Services als Referenzen und achtet, dass diese ein Singleton sind. (Es existiert immer nur eine Instanz des Services).
@@ -710,10 +710,10 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 
 
 
-\section{Klassenbeschreibung View-Model}
-\subsection{Abstract Class BaseModeViewmodel} 
+\section{Klassenbeschreibung ViewModel}
+\subsection{Abstract Class BaseModeViewModel} 
 \paragraph{Klassenbeschreibung:}
-Die abstrakte Klasse IBaseModeViewmodel hält die Commands für Buttonklicks, die in jedem ViewModel der einzelnen Modi benötigt werden. Die Methoden die von den Commands aufgerufen werden und die Event Methode werden als abstrakt deklariert und in den Unterklassen implementiert. Die CheckConnection Methode wird beim Starten eines Vorgangs aufgerufen und ist bereits implementiert.
+Die abstrakte Klasse IBaseModeViewModel hält die Commands für Buttonklicks, die in jedem ViewModel der einzelnen Modi benötigt werden. Die Methoden die von den Commands aufgerufen werden und die Event Methode werden als abstrakt deklariert und in den Unterklassen implementiert. Die CheckConnection Methode wird beim Starten eines Vorgangs aufgerufen und ist bereits implementiert.
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{StartActivityCommand: ICommand} \\  Der Command der beim Drücken des Start Buttons ausgeführt wird, um einen Vorgang zu starten. Ruft die StartActivity Methode auf.
@@ -724,14 +724,14 @@ Die abstrakte Klasse IBaseModeViewmodel hält die Commands für Buttonklicks, di
 	\item[+] \textbf{abstract StartActivity(): void} \\ Abstrakte Methode, die vom StartActivityCommand aufgerufen wird und in den Unterklassen spezifiziert wird.
 	\item[+] \textbf{abstract StopActivity(): void} \\ Abstrakte Methode, die vom StopActivityCommand aufgerufen wird und in den Unterklassen spezifiziert wird.
 	\item[+] \textbf{abstract OnActivityDone(sender: object, e: ActivityArgs)} \\ Abstrakte Methode deren Implementierung in den Unterklassen von den Eventhandlern der Activities aufgerufen wird.
-	\item[+] \textbf{CheckConnection(): void} \\ Methode, die vom statischen PopUpViewmodel den Verbindungsstatus abfragt und bei Bedarf eine Verbindung mit den \Gls{Earables} herstellt.
+	\item[+] \textbf{CheckConnection(): void} \\ Methode, die vom statischen PopUpViewModel den Verbindungsstatus abfragt und bei Bedarf eine Verbindung mit den \Gls{Earables} herstellt.
 \end{itemize}
 
 
-\subsection{Class StepModeViewmodel}
+\subsection{Class StepModeViewModel}
 
 \paragraph{Klassenbeschreibung:}
-Die Klasse StepModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel, enthält die Logik des Stepmodes  und hält Attribute die per Databinding an die Viewklassen StepModePage und StepModeActivePage gebunden sind. 
+Die Klasse StepModeViewModel erbt von der abstrakten Klasse BaseModeViewModel, enthält die Logik des Stepmodes  und hält Attribute die per Databinding an die Viewklassen StepModePage und StepModeActivePage gebunden sind. 
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{StepsDoneLastTime: string} \\ Hält die Schrittanzahl des letzten aktiven Laufvorgangs. 
@@ -748,19 +748,19 @@ Die Klasse StepModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel, e
 \end{itemize}
 \paragraph{Methoden:}
 \begin{itemize}
-	\item[+] \textbf{<<create>> StepModeViewmodel()}\\ Konstruktor, in dem die Commands definiert werden. Die Anzahl der zuletzt gelaufenen Schritte und die Distanz sowie das Datum werden durch Aufruf der Methode updateLastData über den ServiceManager von der DatabaseConnection aktualisiert. isRunning wird standardmäßig zunächst auf false gesetzt. Die beiden Activity Attribute StepActivity und RunningActivity werden ebenfalls über den ServiceManager initialisiert.
-	\item[\#] \textbf{OnPropertyChanged(): void} Methode die beim Eintritt des PropertyChanged Events aufgerufen wird. Sie übermittelt der View die Änderungen im Viewmodel.
+	\item[+] \textbf{<<create>> StepModeViewModel()}\\ Konstruktor, in dem die Commands definiert werden. Die Anzahl der zuletzt gelaufenen Schritte und die Distanz sowie das Datum werden durch Aufruf der Methode updateLastData über den ServiceManager von der DatabaseConnection aktualisiert. isRunning wird standardmäßig zunächst auf false gesetzt. Die beiden Activity Attribute StepActivity und RunningActivity werden ebenfalls über den ServiceManager initialisiert.
+	\item[\#] \textbf{OnPropertyChanged(): void} Methode die beim Eintritt des PropertyChanged Events aufgerufen wird. Sie übermittelt der View die Änderungen im ViewModel.
 	\item[+] \textbf{OnActivityDone(sender: object, e: ActivityArgs)} \\ Event Methode, die von der Aktivität bei Erkennung von einem Schritt aufgerufen wird. Sie erhöht den Counter um 1 und setzt IsRunning auf True. 
 	\item[+] \textbf{UpdateLastData(): void} \\ Wird vom Konstruktor und nach jedem Laufvorgangsende aufgerufen. Aktualisiert die Attribute StepsDoneLastTime, DistanceWalkedLastTime und LastDatatime, indem über den Service Manager von der DataBaseConnection der letzte Eintrag genommen wird. 
-	\item[+] \textbf{StartActivity(): void}\\ Methode die vom StartActivityCommand aufgerufen wird. Zunächst wird mit CheckConnection der Verbindungsstatus überprüft und gegebenenfalls eine Verbindung hergestellt. Das Viewmodel registriert seine OnActivityDone Event Methode beim Event Handler in der StepActivity und in der RunningActivity Klasse, setzt den StepCounter zurück, startet den Timer und wechselt zum StepModeActiveView. Nach einem festgelegten Zeitabschnitt wird die Methode UpdateFrequency aufgerufen, um die Schrittfrequenz zu ermitteln
+	\item[+] \textbf{StartActivity(): void}\\ Methode die vom StartActivityCommand aufgerufen wird. Zunächst wird mit CheckConnection der Verbindungsstatus überprüft und gegebenenfalls eine Verbindung hergestellt. Das ViewModel registriert seine OnActivityDone Event Methode beim Event Handler in der StepActivity und in der RunningActivity Klasse, setzt den StepCounter zurück, startet den Timer und wechselt zum StepModeActiveView. Nach einem festgelegten Zeitabschnitt wird die Methode UpdateFrequency aufgerufen, um die Schrittfrequenz zu ermitteln
 	\item[+] \textbf {StopActivity(): void}\\ Methode die vom StopActivityCommand aufgerufen wird. Meldet die OnActivityDone Methode vom EventHandler in der StepActivity und RunningActivity Klasse ab und setzt IsRunning auf false. Zeigt ein PopUp mit der Anzahl der gelaufenen Schritte an, welches der Nutzer wegklicken kann. Danach wird zum StepModeView zurück gewechselt, die gelaufenen Schritte mit Hilfe der DatabaseConnection gespeichert und die Anzeige des letzten Laufvorgangs aktualisiert.  
 	\item[$-$] \textbf{UpdateFrequency(): void} \\ Berechnet nach einer festgelegten Zeit aus der abgelaufenen Zeit und der Schrittanzahl die aktuelle Schrittfrequenz.
 	\item[$-$] \textbf{ShowPopUp(): void} \\ Zeigt das PopUp mit den gelaufenen Schritten und der Distanz asynchron an, wegklickbar mit einem Button.
 \end{itemize}
 
-\subsection{Class CountModeViewmodel}
+\subsection{Class CountModeViewModel}
 \paragraph{Klassenbeschreibung:}
-Die Klasse CountModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel, enthält die Logik des Countmodes und hält Attribute die per Databinding an die Viewklassen CountModePage und CountModeActivePage gebunden sind.
+Die Klasse CountModeViewModel erbt von der abstrakten Klasse BaseModeViewModel, enthält die Logik des Countmodes und hält Attribute die per Databinding an die Viewklassen CountModePage und CountModeActivePage gebunden sind.
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{SelectedActivity: string} \\ Die aktuell vom Nutzer im Menü ausgewählte Aktivität. 
@@ -775,9 +775,9 @@ Die Klasse CountModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel, 
 \end{itemize}
 \paragraph{Methoden:}
 \begin{itemize}
-	\item[+] \textbf{<<create>> CountModeViewmodel()} \\ Konstruktor, in dem die Commands definiert werden. Die beiden Activity Attribute PushUpActivity und SitUpActivity werden über den ServiceManager initialisiert. In die PossibleActivities Liste werden SitUps und PushUps hinzugefügt.
-	\item[\#] \textbf{OnPropertyChanged(): void} Methode die beim Eintritt des PropertyChanged Events aufgerufen wird. Sie übermittelt der View die Änderungen im Viewmodel.
-	\item[+] \textbf{StartActivity(): void} \\ Methode die vom StartActivityCommand aufgerufen wird. Zunächst wird mit CheckConnection der Verbindungsstatus überprüft und gegebenenfalls eine Verbindung hergestellt. Das Viewmodel registriert seine OnActivityDone Event Methode beim Event Handler in der Activity Klasse und wechselt zum CountModeActivePage; danach wird der Timer gestartet. 
+	\item[+] \textbf{<<create>> CountModeViewModel()} \\ Konstruktor, in dem die Commands definiert werden. Die beiden Activity Attribute PushUpActivity und SitUpActivity werden über den ServiceManager initialisiert. In die PossibleActivities Liste werden SitUps und PushUps hinzugefügt.
+	\item[\#] \textbf{OnPropertyChanged(): void} Methode die beim Eintritt des PropertyChanged Events aufgerufen wird. Sie übermittelt der View die Änderungen im ViewModel.
+	\item[+] \textbf{StartActivity(): void} \\ Methode die vom StartActivityCommand aufgerufen wird. Zunächst wird mit CheckConnection der Verbindungsstatus überprüft und gegebenenfalls eine Verbindung hergestellt. Das ViewModel registriert seine OnActivityDone Event Methode beim Event Handler in der Activity Klasse und wechselt zum CountModeActivePage; danach wird der Timer gestartet. 
 	\item[+] \textbf{StopActivity(): void} \\ Methode die vom StopActivityCommand aufgerufen wird. Meldet die OnActivityDone Methode vom EventHandler in der Activity Klasse ab und hält den Timer an. Zeigt ein PopUp mit der Anzahl der ausgeführten Aktivität an, welches der Nutzer wegklicken kann. Danach werden die Anzahl der ausgeführten Wiederholungen mit Hilfe der DatabaseConnection gespeichert und zum CountModePage zurück gewechselt. 
 	\item[+] \textbf{StartTimer(): void} \\ Startet den Timer. 
 	\item[+] \textbf{StopTimer(): void} \\ Stoppt den Timer. 
@@ -785,9 +785,9 @@ Die Klasse CountModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel, 
 	\item[$-$] \textbf{ShowPopUp(): void} \\ Zeigt das PopUp mit dem Vorgangsresultat asynchron an, wegklickbar mit einem Button. 
 \end{itemize}
 
-\subsection{Class ListenAndPerformViewmodel}
+\subsection{Class ListenAndPerformViewModel}
 \paragraph{Klassenbeschreibung:}
-Die Klasse ListenAndPerformViewmodel erbt von der abstrakten Klasse BaseModeViewmodel, enthält die Logik von Listen\&Perform und hält Attribute die per Databinding an die Viewklassen CountModePage und CountModeActivePage gebunden sind.  Sie implementiert die INotifyPropertyChanged Schnittstelle, um das Erstellen eines Trainingsablaufplans durch den Benutzer in der zugehörigen Viewklasse anzeigen zu können.
+Die Klasse ListenAndPerformViewModel erbt von der abstrakten Klasse BaseModeViewModel, enthält die Logik von Listen\&Perform und hält Attribute die per Databinding an die Viewklassen CountModePage und CountModeActivePage gebunden sind.  Sie implementiert die INotifyPropertyChanged Schnittstelle, um das Erstellen eines Trainingsablaufplans durch den Benutzer in der zugehörigen Viewklasse anzeigen zu können.
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[$-$] \textbf{PushUpResult: int} \\ Zähler für insgesamt während des aktuellen Trainings ausgeführte Push-ups. 
@@ -807,7 +807,7 @@ Die Klasse ListenAndPerformViewmodel erbt von der abstrakten Klasse BaseModeView
 \end{itemize}
 \paragraph{Methoden:}
 \begin{itemize}
-	\item[+] \textbf{<<create>> ListAndPerformViewmodel} \\ Konstruktor, in dem die Commands definiert werden. Die ActivityList und ActivityAmounts werden initialisiert. Die beiden Activity Attribute PushUpActivity und SitUpActivity werden über den ServiceManager initialisiert.
+	\item[+] \textbf{<<create>> ListAndPerformViewModel} \\ Konstruktor, in dem die Commands definiert werden. Die ActivityList und ActivityAmounts werden initialisiert. Die beiden Activity Attribute PushUpActivity und SitUpActivity werden über den ServiceManager initialisiert.
 	\item[\#] \textbf{OnPropertyChanged(): void} \\ Methode die beim Eintritt des PropertyChanged Events aufgerufen wird. Sie verändert bei der registrierten View Klasse die Anzeige der ausgewählten Aktivitäten sowie deren Anzahl. 
 	\item[+] \textbf{StartActivity(): void} \\ Methode die vom StartActivityCommand aufgerufen wird. Zunächst wird mit CheckConnection der Verbindungsstatus überprüft und gegebenenfalls eine Verbindung hergestellt. Die Methode wechselt dann zur ListenAndPerformActivePage. Ruft für jeden Listeneintrag in ActivityList nacheinander die DoActivity Methode auf, bis die Liste abgearbeitet ist. Nach Abarbeiten der Liste wird automatisch die Methode StopActivity aufgerufen.
 	\item[+] \textbf{StopActivity(): void} \\ Methode die vom StopActivityCommand aufgerufen wird. Hält den Timer an und zeigt ein PopUp mit der Anzahl der ausgeführten Aktivitäten an, welches der Nutzer wegklicken kann. Danach werden die Anzahl der ausgeführten Wiederholungen mit Hilfe der DatabaseConnection gespeichert und zur ListenAndPerformPage zurück gewechselt. 
@@ -819,12 +819,12 @@ Die Klasse ListenAndPerformViewmodel erbt von der abstrakten Klasse BaseModeView
 	\item[+] \textbf{ OnActivityDone(sender: object, EventArgs.Empty)} \\ Event Methode, die von der Aktivität bei Erkennung der Ausführung von einer Wiederholung aufgerufen wird. Sie erhöht den jeweiligen Counter um 1.  
 	\item[$-$] \textbf{ShowPopUp(): void} \\ Zeigt das PopUp mit dem Vorgangsresultat asynchron an, wegklickbar mit einem Button. 
 	\item[$-$] \textbf{SpeakNextActivity(): void} \\ Liest die nächste Aktivität der ActivityList sowie seine Anzahl asynchron vor. 
-	\item[$-$] \textbf{DoActivity(): void} \\ Das Viewmodel registriert seine seine OnActivityDone Event Methode bei der aktuellen Activity der ActivityList. Liest die Activity vor und startet den Timer. Nach Erkennung der vorher festgelegten Anzahl Wiederholungen, meldet das Viewmodel seine OnActivityDone Methode ab und zählt den entsprechenden ResultCounter um die ausgeführte Anzahl hoch. 
+	\item[$-$] \textbf{DoActivity(): void} \\ Das ViewModel registriert seine seine OnActivityDone Event Methode bei der aktuellen Activity der ActivityList. Liest die Activity vor und startet den Timer. Nach Erkennung der vorher festgelegten Anzahl Wiederholungen, meldet das ViewModel seine OnActivityDone Methode ab und zählt den entsprechenden ResultCounter um die ausgeführte Anzahl hoch. 
 \end{itemize}
 
-\subsection{Class MusicModeViewmodel}
+\subsection{Class MusicModeViewModel}
 \paragraph{Klassenbeschreibung:}
-Die Klasse MusicModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel und enthält die Logik des Musicmodes.
+Die Klasse MusicModeViewModel erbt von der abstrakten Klasse BaseModeViewModel und enthält die Logik des Musicmodes.
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[$-$] \textbf{isRunning: boolean} \\ Hilfsattribut, speichert ob der Nutzer steht oder läuft, wird in der View nicht angezeigt.
@@ -832,7 +832,7 @@ Die Klasse MusicModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel u
 \end{itemize}
 \paragraph{Methoden:}
 \begin{itemize}
-	\item[+] \textbf{<<create>> MusicModeViewmodel} \\ Konstruktor, in dem die Commands definiert werden. Das Activity Attribut RunningActivity wird über den ServiceManager initialisiert.
+	\item[+] \textbf{<<create>> MusicModeViewModel} \\ Konstruktor, in dem die Commands definiert werden. Das Activity Attribut RunningActivity wird über den ServiceManager initialisiert.
 	\item[+] \textbf{StartActivity(): void} \\ Methode die vom StartActivityCommand aufgerufen wird. Zunächst wird mit CheckConnection der Verbindungsstatus überprüft und gegebenenfalls eine Verbindung hergestellt. Registriert die OnActivityDone Methode beim EventHandler der RunningActivity. 
 	\item[+] \textbf{StopActivity(): void} \\ Methode die vom StopActivityCommand aufgerufen wird. Meldet die OnActivityDone Methode beim EventHandler der RunningActivity ab. 
 	\item[+] \textbf{OnActivityDone(sender: object, e: RunningEventArgs)} \\ Event Methode, die von der Activity aufgerufen wird, die gegebenenfalls isRunning ändert und die Musikmethoden aufruft.
@@ -840,9 +840,9 @@ Die Klasse MusicModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel u
 	\item[+] \textbf{RestartMusic(): void} \\ Wird von OnActivityDone aufgerufen wenn der Nutzer weiter läuft. Spielt die Musik weiter ab.
 \end{itemize}
 
-\subsection{Class DataOverviewViewmodel}
+\subsection{Class DataOverviewViewModel}
 \paragraph{Klassenbeschreibung:}
-Das DataOverviewViewmodel läd die Trainingsdaten des Nutzers über den Datenbank Service und bindet diese an die ListView \textit{contentListView} der DataOverviewPage.
+Das DataOverviewViewModel läd die Trainingsdaten des Nutzers über den Datenbank Service und bindet diese an die ListView \textit{contentListView} der DataOverviewPage.
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{TrainingsData: ObservableCollection<DBEntry>}
@@ -856,14 +856,14 @@ Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen
 
 \begin{minipage}[t]{0.7\textwidth}
 
-	\subsection{Class ImportExportViewmodel}
+	\subsection{Class ImportExportViewModel}
 
 \end{minipage}
 \begin{minipage}[c]{0.3\textwidth}
-	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/ImportExportViewmodel}
+	\includegraphics[width=\textwidth]{bilder/ViewModelKlassen/ImportExportViewModel}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
-Das ImportExportViewmodel verarbeitet das Klicken des Nutzers auf die Buttons  der ImportExportPage.
+Das ImportExportViewModel verarbeitet das Klicken des Nutzers auf die Buttons  der ImportExportPage.
 Die Kommunikation wird dabei mit Commands geregelt.
 \paragraph{Attribute:}
 \begin{itemize}
@@ -884,7 +884,7 @@ Die Commands werden an die entsprechenden Buttons im View gekoppelt und lösen d
 	\subsection{Class SettingsViewModel}
 \end{minipage}
 \begin{minipage}[c]{0.3\textwidth}
-	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/SettingsViewModel.png}
+	\includegraphics[width=\textwidth]{bilder/ViewModelKlassen/SettingsViewModel.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von INotifyPropertyChanged und verwendet für das Speichern der Einstellungen einen Command. Außerdem holt sie sich vom SettingsService alle aktuellen Einstellungen.
@@ -935,7 +935,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\subsection{Class HomeMenuItem}
 \end{minipage}
 \begin{minipage}[c]{0.3\textwidth}
-	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/HomeMenuItem.png}
+	\includegraphics[width=\textwidth]{bilder/ViewModelKlassen/HomeMenuItem.png}
 \end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse spezifiziert einen Eintrag des Menüs (siehe MenuPage). 
@@ -949,7 +949,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\subsection{Enumeration MenuItemType}
 \end{minipage}
 \begin{minipage}[c]{0.3\textwidth}
-	\includegraphics[width=\textwidth]{bilder/ViewmodelKlassen/MenuItemType.png}
+	\includegraphics[width=\textwidth]{bilder/ViewModelKlassen/MenuItemType.png}
 	\vspace{0.3cm}
 \end{minipage}
 
@@ -982,10 +982,10 @@ Diese Klasse stellt die Ansicht des StepModes dar, solange kein Laufvorgang gest
 \paragraph{Attribute:}
 	\begin{itemize}
 	\item[+] \textbf{StepMode: Label} \\ Anzeige des Modusnamen Stepmode.
-	\item[+] \textbf{LastTrainingsDate: Label} \\ Anzeige für den letzten Trainingstag, an das Attribut LastDataTime aus dem Viewmodel gebunden.
-	\item[+] \textbf{StepsDoneLastTime: Label} \\ Anzeige für die am letzten Trainingstag gelaufenen Schritte, an das Attribut StepsDoneLastTime aus dem Viewmodel gebunden.
-	\item[+] \textbf{DistanceWalkedLastTime: Label} \\ Anzeige für die am letzten Trainingstag gelaufene Distanz, an das Attribut DistanceWalkedLastTime aus dem Viewmodel gebunden. 
-	\item[+] \textbf{Start: Button} \\ Button um den Laufvorgang zu starten. Feuert den StartActivityCommand aus dem Viewmodel.
+	\item[+] \textbf{LastTrainingsDate: Label} \\ Anzeige für den letzten Trainingstag, an das Attribut LastDataTime aus dem ViewModel gebunden.
+	\item[+] \textbf{StepsDoneLastTime: Label} \\ Anzeige für die am letzten Trainingstag gelaufenen Schritte, an das Attribut StepsDoneLastTime aus dem ViewModel gebunden.
+	\item[+] \textbf{DistanceWalkedLastTime: Label} \\ Anzeige für die am letzten Trainingstag gelaufene Distanz, an das Attribut DistanceWalkedLastTime aus dem ViewModel gebunden. 
+	\item[+] \textbf{Start: Button} \\ Button um den Laufvorgang zu starten. Feuert den StartActivityCommand aus dem ViewModel.
 	\end{itemize}
 
 \subsection{Class StepModeActivePage}
@@ -994,11 +994,11 @@ Diese Klasse stellt die Ansicht des Stepmodes während eines laufenden Laufvorga
 \paragraph{Attribute:}
 	\begin{itemize}
 	\item[+] \textbf{StepMode: Label} \\ Anzeige des Modusnamen Stepmode.
-	\item[+] \textbf{IsRunning: Label} \\ Zeigt an ob der Nutzer aktuell läuft oder steht, an das Attribut IsRunning aus dem Viewmodel gebunden.
-	\item[+] \textbf{StepCounter: Label} \\ Anzeige für Anzahl bisher gelaufener Schritte, an das Attribut StepCounter aus dem Viewmodel gebunden.
-	\item[+] \textbf{DistanceWalked: Label} \\ Anzeige der bisher gelaufenen Distanz, an das Attribut DistanceWalked aus dem Viewmodel gebunden.
-	\item[+] \textbf{StepFrequency: Label} \\ Anzeige der aktuellen Schrittfrequenz, an das Attribut StepFrequency aus dem Viewmodel gebunden.
-	\item[+] \textbf{Stop: Button} \\ Button um den Laufvorgang zu stoppen. Feuert den StopActivityCommand aus dem Viewmodel.
+	\item[+] \textbf{IsRunning: Label} \\ Zeigt an ob der Nutzer aktuell läuft oder steht, an das Attribut IsRunning aus dem ViewModel gebunden.
+	\item[+] \textbf{StepCounter: Label} \\ Anzeige für Anzahl bisher gelaufener Schritte, an das Attribut StepCounter aus dem ViewModel gebunden.
+	\item[+] \textbf{DistanceWalked: Label} \\ Anzeige der bisher gelaufenen Distanz, an das Attribut DistanceWalked aus dem ViewModel gebunden.
+	\item[+] \textbf{StepFrequency: Label} \\ Anzeige der aktuellen Schrittfrequenz, an das Attribut StepFrequency aus dem ViewModel gebunden.
+	\item[+] \textbf{Stop: Button} \\ Button um den Laufvorgang zu stoppen. Feuert den StopActivityCommand aus dem ViewModel.
 	\end{itemize}
 	
 \subsection{Class CountModePage}
@@ -1007,8 +1007,8 @@ Diese Klasse stellt die Ansicht des Countmodes dar, solange kein Zählvorgang ge
 \paragraph{Attribute:}
 	\begin{itemize}
 	\item[+] \textbf{CountMode: Label} \\ Anzeige des Modusnamen CountMode.
-	\item[+] \textbf{Activities: ListView} \\ Anzeige der verfügbaren Activities die auswählbar sind mithilfe einer ListView, an die ObservableCollection PossibleActivities aus dem Viewmodel gebunden.
-	\item[+] \textbf{Start: Button} \\ Button um den Zählvorgang zu starten. Feuert den StartActivityCommand aus dem Viewmodel.
+	\item[+] \textbf{Activities: ListView} \\ Anzeige der verfügbaren Activities die auswählbar sind mithilfe einer ListView, an die ObservableCollection PossibleActivities aus dem ViewModel gebunden.
+	\item[+] \textbf{Start: Button} \\ Button um den Zählvorgang zu starten. Feuert den StartActivityCommand aus dem ViewModel.
 	\end{itemize}
 
 \subsection{Class CountModeActivePage}
@@ -1018,9 +1018,9 @@ Diese Klasse stellt die Ansicht des Countmodes während eines laufenden Zählvor
 	\begin{itemize}
 	\item[+] \textbf{CountMode: Label} \\ Anzeige des Modusnamen CountMode.
 	\item[+] \textbf{Timer: Label} \\ Anzeige für die seit dem Zählstart vergangene Zeit. Beinhaltet drei Spans für die Anzeige von Minuten, Sekunden und Millisekunden. Das Spans sind an die Attribute Minuten, Sekunden bzw. Millisekunden gebunden.
-	\item[+] \textbf{Counter: Label} \\ Anzeige für die Anzahl bisher ausgeführter Wiederholungen einer Activity. An das Attribut Counter aus dem Viewmodel gebunden.
-	\item[+] \textbf{SelectedActivity: Label} \\ Anzeige für die ausgewählte Übung. An das Attribut SelectedActivity aus dem Viewmodel gebunden.
-	\item[+] \textbf{Stop: Button} \\ Button um den Zählvorgang zu stoppen. Feuert den StopActivityCommand aus dem Viewmodel.
+	\item[+] \textbf{Counter: Label} \\ Anzeige für die Anzahl bisher ausgeführter Wiederholungen einer Activity. An das Attribut Counter aus dem ViewModel gebunden.
+	\item[+] \textbf{SelectedActivity: Label} \\ Anzeige für die ausgewählte Übung. An das Attribut SelectedActivity aus dem ViewModel gebunden.
+	\item[+] \textbf{Stop: Button} \\ Button um den Zählvorgang zu stoppen. Feuert den StopActivityCommand aus dem ViewModel.
 	\end{itemize}
 
 \subsection{Class ListenAndPerformPage}
@@ -1031,10 +1031,10 @@ Diese Klasse stellt die Ansicht von ListAndPerform dar, solange kein Trainingsvo
 	\item[+] \textbf{ListenAndPerform: Label} \\ Anzeige des Modusnamen ListenAndPerform.
 	\item[+] \textbf{WorkoutPlan: Label} \\ Anzeige vom Schriftzug Workout plan.
 	\item[+] \textbf{Activities: ListView} \\	Anzeige für den bisher zusammengestellten Trainingsplan mithilfe einer ListView, an das Attribut ActivityList gebunden. 
-	\item[+] \textbf{AddActivity: Button} \\ Button um eine Activity dem Trainingsplan hinzuzufügen. Feuert den AddActivityCommand aus dem Viewmodel.
-	\item[+] \textbf{RemoveActivity: Button} \\ Button um eine Activity aus dem Trainingsplan zu löschen. Feuert den RemoveActivityCommand aus dem Viewmodel.
-	\item[+] \textbf{EditActivity: Button} \\ Button um eine bereits hinzugefügte Activity oder ihre Anzahl zu ändern. Feuert den EditActivityCommand aus dem Viewmodel.
-	\item[+] \textbf{Start: Button} \\ Button um den Trainingsvorgang zu starten. Feuert den StartActivityCommand aus dem Viewmodel.
+	\item[+] \textbf{AddActivity: Button} \\ Button um eine Activity dem Trainingsplan hinzuzufügen. Feuert den AddActivityCommand aus dem ViewModel.
+	\item[+] \textbf{RemoveActivity: Button} \\ Button um eine Activity aus dem Trainingsplan zu löschen. Feuert den RemoveActivityCommand aus dem ViewModel.
+	\item[+] \textbf{EditActivity: Button} \\ Button um eine bereits hinzugefügte Activity oder ihre Anzahl zu ändern. Feuert den EditActivityCommand aus dem ViewModel.
+	\item[+] \textbf{Start: Button} \\ Button um den Trainingsvorgang zu starten. Feuert den StartActivityCommand aus dem ViewModel.
 	\end{itemize}
 
 \subsection{Class ListenAndPerformActivePage}
@@ -1045,9 +1045,9 @@ Die Klasse stellt die Ansicht von ListenAndPerform während eines laufenden Trai
 	\item[+] \textbf{ListenAndPerform: Label} \\ Anzeige des Modusnamen ListenAndPerform.
 	\item[+] \textbf{Activity: Label} \\ Anzeige für die aktuell auszuführenden Activity.
 	\item[+] \textbf{Timer: Label} \\ Anzeige für die seit dem Zählstart vergangene Zeit. Beinhaltet drei Spans für die Anzeige von Minuten, Sekunden und Millisekunden. Das Spans sind an die Attribute Minuten, Sekunden bzw. Millisekunden gebunden.
-	\item[+] \textbf{Counter: Label} \\ Anzeige für die Anzahl bisher ausgeführter Wiederholungen einer Activity. An die Attribute PushUpCounter und SitUpCounter aus dem Viewmodel gebunden.
+	\item[+] \textbf{Counter: Label} \\ Anzeige für die Anzahl bisher ausgeführter Wiederholungen einer Activity. An die Attribute PushUpCounter und SitUpCounter aus dem ViewModel gebunden.
 	\item[+] \textbf{Progress: ProgressBar} \\ Progressbar zum Anzeigen des Fortschritts innerhalb einer Activity.
-	\item[+] \textbf{Stop: Button} \\ Button um den Trainingsvorgang zu stoppen. Feuert den StopActivityCommand aus dem Viewmodel.
+	\item[+] \textbf{Stop: Button} \\ Button um den Trainingsvorgang zu stoppen. Feuert den StopActivityCommand aus dem ViewModel.
 	\end{itemize}
 	
 \subsection{Class MusicModeAllPage}
@@ -1080,7 +1080,7 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 \end{minipage}
 		\paragraph{Klassenbeschreibung:}
 		Die Klasse ImportExportPage beinhaltet eine Seite mit drei Buttons (siehe Abbildung 11 (Seite 13) im Pflichtenheft).
-		Das Klicken auf diese Buttons benachrichtigt das ImportExportViewmodel (via Command).
+		Das Klicken auf diese Buttons benachrichtigt das ImportExportViewModel (via Command).
 		\paragraph{Attribute}
 		\begin{itemize}
 			\item[+] \textbf{ImportExportLabel: Label} \\ Anzeige des Pagenamens (Im-/ Export CSV Datei).
@@ -1116,7 +1116,7 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\begin{itemize}
 		\item[+] \textbf{Alert: Label}\\Ein Label, welches die Benachrichtigung anzeigt, dass die Verbindung zu den \gls{Earables} nicht besteht. Bei einem fehlgeschlagenen Verbindungsversuch färbt es sich kurzartig rot.
 		\item[+] \textbf{ScanDevices: Button}\\Schickt das Command ab, welches die Bibliothek nach \gls{Earables} suchen lässt.
-		\item[+] \textbf{DevicesAvailable: ListView}\\Liste der \Gls{Earables} mit denen man sich per \gls{BLE} verbinden kann. Es ermöglicht einem einen Eintrag auszuwählen. Die Liste wird von dem Viewmodel ScanningPopUpViewModel aus aktualisiert.
+		\item[+] \textbf{DevicesAvailable: ListView}\\Liste der \Gls{Earables} mit denen man sich per \gls{BLE} verbinden kann. Es ermöglicht einem einen Eintrag auszuwählen. Die Liste wird von dem ViewModel ScanningPopUpViewModel aus aktualisiert.
 		\item[+] \textbf{ConnectButton: Button}\\Schickt das Command ab, welches der Bibliothek mitteilt mit den \Gls{Earables} zu verbinden, welche im ListView ausgewählt wurde.
 		\item[+] \textbf{Cancel: Button}\\Schickt das Command ab, welches das Pop-up verschwinden lässt. Es wurde keine Verbindung hergestellt.
 		\item[+] \textbf{BindingContext: ScanningPopUpViewModel}\\Der BindingContext ist vom Typ ScanningPopUpViewModel, welches die einzelnen UI-Komponenten des Pop-ups aktualisiert. Hier sind ebenfalls die Commands implementiert.
@@ -1330,7 +1330,7 @@ Abstract Class AbstractPushUpActivity & 1\\
 Abstract Class AbstractRunningActivity & 1\\
 Abstract Class AbstractSitUpActivity & 1\\
 Abstract Class AbstractStepActivity & 1\\
-Abstract Class BaseModeViewmodel & 1\\
+Abstract Class BaseModeViewModel & 1\\
 Class Accelerometere & 1\\
 Class Activity & 1\\
 Class ActivityManager & 1\\
@@ -1340,12 +1340,12 @@ Class Characteristics & 1\\
 Class ConfigContainer & 1\\
 Class CountModeActivePage & 1\\
 Class CountModePage & 1\\
-Class CountModeViewmodel & 1\\
+Class CountModeViewModel & 1\\
 Class DBEntry & 1\\
 Class DataBaseConnection & 1\\
 Class DataEventArgs & 1\\
 Class DataOverviewPage & 1\\
-Class DataOverviewViewmodel & 1\\
+Class DataOverviewViewModel & 1\\
 Class DeviceEventArgs & 1\\
 Class EarablesConnection & 1\\
 Class ExceptionHandlingViewModel & 1\\
@@ -1353,14 +1353,14 @@ Class Gyroscope & 1\\
 Class HomeMenuItem & 1\\
 Class IMUDataEntry & 1\\
 Class ImportExportPage & 1\\
-Class ImportExportViewmodel & 1\\
+Class ImportExportViewModel & 1\\
 Class ListenAndPerformActivePage & 1\\
 Class ListenAndPerformPage & 1\\
-Class ListenAndPerformViewmodel & 1\\
+Class ListenAndPerformViewModel & 1\\
 Class MainPage & 1\\
 Class MenuPage & 1\\
 Class MusicModeAllPage & 1\\
-Class MusicModeViewmodel & 1\\
+Class MusicModeViewModel & 1\\
 Class PopUpScanningPage & 1\\
 Class PushUpActivityThreshold & 1\\
 Class PushUpEventArgs & 1\\
@@ -1377,7 +1377,7 @@ Class StepActivityActivityThreshold & 1\\
 Class StepEventActivity & 1\\
 Class StepModeActivePage & 1\\
 Class StepModePage & 1\\
-Class StepModeViewmodel & 1\\
+Class StepModeViewModel & 1\\
 Class User & 1\\
 Enumeration LPF\_Accelerometer & 1\\
 Enumeration LPF\_Gyroscope & 1\\
