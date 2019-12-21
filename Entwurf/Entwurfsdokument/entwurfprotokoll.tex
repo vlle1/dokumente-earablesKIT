@@ -1164,7 +1164,13 @@ Zuletzt wird im Konstruktor eine Mainpage erstellt. Diese ist für die Initialis
 
 \includegraphics[width=1.1\textwidth]{./Diagramme/Verbindungsaufbausequenzdiagramm.png}\\
 Das Sequenzdiagramm verdeutlicht wie eine Bluetoothverbindung hergestellt werden kann. Es wir davon ausgegangen, dass die App bereits gestartet wurde und noch keine Bluetoothverbindung zu den Earables besteht. Außerdem zeigt die App geraden die Seite des Laufmodus an und das PopUpViemwmodel kennt den Service der EarablesConnection bereits.\\
-
+Beim Start des Vorgangs über den Start Button, fragt das StepModeViewModel zunächst, ob die Verbindung zu den \gls{Earables} besteht. Dieses schlägt fehl, da noch keine Verbindung besteht.
+Jetzt wird die statische Methode ShowPopUp() der Klasse ScanningPopUpViewModel aufgerufen. Diese lässt das PopUp vom Typ PopUpScanningPage erscheinen.\\
+Wenn auf diesem der Nutzer den ScanButton betätigt, wird das Command ScanDevicesCommand ausgeführt. In diesem wird die Methode ScanDevices() aufgerufen. Diese ruft bei der EarbalesConnection, welche sie sich als Attribut gespeichert hat, die Methode StartScanning() auf. 
+Diese schaut, mit welchen Geräten sich verbunden werden kann und liefert eine DeviceList zurück. Das ist eine Liste mit Instanzen vom Type Device.
+Die ListViwe im PopUp wird aktualisiert.\\
+Wenn der Nutzer ein Device ausgewählt hat und auf den Connect Button drückt, wird das Command ConnectDeviceCommand im ViewModel ausgeführt. Dieses ruft die Methode ConnectDevice() auf. In dieser Methode wird die EarablesConnection angesprochen, welche versuchen soll sich mit dem Gerät zu verbinden.\\
+Bei einer erfolgreichen Verbindung erhält das ViewModel true zurück. Zudem wird die Eventmethode OnDeviceConnectionStateChanged() von der EarablesConnection aufgerufen. Diese signalisiert, das die Verbindung hergestellt ist. Das PopUp wird darauf mit der Methode HidePopUp() versteckt.
 
 \newpage
 \subsubsection{Navigationsmenu Page auswählen}
