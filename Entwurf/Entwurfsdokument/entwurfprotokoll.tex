@@ -1277,9 +1277,18 @@ Es werden folgende drei .resx Dateien gespeichert:
 	\item[] \textbf{AppResources.de.resx}\\Hierbei handelt es sich um die Deutsche Übersetzung der Beschriftungen.
 	\item[] \textbf{AppResources.en.resx}\\Hierbei handelt es sich um die Englische Übersetzung der Beschriftungen.
 \end{itemize}
-\\
+
 \subsection{lokale Datenbank}
+Die Applikation besitzt eine lokale \gls{Datenbank} zur Speicherung der Trainingsdaten. Dabei ist diese immer am gleichen Pfad zu finden. Die Datenbank wird mit der Erweiterung \gls{SQLite} erstellt und verwaltet. Die Datenbank speichert die Trainingsdaten humanreadable. Man kann die Daten entsprechend in der Datei lesen; sie sind nicht verschlüsselt. In der Datenbank werden Instanzen der Klasse DBEntry gespeichert. Dafür wird nur eine Tablle benötigt. Die Tabelle sieht wie folgt aus:
+
+\begin{itemize}
+	\item[] \textbf{PrimaryKey Date: DateTime}\\Eindeutiger Bezeichner für jeden Datenbankeintrag. Gespeichert wird das Datum.
+	\item[] \textbf{Dictionary: string}\\Attribute des Datenbankeintrag. Für die Modularität wird hier eine Art Dictionary gespeichert. Es enthält die Attribute in einem \gls{CSV}-Format. Dieses Format wird in der statischen Methode parseDBEntry() interpretiert. Beispieleintrag:\\ \textit{'PushUps=12,SitUps=19,Steps=276'}
+\end{itemize}
+ 
 \subsection{App Properties}
+
+\subsection{Plug-ins}
 
 \section{Klassenindex}
 %macht valle ganz am Ende oder wir lassen es weg
