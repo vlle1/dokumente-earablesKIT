@@ -270,6 +270,8 @@ Interface nur um die Kommunikation mit den \Gls{Earables} kümmern muss. Sie ist
 \paragraph{Methoden:}
 \begin{itemize}
 	\item[+] \textbf{ExtractIMUDataString(byteString: int, accScaleFactor: int, GyroScaleFactor): IMUDataEntry}\\Diese Methode erstellt aus der übergebenen Bitfolge ein IMUDataEntry, indem sie die Informationen aus dem Bit string auswertet und in verschiedene Einheiten umrechnet. Zum Umrechnen benötigt sie noch den accScaleFactor und den gyroScaleFactor. Sie erzeugt ein neues IMUDataEntry Objekt und gibt es als Rückgabewert zurück.
+	\item[+] \textbf{ExtractIMUScaleFactorAccelerometer(byteString: int): int}\\Diese Methode berechnet aus dem übergebenen ByteString den Scale Factor für den Accelerometer, der beim extrahieren der IMU Daten gebraucht wird, und gibt diesen als Rückgabewert zurück.
+	\item[+] \textbf{ExtractIMUScaleFactorGyroscope(byteString: int): int}\\Diese Methode berechnet aus dem übergebenen ByteString den Scale Factor für das Gyroscope, der beim extrahieren der IMU Daten gebraucht wird, und gibt diesen als Rückgabewert zurück.
 \end{itemize}
 
 
