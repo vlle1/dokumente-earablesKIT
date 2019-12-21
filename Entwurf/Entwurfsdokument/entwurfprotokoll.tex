@@ -189,7 +189,7 @@ Die Constants Klasse enthält alle Konstanten, die benötigt werden, um die ents
 \end{itemize}
 
 \begin{minipage}[b]{0.5\textwidth}
-	\subsubsection{Class LPF\_Gyroscope}
+	\subsubsection{Enumeration LPF\_Gyroscope}
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
 	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/LPF_Gyrosope.png}
@@ -198,7 +198,7 @@ Die Constants Klasse enthält alle Konstanten, die benötigt werden, um die ents
 \paragraph{Klassenbeschreibung:}
 Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Gyroscope annehmen kann.
 
-\paragraph{Attribute:}
+\paragraph{Werte:}
 \begin{itemize}
 	\item \textbf{250Hz}\\Steht dafür, dass der LPF 250 Hz annehmen kann.
 	\item \textbf{184Hz}\\Steht dafür, dass der LPF 184 Hz annehmen kann.
@@ -213,7 +213,7 @@ Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Gyroscope
 
 
 \begin{minipage}[b]{0.5\textwidth}
-	\subsubsection{Class LPF\_Accelerometer}
+	\subsubsection{Enumeration LPF\_Accelerometer}
 	
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
@@ -222,7 +222,7 @@ Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Gyroscope
 \paragraph{Klassenbeschreibung:}
 Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Accelerometer annehmen kann.
 
-\paragraph{Attribute:}
+\paragraph{Werte:}
 \begin{itemize}
 	\item \textbf{460Hz}\\Steht dafür, dass der LPF 460 Hz annehmen kann.
 	\item \textbf{184Hz}\\Steht dafür, dass der LPF 184 Hz annehmen kann.
@@ -468,7 +468,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item[+] \textbf{DataUpdate(data: DataEventArgs): void}\\Mit dieser Methode bekommt die Aktivität die neuen Dateneinträge. Dabei ruft die Klasse ActivityManager die Methode auf, wenn sie die neuen Daten bekommt. In dieser Methode wird geschaut, ob sich ein Event bei dem EventHandler ActivityDone registriert hat. Falls ja, wird der Datensatz dem buffer hinzugefügt, und der Algorithmus gestartet. Falls nicht, wird der Datensatz ignoriert.
 		\item[\#] \textbf{abstract Analyse(): void}\\Der Algorithmus der Aktivitätserkennung wird in dieser Methode ausgeführt. Dabei ist dieser in den Unterklassen implementiert. Er beurteilt nur mithilfe der gesammelten Gyroskop- und Accelerometerdaten, ob das (der Activity entsprechende) Ereignis eingetroffen ist. In diesem Fall feuert er ein Event über den ActivityDone EventHandler. 
 	\end{itemize}
-	\subsubsection{Abstract class AbstractStepActivity}
+	\subsubsection{Abstract Class AbstractStepActivity}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Schritterkennung.\\ Es soll immer ein Event gefeuert werden, wenn ein Schritt getätigt wurde.
 	\subsubsection{Class StepActivityActivityThreshold}
@@ -480,7 +480,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item [$-$]\textbf{Analyse(): void}\\ Implementierung der Analyse für die Schritterkennung. Dabei basiert diese auf dem Threshold Ansatz.  
 	\end{itemize}
 	
-	\subsubsection{Abstract class AbstractRunningActivity}
+	\subsubsection{Abstract Class AbstractRunningActivity}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung, ob der Nutzer läuft oder steht.\\ Es wird immer dann ein Event gefeuert, wenn sich dieser Status ändert.
 	
@@ -494,7 +494,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 	
 	
-	\subsubsection{Abstract class AbstractPushUpActivity}
+	\subsubsection{Abstract Class AbstractPushUpActivity}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung von Push-ups.\\ Es soll immer ein Event gefeuert werden, wenn eine Liegestütze erkannt wurde.
 	
@@ -507,7 +507,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item [$-$]\textbf{Analyse(): void}\\Implementierung der Analyse für die Sit-Up-Erkennung. Dabei werden die Daten aus der Queue Buffer benutzt. Der EventHandler ruft die Events auf, wenn eine Liegestütze gemacht wurde.
 	\end{itemize}
 
-	\subsubsection{Abstract class AbstractSitUpActivity}
+	\subsubsection{Abstract Class AbstractSitUpActivity}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung von Sit-ups.\\ Es soll nach jedem erkannten Sit-up ein Event gefeuert werden.
 	
@@ -567,50 +567,43 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 		
 		
-		
-		
-		
 \subsection{Settings Service}
 \subsubsection{Interface ISettingsService}
 	\paragraph{Schnittstellenbeschreibung:}
 	ISettingsService bietet eine Schnittstelle für die Einstellungen der App. Sie implementiert Konstanten zur Identifizierung der Einstellungen und hält die aktuellen Einstellungen als Attribute.
 	\paragraph{Attribute:}
 	\begin{itemize}
+		\item[$-$] \textbf{LANGUAGE\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung der Sprache \\
+		\item[$-$] \textbf{USER\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung des Nutzers \\
+		\item[$-$] \textbf{SAMPLINGRATE\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
 		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch)\\
 		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables} \\ 
-		\item[$-$] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache \\
-		\item[$-$] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers \\
-		\item[$-$] \textbf{SAMPLINGRATE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
+		\item[+] \textbf{MyUser: User}\\Der Aktuelle User\\
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item[$-$] \textbf{LoadSettings():void}\\Lädt alle Settings aus den Einstellungen in die Attribute.	
 	\end{itemize}
+
+
 \subsubsection{Class SettingsService}
 	\paragraph{Klassenbeschreibung}
 	Die Klasse SettingsService implementiert die Schnittstelle ISettingsService. Zur Speicherung der Einstellungen wird die Klasse App.Current.Properties verwendet.
 	Dabei wird immer sofort nach einer Änderung die neue Einstellung gespeichert und nicht erst beim Beenden der Sitzung.
-	Das wird gesichert dadurch, dass die Attribute als Properties gespeichert sind, welche beim Setzen (set) stets 'App.Current.Properties[Schlüssel] = value;' benutzen.
-	\paragraph{Attribute:}
-	\begin{itemize}
-		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch). Attribut aus dem Interface ISettingsService\\
-		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables} \\ 
-		\item[$-$] \textbf{LANGUAGE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Sprache. Attribut aus dem Interface ISettingsService \\
-		\item[$-$] \textbf{USER\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung des Nutzers. Konstante aus dem Interface ISettingsService \\
-		\item[$-$] \textbf{SAMPLINGRATE\_PROPERTY: String}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
-	\end{itemize}
+	Das wird dadurch sicher gestellt, dass die Attribute als Properties gespeichert werden, welche beim Setzen (set) stets 'App.Current.Properties[Schlüssel] = value;' benutzen.
+
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item[+] \textbf{<<create>> SettingsService}\\Konstruktor für die Klasse SettingsService. Dabei wird er als Service vom ServiceManager verwaltet, demnach existiert er nur als Singleton.
-		\item[$-$] \textbf{LoadSettings():void}\\Lädt alle Einstellungen aus den App.Current.Properties in die Attribute.	
 	\end{itemize}
+
 \subsubsection{Class User}
 	\paragraph{Klassenbeschreibung:}
 	Die User-Klasse spezifiziert den Nutzer, der die App gerade verwendet. In dieser werden Attribute gespeichert, welche von Nutzer zu Nutzer anders sind. Falls der Nutzer sein Konto noch nicht eingerichtet hat, wird ein Standardnutzer geladen.\\
 	\paragraph{Attribute:}
 	\begin{itemize}
 		\item[+] \textbf{Username: String}\\Der Name des Nutzers. Dabei ist der Standardname 'Nutzer'\\
-		\item[+] \textbf{Steplength: int}\\Die durchschnittliche Schrittlänge des Nutzers in cm. Die Standardlänge beträgt 70cm.\\
+		\item[+] \textbf{Steplength: int}\\Die durchschnittliche Schrittlänge des Nutzers in Zentimeter. Die Standardlänge beträgt 70cm.\\
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
@@ -621,8 +614,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 
 \subsubsection{Enumeration SamplingRate}
 	\paragraph{Enumerationbeschreibung}
-	Das Enum SamplingRate gibt dem User die Auswahl die SamplingRate (Anzahl der Stichproben). Dazu gibt es mehrere Einstellungsraten von 1-100 Hz (Herz). Diese aktuelle SamplingRate wird in den App.Properties gespeichert. Dies wird von der Klasse SettingsService verwaltet. 
-	Bei der Änderung wird die Samplerate der Bibliothek geschickt und auf den \Gls{Earables} gesetzt.
+	Das Enum SamplingRate gibt dem Nutzer die Auswahl die SamplingRate (Anzahl der Stichproben) zu verändern. Dazu gibt es mehrere Einstellungsraten 			von 1-100 Hz (Herz). Die aktuelle SamplingRate, welche von der Klasse SettingsService verwaltet wird, wird in den App.Properties gespeichert.
+	Bei einer Änderung wird die Samplerate der Bibliothek geschickt. Anschließend stellt sie die neue Samplingrate auf den \Gls{Earables} ein.
 	
 	\paragraph{Werte:}
 	\begin{itemize}
@@ -859,12 +852,12 @@ Die Kommunikation wird dabei mit Commands geregelt.
 	\item[+] \textbf{Import: ICommand}
 	\item[+] \textbf{Delete: ICommand}
 \end{itemize}
-Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen die entsprechende Methode in dieser Klasse aus.
+Die Commands werden an die entsprechenden Buttons im View gekoppelt und lösen die entsprechende Methode in dieser Klasse aus.
 \paragraph{Methoden:}
 \begin{itemize}
-    \item[$-$] \textbf{exportClicked(): void}\\ öffnet einen folderPicker-Dialog und ruft danach in IDataBaseConnection exportTrainingData mit dem vom Nutzer im Dialog ausgewählten Pfad aus.%%??name genau von dem filePicker??
-    \item[$-$] \textbf{importClicked(): void}\\ öffnet einen filePicker-Dialog und ruft danach in IDataBaseConnection importTrainingData mit dem vom Nutzer ausgewählten file auf.
-    \item[$-$] \textbf{deleteClicked(): void}\\zeigt einen Warning-Dialog an, ob man wirklich alle Vorgangsdaten löschen will. Daraufhin wird bei Bestätigung in IDatabaseConnection deleteTrainingData aufgerufen.
+    \item[$-$] \textbf{exportClicked(): void}\\ Öffnet einen folderPicker-Dialog und ruft danach in IDataBaseConnection exportTrainingData mit dem vom Nutzer im Dialog ausgewählten Pfad aus.%%??name genau von dem filePicker??
+    \item[$-$] \textbf{importClicked(): void}\\ Öffnet einen filePicker-Dialog und ruft danach in IDataBaseConnection importTrainingData mit dem vom Nutzer ausgewählten file auf.
+    \item[$-$] \textbf{deleteClicked(): void}\\Zeigt einen Warning-Dialog an, ob man wirklich alle Vorgangsdaten löschen will. Daraufhin wird bei Bestätigung in IDatabaseConnection deleteTrainingData aufgerufen.
 \end{itemize} 
 
 \begin{minipage}[b]{0.7\textwidth}
@@ -878,18 +871,18 @@ Die Commands werden je an den entsprechenden Button im View gekoppelt und lösen
 Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von INotifyPropertyChanged und verwendet für das Speichern der Einstellungen einen Command. Außerdem holt sie sich vom SettingsService alle aktuellen Einstellungen.
 \paragraph{Attribute:}
 \begin{itemize}
-	\item[$-$] \textbf{needsRestart: bool}\\ diese Property verfügt nur über einen privaten getter. Sie ist genau dann wahr, wenn der Nutzer die Sprache geändert hat, also der Zustand des Sliders in der View und der Zustand als in dieser Klasse als Attribut gespeicherten Sprache unterschiedlich sind.
-	\item[+] \textbf{Username: String}\\Der Username verfügt über ein Binding zur View.
+	\item[$-$] \textbf{needsRestart: bool}\\ Diese Property verfügt nur über einen privaten Getter. Dieses Attribut ist genau dann wahr, wenn der Nutzer die Sprache geändert hat, also der Zustand des Sliders in der View und der Zustand des Attributs Language dieser Klasse unterschiedlich sind.
+	\item[+] \textbf{Username: string}\\Der Username verfügt über ein Binding zur View.
 	\item[+] \textbf{StepLength: int}\\Die StepLength verfügt über ein Binding zur View. 
-	\item[+] \textbf{SamplingRate: SamplingRate}\\Die SamplingRate wird nicht direkt im View gebunden.
-	\item[+] \textbf{Language: CultureInfo}\\Die Language wird nicht direkt im View gebunden. 
+	\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuell eingestellte Samplerate. Dieses Attribut wird nicht direkt im View gebunden.
+	\item[+] \textbf{Language: CultureInfo}\\Die aktuell eingestellte Sprache. Dieses Attribut wird nicht direkt im View gebunden. 
 	\item[+] \textbf{ClickSave: Command}\\Bei Ausführen dieses Commands wird die Methode SaveClicked ausgeführt. 
 \end{itemize}
 \paragraph{Methoden:}
 \begin{itemize}
-    \item[+] \textbf{<<create>> SettingsViewModel(): void}\\ Im Konstruktor holt sich die Klasse vom ISettingsService den User, die Sprache und die Samplingrate und speichert die Entsprechenden Werte in den eigenen Properties. Die Werte von Attributen, die über kein Binding verfügen, müssen hier manuell ins View übertragen werden.
-    \item[\#] \textbf{OnPropertyChanged(): void} Die Methode wird von der Schnittstelle INotifyPropertyChanged geerbt. Diese wird benutzt um die View zu aktualisieren und ihr um Bescheid zu geben, wenn sich eine Eigenschaft aus dem ViewModel verändert. 
-    \item[$-$] \textbf{SaveClicked(): void}\\ wenn diese Methode aufgerufen wird, werden die aktuellen Properties wieder im ISettingsService gespeichert, nachdem alle Werte von Attributen, die über kein Binding verfügen, vom View geholt und aktualisiert werden. Außerdem wird die Schrittlänge ans Erweiterungsmodul und die Samplingrate an die Bibliothek weitergegeben. Bei Auftretenden Exceptions (kein Gerät verbunden) wird eine Fehlermeldung als Popup angezeigt. Liefert needsRestart wahr, wird außerdem ein Hinweis angezeigt, dass die App neu gestartet werden muss, um alle Änderungen zu übernehmen. 
+    \item[+] \textbf{<<create>> SettingsViewModel(): void}\\ Im Konstruktor holt sich die Klasse vom ISettingsService den User, die Sprache und die Samplingrate und speichert die entsprechenden Werte in den eigenen Properties. Die Werte von Attributen, die über kein Binding verfügen, müssen hier manuell in die View übertragen werden.
+    \item[\#] \textbf{OnPropertyChanged(): void}\\ Die Methode wird von der Schnittstelle INotifyPropertyChanged geerbt. Diese wird benutzt um die View zu aktualisieren und ihr Bescheid zu geben, wenn sich eine Eigenschaft aus dem ViewModel verändert hat. 
+    \item[+] \textbf{SaveClicked(): void}\\ Wenn diese Methode aufgerufen wird, werden, nachdem alle Werte von Attributen, die über kein Binding verfügen, vom View geholt und aktualisiert worden, die aktuellen Properties wieder im ISettingsService gespeichert. Außerdem wird die Schrittlänge an das Erweiterungsmodul und die Samplingrate an die Bibliothek weitergegeben. Bei Auftretenden Exceptions (kein Gerät verbunden) wird eine Fehlermeldung als Popup angezeigt. Liefert needsRestart wahr, wird außerdem ein Hinweis angezeigt, dass die App neu gestartet werden muss, um alle Änderungen zu übernehmen. 
 \end{itemize} 
 
 \subsection{Class ScanningPopUpViewModel}
@@ -1070,9 +1063,9 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\paragraph{Attribute}
 		\begin{itemize}
 			\item[+] \textbf{ImportExportLabel: Label} \\ Anzeige des Pagenamens (Im-/ Export CSV Datei).
-			\item [+]\textbf{DeleteData: Button}
-			\item [+]\textbf{ExportData: Button}
-			\item [+]\textbf{ImportData: Button} %%die anderen haben es auch public gemacht - einheitlich. ist das sinnvoll oder kann das private? -valle
+			\item [+]\textbf{DeleteData: Button}\\ Button der gedrückt wird, um die vorhandenen Daten zu löschen.
+			\item [+]\textbf{ExportData: Button}\\ Button der gedrückt wird, um Daten zu exportieren.
+			\item [+]\textbf{ImportData: Button} \\ Button der gedrückt wird, um Daten zu importieren.
 		\end{itemize}
 
 	\begin{minipage}[b]{0.7\textwidth}
@@ -1087,11 +1080,11 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\paragraph{Attribute}
 		\begin{itemize}
 			\item[+] \textbf{ImportExportLabel: Label} \\ Anzeige des Pagenamens (Settings).
-			\item [+]\textbf{NameEntry: Entry}
-			\item [+]\textbf{LanguagePicker: Picker} Hier kann der Nutzer zwischen Deutsch und Englisch wählen.
-			\item [+]\textbf{StepLengthEntry: Entry} 
-			\item [+]\textbf{SampleRatePicker: Picker} Hier kann der Nutzer zwischen wenigen angebotenen Samplingraten wählen. Diese entsprechen denen vom Settings Service zur Verfügung gestellten Werte.
-			\item [+]\textbf{SaveButton: Button}
+			\item [+]\textbf{NameEntry: Entry}\\ Hier gibt der Nutzer seinen Namen ein.
+			\item [+]\textbf{LanguagePicker: Picker}\\ Hier kann der Nutzer zwischen Deutsch und Englisch wählen.
+			\item [+]\textbf{StepLengthEntry: Entry}\\ Hier gibt de Nutzer seine Schrittlänge ein.
+			\item [+]\textbf{SampleRatePicker: Picker}\\ Hier kann der Nutzer zwischen angebotenen Samplingraten wählen, die vom SettingsService zur Verfügung gestellt werden.
+			\item [+]\textbf{SaveButton: Button}\\ Button der gedrückt wird, um die Eingaben zu speichern.
 		\end{itemize}
 
 	\subsection{Class PopUpScanningPage}
@@ -1122,11 +1115,11 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\end{minipage}
 		\paragraph{Klassenbeschreibung:}
 		Die MainPage erbt von MasterDetailPage und stellt die grundlegende angezeigte Struktur zur Verfügung. Das ist im Wesentlichen der Menü-Button (vlg. Preset "MasterDetailPage" in Visual Studio 2019).\\
-		Bei Klicken auf das Menü-Icon bzw. Swipen vom Rand aus öffnet sich automatisch (vererbt von MasterDetailPage) die MenuPage.
+		Beim Klicken auf das Menü-Icon bzw. Swipen vom Rand aus öffnet sich automatisch (vererbt von MasterDetailPage) die MenuPage.
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [-] \textbf{MenuPages: Dictionary<int, NavigationPage>}\\ Dieses Dictionary wird verwendet, um mit dem Klicken auf den Namen einer bestimmten Page die Page selbst zu assoziieren (bzw. die ihr entsprechende NavigationPage).
-			\item [-] \textbf{icon: navigationPage.Icon} Das Menü-Item, das sich für den Nutzer links oben im Eck befindet.
+			\item [-] \textbf{menuPages: Dictionary<int, NavigationPage>}\\ Dieses Dictionary wird verwendet, um beim Klicken auf den Namen einer bestimmten Page die Page selbst zu assoziieren (bzw. die ihr entsprechende NavigationPage).
+			\item [-] \textbf{icon: navigationPage.Icon} Das Menü-Item, dass sich für den Nutzer links oben im Eck befindet.
 		\end{itemize}
 		\paragraph{Methoden}
 		\begin{itemize}
@@ -1141,16 +1134,16 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\includegraphics[width=\textwidth]{bilder/ViewKlassen/MenuPage.png}
 	\end{minipage}
 		\paragraph{Klassenbeschreibung:}
-		Die MenuPage ist das Menü, aus dem der Nutzer nach Klicken des Menü-Buttons eine Seite auswählen kann.
+		Die MenuPage ist das Menü, aus dem der Nutzer, nach dem Klicken des Menü-Buttons, eine Seite auswählen kann.
 		\paragraph{Attribute}
 		\begin{itemize}
-			\item [+] \textbf{RootPage: MainPage} Diese Property verfügt nur über einen Getter, der die aktuelle MainPage zurückgibt.
-			\item [-] \textbf{menuItems: List<HomeMenuItem>} Diese Liste enthält alle von der MenuPage aus direkt ansteuerbaren Seiten.
-			\item [-] \textbf{menu: ListView} Das menu ist das menuItems entsprechende angezeigte Element auf der Seite.		
+			\item [+] \textbf{RootPage: MainPage}\\ Diese Property verfügt nur über einen Getter, der die aktuelle MainPage zurückgibt.
+			\item [-] \textbf{menuItems: List<HomeMenuItem>}\\ Diese Liste enthält alle von der MenuPage aus direkt ansteuerbaren Seiten.
+			\item [-] \textbf{menu: ListView}\\ Das menu ist das menuItems entsprechende angezeigte Element auf der Seite.		
 		\end{itemize}
 		\paragraph{Methoden}
 		\begin{itemize}
-			\item [+] \textbf{<<create>> MenuPage()} Im Konstruktor wird menuItems mit allen gewünschten Seiten initialisiert und den menuItems wird ein Event, das bei Auswählen eines Items gefeuert wird, hinzugefügt. Dieses veranlasst die Navigation zu dieser Seite mittels der MainPage.
+			\item [+] \textbf{<<create>> MenuPage()}\\ Im Konstruktor wird menuItems mit allen gewünschten Seiten initialisiert und den menuItems wird ein Event, das bei Auswählen eines Items gefeuert wird, hinzugefügt. Dieses veranlasst die Navigation zu dieser Seite mittels der MainPage.
 		\end{itemize}
 	
 \newpage
@@ -1193,8 +1186,13 @@ Das Sequenzdiagramm verdeutlicht wie eine Bluetoothverbindung hergestellt werden
 Beim Start des Vorgangs über den Start Button, fragt das StepModeViewModel zunächst, ob die Verbindung zu den \gls{Earables} besteht. Dieses schlägt fehl, da noch keine Verbindung besteht.
 Jetzt wird die statische Methode ShowPopUp() der Klasse ScanningPopUpViewModel aufgerufen. Diese lässt das PopUp vom Typ PopUpScanningPage erscheinen.\\
 Wenn auf diesem der Nutzer den ScanButton betätigt, wird das Command ScanDevicesCommand ausgeführt. In diesem wird die Methode ScanDevices() aufgerufen. Diese ruft bei der EarbalesConnection, welche sie sich als Attribut gespeichert hat, die Methode StartScanning() auf. 
+<<<<<<< Updated upstream
 Diese schaut, mit welchen Geräten sich verbunden werden kann und liefert eine DeviceList zurück. Das ist eine Liste mit Instanzen vom Type Device.
 Die ListView im PopUp wird aktualisiert.\\
+=======
+Diese schaut, mit welchen Geräten sich verbunden werden kann und liefert eine DeviceList zurück. Das ist eine Liste mit Instanzen vom Type IDevice.
+Die ListViwe im PopUp wird aktualisiert.\\
+>>>>>>> Stashed changes
 Wenn der Nutzer ein Device ausgewählt hat und auf den Connect Button drückt, wird das Command ConnectDeviceCommand im ViewModel ausgeführt. Dieses ruft die Methode ConnectDevice() auf. In dieser Methode wird die EarablesConnection angesprochen, welche versuchen soll sich mit dem Gerät zu verbinden.\\
 Bei einer erfolgreichen Verbindung erhält das ViewModel true zurück. Zudem wird die Eventmethode OnDeviceConnectionStateChanged() von der EarablesConnection aufgerufen. Diese signalisiert, das die Verbindung hergestellt ist. Das PopUp wird darauf mit der Methode HidePopUp() versteckt.
 
@@ -1288,8 +1286,77 @@ Es werden folgende Erweiterungen benötigt:\\
 \end{itemize}
 
 \section{Klassenindex}
-%macht valle ganz am Ende oder wir lassen es weg
-\section{Anhang}
+
+\begin{tabular}[h]{p{15cm}c}
+Klassenname & Seite \\
+\hline
+Abstract Class AbstractPushUpActivity & 1 \\
+Abstract Class AbstractRunningActivity & 1 \\
+Abstract Class AbstractSitUpActivity & 1 \\
+Abstract Class AbstractStepActivity & 1 \\
+Abstract Class BaseModeViewmodel & 1 \\
+Class Accelerometere & 1 \\
+Class Activity & 1 \\
+Class ActivityManager & 1 \\
+Class ButtonEventArgs & 1 \\
+Class Characteristics & 1 \\
+Class ConfigContainer & 1 \\
+Class CountModeActivePage & 1 \\
+Class CountModePage & 1 \\
+Class CountModeViewmodel & 1 \\
+Class DBEntry & 1 \\
+Class DataBaseConnection & 1 \\
+Class DataEventArgs & 1 \\
+Class DataOverviewPage & 1 \\
+Class DataOverviewViewmodel & 1 \\
+Class DeviceEventArgs & 1 \\
+Class EarablesConnection & 1 \\
+Class ExceptionHandlingViewModel & 1 \\
+Class Gyroscope & 1 \\
+Class HomeMenuItem & 1 \\
+Class IMUDataEntry & 1 \\
+Class ImportExportPage & 1 \\ 
+Class ImportExportViewmodel & 1 \\
+Class LPF\_Accelerometer & 1 \\
+Class LPF\_Gyroscope & 1 \\ 
+Class ListenAndPerformActivePage & 1 \\ 
+Class ListenAndPerformPage & 1 \\
+Class ListenAndPerformViewmodel & 1 \\
+Class MainPage & 1 \\
+Class MenuPage & 1 \\
+Class MusicModeAllPage & 1 \\
+Class MusicModeViewmodel & 1 \\
+Class PopUpScanningPage & 1 \\
+Class PushUpActivityThreshold & 1 \\
+Class PushUpEventArgs & 1 \\
+Class RunningActivityThreshold & 1 \\
+Class RunningEventArgs & 1 \\
+Class ScanningPopUpViewModel & 1 \\
+Class ServiceManager & 1 \\
+Class SettingsPage & 1 \\
+Class SettingsService & 1 \\
+Class SettingsViewModel & 1 \\
+Class SitUpActivity & 1 \\
+Class SitUpActivityThreshold & 1 \\
+Class StepActivityActivityThreshold & 1 \\
+Class StepEventActivity & 1 \\
+Class StepModeActivePage & 1 \\
+Class StepModePage & 1 \\
+Class StepModeViewmodel & 1 \\
+Class User & 1 \\
+Enumeration MenuItemType & 1 \\
+Enumeration SamplingRate & 1 \\
+Interface ActivityArgs & 1 \\
+Interface CountableActivityArgs & 1 \\
+Interface IActivityManager & 1 \\
+Interface IDataBaseConnection & 1 \\
+Interface IEarablesConnection & 1 \\
+Interface IManager & 1 \\
+Interface ISettingsService & 1 \\
+Static Class Constants & 1 \\
+Static Class IMUDataExtractor & 1 \\
+\end{tabular}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
