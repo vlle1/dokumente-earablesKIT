@@ -186,12 +186,12 @@ Die Constants Klasse enthält alle Konstanten, die benötigt werden, um die ents
 
 \paragraph{Attribute:}
 \begin{itemize}
-	\item[+] \textbf{START/STOP\_IMU\_SAMPLIG\_CHAR: String}\\ Dieser String enthält die Beschreibung der Charakteristik, welche beschrieben wird,  um das IMU Daten Sampling zu starten und zu stoppen.
-	\item[+] \textbf{SENSORDATA\_CHAR: String}\\ Dieser String enthält die Beschreibung der Charakteristik, in dem die IMU Sensordaten gespeichert werden.
-	\item[+] \textbf{PUSHBUTTON\_CHAR: String} \\Dieser String enthält die Beschreibung der Charakteristik, in dem der Push Button Status gespeichert wird.
-	\item[+] \textbf{BATTERY\_CHAR: String}\\ Dieser String enthält die Beschreibung der Charakteristik, in dem die Batterieladung gespeichert wird.
-	\item[+] \textbf{ACCELEROMETER\_GYROSCOPE\_LPF\_CHAR: String}\\ Dieser String enthält die Beschreibung der Charakteristik, welche beschrieben wird, um den Low Pass Filter für den Accelerometer und das Gyroscope zu setzen.
-\item[+] \textbf{ACCESS\_SERVICE: String}\\ Dieser String enthält die Beschreibung des Service Access-Service, der alle benötigten Charakteristiken enthält.
+	\item[+] \textbf{START/STOP\_IMU\_SAMPLIG\_CHAR: string}\\ Dieser string enthält die Beschreibung der Charakteristik, welche beschrieben wird,  um das IMU Daten Sampling zu starten und zu stoppen.
+	\item[+] \textbf{SENSORDATA\_CHAR: string}\\ Dieser string enthält die Beschreibung der Charakteristik, in dem die IMU Sensordaten gespeichert werden.
+	\item[+] \textbf{PUSHBUTTON\_CHAR: string} \\Dieser string enthält die Beschreibung der Charakteristik, in dem der Push Button Status gespeichert wird.
+	\item[+] \textbf{BATTERY\_CHAR: string}\\ Dieser string enthält die Beschreibung der Charakteristik, in dem die Batterieladung gespeichert wird.
+	\item[+] \textbf{ACCELEROMETER\_GYROSCOPE\_LPF\_CHAR: string}\\ Dieser string enthält die Beschreibung der Charakteristik, welche beschrieben wird, um den Low Pass Filter für den Accelerometer und das Gyroscope zu setzen.
+\item[+] \textbf{ACCESS\_SERVICE: string}\\ Dieser string enthält die Beschreibung des Service Access-Service, der alle benötigten Charakteristiken enthält.
 \end{itemize}
 
 \begin{minipage}[b]{0.5\textwidth}
@@ -263,13 +263,13 @@ Diese Klasse beinhaltet alle Einstellungsmöglichkeiten für die \Gls{Earables}.
 	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/IMUDataExtractor.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
-Diese Klasse übernimmt das Umwandeln des Bit Strings in vernünftige Werte und Einheiten.
+Diese Klasse übernimmt das Umwandeln des Bit strings in vernünftige Werte und Einheiten.
 Die Klasse wurde erstellt um dem IEarablesConnection Interface Arbeit abzunehmen und Logik zu entkoppeln, sodass sich das IEarablesConnection
 Interface nur um die Kommunikation mit den \Gls{Earables} kümmern muss. Sie ist static, da sie nur einen Dienst anbietet.
 
 \paragraph{Methoden:}
 \begin{itemize}
-	\item[+] \textbf{ExtractIMUDataString(byteString: int, accScaleFactor: int, GyroScaleFactor): IMUDataEntry}\\Diese Methode erstellt aus der übergebenen Bitfolge ein IMUDataEntry, indem sie die Informationen aus dem Bit String auswertet und in verschiedene Einheiten umrechnet. Zum Umrechnen benötigt sie noch den accScaleFactor und den gyroScaleFactor. Sie erzeugt ein neues IMUDataEntry Objekt und gibt es als Rückgabewert zurück.
+	\item[+] \textbf{ExtractIMUDataString(byteString: int, accScaleFactor: int, GyroScaleFactor): IMUDataEntry}\\Diese Methode erstellt aus der übergebenen Bitfolge ein IMUDataEntry, indem sie die Informationen aus dem Bit string auswertet und in verschiedene Einheiten umrechnet. Zum Umrechnen benötigt sie noch den accScaleFactor und den gyroScaleFactor. Sie erzeugt ein neues IMUDataEntry Objekt und gibt es als Rückgabewert zurück.
 \end{itemize}
 
 
@@ -358,7 +358,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event DeviceCo
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{Connected: bool}\\Ist true falls eine BLE Verbindung mit einem Device existiert und false falls nicht.
-	\item[+] \textbf{DeviceName: String}\\Beinhaltet den Gerätenamen, mit dem das Smartphone verbunden ist. 
+	\item[+] \textbf{DeviceName: string}\\Beinhaltet den Gerätenamen, mit dem das Smartphone verbunden ist. 
 \end{itemize}
 
 \paragraph{Methoden:}
@@ -623,9 +623,9 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[+] \textbf{ToString(): string}\\Wandelt das Objekt in einen String um. Damit ist geregelt, dass der User als String in den App.Current.Properties gespeichert werden kann. Er wird in ein \Gls{CSV}-Format umgewandelt.\\
-		Beispiel: ``Alice van Bob,80'' ist die String-Repräsentation des Users mit Username ``Alice van Bob'' und Steplength 80.\\
-		\item[+] \textbf{static ParseUser(user: string): User}\\Statische Methode, welche einen \Gls{CSV}-String wieder in  ein Objekt umwandelt. Das Format ist in der ToString() Methode spezialisiert. Falls der übergeben String nicht dem Format entspricht, so wird 'null' zurückgegeben.\\
+		\item[+] \textbf{ToString(): string}\\Wandelt das Objekt in einen string um. Damit ist geregelt, dass der User als string in den App.Current.Properties gespeichert werden kann. Er wird in ein \Gls{CSV}-Format umgewandelt.\\
+		Beispiel: ``Alice van Bob,80'' ist die string-Repräsentation des Users mit Username ``Alice van Bob'' und Steplength 80.\\
+		\item[+] \textbf{static ParseUser(user: string): User}\\Statische Methode, welche einen \Gls{CSV}-String wieder in  ein Objekt umwandelt. Das Format ist in der ToString() Methode spezialisiert. Falls der übergeben string nicht dem Format entspricht, so wird 'null' zurückgegeben.\\
 	\end{itemize}
 
 \subsubsection{Enumeration SamplingRate}
@@ -662,7 +662,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item[+] \textbf{GetAllEntriesAsync(): Task<List<DBEntry> >}\\Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry.\\ 
 		\item[+] \textbf{GetMostRecentEntriesAsync(amount : int): void}\\Liefert  die letzten 'amount' Einträge der Datenbank in Form einer Liste mit DBEntry zurück.\\
 		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEntries raus und speichert sie in der \gls{Datenbank}.\\
-		\item[+] \textbf{ExportTrainingData(path: String): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
+		\item[+] \textbf{ExportTrainingData(path: string): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
 	\end{itemize}
 
 \subsubsection{Class DataBaseConnection}
@@ -675,13 +675,13 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[+] \textbf{<<create>> DatabaseConnection}\\Konstruktor für die Klasse DatabaseConnection. Es wird eine Instanz SQLiteAsyncConnection und eine Tabelle erstellt. Diese besteht aus zwei Spalten: Das Datum(Primary Key) als Datetype und den Inhalt als String.
+		\item[+] \textbf{<<create>> DatabaseConnection}\\Konstruktor für die Klasse DatabaseConnection. Es wird eine Instanz SQLiteAsyncConnection und eine Tabelle erstellt. Diese besteht aus zwei Spalten: Das Datum(Primary Key) als Datetype und den Inhalt als string.
 		\item[+] \textbf{SaveDBEntry(entry: DBEntry): void}\\Speichert ein Datenbankeintrag in der \gls{Datenbank}. Falls schon ein Eintrag zu dem Datum existiert, wird dieser aktualisiert, indem die Werte addiert werden.\\
-		\item[+] \textbf{GetAllEntriesAsync(): Task<List<DBEntry>>}\\Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : String) der Klasse DBEntry.\\ 
-		\item[+] \textbf{GetMostRecentEntriesAsync(amount : int): void}\\Liefert  die letzten 'amount' Einträge der Datenbank in Form einer Liste mit DBEntry zurück. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : String) der Klasse DBEntry.\\
-		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEnries raus und speichert sie in der \gls{Datenbank}. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : String) der Klasse DBEntry.\\
+		\item[+] \textbf{GetAllEntriesAsync(): Task<List<DBEntry>>}\\Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.\\ 
+		\item[+] \textbf{GetMostRecentEntriesAsync(amount : int): void}\\Liefert  die letzten 'amount' Einträge der Datenbank in Form einer Liste mit DBEntry zurück. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.\\
+		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEnries raus und speichert sie in der \gls{Datenbank}. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.\\
 
-		\item[+] \textbf{ExportTrainingData(path: String): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
+		\item[+] \textbf{ExportTrainingData(path: string): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
 	\end{itemize}
 \subsubsection{Class DBEntry}
 	\paragraph{Klassenbeschreibung}
@@ -690,14 +690,14 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\paragraph{Attribute}
 	\begin{itemize}
 		\item[+] \textbf{Date: DateTime}\\Das Datum des Trainingstages. Wird als eindeutiger Bezeichner (Primary key) in der \Gls{Datenbank} benutzt.\\
-			\item[+] \textbf{TrainingsData : Dictionary<String, int>}\\ Beinhaltet die einzelnen Attribute. Dabei ist der String der Bezeichner des Attributes und int die Anzahl der Inhalt. 
+			\item[+] \textbf{TrainingsData : Dictionary<String, int>}\\ Beinhaltet die einzelnen Attribute. Dabei ist der string der Bezeichner des Attributes und int die Anzahl der Inhalt. 
 	\end{itemize}
 	 
 	 \paragraph{Methoden}
 	 \begin{itemize}
-	 	\item[+] \textbf{ToString(): string}\\Liefert die Instanz als String zurück. Dabei wird das \gls{CSV}-Format verwendet. Als Attribute werden standardgemäß die Schritte (Steps), Liegestützen (PushUps) und die SitUps gespeichert.
+	 	\item[+] \textbf{ToString(): string}\\Liefert die Instanz als string zurück. Dabei wird das \gls{CSV}-Format verwendet. Als Attribute werden standardgemäß die Schritte (Steps), Liegestützen (PushUps) und die SitUps gespeichert.
 	 	Beispiel: ``11.11.19,PushUps=10,SitUps=2,Steps=242''\\
-	 	\item[+] \textbf{static ParseDBEntry(entry: string) : DBEntry}\\Liest aus einem String ein DBEntry Objekt. Falls der String nicht dem Format entspricht, wird null zurückgegeben. Das Format ist in ToString() festgelegt.\\
+	 	\item[+] \textbf{static ParseDBEntry(entry: string) : DBEntry}\\Liest aus einem string ein DBEntry Objekt. Falls der string nicht dem Format entspricht, wird null zurückgegeben. Das Format ist in ToString() festgelegt.\\
 	\end{itemize}
 
 
@@ -1295,13 +1295,13 @@ Die Applikation besitzt eine lokale \gls{Datenbank} zur Speicherung der Training
  
 \subsection{App Properties}
 In den App Properties werden die Einstellungen der App gespeichert. Die Klasse SettingsService verwaltet dabei die Einstellungen. Das geschieht mit der Xamarin-nativen Klasse App.Current.Properties. Diese regelt die Speicherung auf dem Gerät, sodass auch bei mehreren Sitzungen die App Properties gleich sind.\\
-Die Klasse SettingsService benutzt die Properties Klasse und regelt das korrekte Setzen der Einstellungen. Dabei können nur Objekte gespeichert werden, welche durch primitive Datentypen beschrieben werden können. Komplexere Datenstrukturen müssen zunächst in einen String (z.B. mit toString()) umgewandelt werden, um gespeichert zu werden. So wird der User mithilfe der ToString() Methode der User Klasse abgespeichert. Es existiert dementsprechend auch die statische Methode ParseUser() in der Klasse User, welche einen String zu einer User-Instanz umwandelt.
+Die Klasse SettingsService benutzt die Properties Klasse und regelt das korrekte Setzen der Einstellungen. Dabei können nur Objekte gespeichert werden, welche durch primitive Datentypen beschrieben werden können. Komplexere Datenstrukturen müssen zunächst in einen string (z.B. mit toString()) umgewandelt werden, um gespeichert zu werden. So wird der User mithilfe der ToString() Methode der User Klasse abgespeichert. Es existiert dementsprechend auch die statische Methode ParseUser() in der Klasse User, welche einen string zu einer User-Instanz umwandelt.
 \\In den App Properties werden folgende Eigenschaften gespeichert:
 \begin{itemize}
 	\item \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache in Form einer CultureInfo. Dabei hat jede Sprache einen eindeutigen Bezeichner, welcher gespeichert wird.\\ (Deutsch='de-DE', Englisch='en-US').
 	\item \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables}. Diese wird als Integer gespeichert. Dieser ist der Wert im Enum SamplingRate.
 
-	\item \textbf{User: User}\\Der aktuelle Nutzer. Dabei wird der Nutzername gespeichert und die Schrittlänge. Der User ist modular, es können noch mehr Attribute ergänzt werden.  Wie beschrieben wird der User als String gespeichert, welcher wieder geparst werden kann.
+	\item \textbf{User: User}\\Der aktuelle Nutzer. Dabei wird der Nutzername gespeichert und die Schrittlänge. Der User ist modular, es können noch mehr Attribute ergänzt werden.  Wie beschrieben wird der User als string gespeichert, welcher wieder geparst werden kann.
 
 \end{itemize}
 
