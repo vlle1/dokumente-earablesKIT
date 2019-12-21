@@ -101,14 +101,14 @@ In diesem Dokument wird der Entwurf der \Gls{CPB}, des Erweiterungsmoduls und de
 Wir haben uns bei der Architekturdiagramm für \textsf{Model-View-Viewmodel}, eine Spezialisierung des Entwurfsmusters Model-View-Controller, entschieden. Dabei wurden im Vergleich zum Architekturdiagramm im Pflichtenheft einige kleinere Änderungen vorgenommen. Es folgt eine Beschreibung der Komponenten:
   \begin{itemize}
   	\item \textsf{\glqq View\grqq{}} enthält alle grafisch angezeigten Elemente, also die Datenanzeige und Bedienoberfläche der App.
- 	\item \textsf{\glqq Model\grqq{}} enthält die Geschäftslogik der App und ist durch die neu hinzugefügte zentrale Schnittstelle des ServiceManagers stark nach außen abgekapselt. Benötigte Services können beim Programmstart im ServiceManager registriert werden, sodass bei Bedarf eine Singelton-Instanz des Service zur Verfügung gestellt werden kann. Wesentlich sind dabei folgende Services: 
+ 	\item \textsf{\glqq Model\grqq{}} enthält die Geschäftslogik der App und ist durch die neu hinzugefügte zentrale Schnittstelle des ServiceManagers stark nach außen abgekapselt. Benötigte Services können beim Programmstart im ServiceManager registriert werden, sodass bei Bedarf eine Singleton-Instanz des Service zur Verfügung gestellt werden kann. Wesentlich sind dabei folgende Services: 
 \begin{itemize}
       \item Die Verwaltung der anfallenden Aktivitätsdaten (Abruf und Bereitstellung der gespeicherten Daten in der Datenbank, im CSV-Format) über ein Datenmodul.
       \item Die Bibliothek, die für die Kommunikation mit den \Gls{Earables} (Verbindungsaufbau, Start und Stopp des Samplings, Konfiguration der \Gls{Steuerungsparameter}, Auslesen der Sensordaten) zuständig ist. Dazu wird eine externe Bibliothek\footnote{https://github.com/xabre/xamarin-bluetooth-le} verwendet. Die ausgelesenen Sensordaten werden per Event an die einzelnen Aktivitätsanalysen weiter geschickt. 
       \item Das Erweiterungsmodul, das sich um die Aktivitätserkennung kümmert. Es definiert die unterschiedlichen Analysemethoden für die Aktivitäten, die aufgrund der Servicestruktur leicht austauschbar sind und nutzt die Schnittstellen der Bibliothek. Die erkannten Aktivitätsdaten werden ebenfalls per Event an das Viewmodel weiter geschickt. 
 \end{itemize}
 Die Services sind dabei jeweils unabhängig vom restlichen Model funktionsfähig und dadurch leichter testbar.
-\item \textsf{\glqq Viewmodel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der Nutzeroberfläche, wird also bei Benutzerinteraktion von der View benachrichtigt. Dabei benutzen wir unter anderem eine Commandstruktur, um beispielsweise Buttonclicks zu registrieren und an das Viewmodel weiter zu delegieren. Das Viewmodel interagiert mit dem Model über die neu hinzugefügte Schnittstelle des ServiceManagers und kann bei ihm Anfragen an benötigte Services wie Aktivitätsanalysen stellen. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die View angepasst wird, zum Beispiel bei Verbindungsabbruch zu den \Gls{Earables} und beim Empfangen von neuen Aktivitätsdaten. Dies erfolgt über Databinding und der von Xamarin angebotenen NotifyPropertyChanged Schnittstelle.
+\item \textsf{\glqq Viewmodel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der Nutzeroberfläche, wird also bei Benutzerinteraktion von der View benachrichtigt. Dabei benutzen wir unter anderem eine Befehlsstruktur, um beispielsweise Buttonklicks zu registrieren und an das Viewmodel weiter zu delegieren. Das Viewmodel interagiert mit dem Model über die neu hinzugefügte Schnittstelle des ServiceManagers und kann bei ihm Anfragen an benötigte Services wie Aktivitätsanalysen stellen. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die View angepasst wird, zum Beispiel bei Verbindungsabbruch zu den \Gls{Earables} und beim Empfangen von neuen Aktivitätsdaten. Dies erfolgt über Databinding und der von Xamarin angebotenen NotifyPropertyChanged Schnittstelle.
 \end{itemize}
   Der Vorteil dieser Architektur ist eine klare Trennung von Benutzerinteraktion und Programmlogik sowie eine lose Kopplung zwischen einzelnen Funktionalitäten insbesondere durch die Eventstruktur, was die Flexibilität und das modulare Testen deutlich erleichtert.
 \clearpage
@@ -144,14 +144,14 @@ Diese Klasse ist das Herz der Bibliothek. Sie ist die Schnittstelle, über die s
 	\item[+] \textbf{DisconnectFromDevice(): bool}\\ Falls das Gerät eine Verbindung zu einem Device besitzt, wird diese getrennt und es wird true zurückgegeben. Wenn das Gerät keine Verbindung besitzt, passiert nichts und es wird false zurückgegeben. Tritt ein Fehler beim Trennen auf, wird ebenfalls false zurückgegeben. Zum Trennen der Verbindung wird die Methode DisconnectDeviceAsync aus dem BLE\_Pugin der Klasse IAdapter benutzt.
 	\item[+] \textbf{StartSampling(): bool}\\ Diese Methode startet die Datenaufzeichnung des IMU. Falls die Datenaufzeichnung erfolgreich gestartet wurde, wird true zurückgegeben, ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die Charakteristik zu beschreiben. Hinweis: Ist die Samplingrate nicht gesetzt, so wird die Standarteinstellung genommen.
 	\item[+] \textbf{StopSampling(): bool}\\Die Datenaufzeichnung des IMU wird mit dieser Methode gestoppt. Falls die Datenaufzeichnung erfolgreich gestoppt wurde, wird true zurückgegeben, ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die Charakteristik zu beschreiben.
-	\item[+] \textbf{SetSamplingrate(heart int): booln}\\Die Samplingrate wird gesetzt und gespeichert. Bei erfolgreichem Setzen wird true zurückgegeben, ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die Charakteristik zu beschreiben.
+	\item[+] \textbf{SetSamplingrate(heart int): bool}\\Die Samplingrate wird gesetzt und gespeichert. Bei erfolgreichem Setzen wird true zurückgegeben, ansonsten false. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die Charakteristik zu beschreiben.
 	\item[+] \textbf{SetLowPassFilterAccelerometer(accelerometerLPF LPF\_Accelerometer): bool}\\ Mit dieser Methode wird der Low Pass Filter des Accelerometers gesetzt. Bei erfolgreichem Setzen wird true zurückgegeben ansonsten false. Bei dem Übergabeparameter handelt es sich um ein Enum, das angibt, auf welchen Wert der Low Pass Filter gesetzt werden soll. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die Charakteristik zu beschreiben.
 	\item[+] \textbf{GetLowPassFilterAccelerometer(): LPF\_Accelerometer}\\ Die Methode gibt an, auf welchen Wert der LPF des Accelerometers momentan gesetzt ist. Er wird in Form des LPF\_Accelerometer Enums zurückgegeben. 
 	\item[+] \textbf{SetLowPassFilterGyroscope(gyroscopeLPF LPF\_Gyroscope): bool}\\ Mit dieser Methode wird der Low Pass Filter des Gyroskops gesetzt. Bei erfolgreichem Setzen wird true zurückgegeben ansonsten false. Bei dem Übergabeparameter handelt es sich um ein Enum, der angibt, auf welchen Wert der Low Pass Filter gesetzt werden soll. Die Methode WriteAsync aus dem BLE\_Plugin ermöglicht es die Charakteristik zu beschreiben.
 	\item[+] \textbf{GetLowPassFilterGyroscope(): LPF\_Gyroscope}\\Die Methode gibt an auf was der LPF des Gyroskops momentan gesetzt ist. Er wird in Form des LPF\_Gyroscope Enums zurückgegeben. 
 	\item[+] \textbf{GetBatteryVoltage(): int}\\ Gibt die Voltanzahl der Batterie zurück. Die Methode ReadAsync aus dem BLE\_Plugin ermöglicht es die entsprechende Charakteristik zu lesen.
 	\item[+] \textbf{IsBluetoothActive(): bool}\\ Zeigt an ob Bluetooth auf dem Smartphone aktiviert ist. Gibt true zurück falls Bluetooth aktiviert ist und false, falls nicht.
-	\item[+] \textbf{static OnValueUpdatedIMU(): void}\\ Falls neue IMU Daten vorliegen, wird diese Methode aufgerufen und feuert das Event IMUDataRecieved.
+	\item[+] \textbf{static OnValueUpdatedIMU(): void}\\ Falls neue IMU Daten vorliegen, wird diese Methode aufgerufen und feuert das Event IMUDataReceived.
 	\item[+] \textbf{static OnPushButtonPressed(): void}\\ Falls der Knopf an den \Gls{Earables} gedrückt wurde, wird diese Methode aufgerufen und feuert das Event ButtonPressed.
 	\item[+] \textbf{static OnDeviceConnected(): void}\\ Falls eine Verbindung mit einem Device hergestellt wurde oder eine bestehende Verbindung aufgelöst wurde, wird diese Methode aufgerufen und feuert das Event DeviceConnectionStateChanged.
 \end{itemize}
@@ -438,7 +438,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\subsubsection{Class ActivityManager}
 	\paragraph{Klassenbeschreibung:}
 	Die Klasse ActivityManager implementiert die Schnittstelle IActivityManager. Sie ist demnach ein Service-Manager und verwaltet die Activities (Vorgängeanalysen). Über sie können die ViewModels auf die Activities zugreifen.\\
-	Der AktivityManager besitzt einen Service von den folgenden Typen: AbstractSitUpActivity, AbstractStepActivity, AbstractRunningActivity, AbstractPushUpActivity.\\
+	Der ActivityManager besitzt einen Service von den folgenden Typen: AbstractSitUpActivity, AbstractStepActivity, AbstractRunningActivity, AbstractPushUpActivity.\\
 	Diese werden als Singletons gespeichert, was bedeutet, dass bei einem Aufruf von GetService<IT,T> immer die gleiche Instanz von T zurückgeliefert wird.
 	
 	\paragraph{Attribute:}
@@ -449,8 +449,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item[+] \textbf{<<create>> ActivityManager}\\Hier handelt es sich um den Konstruktor der Klasse ActivityManager. In dieser wird sich bei dem EventHandler IMUDataReceived der Klasse EarablesConnection registriert und die private Methode ServiceRegistration(...) aufgerufen. Damit findet die Registrierung der Services und die Instanziierung des ActivityProviders statt.
-		\item[$-$] \textbf{ServiceRegistration(out collection IServiceCollection): void}\\Private geerbte Methode der Schnittstelle IManager. In dieser wird eine ServiceCollection angelegt, bei der die Aktiväten registriert werden. Dabei passtiert dies mit der Methode collection.AddSingleton<IT,T>(). IT ist eine Oberklasse/Schnittstelle und T die konkrete Implementierung. IT ist in der Klasse ActivityManager immer vom Typ Activity (abstract).
-		\item[+] \textbf{OnIMUDataReceived(sender: object, args: DataEventArgs): void}\\EventMethode, welche bei dem EventHandler IMUDataReceived der Klasse EarablesConnection registriert wird. Bei dem Aufrufen der Methode werden die Daten an die gespeicherten Aktivitäten weitergegeben. Das passiert per Push-Model (Observer-Muster). Bei den Aktivitäten wir die Methode DataUpdate(data: DataEventArgs) aufgerufen mit den bekommenen Daten als Parameter.
+		\item[$-$] \textbf{ServiceRegistration(out collection IServiceCollection): void}\\Private geerbte Methode der Schnittstelle IManager. In dieser wird eine ServiceCollection angelegt, bei der die Aktiväten registriert werden. Dabei passiert dies mit der Methode collection.AddSingleton<IT,T>(). IT ist eine Oberklasse/Schnittstelle und T die konkrete Implementierung. IT ist in der Klasse ActivityManager immer vom Typ Activity (abstract).
+		\item[+] \textbf{OnIMUDataReceived(sender: object, args: DataEventArgs): void}\\EventMethode, welche bei dem EventHandler IMUDataReceived der Klasse EarablesConnection registriert wird. Bei dem Aufrufen der Methode werden die Daten an die gespeicherten Aktivitäten weitergegeben. Das passiert per Push-Model (Observer-Muster). Bei den Aktivitäten wir die Methode DataUpdate(data: DataEventArgs) aufgerufen mit den erhaltenen Daten als Parameter.
 	\end{itemize}
 	
 	
@@ -465,7 +465,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[+] \textbf{DataUpdate(data: DataEventArgs): void}\\Mit dieser Methode bekommt die Aktivität die neuen Dateneinträge. Dabei ruft die Klasse ActivityManager die Methode auf, wenn sie die neuen Daten bekommt. In dieser Methode wird geschaut, ob sich ein Event bei dem EventHandler ActivityDone registriert hat. Falls ja, wird der Datensatz dem buffer hinugefügt, und der Algorithmus gestartet. Falls nicht, wird der Datensatz ignoriert.
+		\item[+] \textbf{DataUpdate(data: DataEventArgs): void}\\Mit dieser Methode bekommt die Aktivität die neuen Dateneinträge. Dabei ruft die Klasse ActivityManager die Methode auf, wenn sie die neuen Daten bekommt. In dieser Methode wird geschaut, ob sich ein Event bei dem EventHandler ActivityDone registriert hat. Falls ja, wird der Datensatz dem buffer hinzugefügt, und der Algorithmus gestartet. Falls nicht, wird der Datensatz ignoriert.
 		\item[\#] \textbf{abstract Analyse(): void}\\Der Algorithmus der Aktivitätserkennung wird in dieser Methode ausgeführt. Dabei ist dieser in den Unterklassen implementiert. Er beurteilt nur mithilfe der gesammelten Gyroskop- und Accelerometerdaten, ob das (der Activity entsprechende) Ereignis eingetroffen ist. In diesem Fall feuert er ein Event über den ActivityDone EventHandler. 
 	\end{itemize}
 	\subsubsection{Abstract class AbstractStepActivity}
@@ -490,7 +490,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item [+]\textbf{<<create>> SitUpActivityThreshold(): void}\\Konstruktor der Klasse RunningActivityThreshold. In diesem wird der EventHandler erstellt.
-		\item [$-$]\textbf{Analyse(): void}\\Implementierung der Analyse, ob der Nutzter läuft oder steht. Der EventHandler ActivityDone ruft die Events auf, falls sich der Laufstatus ändert. Das bedeutet, wenn der Nutzer anfängt zu laufen, oder aufhört. 
+		\item [$-$]\textbf{Analyse(): void}\\Implementierung der Analyse, ob der Nutzer läuft oder steht. Der EventHandler ActivityDone ruft die Events auf, falls sich der Laufstatus ändert. Das bedeutet, wenn der Nutzer anfängt zu laufen, oder aufhört. 
 	\end{itemize}
 	
 	
@@ -503,7 +503,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung von Sit-ups.Es wird nur analysiert, falls sich mindestens ein Event bei dem geerbten EventHandler ActivityDone registriert hat.
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item [+]\textbf{<<create>> PushUpActivityThreshold(): void}\\Konstruktor der Klasse PushUpActicityThreshold(). In diesem wird der EventHandler ActivityDone instanziiert. 
+		\item [+]\textbf{<<create>> PushUpActivityThreshold(): void}\\Konstruktor der Klasse PushUpActivityThreshold(). In diesem wird der EventHandler ActivityDone instanziiert. 
 		\item [$-$]\textbf{Analyse(): void}\\Implementierung der Analyse für die Sit-Up-Erkennung. Dabei werden die Daten aus der Queue Buffer benutzt. Der EventHandler ruft die Events auf, wenn eine Liegestütze gemacht wurde.
 	\end{itemize}
 
@@ -552,7 +552,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	Dabei implementiert der ServiceManager das Interface IManager.
 	Von diesem bekommt er die Methode serviceRegistration() übergeben.
 	Der ServiceManager speichert die Services als Referenzen und achtet, dass diese ein Singleton sind. (Es existiert immer nur eine Instanz des Services).
-	Er implementriert das Singleton Muster indem der Serviceprovider nur einmal instanziert wird.
+	Er implementiert das Singleton Muster indem der Serviceprovider nur einmal instanziiert wird.
 	
 	\paragraph{Attribute:}
 	\begin{itemize}
@@ -650,7 +650,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item[+] \textbf{SaveDBEntry(entry: DBEntry): void}\\Speichert ein Datenbankeintrag in der \gls{Datenbank}. Falls schon ein Eintrag zu dem Datum existiert, wird dieser aktualisiert\\
 		\item[+] \textbf{GetAllEntriesAsync(): Task<List<DBEntry>>}\\Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry \\ 
 		\item[+] \textbf{GetMostRecentEntriesAsync(amount : int): void}\\Liefert  die letzten 'amount' Einträge der Datenbank in Form einer Liste mit DBEntry zurück\\
-		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEnries raus und speichert sie in der \gls{Datenbank}.\\
+		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEntries raus und speichert sie in der \gls{Datenbank}.\\
 		\item[+] \textbf{ExportTrainingData(path: String): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
 	\end{itemize}
 
@@ -664,16 +664,16 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[+] \textbf{<<create>> DataBaseConnection}\\Konstruktor für die Klasse DataBaseConnection. Es wird eine Instanz SQLiteAsyncConnection erstellt und eine Tabelle erstellt. Diese besteht aus zwei Spalten: Da Datum(Primary Key) als Datetype und den Inhalt als String.
+		\item[+] \textbf{<<create>> DataBaseConnection}\\Konstruktor für die Klasse DataBaseConnection. Es wird eine Instanz SQLiteAsyncConnection erstellt und eine Tabelle erstellt. Diese besteht aus zwei Spalten: Das Datum(Primary Key) als DateType und den Inhalt als String.
 		\item[+] \textbf{SaveDBEntry(entry: DBEntry): void}\\Speichert ein Datenbankeintrag in der \gls{Datenbank}. Falls schon ein Eintrag zu dem Datum existiert, wird dieser aktualisiert\\
 		\item[+] \textbf{GetAllEntriesAsync(): Task<List<DBEntry>>}\\Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry. Er erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : String) der Klasse DBEntry\\ 
 		\item[+] \textbf{GetMostRecentEntriesAsync(amount : int): void}\\Liefert  die letzten 'amount' Einträge der Datenbank in Form einer Liste mit DBEntry zurück. Er erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : String) der Klasse DBEntry\\
-		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEnries raus und speichert sie in der \gls{Datenbank}. Er erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : String) der Klasse DBEntry\\
+		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEntries raus und speichert sie in der \gls{Datenbank}. Er erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : String) der Klasse DBEntry\\
 		\item[+] \textbf{ExportTrainingData(path: String): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
 	\end{itemize}
 \subsubsection{Class DBEntry}
 	\paragraph{Klassenbeschreibung}
-	Die Klasse DBEntry ist ein Datenkontainer, welcher einen Trainingstag darstellt. Dieser wird in der Datenbank gespeichert. DBEntry beinhaltet kein selbstständiges Verhalten. Für die Modularität sind die unterschiedlichen Attribute in einem Dictionary gespeichert.
+	Die Klasse DBEntry ist ein Datencontainer, welcher einen Trainingstag darstellt. Dieser wird in der Datenbank gespeichert. DBEntry beinhaltet kein selbstständiges Verhalten. Für die Modularität sind die unterschiedlichen Attribute in einem Dictionary gespeichert.
 	
 	\paragraph{Attribute}
 	\begin{itemize}
@@ -701,7 +701,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 \section{Klassenbeschreibung View-Model}
 \subsection{Abstract Class BaseModeViewmodel} 
 \paragraph{Klassenbeschreibung:}
-Die abstrakte Klasse IBaseModeViewmodel hält die Commands für Buttonclicks, die in jedem ViewModel der einzelnen Modi benötigt werden. Die Methoden die von den Commands aufgerufen werden und die Event Methode werden als abstrakt deklariert und in den Unterklassen implementiert. Die CheckConnection Methode wird beim Starten eines Vorgangs aufgerufen und ist bereits implementiert.
+Die abstrakte Klasse IBaseModeViewmodel hält die Commands für Buttonklicks, die in jedem ViewModel der einzelnen Modi benötigt werden. Die Methoden die von den Commands aufgerufen werden und die Event Methode werden als abstrakt deklariert und in den Unterklassen implementiert. Die CheckConnection Methode wird beim Starten eines Vorgangs aufgerufen und ist bereits implementiert.
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{StartActivityCommand: ICommand} \\  Der Command der beim Drücken des Start Buttons ausgeführt wird, um einen Vorgang zu starten. Ruft die StartActivity Methode auf.
@@ -736,11 +736,11 @@ Die Klasse StepModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel, e
 \end{itemize}
 \paragraph{Methoden:}
 \begin{itemize}
-	\item[+] \textbf{<<create>> StepModeViewmodel()}\\ Konstruktor, in dem die Commands definiert werden. Die Anzahl der zuletzt gelaufenen Schritte und die Distanz sowie das Datum werden durch Aufruf der Methode updateLastData über den ServiceManager von der DatabaseConnection geupdated. isRunning wird standardmäßig zunächst auf false gesetzt. Die beiden Activity Attribute StepActivity und RunningActivity werden ebenfalls über den ServiceManager initialisiert.
+	\item[+] \textbf{<<create>> StepModeViewmodel()}\\ Konstruktor, in dem die Commands definiert werden. Die Anzahl der zuletzt gelaufenen Schritte und die Distanz sowie das Datum werden durch Aufruf der Methode updateLastData über den ServiceManager von der DatabaseConnection aktualisiert. isRunning wird standardmäßig zunächst auf false gesetzt. Die beiden Activity Attribute StepActivity und RunningActivity werden ebenfalls über den ServiceManager initialisiert.
 	\item[\#] \textbf{OnPropertyChanged(): void} Methode die beim Eintritt des PropertyChanged Events aufgerufen wird. Sie übermittelt der View die Änderungen im Viewmodel.
 	\item[+] \textbf{OnActivityDone(sender: object, e: ActivityArgs)} \\ Event Methode, die von der Aktivität bei Erkennung von einem Schritt aufgerufen wird. Sie erhöht den Counter um 1 und setzt IsRunning auf True. 
 	\item[+] \textbf{UpdateLastData(): void} \\ Wird vom Konstruktor und nach jedem Laufvorgangsende aufgerufen. Aktualisiert die Attribute StepsDoneLastTime, DistanceWalkedLastTime und LastDatatime, indem über den Service Manager von der DataBaseConnection der letzte Eintrag genommen wird. 
-	\item[+] \textbf{StartActivity(): void}\\ Methode die vom StartActivityCommand aufgerufen wird. Zunächst wird mit CheckConnection der Verbindungsstatus überprüft und gegebenenfalls eine Verbindung hergestellt. Das Viewmodel registriert seine OnActivityDone Event Methode beim Event Handler in der StepActivity und in der RunningActivity Klasse, resetted den StepCounter, startet den Timer und wechselt zum StepModeActiveView. Nach einem festgelegten Zeitabschnitt wird die Methode UpdateFrequency aufgerufen, um die Schrittfrequenz zu ermitteln
+	\item[+] \textbf{StartActivity(): void}\\ Methode die vom StartActivityCommand aufgerufen wird. Zunächst wird mit CheckConnection der Verbindungsstatus überprüft und gegebenenfalls eine Verbindung hergestellt. Das Viewmodel registriert seine OnActivityDone Event Methode beim Event Handler in der StepActivity und in der RunningActivity Klasse, setzt den StepCounter zurück, startet den Timer und wechselt zum StepModeActiveView. Nach einem festgelegten Zeitabschnitt wird die Methode UpdateFrequency aufgerufen, um die Schrittfrequenz zu ermitteln
 	\item[+] \textbf {StopActivity(): void}\\ Methode die vom StopActivityCommand aufgerufen wird. Meldet die OnActivityDone Methode vom EventHandler in der StepActivity und RunningActivity Klasse ab und setzt IsRunning auf false. Zeigt ein PopUp mit der Anzahl der gelaufenen Schritte an, welches der Nutzer wegklicken kann. Danach wird zum StepModeView zurück gewechselt, die gelaufenen Schritte mit Hilfe der DatabaseConnection gespeichert und die Anzeige des letzten Laufvorgangs aktualisiert.  
 	\item[$-$] \textbf{UpdateFrequency(): void} \\ Berechnet nach einer festgelegten Zeit aus der abgelaufenen Zeit und der Schrittanzahl die aktuelle Schrittfrequenz.
 	\item[$-$] \textbf{ShowPopUp(): void} \\ Zeigt das PopUp mit den gelaufenen Schritten und der Distanz asynchron an, wegklickbar mit einem Button.
@@ -752,7 +752,7 @@ Die Klasse CountModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel, 
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{SelectedActivity: string} \\ Die aktuell vom Nutzer im Menü ausgewählte Aktivität. 
-	\item[+] \textbf{PossibleActivities: OberservableCollection<string>} \\ Die möglichen Aktivitäten die vom Nutzer ausgewählt werden können. 
+	\item[+] \textbf{PossibleActivities: ObservableCollection<string>} \\ Die möglichen Aktivitäten die vom Nutzer ausgewählt werden können. 
 	\item[+] \textbf{PushUpActivity: AbstractPushUpActivity} \\ Die vom ServiceManager gelieferte Singleton-Activity.
 	\item[+] \textbf{SitUpActivity: AbstractSitUpActivity} \\ Die vom ServiceManager gelieferte Singleton-Activity.
 	\item[$-$] \textbf{timer: Stopwatch} \\ Der Timer, welcher die Trainingszeit des Nutzers misst. 
@@ -824,8 +824,8 @@ Die Klasse MusicModeViewmodel erbt von der abstrakten Klasse BaseModeViewmodel u
 	\item[+] \textbf{StartActivity(): void} \\ Methode die vom StartActivityCommand aufgerufen wird. Zunächst wird mit CheckConnection der Verbindungsstatus überprüft und gegebenenfalls eine Verbindung hergestellt. Registriert die OnActivityDone Methode beim EventHandler der RunningActivity. 
 	\item[+] \textbf{StopActivity(): void} \\ Methode die vom StopActivityCommand aufgerufen wird. Meldet die OnActivityDone Methode beim EventHandler der RunningActivity ab. 
 	\item[+] \textbf{OnActivityDone(sender: object, e: RunningEventArgs)} \\ Event Methode, die von der Activity aufgerufen wird, die gegebenenfalls isRunning ändert und die Musikmethoden aufruft.
-	\item[+] \textbf{StopMusic(): void} \\ Wird von OnActivityDone aufgrufen wenn der Nutzer stehen bleibt. Hält die Musik an.
-	\item[+] \textbf{RestartMusic(): void} \\ Wird von OnActivityDone aufgrufen wenn der Nutzer weiter läuft. Spielt die Musik weiter ab.
+	\item[+] \textbf{StopMusic(): void} \\ Wird von OnActivityDone aufgerufen wenn der Nutzer stehen bleibt. Hält die Musik an.
+	\item[+] \textbf{RestartMusic(): void} \\ Wird von OnActivityDone aufgerufen wenn der Nutzer weiter läuft. Spielt die Musik weiter ab.
 \end{itemize}
 
 \subsection{Class DataOverviewViewmodel}
@@ -881,8 +881,8 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\item[$-$] \textbf{needsRestart: bool}\\ diese Property verfügt nur über einen privaten getter. Sie ist genau dann wahr, wenn der Nutzer die Sprache geändert hat, also der Zustand des Sliders in der View und der Zustand als in dieser Klasse als Attribut gespeicherten Sprache unterschiedlich sind.
 	\item[+] \textbf{Username: String}\\Der Username verfügt über ein Binding zur View.
 	\item[+] \textbf{StepLength: int}\\Die StepLength verfügt über ein Binding zur View. 
-	\item[+] \textbf{SamplingRate: SamplingRate}\\Die SamplingRate wird nicht direkt im View gebindet.
-	\item[+] \textbf{Language: CultureInfo}\\Die Language wird nicht direkt im View gebindet. 
+	\item[+] \textbf{SamplingRate: SamplingRate}\\Die SamplingRate wird nicht direkt im View gebunden.
+	\item[+] \textbf{Language: CultureInfo}\\Die Language wird nicht direkt im View gebunden. 
 	\item[+] \textbf{ClickSave: Command}\\Bei Ausführen dieses Commands wird die Methode SaveClicked ausgeführt. 
 \end{itemize}
 \paragraph{Methoden:}
@@ -894,7 +894,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 
 \subsection{Class ScanningPopUpViewModel}
 	\paragraph{Klassenbeschreibung:}
-	Die Klasse ScanningPopUpViewModel ist das ViewModel zu dem View PopUpScanningPage und verwaltet die Logik dieser Komponente mithilfe von verknüpften Commands. Dabei implementiert die Klasse die Schnittstelle INotifyPropertyChanged, um die View zu aktuallisieren.
+	Die Klasse ScanningPopUpViewModel ist das ViewModel zu dem View PopUpScanningPage und verwaltet die Logik dieser Komponente mithilfe von verknüpften Commands. Dabei implementiert die Klasse die Schnittstelle INotifyPropertyChanged, um die View zu aktualisieren.
 	Sie benutzt die Erweiterung \Gls{Rg.Plugins.Popup} für das Anzeigen und das Versteckend des Pop-ups.
 	
 	\paragraph{Attribute:}
@@ -903,7 +903,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 		\item[+] \textbf{ScanDevicesCommand: ICommand}\\Command, welches die Implementierung des Scannen abkapselt. Dieses Command wird ausgeführt, wenn der ScanDevice Button im View betätigt wird. Es wird die private Methode ScanDevices() aufgerufen.
 		\item[+] \textbf{ConnectDeviceCommand: ICommand}\\Command, welches die Implementierung des Verbinden mit einem ausgewählten BLE Gerät aus dem ListView des Pop-ups. Es wird die private Methode ConnectDevice() aufgerufen.
 		\item[+] \textbf{CancelCommand: ICommand}\\Command, welches die Implementierung des Abbrechen abkapselt. Dieses Command wird ausgeführt, wenn der Cancel Button im View betätigt wird. Es wird die public und statische Methode HidePopUp() aufgerufen. 
-		\item[+] \textbf{Devices: ObservableCollection<Device>}\\Die Liste Devices dient zur Aktuallisierung des Views PopUpScanningPage. Die ListView im View setzt Devices als Ressource. Da Devices eine ObservableCollection ist, wird die Listview bei einer Änderung der Deviceliste aktualisiert.
+		\item[+] \textbf{Devices: ObservableCollection<Device>}\\Die Liste Devices dient zur Aktualisierung des Views PopUpScanningPage. Die ListView im View setzt Devices als Ressource. Da Devices eine ObservableCollection ist, wird die Listview bei einer Änderung der Deviceliste aktualisiert.
 	\end{itemize}
 
 	\paragraph{Methoden:}
@@ -1122,7 +1122,7 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\end{minipage}
 		\paragraph{Klassenbeschreibung:}
 		Die MainPage erbt von MasterDetailPage und stellt die grundlegende angezeigte Struktur zur Verfügung. Das ist im Wesentlichen der Menü-Button (vlg. Preset "MasterDetailPage" in Visual Studio 2019).\\
-		Bei Klicken auf das Menü-Icon bzw. swipen vom Rand aus öffnet sich automatisch (vererbt von MasterDetailPage) die MenuPage.
+		Bei Klicken auf das Menü-Icon bzw. Swipen vom Rand aus öffnet sich automatisch (vererbt von MasterDetailPage) die MenuPage.
 		\paragraph{Attribute}
 		\begin{itemize}
 			\item [-] \textbf{MenuPages: Dictionary<int, NavigationPage>}\\ Dieses Dictionary wird verwendet, um mit dem Klicken auf den Namen einer bestimmten Page die Page selbst zu assoziieren (bzw. die ihr entsprechende NavigationPage).
@@ -1159,7 +1159,7 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 
 \includegraphics[width=1.1\textwidth]{./Diagramme/Appablauf.png}\\
 Das Aktivitätsdiagramm verdeutlicht den Appablauf. Dabei ist dieses Diagramm in zwei Partitionen geteilt. Die Partition 'Erweiterungsmodul (EM)', wo die Aktivitätsanalyse mit Erkennungsalgorithmen stattfindet, und die  Partition 'App', was die View der App ist.\\
-Diese Partitionen arbeiten parallel und starten gleichzeitig mit dem Starten der App. Der Ruhezustand ist, dass die Aktivitätsanalyse nicht aktiv ist und eine Aktiviätspage angezeigt wird. (Standardmäßig der Laufmodus).\\
+Diese Partitionen arbeiten parallel und starten gleichzeitig mit dem Starten der App. Der Ruhezustand ist, dass die Aktivitätsanalyse nicht aktiv ist und eine Aktivitätsseite angezeigt wird. (Standardmäßig der Laufmodus).\\
 Wenn nun der Startbutton betätigt wurde, wird geschaut, ob eine Verbindung zu den \Gls{Earables} besteht. Falls nein, wird das ScanningPop-up angezeigt, welches einen dazu auffordert, sich zu verbinden.
 Beim erfolgreichen Verbinden oder dem Wegklicken des Pop-ups gelangt man in den Ruhemodus.\\
 Falls eine Verbindung besteht, beginnt die Aktivität mit der aktiven Aktivitätspage. Im EM registriert sich die App bei dem richtigen Eventhandler, was zur Folge hat, dass die Aktivitätsanalyse startet.\\
@@ -1173,8 +1173,8 @@ Falls kein Event mehr bei dem EventHandler registriert ist, wird die Analyse ges
 \includegraphics[width=1.1\textwidth]{./Diagramme/AppstartSeqDia.png}\\
 Das Sequenzdiagramm verdeutlicht den Ablauf bei dem Start der App. Zunächst wird beim Start die Klasse 'App' erstellt. 
 Im Konstruktor wird die Methode InitializeComponents() aufgerufen, welche die xaml-page aufruft und die dort festgelegten Attribute initialisiert.\\
-Als nächstes muss die Sprache angepasst werden. Das passiert über den Settingsservice.
-Es wird sich zunächst mit der Methode CurrentUICulture() die aktuelle Sprache geholt. dann wird auf der statischen Klasse ServiceManager versucht eine Instanz des SettignsService zu bekommen. Dabei muss zunächst der ServiceProvider angesprochen werden. Dies wird per Propertyaufruf get() gemacht.\\
+Als nächstes muss die Sprache angepasst werden. Das passiert über den SettingsService.
+Es wird sich zunächst mit der Methode CurrentUICulture() die aktuelle Sprache geholt. dann wird auf der statischen Klasse ServiceManager versucht eine Instanz des SettingsService zu bekommen. Dabei muss zunächst der ServiceProvider angesprochen werden. Dies wird per Propertyaufruf get() gemacht.\\
 Der ServiceManager hält eine Instanz des ServiceProvider, welcher alle Services gelistet hat. Dieser wird als Singleton gespeichert. Es muss daher überprüft werden, ob schon eine Instanz von diesem erstellt wurde. Dies ist nicht der Fall, da die App den ersten Aufruf beim ServiceManager macht.\\
 Um eine Instanz zu erstellen ruft der ServiceManager bei sich die Methode ServiceRegistration() auf. In dieser wird eine ServiceCollection angelegt, bei der die Services registriert werden. Dies passiert per AddSingleton<IT,T>(). \\
 Diese ServiceCollection wird zurückgeliefert und auf dieser wird BuildServiceProvider() aufgerufen, was die ServiceProviderinstanz erstellt.
@@ -1194,7 +1194,7 @@ Beim Start des Vorgangs über den Start Button, fragt das StepModeViewModel zun�
 Jetzt wird die statische Methode ShowPopUp() der Klasse ScanningPopUpViewModel aufgerufen. Diese lässt das PopUp vom Typ PopUpScanningPage erscheinen.\\
 Wenn auf diesem der Nutzer den ScanButton betätigt, wird das Command ScanDevicesCommand ausgeführt. In diesem wird die Methode ScanDevices() aufgerufen. Diese ruft bei der EarbalesConnection, welche sie sich als Attribut gespeichert hat, die Methode StartScanning() auf. 
 Diese schaut, mit welchen Geräten sich verbunden werden kann und liefert eine DeviceList zurück. Das ist eine Liste mit Instanzen vom Type Device.
-Die ListViwe im PopUp wird aktualisiert.\\
+Die ListView im PopUp wird aktualisiert.\\
 Wenn der Nutzer ein Device ausgewählt hat und auf den Connect Button drückt, wird das Command ConnectDeviceCommand im ViewModel ausgeführt. Dieses ruft die Methode ConnectDevice() auf. In dieser Methode wird die EarablesConnection angesprochen, welche versuchen soll sich mit dem Gerät zu verbinden.\\
 Bei einer erfolgreichen Verbindung erhält das ViewModel true zurück. Zudem wird die Eventmethode OnDeviceConnectionStateChanged() von der EarablesConnection aufgerufen. Diese signalisiert, das die Verbindung hergestellt ist. Das PopUp wird darauf mit der Methode HidePopUp() versteckt.
 
@@ -1204,8 +1204,8 @@ Bei einer erfolgreichen Verbindung erhält das ViewModel true zurück. Zudem wir
 \includegraphics[width=1.1\textwidth]{./Diagramme/NavigationsMenuSeqDia.png}\\
 Das Sequenzdiagramm verdeutlicht den Vorgang, wenn der Nutzer die Seite im Menu wechselt.
 Zunächst befindet sich die App im Laufmodus. Es wird nun der Menu-Button betätigt um auf eine andere Seite zu kommen. Die MenuPage ruft bei sich die Methode OnBackButtonPressed() auf, um die Seite zu wechseln. 
-Die Nutzer klickt dabei auf den Musikmodus. Jede MenuSeite hat ihre eigene ID. Der Musikmodus hat die 5 als ID. Diese ID wird der MainPage beim Aufruf NavigatFromMenu(5) übergeben. Somit weiß die MainPage, welche Seite sie erstellen und anzeigen soll.
-Die Mainpage erstellt im nächsten Schritt eine MusicModePage, welche angezeigt werden soll. Um diese anzuzueigen wird eine NavigationPage erstellt, welche von der MenuPage verwendet wird. Diese bekommt in ihrem Konstruktor die gewünschte Page übergeben. In dem Beispiel die Instanz der MusicModePage. \\
+Die Nutzer klickt dabei auf den Musikmodus. Jede MenuSeite hat ihre eigene ID. Der Musikmodus hat die 5 als ID. Diese ID wird der MainPage beim Aufruf NavigateFromMenu(5) übergeben. Somit weiß die MainPage, welche Seite sie erstellen und anzeigen soll.
+Die Mainpage erstellt im nächsten Schritt eine MusicModePage, welche angezeigt werden soll. Um diese anzuzeigen wird eine NavigationPage erstellt, welche von der MenuPage verwendet wird. Diese bekommt in ihrem Konstruktor die gewünschte Page übergeben. In dem Beispiel die Instanz der MusicModePage. \\
 Die MainPage zeigt nun die NavigationPage an, also den gewünschten Musikmodus.
 
 
@@ -1217,7 +1217,7 @@ Die CountModePage setzt im zugehörigen ViewModel CountModelViewModel die Select
 Wenn der Nutzer nun die Aktivität startet wird das Command StartActivity im ViewModel ausgeführt.\\Dort wird zunächst geschaut, ob eine Verbindung zu den \gls{Earables} besteht. In dem Beispiel besteht schon eine Verbindung.\\
 Als nächstes wird sich bei dem EventHandler ActivityDone der gewünschten Aktivität registriert. Dafür muss die Klasse SitUpActivityThreshold angesprochen werden, welche sich das ViewModel als Attribut zwischengespeichert hat.\\
 Nach dem Erfolgreichen registrieren wird zu der aktiven Zählmodusseite gewechselt und der Timer wird gestartet.\\
-Wenn jetzt die Aktivitätsanalyse SitUpActivityThreshold eine Liegestütze erkennt, so wird die registrierte Eventmethode OnAcivityDone() aufgerufen. 
+Wenn jetzt die Aktivitätsanalyse SitUpActivityThreshold eine Liegestütze erkennt, so wird die registrierte Eventmethode OnActivityDone() aufgerufen. 
 Diese aktualisiert bei jedem Aufruf die View, da eine Liegestütze gemacht wurde.\\
 Wenn der Vorgang nun beendet wird, meldet sich das ViewModel bei dem EventHandler wieder ab. Zuletzt wird das Vorgangsresultat angezeigt, welches die Anzahl der Liegestützen anzeigt.\\ 
 
@@ -1237,7 +1237,7 @@ Zum Schluss wird auf dem Datenbankservice die Methode exportTrainingsData() mit 
 \includegraphics[width=1.1\textwidth]{./Diagramme/SetSampleRateSeqDia.png}\\
 Das Sequenzdiagramm zeigt den Vorgang vom Ändern der Samplerate.
 Zunächst befindet sich die App auf der Settingspage und der Nutzer klickt auf den Button 'Speichern'. Jetzt wird im ViewModel das Command ClickSave ausgeführt. Es wird sich die gespeicherte Instanz vom Typ ISettingsService vom Servicemanager per GetService<ISettingsService>() geholt.\\
-Dann wird auf der Instanz die Property SamplingRate gesetzt. Es wird sich aus dem View die ausgewählten Samplingrate geholt und als Parameter übergeben. Dabei handelt es sich um ein Enumeintrag der Enumeration SampleRate.\\
+Dann wird auf der Instanz die Property SamplingRate gesetzt. Es wird sich aus dem View die ausgewählten Samplingrate geholt und als Parameter übergeben. Dabei handelt es sich um einen Eintrag der Enumeration SampleRate.\\
 In der Setzten Methode wird sich zunächst der EarablesConnection Service vom ServiceManager geholt. 
 Auf diesem wird die Methode setSamplingRate() aufgerufen mit dem passenden Integer als Argument.
 In dieser wird die SamplingRate nun auf den Kopfhörern gesetzt.\\
@@ -1245,7 +1245,7 @@ In dieser wird die SamplingRate nun auf den Kopfhörern gesetzt.\\
 \section{Entwurfdaten}
 In der App werden Daten für die Verarbeitung und Visualisierung benötigt. Dabei werden diese in einer Datenbank oder in den App Eigenschaften gespeichert.
 \subsection{Ressourcenverzeichnis}
-Als Ressourcen werden die Sprachressourcen gespeichert. Die App soll in den Sprachen Deutsch und Englisch zur Verfügung stehen. Das bedeutet die Beschriftungen in der graphischen Oberfläche müssen in beiden Sprachen vorhanden sein. Dabei funktioniert dies über die Klasse AppRessources. Diese sucht, basieren auf der aktuellen Sprache, die passende .resx Datei aus. Die .resx Dateien sind ein externes Dictionary, in dem die Bezeichner und Werte für die Beschriftungen enthalten sind.\\
+Als Ressourcen werden die Sprachressourcen gespeichert. Die App soll in den Sprachen Deutsch und Englisch zur Verfügung stehen. Das bedeutet die Beschriftungen in der graphischen Oberfläche müssen in beiden Sprachen vorhanden sein. Dabei funktioniert dies über die Klasse AppResources. Diese sucht, basieren auf der aktuellen Sprache, die passende .resx Datei aus. Die .resx Dateien sind ein externes Dictionary, in dem die Bezeichner und Werte für die Beschriftungen enthalten sind.\\
 Jede Beschriftung hat ihren eigenen eindeutigen Bezeichner. \\Zum Beispiel sind in der 'AppResources.de.resx' Datei für die Beschriftungen die deutschen Werte gespeichert.\\
 Nun kann man in den graphischen Komponenten den Titel oder Ähnliches eine statische Resource geben.
 Zum Beispiel kann man ein Label wie folgt deklarieren:\\\textit{<Label Text="{x:Static resource:AppResources.StepsDone}>}\\ StepsDone ist dabei der Bezeichner für die Beschriftung.
@@ -1257,7 +1257,7 @@ Es werden folgende drei .resx Dateien gespeichert:
 \end{itemize}
 
 \subsection{lokale Datenbank}
-Die Applikation besitzt eine lokale \gls{Datenbank} zur Speicherung der Trainingsdaten. Dabei ist diese immer am gleichen Pfad zu finden. Die Datenbank wird mit der Erweiterung \gls{SQLite} erstellt und verwaltet. Die Datenbank speichert die Trainingsdaten humanreadable. Man kann die Daten entsprechend in der Datei lesen; sie sind nicht verschlüsselt. In der Datenbank werden Instanzen der Klasse DBEntry gespeichert. Dafür wird nur eine Tablle benötigt. Die Tabelle sieht wie folgt aus:
+Die Applikation besitzt eine lokale \gls{Datenbank} zur Speicherung der Trainingsdaten. Dabei ist diese immer am gleichen Pfad zu finden. Die Datenbank wird mit der Erweiterung \gls{SQLite} erstellt und verwaltet. Die Datenbank speichert die Trainingsdaten in einer von Menschen lesbaren Form. Man kann die Daten entsprechend in der Datei lesen; sie sind nicht verschlüsselt. In der Datenbank werden Instanzen der Klasse DBEntry gespeichert. Dafür wird nur eine Tablle benötigt. Die Tabelle sieht wie folgt aus:
 
 \begin{itemize}
 	\item \textbf{PrimaryKey Date: DateTime}\\Eindeutiger Bezeichner für jeden Datenbankeintrag. Gespeichert wird das Datum.
@@ -1271,7 +1271,7 @@ Die Klasse SettingsService benutzt die Properties Klasse und regelt die korrekte
 \begin{itemize}
 	\item \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache in Form einer CultureInfo. Dabei hat jede Sprache einen eindeutigen Bezeichner, welcher gespeichert wird.\\ (Deutsch='de-DE', Englisch='en-US').
 	\item \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables}. Diese wird als Integer gespeichert. Dieser ist der Wert im Enum SamplingRate.
-	\item \textbf{User: User}\\Der aktuelle Nutzer. Dabei wird die Nutzername gespeichert und die Schrittlänge. Der User ist modular, es können noch mehr Attribute ergänzt werden.  Wie beschrieben wird der User als String gespeichert, welcher geparst werden kann.
+	\item \textbf{User: User}\\Der aktuelle Nutzer. Dabei wird die Nutzername gespeichert und die Schrittlänge. Der User ist modular, es können noch mehr Attribute ergänzt werden. Wie beschrieben wird der User als String gespeichert, welcher serialisiert werden kann.
 \end{itemize}
 
 
@@ -1280,9 +1280,9 @@ In der App werden mehrere Erweiterungen benutzt, welche eine Funktionalität ber
 Es werden folgende Erweiterungen benötigt:\\
 \begin{itemize}
 	\item \textbf{\Gls{Bluetooth LE Plugin}}\\Diese Erweiterung ermöglicht es die Verbindung mit den \Gls{Earables} herzustellen. Zudem wird die Kommunikation zwischen Device und \Gls{Earables} geregelt. Von dieser Erweiterung erhalten wir die \Gls{IMU}-Daten.
-	\item \textbf{\Gls{DependencyInjection}}\\Microsoft.Extensions.DependencyInjection ist eine Erweiterung, welches ermöglicht Komponenten als Services zu registrieren und sie somit abgekapselt und modularer zu betrachten. Mit Klassen, wie der ServiceCollection, oder dem ServiceProvicer, bietet die Erweiterung Microsoft.Extensions.DependencyInjection das Framework.
+	\item \textbf{\Gls{DependencyInjection}}\\Microsoft.Extensions.DependencyInjection ist eine Erweiterung, welches ermöglicht Komponenten als Services zu registrieren und sie somit abgekapselt und modularer zu betrachten. Mit Klassen, wie der ServiceCollection, oder dem ServiceProvider, bietet die Erweiterung Microsoft.Extensions.DependencyInjection das Framework.
 	\item \textbf{\Gls{Xamarin.Essentials}}\\Die Erweiterung Xamarin.Essentials ermöglicht einem, Devicespezifische Services anzusprechen. Benutzt wird hiervon die Funktion \Gls{TTS}. 
-	\item \textbf{\Gls{SQLite}}\\SQLite-net-pcl basiert auf dem PlugIn SQLite und ist eine portable Version für die Arbeit mit einer SQLite Datenbank. Dabei ist SQLite eine Erweiterung, mit der man lokale Datenbanken ansprechen und verwalten kann. Dabei bietet die Erweiterung eine lokale Datenbank platformunabhängig gleich anzusprechen. Diese Erweiterung wird für die Speicherung der Trainingsdaten benutzt.
+	\item \textbf{\Gls{SQLite}}\\SQLite-net-pcl basiert auf dem PlugIn SQLite und ist eine portable Version für die Arbeit mit einer SQLite Datenbank. Dabei ist SQLite eine Erweiterung, mit der man lokale Datenbanken ansprechen und verwalten kann. Dabei bietet die Erweiterung eine lokale Datenbank, die plattformunabhängig gleich ansprechbar ist. Diese Erweiterung wird für die Speicherung der Trainingsdaten benutzt.
 	\item \textbf{\Gls{Rg.Plugins.Popup}}\\Rg.Plugins.Popup ist eine Erweiterung (Plugin), welche es einem ermöglicht Pop-up Fenster mit mehr Logik als ein DisplayAlert zu erstellen und anzuzeigen.
 	\item \textbf{\Gls{Xamarin.Plugin.Filepicker}}\\Die Erweiterung Xamarin.Plugin.Filepicker ergänzt die Funktionalität eines Dateiauswähler. Mit diesem kann man in den Dateimanager des Devices und Dateien auswählen. Gebraucht wird dies beim Importieren und Exportieren der Trainingsdaten.
 \end{itemize}
