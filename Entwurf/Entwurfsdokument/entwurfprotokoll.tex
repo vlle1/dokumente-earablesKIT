@@ -72,9 +72,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % GLOSSARY ENTRIES                 	                              	 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \makeglossaries
 \loadglsentries{Glossar.tex}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % THE DOCUMENT BEGINS             	                              	 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1287,7 +1287,14 @@ Die Applikation besitzt eine lokale \gls{Datenbank} zur Speicherung der Training
 \end{itemize}
  
 \subsection{App Properties}
-
+In den App Properties werden die App Einstellungen gespeichert. Die Klasse SettingsService verwaltet dabei die Einstellungen. Das geschieht mit der Xamarin nativen Klasse App.Current.Properties. Diese regelt die Speicherung auf dem Gerät, sodass auch bei mehreren Sitzungen die App Properties gleich sind.\\
+Die Klasse SettingsService benutzt die Properties Klasse und regelt die korrekte Setzung der Einstellungen. Dabei können nur Objekte gespeichert werden, welche durch primitive Datentypen beschrieben werden können. Komplexere Datenstrukturen müssen zunächst in einen string umgewandelt werden, um gespeichert zu werden. Dies wird zum Beispiel mit der Klasse User gemacht, wo die ToString() Methode überschrieben wird, um alles darzustellen. Es existiert dem entsprechend auch die statische Methode ParseUser() in der Klasse User, welche einen string zu einer User-Instanz umwandelt.
+\\In den App Properties werden folgende Eigenschaften gespeichert:
+\begin{itemize}
+	\item[] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache in Form einer CultureInfo. Dabei hat jede Sprache einen eindeutigen Bezeichner, welcher gespeichert wird. (Deutsch='de-DE', Englisch='en-US').
+	\item[] \textbf(SamplingRate: SamplingRate)\\Die aktuelle Samplingrate der \Gls{Earables}. Diese wird als Integer gespeichert. Dieser ist der Wert im Enum SamplingRate.
+	\item[] \textbf{user: User}\\Der aktuelle Nutzer. Dabei wird die Nutzername gespeichert und die Schrittlänge. Der User ist modular, es können noch mehr Attribute ergänzt werden.  Wie beschrieben wird der User als String gespeichert, welcher geparst werden kann.
+\end{itemize}
 \subsection{Plug-ins}
 
 \section{Klassenindex}
@@ -1296,6 +1303,7 @@ Die Applikation besitzt eine lokale \gls{Datenbank} zur Speicherung der Training
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
+
 \printglossaries
 \stepcounter{section}
 
