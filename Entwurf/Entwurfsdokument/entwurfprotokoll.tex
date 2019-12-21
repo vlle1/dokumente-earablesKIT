@@ -955,11 +955,11 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 
 \subsection{Class ExceptionHandlingViewModel}
 	\paragraph{Klassenbeschreibung:}
-	Die Klasse ExceptionHandlingViewModel ist die zentrale Fehlerverarbeitung. Wenn eine Exception in anderen Komponenten des ViewModels oder des Models wird die Exception gefangen und an die Klasse ExceptionHandlingViewModel weitergeleitet. Diese erstellt nun eine Benachrichtigung in Form eines DisplayAlert, sodass der Nutzer von dieser Exception erfährt. 
+	Die Klasse ExceptionHandlingViewModel ist die zentrale Fehlerverarbeitung. Wenn eine Exception in anderen Komponenten des ViewModels oder des Models auftritt, wird die Exception gefangen und an die Klasse ExceptionHandlingViewModel weitergeleitet. Diese erstellt nun eine Benachrichtigung in Form eines DisplayAlerts, sodass der Nutzer von dieser Exception erfährt. 
 	
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[+] \textbf{static HandleException(error: Exception): void}\\Die statische Methode HandleException nimmt als Parameter eine Instanz der Klasse Exception. In dieser Methode wird ein DisplayAlert erstellt mit dem Titel der Exception und dessen Inhalt. Dies wird mit einer Referenz auf die MainPage getan.
+		\item[+] \textbf{static HandleException(error: Exception): void}\\Die statische Methode HandleException nimmt als Parameter eine Instanz der Klasse Exception. In dieser Methode wird ein DisplayAlert mit dem Titel der Exception und dessen Inhalt erstellt. Der DisplayAlert wird mithilfe der MainPage angezeigt.
 	\end{itemize}
 \section{Klassenbeschreibung View}
 
