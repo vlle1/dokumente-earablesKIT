@@ -98,20 +98,19 @@ In diesem Dokument wird der Entwurf der \Gls{CPB}, des Erweiterungsmoduls und de
 	\end{center}
 	\clearpage %%sieht sonst noch zerrissener aus;    Gehts nicht irgendwie schöner? Sodass das Diagramm ganz oben quasi anliegt?
 	\subsection{Kurze Erläuterung zum Architekturdiagramm}
-  Wir haben uns bei der Architekturdiagramm für \textsf{Model-View-Viewmodel}, eine Spezialisierung  des Entwurfsmusters Model-View-Controller, entschieden.
-  Dabei gibt es folgende Komponenten:
+Wir haben uns bei der Architekturdiagramm für \textsf{Model-View-Viewmodel}, eine Spezialisierung des Entwurfsmusters Model-View-Controller, entschieden. Dabei wurden im Vergleich zum Architekturdiagramm im Pflichtenheft einige kleinere Änderungen vorgenommen. Es folgt eine Beschreibung der Komponenten:
   \begin{itemize}
-    \item \textsf{\glqq View\grqq{}} enthält alle grafisch angezeigten Elemente, also die Datenanzeige und Bedienoberfläche der App.
-    \item {\textsf{\glqq Model\grqq{}} enthält die Geschäftslogik der App und ist stark nach außen abgekapselt. In diesen Bereich fallen die meisten komplexen Teile der App, die als Dienste (Services) vom Viewmodel aus verwaltet werden sollen. Wesentlich sind dabei (vollständige Angabe im Entwurf): \begin{itemize}
-      \item Die Verwaltung der anfallenden Produktdaten (Abruf und Bereitstellung der gespeicherten Daten in der Datenbank, im CSV-Format) über ein Datenmodul
-      \item Die Bibliothek, die für die Kommunikation mit den \Gls{Earables} (Verbindungsaufbau, Start und Stopp des Samplings, Konfiguration der \Gls{Steuerungsparameter}, Auslesen der Sensordaten) zuständig ist. Dazu wird eine externe Bibliothek\footnote{https://github.com/xabre/xamarin-bluetooth-le} verwendet.
-      \item Das Erweiterungsmodul, das sich um die Aktivitätserkennung kümmert. Dieses nutzt dabei die Schnittstellen der Bibliothek.
-    \end{itemize}
-    Die Services sind dabei jeweils unabhängig vom restlichen Model funktionsfähig und dadurch leichter testbar.}
-    \item \textsf{\glqq Viewmodel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der UI, wird also bei Benutzerinteraktion vom View aufgerufen. Es gibt dann die entsprechenden Anweisungen an das Model weiter. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die Anzeige der App angepasst wird, zum Beispiel bei Verbindungsabbruch zu den \Gls{Earables}. 
-    
-  \end{itemize}
-  Der Vorteil dieser Architektur ist eine klare Trennung von Benutzerinteraktion und Programmlogik sowie eine lose Kopplung zwischen einzelnen Funktionalitäten, was die Flexibilität und das modulare Testen deutlich erleichtert.
+  	\item \textsf{\glqq View\grqq{}} enthält alle grafisch angezeigten Elemente, also die Datenanzeige und Bedienoberfläche der App.
+ 	\item \textsf{\glqq Model\grqq{}} enthält die Geschäftslogik der App und ist durch die neu hinzugefügte zentrale Schnittstelle des ServiceManagers stark nach außen abgekapselt. Benötigte Services können beim Programmstart im ServiceManager registriert werden, sodass bei Bedarf eine Singelton-Instanz des Service zur Verfügung gestellt werden kann. Wesentlich sind dabei folgende Services: 
+\begin{itemize}
+      \item Die Verwaltung der anfallenden Aktivitätsdaten (Abruf und Bereitstellung der gespeicherten Daten in der Datenbank, im CSV-Format) über ein Datenmodul.
+      \item Die Bibliothek, die für die Kommunikation mit den \Gls{Earables} (Verbindungsaufbau, Start und Stopp des Samplings, Konfiguration der \Gls{Steuerungsparameter}, Auslesen der Sensordaten) zuständig ist. Dazu wird eine externe Bibliothek\footnote{https://github.com/xabre/xamarin-bluetooth-le} verwendet. Die ausgelesenen Sensordaten werden per Event an die einzelnen Aktivitätsanalysen weiter geschickt. 
+      \item Das Erweiterungsmodul, das sich um die Aktivitätserkennung kümmert. Es definiert die unterschiedlichen Analysemethoden für die Aktivitäten, die aufgrund der Servicestruktur leicht austauschbar sind und nutzt die Schnittstellen der Bibliothek. Die erkannten Aktivitätsdaten werden ebenfalls per Event an das Viewmodel weiter geschickt. 
+\end{itemize}
+Die Services sind dabei jeweils unabhängig vom restlichen Model funktionsfähig und dadurch leichter testbar.
+\item \textsf{\glqq Viewmodel\grqq{}} ist das Bindeglied zwischen View und Model. Es enthält die Logik der Nutzeroberfläche, wird also bei Benutzerinteraktion von der View benachrichtigt. Dabei benutzen wir unter anderem eine Commandstruktur, um beispielsweise Buttonclicks zu registrieren und an das Viewmodel weiter zu delegieren. Das Viewmodel interagiert mit dem Model über die neu hinzugefügte Schnittstelle des ServiceManagers und kann bei ihm Anfragen an benötigte Services wie Aktivitätsanalysen stellen. Darüber hinaus kümmert es sich darum, dass in bestimmten Fällen die View angepasst wird, zum Beispiel bei Verbindungsabbruch zu den \Gls{Earables} und beim Empfangen von neuen Aktivitätsdaten. Dies erfolgt über Databinding und der von Xamarin angebotenen NotifyPropertyChanged Schnittstelle.
+\end{itemize}
+  Der Vorteil dieser Architektur ist eine klare Trennung von Benutzerinteraktion und Programmlogik sowie eine lose Kopplung zwischen einzelnen Funktionalitäten insbesondere durch die Eventstruktur, was die Flexibilität und das modulare Testen deutlich erleichtert.
 \clearpage
   \subsection{Klassendiagramm}
 hier kommt ein mal das Klassendiagramm rein mit Verweis auf den Anhang - valle
