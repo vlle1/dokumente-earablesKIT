@@ -1263,9 +1263,21 @@ Dann wird auf der Instanz die Property SamplingRate gesetzt. Es wird sich aus de
 In der Setzten Methode wird sich zunächst der EarablesConnection Service vom ServiceManager geholt. 
 Auf diesem wird die Methode setSamplingRate() aufgerufen mit dem passenden Integer als Argument.
 In dieser wird die SamplingRate nun auf den Kopfhörern gesetzt.\\
-
+\newpage
 \section{Entwurfdaten}
+In der App werden Daten für die Verarbeitung und Visualisierung benötigt. Dabei werden diese in einer Datenbank oder in den App Eigenschaften gespeichert.
 \subsection{Ressourcenverzeichnis}
+Als Ressourcen werden die Sprachressourcen gespeichert. Die App soll in den Sprachen Deutsch und Englisch zur Verfügung stehen. Das bedeutet die Beschriftungen in der graphischen Oberfläche müssen in beiden Sprachen vorhanden sein. Dabei funktioniert dies über die Klasse AppRessources. Diese sucht, basieren auf der aktuellen Sprache, die passende .resx Datei aus. Die .resx Dateien sind ein externes Dictionary, in dem die Bezeichner und Werte für die Beschriftungen enthalten sind.\\
+Jede Beschriftung hat ihren eigenen eindeutigen Bezeichner. \\Zum Beispiel sind in der 'AppResources.de.resx' Datei für die Beschriftungen die deutschen Werte gespeichert.\\
+Nun kann man in den graphischen Komponenten den Titel oder Ähnliches eine statische Resource geben.
+Zum Beispiel kann man ein Label wie folgt deklarieren:\\\textit{<Label Text="{x:Static resource:AppResources.StepsDone}>}\\ StepsDone ist dabei der Bezeichner für die Beschriftung.
+Es werden folgende drei .resx Dateien gespeichert: 
+\begin{itemize}
+	\item[] \textbf{AppResources.resx}\\Hierbei handelt es sich um die Standardsprache. In dem Fall der App ist es Englisch.
+	\item[] \textbf{AppResources.de.resx}\\Hierbei handelt es sich um die Deutsche Übersetzung der Beschriftungen.
+	\item[] \textbf{AppResources.en.resx}\\Hierbei handelt es sich um die Englische Übersetzung der Beschriftungen.
+\end{itemize}
+\\
 \subsection{lokale Datenbank}
 \subsection{App Properties}
 
