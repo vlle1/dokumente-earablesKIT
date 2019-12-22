@@ -864,9 +864,16 @@ Die Klasse MusicModeViewModel erbt von der abstrakten Klasse BaseModeViewModel u
 	\item[+] \textbf{RestartMusic(): void} \\ Wird von OnActivityDone aufgerufen wenn der Nutzer weiter läuft. Spielt die Musik weiter ab.
 \end{itemize}
 
-\subsection{Class DataOverviewViewModel}
+\begin{minipage}[t]{0.7\textwidth}
+	\subsection{Class DataOverviewViewModel}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewModelKlassen/DataOverviewViewModel}
+\end{minipage}
+
 \paragraph{Klassenbeschreibung:}
 Das DataOverviewViewModel läd die Trainingsdaten des Nutzers über den Datenbank Service und bindet diese an die ListView \textit{contentListView} der DataOverviewPage.
+Mithilfe der ObservableCollection werden alle Änderungen der Liste automatisch in der DataOverviewPage angezeigt.
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[+] \textbf{TrainingsData: ObservableCollection<DBEntry>}
@@ -1117,7 +1124,12 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 	\item[+] \textbf{TwoWayButton: Label} \\ Button um den Musikvorgang zu Starten/Stoppen. Feuert beim Starten/Stoppen den StartActivityCommand und den StopActivityCommand respektive.
 	\end{itemize}
 
-	\subsection{Class DataOverviewPage}
+	\begin{minipage}[t]{0.7\textwidth}	
+		\subsection{Class DataOverviewPage}
+	\end{minipage}
+	\begin{minipage}[c]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{bilder/ViewKlassen/DataOverviewPage}
+	\end{minipage}
 		\paragraph{Klassenbeschreibung:}
 		Diese Seite soll dem Nutzer die Ansicht seiner letzten Trainingsergebnisse ermöglichen.
 		Die Daten werden dabei vom DataOverviewViewModel per Data-Binding bereit gestellt.
@@ -1336,7 +1348,7 @@ Zum Schluss wird auf dem Datenbankservice die Methode exportTrainingsData() mit 
 Das Sequenzdiagramm zeigt die Verarbeitungsschritte beim Ändern der Samplerate.
 Zunächst befindet sich die App auf der SettingsPage und der Nutzer klickt auf den Button 'Speichern'. Jetzt wird im ViewModel das Command ClickSave ausgeführt. Es wird sich die gespeicherte Instanz vom Typ ISettingsService vom Servicemanager per GetService<ISettingsService>() geholt.\\
 Dann wird auf der Instanz die Property SamplingRate gesetzt. Es wird sich aus dem View die ausgewählten Samplingrate geholt und als Parameter übergeben. Dabei handelt es sich um ein Enumeintrag der Enumeration SampleRate.\\
-In der nächsten Methode wird sich zunächst der IEarablesConnection-Service (Fuktionalität der Bibliothek) vom ServiceManager geholt. 
+In der nächsten Methode wird sich zunächst der IEarablesConnection-Service (Funktionalität der Bibliothek) vom ServiceManager geholt. 
 
 Auf diesem wird die Methode setSamplingRate() aufgerufen mit dem passenden Integer als Argument.
 In dieser wird die SamplingRate nun auf den Kopfhörern gesetzt.\\
@@ -1345,7 +1357,7 @@ In dieser wird die SamplingRate nun auf den Kopfhörern gesetzt.\\
 In der App werden Daten für die Verarbeitung und Visualisierung benötigt. Dabei werden diese in einer Datenbank oder in den App Eigenschaften gespeichert.
 \subsection{Ressourcenverzeichnis}
 
-Als Ressourcen werden die Sprachressourcen gespeichert. Die App soll in den Sprachen Deutsch und Englisch zur Verfügung stehen. Das bedeutet die Beschriftungen in der graphischen Oberfläche müssen in beiden Sprachen vorhanden sein. Dabei funktioniert dies über die Klasse AppRessources. Diese sucht basierend auf der aktuellen Sprache die passende .resx Datei aus. Die .resx Dateien sind ein externes Dictionary, in dem die Bezeichner und Werte für alle in der App sichtbaren Texte (im Folgenden Beschriftungen) enthalten sind.\\
+Als Ressourcen werden die Sprachressourcen gespeichert. Die App soll in den Sprachen Deutsch und Englisch zur Verfügung stehen. Das bedeutet die Beschriftungen in der graphischen Oberfläche müssen in beiden Sprachen vorhanden sein. Dabei funktioniert dies über die Klasse AppResources. Diese sucht basierend auf der aktuellen Sprache die passende .resx Datei aus. Die .resx Dateien sind ein externes Dictionary, in dem die Bezeichner und Werte für alle in der App sichtbaren Texte (im Folgenden Beschriftungen) enthalten sind.\\
 Jede Beschriftung hat ihren eigenen eindeutigen Bezeichner. \\Zum Beispiel ist in der 'AppResources.de.resx' Datei für jeden Bezeichner die deutsche Beschriftung gespeichert.\\
 Nun kann man in den graphischen Komponenten (also z.B. im View) Texte über statische Resourcen angeben.
 
