@@ -165,19 +165,15 @@ Diese Klasse ist das Herz der Bibliothek. Sie ist die Schnittstelle, über die s
 	\item[+] \textbf{static OnDeviceConnected(): void}\\ Falls eine Verbindung mit einem Device hergestellt wurde oder eine bestehende Verbindung aufgelöst wurde, wird diese Methode aufgerufen und feuert das Event DeviceConnectionStateChanged.
 \end{itemize}
 
-\begin{minipage}[b]{0.5\textwidth}
+\begin{minipage}[t]{0.7\textwidth}
 	\subsubsection{Class EarablesConnection}
-	
-	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.6\textwidth]{bilder/BibPackageKlassen/EarablesConnection.png}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/EarablesConnection}
 \end{minipage}
 
 \paragraph{Klassenbeschreibung:}
 Die Klasse EarablesConnection implementiert das IEarablesConnection Interface und ist die konkrete Klasse, die sich um die BLE-Verbindung kümmert.\\
-
-
-
 
 \begin{minipage}[b]{0.5\textwidth}
 	\subsubsection{Static Class Constants}
@@ -186,10 +182,6 @@ Die Klasse EarablesConnection implementiert das IEarablesConnection Interface un
 	\begin{minipage}[c]{0.5\textwidth}
 	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/Constants.png}
 \end{minipage}
-
-	
-
-
 
 \paragraph{Klassenbeschreibung:}
 Die Constants Klasse enthält alle Konstanten, die benötigt werden, um die entsprechenden Service und Charakteristiken aus den \Gls{Earables} zu lesen. Sie ist als static gekennzeichnet, da sie nur Konstanten bereitstellt und sonst keine weitere Funktionalität beinhaltet.
@@ -204,11 +196,11 @@ Die Constants Klasse enthält alle Konstanten, die benötigt werden, um die ents
 \item[+] \textbf{ACCESS\_SERVICE: string}\\ Dieser string enthält die Beschreibung des Service Access-Service, der alle benötigten Charakteristiken enthält.\\
 \end{itemize}
 
-\begin{minipage}[b]{0.5\textwidth}
+\begin{minipage}[t]{0.7\textwidth}
 	\subsubsection{Enumeration LPF\_Gyroscope}
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.6\textwidth]{bilder/BibPackageKlassen/LPF_Gyrosope.png}
+	\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/LPF_Gyrosope.png}
 \end{minipage}
 
 \paragraph{Klassenbeschreibung:}
@@ -228,12 +220,12 @@ Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Gyroscope
 \end{itemize}
 
 
-\begin{minipage}[b]{0.5\textwidth}
+\begin{minipage}[b]{0.7\textwidth}
 	\subsubsection{Enumeration LPF\_Accelerometer}
 	
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.6\textwidth]{bilder/BibPackageKlassen/LPF_Accelerometer.png}
+	\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/LPF_Accelerometer.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Accelerometer annehmen kann.
@@ -250,11 +242,11 @@ Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Accelerom
 	\item \textbf{OFF}\\Steht dafür, dass der LPF aus ist.\\
 \end{itemize}
 
-\begin{minipage}[b]{0.5\textwidth}
+\begin{minipage}[b]{0.7\textwidth}
 	\subsubsection{Class ConfigContainer}
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/ConfigContainer.png}
+	\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/ConfigContainer.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Diese Klasse beinhaltet alle Einstellungsmöglichkeiten für die \Gls{Earables}.
@@ -284,12 +276,12 @@ Interface nur um die Kommunikation mit den \Gls{Earables} kümmern muss. Sie ist
 \end{itemize}
 
 
-\begin{minipage}[b]{0.5\textwidth}
+\begin{minipage}[b]{0.7\textwidth}
 	\subsubsection{Class IMUDataEntry}
 	
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/IMUDataEntry.png}
+	\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/IMUDataEntry.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Diese Klasse besitzt alle ausgewerteten IMU Informationen, die in einem Datensatz von den \Gls{Earables} ankommen.
@@ -300,12 +292,12 @@ Diese Klasse besitzt alle ausgewerteten IMU Informationen, die in einem Datensat
 	\item[+] \textbf{Acc: Accelerometer}\\In diesem Attribut sind die gemessenen Werte des Accelerometers enthalten.
 \end{itemize}
 
-\begin{minipage}[b]{0.5\textwidth}
+\begin{minipage}[b]{0.7\textwidth}
 	\subsubsection{Class Gyroscope}
 	
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.5\textwidth]{bilder/BibPackageKlassen/Gyroscope.png}
+	\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/Gyroscope.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Diese Klasse besitzt alle ausgewerteten Gyroskopdaten.
@@ -317,12 +309,11 @@ Diese Klasse besitzt alle ausgewerteten Gyroskopdaten.
 	\item[+] \textbf{Deg/s\_Z: float}\\Gibt an um wie viel Grad pro Sekunde sich die \Gls{Earables} in Z Richtung gedreht haben.
 \end{itemize}
 
-\begin{minipage}[b]{0.5\textwidth}
-	\subsubsection{Class Accelerometere}
-	
+\begin{minipage}[b]{0.7\textwidth}
+	\subsubsection{Class Accelerometer}
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.5\textwidth]{bilder/BibPackageKlassen/Accelerometer.png}
+	\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/Accelerometer.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
@@ -338,12 +329,11 @@ Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
 \end{itemize}
 
 
-\begin{minipage}[b]{0.5\textwidth}
+\begin{minipage}[b]{0.7\textwidth}
 	\subsubsection{Class Characteristics}
-	
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/Characteristics.png}
+	\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=1.2\textwidth]{bilder/BibPackageKlassen/Characteristics.png}
 \end{minipage}
 
 
