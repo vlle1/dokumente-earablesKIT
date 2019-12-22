@@ -821,7 +821,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item[+] \textbf{SaveDBEntry(entry: DBEntry): void}\\Speichert ein Datenbankeintrag in der \gls{Datenbank}. Falls schon ein Eintrag zu dem Datum existiert, wird dieser aktualisiert, indem die Werte addiert werden.\\
 		\item[+] \textbf{GetAllEntriesAsync(): Task<List<DBEntry>>}\\Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.
 		\item[+] \textbf{GetMostRecentEntriesAsync(amount : int): void}\\Liefert  die letzten 'amount' Einträge der Datenbank in Form einer Liste mit DBEntry zurück. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.
-		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEnries raus und speichert sie in der \gls{Datenbank}. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.\\
+		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEntries raus und speichert sie in der \gls{Datenbank}. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.\\
 
 		\item[+] \textbf{ExportTrainingData(path: string): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. 
 	\end{itemize}
@@ -1445,7 +1445,7 @@ Zuletzt wird im Konstruktor eine Mainpage erstellt. Diese ist für die Initialis
 \subsubsection{Bluetoothverbindung mit den Earables herstellen:}
 
 \includegraphics[width=1.1\textwidth]{./Diagramme/Verbindungsaufbausequenzdiagramm.png}\\
-Das Sequenzdiagramm verdeutlicht wie eine Bluetoothverbindung hergestellt werden kann. Es wir davon ausgegangen, dass die App bereits gestartet wurde und noch keine Bluetoothverbindung zu den Earables besteht. Außerdem zeigt die App geraden die Seite des Laufmodus an und das PopUpViemwmodel kennt den Service der EarablesConnection bereits.\\
+Das Sequenzdiagramm verdeutlicht wie eine Bluetoothverbindung hergestellt werden kann. Es wir davon ausgegangen, dass die App bereits gestartet wurde und noch keine Bluetoothverbindung zu den Earables besteht. Außerdem zeigt die App geraden die Seite des Laufmodus an und das PopUpViewModel kennt den Service der EarablesConnection bereits.\\
 Beim Start des Vorgangs über den Start Button, fragt das StepModeViewModel zunächst, ob die Verbindung zu den \gls{Earables} besteht. Dieses schlägt fehl, da noch keine Verbindung besteht.
 Jetzt wird die statische Methode ShowPopUp() der Klasse ScanningPopUpViewModel aufgerufen. Diese lässt das PopUp vom Typ PopUpScanningPage erscheinen.\\
 
@@ -1511,7 +1511,7 @@ In der App werden Daten für die Verarbeitung und Visualisierung benötigt. Dabe
 
 Als Ressourcen werden die Sprachressourcen gespeichert. Die App soll in den Sprachen Deutsch und Englisch zur Verfügung stehen. Das bedeutet die Beschriftungen in der graphischen Oberfläche müssen in beiden Sprachen vorhanden sein. Dabei funktioniert dies über die Klasse AppResources. Diese sucht basierend auf der aktuellen Sprache die passende .resx Datei aus. Die .resx Dateien sind ein externes Dictionary, in dem die Bezeichner und Werte für alle in der App sichtbaren Texte (im Folgenden Beschriftungen) enthalten sind.\\
 Jede Beschriftung hat ihren eigenen eindeutigen Bezeichner. \\Zum Beispiel ist in der 'AppResources.de.resx' Datei für jeden Bezeichner die deutsche Beschriftung gespeichert.\\
-Nun kann man in den graphischen Komponenten (also z.B. im View) Texte über statische Resourcen angeben.
+Nun kann man in den graphischen Komponenten (also z.B. im View) Texte über statische Ressourcen angeben.
 
 Zum Beispiel kann man ein Label wie folgt deklarieren:\\\textit{<Label Text="{x:Static resource:AppResources.StepsDone}>}\\ StepsDone ist dabei der Bezeichner für die Beschriftung.
 Es werden folgende drei .resx Dateien gespeichert: 
@@ -1586,7 +1586,7 @@ Abstract Class AbstractStepActivity & 19\\
 \hline
 Abstract Class BaseModeViewModel & 1\\
 \hline
-Class Accelerometere & 13\\
+Class Accelerometer & 13\\
 \hline
 Class Activity & 18\\
 \hline
