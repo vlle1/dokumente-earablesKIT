@@ -132,7 +132,7 @@ eine hochauflösendere Darstellung des Klassendiagramms findet sich im Anhang.
 	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/IEarablesConnection.png}
 
 \paragraph{Klassenbeschreibung:}
-Diese Klasse ist das Herz der Bibliothek. Sie ist die Schnittstelle, über die später kommuniziert werden kann. Hierbei handelt es sich um ein Interface um Mocking zu ermöglichen und so das Implementieren und Testen zu vereinfachen. Um eine BLE Verbindung herzustellen benutzt sie das \glqq Bluetooth LE Plugin for Xamarin\grqq{}\footnote{https://github.com/xabre/xamarin-bluetooth-le}.
+Diese Klasse ist das Herz der Bibliothek. Sie ist die Schnittstelle, über die später kommuniziert werden kann. Hierbei handelt es sich um ein Interface um Mocking zu ermöglichen und so das Implementieren und Testen zu vereinfachen. Um eine BLE Verbindung herzustellen benutzt sie das \glqq \gls{Bluetooth LE Plugin}\grqq{}\footnote{https://github.com/xabre/xamarin-bluetooth-le}.
 \paragraph{Attribute:}
 \begin{itemize}
 	\item[$-$] \textbf{ble: IBluetoothLE}\\ Wird benötigt um auf die Bluetooth Funktion des Smartphones zuzugreifen. Der Typ IBluetooth befindet sich im BLE\_Plugin.
@@ -1165,6 +1165,22 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\begin{itemize}
 			\item [+] \textbf{<<create>> MenuPage()}\\ Im Konstruktor wird menuItems mit allen gewünschten Seiten initialisiert und den menuItems wird ein Event, das bei Auswählen eines Items gefeuert wird, hinzugefügt. Dieses veranlasst die Navigation zu dieser Seite mittels der MainPage.
 		\end{itemize}
+	
+	\section{Class App}
+	\paragraph{Klassenbeschreibung:}
+	Die Klasse 'App' ist die Hauptklasse der App und erbt von der Klasse 'Application'. Wenn die App vom Nutzer gestartet wird, wird eine Instanz der Klasse 'App' erstellt. In dem Konstruktor wird die grafische Oberfläche angelegt und die Funktionen zum Laufen gebracht.\\
+	Die Klasse 'App' regelt den Lebenszyklus der App. Zum Beispiel, wenn die App in den Hintergrund gerät wird OnSleep() aufgerufen.\\
+	Dadurch kann man sie schlecht in einen der klassischen Schichten (Model, ViewModel, View) zuordnen.\\
+	Zudem hält sie Attribute Properties, Current und MainPage, was die Grundbausteine der App sind. Diese erbt die Klasse von der Oberklasse 'Application'
+	
+	\paragraph{Methoden:}
+	\begin{itemize}
+		\item[+] \textbf{<<create>> App()}\\Die Methode ist der Konstruktor von der Klasse App. In diesem werden die xaml-Seiten gelesen und erstellt. Zudem wird die gespeicherte Sprache gesetzt. Zum Schluss erstellt der Konstruktor die MainPage; die App startet. (Siehe 7.2.1, Sequenzdiagramm 'Start der App')
+		\item[#] \textbf{OnStart(): void}\\Die Methode OnStart regelt das Verhalten der App, wenn diese gestartet wird. In dieser App wird diese Methode leer sein, da das Startverhalten im Konstruktor definiert ist.
+		\item[#] \textbf{OnSleep(): void}\\Die Methode OnSleep regelt das Verhalten der App, wenn diese in den Hintergrund gerät. Zunächst werden aktive Vorgänge beendet und gespeichert. Dies gelingt über die Klassen MainPage und NavigationMenu, welche den aktiven Vorgang zurückgeben können. Dieser Vorgang muss gestoppt werden und die Trainingsdaten müssen gespeichert werden. Dazu wird das passende ViewModel angeschaut und der Service IDataBaseConnection wird angesprochen.
+		Daraufhin kann die App in den Hintergrund geraten.
+		\item[#] \textbf{OnResume(): void}\\Die Methode OnResume regelt das Verhalten der App, wenn diese aus dem Hintergrund wieder in den Vordergrund gerät. Es wird die jeweilige Seite angezeigt, welche vor dem 'schlafen gehen' der App aktiv war. Falls diese Seite eine aktive Vorgangsseite war, wird die passive Aktivitätsseite angezeigt.
+	\end{itemize}
 	
 \newpage
 \section{Interaktionsdiagramme}
