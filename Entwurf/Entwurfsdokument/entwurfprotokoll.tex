@@ -736,9 +736,14 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 
 
-\subsubsection{Class User}
 
-\includegraphics{bilder/EMKlassen/UserClass.png}
+\begin{minipage}[b]{0.6\textwidth}
+	\subsubsection{Class User}
+\end{minipage}
+\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics{bilder/EMKlassen/UserClass.png}
+\end{minipage}
+
 	\paragraph{Klassenbeschreibung:}
 	Die User-Klasse spezifiziert den Nutzer, der die App gerade verwendet. In dieser werden Attribute gespeichert, welche von Nutzer zu Nutzer anders sind. Falls der Nutzer sein Konto noch nicht eingerichtet hat, wird ein Standardnutzer geladen.\\
 	\paragraph{Attribute:}
@@ -1387,10 +1392,17 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\end{itemize}
 		\paragraph{Methoden}
 		\begin{itemize}
-			\item [+] \textbf{<<create>> MenuPage()}\\ Im Konstruktor wird menuItems mit allen gewünschten Seiten initialisiert und den menuItems wird ein Event, das bei Auswählen eines Items gefeuert wird, hinzugefügt. Dieses veranlasst die Navigation zu dieser Seite mittels der MainPage.
+			\item [+] \textbf{<<create>> MenuPage()}\\ Im Konstruktor wird menuItems mit allen gewünschten Seiten initialisiert und den menuItems wird ein Event, das bei Auswählen eines Items gefeuert wird, hinzugefügt. Dieses veranlasst die Navigation zu dieser Seite mittels der MainPage.\\
 		\end{itemize}
 	
-	\section{Class App}
+	
+	\begin{minipage}[b]{0.7\textwidth}
+		
+		\section{Class App}
+	\end{minipage}
+	\begin{minipage}[c]{0.3\textwidth}
+		\includegraphics{bilder/ViewKlassen/AppClass.png}
+	\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Die Klasse 'App' ist die Hauptklasse der App und erbt von der Klasse 'Application'. Wenn die App vom Nutzer gestartet wird, wird eine Instanz der Klasse 'App' erstellt. In dem Konstruktor wird die grafische Oberfläche angelegt und die Funktionen zum Laufen gebracht.\\
 	Die Klasse 'App' regelt den Lebenszyklus der App. Zum Beispiel, wenn die App in den Hintergrund gerät wird OnSleep() aufgerufen.\\
