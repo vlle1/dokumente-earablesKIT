@@ -819,11 +819,11 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\begin{itemize}
 		\item[+] \textbf{<<create>> DatabaseConnection}\\Konstruktor für die Klasse DatabaseConnection. Es wird eine Instanz SQLiteAsyncConnection und eine Tabelle erstellt. Diese besteht aus zwei Spalten: Das Datum(Primary Key) als Datetype und den Inhalt als string.
 		\item[+] \textbf{SaveDBEntry(entry: DBEntry): void}\\Speichert ein Datenbankeintrag in der \gls{Datenbank}. Falls schon ein Eintrag zu dem Datum existiert, wird dieser aktualisiert, indem die Werte addiert werden.\\
-		\item[+] \textbf{GetAllEntriesAsync(): Task<List<DBEntry>>}\\Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.\\ 
-		\item[+] \textbf{GetMostRecentEntriesAsync(amount : int): void}\\Liefert  die letzten 'amount' Einträge der Datenbank in Form einer Liste mit DBEntry zurück. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.\\
+		\item[+] \textbf{GetAllEntriesAsync(): Task<List<DBEntry>>}\\Liefert einem alle Einträge der Datenbank in Form von einer Liste mit DBEntry. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.
+		\item[+] \textbf{GetMostRecentEntriesAsync(amount : int): void}\\Liefert  die letzten 'amount' Einträge der Datenbank in Form einer Liste mit DBEntry zurück. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.
 		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEnries raus und speichert sie in der \gls{Datenbank}. Erstellt die DBEntry mithilfe der statischen Methode ParseDBEntry(entry : string) der Klasse DBEntry.\\
 
-		\item[+] \textbf{ExportTrainingData(path: string): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
+		\item[+] \textbf{ExportTrainingData(path: string): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. 
 	\end{itemize}
 \begin{minipage}[b]{0.6\textwidth}
 	\subsubsection{Class DBEntry}
@@ -1094,6 +1094,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 		\item[+] \textbf{static ShowPopUp(): void}\\Statische Methode, welche die View PopUpScanningPage anzeigt. Diese benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Anzeigen geschieht mit der Methode Popupnavigation.Instance.PushAsync(new PopUpScanningPage()). Dabei wird ein neue Instanz der PopUpScanningPage erstellt. Die Methode ist statisch, da die anderen ViewModels bei einem Vorgangstart anzeigen können muss, falls noch keine Verbindung zu den \gls{Earables} besteht.
 		\item[+] \textbf{static HidePopUp(): void}\\Statische Methode, welche dieView PopUpScanningPage verstecken lässt. Diese Methode benutzt die Erweiterung \Gls{Rg.Plugins.Popup}. Das Verstecken der View geschieht mit der Methode Popupnavigation.Instance.popAsync(). 
 	\end{itemize}
+\newpage
 \begin{minipage}[b]{0.7\textwidth}
 
 	\subsection{Class HomeMenuItem}
@@ -1130,7 +1131,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\end{itemize}
 
 
-
+	\newpage
 	\subsection{Class ExceptionHandlingViewModel}
 
 	\includegraphics{bilder/ViewmodelKlassen/ExceptionHandlingViewModelClass.png}
@@ -1142,6 +1143,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\begin{itemize}
 		\item[+] \textbf{static HandleException(error: Exception): void}\\Die statische Methode HandleException nimmt als Parameter eine Instanz der Klasse Exception. In dieser Methode wird ein DisplayAlert mit dem Titel der Exception und dessen Inhalt erstellt. Der DisplayAlert wird mithilfe der MainPage angezeigt.
 	\end{itemize}
+\newpage
 \section{Klassenbeschreibung View}
 
 \begin{minipage}[b]{0.7\textwidth}
