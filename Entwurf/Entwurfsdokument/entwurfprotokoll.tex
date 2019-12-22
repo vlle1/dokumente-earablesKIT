@@ -177,9 +177,18 @@ Diese Klasse ist das Herz der Bibliothek. Sie ist die Schnittstelle, über die s
 Die Klasse EarablesConnection implementiert das IEarablesConnection Interface und ist die konkrete Klasse, die sich um die BLE-Verbindung kümmert.\\
 
 
+
+
+\begin{minipage}[b]{0.5\textwidth}
 	\subsubsection{Static Class Constants}
 	
-	\includegraphics[width=0.5\textwidth]{bilder/BibPackageKlassen/Constants.png}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/Constants.png}
+\end{minipage}
+
+	
+
 
 
 \paragraph{Klassenbeschreibung:}
@@ -192,7 +201,7 @@ Die Constants Klasse enthält alle Konstanten, die benötigt werden, um die ents
 	\item[+] \textbf{PUSHBUTTON\_CHAR: string} \\Dieser string enthält die Beschreibung der Charakteristik, in dem der Push Button Status gespeichert wird.
 	\item[+] \textbf{BATTERY\_CHAR: string}\\ Dieser string enthält die Beschreibung der Charakteristik, in dem die Batterieladung gespeichert wird.
 	\item[+] \textbf{ACCELEROMETER\_GYROSCOPE\_LPF\_CHAR: string}\\ Dieser string enthält die Beschreibung der Charakteristik, welche beschrieben wird, um den Low Pass Filter für den Accelerometer und das Gyroscope zu setzen.
-\item[+] \textbf{ACCESS\_SERVICE: string}\\ Dieser string enthält die Beschreibung des Service Access-Service, der alle benötigten Charakteristiken enthält.
+\item[+] \textbf{ACCESS\_SERVICE: string}\\ Dieser string enthält die Beschreibung des Service Access-Service, der alle benötigten Charakteristiken enthält.\\
 \end{itemize}
 
 \begin{minipage}[b]{0.5\textwidth}
@@ -215,7 +224,7 @@ Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Gyroscope
 	\item \textbf{10Hz}\\Steht dafür, dass der LPF 10 Hz annehmen kann.
 	\item \textbf{5Hz}\\Steht dafür, dass der LPF 5 Hz annehmen kann.
 	\item \textbf{3600Hz}\\Steht dafür, dass der LPF 3600 Hz annehmen kann.
-	\item \textbf{OFF}\\Steht dafür, dass der LPF aus ist.
+	\item \textbf{OFF}\\Steht dafür, dass der LPF aus ist.\\
 \end{itemize}
 
 
@@ -244,7 +253,7 @@ Dieses Enum beinhaltet alle möglichen LPF Werte, die der LPF für das Accelerom
 \begin{minipage}[b]{0.5\textwidth}
 	\subsubsection{Class ConfigContainer}
 	\end{minipage}
-	\begin{minipage}[c]{0.6\textwidth}
+	\begin{minipage}[c]{0.5\textwidth}
 	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/ConfigContainer.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
@@ -296,7 +305,7 @@ Diese Klasse besitzt alle ausgewerteten IMU Informationen, die in einem Datensat
 	
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.6\textwidth]{bilder/BibPackageKlassen/Gyroscope.png}
+	\includegraphics[width=0.5\textwidth]{bilder/BibPackageKlassen/Gyroscope.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Diese Klasse besitzt alle ausgewerteten Gyroskopdaten.
@@ -313,7 +322,7 @@ Diese Klasse besitzt alle ausgewerteten Gyroskopdaten.
 	
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.6\textwidth]{bilder/BibPackageKlassen/Accelerometer.png}
+	\includegraphics[width=0.5\textwidth]{bilder/BibPackageKlassen/Accelerometer.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
@@ -329,9 +338,14 @@ Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
 \end{itemize}
 
 
+\begin{minipage}[b]{0.5\textwidth}
 	\subsubsection{Class Characteristics}
 	
-		\includegraphics[width=0.5\textwidth]{bilder/BibPackageKlassen/Characteristics.png}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/Characteristics.png}
+\end{minipage}
+
 
 \paragraph{Klassenbeschreibung:}
 In dieser Klasse werden die Charakteristiken gespeichert, um sie nicht jedes Mal neu laden zu müssen, wenn sie gebraucht werden. Der Datentyp ICharacteristic befindet sich in dem BLE\_Plugin.
@@ -972,7 +986,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	Diese Klasse spezifiziert einen Eintrag des Menüs (siehe MenuPage). 
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item [+] \textbf{Id: MenuItemType}\\ Der Typ des Menüeintrags (in UML als Assozation dargestellt).
+		\item [+] \textbf{Id: MenuItemType}\\ Der Typ des Menüeintrags (in UML als Assoziation dargestellt).
 		\item [+] \textbf{Title: string}\\ Der angezeigte Text des Menüeintrags.
 	\end{itemize}
 \begin{minipage}[b]{0.7\textwidth}
@@ -1311,7 +1325,7 @@ Bei einer erfolgreichen Verbindung erhält das ViewModel true zurück. Zudem wir
 Das Sequenzdiagramm verdeutlicht den Vorgang, wenn der Nutzer die Seite im Menu wechselt.
 
 Zunächst befindet sich die App im Laufmodus. Es wird nun der Menu-Button betätigt, um auf eine andere Seite zu kommen. Die MenuPage ruft bei sich die Methode OnBackButtonPressed() auf, um die Seite zu wechseln. 
-Der Nutzer klickt dabei auf den Musikmodus. Jede MenuPage hat ihre eigene ID. In diesem Beispiel nehmen wir jetzt an, der Musikmodus hat die 5 als ID. Diese ID wird der MainPage beim Aufruf NavigatFromMenu(5) übergeben. Somit weiß die MainPage, welche Seite sie erstellen und anzeigen soll.
+Der Nutzer klickt dabei auf den Musikmodus. Jede MenuPage hat ihre eigene ID. In diesem Beispiel nehmen wir jetzt an, der Musikmodus hat die 5 als ID. Diese ID wird der MainPage beim Aufruf NavigateFromMenu(5) übergeben. Somit weiß die MainPage, welche Seite sie erstellen und anzeigen soll.
 Die MainPage erstellt im nächsten Schritt eine MusicModePage, welche angezeigt werden soll. Um diese anzuzueigen, wird eine NavigationPage erstellt, welche von der MenuPage verwendet wird. Diese bekommt in ihrem Konstruktor die gewünschte Page übergeben. In dem Beispiel die Instanz der MusicModePage. \\
 
 Die MainPage zeigt nun die NavigationPage an, also den gewünschten Musikmodus.
@@ -1325,7 +1339,7 @@ Die CountModePage setzt im zugehörigen ViewModel CountModelViewModel die Select
 Wenn der Nutzer nun die Aktivität startet, wird das Command StartActivity im ViewModel ausgeführt.\\Dort wird zunächst geschaut, ob eine Verbindung zu den \gls{Earables} besteht. In dem Beispiel besteht schon eine Verbindung.\\
 Als nächstes registriert sich das ViewModel bei dem EventHandler ActivityDone der gewünschten Aktivität. Dafür muss die Klasse SitUpActivityThreshold angesprochen werden, welche sich das ViewModel als Attribut zwischengespeichert hat.\\
 Nach dem erfolgreichen registrieren wird zu der aktiven Zählmodusseite gewechselt und der Timer wird gestartet.\\
-Wenn jetzt die Aktivitätsanalyse SitUpActivityThreshold eine Liegestütze erkennt, so wird die registrierte Eventmethode OnAcivityDone() aufgerufen. 
+Wenn jetzt die Aktivitätsanalyse SitUpActivityThreshold eine Liegestütze erkennt, so wird die registrierte Eventmethode OnActivityDone() aufgerufen. 
 
 Diese aktualisiert bei jedem Aufruf die View, da eine Liegestütze gemacht wurde.\\
 Wenn der Vorgang nun beendet wird, meldet sich das ViewModel bei dem EventHandler wieder ab. Zuletzt wird das Vorgangsresultat (die Anzahl der Liegestützen) angezeigt.\\ 
@@ -1398,7 +1412,7 @@ Es werden folgende Erweiterungen benötigt:\\
 \begin{itemize}
 	\item \textbf{\Gls{Bluetooth LE Plugin}}\\Diese Erweiterung ermöglicht es die Verbindung mit den \Gls{Earables} herzustellen. Zudem wird die Kommunikation zwischen Device und \Gls{Earables} geregelt. Von dieser Erweiterung erhalten wir die \Gls{IMU}-Daten.
 
-	\item \textbf{\Gls{DependencyInjection}}\\Microsoft.Extensions.DependencyInjection ist eine Erweiterung, welche es ermöglicht, Komponenten als Services zu registrieren und sie somit abgekapselt und modularer zu betrachten. Mit Klassen wie der ServiceCollection oder dem ServiceProvicer, bietet die Erweiterung Microsoft.Extensions.DependencyInjection das Framework.
+	\item \textbf{\Gls{DependencyInjection}}\\Microsoft.Extensions.DependencyInjection ist eine Erweiterung, welche es ermöglicht, Komponenten als Services zu registrieren und sie somit abgekapselt und modularer zu betrachten. Mit Klassen wie der ServiceCollection oder dem ServiceProvider, bietet die Erweiterung Microsoft.Extensions.DependencyInjection das Framework.
 	\item \textbf{\Gls{Xamarin.Essentials}}\\Die Erweiterung Xamarin.Essentials ermöglicht einem, Gerätespezifische Services anzusprechen. Benutzt wird hiervon die Funktion \Gls{TTS}. 
 	\item \textbf{\Gls{SQLite}}\\SQLite-net-pcl basiert auf dem PlugIn SQLite und ist eine portable Version für die Arbeit mit einer SQLite Datenbank. Dabei ist SQLite eine Erweiterung, mit der man lokale Datenbanken ansprechen und verwalten kann. Dabei bietet die Erweiterung eine plattformunabhängige, lokale Datenbank. Diese Erweiterung wird für die Speicherung der Trainingsdaten benutzt.
 	\item \textbf{\Gls{Rg.Plugins.Popup}}\\Rg.Plugins.Popup ist eine Erweiterung, welche es einem ermöglicht, Pop-up Fenster mit mehr Logik als ein DisplayAlert zu erstellen und anzuzeigen.
