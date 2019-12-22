@@ -711,7 +711,12 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 
 
 \section{Klassenbeschreibung ViewModel}
-\subsection{Abstract Class BaseModeViewModel} 
+\begin{minipage}[t]{0.7\textwidth}
+	\subsection{Abstract Class BaseModeViewModel} 
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewModelKlassen/BaseModeViewModel}
+\end{minipage}
 \paragraph{Klassenbeschreibung:}
 Die abstrakte Klasse IBaseModeViewModel hält die Commands für Buttonklicks, die in jedem ViewModel der einzelnen Modi benötigt werden. Die Methoden die von den Commands aufgerufen werden und die Event Methode werden als abstrakt deklariert und in den Unterklassen implementiert. Die CheckConnection Methode wird beim Starten eines Vorgangs aufgerufen und ist bereits implementiert.
 \paragraph{Attribute:}
@@ -727,9 +732,12 @@ Die abstrakte Klasse IBaseModeViewModel hält die Commands für Buttonklicks, di
 	\item[+] \textbf{CheckConnection(): void} \\ Methode, die vom statischen PopUpViewModel den Verbindungsstatus abfragt und bei Bedarf eine Verbindung mit den \Gls{Earables} herstellt.
 \end{itemize}
 
-
-\subsection{Class StepModeViewModel}
-
+\begin{minipage}[b]{0.7\textwidth}
+	\subsection{Class StepModeViewModel}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewModelKlassen/StepModeViewModel.png}
+\end{minipage}
 \paragraph{Klassenbeschreibung:}
 Die Klasse StepModeViewModel erbt von der abstrakten Klasse BaseModeViewModel, enthält die Logik des Stepmodes  und hält Attribute die per Databinding an die Viewklassen StepModePage und StepModeActivePage gebunden sind. 
 \paragraph{Attribute:}
@@ -758,7 +766,12 @@ Die Klasse StepModeViewModel erbt von der abstrakten Klasse BaseModeViewModel, e
 	\item[$-$] \textbf{ShowPopUp(): void} \\ Zeigt das PopUp mit den gelaufenen Schritten und der Distanz asynchron an, wegklickbar mit einem Button.
 \end{itemize}
 
-\subsection{Class CountModeViewModel}
+\begin{minipage}[t]{0.7\textwidth}
+	\subsection{Class CountModeViewModel}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewModelKlassen/CountModeViewModel}
+\end{minipage}
 \paragraph{Klassenbeschreibung:}
 Die Klasse CountModeViewModel erbt von der abstrakten Klasse BaseModeViewModel, enthält die Logik des Countmodes und hält Attribute die per Databinding an die Viewklassen CountModePage und CountModeActivePage gebunden sind.
 \paragraph{Attribute:}
@@ -785,7 +798,13 @@ Die Klasse CountModeViewModel erbt von der abstrakten Klasse BaseModeViewModel, 
 	\item[$-$] \textbf{ShowPopUp(): void} \\ Zeigt das PopUp mit dem Vorgangsresultat asynchron an, wegklickbar mit einem Button. 
 \end{itemize}
 
-\subsection{Class ListenAndPerformViewModel}
+
+\begin{minipage}[t]{0.7\textwidth}
+	\subsection{Class ListenAndPerformViewModel}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewModelKlassen/ListenAndPerformViewModel}
+\end{minipage}
 \paragraph{Klassenbeschreibung:}
 Die Klasse ListenAndPerformViewModel erbt von der abstrakten Klasse BaseModeViewModel, enthält die Logik von Listen\&Perform und hält Attribute die per Databinding an die Viewklassen CountModePage und CountModeActivePage gebunden sind.  Sie implementiert die INotifyPropertyChanged Schnittstelle, um das Erstellen eines Trainingsablaufplans durch den Benutzer in der zugehörigen Viewklasse anzeigen zu können.
 \paragraph{Attribute:}
@@ -822,7 +841,12 @@ Die Klasse ListenAndPerformViewModel erbt von der abstrakten Klasse BaseModeView
 	\item[$-$] \textbf{DoActivity(): void} \\ Das ViewModel registriert seine seine OnActivityDone Event Methode bei der aktuellen Activity der ActivityList. Liest die Activity vor und startet den Timer. Nach Erkennung der vorher festgelegten Anzahl Wiederholungen, meldet das ViewModel seine OnActivityDone Methode ab und zählt den entsprechenden ResultCounter um die ausgeführte Anzahl hoch. 
 \end{itemize}
 
-\subsection{Class MusicModeViewModel}
+\begin{minipage}[t]{0.7\textwidth}
+	\subsection{Class MusicModeViewModel}
+\end{minipage}
+\begin{minipage}[c]{0.3\textwidth}
+	\includegraphics[width=\textwidth]{bilder/ViewModelKlassen/MusicModeViewModel}
+\end{minipage}
 \paragraph{Klassenbeschreibung:}
 Die Klasse MusicModeViewModel erbt von der abstrakten Klasse BaseModeViewModel und enthält die Logik des Musicmodes.
 \paragraph{Attribute:}
