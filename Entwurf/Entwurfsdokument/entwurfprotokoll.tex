@@ -612,7 +612,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\subsubsection{Interface ActivityArgs}
 		\end{minipage}
 		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/ActivityArgsInterface.png}
+			\includegraphics{bilder/EMKlassen/ActivityArgsInterface.png}
 		\end{minipage}
 		
 	\paragraph{Schnittstellenbeschreibung:}
@@ -622,7 +622,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\subsubsection{Class RunningEventArgs}
 		\end{minipage}
 		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/RunningEventArgsClass.png}
+			\includegraphics{bilder/EMKlassen/RunningEventArgsClass.png}
 		\end{minipage}
 		
 	\paragraph{Klassenbeschreibung:}
@@ -636,7 +636,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\subsubsection{Interface CountableActivityArgs}
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-		\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/CountableActivityArgsInterface.png}
+		\includegraphics{bilder/EMKlassen/CountableActivityArgsInterface.png}
 	\end{minipage}
 
 	\paragraph{Schnittstellenbeschreibung:}
@@ -648,7 +648,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\subsubsection{Class PushUpEventArgs}
 		\end{minipage}
 		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/PushUpEventArgsClass.png}
+			\includegraphics{bilder/EMKlassen/PushUpEventArgsClass.png}
 		\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Aktuell gibt es keine relevanten Argumente bei Push-ups. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.\\
@@ -657,7 +657,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\subsubsection{Class StepEventArgs}
 		\end{minipage}
 		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/StepEventArgsClass.png}
+			\includegraphics{bilder/EMKlassen/StepEventArgsClass.png}
 		\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Aktuell gibt es keine relevanten Argumente bei der Schritterkennung. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.\\
@@ -666,7 +666,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\subsubsection{Class SitUpEventArgs}
 		\end{minipage}
 		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/SitUpEventArgsClass.png}
+			\includegraphics{bilder/EMKlassen/SitUpEventArgsClass.png}
 		\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Aktuell gibt es keine relevanten Argumente bei Sit-ups. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.\\
@@ -748,7 +748,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 
 \subsubsection{Class User}
 
-\includegraphics[width=0.4\textwidth]{bilder/EMKlassen/UserClass.png}
+\includegraphics{bilder/EMKlassen/UserClass.png}
 	\paragraph{Klassenbeschreibung:}
 	Die User-Klasse spezifiziert den Nutzer, der die App gerade verwendet. In dieser werden Attribute gespeichert, welche von Nutzer zu Nutzer anders sind. Falls der Nutzer sein Konto noch nicht eingerichtet hat, wird ein Standardnutzer geladen.\\
 	\paragraph{Attribute:}
@@ -1084,11 +1084,13 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 \begin{itemize}
     \item[+] \textbf{<<create>> SettingsViewModel(): void}\\ Im Konstruktor holt sich die Klasse vom ISettingsService den User, die Sprache und die Samplingrate und speichert die Entsprechenden Werte in den eigenen Properties. Die Werte von Attributen, die über kein Binding verfügen, müssen hier manuell ins View übertragen werden.
     \item[\#] \textbf{OnPropertyChanged(): void}\\ Die Methode wird von der Schnittstelle INotifyPropertyChanged geerbt. Diese wird benutzt um die View zu aktualisieren und ihr um Bescheid zu geben, wenn sich eine Eigenschaft aus dem ViewModel verändert. 
-    \item[+] \textbf{SaveClicked(): void}\\ wenn diese Methode aufgerufen wird, werden die aktuellen Properties wieder im ISettingsService gespeichert, nachdem alle Werte von Attributen, die über kein Binding verfügen, vom View geholt und aktualisiert werden. Bei Auftretenden Exceptions (kein Gerät verbunden) wird eine Fehlermeldung als Popup angezeigt. Liefert needsRestart wahr, wird außerdem ein Hinweis angezeigt, dass die App neu gestartet werden muss, um alle Änderungen zu übernehmen. 
+    \item[+] \textbf{SaveClicked(): void}\\ wenn diese Methode aufgerufen wird, werden die aktuellen Properties wieder im ISettingsService gespeichert, nachdem alle Werte von Attributen, die über kein Binding verfügen, vom View geholt und aktualisiert werden. Bei Auftretenden Exceptions (kein Gerät verbunden) wird eine Fehlermeldung als Popup angezeigt. Liefert needsRestart wahr, wird außerdem ein Hinweis angezeigt, dass die App neu gestartet werden muss, um alle Änderungen zu übernehmen.\\
 
 \end{itemize} 
 
+
 \subsection{Class ScanningPopUpViewModel}
+	\includegraphics{bilder/ViewmodelKlassen/ScanningPopUpViewModelClass.png}
 	\paragraph{Klassenbeschreibung:}
 	Die Klasse ScanningPopUpViewModel ist das ViewModel zu dem View PopUpScanningPage und verwaltet die Logik dieser Komponente mithilfe von verknüpften Commands. Dabei implementiert die Klasse die Schnittstelle INotifyPropertyChanged, um die View zu aktualisieren.
 	Sie benutzt die Erweiterung \Gls{Rg.Plugins.Popup} für das Anzeigen und das Versteckend des Pop-ups.
@@ -1147,7 +1149,12 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
         \item StepMode
 	\end{itemize}
 
-\subsection{Class ExceptionHandlingViewModel}
+
+
+	\subsection{Class ExceptionHandlingViewModel}
+
+	\includegraphics{bilder/ViewmodelKlassen/ExceptionHandlingViewModelClass.png}
+
 	\paragraph{Klassenbeschreibung:}
 	Die Klasse ExceptionHandlingViewModel ist die zentrale Fehlerverarbeitung. Wenn eine Exception in anderen Komponenten des ViewModels oder des Models auftritt, wird die Exception gefangen und an die Klasse ExceptionHandlingViewModel weitergeleitet. Diese erstellt nun eine Benachrichtigung in Form eines DisplayAlerts, sodass der Nutzer von dieser Exception erfährt. 
 	
@@ -1326,10 +1333,15 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 			\item [+]\textbf{LanguagePicker: Picker}\\ Hier kann der Nutzer zwischen Deutsch und Englisch wählen.
 			\item [+]\textbf{StepLengthEntry: Entry}\\ Hier gibt de Nutzer seine Schrittlänge ein.
 			\item [+]\textbf{SampleRatePicker: Picker}\\ Hier kann der Nutzer zwischen angebotenen Samplingraten wählen, die vom SettingsService zur Verfügung gestellt werden.
-			\item [+]\textbf{SaveButton: Button}\\ Button der gedrückt wird, um die Eingaben zu speichern.
+			\item [+]\textbf{SaveButton: Button}\\ Button der gedrückt wird, um die Eingaben zu speichern.\\
 		\end{itemize}
-
-	\subsection{Class PopUpScanningPage}
+	
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsection{Class PopUpScanningPage}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\textwidth}
+		\includegraphics[width=0.6\textwidth]{bilder/ViewKlassen/PopUpScanningPageClass.png}
+	\end{minipage}
 		\paragraph{Klassenbeschreibung:}
 		Die Klasse erbt von der Klasse PopupPage aus der Erweiterung \Gls{Rg.Plugins.Popup}, welche die Grundstruktur eines Pop-up Fenster implementiert.\\
 		Die Klasse PopUpScanningPage beinhaltet das Pop-up, welches erscheint, wenn keine Verbindung zu den \gls{Earables} besteht. Dies wird überprüft, wenn die App geöffnet wird oder ein Vorgang gestartet werden soll. Dabei interagiert das Pop-Up mit dem Model (der Bibliothek), welches die Verbindungssuche und die Verbindung implementiert. Bei einer erfolgreichen Verbindung, verschwindet das Pop-Up automatisch; bei einer fehlerhaften Verbindung wird eine Fehlermeldung angezeigt. Der Nutzer kann das Pop-Up mit dem 'Cancel-Button' wegklicken. 
