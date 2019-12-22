@@ -298,7 +298,7 @@ Diese Klasse besitzt alle ausgewerteten IMU Informationen, die in einem Datensat
 	
 	\end{minipage}
 	\begin{minipage}[c]{0.3\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/Gyroscope.png}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/Gyroscope.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Diese Klasse besitzt alle ausgewerteten Gyroskopdaten.
@@ -314,7 +314,7 @@ Diese Klasse besitzt alle ausgewerteten Gyroskopdaten.
 	\subsubsection{Class Accelerometer}
 	\end{minipage}
 	\begin{minipage}[c]{0.3\textwidth}
-	\includegraphics[width=0.8\textwidth]{bilder/BibPackageKlassen/Accelerometer.png}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/Accelerometer.png}
 \end{minipage}
 \paragraph{Klassenbeschreibung:}
 Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
@@ -334,7 +334,7 @@ Diese Klasse besitzt alle ausgewerteten Accelerometer Daten.
 	\subsubsection{Class Characteristics}
 	\end{minipage}
 	\begin{minipage}[c]{0.3\textwidth}
-	\includegraphics[width=1.2\textwidth]{bilder/BibPackageKlassen/Characteristics.png}
+	\includegraphics[width=\textwidth]{bilder/BibPackageKlassen/Characteristics.png}
 \end{minipage}
 
 
@@ -435,7 +435,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\subsubsection{Interface IActivityManager}
 	\end{minipage}
 	\begin{minipage}[c]{0.5\textwidth}
-		\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/IActivityManagerInterface.png}
+		\includegraphics[width=\textwidth]{bilder/EMKlassen/IActivityManagerInterface.png}
 	\end{minipage}
 	
 	\paragraph{Schnittstellenbeschreibung:}
@@ -455,11 +455,11 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	
 	
 	
-	\begin{minipage}[b]{0.5\textwidth}
+	\begin{minipage}[b]{0.6\textwidth}
 		\subsubsection{Class ActivityManager}
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-		\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/ActivityMangerClass.png}
+	\begin{minipage}[c]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{bilder/EMKlassen/ActivityMangerClass.png}
 	\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Die Klasse ActivityManager implementiert die Schnittstelle IActivityManager. Sie ist demnach ein Service-Manager und verwaltet die Activities (Vorgängeanalysen). Über sie können die ViewModels auf die Activities zugreifen.\\
@@ -480,10 +480,13 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 	
 	
-	
+	\begin{minipage}[b]{0.6\textwidth}
 		\subsubsection{Class Activity}
+	\end{minipage}
+	\begin{minipage}[c]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{bilder/EMKlassen/ActivityClass.png}
+	\end{minipage}
 	
-	\includegraphics[width=0.4\textwidth]{bilder/EMKlassen/ActivityClass.png}
 	\paragraph{Klassenbeschreibung}
 	Activity ist eine abstrakte Klasse. Eine Activity ist im Wesentlichen ein Aktivitätserkennungsalgorithmus. Dabei wird die DataUpdate() Methode implementiert und den Unterklassen zu Verfügung gestellt. Der Algorithmus zur Aktivitätsanalyse (protected abstract void Analyse()) wird nur in konkreten Unterklassen implementiert. Dieser Entwurf entspricht dem Entwurfsmuster Schablone.
 	
@@ -501,8 +504,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\begin{minipage}[b]{0.6\textwidth}
 		\subsubsection{Abstract Class AbstractStepActivity}
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-		\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/AbstractStepActivityClass.png}
+	\begin{minipage}[c]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{bilder/EMKlassen/AbstractStepActivityClass.png}
 	\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Schritterkennung.\\ Es soll immer ein Event gefeuert werden, wenn ein Schritt getätigt wurde.\\
@@ -510,8 +513,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\begin{minipage}[b]{0.6\textwidth}
 		\subsubsection{Class StepActivityThreshold}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/StepActivityThresholdClass.png}
+		\begin{minipage}[c]{0.4\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/StepActivityThresholdClass.png}
 		\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung, wann ein Schritt getätigt wurde. Es handelt sich hierbei um eine Kindklasse der abstrakten Klasse AbstractStepActivity. 
@@ -526,8 +529,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\begin{minipage}[b]{0.65\textwidth}
 		\subsubsection{Abstract Class AbstractRunningActivity}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/AbstractRunningActivityClass.png}
+		\begin{minipage}[c]{0.35\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/AbstractRunningActivityClass.png}
 		\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung, ob der Nutzer läuft oder steht.\\ Es wird immer dann ein Event gefeuert, wenn sich dieser Status ändert.\\
@@ -535,8 +538,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\begin{minipage}[b]{0.6\textwidth}
 		\subsubsection{Class RunningActivityThreshold}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/RunningActivityThresholdClass.png}
+		\begin{minipage}[c]{0.4\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/RunningActivityThresholdClass.png}
 		\end{minipage}
 		
 	\paragraph{Klassenbeschreibung:}
@@ -551,8 +554,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\begin{minipage}[b]{0.65\textwidth}
 		\subsubsection{Abstract Class AbstractPushUpActivity}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/AbstractPushUpActivityClass.png}
+		\begin{minipage}[c]{0.35\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/AbstractPushUpActivityClass.png}
 		\end{minipage}
 		
 	\paragraph{Klassenbeschreibung:}
@@ -561,8 +564,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\begin{minipage}[b]{0.6\textwidth}
 		\subsubsection{Class PushUpActivityThreshold}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/PushUpActivityThresholdClass.png}
+		\begin{minipage}[c]{0.4\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/PushUpActivityThresholdClass.png}
 		\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung von Push-ups. Es wird nur analysiert, falls sich mindestens ein Event bei dem geerbten EventHandler ActivityDone registriert hat.
@@ -576,8 +579,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\begin{minipage}[b]{0.6\textwidth}
 		\subsubsection{Abstract Class AbstractSitUpActivity}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/AbstractSitUpActivityClass.png}
+		\begin{minipage}[c]{0.4\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/AbstractSitUpActivityClass.png}
 		\end{minipage}
 		
 	\paragraph{Klassenbeschreibung:}
@@ -586,8 +589,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\begin{minipage}[b]{0.6\textwidth}
 		\subsubsection{Class SitUpActitvityThreshold}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/SitUpActivityThresholdClass.png}
+		\begin{minipage}[c]{0.4\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/SitUpActivityThresholdClass.png}
 		\end{minipage}
 		
 	\paragraph{Klassenbeschreibung:}
@@ -599,21 +602,21 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 		
 	
-	\begin{minipage}[b]{0.6\textwidth}
+	\begin{minipage}[b]{0.7\textwidth}
 		\subsubsection{Interface ActivityArgs}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics{bilder/EMKlassen/ActivityArgsInterface.png}
+		\begin{minipage}[c]{0.3\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/ActivityArgsInterface.png}
 		\end{minipage}
 		
 	\paragraph{Schnittstellenbeschreibung:}
 	ActivityArgs werden beim Feuern eines Events mit dem Event übergeben. Das erkannte Ereignis kann durch die ActivityArgs genauer beschrieben werden.\\
 	
-	\begin{minipage}[b]{0.6\textwidth}
+	\begin{minipage}[b]{0.8\textwidth}
 		\subsubsection{Class RunningEventArgs}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics{bilder/EMKlassen/RunningEventArgsClass.png}
+		\begin{minipage}[c]{0.2\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/RunningEventArgsClass.png}
 		\end{minipage}
 		
 	\paragraph{Klassenbeschreibung:}
@@ -623,11 +626,11 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item[+] \textbf{Running: bool}\\ Dieses Attribut ist genau dann auf wahr (true) gesetzt, wenn der Nutzer zu laufen beginnt; falsch (false), wenn der Nutzer stoppt.\\
 	\end{itemize} 
 
-	\begin{minipage}[b]{0.6\textwidth}
+	\begin{minipage}[b]{0.8\textwidth}
 		\subsubsection{Interface CountableActivityArgs}
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-		\includegraphics{bilder/EMKlassen/CountableActivityArgsInterface.png}
+	\begin{minipage}[c]{0.2\textwidth}
+		\includegraphics[width=\textwidth]{bilder/EMKlassen/CountableActivityArgsInterface.png}
 	\end{minipage}
 
 	\paragraph{Schnittstellenbeschreibung:}
@@ -635,38 +638,41 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\newline
 	
 	
-	\begin{minipage}[b]{0.6\textwidth}
+	\begin{minipage}[b]{0.8\textwidth}
 		\subsubsection{Class PushUpEventArgs}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics{bilder/EMKlassen/PushUpEventArgsClass.png}
+		\begin{minipage}[c]{0.2\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/PushUpEventArgsClass.png}
 		\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Aktuell gibt es keine relevanten Argumente bei Push-ups. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.\\
 	
-	\begin{minipage}[b]{0.6\textwidth}
+	\begin{minipage}[b]{0.8\textwidth}
 		\subsubsection{Class StepEventArgs}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics{bilder/EMKlassen/StepEventArgsClass.png}
+		\begin{minipage}[c]{0.2\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/StepEventArgsClass.png}
 		\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Aktuell gibt es keine relevanten Argumente bei der Schritterkennung. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.\\
 	\newline
-	\begin{minipage}[b]{0.6\textwidth}
+	\begin{minipage}[b]{0.8\textwidth}
 		\subsubsection{Class SitUpEventArgs}
 		\end{minipage}
-		\begin{minipage}[c]{0.5\textwidth}
-			\includegraphics{bilder/EMKlassen/SitUpEventArgsClass.png}
+		\begin{minipage}[c]{0.2\textwidth}
+			\includegraphics[width=\textwidth]{bilder/EMKlassen/SitUpEventArgsClass.png}
 		\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Aktuell gibt es keine relevanten Argumente bei Sit-ups. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.\\
 	\newline
 	
 
-
-\subsection{Class ServiceManager}
-	\includegraphics[width=0.4\textwidth]{bilder/EMKlassen/ServiceManagerClass.png}
+\begin{minipage}[b]{0.6\textwidth}
+	\subsection{Class ServiceManager}
+\end{minipage}
+\begin{minipage}[c]{0.4\textwidth}
+	\includegraphics[width=\textwidth]{bilder/EMKlassen/ServiceManagerClass.png}
+\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Der ServiceManager verwaltet alle Services des Models mithilfe eines statischen Serviceproviders. Dies wird von anderen Services des Models, sowie von dem ViewModel benutzt. Er dient zur Delegierung der Services.\\ 
 	Dabei implementiert der ServiceManager das Interface IManager.
@@ -713,8 +719,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 \begin{minipage}[b]{0.6\textwidth}
 	\subsubsection{Class SettingsService}
 \end{minipage}
-\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/SettingsServiceClass.png}
+\begin{minipage}[c]{0.4\textwidth}
+	\includegraphics[width=\textwidth]{bilder/EMKlassen/SettingsServiceClass.png}
 \end{minipage}
 	\paragraph{Klassenbeschreibung}
 	Die Klasse SettingsService implementiert die Schnittstelle ISettingsService. Zur Speicherung der Einstellungen wird die Klasse App.Current.Properties verwendet.
@@ -741,8 +747,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 \begin{minipage}[b]{0.6\textwidth}
 	\subsubsection{Class User}
 \end{minipage}
-\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics{bilder/EMKlassen/UserClass.png}
+\begin{minipage}[c]{0.4\textwidth}
+	\includegraphics[width=\textwidth]{bilder/EMKlassen/UserClass.png}
 \end{minipage}
 
 	\paragraph{Klassenbeschreibung:}
@@ -763,8 +769,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\begin{minipage}[b]{0.6\textwidth}
 		\subsubsection{Enumeration SamplingRate}
 	\end{minipage}
-	\begin{minipage}[c]{0.5\textwidth}
-		\includegraphics{bilder/EMKlassen/SamplingRateEnum.png}
+	\begin{minipage}[c]{0.0\textwidth}
+		\includegraphics[width=\textwidth]{bilder/EMKlassen/SamplingRateEnum.png}
 	\end{minipage}
 	\paragraph{Enumerationbeschreibung}
 	Das Enum SamplingRate gibt dem User die Auswahl die SamplingRate (Anzahl der Stichproben). Dazu gibt es mehrere Einstellungsraten von 1-100 Hz (Herz). Diese aktuelle SamplingRate wird in den App.Properties gespeichert. Dies wird von der Klasse SettingsService verwaltet. 
@@ -805,8 +811,8 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 \begin{minipage}[b]{0.6\textwidth}
 	\subsubsection{Class DataBaseConnection}
 \end{minipage}
-\begin{minipage}[c]{0.5\textwidth}
-	\includegraphics{bilder/EMKlassen/DataBaseConnectionClass.png}
+\begin{minipage}[c]{0.4\textwidth}
+	\includegraphics[width=\textwidth]{bilder/EMKlassen/DataBaseConnectionClass.png}
 \end{minipage}
 	\paragraph{Klassenbeschreibung}
 	Die Klasse DataBaseConnection implementiert die Schnittstelle IDataBaseConnection. Sie kümmert sich um die Speicherung und Verwaltung der Trainingsdaten. Dabei benutzt die DataBaseConnection die \gls{Datenbank} von SQLite. Es werden Objekte von der Klasse DBEntry gespeichert. 
@@ -825,11 +831,11 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 
 		\item[+] \textbf{ExportTrainingData(path: string): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. 
 	\end{itemize}
-\begin{minipage}[b]{0.6\textwidth}
+\begin{minipage}[b]{0.5\textwidth}
 	\subsubsection{Class DBEntry}
 \end{minipage}
 \begin{minipage}[c]{0.5\textwidth}
-	\includegraphics{bilder/EMKlassen/DBEntryClass.png}
+	\includegraphics[width=\textwidth]{bilder/EMKlassen/DBEntryClass.png}
 \end{minipage}
 	\paragraph{Klassenbeschreibung}
 	Die Klasse DBEntry ist ein Datencontainer, welcher einen Trainingstag darstellt. Dieser wird in der Datenbank gespeichert. DBEntry beinhaltet kein selbstständiges Verhalten. Für die Modularität sind die unterschiedlichen Attribute in einem Dictionary gespeichert.
@@ -1267,7 +1273,7 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 	\begin{minipage}[t]{0.7\textwidth}	
 		\subsection{Class DataOverviewPage}
 	\end{minipage}
-	\begin{minipage}[c]{0.4\textwidth}
+	\begin{minipage}[c]{0.3\textwidth}
 		\includegraphics[width=\textwidth]{bilder/ViewKlassen/DataOverviewPage}
 	\end{minipage}
 		\paragraph{Klassenbeschreibung:}
@@ -1388,7 +1394,7 @@ Die Klasse stellt die komplette Ansicht des Musicmodes dar. Beim Starten des Mus
 		\section{Class App}
 	\end{minipage}
 	\begin{minipage}[c]{0.3\textwidth}
-		\includegraphics{bilder/ViewKlassen/AppClass.png}
+		\includegraphics[width=\textwidth]{bilder/ViewKlassen/AppClass.png}
 	\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Die Klasse 'App' ist die Hauptklasse der App und erbt von der Klasse 'Application'. Wenn die App vom Nutzer gestartet wird, wird eine Instanz der Klasse 'App' erstellt. In dem Konstruktor wird die grafische Oberfläche angelegt und die Funktionen zum Laufen gebracht.\\
