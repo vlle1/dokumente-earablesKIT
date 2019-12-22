@@ -439,7 +439,14 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item[$-$] \textbf{ServiceRegistration(out collection: IServiceCollection)}\\Legt eine IServiceCollection an und registriert dort die Services. Die IServiceCollection wird zurückgegeben.
 	\end{itemize}
 	
-	\subsubsection{Interface IActivityManager}
+	
+	\begin{minipage}[b]{0.5\textwidth}
+		\subsubsection{Interface IActivityManager}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\textwidth}
+		\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/IActivityManagerInterface.png}
+	\end{minipage}
+	
 	\paragraph{Schnittstellenbeschreibung:}
 	Die Schnittstelle IActivityManager erweitert die Schnittstelle IManager. Dabei definiert IActivityManager einen spezielleren Service-Manager. Dieser beinhaltet die Modi Services. Zudem definiert der IActivityManager die EventMethode OnIMUDataReceived(sender: object, args: DataEventArgs).\\
 	Die Schnittstelle ist bei der Klasse ServiceManager als Service registriert und kann über diese von anderen Komponenten in der App angesprochen werden.
@@ -455,7 +462,14 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item[+] \textbf{OnIMUDataReceived(sender: object, args: DataEventArgs): void}\\Die öffentliche Methode ist eine EventMethode, welche beim EventHandler IMUDataReceived der Klasse EarablesConnection registriert wird. Die konkreten Unterklassen müssen diese implementieren. 
 	\end{itemize}
 	
-	\subsubsection{Class ActivityManager}
+	
+	
+	\begin{minipage}[b]{0.5\textwidth}
+		\subsubsection{Class ActivityManager}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\textwidth}
+		\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/ActivityMangerClass.png}
+	\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Die Klasse ActivityManager implementiert die Schnittstelle IActivityManager. Sie ist demnach ein Service-Manager und verwaltet die Activities (Vorgängeanalysen). Über sie können die ViewModels auf die Activities zugreifen.\\
 	Der ActivityManager besitzt einen Service von den folgenden Typen: AbstractSitUpActivity, AbstractStepActivity, AbstractRunningActivity, AbstractPushUpActivity.\\
@@ -470,12 +484,15 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\begin{itemize}
 		\item[+] \textbf{<<create>> ActivityManager}\\Im Konstruktor registriert sich die Instanz der Klasse selbst bei dem EventHandler IMUDataReceived der Klasse EarablesConnection und ruft die private Methode ServiceRegistration(\dots) auf. Damit findet die Registrierung der Services und die Instanziierung des ActivityProviders statt.
 		\item[$-$] \textbf{ServiceRegistration(out collection IServiceCollection): void}\\Private geerbte Methode der Schnittstelle IManager. Es wird eine ServiceCollection angelegt, bei der die Aktiväten registriert werden. Dies passiert mit der Methode collection.AddSingleton<IT,T>(). IT ist eine Oberklasse/Schnittstelle und T die konkrete Implementierung. IT ist in der Klasse ActivityManager immer eine Unterklasse vom Typ Activity (abstract).
-		\item[+] \textbf{OnIMUDataReceived(sender: object, args: DataEventArgs): void}\\EventMethode, welche bei dem EventHandler IMUDataReceived der Klasse EarablesConnection registriert wird. Bei dem Aufrufen der Methode werden die Daten an die gespeicherten Aktivitäten weitergegeben. Das passiert per Push-Model (Observer-Muster), indem bei den Aktivitäten die Methode DataUpdate(data: DataEventArgs) aufgerufen wird. DataEventArgs sind dabei die neu erhaltenen Daten.
+		\item[+] \textbf{OnIMUDataReceived(sender: object, args: DataEventArgs): void}\\EventMethode, welche bei dem EventHandler IMUDataReceived der Klasse EarablesConnection registriert wird. Bei dem Aufrufen der Methode werden die Daten an die gespeicherten Aktivitäten weitergegeben. Das passiert per Push-Model (Observer-Muster), indem bei den Aktivitäten die Methode DataUpdate(data: DataEventArgs) aufgerufen wird. DataEventArgs sind dabei die neu erhaltenen Daten.\\
 
 	\end{itemize}
 	
 	
-	\subsubsection{Class Activity}
+	
+		\subsubsection{Class Activity}
+	
+	\includegraphics[width=0.4\textwidth]{bilder/EMKlassen/ActivityClass.png}
 	\paragraph{Klassenbeschreibung}
 	Activity ist eine abstrakte Klasse. Eine Activity ist im Wesentlichen ein Aktivitätserkennungsalgorithmus. Dabei wird die DataUpdate() Methode implementiert und den Unterklassen zu Verfügung gestellt. Der Algorithmus zur Aktivitätsanalyse (protected abstract void Analyse()) wird nur in konkreten Unterklassen implementiert. Dieser Entwurf entspricht dem Entwurfsmuster Schablone.
 	
@@ -489,50 +506,99 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item[+] \textbf{DataUpdate(data: DataEventArgs): void}\\Mit dieser Methode bekommt die Aktivität die neuen Dateneinträge. Dabei ruft die Klasse ActivityManager die Methode auf, wenn sie die neuen Daten bekommt. In dieser Methode wird geschaut, ob sich ein Event bei dem EventHandler ActivityDone registriert hat. Falls ja, wird der Datensatz dem buffer hinzugefügt, und der Algorithmus gestartet. Falls nicht, wird der Datensatz ignoriert.
 		\item[\#] \textbf{abstract Analyse(): void}\\Der Algorithmus der Aktivitätserkennung wird in dieser Methode ausgeführt. Dabei ist dieser in den Unterklassen implementiert. Er beurteilt nur mithilfe der gesammelten Gyroskop- und Accelerometerdaten, ob das (der Activity entsprechende) Ereignis eingetroffen ist. In diesem Fall feuert er ein Event über den ActivityDone EventHandler. 
 	\end{itemize}
-	\subsubsection{Abstract Class AbstractStepActivity}
+	
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Abstract Class AbstractStepActivity}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\textwidth}
+		\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/AbstractStepActivityClass.png}
+	\end{minipage}
 	\paragraph{Klassenbeschreibung:}
-	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Schritterkennung.\\ Es soll immer ein Event gefeuert werden, wenn ein Schritt getätigt wurde.
-	\subsubsection{Class StepActivityActivityThreshold}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Schritterkennung.\\ Es soll immer ein Event gefeuert werden, wenn ein Schritt getätigt wurde.\\
+	\newline
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Class StepActivityThreshold}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/StepActivityThresholdClass.png}
+		\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung, wann ein Schritt getätigt wurde. Es handelt sich hierbei um eine Kindklasse der abstrakten Klasse AbstractStepActivity. 
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item [+]\textbf{<<create>> StepActivityThreshold(): void}\\Konstruktor der KlasseStepActivityThreshold. Dabei wird der EventHandler ActivityDone initialisiert. 
-		\item [$-$]\textbf{Analyse(): void}\\ Implementierung der Analyse für die Schritterkennung. Dabei basiert diese auf dem Threshold Ansatz.  
+		\item [$-$]\textbf{Analyse(): void}\\ Implementierung der Analyse für die Schritterkennung. Dabei basiert diese auf dem Threshold Ansatz.\\
 	\end{itemize}
 	
-	\subsubsection{Abstract Class AbstractRunningActivity}
-	\paragraph{Klassenbeschreibung:}
-	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung, ob der Nutzer läuft oder steht.\\ Es wird immer dann ein Event gefeuert, wenn sich dieser Status ändert.
 	
-	\subsubsection{Class RunningActivityThreshold}
+	
+	\begin{minipage}[b]{0.65\textwidth}
+		\subsubsection{Abstract Class AbstractRunningActivity}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/AbstractRunningActivityClass.png}
+		\end{minipage}
+	\paragraph{Klassenbeschreibung:}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung, ob der Nutzer läuft oder steht.\\ Es wird immer dann ein Event gefeuert, wenn sich dieser Status ändert.\\
+	\newline
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Class RunningActivityThreshold}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/RunningActivityThresholdClass.png}
+		\end{minipage}
+		
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung, ob der Nutzer läuft oder steht. Es wird nur analysiert, falls sich mindestens ein Event bei dem geerbten EventHandler ActivityDone registriert hat.
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item [+]\textbf{<<create>> SitUpActivityThreshold(): void}\\Konstruktor der Klasse RunningActivityThreshold. In diesem wird der EventHandler erstellt.
 		\item [$-$]\textbf{Analyse(): void}\\Implementierung der Analyse, ob der Nutzer läuft oder steht. Der EventHandler ActivityDone ruft die Events auf, falls sich der Laufstatus ändert. Das bedeutet, wenn der Nutzer anfängt zu laufen, oder aufhört. 
-	\end{itemize}
+		\newline	
+\end{itemize}
 	
-	
-	\subsubsection{Abstract Class AbstractPushUpActivity}
+	\begin{minipage}[b]{0.65\textwidth}
+		\subsubsection{Abstract Class AbstractPushUpActivity}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/AbstractPushUpActivityClass.png}
+		\end{minipage}
+		
 	\paragraph{Klassenbeschreibung:}
-	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung von Push-ups.\\ Es soll immer ein Event gefeuert werden, wenn eine Liegestütze erkannt wurde.
-	
-	\subsubsection{Class PushUpActivityThreshold}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung von Push-ups.\\ Es soll immer ein Event gefeuert werden, wenn eine Liegestütze erkannt wurde.\\
+	\newline
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Class PushUpActivityThreshold}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/PushUpActivityThresholdClass.png}
+		\end{minipage}
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung von Push-ups. Es wird nur analysiert, falls sich mindestens ein Event bei dem geerbten EventHandler ActivityDone registriert hat.
 	\paragraph{Methoden:}
 	\begin{itemize}
 		\item [+]\textbf{<<create>> PushUpActivityThreshold(): void}\\Konstruktor der Klasse PushUpActivityThreshold(). In diesem wird der EventHandler ActivityDone instanziiert. 
-		\item [$-$]\textbf{Analyse(): void}\\Implementierung der Analyse für die Sit-Up-Erkennung. Dabei werden die Daten aus der Queue Buffer benutzt. Der EventHandler ruft die Events auf, wenn eine Liegestütze gemacht wurde.
-	\end{itemize}
+		\item [$-$]\textbf{Analyse(): void}\\Implementierung der Analyse für die Sit-Up-Erkennung. Dabei werden die Daten aus der Queue Buffer benutzt. Der EventHandler ruft die Events auf, wenn eine Liegestütze gemacht wurde.\\
+		\newline	
+\end{itemize}
 
-	\subsubsection{Abstract Class AbstractSitUpActivity}
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Abstract Class AbstractSitUpActivity}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/AbstractSitUpActivityClass.png}
+		\end{minipage}
+		
 	\paragraph{Klassenbeschreibung:}
-	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung von Sit-ups.\\ Es soll nach jedem erkannten Sit-up ein Event gefeuert werden.
-	
-	\subsubsection{Class SitUpActivityThreshold}
+	Diese Klasse dient nur zur Gewährleistung der Modularität für den ServiceManager. Alle Kinder dieser Klasse sind verschiedene Algorithmen zur Erkennung von Sit-ups.\\ Es soll nach jedem erkannten Sit-up ein Event gefeuert werden.\\
+	\newline
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Class SitUpActitvityThreshold}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/SitUpActivityThresholdClass.png}
+		\end{minipage}
+		
 	\paragraph{Klassenbeschreibung:}
 	Diese Klasse beinhaltet den Threshold-Algorithmus für die Erkennung von Sit-ups. Hier wird basierend auf den Daten der Earables der Algorithmus in der Methode Analyse() ausgeführt.
 	\paragraph{Methoden:}
@@ -542,31 +608,74 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 		
 	
-	\subsubsection{Interface ActivityArgs}
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Interface ActivityArgs}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/ActivityArgsInterface.png}
+		\end{minipage}
+		
 	\paragraph{Schnittstellenbeschreibung:}
-	ActivityArgs werden beim Feuern eines Events mit dem Event übergeben. Das erkannte Ereignis kann durch die ActivityArgs genauer beschrieben werden.
+	ActivityArgs werden beim Feuern eines Events mit dem Event übergeben. Das erkannte Ereignis kann durch die ActivityArgs genauer beschrieben werden.\\
 	
-	\subsubsection{Class RunningEventArgs}
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Class RunningEventArgs}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/RunningEventArgsClass.png}
+		\end{minipage}
+		
 	\paragraph{Klassenbeschreibung:}
-	Ein Event der RunningActivityThreshold sagt entweder aus, dass der Nutzer stoppt, oder, dass er zu laufen beginnt.
+	Ein Event der RunningActivityThreshold sagt entweder aus, dass der Nutzer stoppt, oder, dass er zu laufen beginnt. Beim Werfen dessen wird eine Instanz dieser Klasse übergeben.
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item[+] \textbf{Running: bool}\\ Dieses Attribut ist genau dann auf wahr (true) gesetzt, wenn der Nutzer zu laufen beginnt; falsch (false), wenn der Nutzer stoppt.
+		\item[+] \textbf{Running: bool}\\ Dieses Attribut ist genau dann auf wahr (true) gesetzt, wenn der Nutzer zu laufen beginnt; falsch (false), wenn der Nutzer stoppt.\\
 	\end{itemize} 
 
-	\subsubsection{Interface CountableActivityArgs}
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Interface CountableActivityArgs}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\textwidth}
+		\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/CountableActivityArgsInterface.png}
+	\end{minipage}
+
 	\paragraph{Schnittstellenbeschreibung:}
-	Diese Schnittstelle spezifiziert alle EventArgs bei Aktivitäten, bei denen gezählt werden kann. Auch wenn momentan keine weiteren EventArgs verwendet werden, stärkt diese Struktur die Erweiterbarkeit und Übersichtlichkeit. Falls für zählbare Aktivitäten weitere Argumente angegeben werden sollen, kann dies gebündelt geschehen.
+	Diese Schnittstelle spezifiziert alle EventArgs bei Aktivitäten, bei denen gezählt werden kann. Auch wenn momentan keine weiteren EventArgs verwendet werden, stärkt diese Struktur die Erweiterbarkeit und Übersichtlichkeit. Falls für zählbare Aktivitäten weitere Argumente angegeben werden sollen, kann dies gebündelt geschehen.\\
+	\newline
 	
-	\subsubsection{Class PushUpEventArgs}
-	Aktuell gibt es keine relevanten Argumente bei Push-ups. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.
-	\subsubsection{Class StepEventActivity}
-	Aktuell gibt es keine relevanten Argumente bei der Schritterkennung. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.
-	\subsubsection{Class SitUpActivity}
-	Aktuell gibt es keine relevanten Argumente bei Sit-ups. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.
+	
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Class PushUpEventArgs}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/PushUpEventArgsClass.png}
+		\end{minipage}
+	\paragraph{Klassenbeschreibung:}
+	Aktuell gibt es keine relevanten Argumente bei Push-ups. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.\\
+	
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Class StepEventArgs}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/StepEventArgsClass.png}
+		\end{minipage}
+	\paragraph{Klassenbeschreibung:}
+	Aktuell gibt es keine relevanten Argumente bei der Schritterkennung. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.\\
+	\newline
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Class SitUpEventArgs}
+		\end{minipage}
+		\begin{minipage}[c]{0.5\textwidth}
+			\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/SitUpEventArgsClass.png}
+		\end{minipage}
+	\paragraph{Klassenbeschreibung:}
+	Aktuell gibt es keine relevanten Argumente bei Sit-ups. Dies kann bei einem anderen Algorithmus-Ansatz (siehe Aktivität) der Fall sein. Bei Bedarf kann man der Klasse weitere Attribute geben.\\
+	\newline
 	
 
+
 \subsection{Class ServiceManager}
+	\includegraphics[width=0.4\textwidth]{bilder/EMKlassen/ServiceManagerClass.png}
 	\paragraph{Klassenbeschreibung:}
 	Der ServiceManager verwaltet alle Services des Models mithilfe eines statischen Serviceproviders. Dies wird von anderen Services des Models, sowie von dem ViewModel benutzt. Er dient zur Delegierung der Services.\\ 
 	Dabei implementiert der ServiceManager das Interface IManager.
@@ -588,7 +697,10 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		
 		
 \subsection{Settings Service}
+
 \subsubsection{Interface ISettingsService}
+\includegraphics[width=0.4\textwidth]{bilder/EMKlassen/ISettingsServiceInterface.png}
+
 	\paragraph{Schnittstellenbeschreibung:}
 	ISettingsService bietet eine Schnittstelle für die Einstellungen der App. Sie implementiert Konstanten zur Identifizierung der Einstellungen und hält die aktuellen Einstellungen als Attribute.
 	\paragraph{Attribute:}
@@ -602,11 +714,17 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[$-$] \textbf{LoadSettings():void}\\Lädt alle Settings aus den Einstellungen in die Attribute.	
+		\item[$-$] \textbf{LoadSettings():void}\\Lädt alle Settings aus den Einstellungen in die Attribute.\\
+		\newline
 	\end{itemize}
 
 
-\subsubsection{Class SettingsService}
+\begin{minipage}[b]{0.6\textwidth}
+	\subsubsection{Class SettingsService}
+\end{minipage}
+\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics[width=0.6\textwidth]{bilder/EMKlassen/SettingsServiceClass.png}
+\end{minipage}
 	\paragraph{Klassenbeschreibung}
 	Die Klasse SettingsService implementiert die Schnittstelle ISettingsService. Zur Speicherung der Einstellungen wird die Klasse App.Current.Properties verwendet.
 	Dabei wird immer sofort nach einer Änderung die neue Einstellung gespeichert und nicht erst beim Beenden der Sitzung.
@@ -623,10 +741,14 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 
   \paragraph{Methoden:}
 	\begin{itemize}
-		\item[+] \textbf{<<create>> SettingsService}\\Konstruktor für die Klasse SettingsService. Dabei wird er als Service vom ServiceManager verwaltet, demnach existiert er nur als Singleton.
+		\item[+] \textbf{<<create>> SettingsService}\\Konstruktor für die Klasse SettingsService. Dabei wird er als Service vom ServiceManager verwaltet, demnach existiert er nur als Singleton.\\
+		\newline
 	\end{itemize}
 
+
 \subsubsection{Class User}
+
+\includegraphics[width=0.4\textwidth]{bilder/EMKlassen/UserClass.png}
 	\paragraph{Klassenbeschreibung:}
 	Die User-Klasse spezifiziert den Nutzer, der die App gerade verwendet. In dieser werden Attribute gespeichert, welche von Nutzer zu Nutzer anders sind. Falls der Nutzer sein Konto noch nicht eingerichtet hat, wird ein Standardnutzer geladen.\\
 	\paragraph{Attribute:}
@@ -642,7 +764,12 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item[+] \textbf{static ParseUser(user: string): User}\\Statische Methode, welche einen \Gls{CSV}-String wieder in  ein Objekt umwandelt. Das Format ist in der ToString() Methode spezialisiert. Falls der übergeben string nicht dem Format entspricht, so wird 'null' zurückgegeben.\\
 	\end{itemize}
 
-\subsubsection{Enumeration SamplingRate}
+	\begin{minipage}[b]{0.6\textwidth}
+		\subsubsection{Enumeration SamplingRate}
+	\end{minipage}
+	\begin{minipage}[c]{0.5\textwidth}
+		\includegraphics{bilder/EMKlassen/SamplingRateEnum.png}
+	\end{minipage}
 	\paragraph{Enumerationbeschreibung}
 	Das Enum SamplingRate gibt dem User die Auswahl die SamplingRate (Anzahl der Stichproben). Dazu gibt es mehrere Einstellungsraten von 1-100 Hz (Herz). Diese aktuelle SamplingRate wird in den App.Properties gespeichert. Dies wird von der Klasse SettingsService verwaltet. 
 	Bei der Änderung wird die Samplerate von der ViewModel-Ebene aus der Bibliothek geschickt und auf den \Gls{Earables} gesetzt.
@@ -665,6 +792,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	
 \subsection{Datenbank Service}
 \subsubsection{Interface IDataBaseConnection}
+\includegraphics{bilder/EMKlassen/IDataBaseConnectionInterface.png}
 	\paragraph{Schnittstellenbeschreibung}
 	Das Interface IDataBaseConnection ist ein Service, welcher vom ServiceManager verwaltet wird. Dieser regelt Speicherung der Trainingsdaten mittels einer \gls{Datenbank}. Zudem implementiert er das Importieren und Exportieren von den Trainingsdaten.
 	Die Datenbankeinträge sind Instanzen der Klasse DBEntry. 
@@ -678,8 +806,12 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item[+] \textbf{ImportTrainingData(file: FileData): void}\\Liest aus der angegebenen \gls{CSV}-Datei die DBEntries raus und speichert sie in der \gls{Datenbank}.\\
 		\item[+] \textbf{ExportTrainingData(path: string): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
 	\end{itemize}
-
-\subsubsection{Class DataBaseConnection}
+\begin{minipage}[b]{0.6\textwidth}
+	\subsubsection{Class DataBaseConnection}
+\end{minipage}
+\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics{bilder/EMKlassen/DataBaseConnectionClass.png}
+\end{minipage}
 	\paragraph{Klassenbeschreibung}
 	Die Klasse DataBaseConnection implementiert die Schnittstelle IDataBaseConnection. Sie kümmert sich um die Speicherung und Verwaltung der Trainingsdaten. Dabei benutzt die DataBaseConnection die \gls{Datenbank} von SQLite. Es werden Objekte von der Klasse DBEntry gespeichert. 
 	
@@ -697,7 +829,12 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 
 		\item[+] \textbf{ExportTrainingData(path: string): void}\\Exportiert die Trainingsdaten aus der \gls{Datenbank} in einer \gls{CSV}-Datei in den Ordner bei path. \\
 	\end{itemize}
-\subsubsection{Class DBEntry}
+\begin{minipage}[b]{0.6\textwidth}
+	\subsubsection{Class DBEntry}
+\end{minipage}
+\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics{bilder/EMKlassen/DBEntryClass.png}
+\end{minipage}
 	\paragraph{Klassenbeschreibung}
 	Die Klasse DBEntry ist ein Datencontainer, welcher einen Trainingstag darstellt. Dieser wird in der Datenbank gespeichert. DBEntry beinhaltet kein selbstständiges Verhalten. Für die Modularität sind die unterschiedlichen Attribute in einem Dictionary gespeichert.
 	
