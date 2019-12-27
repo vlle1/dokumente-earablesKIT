@@ -121,7 +121,7 @@ Die Services sind dabei jeweils unabhängig vom restlichen Model funktionsfähig
 	\includegraphics[width=\textwidth]{Diagramme/uebersicht/Klassendiagram_KOMPAKT.png}
 \end{center}
 \paragraph{Anmerkungen}
-eine hochauflösendere Darstellung des Klassendiagramms findet sich im Anhang.
+Eine hochauflösendere Darstellung des Klassendiagramms findet sich im Anhang.
 \clearpage
 %%\section{Klassenübersicht} brauchen wir nicht, da das bei uns schon alles im Inhaltsverzeichnis aufgelistet wird.
 \section{Klassenbeschreibung Model}
@@ -699,20 +699,12 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 \includegraphics[width=0.4\textwidth]{bilder/EMKlassen/ISettingsServiceInterface.png}
 
 	\paragraph{Schnittstellenbeschreibung:}
-	ISettingsService bietet eine Schnittstelle für die Einstellungen der App. Sie implementiert Konstanten zur Identifizierung der Einstellungen und hält die aktuellen Einstellungen als Attribute.
+	ISettingsService bietet eine Schnittstelle für die Einstellungen der App. Sie implementiert die Einstellungen und hält die aktuellen Instanzen dieser als Attribute.
 	\paragraph{Attribute:}
 	\begin{itemize}
-		\item[$-$] \textbf{LANGUAGE\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung der Sprache \\
-		\item[$-$] \textbf{USER\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung des Nutzers \\
-		\item[$-$] \textbf{SAMPLINGRATE\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
 		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch)\\
 		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables} \\ 
-		\item[+] \textbf{MyUser: User}\\Der Aktuelle User\\
-	\end{itemize}
-	\paragraph{Methoden:}
-	\begin{itemize}
-		\item[$-$] \textbf{LoadSettings():void}\\Lädt alle Settings aus den Einstellungen in die Attribute.\\
-		\newline
+		\item[+] \textbf{MyUser: User}\\Der aktuelle User, der die App benutzt.\\
 	\end{itemize}
 
 
@@ -730,15 +722,16 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\paragraph{Attribute:}
 	\begin{itemize}
 		\item[+] \textbf{ActiveLanguage: CultureInfo}\\Die aktuelle Sprache der App (Deutsch oder Englisch). Attribut aus dem Interface ISettingsService\\
-		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables} \\ 
-		\item[$-$] \textbf{LANGUAGE\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung der Sprache. Attribut aus dem Interface ISettingsService \\
-		\item[$-$] \textbf{USER\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung des Nutzers. Konstante aus dem Interface ISettingsService \\
-		\item[$-$] \textbf{SAMPLINGRATE\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung der Samplingrate \\
+		\item[+] \textbf{SamplingRate: SamplingRate}\\Die aktuelle Samplingrate der \Gls{Earables}\\ 
+		\item[$-$] \textbf{LANGUAGE\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung der Sprache. Ist der Bezeichner für die Sprache im Dictionary in App.Properties.\\
+		\item[$-$] \textbf{USER\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung des Nutzers.Ist der Bezeichner für den User im Dictionary in App.Properties.\\
+		\item[$-$] \textbf{SAMPLINGRATE\_PROPERTY: string}\\Konstanter Bezeichner für die Einstellung der Samplingrate. Ist der Bezeichner für die SamplingRate im Dictionary in App.Properties. \\
 	\end{itemize}
 
   \paragraph{Methoden:}
 	\begin{itemize}
 		\item[+] \textbf{<<create>> SettingsService}\\Konstruktor für die Klasse SettingsService. Dabei wird er als Service vom ServiceManager verwaltet, demnach existiert er nur als Singleton.\\
+		\item[$-$] \textbf{LoadSettings():void}\\Lädt alle Settings aus den Einstellungen in die Attribute. Wird im Konstruktor aufgerufen. (Beim Start)\\
 		\newline
 	\end{itemize}
 
@@ -761,7 +754,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	\end{itemize}
 	\paragraph{Methoden:}
 	\begin{itemize}
-		\item[+] \textbf{ToString(): string}\\Wandelt das Objekt in einen string um. Damit ist geregelt, dass der User als string in den App.Current.Properties gespeichert werden kann. Er wird in ein \Gls{CSV}-Format umgewandelt.\\
+		\item[+] \textbf{<<override>> ToString(): string}\\Wandelt das Objekt in einen string um. Damit ist geregelt, dass der User als string in den App.Current.Properties gespeichert werden kann. Er wird in ein \Gls{CSV}-Format umgewandelt.\\
 		Beispiel: ``Alice van Bob,80'' ist die string-Repräsentation des Users mit Username ``Alice van Bob'' und Steplength 80.\\
 		\item[+] \textbf{static ParseUser(user: string): User}\\Statische Methode, welche einen \Gls{CSV}-String wieder in  ein Objekt umwandelt. Das Format ist in der ToString() Methode spezialisiert. Falls der übergeben string nicht dem Format entspricht, so wird 'null' zurückgegeben.\\
 	\end{itemize}
@@ -848,7 +841,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 	 
 	 \paragraph{Methoden}
 	 \begin{itemize}
-	 	\item[+] \textbf{ToString(): string}\\Liefert die Instanz als string zurück. Dabei wird das \gls{CSV}-Format verwendet. Als Attribute werden standardgemäß die Schritte (Steps), Liegestützen (PushUps) und die SitUps gespeichert.
+	 	\item[+] \textbf{<<override>> ToString(): string}\\Liefert die Instanz als string zurück. Dabei wird das \gls{CSV}-Format verwendet. Als Attribute werden standardgemäß die Schritte (Steps), Liegestützen (PushUps) und die SitUps gespeichert.
 	 	Beispiel: ``11.11.19,PushUps=10,SitUps=2,Steps=242''\\
 	 	\item[+] \textbf{static ParseDBEntry(entry: string) : DBEntry}\\Liest aus einem string ein DBEntry Objekt. Falls der string nicht dem Format entspricht, wird null zurückgegeben. Das Format ist in ToString() festgelegt.\\
 	\end{itemize}
@@ -864,6 +857,7 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 
 
 \section{Klassenbeschreibung ViewModel}
+\includegraphics[width=\textwidth]{Diagramme/uebersicht/Viewmodel}
 \subsection{Abstract Class BaseModeViewModel} 
 \includegraphics{bilder/ViewModelKlassen/BaseModeViewModel}
 
@@ -1151,6 +1145,8 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\end{itemize}
 \newpage
 \section{Klassenbeschreibung View}
+\includegraphics[width=\textwidth]{Diagramme/uebersicht/View}
+\newline
 
 \begin{minipage}[b]{0.7\textwidth}
 	\subsection{Class StepModePage}
