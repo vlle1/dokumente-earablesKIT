@@ -1,0 +1,50 @@
+TODO:
+
+Bib:
+- Battery Level exposed
+- Connection State abfragen
+- Properties anstatt Get/Set Methoden
+
+- IMUDataExtractor: Bekommt man daten per int und nicht per byte[]
+- DeviceEventArgs/DataEventArgs Bild fixen
+
+EM:
+- EventArgs generisch gestalten?
+- StepActivityThreshold Bild fixen
+
+SettingsService:
+- Interfaces nicht private -> Konstanten in konkrete Impl
+- MyUser als Attribut hinzufügen
+- <<override>> hinzufügen
+
+
+ViewModel:
+- Referenz auf INavigation bei VMs? //Geklärt durch Pop-up
+- CheckConnection() protected
+- fix UpdateFrequency() Schreibfehler im Diagramm
+- Command deklaration nachschauen: https://github.com/xamarinhq/app-conference/blob/master/src/Conference.Clients.Portable/ViewModel/SettingsViewModel.cs
+- UpdateLastData() private?
+- StartActivity() private? //Wird geerbt, also protected. Command ist public
+ListenAndPerformModel:
+- Activities private
+- Activites und Amount gemeinsam Kapseln. //Weiß nicht genau, was gemeint ist
+SettingsViewModel:
+- ValueConverter für die Darstellung von Darstellung von CultureInfo/SamplingRate
+PopUpViewModel:
+- gepoppt, wenn Pop-up dargstellt wird // Sinn?
+HomeMenuItem:
+- Erklärung für das HamburgerMenu //@Vale :D
+- Beantworten der Fragen (seite 44 im Anmerkungsdoc.)
+
+
+View:
+- !!! Umbenennen der Komponenten in (StartBtton, StepsDoneLastTimeLabel), um im VM besser unterscheiden zu können
+Mainpage:
+- Mit Typ arbeiten anstatt mit id? //Glaube nein, da das die Xamarin Standard Impl. ist
+
+
+SeqDiagramme:
+Bluetoothverbindung herstellen:
+- Bluetooth permission abfragen
+
+
