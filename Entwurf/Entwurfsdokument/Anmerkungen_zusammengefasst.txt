@@ -5,26 +5,26 @@ Bib:
 - Connection State abfragen
 - Properties anstatt Get/Set Methoden
 
-- IMUDataExtractor: Bekommt man daten per int und nicht per byte[]
-- DeviceEventArgs/DataEventArgs Bild fixen
+- done IMUDataExtractor: Bekommt man daten per int und nicht per byte[]
+- done DeviceEventArgs/DataEventArgs Bild fixen
 
 EM:
 - EventArgs generisch gestalten?
-- StepActivityThreshold Bild fixen
+- done StepActivityThreshold Bild fixen
 
 SettingsService:
-- Interfaces nicht private -> Konstanten in konkrete Impl
-- MyUser als Attribut hinzufügen
-- <<override>> hinzufügen
+- done Interfaces nicht private -> Konstanten in konkrete Impl
+- done MyUser als Attribut hinzufügen
+- done <<override>> hinzufügen
 
 
 ViewModel:
 - Referenz auf INavigation bei VMs? //Geklärt durch Pop-up
-- CheckConnection() protected
-- fix UpdateFrequency() Schreibfehler im Diagramm
-- Command deklaration nachschauen: https://github.com/xamarinhq/app-conference/blob/master/src/Conference.Clients.Portable/ViewModel/SettingsViewModel.cs
-- UpdateLastData() private?
-- StartActivity() private? //Wird geerbt, also protected. Command ist public
+- done CheckConnection() protected
+- done fix UpdateFrequency() Schreibfehler im Diagramm
+- (done, sollte jeder machen) Command deklaration nachschauen: https://github.com/xamarinhq/app-conference/blob/master/src/Conference.Clients.Portable/ViewModel/SettingsViewModel.cs
+- done UpdateLastData() private?
+- done StartActivity() private? //Wird geerbt, also protected. Command ist public
 ListenAndPerformModel:
 - Activities private
 - Activites und Amount gemeinsam Kapseln. //Weiß nicht genau, was gemeint ist
