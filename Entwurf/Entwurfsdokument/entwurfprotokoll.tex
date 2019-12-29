@@ -501,10 +501,10 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\item[\#] \textbf{abstract Analyse(): void}\\Der Algorithmus der Aktivitätserkennung wird in dieser Methode ausgeführt. Dabei ist dieser in den Unterklassen implementiert. Er beurteilt nur mithilfe der gesammelten Gyroskop- und Accelerometerdaten, ob das (der Activity entsprechende) Ereignis eingetroffen ist. In diesem Fall feuert er ein Event über den ActivityDone EventHandler. 
 	\end{itemize}
 	
-	\begin{minipage}[b]{0.6\textwidth}
+	\begin{minipage}[b]{0.65\textwidth}
 		\subsubsection{Abstract Class AbstractStepActivity}
 	\end{minipage}
-	\begin{minipage}[c]{0.4\textwidth}
+	\begin{minipage}[c]{0.35\textwidth}
 		\includegraphics[width=\textwidth]{bilder/EMKlassen/AbstractStepActivityClass.png}
 	\end{minipage}
 	\paragraph{Klassenbeschreibung:}
@@ -576,10 +576,10 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		\newline	
 \end{itemize}
 
-	\begin{minipage}[b]{0.6\textwidth}
+	\begin{minipage}[b]{0.65\textwidth}
 		\subsubsection{Abstract Class AbstractSitUpActivity}
 		\end{minipage}
-		\begin{minipage}[c]{0.4\textwidth}
+		\begin{minipage}[c]{0.35\textwidth}
 			\includegraphics[width=\textwidth]{bilder/EMKlassen/AbstractSitUpActivityClass.png}
 		\end{minipage}
 		
@@ -694,9 +694,14 @@ Enthält alle relevanten Informationen, die als Parameter mit dem Event IMUDataR
 		
 		
 \subsection{Settings Service}
-
+\begin{minipage}[b]{0.6\textwidth}
 \subsubsection{Interface ISettingsService}
-\includegraphics[width=0.4\textwidth]{bilder/EMKlassen/ISettingsServiceInterface.png}
+\end{minipage}
+\begin{minipage}[c]{0.4\textwidth}
+\includegraphics[width=\textwidth]{bilder/EMKlassen/ISettingsServiceInterface.png}
+\end{minipage}
+
+
 
 	\paragraph{Schnittstellenbeschreibung:}
 	ISettingsService bietet eine Schnittstelle für die Einstellungen der App. Sie implementiert die Einstellungen und hält die aktuellen Instanzen dieser als Attribute.
