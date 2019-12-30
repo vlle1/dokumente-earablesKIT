@@ -161,6 +161,7 @@ Diese Klasse ist das Herz der Bibliothek. Sie ist die Schnittstelle, über die s
 	\item[+] \textbf{GetLowPassFilterGyroscope(): LPF\_Gyroscope}\\Die Methode gibt an auf was der LPF des Gyroskops momentan gesetzt ist. Er wird in Form des LPF\_Gyroscope Enums zurückgegeben. 
 	\item[+] \textbf{GetBatteryVoltage(): int}\\ Gibt die Voltanzahl der Batterie zurück. Die Methode ReadAsync aus dem BLE\_Plugin ermöglicht es die entsprechende Charakteristik zu lesen.
 	\item[+] \textbf{IsBluetoothActive(): bool}\\ Zeigt an ob Bluetooth auf dem Smartphone aktiviert ist. Gibt true zurück falls Bluetooth aktiviert ist und false, falls nicht.
+	\item[+] \textbf{IsConnected(): bool}\\ Gibt true zurück falls eine Bluetoothverbindung, zu einem Gerät existiert. Ansonsten wird false zurück gegeben.
 	\item[+] \textbf{static OnValueUpdatedIMU(): void}\\ Falls neue IMU Daten vorliegen, wird diese Methode aufgerufen und feuert das Event IMUDataReceived.
 	\item[+] \textbf{static OnPushButtonPressed(): void}\\ Falls der Knopf an den \Gls{Earables} gedrückt wurde, wird diese Methode aufgerufen und feuert das Event ButtonPressed.
 	\item[+] \textbf{static OnDeviceConnected(): void}\\ Falls eine Verbindung mit einem Device hergestellt wurde oder eine bestehende Verbindung aufgelöst wurde, wird diese Methode aufgerufen und feuert das Event DeviceConnectionStateChanged.
