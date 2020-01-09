@@ -1,0 +1,54 @@
+ValueConverter / Cutsom cell (Jan)
+
+- valueConverter weglassen bei SamplingRate? - ok cool (v)
+
+- (displayname, ohne value converter) language string? als valueconverter CultureInfo?? evtl valueConverter selber implementieren, "damit wir einen Valueconverter haben" (v)
+
+- notify auf battery level machen, property immer aktuell halten (e)
+
+- signieren mit in die Azure Pipeline (Benni)
+
+- bib als nugetpackage einzeln abegeben. (als einzelnes Projekt)
+
+
+
+Fragen:
+
+- Wie viele UI Tests sollen wir machen?
+		- UI MANUELL!!!
+		- Im Dokument dann Checkliste
+	- Nunit (Backend Tests)
+	- Auch private Methoden getetstet? 
+		- Nein
+		
+	- Testüberdeckung mit Resharper installieren
+	
+- Wie genau soll die Documentation im Code sein?
+		- Library genauer
+		- Sonst nicht so genau
+		- Englisch!!
+
+- Wie sollen Reviews ablaufen?
+	- Ganzen Code durchlesen?
+	- Tests schreiben?
+	- Pull Requests absichern?
+		- Ja :)
+		
+
+- Wie genau, soll der Implementierungsplan sein?
+	- Gantt chart?
+		- Zwischenziele 
+		- Grobe Meilensteine und nicht jede Klasse einzeln
+		
+	- Reicht grobere Einteilung wann was fertig gestellt werden soll?
+	- Einteilung in Muss und Wunschkriteren Prioritäten setzen?
+		- Wunschkriterien priotisieren (Low hanging fruits first = Settings etc.)
+	
+	
+- Appcenter.ms
+
+
+
+
+
+

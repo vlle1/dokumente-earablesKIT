@@ -26,8 +26,8 @@ ViewModel:
 - done UpdateLastData() private?
 - done StartActivity() private? //Wird geerbt, also protected. Command ist public
 ListenAndPerformModel:
-- Activities private
-- Activites und Amount gemeinsam Kapseln. //Weiß nicht genau, was gemeint ist
+- done Activities private
+- done Activites und Amount gemeinsam Kapseln. //Weiß nicht genau, was gemeint ist
 SettingsViewModel:
 - ValueConverter für die Darstellung von Darstellung von CultureInfo/SamplingRate
 PopUpViewModel:
