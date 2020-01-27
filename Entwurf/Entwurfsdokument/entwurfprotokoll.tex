@@ -9,6 +9,7 @@
 \usepackage{lmodern}
 \usepackage{titlesec}
 \usepackage{longtable}
+\usepackage{pdfpages}
 % Notwendig für Links im Text
 \usepackage{hyperref}
 %%\usepackage{svg}
@@ -1122,7 +1123,7 @@ Die Klasse SettingsViewModel enthält die Logik der SettingsPage. Sie erbt von I
 	\vspace{0.3cm}
 \end{minipage}
 
-	Dieses Enum spezifiziert alle möglichen Typen von Menüeinträgen der MenuPage. Entsprechend gibt es für jede vom Menü aus direkt navigierbare Page einen Wert dieses Enums. Wir orientieren uns hierbei an dem starndardmäßigen Entwurf für das Master-Detail Schema in der Entwicklungsumgebung Visual Studio 2019. \\
+	Dieses Enum spezifiziert alle möglichen Typen von Menüeinträgen der MenuPage. Entsprechend gibt es für jede vom Menü aus direkt navigierbare Page einen Wert dieses Enums. Wir orientieren uns hierbei an dem starndardmäßigen Entwurf für das Master-Detail Schema von Xamarin in der Entwicklungsumgebung Visual Studio 2019. \\
 	\paragraph{Werte:}
 	\begin{itemize}
         \item CountMode,
@@ -1714,13 +1715,14 @@ Static Class Constants & 9\\
 Static Class IMUDataExtractor & 12\\
 \hline
 \end{longtable}
-
+\clearpage
 \section{Anhang}
-\begin{center}
-\includegraphics[width=1.4\textwidth, angle=-90]{./bilder/Anhang/View.png}\\
-\includegraphics[width=1.5\textwidth, angle=-90]{./bilder/Anhang/ViewModel.png}\\
-\includegraphics[width=1.5\textwidth, angle=-90]{./bilder/Anhang/Model.png}\\
-\end{center}
+\includepdf[fitpaper=true]{Diagramme/uebersicht/png2pdf.pdf}
+%%\begin{center}
+%%\includegraphics[width=1.4\textwidth, angle=-90]{./bilder/Anhang/View.png}\\
+%%\includegraphics[width=1.47\textwidth, angle=-90]{./bilder/Anhang/ViewModel.png}\\
+%%\includegraphics[width=1.47\textwidth, angle=-90]{./bilder/Anhang/Model.png}\\
+%%\end{center}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
