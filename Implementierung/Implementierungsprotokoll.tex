@@ -1,0 +1,114 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc} % Umlaute
+\usepackage[ngerman]{babel} % Umlaute
+\usepackage[T1]{fontenc}    % Umlaute
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{booktabs}
+\usepackage{lmodern}
+\usepackage{titlesec}
+\usepackage{longtable}
+% Notwendig für Links im Text
+\usepackage{hyperref}
+%%\usepackage{svg}
+% glossar, see http://en.wikibooks.org/wiki/LaTeX/Glossary
+% muss NACH hyperref geladen werden, sonst funktionieren die Links nicht
+\usepackage[toc]{glossaries}
+
+% Kompatibilität
+\ifx\pdftexversion\undefined
+\usepackage[dvips]{graphicx}
+\else
+\usepackage[pdftex]{graphicx}
+\DeclareGraphicsRule{*}{mps}{*}{}
+\fi
+\setlength{\parindent}{0pt}
+
+
+%irgendwas mit section formatierung (titlesec package)
+\titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Variablen                                 						 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\authorName}{Tec O'Brain (Entwickler: David Höglinger, Jan Ettrich, Erwin Müller, Benedikt Rittner, Valentin Quapil)}
+\newcommand{\auftraggeber}{Karlsruhe Institute of Technology (Teco)}
+\newcommand{\auftragnehmer}{\authorName}
+\newcommand{\projektName}{Implementierung Earables}
+\newcommand{\tags}{\authorName, Architektur, Implementierung, KIT, Informatik, PSE}
+\newcommand{\documentVersion}{1.0}
+\title{\projektName}
+\date{\today}
+\author{Tec O'Brain}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PDF Meta information                                 				 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+  pdfauthor   = {\authorName},
+  pdfkeywords = {\tags},
+  pdftitle    = {\projektName)}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Create a shorter version for tables. DO NOT CHANGE               	 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand\addrow[2]{#1 &#2\\ }
+
+\newcommand\addheading[2]{#1 &#2\\ \hline}
+\newcommand\tabularhead{\begin{tabular}{lp{13cm}}
+\hline
+}
+
+\newcommand\addmulrow[2]{ \begin{minipage}[t][][t]{2.5cm}#1\end{minipage}%
+   &\begin{minipage}[t][][t]{8cm}
+    \begin{enumerate} #2   \end{enumerate}
+    \end{minipage}\\ }
+
+\newenvironment{usecase}{\tabularhead}
+{\hline\end{tabular}}
+
+\usepackage{microtype}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% GLOSSARY ENTRIES                 	                              	 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% THE DOCUMENT BEGINS             	                              	 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\pagenumbering{roman}
+ \input{Deckblatt}         % Deckblatt.tex laden und einfügen
+ \setcounter{page}{2}
+ \tableofcontents          % Inhaltsverzeichnis ausgeben
+ \clearpage
+ \pagenumbering{arabic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Einleitung}
+\section{Probleme und Änderungen am Entwurf}
+
+\subsection{Bibliothek}
+
+\subsection{Erweiterungsmodul}
+
+\subsection{Model (andere Bestandteile)}
+
+\subsection{Views und ViewModel}
+
+\section{Statistik der Testfälle}
+
+\section{Implementierungsplan}
+
+\section{Anhang}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\printglossaries
+\stepcounter{section}
+
+
+\end{document}
