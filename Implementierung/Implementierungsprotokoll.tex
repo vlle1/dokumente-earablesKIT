@@ -96,7 +96,23 @@
 \subsection{Model (andere Bestandteile)}
 
 \subsection{Views und ViewModel}
+\subsubsection{Commandstruktur bei Modi}
+\paragraph{Beschreibung}
+Da beim Aktivieren des Modus' die Seite gewechselt werden muss und das ViewModel die Views nicht kennen darf, muss der Button Click in den Code Behind delegiert werden und danach erst ins Viewmodel.\\
+Somit wurden die Commands ersetzt durch blablabla.
+\paragraph{Änderungen in Klasse BaseModeViewModel}
+\begin{itemize}
+  \item[-] methodeXY() hinzugefügt
+  \item[] CommandXY entwfernt (vernünftige Signaturen verwenden!)
+\end{itemize}
+\paragraph{Änderungen in Klassen CountViewModel, StepViewModel}
+Die Kindklassen ändern sich entsprechend folgendermaßen:
+\begin{itemize}
+  \item[-] methodeXY() hinzugefügt
+  \item[] CommandXY entwfernt (vernünftige Signaturen verwenden!)
+\end{itemize}
 
+analog ändert sich die Implementierung in allen Kindklassen.
 \section{Statistik der Testfälle}
 
 \section{Implementierungsplan}
