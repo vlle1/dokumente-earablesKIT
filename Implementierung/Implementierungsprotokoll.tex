@@ -91,6 +91,115 @@
 
 \subsection{Bibliothek}
 
+\subsubsection{Schnittstellen der Bibliothek}
+\paragraph{Beschreibung}
+Es war geplant, dass die meisten Schnittstellen der Bibliothek ein Boolean zurückgeben, der true ist, falls die Anweisung korrekt durchgeführt werden konnte und false , falls es Komplikationen gab.
+Um besser auf Fehler und Exceptions zu reagieren macht es mehr Sinn, dass diese Methoden void sind und im Fehlerfall Exceptions schmeißen. Außerdem gibt es nun keine Get/Set Methoden mehr. Sie wurden durch Properties ersetzt.
+
+\paragraph{Änderungen in Klasse IEarablesConnection}
+\begin{itemize}
+	\item[-] Folgende Methoden haben nicht mehr den Rückgabetypen bool sondern void und schmeißen im Fehlerfall Exceptions
+	\item[] ConnectToDevice,
+	\item[] DisconnectFromDevice,
+	\item[] StartSampling,
+	\item[] StopSampling,
+	\item[] 
+
+	\item[-] Properties anstatt Methoden für folgende Attribute
+	\item[] Connected
+	\item[] IsBluetoothActive
+	\item[] SampleRate
+	\item[] AccLPF
+	\item[] GyroLPF
+	\item[] BatteryVoltage
+	\item[] 
+
+	\paragraph{Änderungen in Klasse EarablesConnection}
+	
+	\item[-] Durch die Änderungen der Get/Set Methoden in Properties ergeben sich folgende neue private Methoden
+	\item[] CheckIsBluetoothActive(): void
+	\item[] GetAccelerometerLPF(): LPF\_Accelerometer
+	\item[] SetAccelerometerLPF(LPF\_Accelerometer value): void
+	\item[] GetGyroscopeLPF(): LPF\_Gyroscope
+	\item[] SetGyroscopeLPF(LPF\_Gyroscope value): void
+	\item[] 
+
+	
+	\item[-] Besonderheit des BatteryVoltage Attributes
+	\item[] Die Methode GetBatteryVoltageFromDevice(): void wird automatisch aufgerufen wenn sich die BatteryVoltage der Earables ändert und überträgt den aktuellen Wert in das BatteryVoltage Attribut.
+	\item[] Die Methode initBatteryVoltage(): Task liest den BatteryVoltage Wert der Earables zum ersten mal aus, für den Fall dass sie abgefragt wird bevor sie sich das erste mal aktualisiert hat.
+\end{itemize}
+
+\subsubsection{Exceptions ergänzt}
+\paragraph{Beschreibung}
+Aufgrund der Änderungen, dass die Methodenschnittstellen der Klasse IEarablesConnection nicht mehr Boolean zurückgeben sondern void und im Fehlerfall Exceptions schmeißen, ist es notwendig Exceptions zu ergänzen.
+\paragraph{Folgende Exceptions ergänzt}
+\begin{itemize}
+	\item[-] AllreadyConnectedException. Sie wird geschmissen sobald versucht wird eine Verbindung mit einem Device herzustellen, obwohl schon eine Verbindung existiert.
+	\item[-] ConnectionFailedException. Es kam vereinzelt auf, dass die App beim verbinden abgestürzt ist. Dies wird nun verhindert und stattdessen wird diese  Exception geschmissen.
+	\item[-] InvalideSampleRateException. Die Samplerate muss zwischen 1 und 100 liegen, ansonsten wird die Exception geschmissen (Dies ist von den Earables vorgegeben).
+	\item[-] NoConnectionException. Falls versucht wird eine Aktion durchzuführen, für die eine Verbindung zu einem Device benötigt wird, diese aber nicht existiert, wird diese Exception geschmissen.
+\end{itemize}
+
+
+\subsubsection{Attribute der Bibliothek}
+\paragraph{Beschreibung}
+Für die Attribute config und characteristics ist es, in Betracht der Datenkapselung, Sinnvoller sie private zu halten.
+	\paragraph{Änderungen in Klasse IEarablesConnection}
+\begin{itemize}
+	\item[-] Die Attribute config und characters sind nun private anstatt public.
+\end{itemize}
+
+
+\subsubsection{Enums }
+\paragraph{Beschreibung}
+Die Enums können nicht mit Zahlen beginnen.
+\paragraph{Änderungen in den Enums LPF\_Accelerometer und LPF\_Gyroscope}
+\begin{itemize}
+	 \item[-] Die Inhalte der Enums beginnen nun nicht mehr mit der Zahl sondern mit Hz. Beispielsweise nicht mehr 10Hz sondern Hz10.
+\end{itemize}
+
+\subsubsection{StartScanning Methoden der Klasse IEarablesConnection}
+\paragraph{Beschreibung}
+Es war ursprünglich gedacht, dass die StartScanning Methode eine Liste mit alle gefundenen Devices zurück gibt. Die Liste die zurückgegeben wurde war aber immer leer, da Methoden aus dem Plugin.BLE benutzt werde, die asyncron laufen. So wurde zuerst die Liste zurückgegeben und danach wurde sie befüllt. Nach etlichen gescheiterten Versuchen auf die Threads und Tasks zu warten haben wir uns dafür entschieden jedes mal ein Event zu schmeißen, wenn ein neues Device gescannt wurde. So entstand das neue Event NewDeiviceFound. Es wird geschmissen sobald ein neues Device, beim Scannen gefunden wurde. Die Argumente des Events beinhalten das neue Device.
+\paragraph{Änderungen in der Klasse IEarablesConnection}
+\begin{itemize}
+	 \item[-] public event EventHandler<NewDeviceFoundArgs> NewDeviceFound hinzugefügt
+\end{itemize}
+\paragraph{Klasse NewDeviceFound hinzugefügt}
+\begin{itemize}
+	 \item[-] Enthält als einziges Attribut Device vom Typen IDevice und ein Konstruktor zum setzen des Attributs.
+\end{itemize}
+
+\subsubsection{Static Methoden in der Klasse IEarablesConnection}
+\paragraph{Beschreibung}
+Es wurde angenommen, dass die Methoden die auf die Events der Earables reagieren static sein müssen. Diese Annahme war falsch.
+\paragraph{Änderungen in der Klasse IEarablesConnection}
+\begin{itemize}
+	 \item[-] static Methoden sind nun nicht mehr static
+\end{itemize}
+
+\subsubsection{Klasse EarablesConnection reagiert auf Verbinden und trennen von Devices}
+\paragraph{Beschreibung}
+Es wurden zwei Methoden hinzugefügt, um den Connectionstate des Smartphones, mit Hilfe des DeviceConnectionStateChanged Events, weiterzuleiten. Sie werden aktiviert wenn sich die Earables mutwillig vom Device trennen oder die Verbindung unterbrochen wird.
+\paragraph{Änderungen in der Klasse EarablesConnection}
+\begin{itemize}
+	 \item[-] OnDeviceDisconnected(object sender, Plugin.BLE.Abstractions.EventArgs.DeviceEventArgs args): void ergänzt
+	\item[-]  OnDeviceConnectionLost(object sender, DeviceErrorEventArgs args): void ergänzt
+\end{itemize}
+
+\subsubsection{IMUDataExtructor}
+\paragraph{Beschreibung}
+Die Methode ExtractIMUDataString benötigt für die Berechnung zusätzlich noch den Offset. Dieser wird als vierter Parameter in Form eines Bytearrays mitgegeben. Außerdem sind die ScaleFactoren, die als Parameter übergeben werden jetzt nicht mehr vom Typen int sondern double, da es sich hierbei um Fließkommazahlen handeln kann. Dementsprechend hat sich der Returntyp der Methode ExctractIMUScaleFactorGyroscope in double geändert.
+Die Klasse wurde um zwei Methoden ergänzt, die die Range des Accelerometers und des Gyroscopes aus dem entsprechenden Bytearray ermitteln.
+\paragraph{Änderungen in der Klasse IMUDataExctructor}
+\begin{itemize}
+	 \item[-]  ExtractIMUDataString besitzt nun einen vierten Parameter vom Typ byte[]. Der zweite und dritte Parameter ist nun vom Typen double anstatt int.
+	\item[-] ExctractIMUScaleFactorGyroscope hat jetzt als Returntyp double und nicht mehr int.
+	\item[-] ExtractIMURangeAccelerometer(byte[] bytes): int ergänzt. Diese Methode ermittelt die Range für den Accelerometer.
+	\item[-] ExtractIMURangeGyroscope(byte[] bytes): double ergänzt. Diese Methode ermittelt die Range für das Gyroscope.
+\end{itemize}
+
 \subsection{Erweiterungsmodul}
 
 \subsection{Model (andere Bestandteile)}
