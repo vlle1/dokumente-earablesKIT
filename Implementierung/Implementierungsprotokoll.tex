@@ -102,7 +102,7 @@
   Entfernen (von ...) in Klasse(n) ... (was nie vorkommt glaube ich) }
 (<<kurze Erläuterung>>)
 \begin{itemize}
-  \item <<geändertes Attribut in UML-Notation>>(, <<Kommentar zu Änderung>>) (, ersetzt <<...>>)
+  \item[+ ODER $-$] <<neues Attribut in UML-Notation>> (bei komplettem Austausch von z.B. Methode und Property: \textit{ersetzt} <<altes Attribut>>)
 \end{itemize}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%% !!!!!!!!!!!!!!!
@@ -139,12 +139,12 @@ Die Exceptions werden geschmissen, falls bereits ein Gerät verbunden ist, keine
 In einigen Fällen gibt es nun keine Get/Set Methoden mehr. Sie wurden durch Properties ersetzt.
 Folgende Properties sind als Attribute dazugekommen:
 \begin{itemize}
-	\item[+] Connected statt %??%((hier auch korrekte uml syntax für die neuen Properties verwenden!!)) 
-	\item[+] IsBluetoothActive statt %... 
-	\item[+] SampleRate statt %...
-	\item[+] AccLPF statt SetLowPassFilterAccelerometer, GetLowPassFilterAccelerometer
-	\item[+] GyroLPF statt SetLowPassFilterGyroscope, GetLowPassFilterGyroscope,
-	\item[+] BatteryVoltage statt %...
+	\item[+] Connected \textit{ersetzt ??} %??%((hier auch korrekte uml syntax für die neuen Properties verwenden!!)) 
+	\item[+] IsBluetoothActive  \textit{ersetzt ??} %... 
+	\item[+] SampleRate  \textit{ersetzt ??} %...
+	\item[+] AccLPF  (\textit{ersetzt} SetLowPassFilterAccelerometer, GetLowPassFilterAccelerometer)
+	\item[+] GyroLPF  (\textit{ersetzt} SetLowPassFilterGyroscope, GetLowPassFilterGyroscope)
+	\item[+] BatteryVoltage  \textit{ersetzt ??} %...
 \end{itemize}
 
 \paragraph{Hinzugefügt in Klasse EarablesConnection}
@@ -212,7 +212,7 @@ Es wurden zwei Methoden hinzugefügt, um den Connectionstate des Smartphones mit
 
 \begin{itemize}
 	\item[-] OnDeviceDisconnected(object sender, DeviceEventArgs args): void 
-	\item[-]  OnDeviceConnectionLost(object sender, DeviceErrorEventArgs args): void
+	\item[-] OnDeviceConnectionLost(object sender, DeviceErrorEventArgs args): void
 \end{itemize}
 
 \subsubsection{Funktionsweise der Klasse IMUDataExtractor}
@@ -223,7 +223,8 @@ Die Methode ExtractIMUDataString benötigt für die Berechnung der Sensordaten z
 Die Klasse wurde der Vollständigkeit halber um zwei Methoden ergänzt, die die Range des Accelerometers und des Gyroscopes aus dem entsprechenden Bytearray ermitteln.
 \paragraph{Änderungen in der Klasse IMUDataExtractor}%%extractor oder extructor?? im Entwurf steht extractor
 \begin{itemize}
-  \item[+] \underline{ExtractIMUDataString(byteString: int, accScaleFactor: double, GyroScaleFactor: int, newParam: byte[])} %%newparam name
+  \item[+] \underline{ExtractIMUDataString(byteString: int, accScaleFactor: double,} \\
+  \underline{GyroScaleFactor: int, newParam: byte[])} %%newparam name
 	\item[+] \underline{ExtractIMUScaleFactorAccelerometer(byteString: int): double}
 	\item[+] \underline{ExtractIMUScaleFactorGyoscope(byteString: int): int}%vermute ich mal, stand nicht da 
 \end{itemize}
@@ -239,18 +240,16 @@ Die Klasse wurde der Vollständigkeit halber um zwei Methoden ergänzt, die die 
 \subsection{Views und ViewModel}
 \subsubsection{Commandstruktur bei Modi}
 \paragraph{Beschreibung}
-Da beim Aktivieren des Modus' die Seite gewechselt werden muss und das ViewModel die Views nicht kennen darf, muss der Button Click in den Code Behind delegiert werden und danach erst ins Viewmodel.\\
-Somit wurden die Commands ersetzt durch blablabla.
+Beim Aktivieren eines Modus' wird per Command direkt das ViewModel aufgerufen. Es muss aber die Seite gewechselt werden und das ViewModel darf die Views nicht kennen. \\
+Somit muss der Button-Click in den Code Behind des Views delegiert werden, damit dort der Seitenwechsel implementiert werden kann. Erst von dort aus wird an das ViewModel weitergeleitet.
 \paragraph{Änderungen in Klasse BaseModeViewModel}
 \begin{itemize}
-	\item[-] methodeXY() hinzugefügt
-	\item[] CommandXY entwfernt (vernünftige Signaturen verwenden!)
+	\item[-] methodeXY(): void (\textit{ersetzt} CommandXY)
 \end{itemize}
 \paragraph{Änderungen in Klassen CountViewModel, StepViewModel}
 Die Kindklassen ändern sich entsprechend folgendermaßen:
 \begin{itemize}
-	\item[-] methodeXY() hinzugefügt
-	\item[] CommandXY entwfernt (vernünftige Signaturen verwenden!)
+	\item[-] methodeXY() void (\textit{ersetzt} CommandXY)
 \end{itemize}
 \section{Statistik der Testfälle}
 
