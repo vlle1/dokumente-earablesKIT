@@ -233,6 +233,36 @@ Die Klasse wurde der Vollständigkeit halber um zwei Methoden ergänzt, die die 
   \item[+] \underline{ExtractIMURangeAccelerometer(byte[] bytes): int} %%sicher mit hier int, drunter double?
 	\item[+] \underline{ExtractIMURangeGyroscope(byte[] bytes): double} 
 \end{itemize}
+%durchlesen valle ab hier
+\subsubsection{Charakteristik umbenannt}
+\paragraph{Beschreibung}
+Eine Charakteristik wurde umbenannt.
+\paragraph{Änderungen in der Klasse Constants}
+\begin{itemize}
+	\item[-] Attribut IMU\_FULL\_SCALE\_RANG\_CHAR in OFFSET\_CHAR umbenannt.
+\end{itemize}
+\paragraph{Änderungen in der Klasse Characteristics}
+\begin{itemize}
+	\item[-] Attribute IMUScaleRangeChar in OffsetChar umbenannt.
+\end{itemize}
+
+\subsubsection{Connection überprüfung}
+\paragraph{Beschreibung}
+Um festzustellen ob eine Verbindung zu einem Device besteht wurde eine Methode hinzugefügt
+\paragraph{Änderungen in der Klasse EarablesConnection}
+\begin{itemize}
+	\item[-] Methode CheckConnection():void hinzugefügt. Sie wird am Anfang aller  Methode, die eine Verbindung voraussetzen, aufgerufen und prüft ob eine Verbindung existiert. Falls keine existiert schmeißt sie eine die Exception NoConnectionException.
+\end{itemize}
+
+\subsubsection{Klasse ConfigContainer ergänzt}
+\paragraph{Beschreibung}
+Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt.
+\paragraph{Änderungen in der Klasse ConfigContainer}
+\begin{itemize}
+	\item[-] AccScaleFactor: int und GyroScaleFactor: int hinzugefügt.
+	\item[-] private setSamplingRate(int rate): void hinzugefügt. Beim setzten des Samplingrate Propertys wird diese Methode ausgeführt und stellt sicher, dass nur gültige Werte angenommen werden.
+\end{itemize}
+% durchlesen bis hier valle
 \subsection{Erweiterungsmodul}
 
 \subsection{Model (andere Bestandteile)}
