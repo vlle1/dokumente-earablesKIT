@@ -139,12 +139,12 @@ Die Exceptions werden geschmissen, falls bereits ein Gerät verbunden ist, keine
 In einigen Fällen gibt es nun keine Get/Set Methoden mehr. Sie wurden durch Properties ersetzt.
 Folgende Properties sind als Attribute dazugekommen:
 \begin{itemize}
-	\item[+] Connected \textit{ersetzt ??} %??%((hier auch korrekte uml syntax für die neuen Properties verwenden!!)) 
-	\item[+] IsBluetoothActive  (\textit{ersetzt ??} %... 
-	\item[+] SampleRate  (\textit{ersetzt ??} %...
+	\item[+] Connected (\textit{ersetzt } die Methode IsConnected(): bool)
+	\item[+] IsBluetoothActive  (\textit{ersetzt } die Methode IsBleutoothActive(): bool)
+	\item[+] SampleRate  \textit{ersetzt } die Methode SetSamplingrate(heat: int): bool)
 	\item[+] AccLPF  (\textit{ersetzt} SetLowPassFilterAccelerometer, GetLowPassFilterAccelerometer)
 	\item[+] GyroLPF  (\textit{ersetzt} SetLowPassFilterGyroscope, GetLowPassFilterGyroscope)
-	\item[+] BatteryVoltage  \textit{ersetzt ??} %...
+	\item[+] BatteryVoltage  (\textit{ersetzt } die Methode GetBatteryVoltage(): float)
 \end{itemize}
 
 \paragraph{Hinzugefügt in Klasse EarablesConnection}
@@ -189,6 +189,7 @@ Es war ursprünglich gedacht, dass die StartScanning Methode eine Liste mit alle
 \begin{itemize}
 	\item[+] konstruktor... %%in UML Syntax wie immer.
 	\item[+] Device: IDevice
+	\item[+] <<create>> NewDeviceFound(device :IDevice)
 \end{itemize}
 
 \subsubsection{Static Methoden in der Klasse IEarablesConnection}
@@ -217,19 +218,19 @@ Es wurden zwei Methoden hinzugefügt, um den Connectionstate des Smartphones mit
 \subsubsection{Funktionsweise der Klasse IMUDataExtractor}
 \paragraph{Beschreibung}
 Hier waren aus verschiedenen Gründen Änderungen nötig: 
-Die Methode ExtractIMUDataString benötigt für die Berechnung der Sensordaten zusätzlich noch den Offset. Es wurde ein Parameter ergänzt.\\
+Die Methode ExtractIMUDataString benötigt für die Berechnung der Sensordaten zusätzlich noch den Offset. Dieser wird nun als vierter Parameter übergeben.\\
  Die Skalierungsfaktoren, die als Parameter übergeben werden können nicht nur ganzzahlig sein, hier sind Fließkommazahlen sinnvoller.\\
 Die Klasse wurde der Vollständigkeit halber um zwei Methoden ergänzt, die die Range des Accelerometers und des Gyroscopes aus dem entsprechenden Bytearray ermitteln.
-\paragraph{Änderungen in der Klasse IMUDataExtractor}%%extractor oder extructor?? im Entwurf steht extractor
+\paragraph{Änderungen in der Klasse IMUDataExtractor}
 \begin{itemize}
   \item[+] \underline{ExtractIMUDataString(byteString: int, accScaleFactor: double,} \\
-  \underline{GyroScaleFactor: int, newParam: byte[])} %%newparam name
+  \underline{GyroScaleFactor: int, byteOffset: byte[])} 
 	\item[+] \underline{ExtractIMUScaleFactorAccelerometer(byteString: int): double}
-	\item[+] \underline{ExtractIMUScaleFactorGyoscope(byteString: int): int}%vermute ich mal, stand nicht da 
+	\item[+] \underline{ExtractIMUScaleFactorGyoscope(byteString: int): int}
 \end{itemize}
 \paragraph{Hinzugefügt in der Klasse IMUDataExtractor}
 \begin{itemize}
-  \item[+] \underline{ExtractIMURangeAccelerometer(byte[] bytes): int} %%sicher mit hier int, drunter double?
+  \item[+] \underline{ExtractIMURangeAccelerometer(byte[] bytes): int} 
 	\item[+] \underline{ExtractIMURangeGyroscope(byte[] bytes): double} 
 \end{itemize}
 \subsubsection{Charakteristik umbenannt}
@@ -246,22 +247,38 @@ Eine Charakteristik wurde umbenannt.
 
 \subsubsection{Verbindungsüberprüfung}
 \paragraph{Beschreibung}
-Um festzustellen, ob eine Verbindung zu einem Device besteht, wurde eine Methode hinzugefügt.
-\paragraph{Hinzugefügt in der Klasse EarablesConnection}
+Um festzustellen ob eine Verbindung zu einem Device besteht wurde eine Methode hinzugefügt
+\paragraph{Ergänzungen in der Klasse EarablesConnection}
 \begin{itemize}
-	\item[-] CheckConnection():void Anfang aller  Methode, die eine Verbindung voraussetzen, aufgerufen und prüft ob eine Verbindung existiert. Falls keine existiert schmeißt sie eine die Exception NoConnectionException.
-\end{itemize} 
-Die Methode CheckConnection wird am Anfang aller Methoden, die eine Verbindung voraussetzen, aufgerufen und prüft, ob eine Verbindung existiert. Falls keine existiert schmeißt sie die Exception NoConnectionException.
+	\item[-]  CheckConnection():void  
+\end{itemize}
+Sie wird am Anfang aller  Methode, die eine Verbindung voraussetzen, aufgerufen und prüft ob eine Verbindung existiert. Falls keine existiert schmeißt sie eine die Exception NoConnectionException.
 
 \subsubsection{Zwischenpeichern der Scalierungsfaktoren von Accelerometer und Gyroscope}
 \paragraph{Beschreibung}
-Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest, stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode, um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt.
-\paragraph{Hinzugefügt in der Klasse ConfigContainer}
+Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt.
+\paragraph{Ergänzungen in der Klasse ConfigContainer}
 \begin{itemize}
-	\item[?] AccScaleFactor: int
-	\item[?] GyroScaleFactor: int
-	\item[?] private setSamplingRate(int rate): void
+	\item[+] AccScaleFactor: int 
+	\item[+] GyroScaleFactor: int
+	\item[$-$]  setSamplingRate(int rate): void 
 \end{itemize}
+Beim setzten des Samplingrate Propertys wird die Methode setSamplingRate ausgeführt und stellt sicher, dass nur gültige Werte angenommen werden.
+
+\subsubsection{Testmethoden hinzugefügt}
+\paragraph{Beschreibung}
+Die Scalefactoren hängen von der gewählten Range des Accelerometers und des Gyroscopes ab. Um zu testen ob der richtige Wert in die  Earables geschrieben wird gibt es nun zusätzlich zwei Methoden, die die Range setzen und weitere zwei um die Range von den Earables zu lesen.
+Außerdem wird beim setzen der LPF, in den configs gespeichert auf welchen Wert sie momentan gesetzt sind. Beim Auslesen wird also nicht der Wert von den Earables gelesen sonder der Wert der in den configs steht. Das hat den selben Grund weshalb wir die gefundenen Devices, beim scannen, nicht als Liste zurückgeben. Um den aktuellen LPF der Earables auszulesen benutzen wir wieder asynchrone Methoden aus dem Plugin.BLE. Das heißt der Wert des LPF wird erst zurückgegeben und dann erst ausgelesen, was das Ergebnis verfälscht. Um das zu vermeiden werden die Werte für die LPF nicht aus den Earables ausgelesen sondern aus den Configs, in denen sie gespeichert wurden. Für Testzwecke wurden jedoch trotzdem zwei Methoden implementiert, die die Werte für die LPF direkt aus den Earables lesen. Diese Methoden werden auch in der BibTestApp zum auslesen verwendet.
+
+\paragraph{Ergänzungen in der Klasse EarablesConnection}
+\begin{itemize}
+	\item[$-$] setAccelerometerRange(range :int): void
+	\item[$-$] setGyroscopeRange(range: int): void
+	\item[$-$ ] getAccelerometerLPFFromDevice(): void
+	\item[$-$ ] getGyroscopeLPFFromDevice(): void
+\end{itemize}
+Ermöglichen es die Range zu setzen und den LPF aus den Earables auszulesen. Die Methoden um die Range auszulesen befinden sich in der Klasse IMUDataextractor. Die Methoden zum auslesen des  LPF schreiben den LPF in eine Variable. Bei Verwendung dieser Methoden müssen die Variablen vorher global deklariert werden, um auf sie zuzugreifen zu können. Da wir die Methoden nicht benutzen und sie nur zum testen da sind existieren diese globalen Variablen in unsere Bibliothek nicht.
+% durchlesen bis hier valle
 \subsection{Erweiterungsmodul}
 
 \subsection{Model (andere Bestandteile)}
