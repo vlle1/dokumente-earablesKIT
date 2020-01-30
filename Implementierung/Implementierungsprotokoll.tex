@@ -267,19 +267,106 @@ Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Ac
 \subsection{Model (andere Bestandteile)}
 
 \subsection{Views und ViewModel}
+
 \subsubsection{Commandstruktur bei Modi}
 \paragraph{Beschreibung}
-Beim Aktivieren eines Modus' wird per Command direkt das ViewModel aufgerufen. Es muss aber die Seite gewechselt werden und das ViewModel darf die Views nicht kennen. \\
-Somit muss der Button-Click in den Code Behind des Views delegiert werden, damit dort der Seitenwechsel implementiert werden kann. Erst von dort aus wird an das ViewModel weitergeleitet.
+Beim Starten eines Modus durch Drücken des Start Buttons wurde ursprünglich ein Command direkt das ViewModel gesendet und dort die StartActivity Methode aufgerufen. Da aber beim Starten auch die View gewechselt werden soll und dies aus dem ViewModel nicht umsetzbar ist, muss das Drücken des Start Buttons zunächst im Codebehind der zugehörigen View behandelt und dann weiter an das ViewModel delegiert werden. 
 \paragraph{Änderungen in Klasse BaseModeViewModel}
 \begin{itemize}
-	\item[-] methodeXY(): void (\textit{ersetzt} CommandXY)
+	\item[+] StartActivityCommand: ICommand und StopActivityCommand: ICommand \textit{entfernt}.
+	\item[+] \textit{abstract} StartActivity(): bool und \textit{abstract} StopActivity(): bool Sichtbarkeit von protected auf public \textit{verändert} und Rückgabewerte auf bool \textit{geändert}.
+	\item[\#] CheckConnection(): bool Rückgabetyp zu bool \textit{geändert}.
 \end{itemize}
-\paragraph{Änderungen in Klassen CountViewModel, StepViewModel}
-Die Kindklassen ändern sich entsprechend folgendermaßen:
+\paragraph{Änderungen in Klassen CountViewModel, StepViewModel und ListAndPerformViewModel}
+Bei den Kindklassen verändern sich analog die vererbten StartActivity und StopActivity Methoden.
 \begin{itemize}
-	\item[-] methodeXY() void (\textit{ersetzt} CommandXY)
+	\item[+] StartActivity(): bool und StopActivity(): bool Sichtbarkeit von protected auf public \textit{verändert} und Rückgabewerte auf bool \textit{geändert}.
+	\item[+] UpdateFrequency(): void Sichtbarkeit von private auf public geändert (\textbf{Nur StepModeViewModel}). 
 \end{itemize}
+
+\subsubsection{Wrapperklasse für Activities}
+\paragraph{Beschreibung}
+Um die Anzahl lokaler Attribute und Fallunterscheidungen zu verringern, wurde eine Wrapperklasse für Activities  erstellt. Damit kann dynamisch auf den Namen der Activity sowie deren Counter und der vom Servicemanager gelieferten Analyse zugegriffen werden. Sie implementiert außerdem die Schnittstelle INotifyPropertyChanged, da einige Attribute der Klasse per Databinding angezeigt und während eines laufendes Modus verändert werden.
+\paragraph{Hinzufügen der Klasse ActivityWrapper}
+\begin{itemize}
+	\item[+] \_activity: Activity \textit{hinzugefügt}
+	\item[+] Name: string \textit{hinzugefügt}
+	\item[+] Amount: int \textit{hinzugefügt}
+	\item[-] \_counter: int \textit{hinzugefügt}
+	\item[-] Counter: int \textit{hinzugefügt}
+	\item[+] <<create>> ActivityWrapper(name: string, activity: Activity, amount: int) \textit{hinzugefügt}
+	\item[+] <<create>> ActivityWrapper(name: string, activity: Activity) \textit{hinzugefügt}
+	\item[\#] OnPropertyChanged([CallerMemberName]): void \textit{hinzugefügt}
+\end{itemize}
+\paragraph{Änderungen in CountModeViewModel}
+\begin{itemize}
+	\item[+] \_pushUpActivityWrapper: ActivityWrapper \textit{hinzugefügt}
+	\item[+] \_sitUpActivityWrapper: ActivityWrapper \textit{hinzugefügt}
+	\item[+] \_comingSoon: ActivityWrapper \textit{hinzugefügt}
+	\item[+] PossibleActivities: ObservableCollection<ActivityWrapper> Datentyp der Listenelemente von string zu ActivityWrapper\textit{geändert}.
+	\item[+] SelectedActivity: ActivityWrapper Datentyp von string zu ActivityWrapper \textit{geändert}.
+\end{itemize}
+\paragraph{Änderungen in ListenAndPerformViewModel}
+\begin{itemize}
+	\item[+] ActivityList: ObservableCollection<ActivityWrapper> Datentyp der Listenelemente von string zu ActivityWrapper\textit{geändert}.
+	\item[+] SelectedActivity: ActivityWrapper Datentyp von string zu ActivityWrapper \textit{geändert}.
+	\item[+] ActiveActivity: ActivityWrapper \textit{hinzugefügt}.
+	\item[-] \_activeActivity: ActivityWrapper \textit{hinzugefügt}.
+ 	\item[+] ActivityAmounts: OberservableCollection<int> \textit{entfernt} 
+\end{itemize}
+
+\subsubsection{Data Binding Endlosschleife}
+\paragraph{Beschreibung}
+Im Entwurf wurde nicht berücksichtigt, dass jedes Attribut, welches per Data Binding an Viewelemente gebunden und nicht per default Two-Way binded ist,  auch ein äquivalentes privates Attribut benötigt wird, auf das bei den settern und gettern zugegriffen wird, um Endlosschleifen beim Aktualisieren der Attribute zu verhindern. 
+\paragraph{Änderungen im StepModeViewModel}
+\begin{itemize}
+	\item[-] \_stepsDoneLastTime: int \textit{hinzugefügt} und Datentyp des public Attributs von string zu int geändert.
+	\item[-] \_distanceWalkedLastTime: int \textit{hinzugefügt} und Datentyp des public Attributs von string zu int geändert.
+	\item[-] \_lastDataTime: string \textit{hinzugefügt}.
+	\item[-] \_stepCounter: int \textit{hinzugefügt}.
+	\item[-] \_distanceWalked: int \textit{hinzugefügt}.
+	\item[-] \_isRunning: bool \textit{hinzugefügt}.
+	\item[-] \_stepFrequency: double \textit{hinzugefügt} und Datentyp des public Attributs von string zu double geändert.
+\end{itemize}
+\paragraph{Änderungen im CountModeViewModel}
+\begin{itemize}
+	\item[-] \_minutes: string \textit{hinzugefügt} 
+	\item[-] \_seconds: string \textit{hinzugefügt}
+	\item[-] \_milliseconds: string \textit{hinzugefügt}
+\end{itemize}
+\paragraph{Änderungen im ListenAndPerformViewModel}
+\begin{itemize}
+	\item[-] \_minutes: string \textit{hinzugefügt} 
+	\item[-] \_seconds: string \textit{hinzugefügt}
+	\item[-] \_milliseconds: string \textit{hinzugefügt}
+\end{itemize}
+
+\subsubsection{Speichern der gesammelten Daten der Modi}
+\paragraph{Beschreibung}
+Das Speichern der ausgeführten Sit-ups, Push-ups oder gelaufenen Schritten wurde in eine neue Methode ausgelagert, um Fallunterscheidungen zu vermeiden.
+\paragraph{Änderungen in Klassen CountViewModel, StepViewModel und ListAndPerformViewModel} 
+\begin{itemize}
+	\item[-] saveData(): void \textit{hinzugefügt}
+\end{itemize}
+
+\subsubsection{Zwischenspeichern von Services}
+\paragraph{Beschreibung}
+Um die Übersichtlichkeit in Methoden zu wahren, werden häufig benutzte Services im Konstruktor einmalig vom Service Manager geholt und in einem Attribut gespeichert.
+\paragraph{Änderungen in Klassen CountModeViewModel, StepModeViewModel und ListAndPerformViewModel} 
+\begin{itemize}
+	\item[-] \_activityManager: IActivityManager \textit{hinzugefügt}
+	\item[-] \_dataBaseConnection: IDataBaseConnection \textit{hinzugefügt} 
+\end{itemize}
+
+\subsubsection{Neue Event Methode für RunningEvents}
+\paragraph{Beschreibung}
+Der StepMode muss gleichzeitig von zwei Aktivitätsanalysen Events bekommen, von der RunningActivity und von der StepActivity. Wenn die OnActivityDone Methode bei beiden Event Handlern der Aktivitäten registriert wird, müssten mehrere Fallunterscheidungen und eine Auswertung der nicht implementierten ActivityArgs erfolgen. Stattdessen wird eine neue Methode hinzugefügt, sodass bei jedem Event Handler nur eine Methode registiert ist.
+\paragraph{Änderungen in StepModeViewModel}
+\begin{itemize}
+	\item[+]  OnRunningDone(sender: object, args: ActivityArgs): void \textit{hinzugefügt}
+\end{itemize}
+
+	
 \section{Statistik der Testfälle}
 
 \section{Implementierungsplan}
