@@ -79,127 +79,159 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \pagenumbering{roman}
- \input{Deckblatt}         % Deckblatt.tex laden und einfügen
- \setcounter{page}{2}
- \tableofcontents          % Inhaltsverzeichnis ausgeben
- \clearpage
- \pagenumbering{arabic}
+\input{Deckblatt}         % Deckblatt.tex laden und einfügen
+\setcounter{page}{2}
+\tableofcontents          % Inhaltsverzeichnis ausgeben
+\clearpage
+\pagenumbering{arabic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Einleitung}
-\section{Probleme und Änderungen am Entwurf}
+%%%%%%%%%%%%%%%%%%%%%% !!!!!!!!!!!!  struktur - Schema (runde Klammern = optional)
+%
+\section{Schema für Probleme und Änderungen am Entwurf}
+\subsection{<<Bereich>>}
+\subsubsection{<<Um was geht es>>}
+\paragraph{Beschreibung}
+<<Beschreibung>>
+\paragraph{
+  Änderung(en) (von ...) in Klasse(n) ... \\
+  ODER \\
+  Ergänzung(en) (von ...) in Klasse(n)... \\
+  ODER \\
+  Entfernen (von ...) in Klasse(n) ... (was nie vorkommt glaube ich) }
+(<<kurze Erläuterung>>)
+\begin{itemize}
+  \item <<geändertes Attribut in UML-Notation>>(, <<Kommentar zu Änderung>>) (, ersetzt <<...>>)
+\end{itemize}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%% !!!!!!!!!!!!!!!
 
+\section{Probleme und Änderungen am Entwurf}
 \subsection{Bibliothek}
 
-\subsubsection{Schnittstellen der Bibliothek}
+\subsubsection{Umgang mit Exceptions}
 \paragraph{Beschreibung}
-Es war geplant, dass die meisten Schnittstellen der Bibliothek ein Boolean zurückgeben, der true ist, falls die Anweisung korrekt durchgeführt werden konnte und false , falls es Komplikationen gab.
-Um besser auf Fehler und Exceptions zu reagieren macht es mehr Sinn, dass diese Methoden void sind und im Fehlerfall Exceptions schmeißen. Außerdem gibt es nun keine Get/Set Methoden mehr. Sie wurden durch Properties ersetzt.
+Es war geplant, dass die meisten Schnittstellen der Bibliothek ein Boolean zurückgeben, der true ist, falls die Anweisung korrekt durchgeführt werden konnte und false , falls es Komplikationen gab.\\
+Um besser auf Fehler und Exceptions zu reagieren macht es mehr Sinn, dass diese Methoden nichts zurückgeben sind und im Fehlerfall Exceptions schmeißen.\\
+Dies wurde umgesetzt, falls sich der Nutzer der Schnittstelle IEarablesConnection mehrmals verbinden will, keine Verbindung aufgebaut werden konnte, eine ungültige SampleRate angegeben wurde (Werte zwischen 1 und 100 sind erlaubt) oder eine Aktion ausgeführt werden soll, die bereits eine Verbindung voraussetzt, aber es existiert keine Verbindung.
 
 \paragraph{Änderungen in Klasse IEarablesConnection}
+Folgende Methoden haben nicht mehr den Rückgabetypen bool sondern void und schmeißen im Fehlerfall Exceptions:
 \begin{itemize}
-	\item[-] Folgende Methoden haben nicht mehr den Rückgabetypen bool sondern void und schmeißen im Fehlerfall Exceptions
-	\item[] ConnectToDevice,
-	\item[] DisconnectFromDevice,
-	\item[] StartSampling,
-	\item[] StopSampling,
-	\item[] 
+	\item[+] DisconnectFromDevice(): bool
+	\item[+] StartSampling(): bool
+	\item[+] StopSampling(): bool
+\end{itemize} 
+\paragraph{Hinzugefügte Exceptions}
+Folgende Exception-Klassen mussten ergänzt werden:
+\begin{itemize}
+	\item[$-$] AllreadyConnectedException
+	\item[$-$] ConnectionFailedException
+	\item[$-$] InvalideSampleRateException
+	\item[$-$] NoConnectionException.%man könnte noch überlegen die Rechtschreibfehler aus den AlreadyConnectedException und InvalidSampleRateException raus zu nehmen, müsste man dann aber auch konsequent im code so machen.
+\end{itemize}
+Die Exceptions werden geschmissen, falls bereits ein Gerät verbunden ist, keine Verbindung aufgebaut werden kann, der Wert der eingegebenen Samplerate nicht im richtigen Bereich (zwischen 1 und 100) liegt oder keine Verbindung vorhanden ist, diese aber benötigt würde (z.B. um das Sampling zu starten).
 
-	\item[-] Properties anstatt Methoden für folgende Attribute
-	\item[] Connected
-	\item[] IsBluetoothActive
-	\item[] SampleRate
-	\item[] AccLPF
-	\item[] GyroLPF
-	\item[] BatteryVoltage
-	\item[] 
-
-	\paragraph{Änderungen in Klasse EarablesConnection}
-	
-	\item[-] Durch die Änderungen der Get/Set Methoden in Properties ergeben sich folgende neue private Methoden
-	\item[] CheckIsBluetoothActive(): void
-	\item[] GetAccelerometerLPF(): LPF\_Accelerometer
-	\item[] SetAccelerometerLPF(LPF\_Accelerometer value): void
-	\item[] GetGyroscopeLPF(): LPF\_Gyroscope
-	\item[] SetGyroscopeLPF(LPF\_Gyroscope value): void
-	\item[] 
-
-	
-	\item[-] Besonderheit des BatteryVoltage Attributes
-	\item[] Die Methode GetBatteryVoltageFromDevice(): void wird automatisch aufgerufen wenn sich die BatteryVoltage der Earables ändert und überträgt den aktuellen Wert in das BatteryVoltage Attribut.
-	\item[] Die Methode initBatteryVoltage(): Task liest den BatteryVoltage Wert der Earables zum ersten mal aus, für den Fall dass sie abgefragt wird bevor sie sich das erste mal aktualisiert hat.
+\subsubsection{Properties eingeführt}
+\paragraph{Beschreibung}
+\paragraph{Änderungen in Klasse IEarablesConnection}
+In einigen Fällen gibt es nun keine Get/Set Methoden mehr. Sie wurden durch Properties ersetzt.
+Folgende Properties sind als Attribute dazugekommen:
+\begin{itemize}
+	\item[+] Connected statt %??%((hier auch korrekte uml syntax für die neuen Properties verwenden!!)) 
+	\item[+] IsBluetoothActive statt %... 
+	\item[+] SampleRate statt %...
+	\item[+] AccLPF statt SetLowPassFilterAccelerometer, GetLowPassFilterAccelerometer
+	\item[+] GyroLPF statt SetLowPassFilterGyroscope, GetLowPassFilterGyroscope,
+	\item[+] BatteryVoltage statt %...
 \end{itemize}
 
-\subsubsection{Exceptions ergänzt}
-\paragraph{Beschreibung}
-Aufgrund der Änderungen, dass die Methodenschnittstellen der Klasse IEarablesConnection nicht mehr Boolean zurückgeben sondern void und im Fehlerfall Exceptions schmeißen, ist es notwendig Exceptions zu ergänzen.
-\paragraph{Folgende Exceptions ergänzt}
+\paragraph{Hinzugefügt in Klasse EarablesConnection}
+Zusätzlich zu den vererbten Änderungen ergeben sich folgende neue private Methoden:
 \begin{itemize}
-	\item[-] AllreadyConnectedException. Sie wird geschmissen sobald versucht wird eine Verbindung mit einem Device herzustellen, obwohl schon eine Verbindung existiert.
-	\item[-] ConnectionFailedException. Es kam vereinzelt auf, dass die App beim verbinden abgestürzt ist. Dies wird nun verhindert und stattdessen wird diese  Exception geschmissen.
-	\item[-] InvalideSampleRateException. Die Samplerate muss zwischen 1 und 100 liegen, ansonsten wird die Exception geschmissen (Dies ist von den Earables vorgegeben).
-	\item[-] NoConnectionException. Falls versucht wird eine Aktion durchzuführen, für die eine Verbindung zu einem Device benötigt wird, diese aber nicht existiert, wird diese Exception geschmissen.
+	\item[$-$] CheckIsBluetoothActive(): void
+	\item[$-$] GetAccelerometerLPF(): LPF\_Accelerometer
+	\item[$-$] SetAccelerometerLPF(LPF\_Accelerometer value): void
+	\item[$-$] GetGyroscopeLPF(): LPF\_Gyroscope
+	\item[$-$] SetGyroscopeLPF(LPF\_Gyroscope value): void
+	\item[$-$] GetBatteryVoltageFromDevice(): void
+	\item[$-$] initBatteryVoltage(): Task
+\end{itemize}
+  Hierbei wird GetBatteryVoltageFromDevice automatisch aufgerufen, wenn sich die BatteryVoltage der Earables ändert und überträgt den aktuellen Wert in das BatteryVoltage Attribut.\\
+  Die Methode initBatteryVoltage liest den BatteryVoltage Wert der Earables zum ersten Mal aus, falls sie abgefragt werden sollte, bevor sie sich das erste Mal aktualisiert hat.
+
+\subsubsection{Kapselung von Attributen der Bibliothek}
+\paragraph{Beschreibung}
+Für die Attribute config und characteristics ist es in Betracht der Datenkapselung sinnvoller, sie private zu halten. Sie werden von außen nicht direkt benötigt.
+\paragraph{Änderungen in Klasse IEarablesConnection}
+\begin{itemize}
+	\item[$-$] config
+	\item[$-$] characters
 \end{itemize}
 
 
-\subsubsection{Attribute der Bibliothek}
+\subsubsection{Namensänderungen bei Enums}
 \paragraph{Beschreibung}
-Für die Attribute config und characteristics ist es, in Betracht der Datenkapselung, Sinnvoller sie private zu halten.
-	\paragraph{Änderungen in Klasse IEarablesConnection}
-\begin{itemize}
-	\item[-] Die Attribute config und characters sind nun private anstatt public.
-\end{itemize}
-
-
-\subsubsection{Enums }
-\paragraph{Beschreibung}
-Die Enums können nicht mit Zahlen beginnen.
+Die Enums können nicht mit Zahlen beginnen. Daher mussten sie umbenannt werden.
 \paragraph{Änderungen in den Enums LPF\_Accelerometer und LPF\_Gyroscope}
-\begin{itemize}
-	 \item[-] Die Inhalte der Enums beginnen nun nicht mehr mit der Zahl sondern mit Hz. Beispielsweise nicht mehr 10Hz sondern Hz10.
-\end{itemize}
+Die Werte der Enums beginnen nun nicht mehr mit der Zahl sondern mit Hz. \\
+Beispielsweise wird statt 10Hz jetzt Hz10 verwendet.
 
-\subsubsection{StartScanning Methoden der Klasse IEarablesConnection}
+\subsubsection{Übergabe der Geräte beim Scanvorgang}
 \paragraph{Beschreibung}
-Es war ursprünglich gedacht, dass die StartScanning Methode eine Liste mit alle gefundenen Devices zurück gibt. Die Liste die zurückgegeben wurde war aber immer leer, da Methoden aus dem Plugin.BLE benutzt werde, die asyncron laufen. So wurde zuerst die Liste zurückgegeben und danach wurde sie befüllt. Nach etlichen gescheiterten Versuchen auf die Threads und Tasks zu warten haben wir uns dafür entschieden jedes mal ein Event zu schmeißen, wenn ein neues Device gescannt wurde. So entstand das neue Event NewDeiviceFound. Es wird geschmissen sobald ein neues Device, beim Scannen gefunden wurde. Die Argumente des Events beinhalten das neue Device.
+Es war ursprünglich gedacht, dass die StartScanning Methode eine Liste mit alle gefundenen Devices zurück gibt. Die Liste, die zurückgegeben wurde war aber immer leer, da Methoden aus dem Plugin BLE benutzt wurden, die asynchron laufen. So wurde zuerst die Liste zurückgegeben und danach wurde sie befüllt. Nach etlichen gescheiterten Versuchen auf die Threads und Tasks zu warten haben wir uns dafür entschieden jedes Mal ein Event zu schmeißen, wenn ein neues Device gescannt wurde. Die Argumente des Events beinhalten das neue Device.
 \paragraph{Änderungen in der Klasse IEarablesConnection}
+Hinzugefügt wurde:
 \begin{itemize}
-	 \item[-] public event EventHandler<NewDeviceFoundArgs> NewDeviceFound hinzugefügt
+	\item[+] event NewDeviceFound: EventHandler<NewDeviceFoundArgs> 
 \end{itemize}
 \paragraph{Klasse NewDeviceFound hinzugefügt}
 \begin{itemize}
-	 \item[-] Enthält als einziges Attribut Device vom Typen IDevice und ein Konstruktor zum setzen des Attributs.
+	\item[+] Device: IDevice
+	\item[+] %%konstruktor... in UML Syntax wie immer.
 \end{itemize}
 
 \subsubsection{Static Methoden in der Klasse IEarablesConnection}
 \paragraph{Beschreibung}
-Es wurde angenommen, dass die Methoden die auf die Events der Earables reagieren static sein müssen. Diese Annahme war falsch.
+Es wurde angenommen, dass die Methoden, die auf die Events der Earables reagieren static sein müssen. Diese Annahme war falsch.
 \paragraph{Änderungen in der Klasse IEarablesConnection}
+Die folgenden Methoden sind nun nicht mehr statisch:
 \begin{itemize}
-	 \item[-] static Methoden sind nun nicht mehr static
+  \item[+]OnValueUpdatedIMU():void
+  \item[+]OnPushButtonPressed():void
+  \item[+]OnDeviceConnected():void 
 \end{itemize}
 
-\subsubsection{Klasse EarablesConnection reagiert auf Verbinden und trennen von Devices}
+
+\subsubsection{Reaktion auf Verbinden und Trennen von Devices}
 \paragraph{Beschreibung}
-Es wurden zwei Methoden hinzugefügt, um den Connectionstate des Smartphones, mit Hilfe des DeviceConnectionStateChanged Events, weiterzuleiten. Sie werden aktiviert wenn sich die Earables mutwillig vom Device trennen oder die Verbindung unterbrochen wird.
-\paragraph{Änderungen in der Klasse EarablesConnection}
+Es wurden zwei Methoden hinzugefügt, um den Connectionstate des Smartphones mit Hilfe des DeviceConnectionStateChanged Events weiterzuleiten.\\
+ Sie werden aktiviert, wenn sich die Earables mutwillig vom Device trennen oder die Verbindung unterbrochen wird.
+\paragraph{Ergänzungen in der Klasse EarablesConnection}
+
 \begin{itemize}
-	 \item[-] OnDeviceDisconnected(object sender, Plugin.BLE.Abstractions.EventArgs.DeviceEventArgs args): void ergänzt
-	\item[-]  OnDeviceConnectionLost(object sender, DeviceErrorEventArgs args): void ergänzt
+	\item[-] OnDeviceDisconnected(object sender, DeviceEventArgs args): void 
+	\item[-]  OnDeviceConnectionLost(object sender, DeviceErrorEventArgs args): void
 \end{itemize}
 
-\subsubsection{IMUDataExtructor}
+\subsubsection{Funktionsweise der Klasse IMUDataExtractor}
 \paragraph{Beschreibung}
-Die Methode ExtractIMUDataString benötigt für die Berechnung zusätzlich noch den Offset. Dieser wird als vierter Parameter in Form eines Bytearrays mitgegeben. Außerdem sind die ScaleFactoren, die als Parameter übergeben werden jetzt nicht mehr vom Typen int sondern double, da es sich hierbei um Fließkommazahlen handeln kann. Dementsprechend hat sich der Returntyp der Methode ExctractIMUScaleFactorGyroscope in double geändert.
-Die Klasse wurde um zwei Methoden ergänzt, die die Range des Accelerometers und des Gyroscopes aus dem entsprechenden Bytearray ermitteln.
-\paragraph{Änderungen in der Klasse IMUDataExctructor}
+Hier waren aus verschiedenen Gründen Änderungen nötig: 
+Die Methode ExtractIMUDataString benötigt für die Berechnung der Sensordaten zusätzlich noch den Offset. Es wurde ein Parameter ergänzt.\\
+ Die Skalierungsfaktoren, die als Parameter übergeben werden können nicht nur ganzzahlig sein, hier sind Fließkommazahlen sinnvoller.\\
+Die Klasse wurde der Vollständigkeit halber um zwei Methoden ergänzt, die die Range des Accelerometers und des Gyroscopes aus dem entsprechenden Bytearray ermitteln.
+\paragraph{Änderungen in der Klasse IMUDataExtractor}%%extractor oder extructor?? im Entwurf steht extractor
 \begin{itemize}
-	 \item[-]  ExtractIMUDataString besitzt nun einen vierten Parameter vom Typ byte[]. Der zweite und dritte Parameter ist nun vom Typen double anstatt int.
-	\item[-] ExctractIMUScaleFactorGyroscope hat jetzt als Returntyp double und nicht mehr int.
-	\item[-] ExtractIMURangeAccelerometer(byte[] bytes): int ergänzt. Diese Methode ermittelt die Range für den Accelerometer.
-	\item[-] ExtractIMURangeGyroscope(byte[] bytes): double ergänzt. Diese Methode ermittelt die Range für das Gyroscope.
+  \item[+] \underline{ExtractIMUDataString(byteString: int, accScaleFactor: double, GyroScaleFactor: int, newParam: byte[])} %%newparam name
+	\item[+] \underline{ExtractIMUScaleFactorAccelerometer(byteString: int): double}
+	\item[+] \underline{ExtractIMUScaleFactorGyoscope(byteString: int): int}%vermute ich mal, stand nicht da 
 \end{itemize}
-
+\paragraph{Ergänzungen in der Klasse IMUDataExtractor}
+\begin{itemize}
+  \item[+] \underline{ExtractIMURangeAccelerometer(byte[] bytes): int} %%sicher mit hier int, drunter double?
+	\item[+] \underline{ExtractIMURangeGyroscope(byte[] bytes): double} 
+\end{itemize}
 \subsection{Erweiterungsmodul}
 
 \subsection{Model (andere Bestandteile)}
@@ -211,14 +243,14 @@ Da beim Aktivieren des Modus' die Seite gewechselt werden muss und das ViewModel
 Somit wurden die Commands ersetzt durch blablabla.
 \paragraph{Änderungen in Klasse BaseModeViewModel}
 \begin{itemize}
-  \item[-] methodeXY() hinzugefügt
-  \item[] CommandXY entwfernt (vernünftige Signaturen verwenden!)
+	\item[-] methodeXY() hinzugefügt
+	\item[] CommandXY entwfernt (vernünftige Signaturen verwenden!)
 \end{itemize}
 \paragraph{Änderungen in Klassen CountViewModel, StepViewModel}
 Die Kindklassen ändern sich entsprechend folgendermaßen:
 \begin{itemize}
-  \item[-] methodeXY() hinzugefügt
-  \item[] CommandXY entwfernt (vernünftige Signaturen verwenden!)
+	\item[-] methodeXY() hinzugefügt
+	\item[] CommandXY entwfernt (vernünftige Signaturen verwenden!)
 \end{itemize}
 \section{Statistik der Testfälle}
 
