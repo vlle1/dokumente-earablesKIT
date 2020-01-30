@@ -97,7 +97,7 @@
 \paragraph{
   Änderung(en) (von ...) in Klasse(n) ... \\
   ODER \\
-  Ergänzung(en) (von ...) in Klasse(n)... \\
+  Hinzugefügt in Klasse(n)... \\
   ODER \\
   Entfernen (von ...) in Klasse(n) ... (was nie vorkommt glaube ich) }
 (<<kurze Erläuterung>>)
@@ -140,8 +140,8 @@ In einigen Fällen gibt es nun keine Get/Set Methoden mehr. Sie wurden durch Pro
 Folgende Properties sind als Attribute dazugekommen:
 \begin{itemize}
 	\item[+] Connected \textit{ersetzt ??} %??%((hier auch korrekte uml syntax für die neuen Properties verwenden!!)) 
-	\item[+] IsBluetoothActive  \textit{ersetzt ??} %... 
-	\item[+] SampleRate  \textit{ersetzt ??} %...
+	\item[+] IsBluetoothActive  (\textit{ersetzt ??} %... 
+	\item[+] SampleRate  (\textit{ersetzt ??} %...
 	\item[+] AccLPF  (\textit{ersetzt} SetLowPassFilterAccelerometer, GetLowPassFilterAccelerometer)
 	\item[+] GyroLPF  (\textit{ersetzt} SetLowPassFilterGyroscope, GetLowPassFilterGyroscope)
 	\item[+] BatteryVoltage  \textit{ersetzt ??} %...
@@ -164,7 +164,7 @@ Zusätzlich zu den vererbten Änderungen ergeben sich folgende neue private Meth
 \subsubsection{Kapselung von Attributen der Bibliothek}
 \paragraph{Beschreibung}
 Für die Attribute config und characteristics ist es in Betracht der Datenkapselung sinnvoller, sie private zu halten. Sie werden von außen nicht direkt benötigt.
-\paragraph{Änderungen in Klasse IEarablesConnection}
+\paragraph{Änderungen der Sichtbarkeit in Klasse IEarablesConnection}
 \begin{itemize}
 	\item[$-$] config
 	\item[$-$] characters
@@ -181,15 +181,14 @@ Beispielsweise wird statt 10Hz jetzt Hz10 verwendet.
 \subsubsection{Übergabe der Geräte beim Scanvorgang}
 \paragraph{Beschreibung}
 Es war ursprünglich gedacht, dass die StartScanning Methode eine Liste mit alle gefundenen Devices zurück gibt. Die Liste, die zurückgegeben wurde war aber immer leer, da Methoden aus dem Plugin BLE benutzt wurden, die asynchron laufen. So wurde zuerst die Liste zurückgegeben und danach wurde sie befüllt. Nach etlichen gescheiterten Versuchen auf die Threads und Tasks zu warten haben wir uns dafür entschieden jedes Mal ein Event zu schmeißen, wenn ein neues Device gescannt wurde. Die Argumente des Events beinhalten das neue Device.
-\paragraph{Änderungen in der Klasse IEarablesConnection}
-Hinzugefügt wurde:
+\paragraph{Hinzugefügt in der Klasse IEarablesConnection}
 \begin{itemize}
 	\item[+] event NewDeviceFound: EventHandler<NewDeviceFoundArgs> 
 \end{itemize}
 \paragraph{Klasse NewDeviceFound hinzugefügt}
 \begin{itemize}
+	\item[+] konstruktor... %%in UML Syntax wie immer.
 	\item[+] Device: IDevice
-	\item[+] %%konstruktor... in UML Syntax wie immer.
 \end{itemize}
 
 \subsubsection{Static Methoden in der Klasse IEarablesConnection}
@@ -208,7 +207,7 @@ Die folgenden Methoden sind nun nicht mehr statisch:
 \paragraph{Beschreibung}
 Es wurden zwei Methoden hinzugefügt, um den Connectionstate des Smartphones mit Hilfe des DeviceConnectionStateChanged Events weiterzuleiten.\\
  Sie werden aktiviert, wenn sich die Earables mutwillig vom Device trennen oder die Verbindung unterbrochen wird.
-\paragraph{Ergänzungen in der Klasse EarablesConnection}
+\paragraph{Hinzugefügt in der Klasse EarablesConnection}
 
 \begin{itemize}
 	\item[-] OnDeviceDisconnected(object sender, DeviceEventArgs args): void 
@@ -228,41 +227,41 @@ Die Klasse wurde der Vollständigkeit halber um zwei Methoden ergänzt, die die 
 	\item[+] \underline{ExtractIMUScaleFactorAccelerometer(byteString: int): double}
 	\item[+] \underline{ExtractIMUScaleFactorGyoscope(byteString: int): int}%vermute ich mal, stand nicht da 
 \end{itemize}
-\paragraph{Ergänzungen in der Klasse IMUDataExtractor}
+\paragraph{Hinzugefügt in der Klasse IMUDataExtractor}
 \begin{itemize}
   \item[+] \underline{ExtractIMURangeAccelerometer(byte[] bytes): int} %%sicher mit hier int, drunter double?
 	\item[+] \underline{ExtractIMURangeGyroscope(byte[] bytes): double} 
 \end{itemize}
-%durchlesen valle ab hier
 \subsubsection{Charakteristik umbenannt}
 \paragraph{Beschreibung}
 Eine Charakteristik wurde umbenannt.
 \paragraph{Änderungen in der Klasse Constants}
 \begin{itemize}
-	\item[-] Attribut IMU\_FULL\_SCALE\_RANG\_CHAR in OFFSET\_CHAR umbenannt.
+	\item[-] OFFSET\_CHAR (\textit{ersetzt}  IMU\_FULL\_SCALE\_RANG\_CHAR) %uml?
 \end{itemize}
 \paragraph{Änderungen in der Klasse Characteristics}
 \begin{itemize}
-	\item[-] Attribute IMUScaleRangeChar in OffsetChar umbenannt.
+	\item[-] OffsetChar (\textit{ersetzt} IMUScaleRangeChar) %uml?
 \end{itemize}
 
-\subsubsection{Connection überprüfung}
+\subsubsection{Verbindungsüberprüfung}
 \paragraph{Beschreibung}
-Um festzustellen ob eine Verbindung zu einem Device besteht wurde eine Methode hinzugefügt
-\paragraph{Änderungen in der Klasse EarablesConnection}
+Um festzustellen, ob eine Verbindung zu einem Device besteht, wurde eine Methode hinzugefügt.
+\paragraph{Hinzugefügt in der Klasse EarablesConnection}
 \begin{itemize}
-	\item[-] Methode CheckConnection():void hinzugefügt. Sie wird am Anfang aller  Methode, die eine Verbindung voraussetzen, aufgerufen und prüft ob eine Verbindung existiert. Falls keine existiert schmeißt sie eine die Exception NoConnectionException.
-\end{itemize}
+	\item[-] CheckConnection():void Anfang aller  Methode, die eine Verbindung voraussetzen, aufgerufen und prüft ob eine Verbindung existiert. Falls keine existiert schmeißt sie eine die Exception NoConnectionException.
+\end{itemize} 
+Die Methode CheckConnection wird am Anfang aller Methoden, die eine Verbindung voraussetzen, aufgerufen und prüft, ob eine Verbindung existiert. Falls keine existiert schmeißt sie die Exception NoConnectionException.
 
-\subsubsection{Klasse ConfigContainer ergänzt}
+\subsubsection{Zwischenpeichern der Scalierungsfaktoren von Accelerometer und Gyroscope}
 \paragraph{Beschreibung}
-Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt.
-\paragraph{Änderungen in der Klasse ConfigContainer}
+Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest, stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode, um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt.
+\paragraph{Hinzugefügt in der Klasse ConfigContainer}
 \begin{itemize}
-	\item[-] AccScaleFactor: int und GyroScaleFactor: int hinzugefügt.
-	\item[-] private setSamplingRate(int rate): void hinzugefügt. Beim setzten des Samplingrate Propertys wird diese Methode ausgeführt und stellt sicher, dass nur gültige Werte angenommen werden.
+	\item[?] AccScaleFactor: int
+	\item[?] GyroScaleFactor: int
+	\item[?] private setSamplingRate(int rate): void
 \end{itemize}
-% durchlesen bis hier valle
 \subsection{Erweiterungsmodul}
 
 \subsection{Model (andere Bestandteile)}
