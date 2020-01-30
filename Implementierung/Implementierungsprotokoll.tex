@@ -300,6 +300,18 @@ Bei den Kindklassen verändern sich analog die vererbten StartActivity und StopA
 	\item[+] StartActivity(): bool und StopActivity(): bool Sichtbarkeit von protected auf public \textit{verändert} und Rückgabewerte auf bool \textit{geändert}.
 	\item[+] UpdateFrequency(): void Sichtbarkeit von private auf public geändert (\textbf{Nur StepModeViewModel}). 
 \end{itemize}
+\paragraph{Änderungen in CountModePage, StepModePage und ListenAndPerformPage}
+\begin{itemize}
+	\item[-] ViewModel: (jeweiliger Type)ViewModel \textit{hinzugefügt}.
+	\item[+] OnStartButtonClicked (sender: object, args: EventArgs): void \textit{hinzugefügt}.
+	\item[+] ChangeView (): void \textit{hinzugefügt}.
+\end{itemize}
+\paragraph{Änderungen in CountModeActivePage, StepModeActivePage und ListenAndPerformActivePage}
+\begin{itemize}
+	\item[-] ViewModel: (jeweiliger Type)ViewModel \textit{hinzugefügt}.
+	\item[+] OnStopButtonClicked (sender: object, args: EventArgs): void \textit{hinzugefügt}.
+	\item[+] ChangeView (): void \textit{hinzugefügt}.
+\end{itemize}
 
 \subsubsection{Wrapperklasse für Activities}
 \paragraph{Beschreibung}
@@ -423,6 +435,34 @@ Um den Ablauf einer Pause reibungslos zu ermöglichen wurde ein zusätzlicher Ti
 	\item[-] PauseTimer: Timer \textit{hinzugefügt}.
 	\item[-] OnTimedEvent(): void \textit{hinzugefügt}.
 \end{itemize}
+
+\subsubsection{Weitere Anzeigeelemente in Viewklassen}
+\paragraph{Beschreibung}
+Ergänzung einiger zusätzlicher Anzeigeelemente.
+\paragraph{Änderungen in StepModePage}
+\begin{itemize}
+	\item[+] StepModeTrainingsDateLabel: Label \textit{hinzugefügt}.
+	\item[+] StepModeLastStepsLabel: Label \textit{hinzugefügt}.
+	\item[+] StepModeLastDistanceLabel: Label \textit{hinzugefügt}.
+\end{itemize}
+\paragraph{Änderungen in StepModeActivePage}
+\begin{itemize}
+	\item[+] StepModeStartDataTime: Label \textit{hinzugefügt}.
+	\item[+] CurrentDate: Label \textit{hinzugefügt}.
+	\item[+] StepModeUnbindedStatusLabel: Label \textit{hinzugefügt}.
+	\item[+] StepModeUnbindedStepsDoneLabel: Label \textit{hinzugefügt}.
+	\item[+] StepModeUnbindedFrequencyLabel: Label \textit{hinzugefügt}.
+	\item[+] DistanceWalkedLabel: Label \textit{entfernt}.
+\end{itemize}
+\paragraph{Änderungen in CountModePage}
+\begin{itemize}
+	\item[+] PossibleActivitiesLabel:Label \textit{hinzugefügt}.
+\end{itemize}
+\paragraph{Änderungen in ListenAndPerformActivePage}
+\begin{itemize}
+	\item[+] CurrentActivityUnbindedLabel:Label \textit{hinzugefügt}.
+\end{itemize}
+
 
 \section{Statistik der Testfälle}
 
