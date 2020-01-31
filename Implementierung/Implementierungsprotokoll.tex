@@ -129,7 +129,8 @@ Folgende Exception-Klassen mussten ergänzt werden:
 	\item[$-$] AllreadyConnectedException
 	\item[$-$] ConnectionFailedException
 	\item[$-$] InvalideSampleRateException
-	\item[$-$] NoConnectionException.%man könnte noch überlegen die Rechtschreibfehler aus den AlreadyConnectedException und InvalidSampleRateException raus zu nehmen, müsste man dann aber auch konsequent im code so machen.
+	\item[$-$] NoConnectionException
+	\item[$-$] ChecksumException %man könnte noch überlegen die Rechtschreibfehler aus den AlreadyConnectedException und InvalidSampleRateException raus zu nehmen, müsste man dann aber auch konsequent im code so machen.
 \end{itemize}
 Die Exceptions werden geschmissen, falls bereits ein Gerät verbunden ist, keine Verbindung aufgebaut werden kann, der Wert der eingegebenen Samplerate nicht im richtigen Bereich (zwischen 1 und 100) liegt oder keine Verbindung vorhanden ist, diese aber benötigt würde (z.B. um das Sampling zu starten).
 
@@ -187,7 +188,6 @@ Es war ursprünglich gedacht, dass die StartScanning Methode eine Liste mit alle
 \end{itemize}
 \paragraph{Klasse NewDeviceFound hinzugefügt}
 \begin{itemize}
-	\item[+] konstruktor... %%in UML Syntax wie immer.
 	\item[+] Device: IDevice
 	\item[+] <<create>> NewDeviceFound(device :IDevice)
 \end{itemize}
@@ -254,9 +254,15 @@ Um festzustellen ob eine Verbindung zu einem Device besteht wurde eine Methode h
 \end{itemize}
 Sie wird am Anfang aller  Methode, die eine Verbindung voraussetzen, aufgerufen und prüft ob eine Verbindung existiert. Falls keine existiert schmeißt sie eine die Exception NoConnectionException.
 
-\subsubsection{Zwischenpeichern der Scalierungsfaktoren von Accelerometer und Gyroscope}
+\subsubsection{Zwischenpeichern der Scalierungsfaktoren von Acc und Gyro}
 \paragraph{Beschreibung}
-Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt.
+Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt. Das gleiche Problem ergab sich auch beim lesen des Offset Bytearrasy. Dieser wird jetzt in einer privaten Variable in der Klasse EarablesConnection gespeichert, da es sich hierbei nicht um eine Konfiguration handelt.
+
+\paragraph{Ergänzungen in der Klasse EarablesConnection}
+\begin{itemize}
+	\item[$-$] byteOffset: byte[]
+\end{itemize}
+
 \paragraph{Ergänzungen in der Klasse ConfigContainer}
 \begin{itemize}
 	\item[+] AccScaleFactor: int 
@@ -278,6 +284,18 @@ Außerdem wird beim setzen der LPF, in den configs gespeichert auf welchen Wert 
 	\item[$-$ ] getGyroscopeLPFFromDevice(): void
 \end{itemize}
 Ermöglichen es die Range zu setzen und den LPF aus den Earables auszulesen. Die Methoden um die Range auszulesen befinden sich in der Klasse IMUDataextractor. Die Methoden zum auslesen des  LPF schreiben den LPF in eine Variable. Bei Verwendung dieser Methoden müssen die Variablen vorher global deklariert werden, um auf sie zuzugreifen zu können. Da wir die Methoden nicht benutzen und sie nur zum testen da sind existieren diese globalen Variablen in unsere Bibliothek nicht.
+
+\subsubsection{Checksummen Überprüfung}
+\paragraph{Beschreibung}
+Die Bytearrays beinhalten ein Byte, in dem eine Checksumme gespeichert wird. Sie setzt sich aus der Addition der Restlichen Bytes zusammen. 
+
+\paragraph{Ergänzungen in der Klasse EarablesConnection}
+\begin{itemize}
+	\item[$-$] CheckChecksum(bytes: byte[]): void
+	\item[$-$] CheckIMUChecksum(bytes: byte[]): void
+\end{itemize}
+Beim erhalten des Bytearrays überprüfen wir nun ob diese mit dem Sollwert übereinstimmt oder ob bei der Übertragung ein paar Bits verloren gegangen sind. Falls es keine Übereinstimmung gibt wird eine Exception geschmissen. Es gibt eine Methode die sich für die Überprüfung aller Bytearrays eignet außer für die Überprüfung des IMUData Bytearrays da es leicht anders aufgebaut ist als die restlichen Bytearrays.
+
 % durchlesen bis hier valle
 \subsection{Erweiterungsmodul}
 
