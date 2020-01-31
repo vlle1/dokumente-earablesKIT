@@ -307,27 +307,28 @@ Beim erhalten des Bytearrays überprüfen wir nun ob diese mit dem Sollwert übe
 
 \subsection{Model (andere Bestandteile)}
 
-\subsubsection{Datenbank Service}
+\subsubsection{Synchrone Datenbank}
 \paragraph{Beschreibung}
-Ursprünglich war es geplant die Datenbank asynchrons zu implementieren. Dies ist nicht nötig für unsere Anwendung, weswegen wir auf eine synchrone Datenbank gewechselt sind. Das ergibt einen klaren Kontrollfluss, welcher besser nachvollziehbar ist. Die Synchronisierung schadet nicht der Performance, da keine großen Datenbankzugegriffe getätigt wern wird, um Endlosschleifen beim Aktualisieren der Attribute zu verhindern.
+Ursprünglich war es geplant die Datenbank asynchron zu implementieren. Dies ist nicht nötig für unsere Anwendung, weswegen wir auf eine synchrone Datenbank gewechselt sind. Das ergibt einen klaren Kontrollfluss, welcher besser nachvollziehbar ist. Die Synchronisierung schadet nicht der Performance, da keine großen Datenbankzugriffe getätigt werden.
 
 \paragraph{Änderungen in den Klassen IDataBaseConnection und DataBaseConnection}
 \begin{itemize}
-	\item[+] GetAllEntriesAsync(): Namen in GetAllEntries() \textit{geändert} und Rückgabewert in List<DBEntry> \textit{geändert}.
-	\item[+] GetMostRecentEntriesAsync(): Namen in GetMostRecentEntries() \textit{geändert} und Rückgabewert in List<DBEntry> \textit{geändert}.
+	\item[+] GetAllEntries(): List<DBEntry> Namen von GetAllEntriesAsync() \textit{geändert} und Rückgabewert von Task<List<DBEntry>> in List<DBEntry> \textit{geändert}.
+	\item[+] GetMostRecentEntries(): List<DBEntry> Namen von GetMostRecentEntriesAsync() \textit{geändert} und Rückgabewert in List<DBEntry> \textit{geändert}.
 \end{itemize}
 \paragraph{Attributänderung der Klassen DataBaseConnection}
 \begin{itemize}
-	\item[$-$] \_database : SQLiteConnection als synchrone Datenbank \textit{hinzugefügt}.
+	\item[$-$] \_database: SQLiteConnection als synchrone Datenbank \textit{hinzugefügt}.
 \end{itemize}
 
+\subsubsection{Speichern der Datenbankeinträge}
 \paragraph{Beschreibung}
 Zum Speichern der DBEntries wurde eine neue Klasse namens DBEntryToSave hinzugefügt, da die Datenbank keine komplexeren Datentypen speichern kann, sondern nur primitive. DBEntryToSave ist abgekapselt im Datenbank Service. 
 
 \paragraph{Hinzufügen der Klasse DBEntryToSave}
 \begin{itemize}
-	\item[+] DateTime: DateTime: Attribut \textit{hinzugefügt}. Dient als Primary key, welcher in der Datenbank gespeichert wird.
-	\item[+] TrainingsDataAsString: string: Attribut \textit{hinzugefügt}. Speichert die Trainingsdaten als string, welcher in der Datenbank gespeichert wird. Dieser bildet sich aus dem Dictionary TrainingsData der Klasse DEntry.
+	\item[+] DateTime: DateTime  Attribut \textit{hinzugefügt}. Dient als Primary key, welcher in der Datenbank gespeichert wird.
+	\item[+] TrainingsDataAsString: string  Attribut \textit{hinzugefügt}. Beinhaltet die Trainingsdaten als string, welcher in der Datenbank gespeichert wird. Dieser bildet sich aus dem Dictionary TrainingsData der Klasse DBEntry.
 \end{itemize}
 
 \paragraph{Änderungen in Klasse DBEntry}
@@ -526,7 +527,7 @@ Ergänzung einiger zusätzlicher Anzeigeelemente.
 Das ExceptionHandlingViewModel ist ein statisches Singleton mit der zentralen Methode HandleException(error: Exception). Da wir nicht immer die Fehlermeldung der Exception werfen wollen haben wir uns dazu entschieden eine Standardfehlermeldung zu implementieren. Dazu haben wir die Methode HandleException überladen. Sie existiert jetzt auch ohne ein Argument, was der Standardfehlermeldung entspricht.
 \paragraph{Änderung in ExceptionHandlinViewModel}
 \begin{itemize}
-	\item[+] HandleException(): void: Methodenüberladung hinzugefügt. Wirft eine Standardfehlermeldung in Form eines Displayalerts.
+	\item[+] HandleException(): void  Methodenüberladung hinzugefügt. Wirft eine Standardfehlermeldung in Form eines Displayalerts.
 \end{itemize}
 
 \subsubsection{Aktualisierung DataOverViewPage}
@@ -535,7 +536,7 @@ Bei der Standardimplementierung des Hamburgermenus wird bei der Navigation zu ei
 
 \paragraph{Änderung in DataOverViewModel}
 \begin{itemize}
-	\item[+] OnAppearing(sender: object, e: EventArgs): Eventmethode hinzugefügt, welche die Daten neu lädt.
+	\item[+] OnAppearing(sender: object, e: EventArgs): void  Eventmethode hinzugefügt, welche die Daten neu lädt.
 \end{itemize}
 
 
@@ -545,15 +546,14 @@ Im Entwurf haben wir uns dazu entschieden,dass das ImportExportViewModel die kom
 
 \paragraph{Änderung in ImportExportViewModel}
 \begin{itemize}
-	\item[+] ExportData(path: FileData): Methode ExportData bekommt nun ein pfad in den es die zu exportierende Datei speichern soll.
-	\item[+] ImportData(path: FileData): Methode ImportData bekommt nun ein pfad welcher angibt, wo die zu lesende Datei im Speicher liegt.
+	\item[+] ExportData(path: FileData): void  Methode ExportData bekommt nun ein pfad in den es die zu exportierende Datei speichern soll.
+	\item[+] ImportData(path: FileData): void  Methode ImportData bekommt nun ein pfad welcher angibt, wo die zu lesende Datei im Speicher liegt.
 \end{itemize}
 
 \paragraph{Änderung in ImportExportPage}
 \begin{itemize}
-	\item[$-$] ImportButton\_Clicked(): Eventmethode fürs reagieren auf den ImportButtonclick \textit{hinzugefügt}
-	\item[$-$] ExportButton\_Clicked(): Eventmethode fürs reagieren auf den ExportButtonclick \textit{hinzugefügt}
-	
+	\item[$-$] ImportButton\_Clicked(): void  Eventmethode fürs reagieren auf den ImportButtonclick \textit{hinzugefügt}
+	\item[$-$] ExportButton\_Clicked(): void  Eventmethode fürs reagieren auf den ExportButtonclick \textit{hinzugefügt}
 \end{itemize}
 
 \subsubsection{Aktualisierung ScanningDevices}
@@ -567,8 +567,13 @@ Das ScanningPopUp zeigt nach dem betätigen des Buttons 'Scan Devices' die Liste
 \end{itemize} 
 
 \section{Implementierungsplan}
-%benni
-\includegraphics[width=\textwidth]{bilder/Implementierungsplan.png}
+\paragraph{Gantt Chart}
+Zu Beginn der Implementierungsphase haben wir uns zum ersten Treffen überlegt, wie wir den Entwurf nun gliedern können. Dazu haben wir zunächst alle Aufgaben aufgeschrieben und diese nach Muss- und Wunschkriterien aufgeteilt. Somit konnten wir eine erste Priorisierung erstellen. Der nächste Schritt war, dass wir Abhängigkeiten unter den Aufgabe hergestellt haben. Zum Beispiel muss das 'Daten weiterschicken' und die 'Navigation' vor dem Entwurf der Erkennungsalgorithmen implementiert werden. Damit konnte man eine zeitliche Relation erstellen, was wir in einem Gantt Chart visualisieren. Dort ist immer das Startdatum und die Dauer der Aufgabe vermerkt und in einer Timeline dargestellt.
+Die Dauer haben wir mit der Methode 'Planungspoker' geschätzt. Die Aufgaben teilten wir zusätzlich einzelnen Teammitgliedern zu.
+\newline
+\newline
+\includegraphics[width=\textwidth, height=0.5\textheight]{bilder/Implementierungsplan.png}
+
 \section{Anhang}
 die ganzen Verweise zum repo, nuget
 %valle
