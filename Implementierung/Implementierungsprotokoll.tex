@@ -254,7 +254,7 @@ Um festzustellen ob eine Verbindung zu einem Device besteht wurde eine Methode h
 \end{itemize}
 Sie wird am Anfang aller  Methode, die eine Verbindung voraussetzen, aufgerufen und prüft ob eine Verbindung existiert. Falls keine existiert schmeißt sie eine die Exception NoConnectionException.
 
-\subsubsection{Zwischenpeichern der Scalierungsfaktoren von Accelerometer und Gyroscope}
+\subsubsection{Zwischenpeichern der Accelerometer/Gyroscope Scalierungsfaktoren}
 \paragraph{Beschreibung}
 Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt.
 \paragraph{Ergänzungen in der Klasse ConfigContainer}
@@ -282,6 +282,40 @@ Ermöglichen es die Range zu setzen und den LPF aus den Earables auszulesen. Die
 \subsection{Erweiterungsmodul}
 
 \subsection{Model (andere Bestandteile)}
+
+\subsubsection{Datenbank Service}
+\paragraph{Beschreibung}
+Ursprünglich war es geplant die Datenbank asynchrons zu implementieren. Dies ist nicht nötig für unsere Anwendung, weswegen wir auf eine synchrone Datenbank gewechselt sind. Das ergibt einen klaren Kontrollfluss, welcher besser nachvollziehbar ist. Die Synchronisierung schadet nicht der Performance, da keine großen Datenbankzugegriffe getätigt wern wird, um Endlosschleifen beim Aktualisieren der Attribute zu verhindern.
+
+\paragraph{Änderungen in den Klassen IDataBaseConnection und DataBaseConnection}
+\begin{itemize}
+	\item[+] GetAllEntriesAsync(): Namen in GetAllEntries() \textit{geändert} und Rückgabewert in List<DBEntry> \textit{geändert}.
+	\item[+] GetMostRecentEntriesAsync(): Namen in GetMostRecentEntries() \textit{geändert} und Rückgabewert in List<DBEntry> \textit{geändert}.
+\end{itemize}
+\paragraph{Attributänderung der Klassen DataBaseConnection}
+\begin{itemize}
+	\item[$-$] \_database : SQLiteConnection als synchrone Datenbank \textit{hinzugefügt}.
+\end{itemize}
+
+\paragraph{Beschreibung}
+Zum Speichern der DBEntries wurde eine neue Klasse namens DBEntryToSave hinzugefügt, da die Datenbank keine komplexeren Datentypen speichern kann, sondern nur primitive. DBEntryToSave ist abgekapselt im Datenbank Service. 
+
+\paragraph{Hinzufügen der Klasse DBEntryToSave}
+\begin{itemize}
+	\item[+] DateTime: DateTime: Attribut \textit{hinzugefügt}. Dient als Primary key, welcher in der Datenbank gespeichert wird.
+	\item[+] TrainingsDataAsString: string: Attribut \textit{hinzugefügt}. Speichert die Trainingsdaten als string, welcher in der Datenbank gespeichert wird. Dieser bildet sich aus dem Dictionary TrainingsData der Klasse DEntry.
+\end{itemize}
+
+\paragraph{Änderungen in Klasse DBEntry}
+
+\begin{itemize}
+	\item[+] const StepAmountIdentifier: string: Identifier für das Dictionary für die Schrittanzahl
+	\item[+] const PushAmountIdentifier: string: Identifier für das Dictionary für die Liegestützenanzahl
+	\item[+] const SitUpAmountIdentifier: string: Identifier für das Dictionary für die SitUpanzahl
+	\item[+] ConvertToDBEntryToSav()e: DBEntryToSave: Methode \textit{hinzugefügt} um die Instanz in eine Instanz vom Type DBEntryToSave. 
+	\item[+] ParseDbEntry(): Nun überladen mit den Parametern vom Typ DBEntryToSave und vom Typ string.
+	
+\end{itemize}
 
 \subsection{Views und ViewModel}
 
@@ -463,11 +497,56 @@ Ergänzung einiger zusätzlicher Anzeigeelemente.
 	\item[+] CurrentActivityUnbindedLabel:Label \textit{hinzugefügt}.
 \end{itemize}
 
+\subsubsection{Überladung im ExceptionHandlingViewModel}
+\paragraph{Beschreibung}
+Das ExceptionHandlingViewModel ist ein statisches Singleton mit der zentralen Methode HandleException(error: Exception). Da wir nicht immer die Fehlermeldung der Exception werfen wollen haben wir uns dazu entschieden eine Standardfehlermeldung zu implementieren. Dazu haben wir die Methode HandleException überladen. Sie existiert jetzt auch ohne ein Argument, was der Standardfehlermeldung entspricht.
+\paragraph{Änderung in ExceptionHandlinViewModel}
+\begin{itemize}
+	\item[+] HandleException(): void: Methodenüberladung hinzugefügt. Wirft eine Standardfehlermeldung in Form eines Displayalerts.
+\end{itemize}
+
+\subsubsection{Aktualisierung DataOverViewPage}
+\paragraph{Beschreibung}
+Bei der Standardimplementierung des Hamburgermenus wird bei der Navigation zu einer Seite nu beim ersten Aufruf eine Instanz erstellt. Die DataOverViewPage muss bei jedem Aufruf der Seite neu aktualisiert werden. Die Datenbankeinträge erhält sie von der Datenbank per Methodenaufruf. Um bei jedem Erscheinen neu zu aktualisieren, wurde sich bei dem EventHandler Appearing mit der neuen Methode OnAppearing registriert.
+
+\paragraph{Änderung in DataOverViewModel}
+\begin{itemize}
+	\item[+] OnAppearing(sender: object, e: EventArgs): Eventmethode hinzugefügt, welche die Daten neu lädt.
+\end{itemize}
+
+
+\subsubsection{Verarbeitung des Import/Export}
+\paragraph{Beschreibung}
+Im Entwurf haben wir uns dazu entschieden,dass das ImportExportViewModel die komplette Verarbeitung des Importieren und Exportieren der Daten macht. Um eine Datei auszuwählen haben wir uns dazu entschieden einen CrossFilePicker zu benutzen. Dieser lässt den User auswählen, von wo/wohin geladen/gespeichert werden soll. Diese Funktionalität haben wir in das Codebehind von der page ImportExportPage verlegt.
+
+\paragraph{Änderung in ImportExportViewModel}
+\begin{itemize}
+	\item[+] ExportData(path: FileData): Methode ExportData bekommt nun ein pfad in den es die zu exportierende Datei speichern soll.
+	\item[+] ImportData(path: FileData): Methode ImportData bekommt nun ein pfad welcher angibt, wo die zu lesende Datei im Speicher liegt.
+\end{itemize}
+
+\paragraph{Änderung in ImportExportPage}
+\begin{itemize}
+	\item[$-$] ImportButton\_Clicked(): Eventmethode fürs reagieren auf den ImportButtonclick \textit{hinzugefügt}
+	\item[$-$] ExportButton\_Clicked(): Eventmethode fürs reagieren auf den ExportButtonclick \textit{hinzugefügt}
+	
+\end{itemize}
+
+\subsubsection{Aktualisierung ScanningDevices}
+\paragraph{Beschreibung}
+Das ScanningPopUp zeigt nach dem betätigen des Buttons 'Scan Devices' die Liste der gefundenen Geräte an. Sobald ein geeignetes Gerät gefunden wurde, soll die View geupdated werden (der Button 'Verbinden' wird enabled). Diese Logic beinhaltet das Codebehind der Seite PopUpScanningPage.
+
+\paragraph{Änderung in PopUpScanningPage}
+\begin{itemize}
+	\item[+] UpdateList(sender: object, e: PropertyChangedEventArgs): Methode \textit{hinzugefügt}. Es handelt sich um eine Eventmethode, welche bei dem Update der DeviceList aufgerufe wird. Dise überprüft, ob die Liste leer ist und ändert dem entsprechend die View ab.
+	\item[$-$] ConnectButton\_Clicked() : Methode \textit{hinzugefügt}. Dies ist eine Eventmethode, welche beim Betätigen des Connect button aufgerufen wird.
+\end{itemize} 
 
 \section{Statistik der Testfälle}
 
 \section{Implementierungsplan}
 
+\includegraphics[width=\textwidth]{bilder/Implementierungsplan.png}
 \section{Anhang}
 
 
