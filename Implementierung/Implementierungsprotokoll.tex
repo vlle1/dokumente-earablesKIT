@@ -93,26 +93,9 @@
 % in bennjis präsi nachschauen und mit zahlen flexen. frag benji dass er dir die Präsentation schickt
 
 
-%%%%%%%%%%%%%%%%%%%%%% !!!!!!!!!!!!  struktur - Schema (runde Klammern = optional)
-%
-\section{Schema für Probleme und Änderungen am Entwurf}
-\subsection{<<Bereich>>}
-\subsubsection{<<Um was geht es>>}
-\paragraph{Beschreibung}
-<<Beschreibung>>
-\paragraph{
-  Änderung(en) (von ...) in Klasse(n) ... \\
-  ODER \\
-  Hinzugefügt in Klasse(n)... \\
-  ODER \\
-  Entfernen (von ...) in Klasse(n) ... (was nie vorkommt glaube ich) }
-(<<kurze Erläuterung>>)
-\begin{itemize}
-  \item[+ ODER $-$] <<neues Attribut in UML-Notation>> (bei komplettem Austausch von z.B. Methode und Property: \textit{ersetzt} <<altes Attribut>>)
-\end{itemize}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%% !!!!!!!!!!!!!!!
+
 \section{Implemetierung der Erkennungsalgorithmen}
+\label{algorithmen}
 \section{Probleme und Änderungen am Entwurf}
 \subsection{Bibliothek}
 
@@ -302,9 +285,88 @@ Die Bytearrays beinhalten ein Byte, in dem eine Checksumme gespeichert wird. Sie
 \end{itemize}
 Beim erhalten des Bytearrays überprüfen wir nun ob diese mit dem Sollwert übereinstimmt oder ob bei der Übertragung ein paar Bits verloren gegangen sind. Falls es keine Übereinstimmung gibt wird eine Exception geschmissen. Es gibt eine Methode die sich für die Überprüfung aller Bytearrays eignet außer für die Überprüfung des IMUData Bytearrays da es leicht anders aufgebaut ist als die restlichen Bytearrays.
 
-% durchlesen bis hier valle
 \subsection{Erweiterungsmodul}
 
+
+\subsubsection{Private Attribute aufgrund konkreter Implementierung}
+\paragraph{Beschreibung}
+Bei der Implementierung des Erweiterungsmoduls ist aufgefallen, dass beim Entwurf ein großer Bestandteil der Implementierung des Erweiterungsmoduls noch nicht konkret durchdacht war.\\
+Für eine möglichst saubere Impementierung mussten also einige private Attribute ergänzt werden.\\ 
+Diese Änderung ist allerdings auch nicht sehr bemerkenswert, da die Impementierung der Erkennungsalgorithmen vor allem davon abhängen, wie die Algorithmen funktionieren, dies wurde aber erst während der Implementierungsphase erarbeitet. \\
+\paragraph{Hinweis}
+Die aktuellen Algorithmen zur Erkennung sind im Abschnitt \hyperref[algorithmen]{Implementierung der Erkennungsalgorithmen} erklärt.
+\paragraph{Ergänzung in der Klasse ActivityManager}
+\begin{itemize}
+	\item [$-$]\_activityProvider: ServiceProvider 
+\end{itemize}
+Das Attribut \_activityProvider speichert den aktuellen Wert der Property ActivityProvider der Klasse.
+\paragraph{Ergänzungen in der Klasse Activity}
+\begin{itemize}
+	\item [\#] \_frequency: int \textit{speichert die aktuelle Frequenz der empfangenen Daten}.
+\end{itemize}
+\paragraph{Ergänzungen in der Klasse AbstractRunningActivity}
+Hier konnte das Schmeißen der Events und der Zustand (Nutzer läuft bzw. läuft nicht) abstrahiert werden, da er bei jeder Implementierung gleich ist.
+\begin{itemize}
+	\item [\#] \_runningState: bool
+	\item [\#] ChangeDetected: void 
+\end{itemize}
+Dabei soll von der konkreten Impementierung ChangeDetected() aufgerufen werden, anstatt manuell den runningState anzupassen und das Event zu feuern.
+\paragraph{Ergänzungen in der Klasse StepActivityThreshold}
+\begin{itemize}
+	%\item [$-$] const REF\_WEIGHT: int        %%%Konstanten auflisten?
+	%\item [$-$] const TRIGGER\_THRESHOLD: double
+	%\item [$-$] const ANGLE\_TOLERANCE\_COS: double
+	%\item [$-$] const COOLDOWN\_DURATION: double
+	\item [$-$] cooldown: double
+	\item [$-$] \_avgAccAbsolute: double
+	\item [$-$] \_avgAccX: double
+	\item [$-$] \_avgAccY: double
+	\item [$-$] \_avgAccZ: double
+\end{itemize}
+Hierbei sind alle Attribute selbsterklärend und im Code noch einmal kurz erläutert.\\
+Die Attribute \_avgAcc\dots geben dabei die Approximierung der durchschnittlichen Absoluten bzw. gerichteten Beschleunigung an.
+\paragraph{Ergänzungen in der Klasse SitUpActivityThreshold}
+Auch hier 
+\begin{itemize}
+	%\item [$-$] const STATE\_COUNT: int
+	%\item [$-$] const LOWER: bool[]
+	%\item [$-$] const VALUE\_INDEX: int[]
+	%\item [$-$] const THRESHOLD: double[]
+	\item [$-$] \_state: int
+\end{itemize}
+\paragraph{Ergänzung in der Klasse RunningEventArgs}
+Hier wurde im Entwurf nur der Konstruktor vergessen.
+\begin{itemize}
+	\item [+] <<create>> RunningEventArgs(isRunning: bool)
+\end{itemize}
+\paragraph{Ergänzungen in der Klasse RunningActivityThreshold}
+\begin{itemize}
+	%\item [$-$] const TIMEOUT\_LENGTH : double
+	\item [$-$] \_timeout\_counter : double
+	\item [$-$] \_subDetection : AbstractStepActivity
+	\item [$-$] \_OnStepRecognized(object sender, ActivityArgs e): void \textit{Methode, die von \_subDetection aufgerufen wird.}
+\end{itemize}
+\paragraph{Ergänzungen in der Klasse PushUpActivityThreshold}
+\begin{itemize}
+	%\item [$-$] const STATE\_COUNT: int
+	%\item [$-$] const LOWER: bool[]
+	%\item [$-$] const ABS\_ACC\_THRESHOLD: double[]
+	%\item [$-$] const COOLDOWN\_DURATION: double[]
+	\item [$-$] \_state: int
+	\item [$-$] \_cooldown: double
+	
+\end{itemize}
+\subsubsection{Strategie bei der Datenverarbeitung}
+\paragraph{Beschreibung}
+Ursprünglich war geplant, die Datenverarbeitung der Activities über einen Puffer zu regeln, in dem immer die neuesten Werte gesammelt gespeichert werden. Wir haben uns in der Implementierung aber entschieden, dass diese Puffer im Allgemeinfall und hierbei tatsächlich in allen konkreten Impementierungen nicht nötig ist.\\
+Dadurch wird es allerdings nötig, dass der Zustand der Activity anders zurückgesetzt werden kann (da es jetzt keine Queue mehr gibt, die dann einfach gelöscht werden sollte).
+\paragraph{Änderungen in Klasse Activity und Kindklassen}
+Die entsprechende Änderung betrifft auch alle Activities (PushUpActivityThreshold, RunningActivityThreshold, SitUpActivityThreshold, sowie StepActivityThreshold) und die zugehörigen abstrakten Klassen.
+\begin{itemize}
+	\item [-] buffer: Queue<DataEventArgs> \textit{entfernt}.
+	\item [\#] Analyse(DataEventArgs: data) \textit{benötigt jetzt die aktuellen Sensordaten, da die Queue diese nicht mehr zur Verfügung stellt}.
+	\item [\#] Activate(): void \textit{hinzugefügt. Setzt den Zustand der Activity zurück}.
+\end{itemize}
 \subsection{Model (andere Bestandteile)}
 
 \subsubsection{Datenbank Service}
