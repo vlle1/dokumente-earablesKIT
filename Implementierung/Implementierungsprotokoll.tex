@@ -187,7 +187,7 @@ Dieser Algorithmus ist sehr simpel und basiert auf dem Schritterkennungsalgorith
 \newline
 \input{tikx/running_automat.tex}
 Da der Nutzer seine Schrittfrequenz oft unregelmäßig ändert, macht es wenig Sinn, das Timeout (hier eine Sekunde) daran relativ anzupassen.\\
-Bei sehr zuverlässiger Schritterkennung könnte man das Timeout allerdings verringern; aktuell soll aber vor allem 'laufe' nicht unterbrochen werden, falls z.B. ein einzelner Schritt nicht erkannt wurde.\\ 
+Bei sehr zuverlässiger Schritterkennung könnte man das Timeout allerdings verringern; aktuell soll aber vor allem ``laufe'' nicht unterbrochen werden, falls z.B. ein einzelner Schritt nicht erkannt wurde.\\ 
 
 \subsection{Liegestützen-Erkennung (PushUpActivityThreshold)}
 Hier wird ein Zustandsautomat mit vier Zuständen verwendet (die Cooldowns sind eigentlich keine eigenen Zustände, aber so ist es besser visualisiert). 
@@ -218,7 +218,7 @@ Dabei werden auch einige Debug-Informationen auf dem Display angezeigt, die am g
 \subsection{Situps-Erkennung (SitUpActivityThreshold)}
 \paragraph{Voraussetzung} 
 Im Gegensatz zu den anderen Algorithmen gehen wir bei Situps davon aus, dass die Benutzer ihren Kopf während der Übung immer nach vorne ausrichten. Das liegt daran, dass wir das Gyroskop zur Erkennung mitbenutzen wollten, was quasi unmöglich wird, wenn der Kopf seitlich verdreht ist.\\
-Der Nutzer sollte außerdem die 'alten SitUps' machen, d.h. er bewegt seinen Kopf bis in die aufrecht sitzende Position. Hier soll der Algorithmus darauf achten, dass 'halbe Situps' (Crunches) nicht gewertet werden.
+Der Nutzer sollte außerdem die ``alten SitUps'' machen, d.h. er bewegt seinen Kopf bis in die aufrecht sitzende Position. Hier soll der Algorithmus darauf achten, dass ``halbe Situps'' (Crunches) nicht gewertet werden.
 \paragraph{Algorithmus}
 Es handelt sich wieder um einen Zustandsautomaten mit vier Zuständen.\\
 Der Algorithmus nutzt hier sowohl Gyroskop als auch Accelerometer. Die Drehbewegung des Kopfes bei der Ausführung von Situps ist das stärkste Merkmal. So muss $GyroZ$ beim aufrichten einen hohen positiven Wert haben, bei der Abwärtsbewegung einen entsprechenden negativen Wert.\\
@@ -227,9 +227,9 @@ Durch die Kombination dieser Merkmale der Bewegung benötigt die Klassifikation 
 \paragraph{Zustandsautomat}
 \input{tikx/situps_automat.tex}
 \paragraph{Beobachtungen}
-Bei diesem Bewegungsablauf gibt es sehr wenige 'false positives', d.h. die Bedingungen sind so speziefisch, dass kaum eine andere Bewegung als Situp erkannt werden sollte.\\
-Oft bewegt man sich nicht ganz weit genug nach vorne, daher werden manche SitUps nich korrekt gezählt. Hier ist der Algorithmus also stark von der Auslegung der Übung abhängig (man könnte die Beschleunigungsbedingung im Zustand 'oben' dann entsprechend weglassen).\\
-Aus der Nutzerperspektive wäre ein Ton oder eine Anzeige sinnvoll, wenn Zustand 'aufrecht' erreicht wurde. Dies haben wir in unserem Entwurf allerdings nicht berücksichtigt und ist eher eine Idee, die erst am Ende der Implemetierung zustande kam.\\
+Bei diesem Bewegungsablauf gibt es sehr wenige ``false positives'', d.h. die Bedingungen sind so speziefisch, dass kaum eine andere Bewegung als Situp erkannt werden sollte.\\
+Oft bewegt man sich nicht ganz weit genug nach vorne, daher werden manche SitUps nich korrekt gezählt. Hier ist der Algorithmus also stark von der Auslegung der Übung abhängig (man könnte die Beschleunigungsbedingung im Zustand ``oben'' dann entsprechend weglassen).\\
+Aus der Nutzerperspektive wäre ein Ton oder eine Anzeige sinnvoll, wenn Zustand ``aufrecht'' erreicht wurde. Dies haben wir in unserem Entwurf allerdings nicht berücksichtigt und ist eher eine Idee, die erst am Ende der Implemetierung zustande kam.\\
 Eine weitere Schwachstelle ist außerdem, dass die Kopfhöhrer im Ohr etwas verschieden gedreht werden können; sind sie hier zu arg verdreht, funktioniert der Algorithmus sofort nicht mehr, da die Richtung durch die Beschränkung auf $AccY$ vorgegeben ist.
 \paragraph{Ausprobieren}
 Die folgende Version der App unter Menüpunkt Debug ist zum Ausprobieren geeignet (Algorithmus hier im DebugViewModel, andere Thresholds / Strategien können einfach ausprobiert werden): 
@@ -758,7 +758,7 @@ Im Entwurf haben wir uns dazu entschieden,dass das ImportExportViewModel die kom
 
 \subsubsection{Aktualisierung ScanningDevices}
 \paragraph{Beschreibung}
-Das ScanningPopUp zeigt nach dem betätigen des Buttons 'Scan Devices' die Liste der gefundenen Geräte an. Sobald ein geeignetes Gerät gefunden wurde, soll die View geupdated werden (der Button 'Verbinden' wird enabled). Diese Logic beinhaltet das Codebehind der Seite PopUpScanningPage.
+Das ScanningPopUp zeigt nach dem betätigen des Buttons ``Scan Devices'' die Liste der gefundenen Geräte an. Sobald ein geeignetes Gerät gefunden wurde, soll die View geupdated werden (der Button ``Verbinden'' wird enabled). Diese Logic beinhaltet das Codebehind der Seite PopUpScanningPage.
 
 \paragraph{Änderung in PopUpScanningPage}
 \begin{itemize}
@@ -769,8 +769,8 @@ Das ScanningPopUp zeigt nach dem betätigen des Buttons 'Scan Devices' die Liste
 \section{Implementierungsplan}
 \paragraph{Gantt Chart}
 Zu Beginn der Implementierungsphase haben wir uns zum ersten Treffen überlegt, wie wir den Entwurf nun gliedern können. Dazu haben wir zunächst alle Aufgaben aufgeschrieben und diese nach Muss- und Wunschkriterien aufgeteilt. Somit konnten wir eine erste Priorisierung erstellen.\\
- Der nächste Schritt war, dass wir Abhängigkeiten unter den Aufgabe hergestellt haben. Zum Beispiel muss das 'Daten weiterschicken' und die 'Navigation' vor dem Entwurf der Erkennungsalgorithmen implementiert werden. Damit konnte man eine zeitliche Relation erstellen, was wir in einem Gantt Chart visualisieren. Dort ist immer das Startdatum und die Dauer der Aufgabe vermerkt und in einer Timeline dargestellt.
-Die Dauer haben wir mit der Methode 'Planungspoker' geschätzt. Die Aufgaben teilten wir zusätzlich einzelnen Teammitgliedern zu.
+ Der nächste Schritt war, dass wir Abhängigkeiten unter den Aufgabe hergestellt haben. Zum Beispiel muss das ``Daten weiterschicken'' und die ``Navigation'' vor dem Entwurf der Erkennungsalgorithmen implementiert werden. Damit konnte man eine zeitliche Relation erstellen, was wir in einem Gantt Chart visualisieren. Dort ist immer das Startdatum und die Dauer der Aufgabe vermerkt und in einer Timeline dargestellt.
+Die Dauer haben wir mit der Methode ``Planungspoker'' geschätzt. Die Aufgaben teilten wir zusätzlich einzelnen Teammitgliedern zu.
 \newline
 \newline
 \includegraphics[width=\textwidth, height=0.5\textheight]{bilder/Implementierungsplan.png}
