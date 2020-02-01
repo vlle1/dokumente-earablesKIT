@@ -453,10 +453,10 @@ Hier konnte das Schmeißen der Events und der Zustand (Nutzer läuft bzw. läuft
 Dabei soll von der konkreten Impementierung ChangeDetected() aufgerufen werden, anstatt manuell den runningState anzupassen und das Event zu feuern.
 \paragraph{Ergänzungen in der Klasse StepActivityThreshold}
 \begin{itemize}
-	%\item [$-$] const REF\_WEIGHT: int        %%%Konstanten auflisten?
-	%\item [$-$] const TRIGGER\_THRESHOLD: double
-	%\item [$-$] const ANGLE\_TOLERANCE\_COS: double
-	%\item [$-$] const COOLDOWN\_DURATION: double
+	\item [$-$] const REF\_WEIGHT: int        %%%Konstanten auflisten?
+	\item [$-$] const TRIGGER\_THRESHOLD: double
+	\item [$-$] const ANGLE\_TOLERANCE\_COS: double
+	\item [$-$] const COOLDOWN\_DURATION: double
 	\item [$-$] cooldown: double
 	\item [$-$] \_avgAccAbsolute: double
 	\item [$-$] \_avgAccX: double
@@ -466,10 +466,10 @@ Dabei soll von der konkreten Impementierung ChangeDetected() aufgerufen werden, 
 Die Attribute \_avgAcc\dots geben dabei die Approximierung der durchschnittlichen Absoluten bzw. gerichteten Beschleunigung an.
 \paragraph{Ergänzungen in der Klasse SitUpActivityThreshold}
 \begin{itemize}
-	%\item [$-$] const STATE\_COUNT: int
-	%\item [$-$] const LOWER: bool[]
-	%\item [$-$] const VALUE\_INDEX: int[]
-	%\item [$-$] const THRESHOLD: double[]
+	\item [$-$] const STATE\_COUNT: int
+	\item [$-$] const LOWER: bool[]
+	\item [$-$] const VALUE\_INDEX: int[]
+	\item [$-$] const THRESHOLD: double[]
 	\item [$-$] \_state: int
 \end{itemize}
 \paragraph{Ergänzung in der Klasse RunningEventArgs}
@@ -479,17 +479,17 @@ Hier wurde im Entwurf nur der Konstruktor vergessen.
 \end{itemize}
 \paragraph{Ergänzungen in der Klasse RunningActivityThreshold}
 \begin{itemize}
-	%\item [$-$] const TIMEOUT\_LENGTH : double
+	\item [$-$] const TIMEOUT\_LENGTH : double
 	\item [$-$] \_timeout\_counter : double
 	\item [$-$] \_subDetection : AbstractStepActivity
 	\item [$-$] \_OnStepRecognized(object sender, ActivityArgs e): void \textit{Methode, die von \_subDetection aufgerufen wird.}
 \end{itemize}
 \paragraph{Ergänzungen in der Klasse PushUpActivityThreshold}
 \begin{itemize}
-	%\item [$-$] const STATE\_COUNT: int
-	%\item [$-$] const LOWER: bool[]
-	%\item [$-$] const ABS\_ACC\_THRESHOLD: double[]
-	%\item [$-$] const COOLDOWN\_DURATION: double[]
+	\item [$-$] const STATE\_COUNT: int
+	\item [$-$] const LOWER: bool[]
+	\item [$-$] const ABS\_ACC\_THRESHOLD: double[]
+	\item [$-$] const COOLDOWN\_DURATION: double[]
 	\item [$-$] \_state: int
 	\item [$-$] \_cooldown: double
 	
