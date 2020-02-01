@@ -102,14 +102,14 @@
 Im Folgenden werden die implementierten Algorithmen für die Lauf-, Schritt-, PushUp- und  Sit-Up-Erkennung erläutert. Die konkreten Variablen und Benennungen sind im Code entsprechend auffindbar und ausführlich kommentiert.
 \paragraph{Hinweis}
 
-Ich gehe in diesem Kapitel sehr ausführlich darauf ein, was die grundlegenden Überlegungen für die Algorithmen waren, was Probleme sind, wie man die Algorithmen verbessern könnte und was wir daraus gelernt haben.\\
+Ich werde in diesem Kapitel sehr ausführlich darauf eingehen, was die grundlegenden Überlegungen für die Algorithmen waren, was Probleme sind, wie man die Algorithmen verbessern könnte und was wir daraus gelernt haben.\\
 Das Kapitel ist nur aus dem Willen heraus entstanden, diese Erkenntnisse irgendwo festzuhalten und hat eigentlich im Impelementierungsprotokoll (zumindest in dieser Ausführlichkeit) nichts verloren.\\
 Der Teil lässt sich also auch bedenkenlos überspingen, \hyperref[aenderungen]{hier} geht es weiter.   
 \subsection{Warum Threshold-Algorithmen?}
 Wir haben uns bewusst dafür entschieden, auf maschinelles Lernen im Sinne von Neuronalen Netzen zu verzichten und stattdessen einen heuristischen Ansatz zu wählen.\\
  Bei einem Threshold-Ansatz bestehen wesentliche Teile der Entscheidung darin, ob ein bestimmter Schwellenwert von einem Messwert überschritten wird.
 \paragraph{Vorteile}
-Dies hat einerseits den Grund, dass wir selbst wenig Erfahrung mit neuronalen Netzen haben. Andererseits wollten wir den Fokus in unserer App weniger auf Perfektion legen, und mehr darauf, Anwendungsszenarien von Bewegungserkennung n mit Kopfhöhrern zu modellieren: Die App ist auch ein Experiment, um herauszufinden, was man vielleicht mit Earables besser erkennen kann als mit einem Fittnes-Armband. Bei der Implementierung hat sich herausgestellt, dass für unsere Zwecke ein Threshold-Algorithmus ausreichend ist. Man lernt bei der Entwicklung auch selbst sehr gut, in wie weit man mit den Sensoren bestimmte Bewegungen erkennen kann. Dieses Grundverständnis zu erreichen ist für uns wichtiger als ein perfekt funktionierender Algorithmus.\\
+Dies hat einerseits den Grund, dass wir selbst wenig Erfahrung mit neuronalen Netzen haben. Andererseits wollten wir den Fokus in unserer App weniger auf Perfektion legen, und mehr darauf, Anwendungsszenarien von Bewegungserkennung mit Kopfhöhrern zu modellieren: Die App ist auch ein Experiment, um herauszufinden, was man vielleicht mit Earables besser erkennen kann als mit einem Fitness-Armband. Bei der Implementierung hat sich herausgestellt, dass für unsere Zwecke ein Threshold-Algorithmus ausreichend ist. Man lernt bei der Entwicklung auch selbst sehr gut, in wie weit man mit den Sensoren bestimmte Bewegungen erkennen kann. Dieses Grundverständnis zu erreichen ist für uns wichtiger als ein perfekt funktionierender Algorithmus.\\
 Zusätzlich muss man sagen, dass jeder Algorithmus durch die Service-Struktur der Activities leicht ausgetauscht werden kann.
 \paragraph{Nachteile}
 Ein Ansatz mit maschinellem Lernen bzw. ein vor dem release trainiertes neuronales Netz würde vermutlich akkuratere Ergebnisse liefern. 
