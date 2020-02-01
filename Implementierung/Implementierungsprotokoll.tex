@@ -25,6 +25,9 @@
 \fi
 \setlength{\parindent}{0pt}
 
+%valle will Automaten verwenden
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
 
 %irgendwas mit section formatierung (titlesec package)
 \titleformat{\paragraph}[hang]{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
@@ -96,7 +99,135 @@
 
 \section{Implemetierung der Erkennungsalgorithmen}
 \label{algorithmen}
+Im Folgenden werden die implementierten Algorithmen für die Lauf-, Schritt-, PushUp- und  Sit-Up-Erkennung erläutert. Die konkreten Variablen und Benennungen sind im Code entsprechend auffindbar und ausführlich kommentiert.
+\paragraph{Hinweis}
+
+Ich gehe in diesem Kapitel sehr ausführlich darauf ein, was die grundlegenden Überlegungen für die Algorithmen waren, was Probleme sind, wie man die Algorithmen verbessern könnte und was wir daraus gelernt haben.\\
+Das Kapitel ist nur aus dem Willen heraus entstanden, diese Erkenntnisse irgendwo festzuhalten und hat eigentlich im Impelementierungsprotokoll (zumindest in dieser Ausführlichkeit) nichts verloren.\\
+Der Teil lässt sich also auch bedenkenlos überspingen, \hyperref[aenderungen]{hier} geht es weiter.   
+\subsection{Warum Threshold-Algorithmen?}
+Wir haben uns bewusst dafür entschieden, auf maschinelles Lernen im Sinne von Neuronalen Netzen zu verzichten und stattdessen einen heuristischen Ansatz zu wählen.\\
+ Bei einem Threshold-Ansatz bestehen wesentliche Teile der Entscheidung darin, ob ein bestimmter Schwellenwert von einem Messwert überschritten wird.
+\paragraph{Vorteile}
+Dies hat einerseits den Grund, dass wir selbst wenig Erfahrung mit neuronalen Netzen haben. Andererseits wollten wir den Fokus in unserer App weniger auf Perfektion legen, und mehr darauf, Anwendungsszenarien von Bewegungserkennung n mit Kopfhöhrern zu modellieren: Die App ist auch ein Experiment, um herauszufinden, was man vielleicht mit Earables besser erkennen kann als mit einem Fittnes-Armband. Bei der Implementierung hat sich herausgestellt, dass für unsere Zwecke ein Threshold-Algorithmus ausreichend ist. Man lernt bei der Entwicklung auch selbst sehr gut, in wie weit man mit den Sensoren bestimmte Bewegungen erkennen kann. Dieses Grundverständnis zu erreichen ist für uns wichtiger als ein perfekt funktionierender Algorithmus.\\
+Zusätzlich muss man sagen, dass jeder Algorithmus durch die Service-Struktur der Activities leicht ausgetauscht werden kann.
+\paragraph{Nachteile}
+Ein Ansatz mit maschinellem Lernen bzw. ein vor dem release trainiertes neuronales Netz würde vermutlich akkuratere Ergebnisse liefern. 
+\subsection{Benennung der Messwerte}
+Die Kopfhöhrer befinden sich nicht immer exakt in dieser Position, sondern können zu den Sensorachsen leicht verdeht sein. Wir bezeichnen (aus der Perspektive des/der Tragenden) die (Mess-)Werte:
+\begin{itemize}
+	\item Beschleunigung nach unten in G: $AccX$
+	\item Beschleunigung nach vorne in G: $AccY$
+	\item Beschleunigung nach links in G: $AccZ$
+	\item absolute Beschleunigung: $AccAbs = \sqrt{AccX^2+AccY^2+AccZ^2}$
+	\item Drehbeschleunigung vorne-nach-rechts in Grad pro Sekunde: $GyroX$ 
+	\item Drehbeschleunigung oben-nach-links in Grad pro Sekunde: $GyroY$ 
+	\item Drehbeschleunigung oben-nach-vorne in Grad pro Sekunde: $GyroZ$ 
+	\item absolute Drehbeschleunigung: $GyroAbs = \sqrt{GyroX^2+GyroY^2+GyroZ^2}$
+	\item Samplingrate (Anzahl Messwerte pro Sekunde) in Hz: $freq$
+\end{itemize}
+Das sind alle für die Algorithmen verwendete Werte. Optional wird als Index der Zeitpunkt $i$ des Messwerts verwendet, wobei $i$ und $i+1$ aufeinanderfolgende Werte sind.
+\subsection{Schritterkennung (StepActivityThreshold)}
+\subsubsection{naiver Threshold-Ansatz}
+Die Schritterkennung basiert auf einem klassischen Threshold-Ansatz:\\
+erkenne Schritt, falls 
+\begin{equation}
+	AccAbs > 1.15
+\end{equation}
+Bei jedem Messwert wird die absolute Beschleunigung gemessen. Überschreitet sie einen bestimmten Schwellenwert (z.B. die 1.15-fache Erdbeschleunigung), wird ein Schritt erkannt.\\ 
+Damit ein Schritt nicht mehrfach erkannt wird, erfolgt nach jedem Schritt eine Cooldown-Phase (z.B. 0.3 Sekunden lang), in der keine neuen Schritte mehr erkannt werden.
+\paragraph{Erkenntnisse}
+Schritte beim normalen Gehen werden immer erkannt, und zwar durch die Erschütterung (Beschleunigung nach unten) beim Auftreten. 
+\begin{figure}
+	\centering
+\includegraphics[width = 14cm]{bilder/steps.jpg}
+	\caption{Absolute Beschleunigung beim Laufen, gemessen mit phyphox-App und Beschleunigungssensoren des Handys  (Beachte, dass $9,81 m/s^2 \approx 1 G$)).}
+\end{figure} 
+Allerdings werden auch viele andere Bewegungen (z.B. Kopfschütteln) erkannt.
+\paragraph{Verbesserung}
+Bei Schritten ist die Beschleunigung immer nach unten gerichtet. Daher wird jetzt zusätzlich gemessen, wo gerade vermutlich unten ist, indem ein Durchschnitt laufend aktualisiert wird. Ein sehr einfacher Ansatz ist dabei, den Durchschnitt exponentiell anzugleichen:
+\begin{equation}
+	avgAcc_i = (avgAccX_{i-1} * weight + AccX_i) /(weight + 1)
+\end{equation}
+Analog auch für die anderen Koordinaten. Initialisiert werden die Werte, als ob sich die Earables in Ausgangsposition befinden (Kopf gerade). Wir haben hierbei die Gewichtung $weight$ von der Samplingrate abhängig gemacht, sodass geringerer Samplerate die Angleichung nicht deutlich langsamer erfolgt:
+\begin{equation}
+	weight = freq * 2
+\end{equation}
+Nun kann der cosinus des Winkels zwischen approximierter Standardbeschleunigung und aktueller Beschleunigung berechnet werden:
+\begin{equation}
+	cos(\alpha) = \frac{avgAccX * AccX + avgAccY * AccY + avgAccZ * AccZ}{ AccAbs * AvgAccAbs },
+\end{equation}
+wobei $AvgAccAbs = \sqrt{avgAccX^2+avgAccY^2+avgAccZ^2}$ ist.\\
+\newline
+\noindent
+\begin{minipage}{0.5\textwidth}
+	Der Winkel wird in unserem Fall akzeptiert, falls $cos(\alpha) > 0.89$, also darf der Winkel um maximal 27 Grad abweichen.\\
+	
+	Zusätzlich kann auch das Threshold jetzt relativ zur durchschnittlichen Beschleunigung berechnet werden:
+	\begin{equation}
+		AccAbs > 1.15 * AvgAccAbs
+	\end{equation}
+	
+	So kann eine falsche Kalibrierung der Sensoren ausgeglichen werden.
+\end{minipage}
+\hspace{0.1\textwidth}
+\begin{minipage}{0.35\textwidth}
+	\input{tikx/angle.tex}
+	Visualisierung: als Schritt akzeptierte Beschleunigung $Acc$
+\end{minipage}
+\vspace{0.5cm}\\
+Da alle Vergleiche relativ erfolgen, kann zur Schritterkennung der Sensor auch falsch gedreht sein oder ähnliches, die Erkennung funktioniert trotztem korrekt, da sie sich anpasst.\\
+\paragraph{Ausprobieren}
+Die folgende Version der App unter Menüpunkt Debug ist zum Ausprobieren geeignet (Algorithmus hier im DebugViewModel, andere Thresholds / Strategien können einfach ausprobiert werden): 
+\href{https://github.com/vlle1/earablesKIT/tree/b8b34bbe0716ddb37c5afbd315e91d7f11c0270d}{earablesKIT/debugView/Schritterkennung\_Version\_3}\\
+Dabei werden auch einige Debug-Informationen auf dem Display angezeigt, z.B. der erkannte Winkel.
+
+\subsection{Lauferkennung (RunningActivityThreshold)}
+Dieser Algorithmus ist sehr simpel und basiert auf dem Schritterkennungsalgorithmus: 
+\newline
+\input{tikx/running_automat.tex}
+Da der Nutzer seine Schrittfrequenz oft unregelmäßig ändert, macht es wenig Sinn, das Timeout (hier eine Sekunde) daran relativ anzupassen.\\
+Bei sehr zuverlässiger Schritterkennung könnte man das Timeout allerdings verringern; aktuell soll aber vor allem 'laufe' nicht unterbrochen werden, falls z.B. ein einzelner Schritt nicht erkannt wurde.\\ 
+
+\subsection{Liegestützen-Erkennung (PushUpActivityThreshold)}
+Hier wird ein Zustandsautomat mit vier Zuständen verwendet (die Cooldowns sind eigentlich keine eigenen Zustände, aber so ist es besser visualisiert). 
+\paragraph{Grundlagen}
+Im Wesentlichen basiert der Algorithmus auf dem Fakt, dass die absolute Beschleunigung der Sensoren nur dann geringer als 1G sein kann, wenn die Kopfhöhrer sich Richtung Boden beschleunigen.\\
+Es wurde mit Cooldowns gearbeitet, um zu vermeiden, dass durch kurze Bewegungen fälschlicherweise Liegestütze gezählt werden.\\
+Außerdem sollte der Algorithmus unempflindlich sein, wenn der Nutzer (etwa aus Erschöpfung oder Verzweiflung an der Text-to-Speech-Stimme im ListenAndPerform Modus) seinen Kopf zur Seite dreht, hängen lässt oder Ähnliches. Dies wird dadurch erreicht, dass nur die absolute Beschleunigung berücksichtigt wird.
+\paragraph{Wertverlauf}
+Bei einer einzelnen Liegestütze ergibt sich der folgende Verlauf für die absolute Beschleunigung:
+\begin{figure}
+	\centering
+\includegraphics[width = 10cm]{bilder/pushup_sample.jpg}
+	\caption{Absolute Beschleunigung beim Laufen, gemessen mit phyphox-App und Beschleunigungssensoren des Handys (Beachte, dass $9,81 m/s^2 \approx 1 G$).}
+\end{figure} 
+Man kann sich bewusst machen, dass die absolute Beschleunigung der Kopfhöhrer in etwa proportional zum Druck ist, den man mit den Händen auf den Boden ausübt. So wird auch klar, wie die beiden Maxima im Verlauf zustande kommen: Erst bremst man die Abwärtsbewegung aus, dann drückt man sich wieder vom Boden weg. Analog gilt das auch für die beiden Minima. 
+\paragraph{Zustandsautomat}
+\input{tikx/pushups_automat.tex}
+
+\paragraph{Weitere Beobachtungen}
+Man könnte jetzt noch zusätzlich einen Timeout einführen (hält Zustand "abwärts" oder "aufwärts" zu lange, wurde die Liegestütze vermutlich abgebrochen) und die verschiedenen Thresholds feiner anpassen, um die Erkennung noch weiter zu verbessern.\\
+Der Algorithmus kommt an seine Grenzen, wenn man die Liegestütze extrem schnell ausführt (der Cooldown könnte an die Intensität der Beschleunigung angepasst werden), oder extrem langsam ausführt (da dann die Thresholds nicht mehr überschritten werden). Außerdem wird ab und zu schon eine Liegestütze erkannt, während man noch (zum Beispiel aus dem Stand) in die Startposition geht. Um diese Probleme zu umgehen wäre eine grundlegend andere Datenaufbereitung notwendig, beispielsweise mit einem Kalman-Filter.\\
+Der Algorithmus könnte übrigens auch äquivalent für Kniebeugen verwendet werden.
+\paragraph{Ausprobieren}
+Die folgende Version der App unter Menüpunkt Debug ist zum Ausprobieren geeignet (Algorithmus hier im DebugViewModel, andere Thresholds / Strategien können einfach ausprobiert werden): 
+\href{https://github.com/vlle1/earablesKIT/commit/6a4999ac8e2613298a6e6dd9bc85092ddd1b6133}{earablesKIT/debugView/Liegestütze-Erkennung}\\
+Dabei werden auch einige Debug-Informationen auf dem Display angezeigt, z.B. der erkannte Winkel.
+
+\subsection{Situps-Erkennung (SitUpActivityThreshold)}
+\paragraph{Voraussetzung} 
+Im Gegensatz zu den anderen Algorithmen gehen wir bei Situps davon aus, dass die Benutzer ihren Kopf während der Übung immer nach vorne ausrichten. Das liegt daran, dass wir das Gyroskop zur Erkennung mitbenutzen wollten, was quasi unmöglich wird, wenn der Kopf seitlich verdreht ist.\\
+Der Nutzer sollte außerdem die 'alten SitUps' machen, d.h. er bewegt seinen Kopf bis in die aufrecht sitzende Position. Hier soll der Algorithmus darauf achten, dass 'halbe Situps' (Crunches) nicht gewertet werden.
+
+todo hier fehlt noch zeug
+
+\paragraph{Beobachtungen}
+Aus der Nutzerperspektive wäre ein Ton oder eine Anzeige sinnvoll, wenn Zustand 'aufrecht' erreicht wurde. Dies haben wir in unserem Entwurf allerdings nicht berücksichtigt und ist eher eine Idee, die erst am Ende der Implemetierung zustande kam. 
+
+
 \section{Probleme und Änderungen am Entwurf}
+\label{aenderungen}
 \subsection{Bibliothek}
 
 \subsubsection{Umgang mit Exceptions}
