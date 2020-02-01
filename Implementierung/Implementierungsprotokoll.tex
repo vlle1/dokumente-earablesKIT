@@ -129,12 +129,12 @@ Die Exceptions werden geschmissen, falls bereits ein Gerät verbunden ist, keine
 In einigen Fällen gibt es nun keine Get/Set Methoden mehr. Sie wurden durch Properties ersetzt.
 Folgende Properties sind als Attribute dazugekommen:
 \begin{itemize}
-	\item[+] Connected (\textit{ersetzt } die Methode IsConnected(): bool)
-	\item[+] IsBluetoothActive  (\textit{ersetzt } die Methode IsBleutoothActive(): bool)
-	\item[+] SampleRate  \textit{ersetzt } die Methode SetSamplingrate(heat: int): bool)
-	\item[+] AccLPF  (\textit{ersetzt} SetLowPassFilterAccelerometer, GetLowPassFilterAccelerometer)
-	\item[+] GyroLPF  (\textit{ersetzt} SetLowPassFilterGyroscope, GetLowPassFilterGyroscope)
-	\item[+] BatteryVoltage  (\textit{ersetzt } die Methode GetBatteryVoltage(): float)
+	\item[+] Connected \textit{ersetzt } die Methode IsConnected(): bool
+	\item[+] IsBluetoothActive  \textit{ersetzt } die Methode IsBleutoothActive(): bool
+	\item[+] SampleRate  \textit{ersetzt } die Methode SetSamplingrate(heat: int): bool
+	\item[+] AccLPF \textit{ersetzt} SetLowPassFilterAccelerometer, GetLowPassFilterAccelerometer
+	\item[+] GyroLPF  \textit{ersetzt} SetLowPassFilterGyroscope, GetLowPassFilterGyroscope
+	\item[+] BatteryVoltage  \textit{ersetzt } die Methode GetBatteryVoltage(): float
 \end{itemize}
 
 \paragraph{Hinzugefügt in Klasse EarablesConnection}
@@ -323,10 +323,8 @@ Dabei soll von der konkreten Impementierung ChangeDetected() aufgerufen werden, 
 	\item [$-$] \_avgAccY: double
 	\item [$-$] \_avgAccZ: double
 \end{itemize}
-Hierbei sind alle Attribute selbsterklärend und im Code noch einmal kurz erläutert.\\
 Die Attribute \_avgAcc\dots geben dabei die Approximierung der durchschnittlichen Absoluten bzw. gerichteten Beschleunigung an.
 \paragraph{Ergänzungen in der Klasse SitUpActivityThreshold}
-Auch hier 
 \begin{itemize}
 	%\item [$-$] const STATE\_COUNT: int
 	%\item [$-$] const LOWER: bool[]
@@ -630,15 +628,20 @@ Das ScanningPopUp zeigt nach dem betätigen des Buttons 'Scan Devices' die Liste
 
 \section{Implementierungsplan}
 \paragraph{Gantt Chart}
-Zu Beginn der Implementierungsphase haben wir uns zum ersten Treffen überlegt, wie wir den Entwurf nun gliedern können. Dazu haben wir zunächst alle Aufgaben aufgeschrieben und diese nach Muss- und Wunschkriterien aufgeteilt. Somit konnten wir eine erste Priorisierung erstellen. Der nächste Schritt war, dass wir Abhängigkeiten unter den Aufgabe hergestellt haben. Zum Beispiel muss das 'Daten weiterschicken' und die 'Navigation' vor dem Entwurf der Erkennungsalgorithmen implementiert werden. Damit konnte man eine zeitliche Relation erstellen, was wir in einem Gantt Chart visualisieren. Dort ist immer das Startdatum und die Dauer der Aufgabe vermerkt und in einer Timeline dargestellt.
+Zu Beginn der Implementierungsphase haben wir uns zum ersten Treffen überlegt, wie wir den Entwurf nun gliedern können. Dazu haben wir zunächst alle Aufgaben aufgeschrieben und diese nach Muss- und Wunschkriterien aufgeteilt. Somit konnten wir eine erste Priorisierung erstellen.\\
+ Der nächste Schritt war, dass wir Abhängigkeiten unter den Aufgabe hergestellt haben. Zum Beispiel muss das 'Daten weiterschicken' und die 'Navigation' vor dem Entwurf der Erkennungsalgorithmen implementiert werden. Damit konnte man eine zeitliche Relation erstellen, was wir in einem Gantt Chart visualisieren. Dort ist immer das Startdatum und die Dauer der Aufgabe vermerkt und in einer Timeline dargestellt.
 Die Dauer haben wir mit der Methode 'Planungspoker' geschätzt. Die Aufgaben teilten wir zusätzlich einzelnen Teammitgliedern zu.
 \newline
 \newline
 \includegraphics[width=\textwidth, height=0.5\textheight]{bilder/Implementierungsplan.png}
 
 \section{Anhang}
-die ganzen Verweise zum repo, nuget
-%valle
+\subsection{Links}
+\subsubsection{Bibliothek}
+NuGet Package: \url{https://www.nuget.org/packages/EarablesBLE}\\
+GitHub Repository: \url{https://github.com/vlle1/lib-earablesKIT}
+\subsubsection{App}
+GitHub Repository: \url{https://github.com/vlle1/earablesKIT}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
