@@ -196,8 +196,8 @@ Im Wesentlichen basiert der Algorithmus auf dem Fakt, dass die absolute Beschleu
 Es wurde mit Cooldowns gearbeitet, um zu vermeiden, dass durch kurze Bewegungen fälschlicherweise Liegestütze gezählt werden.\\
 Außerdem sollte der Algorithmus unempflindlich sein, wenn der Nutzer (etwa aus Erschöpfung oder Verzweiflung an der Text-to-Speech-Stimme im ListenAndPerform Modus) seinen Kopf zur Seite dreht, hängen lässt oder Ähnliches. Dies wird dadurch erreicht, dass nur die absolute Beschleunigung berücksichtigt wird.
 \paragraph{Wertverlauf}
-Bei einer einzelnen Liegestütze ergibt sich der folgende Verlauf für die absolute Beschleunigung:
-\begin{figure}
+Bei einer einzelnen Liegestütze ergibt sich der folgende Verlauf für die absolute Beschleunigung.\\
+\begin{figure}[h]
 	\centering
 \includegraphics[width = 10cm]{bilder/pushup_sample.jpg}
 	\caption{Absolute Beschleunigung beim Laufen, gemessen mit phyphox-App und Beschleunigungssensoren des Handys (Beachte, dass $9,81 m/s^2 \approx 1 G$).}
@@ -213,19 +213,28 @@ Der Algorithmus könnte übrigens auch äquivalent für Kniebeugen verwendet wer
 \paragraph{Ausprobieren}
 Die folgende Version der App unter Menüpunkt Debug ist zum Ausprobieren geeignet (Algorithmus hier im DebugViewModel, andere Thresholds / Strategien können einfach ausprobiert werden): 
 \href{https://github.com/vlle1/earablesKIT/commit/6a4999ac8e2613298a6e6dd9bc85092ddd1b6133}{earablesKIT/debugView/Liegestütze-Erkennung}\\
-Dabei werden auch einige Debug-Informationen auf dem Display angezeigt, z.B. der erkannte Winkel.
+Dabei werden auch einige Debug-Informationen auf dem Display angezeigt, die am grüßten angezeigte Zahl entspricht hier dem Zustand des Automaten: 0 (oben), 1 (runter), 2 (unten) bzw. 3 (hoch).
 
 \subsection{Situps-Erkennung (SitUpActivityThreshold)}
 \paragraph{Voraussetzung} 
 Im Gegensatz zu den anderen Algorithmen gehen wir bei Situps davon aus, dass die Benutzer ihren Kopf während der Übung immer nach vorne ausrichten. Das liegt daran, dass wir das Gyroskop zur Erkennung mitbenutzen wollten, was quasi unmöglich wird, wenn der Kopf seitlich verdreht ist.\\
 Der Nutzer sollte außerdem die 'alten SitUps' machen, d.h. er bewegt seinen Kopf bis in die aufrecht sitzende Position. Hier soll der Algorithmus darauf achten, dass 'halbe Situps' (Crunches) nicht gewertet werden.
-
-todo hier fehlt noch zeug
-
+\paragraph{Algorithmus}
+Es handelt sich wieder um einen Zustandsautomaten mit vier Zuständen.\\
+Der Algorithmus nutzt hier sowohl Gyroskop als auch Accelerometer. Die Drehbewegung des Kopfes bei der Ausführung von Situps ist das stärkste Merkmal. So muss $GyroZ$ beim aufrichten einen hohen positiven Wert haben, bei der Abwärtsbewegung einen entsprechenden negativen Wert.\\
+Um ähnliche Bewegungen (z.B. nicken) auszuschließen, wird zusätzlich die Beschleunigung nach vorne ($AccY$) betrachtet. Diese muss zu Start der Übung sehr hoch sein (allerdings negativ, da ja nach hinten), da der Nutzer mit dem Kopf nach oben schaut; wenn der Nutzer aufrecht sitzt, sollte sie kurze Zeit quasi null sein (da er aber währenddessen nach hinten beschleunigt ist sie tatsächlich kurz positiv).\\
+Durch die Kombination dieser Merkmale der Bewegung benötigt die Klassifikation keinerlei Cooldown, da es (zumindest versehentlich oder wenn man den Algorithmus nicht kennt) unwahrscheinlich ist, einen vollen Zyklus nur durch Wackeln mit dem Kopf oder ähnliches in kürzerer Zeit zu durchlaufen.
+\paragraph{Zustandsautomat}
+\input{tikx/situps_automat.tex}
 \paragraph{Beobachtungen}
-Aus der Nutzerperspektive wäre ein Ton oder eine Anzeige sinnvoll, wenn Zustand 'aufrecht' erreicht wurde. Dies haben wir in unserem Entwurf allerdings nicht berücksichtigt und ist eher eine Idee, die erst am Ende der Implemetierung zustande kam. 
-
-
+Bei diesem Bewegungsablauf gibt es sehr wenige 'false positives', d.h. die Bedingungen sind so speziefisch, dass kaum eine andere Bewegung als Situp erkannt werden sollte.\\
+Oft bewegt man sich nicht ganz weit genug nach vorne, daher werden manche SitUps nich korrekt gezählt. Hier ist der Algorithmus also stark von der Auslegung der Übung abhängig (man könnte die Beschleunigungsbedingung im Zustand 'oben' dann entsprechend weglassen).\\
+Aus der Nutzerperspektive wäre ein Ton oder eine Anzeige sinnvoll, wenn Zustand 'aufrecht' erreicht wurde. Dies haben wir in unserem Entwurf allerdings nicht berücksichtigt und ist eher eine Idee, die erst am Ende der Implemetierung zustande kam.\\
+Eine weitere Schwachstelle ist außerdem, dass die Kopfhöhrer im Ohr etwas verschieden gedreht werden können; sind sie hier zu arg verdreht, funktioniert der Algorithmus sofort nicht mehr, da die Richtung durch die Beschränkung auf $AccY$ vorgegeben ist.
+\paragraph{Ausprobieren}
+Die folgende Version der App unter Menüpunkt Debug ist zum Ausprobieren geeignet (Algorithmus hier im DebugViewModel, andere Thresholds / Strategien können einfach ausprobiert werden): 
+\href{https://github.com/vlle1/earablesKIT/tree/cd774e370156ea3d13eff2879a2d7f0f7d541260}{earablesKIT/debugView/SitUps-Erkennung}\\
+Dabei werden auch einige Debug-Informationen auf dem Display angezeigt, die am grüßten angezeigte Zahl entspricht hier dem Zustand des Automaten: 0 (unten), 1 (hoch), 2 (oben) bzw. 3 (runter).
 \section{Probleme und Änderungen am Entwurf}
 \label{aenderungen}
 \subsection{Bibliothek}
