@@ -421,14 +421,14 @@ Ermöglichen es die Range zu setzen und den LPF aus den Earables auszulesen. Die
 
 \subsubsection{Checksummen Überprüfung}
 \paragraph{Beschreibung}
-Die Bytearrays beinhalten ein Byte, in dem eine Checksumme gespeichert wird. Sie setzt sich aus der Addition der Restlichen Bytes zusammen. 
+Die Bytearrays, die in den Charakteristiken der Earables stehen, beinhalten ein Byte, in dem eine Checksumme gespeichert wird. Sie setzt sich aus der Addition der Restlichen Bytes zusammen. 
 
 \paragraph{Ergänzungen in der Klasse EarablesConnection}
 \begin{itemize}
 	\item[$-$] CheckChecksum(bytes: byte[]): void
 	\item[$-$] CheckIMUChecksum(bytes: byte[]): void
 \end{itemize}
-Beim erhalten des Bytearrays überprüfen wir nun ob diese mit dem Sollwert übereinstimmt oder ob bei der Übertragung ein paar Bits verloren gegangen sind. Falls es keine Übereinstimmung gibt wird eine Exception geschmissen. Es gibt eine Methode die sich für die Überprüfung aller Bytearrays eignet außer für die Überprüfung des IMUData Bytearrays da es leicht anders aufgebaut ist als die restlichen Bytearrays.
+Beim erhalten des Bytearrays überprüfen wir nun ob diese mit dem Sollwert übereinstimmt oder ob bei der Übertragung ein paar Bits verloren gegangen sind. Falls es keine Übereinstimmung gibt wird eine Exception geschmissen. Es gibt eine Methode die sich für die Überprüfung aller Bytearrays eignet außer für die Überprüfung des IMUData Bytearrays da es leicht anders aufgebaut ist als die restlichen Bytearrays. Deshalb gibt dafür es zwei Verschiedene Methoden
 
 \subsection{Erweiterungsmodul}
 
@@ -514,7 +514,7 @@ Die entsprechende Änderung betrifft auch alle Activities (PushUpActivityThresho
 
 \subsubsection{Synchrone Datenbank}
 \paragraph{Beschreibung}
-Ursprünglich war es geplant die Datenbank asynchron zu implementieren. Dies ist nicht nötig für unsere Anwendung, weswegen wir auf eine synchrone Datenbank gewechselt sind. Das ergibt einen klaren Kontrollfluss, welcher besser nachvollziehbar ist. Die Synchronisierung schadet nicht der Performance, da keine großen Datenbankzugriffe getätigt werden.
+Ursprünglich war es geplant die Datenbank asynchron zu implementieren. Für unsere Anwendung ist dies allerdings nicht nötig, weswegen wir auf eine synchrone Datenbank gewechselt sind. Das ergibt einen klaren Kontrollfluss, welcher besser nachvollziehbar ist. Die Synchronisierung schadet nicht der Performance, da keine großen Datenbankzugriffe getätigt werden.
 
 \paragraph{Änderungen in den Klassen IDataBaseConnection und DataBaseConnection}
 \begin{itemize}
@@ -551,7 +551,7 @@ Zum Speichern der DBEntries wurde eine neue Klasse namens DBEntryToSave hinzugef
 
 \subsubsection{Commandstruktur bei Modi}
 \paragraph{Beschreibung}
-Beim Starten eines Modus durch Drücken des Start Buttons wurde ursprünglich ein Command direkt das ViewModel gesendet und dort die StartActivity Methode aufgerufen. Da aber beim Starten auch die View gewechselt werden soll und dies aus dem ViewModel nicht umsetzbar ist, muss das Drücken des Start Buttons zunächst im Codebehind der zugehörigen View behandelt und dann weiter an das ViewModel delegiert werden. 
+Beim Starten eines Modus durch Drücken des Start Buttons wurde ursprünglich ein Command direkt an das ViewModel gesendet und dort die StartActivity Methode aufgerufen. Da aber beim Starten auch die View gewechselt werden soll und dies aus dem ViewModel nicht umsetzbar ist, muss das Drücken des Start Buttons zunächst im Codebehind der zugehörigen View behandelt und dann weiter an das ViewModel delegiert werden. 
 \paragraph{Änderungen in Klasse BaseModeViewModel}
 \begin{itemize}
 	\item[+] StartActivityCommand: ICommand und StopActivityCommand: ICommand \textit{entfernt}.
@@ -736,7 +736,7 @@ Das ExceptionHandlingViewModel ist ein statisches Singleton mit der zentralen Me
 
 \subsubsection{Aktualisierung DataOverViewPage}
 \paragraph{Beschreibung}
-Bei der Standardimplementierung des Hamburgermenus wird bei der Navigation zu einer Seite nu beim ersten Aufruf eine Instanz erstellt. Die DataOverViewPage muss bei jedem Aufruf der Seite neu aktualisiert werden. Die Datenbankeinträge erhält sie von der Datenbank per Methodenaufruf. Um bei jedem Erscheinen neu zu aktualisieren, wurde sich bei dem EventHandler Appearing mit der neuen Methode OnAppearing registriert.
+Bei der Standardimplementierung des Hamburgermenus wird bei der Navigation zu einer Seite nur beim ersten Aufruf eine Instanz erstellt. Die DataOverViewPage muss bei jedem Aufruf der Seite neu aktualisiert werden. Die Datenbankeinträge erhält sie von der Datenbank per Methodenaufruf. Um bei jedem Erscheinen neu zu aktualisieren, wurde sich bei dem EventHandler Appearing mit der neuen Methode OnAppearing registriert.
 
 \paragraph{Änderung in DataOverViewModel}
 \begin{itemize}
@@ -780,7 +780,7 @@ Die zum MusicMode gehörende View wurde umbenannt in \textit{MusicModePage}.
 			\textit{StartActivityCommand} und \textit{StopActivityCommand}
 			ausgeführt, sondern der neue Command \textit{ToggleMusicMode}.
 			Außerdem ist die Beschriftung des Buttons an das \textit{StartStopLabel}
-			gebunden, um jeweils "Start" und "Stop" korrekt anzuzeigen. \textit{geändert}
+			gebunden, um jeweils \glqq{}Start\grqq{} und \glqq{}Stop\grqq{} korrekt anzuzeigen. \textit{geändert}
 	\item[+] CurrentStatusLabel: Zeigt an, ob der Nutzer gerade steht oder geht. \textit{hinzugefügt}
 	\item[+] Image: Gif zur Visualisierung ob der Nutzer steht oder geht. \textit{hinzugefügt}
 	\item[+] Label: Quellenangabe des Gifs. \textit{hinzugefügt}
@@ -806,7 +806,7 @@ Die zum MusicMode gehörende View wurde umbenannt in \textit{MusicModePage}.
 \section{Implementierungsplan}
 \paragraph{Gantt Chart}
 Zu Beginn der Implementierungsphase haben wir uns zum ersten Treffen überlegt, wie wir den Entwurf nun gliedern können. Dazu haben wir zunächst alle Aufgaben aufgeschrieben und diese nach Muss- und Wunschkriterien aufgeteilt. Somit konnten wir eine erste Priorisierung erstellen.\\
- Der nächste Schritt war, dass wir Abhängigkeiten unter den Aufgabe hergestellt haben. Zum Beispiel muss das ``Daten weiterschicken'' und die ``Navigation'' vor dem Entwurf der Erkennungsalgorithmen implementiert werden. Damit konnte man eine zeitliche Relation erstellen, was wir in einem Gantt Chart visualisieren. Dort ist immer das Startdatum und die Dauer der Aufgabe vermerkt und in einer Timeline dargestellt.
+ Der nächste Schritt war, dass wir Abhängigkeiten unter den Aufgabe hergestellt haben. Zum Beispiel muss das ``Daten weiterschicken'' und die ``Navigation'' vor dem Entwurf der Erkennungsalgorithmen implementiert werden. Damit konnte man eine zeitliche Relation erstellen, was wir in einem Gantt Chart visualisieren. Hierbei wird das Startdatum und die Dauer der Aufgabe vermerkt und in einer Timeline dargestellt.
 Die Dauer haben wir mit der Methode ``Planungspoker'' geschätzt. Die Aufgaben teilten wir zusätzlich einzelnen Teammitgliedern zu.
 \newline
 \newline
