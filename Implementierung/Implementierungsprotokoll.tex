@@ -90,10 +90,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Einleitung}
-%erwin:
-%% massenfingersaugaktion
-% gruppenzusammenarbeit, nuget, änderungen nur klein,
-% in bennjis präsi nachschauen und mit zahlen flexen. frag benji dass er dir die Präsentation schickt
+Das nachfolgende Dokument spiegelt den Ablauf unserer Implementierungsphase wieder. Festgehalten wurden hauptsächlich Probleme, auf die wir, beim Implementieren gestoßen sind, wie wir diese gelöst haben und welche Änderungen wir dafür am Entwurf vornehmen mussten. Zusätzlich wird die Implementierung der Erkennungsalgorythmen beschrieben. Eine visuelle Übersicht der einzelnen Aufgaben, die bei der Implementierung entstanden sind, werden durch das beigefügt Gantt Chart repräsentiert.\\
+Insgesamt ist es uns durch durch unsere Teamarbeit gelungen alle Muss und Wunsch Kriterien umzusetzen. Wir haben es geschafft, die Bibliothek, die für die Steuerung der Earables zuständig ist, als NuGet zu veröffentlichen und bei denn Änderungen, die wir am ursprünglichen Entwurf vornehme mussten, handelt es sich zum größten Teil um Kleinigkeiten.\\
+Unser Workflow fand mit GitHub oder Auch GitKraken statt. Jeder entwickelte auf seinem Branch seine Features und machte durch ein Pull-Request kenntlich, falls seine Feature fertig war. Issues wurden hauptsächlich auf dem Papier, aber auch mündlich festgehalten. Zur Überprüfung des Codes verwendeten wir Azure Pipelines.
 
 
 
@@ -102,6 +101,7 @@
 Im Folgenden werden die implementierten Algorithmen für die Lauf-, Schritt-, PushUp- und  Sit-Up-Erkennung erläutert. Die konkreten Variablen und Benennungen sind im Code entsprechend auffindbar und ausführlich kommentiert.
 \paragraph{Hinweis}
 
+%% Vorschlag: "Wir" anstatt "Ich"
 Ich werde in diesem Kapitel sehr ausführlich darauf eingehen, was die grundlegenden Überlegungen für die Algorithmen waren, was Probleme sind, wie man die Algorithmen verbessern könnte und was wir daraus gelernt haben.\\
 Das Kapitel ist nur aus dem Willen heraus entstanden, diese Erkenntnisse irgendwo festzuhalten und hat eigentlich im Impelementierungsprotokoll (zumindest in dieser Ausführlichkeit) nichts verloren.\\
 Der Teil lässt sich also auch bedenkenlos überspingen, \hyperref[aenderungen]{hier} geht es weiter.   
@@ -352,11 +352,13 @@ Die Methode ExtractIMUDataString benötigt für die Berechnung der Sensordaten z
 Die Klasse wurde der Vollständigkeit halber um zwei Methoden ergänzt, die die Range des Accelerometers und des Gyroscopes aus dem entsprechenden Bytearray ermitteln.
 \paragraph{Änderungen in der Klasse IMUDataExtractor}
 \begin{itemize}
-  \item[+] \underline{ExtractIMUDataString(byteString: int, accScaleFactor: double,} \\
-  \underline{GyroScaleFactor: int, byteOffset: byte[])} 
 	\item[+] \underline{ExtractIMUScaleFactorAccelerometer(byteString: int): double}
 	\item[+] \underline{ExtractIMUScaleFactorGyoscope(byteString: int): int}
+	 \item[+] \underline{ExtractIMUDataString(byteString: int, accScaleFactor: double,} \\
+	 \underline{GyroScaleFactor: int, byteOffset: byte[])} 
 \end{itemize}
+\paragraph{Hinweis}
+Bei der Methode ExtractIMUDataString wird ein Offset vom Typ Bytearray als Parameter übergeben. Dieser wird von uns aus jedoch nicht in der Berechnung der IMUDaten verwendet.
 \paragraph{Hinzugefügt in der Klasse IMUDataExtractor}
 \begin{itemize}
   \item[+] \underline{ExtractIMURangeAccelerometer(byte[] bytes): int} 
@@ -367,11 +369,11 @@ Die Klasse wurde der Vollständigkeit halber um zwei Methoden ergänzt, die die 
 Eine Charakteristik wurde umbenannt.
 \paragraph{Änderungen in der Klasse Constants}
 \begin{itemize}
-	\item[-] OFFSET\_CHAR (\textit{ersetzt}  IMU\_FULL\_SCALE\_RANG\_CHAR) %uml?
+	\item[+] \underline{string OFFSET\_CHAR} \textit{ersetzt} \underline{ string IMU\_FULL\_SCALE\_RANG\_CHAR} 
 \end{itemize}
 \paragraph{Änderungen in der Klasse Characteristics}
 \begin{itemize}
-	\item[-] OffsetChar (\textit{ersetzt} IMUScaleRangeChar) %uml?
+	\item[+] ICharacteristic OffsetChar \textit{ersetzt} ICharacteristic IMUScaleRangeChar
 \end{itemize}
 
 \subsubsection{Verbindungsüberprüfung}
