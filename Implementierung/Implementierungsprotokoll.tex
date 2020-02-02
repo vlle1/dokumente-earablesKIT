@@ -144,7 +144,8 @@ Schritte beim normalen Gehen werden immer erkannt, und zwar durch die Erschütte
 	\caption{Absolute Beschleunigung beim Laufen, gemessen mit phyphox-App und Beschleunigungssensoren des Handys  (Beachte, dass $9,81 m/s^2 \approx 1 G$)).}
 \end{figure} 
 Allerdings werden auch viele andere Bewegungen (z.B. Kopfschütteln) erkannt.
-\paragraph{Verbesserung}
+\subsubsection{Verbesserter Ansatz}
+Um die Anzahl der ``false positives'' zu verringern, wird jetzt eine zusätzliche Bedingung eingeführt:\\
 Bei Schritten ist die Beschleunigung immer nach unten gerichtet. Daher wird jetzt zusätzlich gemessen, wo gerade vermutlich unten ist, indem ein Durchschnitt laufend aktualisiert wird. Ein sehr einfacher Ansatz ist dabei, den Durchschnitt exponentiell anzugleichen:
 \begin{equation}
 	avgAcc_i = (avgAccX_{i-1} * weight + AccX_i) /(weight + 1)
@@ -455,7 +456,7 @@ Hier konnte das Schmeißen der Events und der Zustand (Nutzer läuft bzw. läuft
 Dabei soll von der konkreten Impementierung ChangeDetected() aufgerufen werden, anstatt manuell den runningState anzupassen und das Event zu feuern.
 \paragraph{Ergänzungen in der Klasse StepActivityThreshold}
 \begin{itemize}
-	\item [$-$] const REF\_WEIGHT: int        %%%Konstanten auflisten?
+	\item [$-$] const REF\_WEIGHT\_REL: int
 	\item [$-$] const TRIGGER\_THRESHOLD: double
 	\item [$-$] const ANGLE\_TOLERANCE\_COS: double
 	\item [$-$] const COOLDOWN\_DURATION: double
