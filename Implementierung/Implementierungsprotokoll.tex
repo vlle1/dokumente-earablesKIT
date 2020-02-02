@@ -236,15 +236,17 @@ Eine weitere Schwachstelle ist außerdem, dass die Kopfhöhrer im Ohr etwas vers
 Die folgende Version der App unter Menüpunkt Debug ist zum Ausprobieren geeignet (Algorithmus hier im DebugViewModel, andere Thresholds / Strategien können einfach ausprobiert werden): 
 \href{https://github.com/vlle1/earablesKIT/tree/cd774e370156ea3d13eff2879a2d7f0f7d541260}{earablesKIT/debugView/SitUps-Erkennung}\\
 Dabei werden auch einige Debug-Informationen auf dem Display angezeigt, die am grüßten angezeigte Zahl entspricht hier dem Zustand des Automaten: 0 (unten), 1 (hoch), 2 (oben) bzw. 3 (runter).
+\clearpage
+
 \section{Probleme und Änderungen am Entwurf}
 \label{aenderungen}
 \subsection{Bibliothek}
 
 \subsubsection{Umgang mit Exceptions}
 \paragraph{Beschreibung}
-Es war geplant, dass die meisten Schnittstellen der Bibliothek ein Boolean zurückgeben, der true ist, falls die Anweisung korrekt durchgeführt werden konnte und false , falls es Komplikationen gab.\\
-Um besser auf Fehler und Exceptions zu reagieren macht es mehr Sinn, dass diese Methoden nichts zurückgeben sind und im Fehlerfall Exceptions schmeißen.\\
-Dies wurde umgesetzt, falls sich der Nutzer der Schnittstelle IEarablesConnection mehrmals verbinden will, keine Verbindung aufgebaut werden konnte, eine ungültige SampleRate angegeben wurde (Werte zwischen 1 und 100 sind erlaubt) oder eine Aktion ausgeführt werden soll, die bereits eine Verbindung voraussetzt, aber es existiert keine Verbindung.
+Es war geplant, dass die meisten Schnittstellen der Bibliothek ein Boolean zurückgeben, der true ist, falls die Anweisung korrekt durchgeführt werden konnte und false , falls es Komplikationen gab.
+Um besser auf Fehler und Exceptions zu reagieren macht es mehr Sinn, dass diese Methoden nichts zurückgeben und im Fehlerfall Exceptions schmeißen.\\
+Dies wurde umgesetzt, falls sich der Nutzer mit der Schnittstelle IEarablesConnection mehrmals verbinden will, keine Verbindung aufgebaut werden konnte, eine ungültige SampleRate angegeben wurde (Werte zwischen 1 und 100 sind erlaubt) oder eine Aktion ausgeführt werden soll, die eine Verbindung voraussetzt, aber noch keine existiert.
 
 \paragraph{Änderungen in Klasse IEarablesConnection}
 Folgende Methoden haben nicht mehr den Rückgabetypen bool sondern void und schmeißen im Fehlerfall Exceptions:
@@ -262,7 +264,7 @@ Folgende Exception-Klassen mussten ergänzt werden:
 	\item[$-$] NoConnectionException
 	\item[$-$] ChecksumException %man könnte noch überlegen die Rechtschreibfehler aus den AlreadyConnectedException und InvalidSampleRateException raus zu nehmen, müsste man dann aber auch konsequent im code so machen.
 \end{itemize}
-Die Exceptions werden geschmissen, falls bereits ein Gerät verbunden ist, keine Verbindung aufgebaut werden kann, der Wert der eingegebenen Samplerate nicht im richtigen Bereich (zwischen 1 und 100) liegt oder keine Verbindung vorhanden ist, diese aber benötigt würde (z.B. um das Sampling zu starten).
+Die Exceptions werden geschmissen, falls bereits ein Gerät verbunden ist, keine Verbindung aufgebaut werden kann, der Wert der eingegebenen Samplerate nicht im richtigen Bereich (zwischen 1 und 100) liegt, die Checksumme nicht korrekt ist oder keine Verbindung vorhanden ist, diese aber benötigt würde (z.B. um das Sampling zu starten).
 
 \subsubsection{Properties eingeführt}
 \paragraph{Beschreibung}
@@ -384,11 +386,11 @@ Um festzustellen ob eine Verbindung zu einem Device besteht wurde eine Methode h
 \begin{itemize}
 	\item[-]  CheckConnection():void  
 \end{itemize}
-Sie wird am Anfang aller  Methode, die eine Verbindung voraussetzen, aufgerufen und prüft ob eine Verbindung existiert. Falls keine existiert schmeißt sie eine die Exception NoConnectionException.
+Sie wird am Anfang aller  Methode, die eine Verbindung voraussetzen, aufgerufen und prüft ob eine Verbindung existiert. Falls keine existiert schmeißt sie eine NoConnectionException Exception.
 
 \subsubsection{Zwischenpeichern der Scalierungsfaktoren von Acc und Gyro}
 \paragraph{Beschreibung}
-Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt. Das gleiche Problem ergab sich auch beim lesen des Offset Bytearrasy. Dieser wird jetzt in einer privaten Variable in der Klasse EarablesConnection gespeichert, da es sich hierbei nicht um eine Konfiguration handelt.
+Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt. Das gleiche Problem ergab sich auch beim lesen des Offset Bytearrasy. Dieser wird jetzt in einer privaten Variable in der Klasse EarablesConnection gespeichertund nicht in der ConfigContainer Klasse, da es sich hierbei nicht um eine Konfiguration handelt.
 
 \paragraph{Ergänzungen in der Klasse EarablesConnection}
 \begin{itemize}
