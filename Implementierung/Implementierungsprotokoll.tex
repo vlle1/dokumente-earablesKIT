@@ -765,6 +765,39 @@ Das ScanningPopUp zeigt nach dem betätigen des Buttons ``Scan Devices'' die Lis
 	\item[$-$] ConnectButton\_Clicked() : Methode \textit{hinzugefügt}. Dies ist eine Eventmethode, welche beim Betätigen des Connect button aufgerufen wird.
 \end{itemize} 
 
+\subsubsection{Änderungen im MusicMode}
+\paragraph{Beschreibung}
+Die zum MusicMode gehörende View wurde umbenannt in \textit{MusicModePage}.
+
+\paragraph{Änderungen der View}
+\begin{itemize}
+	\item[\#] TwoWayButton: Beim Drücken des Buttons wird nicht
+			\textit{StartActivityCommand} und \textit{StopActivityCommand}
+			ausgeführt, sondern der neue Command \textit{ToggleMusicMode}.
+			Außerdem ist die Beschriftung des Buttons an das \textit{StartStopLabel}
+			gebunden, um jeweils "Start" und "Stop" korrekt anzuzeigen. \textit{geändert}
+	\item[+] CurrentStatusLabel: Zeigt an, ob der Nutzer gerade steht oder geht. \textit{hinzugefügt}
+	\item[+] Image: Gif zur Visualisierung ob der Nutzer steht oder geht. \textit{hinzugefügt}
+	\item[+] Label: Quellenangabe des Gifs. \textit{hinzugefügt}
+\end{itemize}
+
+\paragraph{Änderungen des ViewModels}
+\begin{itemize}
+	\item[\#]public isRunning: Bool - Property von private zu Public geändert um DataBinding zu ermöglichen. \textit{geändert}
+	\item[\#]public StartActivity(): Bool - Aufgrund der Änderungen im \textit{BaseModeViewModel} jetzt public und hat Rückgabetyp Bool \textit{geändert}
+	\item[\#]public StopActivity(): Bool - Aufgrund der Änderungen im \textit{BaseModeViewModel} jetzt public und hat Rückgabetyp Bool \textit{geändert}
+	\item[\#]private RestartMusic(): Initialisiert den Musik Player und wird von StartActivity aufgerufen. \textit{geändert}
+	\item[+]private \_musicModeActive: Bool - Speichert den aktuellen Zustand des Musikmodus. \textit{hinzugefügt}
+	\item[+]:public PropertyChanged: PropertyChangedEventHandler - Event um die View upzudaten. \textit{hinzugefügt}
+	\item[+]:public ToggleMusicMode: Command - Startet/Stoppt den MusicMode. Setzt außerdem \_musicModeActive. \textit{hinzugefügt}
+	\item[+]:public StartStopLabel: String - Gibt den korrekten Text für den Button der View zurück. \textit{hinzugefügt}
+	\item[+]:public CurrentStatusLabel: String - Gibt den korrekten Text für das CurrentStatusLabel zurück. \textit{hinzugefügt}
+	\item[+]:protected OnPropertyChanged(string name): void - Benachrichtigt die View, falls es Änderungen gibt. \textit{hinzugefügt}
+	\item[\-]StopMusic: Das Starten und Stoppen der Musik wird von der Property \textit{isRunning} übernommen. \textit{entfernt}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementierungsplan}
 \paragraph{Gantt Chart}
 Zu Beginn der Implementierungsphase haben wir uns zum ersten Treffen überlegt, wie wir den Entwurf nun gliedern können. Dazu haben wir zunächst alle Aufgaben aufgeschrieben und diese nach Muss- und Wunschkriterien aufgeteilt. Somit konnten wir eine erste Priorisierung erstellen.\\
