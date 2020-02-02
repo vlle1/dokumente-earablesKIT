@@ -561,13 +561,13 @@ Bei den Kindklassen verändern sich analog die vererbten StartActivity und StopA
 \end{itemize}
 \paragraph{Änderungen in CountModePage, StepModePage und ListenAndPerformPage}
 \begin{itemize}
-	\item[-] ViewModel: (jeweiliger Type)ViewModel \textit{hinzugefügt}.
+	\item[$-$] ViewModel: (jeweiliger Type)ViewModel \textit{hinzugefügt}.
 	\item[+] OnStartButtonClicked (sender: object, args: EventArgs): void \textit{hinzugefügt}.
 	\item[+] ChangeView (): void \textit{hinzugefügt}.
 \end{itemize}
 \paragraph{Änderungen in CountModeActivePage, StepModeActivePage und ListenAndPerformActivePage}
 \begin{itemize}
-	\item[-] ViewModel: (jeweiliger Type)ViewModel \textit{hinzugefügt}.
+	\item[$-$] ViewModel: (jeweiliger Type)ViewModel \textit{hinzugefügt}.
 	\item[+] OnStopButtonClicked (sender: object, args: EventArgs): void \textit{hinzugefügt}.
 	\item[+] ChangeView (): void \textit{hinzugefügt}.
 \end{itemize}
@@ -580,8 +580,8 @@ Um die Anzahl lokaler Attribute und Fallunterscheidungen zu verringern, wurde ei
 	\item[+] \_activity: Activity \textit{hinzugefügt}.
 	\item[+] Name: string \textit{hinzugefügt}.
 	\item[+] Amount: int \textit{hinzugefügt}.
-	\item[-] \_counter: int \textit{hinzugefügt}.
-	\item[-] Counter: int \textit{hinzugefügt}.
+	\item[$-$] \_counter: int \textit{hinzugefügt}.
+	\item[+] Counter: int \textit{hinzugefügt}.
 	\item[+] <<create>> ActivityWrapper(name: string, activity: Activity, amount: int) \textit{hinzugefügt}.
 	\item[+] <<create>> ActivityWrapper(name: string, activity: Activity) \textit{hinzugefügt}.
 	\item[\#] OnPropertyChanged([CallerMemberName]): void \textit{hinzugefügt}.
@@ -608,25 +608,25 @@ Um die Anzahl lokaler Attribute und Fallunterscheidungen zu verringern, wurde ei
 Im Entwurf wurde nicht berücksichtigt, dass jedes Attribut, welches per Data Binding an Viewelemente gebunden und nicht per default Two-Way binded ist,  auch ein äquivalentes privates Attribut benötigt wird, auf das bei den settern und gettern zugegriffen wird, um Endlosschleifen beim Aktualisieren der Attribute zu verhindern. 
 \paragraph{Änderungen im StepModeViewModel}
 \begin{itemize}
-	\item[-] \_stepsDoneLastTime: int \textit{hinzugefügt} und Datentyp des public Attributs von string zu int geändert.
-	\item[-] \_distanceWalkedLastTime: int \textit{hinzugefügt} und Datentyp des public Attributs von string zu int geändert.
-	\item[-] \_lastDataTime: string \textit{hinzugefügt}.
-	\item[-] \_stepCounter: int \textit{hinzugefügt}.
-	\item[-] \_distanceWalked: int \textit{hinzugefügt}.
-	\item[-] \_isRunning: bool \textit{hinzugefügt}.
-	\item[-] \_stepFrequency: double \textit{hinzugefügt} und Datentyp des public Attributs von string zu double geändert.
+	\item[$-$] \_stepsDoneLastTime: int \textit{hinzugefügt} und Datentyp des public Attributs von string zu int geändert.
+	\item[$-$] \_distanceWalkedLastTime: int \textit{hinzugefügt} und Datentyp des public Attributs von string zu int geändert.
+	\item[$-$] \_lastDataTime: string \textit{hinzugefügt}.
+	\item[$-$] \_stepCounter: int \textit{hinzugefügt}.
+	\item[$-$] \_distanceWalked: int \textit{hinzugefügt}.
+	\item[$-$] \_isRunning: bool \textit{hinzugefügt}.
+	\item[$-$] \_stepFrequency: double \textit{hinzugefügt} und Datentyp des public Attributs von string zu double geändert.
 \end{itemize}
 \paragraph{Änderungen im CountModeViewModel}
 \begin{itemize}
-	\item[-] \_minutes: string \textit{hinzugefügt}. 
-	\item[-] \_seconds: string \textit{hinzugefügt}.
-	\item[-] \_milliseconds: string \textit{hinzugefügt}.
+	\item[$-$] \_minutes: string \textit{hinzugefügt}. 
+	\item[$-$] \_seconds: string \textit{hinzugefügt}.
+	\item[$-$] \_milliseconds: string \textit{hinzugefügt}.
 \end{itemize}
 \paragraph{Änderungen im ListenAndPerformViewModel}
 \begin{itemize}
-	\item[-] \_minutes: string \textit{hinzugefügt}.
-	\item[-] \_seconds: string \textit{hinzugefügt}.
-	\item[-] \_milliseconds: string \textit{hinzugefügt}.
+	\item[$-$] \_minutes: string \textit{hinzugefügt}.
+	\item[$-$] \_seconds: string \textit{hinzugefügt}.
+	\item[$-$] \_milliseconds: string \textit{hinzugefügt}.
 \end{itemize}
 
 \subsubsection{Speichern der gesammelten Daten der Modi}
@@ -634,7 +634,7 @@ Im Entwurf wurde nicht berücksichtigt, dass jedes Attribut, welches per Data Bi
 Das Speichern der ausgeführten Sit-ups, Push-ups oder gelaufenen Schritten wurde in eine neue Methode ausgelagert, um Fallunterscheidungen zu vermeiden.
 \paragraph{Änderungen in Klassen CountViewModel, StepViewModel und ListAndPerformViewModel} 
 \begin{itemize}
-	\item[-] saveData(): void \textit{hinzugefügt}.
+	\item[$-$] saveData(): void \textit{hinzugefügt}.
 \end{itemize}
 
 \subsubsection{Zwischenspeichern von Services}
@@ -642,8 +642,8 @@ Das Speichern der ausgeführten Sit-ups, Push-ups oder gelaufenen Schritten wurd
 Um die Übersichtlichkeit in Methoden zu wahren, werden häufig benutzte Services im Konstruktor einmalig vom Service Manager geholt und in einem Attribut gespeichert.
 \paragraph{Änderungen in Klassen CountModeViewModel, StepModeViewModel und ListAndPerformViewModel} 
 \begin{itemize}
-	\item[-] \_activityManager: IActivityManager \textit{hinzugefügt}.
-	\item[-] \_dataBaseConnection: IDataBaseConnection \textit{hinzugefügt} .
+	\item[$-$] \_activityManager: IActivityManager \textit{hinzugefügt}.
+	\item[$-$] \_dataBaseConnection: IDataBaseConnection \textit{hinzugefügt} .
 \end{itemize}
 
 \subsubsection{Neue Event Methode für RunningEvents}
@@ -659,7 +659,7 @@ Der StepMode muss gleichzeitig von zwei Aktivitätsanalysen Events bekommen, von
 Um sicher zu gehen, dass der Nutzer beim Starten des Zählmodus eine gültige Aktivität ausgewählt hat, wird eine neue Methode hinzugefügt, die im Erfolgsfall auch die Event Methode des ViewModels beim korrekten Event Handler registriert.
 \paragraph{Änderung im CountModeViewModel}
 \begin{itemize}
-	\item[-]  RegisterActivity(): bool \textit{hinzugefügt}.
+	\item[$-$]  RegisterActivity(): bool \textit{hinzugefügt}.
 \end{itemize}
 
 \subsubsection{Progressbar im ListenAndPerformViewModel}
@@ -667,8 +667,8 @@ Um sicher zu gehen, dass der Nutzer beim Starten des Zählmodus eine gültige Ak
 Zu besseren Visualisierung des Fortschritts des Nutzers während einer Trainingseinheit wurde eine Progressbar hinzugefügt. Diese wird mit einer Hilfsvariable nach der Ausführung einer Wiederholung einer Aktivität aktualisiert und resettet sich nach jedem abgearbeiteten Listeneintrag.
 \paragraph{Änderungen im ListenAndPerformViewModel }
 \begin{itemize}
-	\item[-] Repetitions: int \textit{hinzugefügt}.
-	\item[-] \_progress: double \textit{hinzugefügt}
+	\item[$-$] Repetitions: int \textit{hinzugefügt}.
+	\item[$-$] \_progress: double \textit{hinzugefügt}
 	\item[+] ProgressLive: double \textit{hinzugefügt}
 \end{itemize}
 \paragraph{Änderung in ListenAndPerformActivePage}
@@ -681,9 +681,8 @@ Zu besseren Visualisierung des Fortschritts des Nutzers während einer Trainings
 Die Abarbeitung der vom Nutzer zusammengestellten Aktivitätsliste erfolgt nun vollständig auf Event Basis, anstelle innerhalb der DoActivity Methode. Die OnActivityDone Methode zählt nun nicht mehr nur immer einen Counter hoch, sondern prüft gleichzeitig auch, ob die festgelegte Anzahl an Wiederholungen gemacht wurde, um in dem Fall über den Iterator die nächste Aktivität aus der Liste zu holen. Die Zwischenspeicherung der bisher geleisteten Push-ups und Sit-ups regelt die neue Methode IncreaseResultCounter, welche von OnActivityDone aufgerufen wird. Die Methode CheckNextActivity ersetzt die DoActivity Methode und kümmert sich um das Registrieren der OnActivityDone Methode beim korrekten Event Handler. 
 \paragraph{Änderungen im ListenAndPerformViewModel}
 \begin{itemize}
-	\item[-] CheckNextActivity(): void \textit{hinzugefügt}.
-	\item[-] IncreaseResultCounter(): void \textit{hinzugefügt}.
-	\item[-] DoActivity(): void \textit{entfernt}.
+	\item[$-$] CheckNextActivity(): void \textit{ersetzt} DoActivity(): void.
+	\item[$-$] IncreaseResultCounter(): void \textit{hinzugefügt}.
 \end{itemize}
 	
 \subsubsection{Pause in ListenAndPerform}
@@ -691,8 +690,8 @@ Die Abarbeitung der vom Nutzer zusammengestellten Aktivitätsliste erfolgt nun v
 Um den Ablauf einer Pause reibungslos zu ermöglichen wurde ein zusätzlicher Timer eingebaut, der nur aktiviert wird wenn der nächste Listeneintrag in der Aktivitätsliste eine Pause ist. Dabei wird in der CheckNextActivity Methode jede Sekunde ein Event an die neu hinzugefügte Methode OnTimedEvent gesendet. Diese Methode funktioniert dann analog zur OnActivityDone Methode und ruft die nächste Aktivität aus der Liste auf, wenn die Pausenzeit abgelaufen ist.
 \paragraph{Änderungen im ListenAndPerformViewModel}
 \begin{itemize}
-	\item[-] PauseTimer: Timer \textit{hinzugefügt}.
-	\item[-] OnTimedEvent(): void \textit{hinzugefügt}.
+	\item[$-$] PauseTimer: Timer \textit{hinzugefügt}.
+	\item[$-$] OnTimedEvent(): void \textit{hinzugefügt}.
 \end{itemize}
 
 \subsubsection{Weitere Anzeigeelemente in Viewklassen}
