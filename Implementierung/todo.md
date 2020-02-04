@@ -8,6 +8,6 @@
 - bei modi: Größe der Anzeigen nach (intuitiver) Priorität
   - z.B. Laufmodus: schrittanzahl groß, training gestartet label klein. (Besseres Beispiel: screenshot straca @David)
 
-## Sounds
--  
-
+## Sounds (lassen wir weg)
+- Buttons nicht(sind noch Systemsounds, hat jeder aus)
+- bei Fehlermeldungen/Pepups wäre es möglich, machen wir nicht.
