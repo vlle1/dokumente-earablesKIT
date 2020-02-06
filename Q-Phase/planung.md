@@ -30,6 +30,6 @@ Protokoll vom 3.2., sollte weiterverwendet werden.
 
 
 # Fragen (Tobi, Anja)
-- Rekursionstests haben wir nicht so wirklich gemacht. Wie sollen wir mit dem Teil jetzt weitermachen (Ignorieren / im Nachhinein schreiben)?
-- Was sollen wir mocken?
-- Wie auf iOS testen? mock / live / lassen?
+- Rekursionstests haben wir nicht so wirklich gemacht. Wie sollen wir mit dem Teil jetzt weitermachen (Ignorieren / im Nachhinein schreiben)? Nacharbeiten
+- Was sollen wir mocken? Vollständige Schnittstelle der Bibliothek
+- Wie auf iOS testen? mock / live / lassen? do it.
