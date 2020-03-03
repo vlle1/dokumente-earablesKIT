@@ -7,23 +7,36 @@ Protokoll vom 3.2., sollte weiterverwendet werden.
 
 # Aufgaben
 ## Vorbereitung
-- Mock für die Bibliothek (Benni)
-- Tests aus Pflichtenheft in ManuelleViewTests eintragen (David)
-- Testaufgaben einteilen (alle)
-- Fakedaten für Algorithmen (Aufzeichnungsmöglichkeit in App schreiben) (Valle)
-- Mappe / Dokument für Praxistest entwerfen (Umgebung, was sagen wir den Testpersonen, wo lang laufen (bitte eher Strecke entlang, draußen, geradeaus) (david)
+- Mock für die Bibliothek (Benni) - schafft er nicht
+- Tests aus Pflichtenheft in ManuelleViewTests eintragen (David) - done
+- Testaufgaben einteilen (alle) - !
+- Fakedaten für Algorithmen (Aufzeichnungsmöglichkeit in App schreiben) - über Äpp (unterpunkt Valle)
+- Mappe / Dokument für Praxistest entwerfen (Umgebung, was sagen wir den Testpersonen, wo lang laufen (bitte eher Strecke entlang, draußen, geradeaus) (david!)
   - Tests z.B.: 2*10 liegestütze, 2*10 Tisups, 2*50 Schritte geradeaus (wo platz ist)
   - Trainingsablauf
   - 10 Schritte mit pausen und anderen Bewegungen, eine Minute lang -> Dokumentieren, was für Bewegungen gemacht wurden.
   - Bei Situps: 1 situp sauber vormachen ("ganz hoch")
   - Anweisung: "mach, was die App sagt". Bei 2. Durchlauf Hinweise geben und dokumentieren. 
   - Fakedaten aufnehmen für 2 Situps, 2 Liegestütze, 2 Schritte
-- in testfiles (RealLiveTests) soll übersichts-statistik automatisch berechnet werden.
+- in testfiles (RealLiveTests) soll übersichts-statistik automatisch berechnet werden. (David)
 ## Testaufgaben
-- Algorithmen mit Fakedaten (aufgezeichnete) prüfen
-- Unit-Tests schreiben
-- Bib testen (Erwin) (Steuerungsparameter, Rohtaden.)
-- manuelle View-Tests
+- Bib testen (Erwin) (eigenes Ding um Bib zu testen. Steuerungsparameter, Rohtaden.)
+- Unit-Tests schreiben (siehe Einteilung)
+  - model:
+    - Bib 
+      - ??(Was, wenn Kopfhöhrer falsche sachen zurückgeben  - keine Priorität, sollte laut tobi gemacht werden)
+      - IMUDataExtractor (klein, Bytefolge auf Werte) (unassigned)
+    - Erweiterungsmodul 
+      - Algorithmen (mit Fakedaten prüfen) (valle)
+      - ActivityManager (klein)
+    - DBService
+    - SettingsService nicht (noch schlimmer als Bibliothek)
+    - Servicemanager (klein)(benni)
+  - viewmodel: 
+    - StepModeViewModel (Pionier-Mock)(abgucken von DatabaseConnectionTest)
+    - dann Aufwandschätzung, andere viewmodels testen...
+  - view: keine (nur manuelle view tests.)
+- Szenarien testen und Wunsch/Mussanforderungen daraufhin abhaken. (manuell) (David, Jan, Benni)
 - Praxis: Testpersonen (jeder mit einer Testperson)
 ## Abschlussaufgaben
 - Testabdeckung ermitteln (für "testbare" Bestandteile)
