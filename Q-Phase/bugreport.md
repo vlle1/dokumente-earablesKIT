@@ -1,5 +1,12 @@
-# wenn man im Laufmodus startet und stoppt und den Modus NICHT wechselt, stürzt die App 10 Sekunden später ab (Erwin)
- - noch aktuell?? (Erwin testen!)
+﻿# wenn man im Laufmodus startet und stoppt und den Modus NICHT wechselt, stürzt die App 10 Sekunden später ab (Erwin)
+ - Schritte zur rekonstruktion
+  - 1. App starten
+  - 2. Kopfhörer verbinden
+  - 3. Laufmodus starten
+  - 4. 30 Schritte machen
+  - 5. Laufmodus beendet und PopUp noch nicht weggecklickt
+  - 6. Warten
+  - 7. App stürtzt ab wegen Null Pointer exception
 # edit entry in listenandperform (jan):
 dialog wegklicken führt zu löschung, sollte aber da bleiben,
 Dialog überarbeiten (edit führt zu "add acitivity") (drüber reden)
