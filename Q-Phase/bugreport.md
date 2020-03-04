@@ -8,7 +8,6 @@
   - 6. Warten
   - 7. App stürtzt ab wegen Null Pointer exception
 # edit entry in listenandperform (jan):
-dialog wegklicken führt zu löschung, sollte aber da bleiben,
 Dialog überarbeiten (edit führt zu "add acitivity") (drüber reden)
 
 
