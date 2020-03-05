@@ -12,7 +12,7 @@ Protokoll vom 3.2., sollte weiterverwendet werden.
 - Testaufgaben einteilen (alle) - !
 - Fakedaten für Algorithmen (Aufzeichnungsmöglichkeit in App schreiben) - über Äpp (unterpunkt Valle)
 - Mappe / Dokument für Praxistest entwerfen (Umgebung, was sagen wir den Testpersonen, wo lang laufen (bitte eher Strecke entlang, draußen, geradeaus) (david!)
-  - Tests z.B.: 2*10 liegestütze, 2*10 Tisups, 2*50 Schritte geradeaus (wo platz ist)
+  - Tests z.B.: 2\*10 liegestütze, 2\*10 Tisups, 2\*50 Schritte geradeaus (wo platz ist)
   - Trainingsablauf
   - 10 Schritte mit pausen und anderen Bewegungen, eine Minute lang -> Dokumentieren, was für Bewegungen gemacht wurden.
   - Bei Situps: 1 situp sauber vormachen ("ganz hoch")
