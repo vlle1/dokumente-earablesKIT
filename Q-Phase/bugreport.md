@@ -8,6 +8,8 @@
   - 6. Warten
   - 7. App stürtzt ab wegen Null Pointer exception
 
+# wenn man ein zu kleinen ... wenn man ein zu kleines Display hat, wird manches abgeschnitten (von Jan)
+  - z.B. bei Laufmodus (aktiv)
 # wenn man im Musikmodus ein paar mal öfter auf Start/Stopp klickt stürzt die App schnell ab (vol Valle)
   - zuverlässig reproduzierbar, sobald man den Button 3 bis 4 mal kurz hintereinander drückt.
 # edit entry in listenandperform
