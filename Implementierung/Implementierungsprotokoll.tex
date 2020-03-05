@@ -94,17 +94,9 @@ Das nachfolgende Dokument spiegelt den Ablauf unserer Implementierungsphase wied
 Insgesamt ist es uns durch durch unsere Teamarbeit gelungen, alle Muss- und Wunsch-Kriterien umzusetzen. Wir haben es geschafft, die Bibliothek, die für die Steuerung der Earables zuständig ist, als NuGet zu veröffentlichen. Bei den Änderungen, die wir am ursprünglichen Entwurf vornehme mussten, handelt es sich zum größten Teil um Kleinigkeiten.\\
 Unser Workflow fand mit GitHub oder auch GitKraken statt. Jeder entwickelte auf seinem Branch seine Features und machte durch ein Pull-Request kenntlich, falls seine Feature fertig war. Issues wurden hauptsächlich auf dem Papier, aber auch mündlich festgehalten. Zur Überprüfung des Codes verwendeten wir Azure Pipelines.
 
-
-
 \section{Implemetierung der Erkennungsalgorithmen}
 \label{algorithmen}
 Im Folgenden werden die implementierten Algorithmen für die Lauf-, Schritt-, PushUp- und  Sit-Up-Erkennung erläutert. Die konkreten Variablen und Benennungen sind im Code entsprechend auffindbar und ausführlich kommentiert.
-\paragraph{Hinweis}
-
-%% Vorschlag: "Wir" anstatt "Ich"
-Ich werde in diesem Kapitel sehr ausführlich darauf eingehen, was die grundlegenden Überlegungen für die Algorithmen waren, was Probleme sind, wie man die Algorithmen verbessern könnte und was wir daraus gelernt haben.\\
-Das Kapitel ist nur aus dem Willen heraus entstanden, diese Erkenntnisse irgendwo festzuhalten und hat eigentlich im Impelementierungsprotokoll (zumindest in dieser Ausführlichkeit) nichts verloren.\\
-Der Teil lässt sich also auch bedenkenlos überspingen, \hyperref[aenderungen]{hier} geht es weiter.   
 \subsection{Warum Threshold-Algorithmen?}
 Wir haben uns bewusst dafür entschieden, auf maschinelles Lernen im Sinne von Neuronalen Netzen zu verzichten und stattdessen einen heuristischen Ansatz zu wählen.\\
  Bei einem Threshold-Ansatz bestehen wesentliche Teile der Entscheidung darin, ob ein bestimmter Schwellenwert von einem Messwert überschritten wird.
@@ -148,13 +140,14 @@ Allerdings werden auch viele andere Bewegungen (z.B. Kopfschütteln) erkannt.
 Um die Anzahl der ``false positives'' zu verringern, wird jetzt eine zusätzliche Bedingung eingeführt:\\
 Bei Schritten ist die Beschleunigung immer nach unten gerichtet. Daher wird jetzt zusätzlich gemessen, wo gerade vermutlich unten ist, indem ein Durchschnitt laufend aktualisiert wird. Ein sehr einfacher Ansatz ist dabei, den Durchschnitt exponentiell anzugleichen:
 \begin{equation}
-	avgAcc_i = (avgAccX_{i-1} * weight + AccX_i) /(weight + 1)
+	avgAccX_i = (avgAccX_{i-1} * weight + AccX_i) /(weight + 1)
 \end{equation}
-Analog auch für die anderen Koordinaten. Initialisiert werden die Werte, als ob sich die Earables in Ausgangsposition befinden (Kopf gerade). Wir haben hierbei die Gewichtung $weight$ von der Samplingrate abhängig gemacht, sodass geringerer Samplerate die Angleichung nicht deutlich langsamer erfolgt:
+Analog wird diese Berechnung auch für die anderen Koordinaten durchgeführt. Somit ergibt sich direkt ein \textbf{Vektor $AvgAcc$ der durchschnittlichen Beschleunigung, der als ``nach unten zeigend'' interpretiert werden kann}, da die Richtung der durchschnittlichen Beschleunigung mit der Richtung ``unten'' korreliert. Initialisiert werden die Werte, als ob sich die Earables in Ausgangsposition befinden (Kopf gerade). Wir haben hierbei die Gewichtung $weight$ von der Samplingrate abhängig gemacht, sodass geringerer Samplerate die Angleichung nicht deutlich langsamer erfolgt:
 \begin{equation}
 	weight = freq * 2
 \end{equation}
-Nun kann der cosinus des Winkels zwischen approximierter Standardbeschleunigung und aktueller Beschleunigung berechnet werden:
+Vergleicht man nun (in der visuellen Vorstellung des Verfahrens) den Vektor $AvgAcc$ mit dem Vektor, der die \textbf{aktuelle Beschleunigung $Acc$} repräsentiert, kann man den \textbf{Winkel $\alpha$} für die Klassifikation nutzen.\\
+Im Algorithmus kann dabei der Cosinus des Winkels zwischen approximierter Standardbeschleunigung und aktueller Beschleunigung folgendermaßen berechnet werden:
 \begin{equation}
 	cos(\alpha) = \frac{avgAccX * AccX + avgAccY * AccY + avgAccZ * AccZ}{ AccAbs * AvgAccAbs },
 \end{equation}
@@ -162,8 +155,8 @@ wobei $AvgAccAbs = \sqrt{avgAccX^2+avgAccY^2+avgAccZ^2}$ ist.\\
 \newline
 \noindent
 \begin{minipage}{0.5\textwidth}
-	Der Winkel wird in unserem Fall akzeptiert, falls $cos(\alpha) > 0.89$, also darf der Winkel um maximal 27 Grad abweichen.\\
-	
+	Der Winkel wird in unserem Fall akzeptiert, falls $cos(\alpha) > 0.89$, also darf der Winkel um maximal 27 Grad abweichen. Die intuitive Erklärung für diese Klassifikation ist, dass eine Erschütterung beim Auftreten in etwa ``nach unten'' gerichtet ist, ansonsten muss es sich um eine andere Bewegung handeln.\\ 
+	Diese Klassifikation hat sich als Erfahrungswert geeignet.
 	Zusätzlich kann auch das Threshold jetzt relativ zur durchschnittlichen Beschleunigung berechnet werden:
 	\begin{equation}
 		AccAbs > 1.15 * AvgAccAbs
@@ -177,7 +170,8 @@ wobei $AvgAccAbs = \sqrt{avgAccX^2+avgAccY^2+avgAccZ^2}$ ist.\\
 	Visualisierung: als Schritt akzeptierte Beschleunigung $Acc$
 \end{minipage}
 \vspace{0.5cm}\\
-Da alle Vergleiche relativ erfolgen, kann zur Schritterkennung der Sensor auch falsch gedreht sein oder ähnliches, die Erkennung funktioniert trotztem korrekt, da sie sich anpasst.\\
+
+Da alle Vergleiche relativ erfolgen, kann zur Schritterkennung der Sensor auch falsch orientiert sein. Die Erkennung funktioniert trotzdem korrekt, da sie sich an die relative Richtung der Erdbeschleunigung anpasst.\\
 \paragraph{Ausprobieren}
 Die folgende Version der App unter Menüpunkt Debug ist zum Ausprobieren geeignet (Algorithmus hier im DebugViewModel, andere Thresholds / Strategien können einfach ausprobiert werden): 
 \href{https://github.com/vlle1/earablesKIT/tree/b8b34bbe0716ddb37c5afbd315e91d7f11c0270d}{earablesKIT/debugView/Schritterkennung\_Version\_3}\\
@@ -201,14 +195,14 @@ Bei einer einzelnen Liegestütze ergibt sich der folgende Verlauf für die absol
 \begin{figure}[ht]
 	\centering
 \includegraphics[width = 10cm]{bilder/pushup_sample.jpg}
-	\caption{Absolute Beschleunigung beim Laufen, gemessen mit phyphox-App und Beschleunigungssensoren des Handys (Beachte, dass $9,81 m/s^2 \approx 1 G$).}
+	\caption{Absolute Beschleunigung bei einer Liegestütze, gemessen mit phyphox-App und Beschleunigungssensoren des Handys (Beachte, dass $9,81 m/s^2 \approx 1 G$).}
 \end{figure} 
 Man kann sich bewusst machen, dass die absolute Beschleunigung der Kopfhöhrer in etwa proportional zum Druck ist, den man mit den Händen auf den Boden ausübt. So wird auch klar, wie die beiden Maxima im Verlauf zustande kommen: Erst bremst man die Abwärtsbewegung aus, dann drückt man sich wieder vom Boden weg. Analog gilt das auch für die beiden Minima. 
 \paragraph{Zustandsautomat}
 \input{tikx/pushups_automat.tex}
 
 \paragraph{Weitere Beobachtungen}
-Man könnte jetzt noch zusätzlich einen Timeout einführen (hält Zustand "abwärts" oder "aufwärts" zu lange, wurde die Liegestütze vermutlich abgebrochen) und die verschiedenen Thresholds feiner anpassen, um die Erkennung noch weiter zu verbessern.\\
+Man könnte jetzt noch zusätzlich einen Timeout einführen (hält Zustand ``abwärts'' oder ``aufwärts'' zu lange, wurde die Liegestütze vermutlich abgebrochen) und die verschiedenen Thresholds feiner anpassen, um die Erkennung noch weiter zu verbessern.\\
 Der Algorithmus kommt an seine Grenzen, wenn man die Liegestütze extrem schnell ausführt (der Cooldown könnte an die Intensität der Beschleunigung angepasst werden), oder extrem langsam ausführt (da dann die Thresholds nicht mehr überschritten werden). Außerdem wird ab und zu schon eine Liegestütze erkannt, während man noch (zum Beispiel aus dem Stand) in die Startposition geht. Um diese Probleme zu umgehen wäre eine grundlegend andere Datenaufbereitung notwendig, beispielsweise mit einem Kalman-Filter.\\
 Der Algorithmus könnte übrigens auch äquivalent für Kniebeugen verwendet werden.
 \paragraph{Ausprobieren}
@@ -230,7 +224,7 @@ Durch die Kombination dieser Merkmale der Bewegung benötigt die Klassifikation 
 \paragraph{Beobachtungen}
 Bei diesem Bewegungsablauf gibt es sehr wenige ``false positives'', d.h. die Bedingungen sind so speziefisch, dass kaum eine andere Bewegung als Situp erkannt werden sollte.\\
 Oft bewegt man sich nicht ganz weit genug nach vorne, daher werden manche SitUps nich korrekt gezählt. Hier ist der Algorithmus also stark von der Auslegung der Übung abhängig (man könnte die Beschleunigungsbedingung im Zustand ``oben'' dann entsprechend weglassen).\\
-Aus der Nutzerperspektive wäre ein Ton oder eine Anzeige sinnvoll, wenn Zustand ``aufrecht'' erreicht wurde. Dies haben wir in unserem Entwurf allerdings nicht berücksichtigt und ist eher eine Idee, die erst am Ende der Implemetierung zustande kam.\\
+Aus der Nutzerperspektive wäre ein Ton oder eine Anzeige sinnvoll, wenn Zustand ``oben'' erreicht wurde. Dies haben wir in unserem Entwurf allerdings nicht berücksichtigt und ist eher eine Idee, die erst am Ende der Implemetierung zustande kam.\\
 Eine weitere Schwachstelle ist außerdem, dass die Kopfhöhrer im Ohr etwas verschieden gedreht werden können; sind sie hier zu arg verdreht, funktioniert der Algorithmus sofort nicht mehr, da die Richtung durch die Beschränkung auf $AccY$ vorgegeben ist.
 \paragraph{Ausprobieren}
 Die folgende Version der App unter Menüpunkt Debug ist zum Ausprobieren geeignet (Algorithmus hier im DebugViewModel, andere Thresholds / Strategien können einfach ausprobiert werden): 
