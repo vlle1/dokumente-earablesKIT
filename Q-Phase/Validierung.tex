@@ -93,701 +93,289 @@
 Das nachfolgende Dokument spiegelt den Ablauf unserer Qualitätssicherungsphase wieder.
 
 
-\section{Implemetierung der Erkennungsalgorithmen}
-\label{algorithmen}
-Im Folgenden werden die implementierten Algorithmen für die Lauf-, Schritt-, PushUp- und  Sit-Up-Erkennung erläutert. Die konkreten Variablen und Benennungen sind im Code entsprechend auffindbar und ausführlich kommentiert.
-\paragraph{Hinweis}
+\section{Testszenarien}
 
-%% Vorschlag: "Wir" anstatt "Ich"
-Ich werde in diesem Kapitel sehr ausführlich darauf eingehen, was die grundlegenden Überlegungen für die Algorithmen waren, was Probleme sind, wie man die Algorithmen verbessern könnte und was wir daraus gelernt haben.\\
-Das Kapitel ist nur aus dem Willen heraus entstanden, diese Erkenntnisse irgendwo festzuhalten und hat eigentlich im Impelementierungsprotokoll (zumindest in dieser Ausführlichkeit) nichts verloren.\\
-\subsection{Warum Threshold-Algorithmen?}
-Wir haben uns bewusst dafür entschieden, auf maschinelles Lernen im Sinne von Neuronalen Netzen zu verzichten und stattdessen einen heuristischen Ansatz zu wählen.\\
- Bei einem Threshold-Ansatz bestehen wesentliche Teile der Entscheidung darin, ob ein bestimmter Schwellenwert von einem Messwert überschritten wird.
-\paragraph{Vorteile}
-Dies hat einerseits den Grund, dass wir selbst wenig Erfahrung mit neuronalen Netzen haben. Andererseits wollten wir den Fokus in unserer App weniger auf Perfektion legen, und mehr darauf, Anwendungsszenarien von Bewegungserkennung mit Kopfhöhrern zu modellieren: Die App ist auch ein Experiment, um herauszufinden, was man vielleicht mit Earables besser erkennen kann als mit einem Fitness-Armband. Bei der Implementierung hat sich herausgestellt, dass für unsere Zwecke ein Threshold-Algorithmus ausreichend ist. Man lernt bei der Entwicklung auch selbst sehr gut, in wie weit man mit den Sensoren bestimmte Bewegungen erkennen kann. Dieses Grundverständnis zu erreichen ist für uns wichtiger als ein perfekt funktionierender Algorithmus.\\
-Zusätzlich muss man sagen, dass jeder Algorithmus durch die Service-Struktur der Activities leicht ausgetauscht werden kann.
-\paragraph{Nachteile}
-Ein Ansatz mit maschinellem Lernen bzw. ein vor dem release trainiertes neuronales Netz würde vermutlich akkuratere Ergebnisse liefern. 
-\subsection{Benennung der Messwerte}
-Die Kopfhöhrer befinden sich nicht immer exakt in dieser Position, sondern können zu den Sensorachsen leicht verdeht sein. Wir bezeichnen (aus der Perspektive des/der Tragenden) die (Mess-)Werte:
-\begin{itemize}
-	\item Beschleunigung nach unten in G: $AccX$
-	\item Beschleunigung nach vorne in G: $AccY$
-	\item Beschleunigung nach links in G: $AccZ$
-	\item absolute Beschleunigung: $AccAbs = \sqrt{AccX^2+AccY^2+AccZ^2}$
-	\item Drehbeschleunigung vorne-nach-rechts in Grad pro Sekunde: $GyroX$ 
-	\item Drehbeschleunigung oben-nach-links in Grad pro Sekunde: $GyroY$ 
-	\item Drehbeschleunigung oben-nach-vorne in Grad pro Sekunde: $GyroZ$ 
-	\item absolute Drehbeschleunigung: $GyroAbs = \sqrt{GyroX^2+GyroY^2+GyroZ^2}$
-	\item Samplingrate (Anzahl Messwerte pro Sekunde) in Hz: $freq$
-\end{itemize}
-Das sind alle für die Algorithmen verwendete Werte. Optional wird als Index der Zeitpunkt $i$ des Messwerts verwendet, wobei $i$ und $i+1$ aufeinanderfolgende Werte sind.
-\subsection{Schritterkennung (StepActivityThreshold)}
-\subsubsection{naiver Threshold-Ansatz}
-Die Schritterkennung basiert auf einem klassischen Threshold-Ansatz:\\
-erkenne Schritt, falls 
-\begin{equation}
-	AccAbs > 1.15
-\end{equation}
-Bei jedem Messwert wird die absolute Beschleunigung gemessen. Überschreitet sie einen bestimmten Schwellenwert (z.B. die 1.15-fache Erdbeschleunigung), wird ein Schritt erkannt.\\ 
-Damit ein Schritt nicht mehrfach erkannt wird, erfolgt nach jedem Schritt eine Cooldown-Phase (z.B. 0.3 Sekunden lang), in der keine neuen Schritte mehr erkannt werden.
-\paragraph{Erkenntnisse}
-Schritte beim normalen Gehen werden immer erkannt, und zwar durch die Erschütterung (Beschleunigung nach unten) beim Auftreten. 
-\begin{figure}
-	\centering
-\includegraphics[width = 14cm]{bilder/steps.jpg}
-	\caption{Absolute Beschleunigung beim Laufen, gemessen mit phyphox-App und Beschleunigungssensoren des Handys  (Beachte, dass $9,81 m/s^2 \approx 1 G$)).}
-\end{figure} 
-Allerdings werden auch viele andere Bewegungen (z.B. Kopfschütteln) erkannt.
-\subsubsection{Verbesserter Ansatz}
-Um die Anzahl der ``false positives'' zu verringern, wird jetzt eine zusätzliche Bedingung eingeführt:\\
-Bei Schritten ist die Beschleunigung immer nach unten gerichtet. Daher wird jetzt zusätzlich gemessen, wo gerade vermutlich unten ist, indem ein Durchschnitt laufend aktualisiert wird. Ein sehr einfacher Ansatz ist dabei, den Durchschnitt exponentiell anzugleichen:
-\begin{equation}
-	avgAcc_i = (avgAccX_{i-1} * weight + AccX_i) /(weight + 1)
-\end{equation}
-Analog auch für die anderen Koordinaten. Initialisiert werden die Werte, als ob sich die Earables in Ausgangsposition befinden (Kopf gerade). Wir haben hierbei die Gewichtung $weight$ von der Samplingrate abhängig gemacht, sodass geringerer Samplerate die Angleichung nicht deutlich langsamer erfolgt:
-\begin{equation}
-	weight = freq * 2
-\end{equation}
-Nun kann der cosinus des Winkels zwischen approximierter Standardbeschleunigung und aktueller Beschleunigung berechnet werden:
-\begin{equation}
-	cos(\alpha) = \frac{avgAccX * AccX + avgAccY * AccY + avgAccZ * AccZ}{ AccAbs * AvgAccAbs },
-\end{equation}
-wobei $AvgAccAbs = \sqrt{avgAccX^2+avgAccY^2+avgAccZ^2}$ ist.\\
-\newline
-\noindent
-
-\subsection{Lauferkennung (RunningActivityThreshold)}
-Dieser Algorithmus ist sehr simpel und basiert auf dem Schritterkennungsalgorithmus: 
-\newline
-\input{tikx/running_automat.tex}
-Da der Nutzer seine Schrittfrequenz oft unregelmäßig ändert, macht es wenig Sinn, das Timeout (hier eine Sekunde) daran relativ anzupassen.\\
-Bei sehr zuverlässiger Schritterkennung könnte man das Timeout allerdings verringern; aktuell soll aber vor allem ``laufe'' nicht unterbrochen werden, falls z.B. ein einzelner Schritt nicht erkannt wurde.\\ 
-
-\subsection{Liegestützen-Erkennung (PushUpActivityThreshold)}
-Hier wird ein Zustandsautomat mit vier Zuständen verwendet (die Cooldowns sind eigentlich keine eigenen Zustände, aber so ist es besser visualisiert). 
-\paragraph{Grundlagen}
-Im Wesentlichen basiert der Algorithmus auf dem Fakt, dass die absolute Beschleunigung der Sensoren nur dann geringer als 1G sein kann, wenn die Kopfhöhrer sich Richtung Boden beschleunigen.\\
-Es wurde mit Cooldowns gearbeitet, um zu vermeiden, dass durch kurze Bewegungen fälschlicherweise Liegestütze gezählt werden.\\
-Außerdem sollte der Algorithmus unempflindlich sein, wenn der Nutzer (etwa aus Erschöpfung oder Verzweiflung an der Text-to-Speech-Stimme im ListenAndPerform Modus) seinen Kopf zur Seite dreht, hängen lässt oder Ähnliches. Dies wird dadurch erreicht, dass nur die absolute Beschleunigung berücksichtigt wird.
-\paragraph{Wertverlauf}
-Bei einer einzelnen Liegestütze ergibt sich der folgende Verlauf für die absolute Beschleunigung.\\
-\begin{figure}[ht]
-	\centering
-\includegraphics[width = 10cm]{bilder/pushup_sample.jpg}
-	\caption{Absolute Beschleunigung beim Laufen, gemessen mit phyphox-App und Beschleunigungssensoren des Handys (Beachte, dass $9,81 m/s^2 \approx 1 G$).}
-\end{figure} 
-Man kann sich bewusst machen, dass die absolute Beschleunigung der Kopfhöhrer in etwa proportional zum Druck ist, den man mit den Händen auf den Boden ausübt. So wird auch klar, wie die beiden Maxima im Verlauf zustande kommen: Erst bremst man die Abwärtsbewegung aus, dann drückt man sich wieder vom Boden weg. Analog gilt das auch für die beiden Minima. 
-\paragraph{Zustandsautomat}
-\input{tikx/pushups_automat.tex}
-
-\paragraph{Weitere Beobachtungen}
-Man könnte jetzt noch zusätzlich einen Timeout einführen (hält Zustand "abwärts" oder "aufwärts" zu lange, wurde die Liegestütze vermutlich abgebrochen) und die verschiedenen Thresholds feiner anpassen, um die Erkennung noch weiter zu verbessern.\\
-Der Algorithmus kommt an seine Grenzen, wenn man die Liegestütze extrem schnell ausführt (der Cooldown könnte an die Intensität der Beschleunigung angepasst werden), oder extrem langsam ausführt (da dann die Thresholds nicht mehr überschritten werden). Außerdem wird ab und zu schon eine Liegestütze erkannt, während man noch (zum Beispiel aus dem Stand) in die Startposition geht. Um diese Probleme zu umgehen wäre eine grundlegend andere Datenaufbereitung notwendig, beispielsweise mit einem Kalman-Filter.\\
-Der Algorithmus könnte übrigens auch äquivalent für Kniebeugen verwendet werden.
-\paragraph{Ausprobieren}
-Die folgende Version der App unter Menüpunkt Debug ist zum Ausprobieren geeignet (Algorithmus hier im DebugViewModel, andere Thresholds / Strategien können einfach ausprobiert werden): 
-\href{https://github.com/vlle1/earablesKIT/commit/6a4999ac8e2613298a6e6dd9bc85092ddd1b6133}{earablesKIT/debugView/Liegestütze-Erkennung}\\
-Dabei werden auch einige Debug-Informationen auf dem Display angezeigt, die am grüßten angezeigte Zahl entspricht hier dem Zustand des Automaten: 0 (oben), 1 (runter), 2 (unten) bzw. 3 (hoch).
-
-\subsection{Situps-Erkennung (SitUpActivityThreshold)}
-\paragraph{Voraussetzung} 
-Im Gegensatz zu den anderen Algorithmen gehen wir bei Situps davon aus, dass die Benutzer ihren Kopf während der Übung immer nach vorne ausrichten. Das liegt daran, dass wir das Gyroskop zur Erkennung mitbenutzen wollten, was quasi unmöglich wird, wenn der Kopf seitlich verdreht ist.\\
-Der Nutzer sollte außerdem die ``alten SitUps'' machen, d.h. er bewegt seinen Kopf bis in die aufrecht sitzende Position. Hier soll der Algorithmus darauf achten, dass ``halbe Situps'' (Crunches) nicht gewertet werden.
-\paragraph{Algorithmus}
-Es handelt sich wieder um einen Zustandsautomaten mit vier Zuständen.\\
-Der Algorithmus nutzt hier sowohl Gyroskop als auch Accelerometer. Die Drehbewegung des Kopfes bei der Ausführung von Situps ist das stärkste Merkmal. So muss $GyroZ$ beim aufrichten einen hohen positiven Wert haben, bei der Abwärtsbewegung einen entsprechenden negativen Wert.\\
-Um ähnliche Bewegungen (z.B. nicken) auszuschließen, wird zusätzlich die Beschleunigung nach vorne ($AccY$) betrachtet. Diese muss zu Start der Übung sehr hoch sein (allerdings negativ, da ja nach hinten), da der Nutzer mit dem Kopf nach oben schaut; wenn der Nutzer aufrecht sitzt, sollte sie kurze Zeit quasi null sein (da er aber währenddessen nach hinten beschleunigt ist sie tatsächlich kurz positiv).\\
-Durch die Kombination dieser Merkmale der Bewegung benötigt die Klassifikation keinerlei Cooldown, da es (zumindest versehentlich oder wenn man den Algorithmus nicht kennt) unwahrscheinlich ist, einen vollen Zyklus nur durch Wackeln mit dem Kopf oder ähnliches in kürzerer Zeit zu durchlaufen.
-\paragraph{Zustandsautomat}
-\input{tikx/situps_automat.tex}
-\paragraph{Beobachtungen}
-Bei diesem Bewegungsablauf gibt es sehr wenige ``false positives'', d.h. die Bedingungen sind so speziefisch, dass kaum eine andere Bewegung als Situp erkannt werden sollte.\\
-Oft bewegt man sich nicht ganz weit genug nach vorne, daher werden manche SitUps nich korrekt gezählt. Hier ist der Algorithmus also stark von der Auslegung der Übung abhängig (man könnte die Beschleunigungsbedingung im Zustand ``oben'' dann entsprechend weglassen).\\
-Aus der Nutzerperspektive wäre ein Ton oder eine Anzeige sinnvoll, wenn Zustand ``aufrecht'' erreicht wurde. Dies haben wir in unserem Entwurf allerdings nicht berücksichtigt und ist eher eine Idee, die erst am Ende der Implemetierung zustande kam.\\
-Eine weitere Schwachstelle ist außerdem, dass die Kopfhöhrer im Ohr etwas verschieden gedreht werden können; sind sie hier zu arg verdreht, funktioniert der Algorithmus sofort nicht mehr, da die Richtung durch die Beschränkung auf $AccY$ vorgegeben ist.
-\paragraph{Ausprobieren}
-Die folgende Version der App unter Menüpunkt Debug ist zum Ausprobieren geeignet (Algorithmus hier im DebugViewModel, andere Thresholds / Strategien können einfach ausprobiert werden): 
-\href{https://github.com/vlle1/earablesKIT/tree/cd774e370156ea3d13eff2879a2d7f0f7d541260}{earablesKIT/debugView/SitUps-Erkennung}\\
-Dabei werden auch einige Debug-Informationen auf dem Display angezeigt, die am grüßten angezeigte Zahl entspricht hier dem Zustand des Automaten: 0 (unten), 1 (hoch), 2 (oben) bzw. 3 (runter).
-\clearpage
-
-\section{Probleme und Änderungen am Entwurf}
-\label{aenderungen}
-\subsection{Bibliothek}
-
-\subsubsection{Umgang mit Exceptions}
-\paragraph{Beschreibung}
-Es war geplant, dass die meisten Schnittstellen der Bibliothek ein Boolean zurückgeben, der true ist, falls die Anweisung korrekt durchgeführt werden konnte und false , falls es Komplikationen gab.
-Um besser auf Fehler und Exceptions zu reagieren macht es mehr Sinn, dass diese Methoden nichts zurückgeben und im Fehlerfall Exceptions schmeißen.\\
-Dies wurde umgesetzt, falls sich der Nutzer mit der Schnittstelle IEarablesConnection mehrmals verbinden will, keine Verbindung aufgebaut werden konnte, eine ungültige SampleRate angegeben wurde (Werte zwischen 1 und 100 sind erlaubt) oder eine Aktion ausgeführt werden soll, die eine Verbindung voraussetzt, aber noch keine existiert.
-
-\paragraph{Änderungen in Klasse IEarablesConnection}
-Folgende Methoden haben nicht mehr den Rückgabetypen bool sondern void und schmeißen im Fehlerfall Exceptions:
-\begin{itemize}
-	\item[+] DisconnectFromDevice(): bool
-	\item[+] StartSampling(): bool
-	\item[+] StopSampling(): bool
-\end{itemize} 
-\paragraph{Hinzugefügte Exceptions}
-Folgende Exception-Klassen mussten ergänzt werden:
-\begin{itemize}
-	\item[$-$] AllreadyConnectedException
-	\item[$-$] ConnectionFailedException
-	\item[$-$] InvalideSampleRateException
-	\item[$-$] NoConnectionException
-	\item[$-$] ChecksumException %man könnte noch überlegen die Rechtschreibfehler aus den AlreadyConnectedException und InvalidSampleRateException raus zu nehmen, müsste man dann aber auch konsequent im code so machen.
-\end{itemize}
-Die Exceptions werden geschmissen, falls bereits ein Gerät verbunden ist, keine Verbindung aufgebaut werden kann, der Wert der eingegebenen Samplerate nicht im richtigen Bereich (zwischen 1 und 100) liegt, die Checksumme nicht korrekt ist oder keine Verbindung vorhanden ist, diese aber benötigt würde (z.B. um das Sampling zu starten).
-
-\subsubsection{Properties eingeführt}
-\paragraph{Beschreibung}
-\paragraph{Änderungen in Klasse IEarablesConnection}
-In einigen Fällen gibt es nun keine Get/Set Methoden mehr. Sie wurden durch Properties ersetzt.
-Folgende Properties sind als Attribute dazugekommen:
-\begin{itemize}
-	\item[+] Connected \textit{ersetzt } die Methode IsConnected(): bool
-	\item[+] IsBluetoothActive  \textit{ersetzt } die Methode IsBleutoothActive(): bool
-	\item[+] SampleRate  \textit{ersetzt } die Methode SetSamplingrate(heat: int): bool
-	\item[+] AccLPF \textit{ersetzt} SetLowPassFilterAccelerometer, GetLowPassFilterAccelerometer
-	\item[+] GyroLPF  \textit{ersetzt} SetLowPassFilterGyroscope, GetLowPassFilterGyroscope
-	\item[+] BatteryVoltage  \textit{ersetzt } die Methode GetBatteryVoltage(): float
-\end{itemize}
-
-\paragraph{Hinzugefügt in Klasse EarablesConnection}
-Zusätzlich zu den vererbten Änderungen ergeben sich folgende neue private Methoden:
-\begin{itemize}
-	\item[$-$] CheckIsBluetoothActive(): void
-	\item[$-$] GetAccelerometerLPF(): LPF\_Accelerometer
-	\item[$-$] SetAccelerometerLPF(LPF\_Accelerometer value): void
-	\item[$-$] GetGyroscopeLPF(): LPF\_Gyroscope
-	\item[$-$] SetGyroscopeLPF(LPF\_Gyroscope value): void
-	\item[$-$] GetBatteryVoltageFromDevice(): void
-	\item[$-$] initBatteryVoltage(): Task
-\end{itemize}
-  Hierbei wird GetBatteryVoltageFromDevice automatisch aufgerufen, wenn sich die BatteryVoltage der Earables ändert und überträgt den aktuellen Wert in das BatteryVoltage Attribut.\\
-  Die Methode initBatteryVoltage liest den BatteryVoltage Wert der Earables zum ersten Mal aus, falls sie abgefragt werden sollte, bevor sie sich das erste Mal aktualisiert hat.
-
-\subsubsection{Kapselung von Attributen der Bibliothek}
-\paragraph{Beschreibung}
-Für die Attribute config und characteristics ist es in Betracht der Datenkapselung sinnvoller, sie private zu halten. Sie werden von außen nicht direkt benötigt.
-\paragraph{Änderungen der Sichtbarkeit in Klasse IEarablesConnection}
-\begin{itemize}
-	\item[$-$] config
-	\item[$-$] characters
-\end{itemize}
+%Table template:
+\iffalse
+\begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
+	\hline
+	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	/T070/ & Der Nutzer startet die App. & OK\\
+	\hline	
+\end{tabular}
+\fi
+Die Testszenarien setzen sich aus den im Pflichtenheft genannten Testfällen (T) zusammen.
 
 
-\subsubsection{Namensänderungen bei Enums}
-\paragraph{Beschreibung}
-Die Enums können nicht mit Zahlen beginnen. Daher mussten sie umbenannt werden.
-\paragraph{Änderungen in den Enums LPF\_Accelerometer und LPF\_Gyroscope}
-Die Werte der Enums beginnen nun nicht mehr mit der Zahl sondern mit Hz. \\
-Beispielsweise wird statt 10Hz jetzt Hz10 verwendet.
-
-\subsubsection{Übergabe der Geräte beim Scanvorgang}
-\paragraph{Beschreibung}
-Es war ursprünglich gedacht, dass die StartScanning Methode eine Liste mit alle gefundenen Devices zurück gibt. Die Liste, die zurückgegeben wurde war aber immer leer, da Methoden aus dem Plugin BLE benutzt wurden, die asynchron laufen. So wurde zuerst die Liste zurückgegeben und danach wurde sie befüllt. Nach etlichen gescheiterten Versuchen auf die Threads und Tasks zu warten haben wir uns dafür entschieden jedes Mal ein Event zu schmeißen, wenn ein neues Device gescannt wurde. Die Argumente des Events beinhalten das neue Device.
-\paragraph{Hinzugefügt in der Klasse IEarablesConnection}
-\begin{itemize}
-	\item[+] event NewDeviceFound: EventHandler<NewDeviceFoundArgs> 
-\end{itemize}
-\paragraph{Klasse NewDeviceFound hinzugefügt}
-\begin{itemize}
-	\item[+] Device: IDevice
-	\item[+] <<create>> NewDeviceFound(device :IDevice)
-\end{itemize}
-
-\subsubsection{Static Methoden in der Klasse IEarablesConnection}
-\paragraph{Beschreibung}
-Es wurde angenommen, dass die Methoden, die auf die Events der Earables reagieren static sein müssen. Diese Annahme war falsch.
-\paragraph{Änderungen in der Klasse IEarablesConnection}
-Die folgenden Methoden sind nun nicht mehr statisch:
-\begin{itemize}
-  \item[+]OnValueUpdatedIMU():void
-  \item[+]OnPushButtonPressed():void
-  \item[+]OnDeviceConnected():void 
-\end{itemize}
-
-
-\subsubsection{Reaktion auf Verbinden und Trennen von Devices}
-\paragraph{Beschreibung}
-Es wurden zwei Methoden hinzugefügt, um den Connectionstate des Smartphones mit Hilfe des DeviceConnectionStateChanged Events weiterzuleiten.\\
- Sie werden aktiviert, wenn sich die Earables mutwillig vom Device trennen oder die Verbindung unterbrochen wird.
-\paragraph{Hinzugefügt in der Klasse EarablesConnection}
-
-\begin{itemize}
-	\item[-] OnDeviceDisconnected(object sender, DeviceEventArgs args): void 
-	\item[-] OnDeviceConnectionLost(object sender, DeviceErrorEventArgs args): void
-\end{itemize}
-
-\subsubsection{Funktionsweise der Klasse IMUDataExtractor}
-\paragraph{Beschreibung}
-Hier waren aus verschiedenen Gründen Änderungen nötig: 
-Die Methode ExtractIMUDataString benötigt für die Berechnung der Sensordaten zusätzlich noch den Offset. Dieser wird nun als vierter Parameter übergeben.\\
- Die Skalierungsfaktoren, die als Parameter übergeben werden können nicht nur ganzzahlig sein, hier sind Fließkommazahlen sinnvoller.\\
-Die Klasse wurde der Vollständigkeit halber um zwei Methoden ergänzt, die die Range des Accelerometers und des Gyroscopes aus dem entsprechenden Bytearray ermitteln.
-\paragraph{Änderungen in der Klasse IMUDataExtractor}
-\begin{itemize}
-	\item[+] \underline{ExtractIMUScaleFactorAccelerometer(byteString: int): double}
-	\item[+] \underline{ExtractIMUScaleFactorGyoscope(byteString: int): int}
-	 \item[+] \underline{ExtractIMUDataString(byteString: int, accScaleFactor: double,} \\
-	 \underline{GyroScaleFactor: int, byteOffset: byte[])} 
-\end{itemize}
-\paragraph{Hinweis}
-Bei der Methode ExtractIMUDataString wird ein Offset vom Typ Bytearray als Parameter übergeben. Dieser wird von uns aus jedoch nicht in der Berechnung der IMUDaten verwendet.
-\paragraph{Hinzugefügt in der Klasse IMUDataExtractor}
-\begin{itemize}
-  \item[+] \underline{ExtractIMURangeAccelerometer(byte[] bytes): int} 
-	\item[+] \underline{ExtractIMURangeGyroscope(byte[] bytes): double} 
-\end{itemize}
-\subsubsection{Charakteristik umbenannt}
-\paragraph{Beschreibung}
-Eine Charakteristik wurde umbenannt.
-\paragraph{Änderungen in der Klasse Constants}
-\begin{itemize}
-	\item[+] \underline{string OFFSET\_CHAR} \textit{ersetzt} \underline{ string IMU\_FULL\_SCALE\_RANG\_CHAR} 
-\end{itemize}
-\paragraph{Änderungen in der Klasse Characteristics}
-\begin{itemize}
-	\item[+] ICharacteristic OffsetChar \textit{ersetzt} ICharacteristic IMUScaleRangeChar
-\end{itemize}
-
-\subsubsection{Verbindungsüberprüfung}
-\paragraph{Beschreibung}
-Um festzustellen ob eine Verbindung zu einem Device besteht wurde eine Methode hinzugefügt
-\paragraph{Ergänzungen in der Klasse EarablesConnection}
-\begin{itemize}
-	\item[-]  CheckConnection():void  
-\end{itemize}
-Sie wird am Anfang aller  Methode, die eine Verbindung voraussetzen, aufgerufen und prüft ob eine Verbindung existiert. Falls keine existiert schmeißt sie eine NoConnectionException Exception.
-
-\subsubsection{Zwischenpeichern der Scalierungsfaktoren von Acc und Gyro}
-\paragraph{Beschreibung}
-Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt. Das gleiche Problem ergab sich auch beim lesen des Offset Bytearrasy. Dieser wird jetzt in einer privaten Variable in der Klasse EarablesConnection gespeichertund nicht in der ConfigContainer Klasse, da es sich hierbei nicht um eine Konfiguration handelt.
-
-\paragraph{Ergänzungen in der Klasse EarablesConnection}
-\begin{itemize}
-	\item[$-$] byteOffset: byte[]
-\end{itemize}
-
-\paragraph{Ergänzungen in der Klasse ConfigContainer}
-\begin{itemize}
-	\item[+] AccScaleFactor: int 
-	\item[+] GyroScaleFactor: int
-	\item[$-$]  setSamplingRate(int rate): void 
-\end{itemize}
-Beim setzten des Samplingrate Propertys wird die Methode setSamplingRate ausgeführt und stellt sicher, dass nur gültige Werte angenommen werden.
-
-\subsubsection{Testmethoden hinzugefügt}
-\paragraph{Beschreibung}
-Die Scalefactoren hängen von der gewählten Range des Accelerometers und des Gyroscopes ab. Um zu testen ob der richtige Wert in die  Earables geschrieben wird gibt es nun zusätzlich zwei Methoden, die die Range setzen und weitere zwei um die Range von den Earables zu lesen.
-Außerdem wird beim setzen der LPF, in den configs gespeichert auf welchen Wert sie momentan gesetzt sind. Beim Auslesen wird also nicht der Wert von den Earables gelesen sonder der Wert der in den configs steht. Das hat den selben Grund weshalb wir die gefundenen Devices, beim scannen, nicht als Liste zurückgeben. Um den aktuellen LPF der Earables auszulesen benutzen wir wieder asynchrone Methoden aus dem Plugin.BLE. Das heißt der Wert des LPF wird erst zurückgegeben und dann erst ausgelesen, was das Ergebnis verfälscht. Um das zu vermeiden werden die Werte für die LPF nicht aus den Earables ausgelesen sondern aus den Configs, in denen sie gespeichert wurden. Für Testzwecke wurden jedoch trotzdem zwei Methoden implementiert, die die Werte für die LPF direkt aus den Earables lesen. Diese Methoden werden auch in der BibTestApp zum auslesen verwendet.
-
-\paragraph{Ergänzungen in der Klasse EarablesConnection}
-\begin{itemize}
-	\item[$-$] setAccelerometerRange(range :int): void
-	\item[$-$] setGyroscopeRange(range: int): void
-	\item[$-$ ] getAccelerometerLPFFromDevice(): void
-	\item[$-$ ] getGyroscopeLPFFromDevice(): void
-\end{itemize}
-Ermöglichen es die Range zu setzen und den LPF aus den Earables auszulesen. Die Methoden um die Range auszulesen befinden sich in der Klasse IMUDataextractor. Die Methoden zum auslesen des  LPF schreiben den LPF in eine Variable. Bei Verwendung dieser Methoden müssen die Variablen vorher global deklariert werden, um auf sie zuzugreifen zu können. Da wir die Methoden nicht benutzen und sie nur zum testen da sind existieren diese globalen Variablen in unsere Bibliothek nicht.
-
-\subsubsection{Checksummen Überprüfung}
-\paragraph{Beschreibung}
-Die Bytearrays, die in den Charakteristiken der Earables stehen, beinhalten ein Byte, in dem eine Checksumme gespeichert wird. Sie setzt sich aus der Addition der Restlichen Bytes zusammen. 
-
-\paragraph{Ergänzungen in der Klasse EarablesConnection}
-\begin{itemize}
-	\item[$-$] CheckChecksum(bytes: byte[]): void
-	\item[$-$] CheckIMUChecksum(bytes: byte[]): void
-\end{itemize}
-Beim erhalten des Bytearrays überprüfen wir nun ob diese mit dem Sollwert übereinstimmt oder ob bei der Übertragung ein paar Bits verloren gegangen sind. Falls es keine Übereinstimmung gibt wird eine Exception geschmissen. Es gibt eine Methode die sich für die Überprüfung aller Bytearrays eignet außer für die Überprüfung des IMUData Bytearrays da es leicht anders aufgebaut ist als die restlichen Bytearrays. Deshalb gibt dafür es zwei Verschiedene Methoden
-
-\subsection{Erweiterungsmodul}
+\subsection{Laufmodus}
+Änderungen: Keine
+\\
+\\
+\begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
+	\hline
+	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	/T070/ & Der Nutzer startet die App. & OK\\
+	\hline
+	& Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & OK\\
+	\hline
+	& Nach dem Startvorgang der App wird in den Modus \glqq Laufmodus\grqq{} gewechselt. & OK\\
+	\hline
+	/T104/ & Falls es schon einen Laufvorgang zuvor gab, werden nun die Anzahl der zurückgelegten Schritte und die zurückgelegte Distanz angezeigt.& OK\\
+	\hline
+	& Die Earables werden korrekt am Ohr des Nutzers angebracht. & OK\\
+	\hline
+	& Der Nutzer startet den Laufmodus. & OK\\
+	\hline
+	& Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an. & OK\\
+	\hline
+	& Die App zeigt dem Nutzer die aktuelle Schrittfrequenz und die Anzahl der bisher. & OK\\
+	\hline
+	& Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an. & OK\\
+	\hline
+	& Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu "stehend". & OK\\
+	\hline	
+\end{tabular}
 
 
-\subsubsection{Private Attribute aufgrund konkreter Implementierung}
-\paragraph{Beschreibung}
-Bei der Implementierung des Erweiterungsmoduls ist aufgefallen, dass beim Entwurf ein großer Bestandteil der Implementierung des Erweiterungsmoduls noch nicht konkret durchdacht war.\\
-Für eine möglichst saubere Impementierung mussten also einige private Attribute ergänzt werden.\\ 
-Diese Änderung ist allerdings auch nicht sehr bemerkenswert, da die Impementierung der Erkennungsalgorithmen vor allem davon abhängen, wie die Algorithmen funktionieren, dies wurde aber erst während der Implementierungsphase erarbeitet. \\
-\paragraph{Hinweis}
-Die aktuellen Algorithmen zur Erkennung sind im Abschnitt \hyperref[algorithmen]{Implementierung der Erkennungsalgorithmen} erklärt.
-\paragraph{Ergänzung in der Klasse ActivityManager}
-\begin{itemize}
-	\item [$-$]\_activityProvider: ServiceProvider 
-\end{itemize}
-Das Attribut \_activityProvider speichert den aktuellen Wert der Property ActivityProvider der Klasse.
-\paragraph{Ergänzungen in der Klasse Activity}
-\begin{itemize}
-	\item [\#] \_frequency: int \textit{speichert die aktuelle Frequenz der empfangenen Daten}.
-\end{itemize}
-\paragraph{Ergänzungen in der Klasse AbstractRunningActivity}
-Hier konnte das Schmeißen der Events und der Zustand (Nutzer läuft bzw. läuft nicht) abstrahiert werden, da er bei jeder Implementierung gleich ist.
-\begin{itemize}
-	\item [\#] \_runningState: bool
-	\item [\#] ChangeDetected: void 
-\end{itemize}
-Dabei soll von der konkreten Impementierung ChangeDetected() aufgerufen werden, anstatt manuell den runningState anzupassen und das Event zu feuern.
-\paragraph{Ergänzungen in der Klasse StepActivityThreshold}
-\begin{itemize}
-	\item [$-$] const REF\_WEIGHT\_REL: int
-	\item [$-$] const TRIGGER\_THRESHOLD: double
-	\item [$-$] const ANGLE\_TOLERANCE\_COS: double
-	\item [$-$] const COOLDOWN\_DURATION: double
-	\item [$-$] cooldown: double
-	\item [$-$] \_avgAccAbsolute: double
-	\item [$-$] \_avgAccX: double
-	\item [$-$] \_avgAccY: double
-	\item [$-$] \_avgAccZ: double
-\end{itemize}
-Die Attribute \_avgAcc\dots geben dabei die Approximierung der durchschnittlichen Absoluten bzw. gerichteten Beschleunigung an.
-\paragraph{Ergänzungen in der Klasse SitUpActivityThreshold}
-\begin{itemize}
-	\item [$-$] const STATE\_COUNT: int
-	\item [$-$] const LOWER: bool[]
-	\item [$-$] const VALUE\_INDEX: int[]
-	\item [$-$] const THRESHOLD: double[]
-	\item [$-$] \_state: int
-\end{itemize}
-\paragraph{Ergänzung in der Klasse RunningEventArgs}
-Hier wurde im Entwurf nur der Konstruktor vergessen.
-\begin{itemize}
-	\item [+] <<create>> RunningEventArgs(isRunning: bool)
-\end{itemize}
-\paragraph{Ergänzungen in der Klasse RunningActivityThreshold}
-\begin{itemize}
-	\item [$-$] const TIMEOUT\_LENGTH : double
-	\item [$-$] \_timeout\_counter : double
-	\item [$-$] \_subDetection : AbstractStepActivity
-	\item [$-$] \_OnStepRecognized(object sender, ActivityArgs e): void \textit{Methode, die von \_subDetection aufgerufen wird.}
-\end{itemize}
-\paragraph{Ergänzungen in der Klasse PushUpActivityThreshold}
-\begin{itemize}
-	\item [$-$] const STATE\_COUNT: int
-	\item [$-$] const LOWER: bool[]
-	\item [$-$] const ABS\_ACC\_THRESHOLD: double[]
-	\item [$-$] const COOLDOWN\_DURATION: double[]
-	\item [$-$] \_state: int
-	\item [$-$] \_cooldown: double
-	
-\end{itemize}
-\subsubsection{Strategie bei der Datenverarbeitung}
-\paragraph{Beschreibung}
-Ursprünglich war geplant, die Datenverarbeitung der Activities über einen Puffer zu regeln, in dem immer die neuesten Werte gesammelt gespeichert werden. Wir haben uns in der Implementierung aber entschieden, dass diese Puffer im Allgemeinfall und hierbei tatsächlich in allen konkreten Impementierungen nicht nötig ist.\\
-Dadurch wird es allerdings nötig, dass der Zustand der Activity anders zurückgesetzt werden kann (da es jetzt keine Queue mehr gibt, die dann einfach gelöscht werden sollte).
-\paragraph{Änderungen in Klasse Activity und Kindklassen}
-Die entsprechende Änderung betrifft auch alle Activities (PushUpActivityThreshold, RunningActivityThreshold, SitUpActivityThreshold, sowie StepActivityThreshold) und die zugehörigen abstrakten Klassen.
-\begin{itemize}
-	\item [-] buffer: Queue<DataEventArgs> \textit{entfernt}.
-	\item [\#] Analyse(DataEventArgs: data) \textit{benötigt jetzt die aktuellen Sensordaten, da die Queue diese nicht mehr zur Verfügung stellt}.
-	\item [\#] Activate(): void \textit{hinzugefügt. Setzt den Zustand der Activity zurück}.
-\end{itemize}
-\subsection{Model (andere Bestandteile)}
+\subsection{Zählmodus}
+Änderungen: Keine
+\\
+\\
+\begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
+	\hline
+	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	/T070/ & Der Nutzer startet die App. & OK\\
+	\hline
+	& Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & OK\\
+	\hline
+	/T090/ & Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Zählmodus\grqq . & OK\\
+	\hline
+	& Die Earables werden korrekt am Ohr des Nutzers angebracht. & OK \\
+	\hline
+	& Der Nutzer wählt eine verfügbare Übung aus. & OK \\
+	\hline
+	& Der Nutzer startet den gewählten Vorgang. & OK \\
+	\hline
+	& Der Nutzer führt die Übung 15 (natürliche Zahl) mal aus. & OK \\
+	\hline
+	& Der Nutzer stoppt den laufenden Vorgang. & OK \\
+	\hline
+	/T200/ & Die App zeigt 15 an. & OK \\
+	\hline
+\end{tabular}
 
-\subsubsection{Synchrone Datenbank}
-\paragraph{Beschreibung}
-Ursprünglich war es geplant die Datenbank asynchron zu implementieren. Für unsere Anwendung ist dies allerdings nicht nötig, weswegen wir auf eine synchrone Datenbank gewechselt sind. Das ergibt einen klaren Kontrollfluss, welcher besser nachvollziehbar ist. Die Synchronisierung schadet nicht der Performance, da keine großen Datenbankzugriffe getätigt werden.
-
-\paragraph{Änderungen in den Klassen IDataBaseConnection und DataBaseConnection}
-\begin{itemize}
-	\item[+] GetAllEntries(): List<DBEntry> Namen von GetAllEntriesAsync() \textit{geändert} und Rückgabewert von Task<List<DBEntry>> in List<DBEntry> \textit{geändert}.
-	\item[+] GetMostRecentEntries(): List<DBEntry> Namen von GetMostRecentEntriesAsync() \textit{geändert} und Rückgabewert in List<DBEntry> \textit{geändert}.
-\end{itemize}
-\paragraph{Attributänderung der Klassen DataBaseConnection}
-\begin{itemize}
-	\item[$-$] \_database: SQLiteConnection als synchrone Datenbank \textit{hinzugefügt}.
-\end{itemize}
-
-\subsubsection{Speichern der Datenbankeinträge}
-\paragraph{Beschreibung}
-Zum Speichern der DBEntries wurde eine neue Klasse namens DBEntryToSave hinzugefügt, da die Datenbank keine komplexeren Datentypen speichern kann, sondern nur primitive. DBEntryToSave ist abgekapselt im Datenbank Service. 
-
-\paragraph{Hinzufügen der Klasse DBEntryToSave}
-\begin{itemize}
-	\item[+] DateTime: DateTime  Attribut \textit{hinzugefügt}. Dient als Primary key, welcher in der Datenbank gespeichert wird.
-	\item[+] TrainingsDataAsString: string  Attribut \textit{hinzugefügt}. Beinhaltet die Trainingsdaten als string, welcher in der Datenbank gespeichert wird. Dieser bildet sich aus dem Dictionary TrainingsData der Klasse DBEntry.
-\end{itemize}
-
-\paragraph{Änderungen in Klasse DBEntry}
-
-\begin{itemize}
-	\item[+] const StepAmountIdentifier: string: Identifier für das Dictionary für die Schrittanzahl
-	\item[+] const PushAmountIdentifier: string: Identifier für das Dictionary für die Liegestützenanzahl
-	\item[+] const SitUpAmountIdentifier: string: Identifier für das Dictionary für die SitUpanzahl
-	\item[+] ConvertToDBEntryToSav()e: DBEntryToSave: Methode \textit{hinzugefügt} um die Instanz in eine Instanz vom Type DBEntryToSave. 
-	\item[+] ParseDbEntry(): Nun überladen mit den Parametern vom Typ DBEntryToSave und vom Typ string.
-	
-\end{itemize}
-
-\subsection{Views und ViewModel}
-
-\subsubsection{Commandstruktur bei Modi}
-\paragraph{Beschreibung}
-Beim Starten eines Modus durch Drücken des Start Buttons wurde ursprünglich ein Command direkt an das ViewModel gesendet und dort die StartActivity Methode aufgerufen. Da aber beim Starten auch die View gewechselt werden soll und dies aus dem ViewModel nicht umsetzbar ist, muss das Drücken des Start Buttons zunächst im Codebehind der zugehörigen View behandelt und dann weiter an das ViewModel delegiert werden. 
-\paragraph{Änderungen in Klasse BaseModeViewModel}
-\begin{itemize}
-	\item[+] StartActivityCommand: ICommand und StopActivityCommand: ICommand \textit{entfernt}.
-	\item[+] \textit{abstract} StartActivity(): bool und \textit{abstract} StopActivity(): bool Sichtbarkeit von protected auf public \textit{verändert} und Rückgabewerte auf bool \textit{geändert}.
-	\item[\#] CheckConnection(): bool Rückgabetyp zu bool \textit{geändert}.
-\end{itemize}
-\paragraph{Änderungen in Klassen CountViewModel, StepViewModel und ListAndPerformViewModel}
-Bei den Kindklassen verändern sich analog die vererbten StartActivity und StopActivity Methoden.
-\begin{itemize}
-	\item[+] StartActivity(): bool und StopActivity(): bool Sichtbarkeit von protected auf public \textit{verändert} und Rückgabewerte auf bool \textit{geändert}.
-	\item[+] UpdateFrequency(): void Sichtbarkeit von private auf public geändert (\textbf{Nur StepModeViewModel}). 
-\end{itemize}
-\paragraph{Änderungen in CountModePage, StepModePage und ListenAndPerformPage}
-\begin{itemize}
-	\item[$-$] ViewModel: (jeweiliger Type)ViewModel \textit{hinzugefügt}.
-	\item[+] OnStartButtonClicked (sender: object, args: EventArgs): void \textit{hinzugefügt}.
-	\item[+] ChangeView (): void \textit{hinzugefügt}.
-\end{itemize}
-\paragraph{Änderungen in CountModeActivePage, StepModeActivePage und ListenAndPerformActivePage}
-\begin{itemize}
-	\item[$-$] ViewModel: (jeweiliger Type)ViewModel \textit{hinzugefügt}.
-	\item[+] OnStopButtonClicked (sender: object, args: EventArgs): void \textit{hinzugefügt}.
-	\item[+] ChangeView (): void \textit{hinzugefügt}.
-\end{itemize}
-
-\subsubsection{Wrapperklasse für Activities}
-\paragraph{Beschreibung}
-Um die Anzahl lokaler Attribute und Fallunterscheidungen zu verringern, wurde eine Wrapperklasse für Activities  erstellt. Damit kann dynamisch auf den Namen der Activity sowie deren Counter und der vom Servicemanager gelieferten Analyse zugegriffen werden. Sie implementiert außerdem die Schnittstelle INotifyPropertyChanged, da einige Attribute der Klasse per Databinding angezeigt und während eines laufendes Modus verändert werden.
-\paragraph{Hinzufügen der Klasse ActivityWrapper}
-\begin{itemize}
-	\item[+] \_activity: Activity \textit{hinzugefügt}.
-	\item[+] Name: string \textit{hinzugefügt}.
-	\item[+] Amount: int \textit{hinzugefügt}.
-	\item[$-$] \_counter: int \textit{hinzugefügt}.
-	\item[+] Counter: int \textit{hinzugefügt}.
-	\item[+] <<create>> ActivityWrapper(name: string, activity: Activity, amount: int) \textit{hinzugefügt}.
-	\item[+] <<create>> ActivityWrapper(name: string, activity: Activity) \textit{hinzugefügt}.
-	\item[\#] OnPropertyChanged([CallerMemberName]): void \textit{hinzugefügt}.
-\end{itemize}
-\paragraph{Änderungen in CountModeViewModel}
-\begin{itemize}
-	\item[+] \_pushUpActivityWrapper: ActivityWrapper \textit{hinzugefügt}.
-	\item[+] \_sitUpActivityWrapper: ActivityWrapper \textit{hinzugefügt}.
-	\item[+] \_comingSoon: ActivityWrapper \textit{hinzugefügt}.
-	\item[+] PossibleActivities: ObservableCollection<ActivityWrapper> Datentyp der Listenelemente von string zu ActivityWrapper\textit{geändert}.
-	\item[+] SelectedActivity: ActivityWrapper Datentyp von string zu ActivityWrapper \textit{geändert}.
-\end{itemize}
-\paragraph{Änderungen in ListenAndPerformViewModel}
-\begin{itemize}
-	\item[+] ActivityList: ObservableCollection<ActivityWrapper> Datentyp der Listenelemente von string zu ActivityWrapper\textit{geändert}.
-	\item[+] SelectedActivity: ActivityWrapper Datentyp von string zu ActivityWrapper \textit{geändert}.
-	\item[+] ActiveActivity: ActivityWrapper \textit{hinzugefügt}.
-	\item[-] \_activeActivity: ActivityWrapper \textit{hinzugefügt}.
- 	\item[+] ActivityAmounts: OberservableCollection<int> \textit{entfernt}. 
-\end{itemize}
-
-\subsubsection{Data Binding Endlosschleife}
-\paragraph{Beschreibung}
-Im Entwurf wurde nicht berücksichtigt, dass jedes Attribut, welches per Data Binding an Viewelemente gebunden und nicht per default Two-Way binded ist,  auch ein äquivalentes privates Attribut benötigt wird, auf das bei den settern und gettern zugegriffen wird, um Endlosschleifen beim Aktualisieren der Attribute zu verhindern. 
-\paragraph{Änderungen im StepModeViewModel}
-\begin{itemize}
-	\item[$-$] \_stepsDoneLastTime: int \textit{hinzugefügt} und Datentyp des public Attributs von string zu int geändert.
-	\item[$-$] \_distanceWalkedLastTime: int \textit{hinzugefügt} und Datentyp des public Attributs von string zu int geändert.
-	\item[$-$] \_lastDataTime: string \textit{hinzugefügt}.
-	\item[$-$] \_stepCounter: int \textit{hinzugefügt}.
-	\item[$-$] \_distanceWalked: int \textit{hinzugefügt}.
-	\item[$-$] \_isRunning: bool \textit{hinzugefügt}.
-	\item[$-$] \_stepFrequency: double \textit{hinzugefügt} und Datentyp des public Attributs von string zu double geändert.
-\end{itemize}
-\paragraph{Änderungen im CountModeViewModel}
-\begin{itemize}
-	\item[$-$] \_minutes: string \textit{hinzugefügt}. 
-	\item[$-$] \_seconds: string \textit{hinzugefügt}.
-	\item[$-$] \_milliseconds: string \textit{hinzugefügt}.
-\end{itemize}
-\paragraph{Änderungen im ListenAndPerformViewModel}
-\begin{itemize}
-	\item[$-$] \_minutes: string \textit{hinzugefügt}.
-	\item[$-$] \_seconds: string \textit{hinzugefügt}.
-	\item[$-$] \_milliseconds: string \textit{hinzugefügt}.
-\end{itemize}
-
-\subsubsection{Speichern der gesammelten Daten der Modi}
-\paragraph{Beschreibung}
-Das Speichern der ausgeführten Sit-ups, Push-ups oder gelaufenen Schritten wurde in eine neue Methode ausgelagert, um Fallunterscheidungen zu vermeiden.
-\paragraph{Änderungen in Klassen CountViewModel, StepViewModel und ListAndPerformViewModel} 
-\begin{itemize}
-	\item[$-$] saveData(): void \textit{hinzugefügt}.
-\end{itemize}
-
-\subsubsection{Zwischenspeichern von Services}
-\paragraph{Beschreibung}
-Um die Übersichtlichkeit in Methoden zu wahren, werden häufig benutzte Services im Konstruktor einmalig vom Service Manager geholt und in einem Attribut gespeichert.
-\paragraph{Änderungen in Klassen CountModeViewModel, StepModeViewModel und ListAndPerformViewModel} 
-\begin{itemize}
-	\item[$-$] \_activityManager: IActivityManager \textit{hinzugefügt}.
-	\item[$-$] \_dataBaseConnection: IDataBaseConnection \textit{hinzugefügt} .
-\end{itemize}
-
-\subsubsection{Neue Event Methode für RunningEvents}
-\paragraph{Beschreibung}
-Der StepMode muss gleichzeitig von zwei Aktivitätsanalysen Events bekommen, von der RunningActivity und von der StepActivity. Wenn die OnActivityDone Methode bei beiden Event Handlern der Aktivitäten registriert wird, müssten mehrere Fallunterscheidungen und eine Auswertung der nicht implementierten ActivityArgs erfolgen. Stattdessen wird eine neue Methode hinzugefügt, sodass bei jedem Event Handler nur eine seperate Methode registiert ist.
-\paragraph{Änderung im StepModeViewModel}
-\begin{itemize}
-	\item[+]  OnRunningDone(sender: object, args: ActivityArgs): void \textit{hinzugefügt}.
-\end{itemize}
-
-\subsubsection{Auslagerung der Registrierung im CountModeViewModel}
-\paragraph{Beschreibung}
-Um sicher zu gehen, dass der Nutzer beim Starten des Zählmodus eine gültige Aktivität ausgewählt hat, wird eine neue Methode hinzugefügt, die im Erfolgsfall auch die Event Methode des ViewModels beim korrekten Event Handler registriert.
-\paragraph{Änderung im CountModeViewModel}
-\begin{itemize}
-	\item[$-$]  RegisterActivity(): bool \textit{hinzugefügt}.
-\end{itemize}
-
-\subsubsection{Progressbar im ListenAndPerformViewModel}
-\paragraph{Beschreibung}
-Zu besseren Visualisierung des Fortschritts des Nutzers während einer Trainingseinheit wurde eine Progressbar hinzugefügt. Diese wird mit einer Hilfsvariable nach der Ausführung einer Wiederholung einer Aktivität aktualisiert und resettet sich nach jedem abgearbeiteten Listeneintrag.
-\paragraph{Änderungen im ListenAndPerformViewModel }
-\begin{itemize}
-	\item[$-$] Repetitions: int \textit{hinzugefügt}.
-	\item[$-$] \_progress: double \textit{hinzugefügt}
-	\item[+] ProgressLive: double \textit{hinzugefügt}
-\end{itemize}
-\paragraph{Änderung in ListenAndPerformActivePage}
-\begin{itemize}
-	\item[+] Progress: ProgressBar \textit{hinzugefügt}.
-\end{itemize}
-
-\subsubsection{Ablauf in ListenAndPerform}
-\paragraph{Beschreibung}
-Die Abarbeitung der vom Nutzer zusammengestellten Aktivitätsliste erfolgt nun vollständig auf Event Basis, anstelle innerhalb der DoActivity Methode. Die OnActivityDone Methode zählt nun nicht mehr nur immer einen Counter hoch, sondern prüft gleichzeitig auch, ob die festgelegte Anzahl an Wiederholungen gemacht wurde, um in dem Fall über den Iterator die nächste Aktivität aus der Liste zu holen. Die Zwischenspeicherung der bisher geleisteten Push-ups und Sit-ups regelt die neue Methode IncreaseResultCounter, welche von OnActivityDone aufgerufen wird. Die Methode CheckNextActivity ersetzt die DoActivity Methode und kümmert sich um das Registrieren der OnActivityDone Methode beim korrekten Event Handler. 
-\paragraph{Änderungen im ListenAndPerformViewModel}
-\begin{itemize}
-	\item[$-$] CheckNextActivity(): void \textit{ersetzt} DoActivity(): void.
-	\item[$-$] IncreaseResultCounter(): void \textit{hinzugefügt}.
-\end{itemize}
-	
-\subsubsection{Pause in ListenAndPerform}
-\paragraph{Beschreibung}
-Um den Ablauf einer Pause reibungslos zu ermöglichen wurde ein zusätzlicher Timer eingebaut, der nur aktiviert wird wenn der nächste Listeneintrag in der Aktivitätsliste eine Pause ist. Dabei wird in der CheckNextActivity Methode jede Sekunde ein Event an die neu hinzugefügte Methode OnTimedEvent gesendet. Diese Methode funktioniert dann analog zur OnActivityDone Methode und ruft die nächste Aktivität aus der Liste auf, wenn die Pausenzeit abgelaufen ist.
-\paragraph{Änderungen im ListenAndPerformViewModel}
-\begin{itemize}
-	\item[$-$] PauseTimer: Timer \textit{hinzugefügt}.
-	\item[$-$] OnTimedEvent(): void \textit{hinzugefügt}.
-\end{itemize}
-
-\subsubsection{Weitere Anzeigeelemente in Viewklassen}
-\paragraph{Beschreibung}
-Ergänzung einiger zusätzlicher Anzeigeelemente.
-\paragraph{Änderungen in StepModePage}
-\begin{itemize}
-	\item[+] StepModeTrainingsDateLabel: Label \textit{hinzugefügt}.
-	\item[+] StepModeLastStepsLabel: Label \textit{hinzugefügt}.
-	\item[+] StepModeLastDistanceLabel: Label \textit{hinzugefügt}.
-\end{itemize}
-\paragraph{Änderungen in StepModeActivePage}
-\begin{itemize}
-	\item[+] StepModeStartDataTime: Label \textit{hinzugefügt}.
-	\item[+] CurrentDate: Label \textit{hinzugefügt}.
-	\item[+] StepModeUnbindedStatusLabel: Label \textit{hinzugefügt}.
-	\item[+] StepModeUnbindedStepsDoneLabel: Label \textit{hinzugefügt}.
-	\item[+] StepModeUnbindedFrequencyLabel: Label \textit{hinzugefügt}.
-	\item[+] DistanceWalkedLabel: Label \textit{entfernt}.
-\end{itemize}
-\paragraph{Änderungen in CountModePage}
-\begin{itemize}
-	\item[+] PossibleActivitiesLabel:Label \textit{hinzugefügt}.
-\end{itemize}
-\paragraph{Änderungen in ListenAndPerformActivePage}
-\begin{itemize}
-	\item[+] CurrentActivityUnbindedLabel:Label \textit{hinzugefügt}.
-\end{itemize}
-
-\subsubsection{Überladung im ExceptionHandlingViewModel}
-\paragraph{Beschreibung}
-Das ExceptionHandlingViewModel ist ein statisches Singleton mit der zentralen Methode HandleException(error: Exception). Da wir nicht immer die Fehlermeldung der Exception werfen wollen haben wir uns dazu entschieden eine Standardfehlermeldung zu implementieren. Dazu haben wir die Methode HandleException überladen. Sie existiert jetzt auch ohne ein Argument, was der Standardfehlermeldung entspricht.
-\paragraph{Änderung in ExceptionHandlinViewModel}
-\begin{itemize}
-	\item[+] HandleException(): void  Methodenüberladung hinzugefügt. Wirft eine Standardfehlermeldung in Form eines Displayalerts.
-\end{itemize}
-
-\subsubsection{Aktualisierung DataOverViewPage}
-\paragraph{Beschreibung}
-Bei der Standardimplementierung des Hamburgermenus wird bei der Navigation zu einer Seite nur beim ersten Aufruf eine Instanz erstellt. Die DataOverViewPage muss bei jedem Aufruf der Seite neu aktualisiert werden. Die Datenbankeinträge erhält sie von der Datenbank per Methodenaufruf. Um bei jedem Erscheinen neu zu aktualisieren, wurde sich bei dem EventHandler Appearing mit der neuen Methode OnAppearing registriert.
-
-\paragraph{Änderung in DataOverViewModel}
-\begin{itemize}
-	\item[+] OnAppearing(sender: object, e: EventArgs): void  Eventmethode hinzugefügt, welche die Daten neu lädt.
-\end{itemize}
+\subsection{Start/Stop Musikmodus}
+Änderungen: Die Funktion wurde aus dem Laufmodus in den Modus \glqq Musik Modus\grqq{} umbenannt.
+\\
+\\
+\begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
+	\hline
+	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	/T070/ & Der Nutzer startet die App. & OK\\
+	\hline
+	& Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & OK\\
+	\hline
+	& Der Nutzer spielt Musik mit der vorinstallierten Musik-App ab. & OK\\
+	\hline
+	& Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Music Mode\grqq . & OK\\
+	\hline
+	& Die Earables werden korrekt am Ohr des Nutzers angebracht. & OK\\
+	\hline
+	& Der Nutzer beginnt zu gehen. & OK \\
+	\hline
+	& Der Nutzer startet den gewählten Vorgang. & OK \\
+	\hline
+	& Der Nutzer hört auf zu gehen. & OK \\
+	\hline
+	/T210/ & Die Musik wird pausiert. & OK \\
+	\hline
+	& Der Nutzer geht weiter. & OK \\
+	\hline
+	/T210/ & Die Musik startet automatisch wieder. & OK \\
+	\hline
+\end{tabular}
 
 
-\subsubsection{Verarbeitung des Import/Export}
-\paragraph{Beschreibung}
-Im Entwurf haben wir uns dazu entschieden,dass das ImportExportViewModel die komplette Verarbeitung des Importieren und Exportieren der Daten macht. Um eine Datei auszuwählen haben wir uns dazu entschieden einen CrossFilePicker zu benutzen. Dieser lässt den User auswählen, von wo/wohin geladen/gespeichert werden soll. Diese Funktionalität haben wir in das Codebehind von der page ImportExportPage verlegt.
+\subsection{Lauschen\&Agieren}
+Änderungen:
+\\
+\\
+\begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
+	\hline
+	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	/T070/ & Der Nutzer startet die App. & OK\\
+	\hline
+	& Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & OK \\
+	\hline
+	/F090/ & Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Lauschen\&Agieren\grqq . & OK \\
+	\hline
+	& Die Earables werden korrekt am Ohr des Nutzers angebracht. & OK \\
+	\hline
+	/T221/ & Der Nutzer stellt sich ein Training aus den verfügbaren Übungen zusammen. & OK \\
+	\hline
+	& Der Nutzer startet den gewählten Vorgang. & OK \\
+	\hline
+	/T222/ & Dem Nutzer wird per Text-To-Speech die aktuelle Übung angesagt. & OK \\
+	\hline
+	& Der Nutzer führt die Übung aus. & OK \\
+	\hline
+	& Die letzten beiden Schritte werden so lange wiederholt, bis alle ausgewählten Übungen erledigt sind. & OK \\
+	\hline
+	& Der Vorgang wird automatisch beendet. & OK \\
+	\hline
+	/T223/ & Die App zeigt die benötigte Zeit für den Vorgang an. & OK \\
+	\hline
+\end{tabular}
 
-\paragraph{Änderung in ImportExportViewModel}
-\begin{itemize}
-	\item[+] ExportData(path: FileData): void  Methode ExportData bekommt nun ein pfad in den es die zu exportierende Datei speichern soll.
-	\item[+] ImportData(path: FileData): void  Methode ImportData bekommt nun ein pfad welcher angibt, wo die zu lesende Datei im Speicher liegt.
-\end{itemize}
-
-\paragraph{Änderung in ImportExportPage}
-\begin{itemize}
-	\item[$-$] ImportButton\_Clicked(): void  Eventmethode fürs reagieren auf den ImportButtonclick \textit{hinzugefügt}
-	\item[$-$] ExportButton\_Clicked(): void  Eventmethode fürs reagieren auf den ExportButtonclick \textit{hinzugefügt}
-\end{itemize}
-
-\subsubsection{Aktualisierung ScanningDevices}
-\paragraph{Beschreibung}
-Das ScanningPopUp zeigt nach dem betätigen des Buttons ``Scan Devices'' die Liste der gefundenen Geräte an. Sobald ein geeignetes Gerät gefunden wurde, soll die View geupdated werden (der Button ``Verbinden'' wird enabled). Diese Logic beinhaltet das Codebehind der Seite PopUpScanningPage.
-
-\paragraph{Änderung in PopUpScanningPage}
-\begin{itemize}
-	\item[+] UpdateList(sender: object, e: PropertyChangedEventArgs): Methode \textit{hinzugefügt}. Es handelt sich um eine Eventmethode, welche bei dem Update der DeviceList aufgerufe wird. Dise überprüft, ob die Liste leer ist und ändert dem entsprechend die View ab.
-	\item[$-$] ConnectButton\_Clicked() : Methode \textit{hinzugefügt}. Dies ist eine Eventmethode, welche beim Betätigen des Connect button aufgerufen wird.
-\end{itemize} 
-
-\subsubsection{Änderungen im MusicMode}
-\paragraph{Beschreibung}
-Die zum MusicMode gehörende View wurde umbenannt in \textit{MusicModePage}.
-
-\paragraph{Änderungen der View}
-\begin{itemize}
-	\item[\#] TwoWayButton: Beim Drücken des Buttons wird nicht
-			\textit{StartActivityCommand} und \textit{StopActivityCommand}
-			ausgeführt, sondern der neue Command \textit{ToggleMusicMode}.
-			Außerdem ist die Beschriftung des Buttons an das \textit{StartStopLabel}
-			gebunden, um jeweils \glqq{}Start\grqq{} und \glqq{}Stop\grqq{} korrekt anzuzeigen. \textit{geändert}
-	\item[+] CurrentStatusLabel: Zeigt an, ob der Nutzer gerade steht oder geht. \textit{hinzugefügt}
-	\item[+] Image: Gif zur Visualisierung ob der Nutzer steht oder geht. \textit{hinzugefügt}
-	\item[+] Label: Quellenangabe des Gifs. \textit{hinzugefügt}
-\end{itemize}
-
-\paragraph{Änderungen des ViewModels}
-\begin{itemize}
-	\item[\#]public isRunning: Bool - Property von private zu Public geändert um DataBinding zu ermöglichen. \textit{geändert}
-	\item[\#]public StartActivity(): Bool - Aufgrund der Änderungen im \textit{BaseModeViewModel} jetzt public und hat Rückgabetyp Bool \textit{geändert}
-	\item[\#]public StopActivity(): Bool - Aufgrund der Änderungen im \textit{BaseModeViewModel} jetzt public und hat Rückgabetyp Bool \textit{geändert}
-	\item[\#]private RestartMusic(): Initialisiert den Musik Player und wird von StartActivity aufgerufen. \textit{geändert}
-	\item[+]private \_musicModeActive: Bool - Speichert den aktuellen Zustand des Musikmodus. \textit{hinzugefügt}
-	\item[+]:public PropertyChanged: PropertyChangedEventHandler - Event um die View upzudaten. \textit{hinzugefügt}
-	\item[+]:public ToggleMusicMode: Command - Startet/Stoppt den MusicMode. Setzt außerdem \_musicModeActive. \textit{hinzugefügt}
-	\item[+]:public StartStopLabel: String - Gibt den korrekten Text für den Button der View zurück. \textit{hinzugefügt}
-	\item[+]:public CurrentStatusLabel: String - Gibt den korrekten Text für das CurrentStatusLabel zurück. \textit{hinzugefügt}
-	\item[+]:protected OnPropertyChanged(string name): void - Benachrichtigt die View, falls es Änderungen gibt. \textit{hinzugefügt}
-	\item[\-]StopMusic: Das Starten und Stoppen der Musik wird von der Property \textit{isRunning} übernommen. \textit{entfernt}
-\end{itemize}
+\subsection{Einstellungen}
+Änderungen: Die Standardsprache ist Englisch, daher wurde /T260/ auf Deutsch geändert.
+\\
+\\
+\begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
+	\hline
+	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	/T070/ & Der Nutzer startet die App. & OK\\
+	\hline
+	& Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & OK \\
+	\hline
+	& Nach dem Startvorgang der App wechselt der Nutzer in die Ansicht \glqq Einstellungen\grqq . & OK\\
+	\hline
+	/T250/ & Der Nutzer ändert seinen Namen. & OK \\
+	\hline
+	/T260/ & Der Nutzer ändert die Sprache auf Deutsch & OK \\
+	\hline
+	/T270/ & Dem Nutzer löscht die gespeicherten Vorgangsdaten. & OK \\
+	\hline
+	/T280/ & Dem Nutzer ändert die Samplingrate & OK \\
+	\hline
+	/T285/ & Der Nutzer ändert seine Schrittlänge. & OK \\
+	\hline
+	& Der Nutzer klickt auf speichern. & OK \\
+	\hline
+	& Der Nutzer beendet die App. & OK \\
+	\hline
+	/T070/ & Der Nutzer startet die App. & OK \\
+	\hline
+	& Der Nutzer wechselt in die Ansicht \glqq Einstellungen\grqq . & OK \\
+	\hline
+	& Die Einstellungen sind exakt so, wie sie vorher eingestellt wurden. & OK \\
+	\hline
+\end{tabular}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Implementierungsplan}
-\paragraph{Gantt Chart}
-Zu Beginn der Implementierungsphase haben wir uns zum ersten Treffen überlegt, wie wir den Entwurf nun gliedern können. Dazu haben wir zunächst alle Aufgaben aufgeschrieben und diese nach Muss- und Wunschkriterien aufgeteilt. Somit konnten wir eine erste Priorisierung erstellen.\\
- Der nächste Schritt war, dass wir Abhängigkeiten unter den Aufgabe hergestellt haben. Zum Beispiel muss das ``Daten weiterschicken'' und die ``Navigation'' vor dem Entwurf der Erkennungsalgorithmen implementiert werden. Damit konnte man eine zeitliche Relation erstellen, was wir in einem Gantt Chart visualisieren. Hierbei wird das Startdatum und die Dauer der Aufgabe vermerkt und in einer Timeline dargestellt.
-Die Dauer haben wir mit der Methode ``Planungspoker'' geschätzt. Die Aufgaben teilten wir zusätzlich einzelnen Teammitgliedern zu.
-\newline
-\newline
-\includegraphics[width=\textwidth, height=0.5\textheight]{bilder/Implementierungsplan.png}
+\subsection{Erstnutzung}
+Änderungen: Der Punkt \glqq Der Nutzer klickt auf SAVE\grqq{} wurde hinzugefügt. Außerdem wurde die Sprache von Englisch auf Deutsch geändert.
+\\
+\\
+\begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
+	\hline
+	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	/T070/ & Der Nutzer startet die App. & OK\\
+	\hline
+	/T290/ & Der Nutzer wird aufgefordert seinen Namen und seine Schrittlänge zu setzen. & OK \\
+	\hline
+	& Der Nutzer wählt im Hamburgermenü den Reiter Einstellungen aus. & OK \\
+	\hline
+	/T260/ & Der Nutzer ändert die Sprache auf Deutsch. & OK \\
+	\hline
+	& Der Nutzer klickt auf \glqq SAVE\grqq . & OK \\
+	\hline
+	& Danach wechselt der Nutzer in den \glqq Laufmodus\grqq . & OK \\
+	\hline
+	& Der Nutzer schließt die App. & OK \\
+	\hline
+	/T070/ & Der Nutzer startet die App erneut und befindet sich nun im \glqq Laufmodus\grqq . & OK \\
+	\hline	
+	& Sein Name, seine Schrittlänge und die in-App Sprache wurden gespeichert. & OK \\
+	\hline
+\end{tabular}
+
+
+
+\subsection{Vorgangsdaten importieren/exportieren}
+Änderungen: \glqq Import/Export\grqq{} wurde in \glqq Dateimanagement\grqq umbenannt.
+\\
+\\
+\begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
+	\hline
+	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	/T070/ & Der Nutzer startet die App. & OK\\
+	\hline
+	& Der Nutzer wählt über das Hamburgermenü den Reiter \glqq Dateimanagement\grqq . & OK \\
+	\hline
+	& Der Nutzer exportiert seine Daten. & OK\\
+	\hline
+	/T270/ & Der Nutzer löscht seine Daten. & OK\\
+	\hline
+	/T300/ & Der Nutzer importiert seine Daten aus einer CSV-Datei. & OK\\
+	\hline
+	& Die Daten sind alle wieder vorhanden so als ob der Nutzer sie nie gelöscht hätte. & OK\\
+	\hline
+\end{tabular}
+
+\subsection{Trainingsdaten anschauen}
+Änderungen: -
+\\
+\\
+\begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
+	\hline
+	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	/T070/ & Der Nutzer startet die App. & OK\\
+	\hline
+	& Der Nutzer wechselt über das Hamburgermenü in die Datenübersicht. & OK \\
+	\hline
+	/T320/ & Dem Nutzer werden die letzten Trainingsdaten der letzten 30 Vorgangstage angezeigt. & OK \\
+	\hline
+\end{tabular}
+
+\subsection{Pop-up}
+Änderungen: -
+\\
+\\
+\begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
+	\hline
+	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	/T070/ & Der Nutzer startet die App. & OK\\
+	\hline
+	& Das Pop-up Fenster erscheint. & OK \\
+	\hline
+	/T160/ & Der Nutzer klickt das Pop-up weg. & OK \\
+	\hline
+	& Der Nutzer versucht einen Laufvorgang zu starten. & OK \\
+	\hline
+	& Das Pop-up erscheint. & OK \\
+	\hline
+	& Der Nutzer stellt eine Verbindung zu den Earables her. & OK \\
+	\hline
+	& Der Nutzer entfernt sich mit seinem Smartphone von de Earables. & OK \\
+	\hline
+	/T150/ & Das Smartphone verliert die Bluetooth Verbindung zu den Earables und das Pop-up erscheint. & OK \\
+	\hline
+\end{tabular}
+
+
+
+\section{Test-Coverage}
+
+\section{Regressionstests}
+
+\section{Beschreibung Fehler}
 
 \section{Anhang}
+\subsection{Unit Test Reports}
+\subsubsection{Bibliothek}
+\subsubsection{App}
+
 \subsection{Links}
 \subsubsection{Bibliothek}
 NuGet Package: \url{https://www.nuget.org/packages/EarablesBLE}\\
