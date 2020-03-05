@@ -10,7 +10,7 @@ Protokoll vom 3.2., sollte weiterverwendet werden.
 - Mock für die Bibliothek (Benni) - schafft er nicht
 - Tests aus Pflichtenheft in ManuelleViewTests eintragen (David) - done
 - Testaufgaben einteilen (alle) - !
-- Fakedaten für Algorithmen (Aufzeichnungsmöglichkeit in App schreiben) - über Äpp (unterpunkt Valle)
+- Fakedaten für Algorithmen (Aufzeichnungsmöglichkeit in App schreiben) - über App (Valle) 
 - Mappe / Dokument für Praxistest entwerfen (Umgebung, was sagen wir den Testpersonen, wo lang laufen (bitte eher Strecke entlang, draußen, geradeaus) (david!)
   - Tests z.B.: 2\*10 liegestütze, 2\*10 Tisups, 2\*50 Schritte geradeaus (wo platz ist)
   - Trainingsablauf
@@ -27,7 +27,7 @@ Protokoll vom 3.2., sollte weiterverwendet werden.
       - ??(Was, wenn Kopfhöhrer falsche sachen zurückgeben  - keine Priorität, sollte laut tobi gemacht werden)
       - IMUDataExtractor (klein, Bytefolge auf Werte) (unassigned)
     - Erweiterungsmodul 
-      - Algorithmen (mit Fakedaten prüfen) (valle)
+      - Algorithmen (mit Fakedaten prüfen) (Jan)
       - ActivityManager (klein)
     - DBService
     - SettingsService nicht (noch schlimmer als Bibliothek)

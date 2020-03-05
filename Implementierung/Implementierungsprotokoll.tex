@@ -9,6 +9,9 @@
 \usepackage{lmodern}
 \usepackage{titlesec}
 \usepackage{longtable}
+\usepackage{tabularx} % table
+\usepackage{array}	%% ??
+\usepackage[table]{xcolor}% http://ctan.org/pkg/xcolor
 % Notwendig für Links im Text
 \usepackage{hyperref}
 %%\usepackage{svg}
@@ -234,6 +237,9 @@ Dabei werden auch einige Debug-Informationen auf dem Display angezeigt, die am g
 
 \section{Probleme und Änderungen am Entwurf}
 \label{aenderungen}
+\paragraph{Legende}
+Im Folgenden wird bei der Auflistung der Methodensignaturen und Attribute UML-Syntax verwendet.\\
+Dabei bedeutet $-$ ``private'', $+$ ``public'' und \# ``protected''.
 \subsection{Bibliothek}
 
 \subsubsection{Umgang mit Exceptions}
@@ -797,7 +803,135 @@ Die zum MusicMode gehörende View wurde umbenannt in \textit{MusicModePage}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Implementierungsplan}
+\section{Übersicnt}
+\subsection{Erfüllte und nicht Erfüllte Anforderungen}
+\paragraph{Mussanforderungen}
+\begin{center}
+\begin{tabular}{ |m{1cm}| m{11cm} | c | } 
+	\hline
+	\textbf{Nr.} & \textbf{Kriterium} & \textbf{Status}\\
+	\hline   F010 & Gemessene Rohdaten des IMU in Echtzeit zur Verfügung stellen.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F030 & Steuerungsparameter (Abtastrate, Wertebereich Gyroskop/Beschleunigungssensor, Tiefpassfilter) ändern. %%die einzigen "Messparameter" die wir ändern können sind die abtastrate und die start/stop des samplings
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F040 & Die Datenaufnahme des IMU starten und stoppen.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F060 & \textsf{Schritterkennung:} Es wird erkannt ob der Nutzer einen Schritt tätigt.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F061 & \textsf{Schrittfrequenzerkennung:} Während der Nutzer läuft wird die Schrittfrequenz ermittelt.
+	&    \cellcolor{green!25} Erfüllt
+	\\  \hline   F062 & \textsf{Schrittanzahl wird gezählt:} Die Schritte des Nutzers werden gezählt.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F063 & \textsf{Berechnung Distanz:} Die zurückgelegte Distanz des Nutzers soll berechnet werden können.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F070 & \textsf{App starten:} Der Nutzer kann die App über sein Smartphone starten. Die App startet im Laufmodus.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F075 & \textsf{Vorgang starten:} Der Nutzer kann den modusspezifischen Vorgang starten. Dann wird der Modus seiner Beschreibung nach aktiv ausgeführt.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F080 & \textsf{Vorgang stoppen:} Der Nutzer kann den modusspezifischen Vorgang stoppen.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F085 & \textsf{Resultat anzeigen:} Nach Stoppen wird das Vorgangsresultat angezeigt.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F090 & \textsf{Modus wechseln:} Der Nutzer kann zwischen Modi über ein einblendbares Menü wechseln.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F100 & \textsf{Laufmodus:} Liveanzeige, ob der Nutzer gerade \glqq läuft\grqq{} oder \glqq steht\grqq{}, mit Hilfe von /F060/.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F101 & \textsf {Schrittfrequenz anzeigen:} Im Modus \glqq{}Laufmodus\grqq{} wird die Schrittfrequenz des Nutzers angezeigt, sobald der Vorgang gestartet wird. Die Schrittfrequenz wird mit Hilfe von /F061/ ermittelt.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F102 & \textsf {Schrittanzahl anzeigen:} Im Modus \glqq{}Laufmodus\grqq{} wird die Schrittanzahl des Nutzers angezeigt, sobald der Vorgang gestartet wird. Die Schrittanzahl wird mit Hilfe von /F062/ ermittelt. Die Schrittzählung beginnt/endet mit dem Starten/Stoppen des Vorgangs.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F103 & \textsf{Schrittanzahl Speichern:} Die App speichert die Schrittanzahl pro Tag für die letzten 30 Tage an denen der Laufmodus aktiv war.
+	&    \cellcolor{green!25} Erfüllt 
+	\\
+	\hline
+	
+   
+\end{tabular}
+\end{center}
+\vspace{1cm}
+
+\begin{center}
+	\begin{tabular}{ |m{1cm}| m{11cm} | c | } 
+		\hline
+		\textbf{Nr.} & \textbf{Kriterium} & \textbf{Status}
+
+	\\  \hline   F140 & \textsf{BLE-Verbindung herstellen:} Sobald der Nutzer die App startet erscheint ein Pop-up Fenster, über das der Nutzer sein Smartphone mit den Earables verbinden kann. Ohne BLE-Verbindung kann der Nutzer keinen Vorgang starten.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F150 & \textsf{BLE-Verbindung unterbrochen:} Falls die App die Verbindung zu den Earables verlieren sollte, erscheint wieder das Pop-up Fenster aus /F140/.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F160 & \textsf{BLE-Verbindung nicht notwendig:} Der Nutzer kann das Pop-up Fenster aus /F140/ wegklicken.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F165 & \textsf{BLE-Verbindung später herstellen:} Falls der Nutzer keine BLE-Verbindung mit den Earables besitzt und einen Vorgang startet, so erscheint zunächst das Pop-up Fenster aus /F140/.
+	&    \cellcolor{green!25} Erfüllt 
+	\\
+	\hline
+   
+\end{tabular}
+\end{center}
+\vspace{1cm}
+\paragraph{Wunschanforderungen}
+\begin{center}
+	\begin{tabular}{ |m{1cm}| m{11cm} | c | } 
+		\hline
+		\textbf{Nr.} & \textbf{Kriterium} & \textbf{Status}
+
+	\\  \hline   F170 & \textsf{Erkennung Sit-ups} Das Erweiterungsmodul kann erkennen, ob der Nutzer Sit-ups macht.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F180 & \textsf{Erkennung Liegestütze} Das Erweiterungsmodul kann erkennen, ob der Nutzer Liegestütze macht.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F200 & \textsf{Zählmodus:} Zählen von Liegestützen oder Sit-ups mit Hilfe von /F170/ und /F180/.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F210 & \textsf{Start/Stopp Musikmodus:} Musik stoppt wenn Nutzer stehen bleibt, läuft wenn der Nutzer läuft. Bei diesem Modus werden keine Resultate angezeigt.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F220 & \textsf{Modus \glqq Lauschen\&Agieren\grqq:}
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F221 &Der Nutzer kann sich einen Trainingsablaufplan zusammenstellen, indem er in einer Liste Aktivitäten hinzufügt (Liegestütze, Sit-ups, Laufen, Pausenzeit). - Laufen entfernt.
+	&    \cellcolor{blue!25} Modifiziert 
+	\\  \hline   F222 & Der Nutzer erhält Sprachanweisungen per TTS für die nächste Übung während des Vorgangs. Die nächste Sprachanweisung kommt erst, wenn der Nutzer die aktuelle Aktivität vollständig beendet hat.
+	&    \cellcolor{green!25} Erfüllt 
+	\\
+	\hline
+		
+   
+\end{tabular}
+\end{center}
+\vspace{1cm}
+
+\begin{center}
+	\begin{tabular}{ |m{1cm}| m{11cm} | c | } 
+		\hline
+		\textbf{Nr.} & \textbf{Kriterium} & \textbf{Status}
+	\\	\hline   F223 & Neben dem Vorgangsresultat wird dem Nutzer nach Beenden des Vorgangs auch die Zeit angezeigt, in der er die Aktivitäten absolviert hat. - Im Laufmodus nicht.
+	&    \cellcolor{blue!25} Modifiziert 
+	\\  \hline   F224 & Die Sprachanweisung erfolgt in der Sprache der in-App Einstellungen.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F250 & Der Nutzer kann seinen Namen in den Einstellungen ändern.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F260 & Der Nutzer kann die Sprache der App verändern. (Möglichkeiten sind Deutsch und Englisch)
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F265 & Die Sprache der App wird sich bei der Erstnutzung an die Systemsprache des Nutzers anpassen. Standardmäßig ist dies Englisch, bei deutscher Systemsprache wird Deutsch eingestellt.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F270 & Der Nutzer kann die gespeicherten Vorgangsdaten löschen.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F280 & Der Nutzer kann die Steuerungsparameter anpassen. - Für bessere Benutzerfreundlichkeit wurde dieses Feature auf wenige Werte die Samplerate beschränkt.
+	&    \cellcolor{blue!25} Modifiziert
+	\\  \hline   F285 & Der Nutzer kann die Schrittlänge für die Distanzmessung anpassen.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F290 & Aufforderung der Angabe von Name und Schrittlänge bei Erstnutzung. - wurde als unwichtig weggelassen.
+	&    \cellcolor{red!25} Nicht Erfüllt
+	\\  \hline   F300 & Der Nutzer kann in der App seine gesamten Vorgangsdaten exportieren, importieren und löschen. Dabei wird das CSV-Format genutzt. - Export über den nativen Share-Dialog
+	&    \cellcolor{green!25} Modifiziert 
+	\\  \hline   F310 & Speicherung von Sit-ups, Liegestütze und Schrittanzahl für jeden Tag, an dem ein Vorgang aktiv war.
+	&    \cellcolor{green!25} Erfüllt 
+	\\  \hline   F320 & Der Nutzer kann die gespeicherten Vorgangsdaten /F310/ der letzten 30 Tage, an denen mindestens ein Vorgang gestartet wurde, einsehen. 
+	&	 \cellcolor{green!25} Erfüllt 
+	\\
+	\hline
+\end{tabular}
+\end{center}
+\vspace{1cm}
+
+\subsection{Implementierungsplan}
 \paragraph{Gantt Chart}
 Zu Beginn der Implementierungsphase haben wir uns zum ersten Treffen überlegt, wie wir den Entwurf nun gliedern können. Dazu haben wir zunächst alle Aufgaben aufgeschrieben und diese nach Muss- und Wunschkriterien aufgeteilt. Somit konnten wir eine erste Priorisierung erstellen.\\
  Der nächste Schritt war, dass wir Abhängigkeiten unter den Aufgabe hergestellt haben. Zum Beispiel muss das ``Daten weiterschicken'' und die ``Navigation'' vor dem Entwurf der Erkennungsalgorithmen implementiert werden. Damit konnte man eine zeitliche Relation erstellen, was wir in einem Gantt Chart visualisieren. Hierbei wird das Startdatum und die Dauer der Aufgabe vermerkt und in einer Timeline dargestellt.
