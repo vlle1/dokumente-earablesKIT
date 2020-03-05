@@ -46,3 +46,11 @@ Protokoll vom 3.2., sollte weiterverwendet werden.
 - Rekursionstests haben wir nicht so wirklich gemacht. Wie sollen wir mit dem Teil jetzt weitermachen (Ignorieren / im Nachhinein schreiben)? Nacharbeiten
 - Was sollen wir mocken? Vollständige Schnittstelle der Bibliothek
 - Wie auf iOS testen? mock / live / lassen? do it.
+
+
+# 5.3. Tobi, Anja
+
+- Auch Integrationstest sollten gemacht werden!
+- veränderungen an Testszenarien dokumentieren
+- Tests möglichst umfassend dokumentieren
+- Implementiernungsprotokoll überarbeiten (mittlere Priorität)
