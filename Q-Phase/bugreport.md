@@ -10,14 +10,15 @@
 
 # wenn man ein zu kleinen ... wenn man ein zu kleines Display hat, wird manches abgeschnitten (von Jan)
   - z.B. bei Laufmodus (aktiv)
-# wenn man im Musikmodus ein paar mal öfter auf Start/Stopp klickt stürzt die App schnell ab (vol Valle)
+# wenn man im Musikmodus ein paar mal öfter auf Start/Stopp klickt stürzt die App schnell ab (von Valle)
   - zuverlässig reproduzierbar, sobald man den Button 3 bis 4 mal kurz hintereinander drückt.
-# edit entry in listenandperform
-  - (fixed) Dialog wegklicken führt zu Löschung, sollte aber da bleiben
-  - Dialog überarbeiten (edit führt zu "add acitivity", was, wenn man dann abbricht?) (drüber reden)
-# Sampling Rate (von valle)
-  - Einstellen funkitoniert noch nicht zuverlässig (hinkt immer eine Einstellung hinterher oder so?)
 
+# Sampling Rate (von valle)
+  - Einstellen funktioniert noch nicht zuverlässig (hinkt immer eine Einstellung hinterher oder so?)
+
+# Püp-üp Hinweis (valle)
+  - beim Verbinden: anzeigen, dass Verbindung gerade hergestellt wird, damit Nutzer nicht weg klickt.
+  
 # Akzent TTS ( unassigned - nicht soo wichtig)
   - Listen and Perform auf deutsch zu deutscher Aussprache zwingen müsste machbar sein: https://docs.microsoft.com/de-de/xamarin/essentials/text-to-speech
 # Muic Mode ( unassigned - nicht soo wichtig)
@@ -28,26 +29,27 @@
   - Darstellungsform der Buttons ändern: add sollte in der Tabelle angezeigt werden, damit klar ist, dass man was am ende anfügt.
   - Standardmäßiges Workout klären.
   - Feature: Anfeuern ("noch 5 usw.")
+  
 # Settings Hinweis (unassigned - nicht so wichtig)
   - Beim Ändern der Sprache sollte der Hinweis angezeigt werden, dass man die App neu starten soll. (have you tried turning the earables off and on again?)
+
+
+ ------- erledigt --------
+
+ # edit entry in listenandperform (valle)
+  - (fixed) Dialog wegklicken führt zu Löschung, sollte aber da bleiben
+  - (fixed) Dialog überarbeiten (edit führt zu "add acitivity", was, wenn man dann abbricht?) (drüber reden)
+  # Resource Strings formatieren(valle) 
+  - (fixed) Ausrufezeichen weg usw.
+  - (fixed) "you have taken 123 seps done" (Stepmode) - grammatikalische Struktur in Nachrichten berücksichtigen
+  - (fixed) Data Overview (valle)
+  - (fixed) Shouldn't say "welcome to", Strings besser formatieren.
+  
+# Frequenz - Berechnung anpassen (valle)
+  - (fixed) -- statt 0, falls stehend
+  - (fixed) Berechnung anpassen (regression über letzte 5 Schritte).
+
 # Impressum 
   - (fixed) Impressum fehlt noch... (benni)
 # Timer im Zählmodus hat ADHS
   - (fixed) auch die Millisekunden sind zuverlässig dreistellig, sodass die Zahl nicht immer hin und her springt.
- ----------------------------------------------------------------------------------------------------------
-# ignore everything down here it is just small things I will change them later..
-  - Resources (valle) 
-    - Ausrufezeichen weg usw.
-  - Frequenz (valle)
-    - -- statt 0, falls stehend
-    - Berechnung anpassen (regression über letzte 5 Schritte).
-
-  - Püp-üp (valle)
-    - beim Verbinden: anzeigen, dass Verbindung gerade hergestellt wird, damit Nutzer nicht weg klickt.
-  
-  - Tichy-slang als dritte Sprache auswählbar machen 
-
-  - sachen formatieren:
-    - "you have taken 123 seps done" (Stepmode).
-    - Data Overview (valle)
-    - Shouldn't say "welcome to", Strings besser formatieren.
