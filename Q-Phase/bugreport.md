@@ -15,6 +15,7 @@
 
 # Sampling Rate (von valle)
   - Einstellen funktioniert noch nicht zuverlässig (hinkt immer eine Einstellung hinterher oder so?)
+  - wenn man die App neu startet, wird die in den Einstellungen angezeigte Samplingrate zurückgesetzt (- fehlt hier logik?)
 
 # Püp-üp Hinweis (valle)
   - beim Verbinden: anzeigen, dass Verbindung gerade hergestellt wird, damit Nutzer nicht weg klickt.
