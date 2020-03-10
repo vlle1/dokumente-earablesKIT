@@ -7,11 +7,13 @@ Protokoll vom 3.2., sollte weiterverwendet werden.
 
 # Aufgaben
 ## Vorbereitung
-- Mock für die Bibliothek (Benni) - schafft er nicht
-- Tests aus Pflichtenheft in ManuelleViewTests eintragen (David) - done
-- Testaufgaben einteilen (alle) - !
-- Fakedaten für Algorithmen (Aufzeichnungsmöglichkeit in App schreiben) - über App (Valle) 
-- Mappe / Dokument für Praxistest entwerfen (Umgebung, was sagen wir den Testpersonen, wo lang laufen (bitte eher Strecke entlang, draußen, geradeaus) (david!)
+%% H Häkchen, X weggelassen, A in Arbeit
+
+- X Mock für unsere Bibliothek (Benni) - NOPE
+- H Tests aus Pflichtenheft in ManuelleViewTests eintragen (David) - done
+- H Testaufgaben einteilen (alle) - !
+- H Fakedaten für Algorithmen (Aufzeichnungsmöglichkeit in App schreiben) - über App (Valle) 
+- H Mappe / Dokument für Praxistest entwerfen (Umgebung, was sagen wir den Testpersonen, wo lang laufen (bitte eher Strecke entlang, draußen, geradeaus) (david!)
   - Tests z.B.: 2\*10 liegestütze, 2\*10 Tisups, 2\*50 Schritte geradeaus (wo platz ist)
   - Trainingsablauf
   - 10 Schritte mit pausen und anderen Bewegungen, eine Minute lang -> Dokumentieren, was für Bewegungen gemacht wurden.
@@ -20,27 +22,25 @@ Protokoll vom 3.2., sollte weiterverwendet werden.
   - Fakedaten aufnehmen für 2 Situps, 2 Liegestütze, 2 Schritte
 - in testfiles (RealLiveTests) soll übersichts-statistik automatisch berechnet werden. (David)
 ## Testaufgaben
-- Bib testen (Erwin) (eigenes Ding um Bib zu testen. Steuerungsparameter, Rohtaden.)
-- Unit-Tests schreiben (siehe Einteilung)
+- A Bib testen (Erwin) (eigenes Ding um Bib zu testen. Steuerungsparameter, Rohtaden.)
+- A Unit-Tests schreiben (siehe Einteilung)
   - model:
-    - Bib 
-      - ??(Was, wenn Kopfhöhrer falsche sachen zurückgeben  - keine Priorität, sollte laut tobi gemacht werden)
-      - IMUDataExtractor (klein, Bytefolge auf Werte) (unassigned)
+    - A Bib 
+      - ??(Was, wenn Kopfhöhrer falsche sachen zurückgeben  - keine Priorität, sollte laut tobi gemacht werden) (Test für checksum schreiben)
+      - H IMUDataExtractor (klein, Bytefolge auf Werte) (done)
     - Erweiterungsmodul 
-      - Algorithmen (mit Fakedaten prüfen) (Jan)
-      - ActivityManager (klein)
-    - DBService
-    - SettingsService nicht (noch schlimmer als Bibliothek)
+      - A Algorithmen (mit Fakedaten prüfen) (Valle)
+      - ende: ActivityManager (klein)
+    - nochmal überarbeiten: DBService
+    - X SettingsService nicht (noch schlimmer als Bibliothek)
     - Servicemanager (klein)(benni)
   - viewmodel: 
     - StepModeViewModel (Pionier-Mock)(abgucken von DatabaseConnectionTest)
     - dann Aufwandschätzung, andere viewmodels testen...
-  - view: keine (nur manuelle view tests.)
-- Szenarien testen und Wunsch/Mussanforderungen daraufhin abhaken. (manuell) (David, Jan, Benni)
-- Praxis: Testpersonen (jeder mit einer Testperson)
+- A Szenarien testen und Wunsch/Mussanforderungen daraufhin abhaken. (manuell) (David, Jan, Benni)
+- A Praxis: Testpersonen (jeder mit einer Testperson)
 ## Abschlussaufgaben
 - Testabdeckung ermitteln (für "testbare" Bestandteile)
-
 
 # Fragen (Tobi, Anja)
 - Rekursionstests haben wir nicht so wirklich gemacht. Wie sollen wir mit dem Teil jetzt weitermachen (Ignorieren / im Nachhinein schreiben)? Nacharbeiten

@@ -367,6 +367,45 @@ Die Testszenarien setzen sich aus den im Pflichtenheft genannten Testfällen (T)
 
 \section{Test-Coverage}
 
+\section{Bib Test App}
+
+\subsection{Einleitung}
+
+Da wir für die Bluetoothverbindung in unserer Bibliothek das NuGet "Bluetooth LE plugin for Xamarin" benutzen erschwert dies das Testen mit XUnit tests, da die Bibliothek die Bits und Bytes der Earables empfängt und schreibt und ohne eine Verbindung zu den Earables funktioniert das nicht so gut. Damit wir nun nicht die komplette Bluetooth Verindung mocken müssen, haben wir uns dazu entschieden eine Test App zu bauen, die unsere Bibliothek Testet.
+
+\subsection{Die Bib Test App}
+Mit der Test App werden alle Funktionalitäten getestet, die die Bibliothek bereitstellt. Diese sind das Suchen von Geräten über Bluetooth, das Verbinden mit Bluetooth Geräten (speziell mit Earables), das Trennen von Bluetooth Geräten, das Setzen des LPF für das Gyroscope, das Auslesen des LPF für das Gyroscope, das Setzen des LPF für den Accelerometer, das Auslesen des LPF für den Accelerometer, das Starten des samplings, das Stoppen des samplings, das Setzen der Samplingrate, das Auslesen der Samplingrate, das Setzen der Range des Gyroscopes, das Auslesen des Scalefactors für das Gyroscope (hängt von der Range ab und wird für die Erzeugung der Rohdaten benötigt), das Setzen der Range des Accelerometers, das Auslesen des Scalefactors für den Accelerometer (hängt von der Range ab und wird für die Erzeugung der Rohdaten benötigt), das Anzeigen der Battery Voltage und das ermitteln des Verbindungdsstatuses.
+
+\subsection{Test Szenarien}
+
+\subsubsection{Verbinden mit den Earables}
+normales verbinden und trennen
+
+Hinweis: Für die nachfolgenden Tests wird angenommen, dass bereits eine Verbindung zu den Earable besteht.
+\subsection{Sampling starten}
+normales sampling starten und sehen, dass siech die Daten verändern
+mit einer anderen app die daten aufzeichnen und vregleichen ob beide das gleiche anzeigen
+\subsection{Setzen der LPF für das Gyroscope}
+alle LPF einmal setzen und auslesen
+\subsection{Setzen der LPF für den Accelerometer}
+alle LPF einmal setzen und auslesen
+\subsection{Samplingrate verändern}
+Samplingrate auf 1 setzen und sehen dass sich die Daten nur einmal pro sekunde verändern
+\subsection{Gyro Range verändern}
+Gyro Range verändern und sehen dass die Daten bei unterschiedlichcer Range eine obere Grenze haben
+\subsection{Acc Range verändern}
+Acc Range verändern und sehen dass die Daten bei unterschiedlichcer Range eine obere Grenze haben
+\subsection{BatteryVoltage}
+battery auslesen
+\subsection{verbindungsstatus}
+verbindungsstatus auslesen , dann trennen dann nochmal auslesen
+\subsection{bluetooth status}
+ble status auslesen dann ausschalten dann nocham auslesen
+\subsection{alles auf einmal}
+alles auf einmal
+
+
+
 \section{Regressionstests}
 
 \section{Beschreibung Fehler}
