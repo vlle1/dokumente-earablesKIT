@@ -32,11 +32,22 @@
   
 # Settings Hinweis (unassigned - nicht so wichtig)
   - Beim Ändern der Sprache sollte der Hinweis angezeigt werden, dass man die App neu starten soll. (have you tried turning the earables off and on again?)
+  
+# Listen and perform (WICHTIG)
+  - Ausführungen von Liegestütze werden nicht korekt gespeichert (aber korrekt runtergezählt während Ausführung), aber nur wenn die App auf Englisch
+	eingestellt ist!!! Sit-ups werden korrekt gespeichert, der Bug tritt im Countmode nicht auf. 
+  - Bug tritt nicht auf wenn die App auf Deutsch eingestellt ist
+  - Rekonstruktion
+   - 1. App auf Englisch stellen und neu Starten
+   - 2. Verbinden, in Listen&Perform wechseln, beliebigen Trainingsplan mit Liegestützen erstellen (Getestet: 3 Liegestütze, 5 Pause, 3 Sit-ups)
+   - 3. Modus Starten, Trainingsplan abarbeiten
+   - 4. Resultatspopup zeigt 0 Liegestütze und korrekte Anzahl ausgeführter Sit-ups an. (Angezeigt beim Test: 0 Liegestütze, 3 Sit-ups)
+   - 5. Im Dataoverview werden nur die Sit-ups gespeichert
 
 
  ------- erledigt --------
 
- # edit entry in listenandperform (valle)
+ # edit entry in listenandperform (Jan)
   - (fixed) Dialog wegklicken führt zu Löschung, sollte aber da bleiben
   - (fixed) Dialog überarbeiten (edit führt zu "add acitivity", was, wenn man dann abbricht?) (drüber reden)
   # Resource Strings formatieren(valle) 
