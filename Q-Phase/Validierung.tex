@@ -369,40 +369,265 @@ Die Testszenarien setzen sich aus den im Pflichtenheft genannten Testfällen (T)
 
 \section{Bib Test App}
 
-\subsection{Einleitung}
+%%\subsection{Einleitung}
 
-Da wir für die Bluetoothverbindung in unserer Bibliothek das NuGet "Bluetooth LE plugin for Xamarin" benutzen erschwert dies das Testen mit XUnit tests, da die Bibliothek die Bits und Bytes der Earables empfängt und schreibt und ohne eine Verbindung zu den Earables funktioniert das nicht so gut. Damit wir nun nicht die komplette Bluetooth Verindung mocken müssen, haben wir uns dazu entschieden eine Test App zu bauen, die unsere Bibliothek Testet.
+%%Da wir für die Bluetoothverbindung in unserer Bibliothek das NuGet "Bluetooth LE plugin for Xamarin" benutzen erschwert dies das Testen mit XUnit tests, da die Bibliothek die Bits und Bytes der Earables empfängt und schreibt und ohne eine Verbindung zu den Earables funktioniert das nicht so gut. Damit wir nun nicht die komplette Bluetooth Verindung mocken müssen, haben wir uns dazu entschieden eine Test App zu bauen, die unsere Bibliothek Testet.
 
-\subsection{Die Bib Test App}
-Mit der Test App werden alle Funktionalitäten getestet, die die Bibliothek bereitstellt. Diese sind das Suchen von Geräten über Bluetooth, das Verbinden mit Bluetooth Geräten (speziell mit Earables), das Trennen von Bluetooth Geräten, das Setzen des LPF für das Gyroscope, das Auslesen des LPF für das Gyroscope, das Setzen des LPF für den Accelerometer, das Auslesen des LPF für den Accelerometer, das Starten des samplings, das Stoppen des samplings, das Setzen der Samplingrate, das Auslesen der Samplingrate, das Setzen der Range des Gyroscopes, das Auslesen des Scalefactors für das Gyroscope (hängt von der Range ab und wird für die Erzeugung der Rohdaten benötigt), das Setzen der Range des Accelerometers, das Auslesen des Scalefactors für den Accelerometer (hängt von der Range ab und wird für die Erzeugung der Rohdaten benötigt), das Anzeigen der Battery Voltage und das ermitteln des Verbindungdsstatuses.
+%%\subsection{Die Bib Test App}
+Wir haben eine eigene App gebaut um die Funktionalität unsere Bibliothek zu testen. So sind wir in der Lage, mit kleine Szenarien, die nur unsere Bibliothek betreffen, zielgerichtete Tests durchzuführen.
+Mit der Test App werden alle Funktionalitäten getestet, die die Bibliothek bereitstellt. Diese sind das Suchen von Geräten über Bluetooth, das Verbinden mit Bluetooth Geräten (speziell mit Earables), das Trennen von Bluetooth Geräten, das Setzen des LPF für das Gyroscope, das Auslesen des LPF für das Gyroscope, das Setzen des LPF für den Accelerometer, das Auslesen des LPF für den Accelerometer, das Starten des samplings, das Stoppen des samplings, das Setzen der Samplingrate, das Auslesen der Samplingrate, das Setzen der Range des Gyroscopes, das Auslesen des Scalefactors für das Gyroscope (hängt von der Range ab und wird für die Erzeugung der Rohdaten benötigt), das Setzen der Range des Accelerometers, das Auslesen des Scalefactors für den Accelerometer (hängt von der Range ab und wird für die Erzeugung der Rohdaten benötigt), das Anzeigen der Battery Voltage und das Ermitteln des Verbindungdsstatuses.
 
 \subsection{Test Szenarien}
 
 \subsubsection{Verbinden mit den Earables}
-normales verbinden und trennen
+\begin{tabular}{ | p{12cm} | c| }
+	\hline
+	\textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	Der Nutzer startet die App. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get  connection status\grqq{}. & OK\\
+	\hline
+	Es erscheint ein Pop-up welches als connection status \glqq{}getrennt\grqq{} anzeigt. & OK\\
+	\hline
+	Der Nutzer klickt das Pop-up weg. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Search\grqq{}. & OK \\
+	\hline
+	Der Nutzer wählt seine Earables, als zu verbindendes Device, aus. & OK \\
+	\hline
+	Es erscheint ein Pop-up, das dem Nutzer anzeigt, dass er nun, mit den Earables verbund ist. & OK \\
+	\hline
+	Der Nutzer klickt das Pop-up weg. & OK \\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get  connection status\grqq{}. & OK\\
+	\hline
+	Es erscheint ein Pop-up welches als connection status \glqq{}verbunden\grqq{} anzeigt. & OK\\
+	\hline
+	Der Nutzer klickt das Pop-up weg. & OK \\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Disconnect\grqq{}. & OK\\
+	\hline
+	Es erscheint ein Pop-up welches als connection status \glqq{}getrennt\grqq{} anzeigt. & OK\\
+	\hline
+	Der Nutzer klickt das Pop-up weg. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get  connection status\grqq{}. & OK\\
+	\hline
+	Es erscheint ein Pop-up welches als connection status \glqq{}getrennt\grqq{} anzeigt. & OK\\
+	\hline
+	Der Nutzer klickt das Pop-up weg. & OK\\
+	\hline
+\end{tabular}
 
-Hinweis: Für die nachfolgenden Tests wird angenommen, dass bereits eine Verbindung zu den Earable besteht.
-\subsection{Sampling starten}
-normales sampling starten und sehen, dass siech die Daten verändern
-mit einer anderen app die daten aufzeichnen und vregleichen ob beide das gleiche anzeigen
-\subsection{Setzen der LPF für das Gyroscope}
-alle LPF einmal setzen und auslesen
-\subsection{Setzen der LPF für den Accelerometer}
-alle LPF einmal setzen und auslesen
-\subsection{Samplingrate verändern}
-Samplingrate auf 1 setzen und sehen dass sich die Daten nur einmal pro sekunde verändern
-\subsection{Gyro Range verändern}
-Gyro Range verändern und sehen dass die Daten bei unterschiedlichcer Range eine obere Grenze haben
-\subsection{Acc Range verändern}
-Acc Range verändern und sehen dass die Daten bei unterschiedlichcer Range eine obere Grenze haben
-\subsection{BatteryVoltage}
-battery auslesen
-\subsection{verbindungsstatus}
-verbindungsstatus auslesen , dann trennen dann nochmal auslesen
-\subsection{bluetooth status}
-ble status auslesen dann ausschalten dann nocham auslesen
-\subsection{alles auf einmal}
-alles auf einmal
+Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gestartet ist und eine Verbindung zu den Earable besteht.
+
+\subsubsection{Sampling starten}
+\begin{tabular}{ | p{12cm} | c| }
+	\hline
+	\textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Start Sampling\grqq{}. & OK\\
+	\hline
+	Es werden die Rohdaten auf dem Bildschirm angezeigt. & OK\\
+	\hline
+	Der Nutzer bewegt seinen Kopf und sieht wie sich die Rohdaten dementsprechend verändern. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Stop Sampling\grqq{}. & OK \\
+	\hline
+	Das Sampling wird gestoppt und die Rohdaten hören auf sich zu aktualisieren. & OK \\
+	\hline
+\end{tabular}
+
+%%mit einer anderen app die daten aufzeichnen und vregleichen ob beide das gleiche anzeigen
+\subsubsection{Setzen der LPF für das Gyroscope}
+\begin{tabular}{ | p{12cm} | c| }
+	\hline
+	\textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Gyro LPF\grqq{}. & OK\\
+	\hline
+	Es wird angezeigt dass der LPF für das Gyroscope 5Hz beträgt . & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Set Gyro LPF\grqq{}. & OK\\
+	\hline
+	Der Nutzer wählt 41Hz als LPF aus. & OK \\
+	\hline
+	Es wird angezeigt, dass der LPF auf 41Hz gesetzt wird . & OK \\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Gyro LPF\grqq{}. & OK\\
+	\hline
+	Es wird angezeigt dass der LPF für das Gyroscope 41Hz beträgt . & OK\\
+	\hline
+\end{tabular}
+
+\subsubsection{Setzen der LPF für den Accelerometer}
+\begin{tabular}{ | p{12cm} | c| }
+	\hline
+	\textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Acc LPF\grqq{}. & OK\\
+	\hline
+	Es wird angezeigt dass der LPF für den Acc 5Hz beträgt . & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Set Acc LPF\grqq{}. & OK\\
+	\hline
+	Der Nutzer wählt 184Hz als LPF aus. & OK \\
+	\hline
+	Es wird angezeigt, dass der LPF auf 184Hz gesetzt wird . & OK \\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Acc LPF\grqq{}. & OK\\
+	\hline
+	Es wird angezeigt dass der LPF für den Accelerometer 41Hz beträgt . & OK\\
+	\hline
+\end{tabular}
+
+\subsubsection{Samplingrate verändern}
+\begin{tabular}{ | p{12cm} | c| }
+	\hline
+	\textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Start Sampling\grqq{}. & OK\\
+	\hline
+	Es werden die Rohdaten auf dem Bildschirm angezeigt und der Nutzer sieht, dass sie sich 50 mal pro Sekunde aktualisieren. & OK\\
+	\hline
+	Der Nutzer bewegt seinen Kopf und sieht wie sich die Rohdaten dementsprechend verändern. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Stop Sampling\grqq{}. & OK \\
+	\hline
+	Das Sampling wird gestoppt und die Rohdaten hören auf sich zu aktualisieren. & OK \\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Samplingrate\grqq{}. & OK\\
+	\hline
+	Es wird angezeigt dass die Samplingrate 50Hz beträgt. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}SetSamplingrate\grqq{}. & OK\\
+	\hline
+	Der Nutzer gibt 1 als Samplingrate ein. & OK \\
+	\hline
+	Es wird angezeigt, dass die Samplingrate auf 1 gesetzt wird. & OK \\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Start Sampling\grqq{}. & OK\\
+	\hline
+	Es werden die Rohdaten auf dem Bildschirm angezeigt und der Nutzer sieht, dass sie sich nur ein mal pro Sekunde aktualisieren. & OK\\
+	\hline
+	Der Nutzer bewegt seinen Kopf und sieht wie sich die Rohdaten dementsprechend verändern. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Stop Sampling\grqq{}. & OK \\
+	\hline
+	Das Sampling wird gestoppt und die Rohdaten hören auf sich zu aktualisieren. & OK \\
+	\hline
+\end{tabular}
+\subsubsection{Gyro Range verändern}
+\begin{tabular}{ | p{12cm} | c| }
+	\hline
+	\textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Gyro Scalefactor\grqq{}. & OK\\
+	\hline
+	Es wird angezeigt, dass der Gyro Scale Factor 65,5 beträgt. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Start Sampling\grqq{}. & OK\\
+	\hline
+	Es werden die Rohdaten auf dem Bildschirm angezeigt und der Nutzer erkennt, dass die Range der Rotationen um die Achsen auf +- 500 deg/s beschrängt ist, wenn er seinen Kopf dreht. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Stop Sampling\grqq{}. & OK \\
+	\hline
+	Das Sampling wird gestoppt und die Rohdaten hören auf sich zu aktualisieren. & OK \\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Set Gyro Range\grqq{}. & OK\\
+	\hline
+	Er wählt 250deg/s aus. & OK\\
+	\hline
+	Es wird angezeigt, dass die Gyro Range jetzt 250deg/s beträgt. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Gyro Scalefactor\grqq{}. & OK\\
+	\hline
+	Es wird angezeigt, dass der Gyro Scale Factor 131 beträgt. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Start Sampling\grqq{}. & OK\\
+	\hline
+	Es werden die Rohdaten auf dem Bildschirm angezeigt und der Nutzer erkennt, dass die Range der Rotationen um die Achsen auf +- 250 deg/s beschrängt ist, wenn er seinen Kopf dreht. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Stop Sampling\grqq{}. & OK \\
+	\hline
+\end{tabular}
+\subsubsection{Acc Range verändern}
+\begin{tabular}{ | p{12cm} | c| }
+	\hline
+	\textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Acc Scalefactor\grqq{}. & OK\\
+	\hline
+	Es wird angezeigt, dass der Gyro Scale Factor 8192 beträgt. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Start Sampling\grqq{}. & OK\\
+	\hline
+	Es werden die Rohdaten auf dem Bildschirm angezeigt und der Nutzer erkennt, dass die Range der Beschleunigungen auf den Achsen  auf +-4 g beschränkt ist, wenn er sich bewegt. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Stop Sampling\grqq{}. & OK \\
+	\hline
+	Das Sampling wird gestoppt und die Rohdaten hören auf sich zu aktualisieren. & OK \\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Set Acc Range\grqq{}. & OK\\
+	\hline
+	Er wählt 2g aus. & OK\\
+	\hline
+	Es wird angezeigt, dass die Gyro Range jetzt 2g beträgt. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Acc Scalefactor\grqq{}. & OK\\
+	\hline
+	Es wird angezeigt, dass der Acc Scale Factor 16384 beträgt. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Start Sampling\grqq{}. & OK\\
+	\hline
+	Es werden die Rohdaten auf dem Bildschirm angezeigt und der Nutzer erkennt, dass die Range der Beschleunigungen auf den Achsen  auf +-2g beschränkt ist, wenn er sich bewegt. & OK\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Stop Sampling\grqq{}. & OK \\
+	\hline
+\end{tabular}
+
+\subsubsection{BatteryVoltage auslesen}
+\begin{tabular}{ | p{12cm} | c| }
+	\hline
+	\textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Batteryvoltage\grqq{}. & OK\\
+	\hline
+	Es wird die aktuelle Batteryvoltage angezeigt. & OK\\
+	\hline
+\end{tabular}
+
+\subsubsection{Push button drücken}
+\begin{tabular}{ | p{12cm} | c| }
+	\hline
+	\textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	Der Nutzer drückt denden Knopf an den Earables. & OK\\
+	\hline
+	Auf der Console, im Debug Modus, wird eine Zeile gedruckt, die dem Nutzer mitteilt, dass der Knopf an den Earables gedrückt wurde. & OK\\
+	\hline
+\end{tabular}
+
+\subsubsection{Bluetooth status auslesen}
+\begin{tabular}{ | p{12cm} | c| }
+	\hline
+	\textbf{Beschreibung} & \textbf{Bestanden}\\
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Bl status\grqq{}. & OK\\
+	\hline
+	Es wird angezeigt, dass Bluetooth am Handy eingeschaltet ist. & OK\\
+	\hline
+	Der Nutzer schaltet Bluetooth an seinem Smartphone aus. & OK\\
+	\hline
+	\hline
+	Der Nutzer drückt den Button \glqq{}Get Bl status\grqq{}. & OK\\
+	\hline
+	Es wird angezeigt, dass Bluetooth am Handy ausgeschaltet ist. & OK\\
+	\hline
+\end{tabular}
+\subsubsection{alles auf einmal}
+alles auf einmal (soll ich das wirklich noch machen ??? es wird wahrscheinlich extrem lang )
 
 
 

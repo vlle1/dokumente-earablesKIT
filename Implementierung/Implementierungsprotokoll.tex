@@ -97,19 +97,19 @@ Das nachfolgende Dokument spiegelt den Ablauf unserer Implementierungsphase wied
 Insgesamt ist es uns durch durch unsere Teamarbeit gelungen, alle Muss- und Wunsch-Kriterien umzusetzen. Wir haben es geschafft, die Bibliothek, die für die Steuerung der Earables zuständig ist, als NuGet zu veröffentlichen. Bei den Änderungen, die wir am ursprünglichen Entwurf vornehme mussten, handelt es sich zum größten Teil um Kleinigkeiten.\\
 Unser Workflow fand mit GitHub oder auch GitKraken statt. Jeder entwickelte auf seinem Branch seine Features und machte durch ein Pull-Request kenntlich, falls seine Feature fertig war. Issues wurden hauptsächlich auf dem Papier, aber auch mündlich festgehalten. Zur Überprüfung des Codes verwendeten wir Azure Pipelines.
 
-\section{Implemetierung der Erkennungsalgorithmen}
+\section{Implementierung der Erkennungsalgorithmen}
 \label{algorithmen}
 Im Folgenden werden die implementierten Algorithmen für die Lauf-, Schritt-, PushUp- und  Sit-Up-Erkennung erläutert. Die konkreten Variablen und Benennungen sind im Code entsprechend auffindbar und ausführlich kommentiert.
 \subsection{Warum Threshold-Algorithmen?}
 Wir haben uns bewusst dafür entschieden, auf maschinelles Lernen im Sinne von Neuronalen Netzen zu verzichten und stattdessen einen heuristischen Ansatz zu wählen.\\
  Bei einem Threshold-Ansatz bestehen wesentliche Teile der Entscheidung darin, ob ein bestimmter Schwellenwert von einem Messwert überschritten wird.
 \paragraph{Vorteile}
-Dies hat einerseits den Grund, dass wir selbst wenig Erfahrung mit neuronalen Netzen haben. Andererseits wollten wir den Fokus in unserer App weniger auf Perfektion legen, und mehr darauf, Anwendungsszenarien von Bewegungserkennung mit Kopfhöhrern zu modellieren: Die App ist auch ein Experiment, um herauszufinden, was man vielleicht mit Earables besser erkennen kann als mit einem Fitness-Armband. Bei der Implementierung hat sich herausgestellt, dass für unsere Zwecke ein Threshold-Algorithmus ausreichend ist. Man lernt bei der Entwicklung auch selbst sehr gut, in wie weit man mit den Sensoren bestimmte Bewegungen erkennen kann. Dieses Grundverständnis zu erreichen ist für uns wichtiger als ein perfekt funktionierender Algorithmus.\\
+Dies hat einerseits den Grund, dass wir selbst wenig Erfahrung mit neuronalen Netzen haben. Andererseits wollten wir den Fokus in unserer App weniger auf Perfektion legen, und mehr darauf, Anwendungsszenarien von Bewegungserkennung mit Kopfhörern zu modellieren: Die App ist auch ein Experiment, um herauszufinden, was man vielleicht mit Earables besser erkennen kann als mit einem Fitness-Armband. Bei der Implementierung hat sich herausgestellt, dass für unsere Zwecke ein Threshold-Algorithmus ausreichend ist. Man lernt bei der Entwicklung auch selbst sehr gut, in wie weit man mit den Sensoren bestimmte Bewegungen erkennen kann. Dieses Grundverständnis zu erreichen ist für uns wichtiger als ein perfekt funktionierender Algorithmus.\\
 Zusätzlich muss man sagen, dass jeder Algorithmus durch die Service-Struktur der Activities leicht ausgetauscht werden kann.
 \paragraph{Nachteile}
-Ein Ansatz mit maschinellem Lernen bzw. ein vor dem release trainiertes neuronales Netz würde vermutlich akkuratere Ergebnisse liefern. 
+Ein Ansatz mit maschinellem Lernen bzw. ein vor dem release trainiertes neuronales Netz würde vermutlich akkuraterer Ergebnisse liefern. 
 \subsection{Benennung der Messwerte}
-Die Kopfhöhrer befinden sich nicht immer exakt in dieser Position, sondern können zu den Sensorachsen leicht verdeht sein. Wir bezeichnen (aus der Perspektive des/der Tragenden) die (Mess-)Werte:
+Die Kopfhörer befinden sich nicht immer exakt in dieser Position, sondern können zu den Sensorachsen leicht verdreht sein. Wir bezeichnen (aus der Perspektive des/der Tragenden) die (Mess-)Werte:
 \begin{itemize}
 	\item Beschleunigung nach unten in G: $AccX$
 	\item Beschleunigung nach vorne in G: $AccY$
@@ -190,9 +190,9 @@ Bei sehr zuverlässiger Schritterkennung könnte man das Timeout allerdings verr
 \subsection{Liegestützen-Erkennung (PushUpActivityThreshold)}
 Hier wird ein Zustandsautomat mit vier Zuständen verwendet (die Cooldowns sind eigentlich keine eigenen Zustände, aber so ist es besser visualisiert). 
 \paragraph{Grundlagen}
-Im Wesentlichen basiert der Algorithmus auf dem Fakt, dass die absolute Beschleunigung der Sensoren nur dann geringer als 1G sein kann, wenn die Kopfhöhrer sich Richtung Boden beschleunigen.\\
+Im Wesentlichen basiert der Algorithmus auf dem Fakt, dass die absolute Beschleunigung der Sensoren nur dann geringer als 1G sein kann, wenn die Kopfhörer sich Richtung Boden beschleunigen.\\
 Es wurde mit Cooldowns gearbeitet, um zu vermeiden, dass durch kurze Bewegungen fälschlicherweise Liegestütze gezählt werden.\\
-Außerdem sollte der Algorithmus unempflindlich sein, wenn der Nutzer (etwa aus Erschöpfung oder Verzweiflung an der Text-to-Speech-Stimme im ListenAndPerform Modus) seinen Kopf zur Seite dreht, hängen lässt oder Ähnliches. Dies wird dadurch erreicht, dass nur die absolute Beschleunigung berücksichtigt wird.
+Außerdem sollte der Algorithmus unempfindlich sein, wenn der Nutzer (etwa aus Erschöpfung oder Verzweiflung an der Text-to-Speech-Stimme im ListenAndPerform Modus) seinen Kopf zur Seite dreht, hängen lässt oder Ähnliches. Dies wird dadurch erreicht, dass nur die absolute Beschleunigung berücksichtigt wird.
 \paragraph{Wertverlauf}
 Bei einer einzelnen Liegestütze ergibt sich der folgende Verlauf für die absolute Beschleunigung.\\
 \begin{figure}[ht]
@@ -200,7 +200,7 @@ Bei einer einzelnen Liegestütze ergibt sich der folgende Verlauf für die absol
 \includegraphics[width = 10cm]{bilder/pushup_sample.jpg}
 	\caption{Absolute Beschleunigung bei einer Liegestütze, gemessen mit phyphox-App und Beschleunigungssensoren des Handys (Beachte, dass $9,81 m/s^2 \approx 1 G$).}
 \end{figure} 
-Man kann sich bewusst machen, dass die absolute Beschleunigung der Kopfhöhrer in etwa proportional zum Druck ist, den man mit den Händen auf den Boden ausübt. So wird auch klar, wie die beiden Maxima im Verlauf zustande kommen: Erst bremst man die Abwärtsbewegung aus, dann drückt man sich wieder vom Boden weg. Analog gilt das auch für die beiden Minima. 
+Man kann sich bewusst machen, dass die absolute Beschleunigung der Kopfhörer in etwa proportional zum Druck ist, den man mit den Händen auf den Boden ausübt. So wird auch klar, wie die beiden Maxima im Verlauf zustande kommen: Erst bremst man die Abwärtsbewegung aus, dann drückt man sich wieder vom Boden weg. Analog gilt das auch für die beiden Minima. 
 \paragraph{Zustandsautomat}
 \input{tikx/pushups_automat.tex}
 
@@ -225,10 +225,10 @@ Durch die Kombination dieser Merkmale der Bewegung benötigt die Klassifikation 
 \paragraph{Zustandsautomat}
 \input{tikx/situps_automat.tex}
 \paragraph{Beobachtungen}
-Bei diesem Bewegungsablauf gibt es sehr wenige ``false positives'', d.h. die Bedingungen sind so speziefisch, dass kaum eine andere Bewegung als Situp erkannt werden sollte.\\
-Oft bewegt man sich nicht ganz weit genug nach vorne, daher werden manche SitUps nich korrekt gezählt. Hier ist der Algorithmus also stark von der Auslegung der Übung abhängig (man könnte die Beschleunigungsbedingung im Zustand ``oben'' dann entsprechend weglassen).\\
-Aus der Nutzerperspektive wäre ein Ton oder eine Anzeige sinnvoll, wenn Zustand ``oben'' erreicht wurde. Dies haben wir in unserem Entwurf allerdings nicht berücksichtigt und ist eher eine Idee, die erst am Ende der Implemetierung zustande kam.\\
-Eine weitere Schwachstelle ist außerdem, dass die Kopfhöhrer im Ohr etwas verschieden gedreht werden können; sind sie hier zu arg verdreht, funktioniert der Algorithmus sofort nicht mehr, da die Richtung durch die Beschränkung auf $AccY$ vorgegeben ist.
+Bei diesem Bewegungsablauf gibt es sehr wenige ``false positives'', d.h. die Bedingungen sind so spezifisch, dass kaum eine andere Bewegung als Situp erkannt werden sollte.\\
+Oft bewegt man sich nicht ganz weit genug nach vorne, daher werden manche SitUps nicht korrekt gezählt. Hier ist der Algorithmus also stark von der Auslegung der Übung abhängig (man könnte die Beschleunigungsbedingung im Zustand ``oben'' dann entsprechend weglassen).\\
+Aus der Nutzerperspektive wäre ein Ton oder eine Anzeige sinnvoll, wenn Zustand ``oben'' erreicht wurde. Dies haben wir in unserem Entwurf allerdings nicht berücksichtigt und ist eher eine Idee, die erst am Ende der Implementierung zustande kam.\\
+Eine weitere Schwachstelle ist außerdem, dass die Kopfhörer im Ohr etwas verschieden gedreht werden können; sind sie hier zu arg verdreht, funktioniert der Algorithmus sofort nicht mehr, da die Richtung durch die Beschränkung auf $AccY$ vorgegeben ist.
 \paragraph{Ausprobieren}
 Die folgende Version der App unter Menüpunkt Debug ist zum Ausprobieren geeignet (Algorithmus hier im DebugViewModel, andere Thresholds / Strategien können einfach ausprobiert werden): 
 \href{https://github.com/vlle1/earablesKIT/tree/cd774e370156ea3d13eff2879a2d7f0f7d541260}{earablesKIT/debugView/SitUps-Erkennung}\\
@@ -258,7 +258,7 @@ Folgende Methoden haben nicht mehr den Rückgabetypen bool sondern void und schm
 \paragraph{Hinzugefügte Exceptions}
 Folgende Exception-Klassen mussten ergänzt werden:
 \begin{itemize}
-	\item[$-$] AllreadyConnectedException
+	\item[$-$] AlreadyConnectedException
 	\item[$-$] ConnectionFailedException
 	\item[$-$] InvalideSampleRateException
 	\item[$-$] NoConnectionException
@@ -273,7 +273,7 @@ In einigen Fällen gibt es nun keine Get/Set Methoden mehr. Sie wurden durch Pro
 Folgende Properties sind als Attribute dazugekommen:
 \begin{itemize}
 	\item[+] Connected \textit{ersetzt } die Methode IsConnected(): bool
-	\item[+] IsBluetoothActive  \textit{ersetzt } die Methode IsBleutoothActive(): bool
+	\item[+] IsBluetoothActive  \textit{ersetzt } die Methode IsBluetoothActive(): bool
 	\item[+] SampleRate  \textit{ersetzt } die Methode SetSamplingrate(heat: int): bool
 	\item[+] AccLPF \textit{ersetzt} SetLowPassFilterAccelerometer, GetLowPassFilterAccelerometer
 	\item[+] GyroLPF  \textit{ersetzt} SetLowPassFilterGyroscope, GetLowPassFilterGyroscope
@@ -390,7 +390,7 @@ Sie wird am Anfang aller  Methode, die eine Verbindung voraussetzen, aufgerufen 
 
 \subsubsection{Zwischenpeichern der Scalierungsfaktoren von Acc und Gyro}
 \paragraph{Beschreibung}
-Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt. Das gleiche Problem ergab sich auch beim lesen des Offset Bytearrasy. Dieser wird jetzt in einer privaten Variable in der Klasse EarablesConnection gespeichertund nicht in der ConfigContainer Klasse, da es sich hierbei nicht um eine Konfiguration handelt.
+Um das Bytearray des IMU auszuwerten benötigt man die Scalefactoren für den Accelerometer und für das Gyroscope. Wenn man diesen aber erst in der Methode OnValueUpdatedIMU ausliest stürzt die App ab, da die Methode jedes mal aufgerufen wird, wenn neue IMUDaten anliegen, was bis zu 100 mal pro Sekunde passieren kann. Das liegt daran, dass das Auslesen der Charakteristiken mit Hilfe von asynchronen Methoden aus dem Plugin.BLE geschieht. Deswegen werden die Scalefactoren bereits beim Starten des Samplings ausgelesen und müssen irgendwo zwischengespeichert werden. Dafür wurden in der Klasse ConfigContainer zwei Attribute AccScaleFactor und GyroScaleFactor hinzugefügt. Außerdem enthält sie zusätzlich noch eine Methode um zu überprüfen, ob die Samplingrate im gültigen Wertebereich liegt. Das gleiche Problem ergab sich auch beim lesen des Offset Bytearrays. Dieser wird jetzt in einer privaten Variable in der Klasse EarablesConnection gespeichertund nicht in der ConfigContainer Klasse, da es sich hierbei nicht um eine Konfiguration handelt.
 
 \paragraph{Ergänzungen in der Klasse EarablesConnection}
 \begin{itemize}
@@ -436,8 +436,8 @@ Beim erhalten des Bytearrays überprüfen wir nun ob diese mit dem Sollwert übe
 \subsubsection{Private Attribute aufgrund konkreter Implementierung}
 \paragraph{Beschreibung}
 Bei der Implementierung des Erweiterungsmoduls ist aufgefallen, dass beim Entwurf ein großer Bestandteil der Implementierung des Erweiterungsmoduls noch nicht konkret durchdacht war.\\
-Für eine möglichst saubere Impementierung mussten also einige private Attribute ergänzt werden.\\ 
-Diese Änderung ist allerdings auch nicht sehr bemerkenswert, da die Impementierung der Erkennungsalgorithmen vor allem davon abhängen, wie die Algorithmen funktionieren, dies wurde aber erst während der Implementierungsphase erarbeitet. \\
+Für eine möglichst saubere Implementierung mussten also einige private Attribute ergänzt werden.\\ 
+Diese Änderung ist allerdings auch nicht sehr bemerkenswert, da die Implementierung der Erkennungsalgorithmen vor allem davon abhängen, wie die Algorithmen funktionieren, dies wurde aber erst während der Implementierungsphase erarbeitet. \\
 \paragraph{Hinweis}
 Die aktuellen Algorithmen zur Erkennung sind im Abschnitt \hyperref[algorithmen]{Implementierung der Erkennungsalgorithmen} erklärt.
 \paragraph{Ergänzung in der Klasse ActivityManager}
@@ -455,7 +455,7 @@ Hier konnte das Schmeißen der Events und der Zustand (Nutzer läuft bzw. läuft
 	\item [\#] \_runningState: bool
 	\item [\#] ChangeDetected: void 
 \end{itemize}
-Dabei soll von der konkreten Impementierung ChangeDetected() aufgerufen werden, anstatt manuell den runningState anzupassen und das Event zu feuern.
+Dabei soll von der konkreten Implementierung ChangeDetected() aufgerufen werden, anstatt manuell den runningState anzupassen und das Event zu feuern.
 \paragraph{Ergänzungen in der Klasse StepActivityThreshold}
 \begin{itemize}
 	\item [$-$] const REF\_WEIGHT\_REL: int
@@ -501,7 +501,7 @@ Hier wurde im Entwurf nur der Konstruktor vergessen.
 \end{itemize}
 \subsubsection{Strategie bei der Datenverarbeitung}
 \paragraph{Beschreibung}
-Ursprünglich war geplant, die Datenverarbeitung der Activities über einen Puffer zu regeln, in dem immer die neuesten Werte gesammelt gespeichert werden. Wir haben uns in der Implementierung aber entschieden, dass diese Puffer im Allgemeinfall und hierbei tatsächlich in allen konkreten Impementierungen nicht nötig ist.\\
+Ursprünglich war geplant, die Datenverarbeitung der Activities über einen Puffer zu regeln, in dem immer die neuesten Werte gesammelt gespeichert werden. Wir haben uns in der Implementierung aber entschieden, dass diese Puffer im Allgemeinfall und hierbei tatsächlich in allen konkreten Implementierungen nicht nötig ist.\\
 Dadurch wird es allerdings nötig, dass der Zustand der Activity anders zurückgesetzt werden kann (da es jetzt keine Queue mehr gibt, die dann einfach gelöscht werden sollte).
 \paragraph{Änderungen in Klasse Activity und Kindklassen}
 Die entsprechende Änderung betrifft auch alle Activities (PushUpActivityThreshold, RunningActivityThreshold, SitUpActivityThreshold, sowie StepActivityThreshold) und die zugehörigen abstrakten Klassen.
@@ -653,7 +653,7 @@ Um die Übersichtlichkeit in Methoden zu wahren, werden häufig benutzte Service
 
 \subsubsection{Neue Event Methode für RunningEvents}
 \paragraph{Beschreibung}
-Der StepMode muss gleichzeitig von zwei Aktivitätsanalysen Events bekommen, von der RunningActivity und von der StepActivity. Wenn die OnActivityDone Methode bei beiden Event Handlern der Aktivitäten registriert wird, müssten mehrere Fallunterscheidungen und eine Auswertung der nicht implementierten ActivityArgs erfolgen. Stattdessen wird eine neue Methode hinzugefügt, sodass bei jedem Event Handler nur eine seperate Methode registiert ist.
+Der StepMode muss gleichzeitig von zwei Aktivitätsanalysen Events bekommen, von der RunningActivity und von der StepActivity. Wenn die OnActivityDone Methode bei beiden Event Handlern der Aktivitäten registriert wird, müssten mehrere Fallunterscheidungen und eine Auswertung der nicht implementierten ActivityArgs erfolgen. Stattdessen wird eine neue Methode hinzugefügt, sodass bei jedem Event Handler nur eine separate Methode registriert ist.
 \paragraph{Änderung im StepModeViewModel}
 \begin{itemize}
 	\item[+]  OnRunningDone(sender: object, args: ActivityArgs): void \textit{hinzugefügt}.
@@ -766,7 +766,7 @@ Das ScanningPopUp zeigt nach dem betätigen des Buttons ``Scan Devices'' die Lis
 
 \paragraph{Änderung in PopUpScanningPage}
 \begin{itemize}
-	\item[+] UpdateList(sender: object, e: PropertyChangedEventArgs): Methode \textit{hinzugefügt}. Es handelt sich um eine Eventmethode, welche bei dem Update der DeviceList aufgerufe wird. Dise überprüft, ob die Liste leer ist und ändert dem entsprechend die View ab.
+	\item[+] UpdateList(sender: object, e: PropertyChangedEventArgs): Methode \textit{hinzugefügt}. Es handelt sich um eine Eventmethode, welche bei dem Update der DeviceList aufgerufe wird. Diese überprüft, ob die Liste leer ist und ändert dem entsprechend die View ab.
 	\item[$-$] ConnectButton\_Clicked() : Methode \textit{hinzugefügt}. Dies ist eine Eventmethode, welche beim Betätigen des Connect button aufgerufen wird.
 \end{itemize} 
 
@@ -803,7 +803,7 @@ Die zum MusicMode gehörende View wurde umbenannt in \textit{MusicModePage}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Übersicnt}
+\section{Übersicht}
 \subsection{Erfüllte und nicht Erfüllte Anforderungen}
 \paragraph{Mussanforderungen}
 \begin{center}

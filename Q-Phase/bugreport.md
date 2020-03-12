@@ -8,14 +8,14 @@
   - 6. Warten
   - 7. App stürtzt ab wegen Null Pointer exception
 
+# (Auf deutsch) Im Listen and Perform modus sagt die gute Frau "Nächste Aktivität Komma Eins Null Liegestütze"
+
+# (Auf englisch) Im Listen and Perform modus sagt die gute Frau "Next Activiti Eins Null Liegstütze"
+
 # wenn man ein zu kleinen ... wenn man ein zu kleines Display hat, wird manches abgeschnitten (von Jan)
   - z.B. bei Laufmodus (aktiv)
 # wenn man im Musikmodus ein paar mal öfter auf Start/Stopp klickt stürzt die App schnell ab (von Valle)
   - zuverlässig reproduzierbar, sobald man den Button 3 bis 4 mal kurz hintereinander drückt.
-
-# Sampling Rate (von valle)
-  - Einstellen funktioniert noch nicht zuverlässig (hinkt immer eine Einstellung hinterher oder so?)
-  - wenn man die App neu startet, wird die in den Einstellungen angezeigte Samplingrate zurückgesetzt (- fehlt hier logik?)
 
 # Püp-üp Hinweis (valle)
   - beim Verbinden: anzeigen, dass Verbindung gerade hergestellt wird, damit Nutzer nicht weg klickt.
@@ -60,6 +60,11 @@
 # Frequenz - Berechnung anpassen (valle)
   - (fixed) -- statt 0, falls stehend
   - (fixed) Berechnung anpassen (regression über letzte 5 Schritte).
+
+# SamplingRate
+  - (fixed) Einstellen funktioniert noch nicht zuverlässig (hinkt immer eine Einstellung hinterher oder so?)
+  - (fixed) wenn man die App neu startet, wird die in den Einstellungen angezeigte Samplingrate zurückgesetzt (- fehlt hier logik?)
+
 
 # Impressum 
   - (fixed) Impressum fehlt noch... (benni)
