@@ -54,3 +54,7 @@ Protokoll vom 3.2., sollte weiterverwendet werden.
 - veränderungen an Testszenarien dokumentieren
 - Tests möglichst umfassend dokumentieren
 - Implementiernungsprotokoll überarbeiten (mittlere Priorität)
+
+# 12.3. Tobi, Anja
+
+- nix neues :D
