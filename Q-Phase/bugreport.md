@@ -24,7 +24,7 @@
   - Listen and Perform auf deutsch zu deutscher Aussprache zwingen müsste machbar sein: https://docs.microsoft.com/de-de/xamarin/essentials/text-to-speech
 # Muic Mode ( unassigned - nicht soo wichtig)
   - Gif seems to take some time loading!
-  - Message when going out of music mode should be removed! (was a debug message)
+  - (probably fixed) Message when going out of music mode should be removed! (was a debug message)
 
 # Listen and perform (unassigned - nicht soo wichtig)
   - Darstellungsform der Buttons ändern: add sollte in der Tabelle angezeigt werden, damit klar ist, dass man was am ende anfügt.
@@ -50,7 +50,7 @@
 
  # edit entry in listenandperform (Jan)
   - (fixed) Dialog wegklicken führt zu Löschung, sollte aber da bleiben
-  - (fixed) Dialog überarbeiten (edit führt zu "add acitivity", was, wenn man dann abbricht?) (drüber reden)
+  - (fixed) Dialog überarbeiten (edit führt zu "add activity", was, wenn man dann abbricht?) (drüber reden)
   # Resource Strings formatieren(valle) 
   - (fixed) Ausrufezeichen weg usw.
   - (fixed) "you have taken 123 seps done" (Stepmode) - grammatikalische Struktur in Nachrichten berücksichtigen
