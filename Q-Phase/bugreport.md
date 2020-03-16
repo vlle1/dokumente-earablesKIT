@@ -8,20 +8,19 @@
   - 6. Warten
   - 7. App stürtzt ab wegen Null Pointer exception
 
-# (Auf deutsch) Im Listen and Perform modus sagt die gute Frau "Nächste Aktivität Komma Eins Null Liegestütze"
-
-# (Auf englisch) Im Listen and Perform modus sagt die gute Frau "Next Activiti Eins Null Liegstütze"
-
-# wenn man ein zu kleinen ... wenn man ein zu kleines Display hat, wird manches abgeschnitten (von Jan)
+# wenn man ein zu kleines Display hat, wird manches abgeschnitten!! (von Jan)
   - z.B. bei Laufmodus (aktiv)
+  - es könnte sich jemand das hier anschauen :) https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/layouts/flex-layout (von valle)
 # wenn man im Musikmodus ein paar mal öfter auf Start/Stopp klickt stürzt die App schnell ab (von Valle)
   - zuverlässig reproduzierbar, sobald man den Button 3 bis 4 mal kurz hintereinander drückt.
 
-# Püp-üp Hinweis (valle)
+# [wip] Püp-üp Hinweis (valle)
   - beim Verbinden: anzeigen, dass Verbindung gerade hergestellt wird, damit Nutzer nicht weg klickt.
   
 # Akzent TTS ( unassigned - nicht soo wichtig)
-  - Listen and Perform auf deutsch zu deutscher Aussprache zwingen müsste machbar sein: https://docs.microsoft.com/de-de/xamarin/essentials/text-to-speech
+  - Listen and Perform z.B. auf deutsch zu deutscher Aussprache usw. zwingen müsste machbar sein: https://docs.microsoft.com/de-de/xamarin/essentials/text-to-speech
+### (Auf deutsch) Im Listen and Perform modus sagt die gute Frau "Nächste Aktivität Komma Eins Null Liegestütze" (von Erwin) - das ist nur bei dir so, es hängt von der Systemsprache ab!! das kann man fixen (s.o.)
+### (Auf englisch) Im Listen and Perform modus sagt die gute Frau "Next Activiti Eins Null Liegstütze" (von Erwin)
 # Muic Mode ( unassigned - nicht soo wichtig)
   - Gif seems to take some time loading!
   - (probably fixed) Message when going out of music mode should be removed! (was a debug message)
