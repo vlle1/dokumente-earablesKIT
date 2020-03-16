@@ -143,16 +143,16 @@ Allerdings werden auch viele andere Bewegungen (z.B. Kopfschütteln) erkannt.
 Um die Anzahl der ``false positives'' zu verringern, wird jetzt eine zusätzliche Bedingung eingeführt:\\
 Bei Schritten ist die Beschleunigung immer nach unten gerichtet. Daher wird jetzt zusätzlich gemessen, wo gerade vermutlich unten ist, indem ein Durchschnitt laufend aktualisiert wird. Ein sehr einfacher Ansatz ist dabei, den Durchschnitt exponentiell anzugleichen:
 \begin{equation}
-	avgAccX_i = (avgAccX_{i-1} * weight + AccX_i) /(weight + 1)
+	avgAccX_i = (avgAccX_{i-1} \cdot weight + AccX_i) /(weight + 1)
 \end{equation}
 Analog wird diese Berechnung auch für die anderen Koordinaten durchgeführt. Somit ergibt sich direkt ein \textbf{Vektor $AvgAcc$ der durchschnittlichen Beschleunigung, der als ``nach unten zeigend'' interpretiert werden kann}, da die Richtung der durchschnittlichen Beschleunigung mit der Richtung ``unten'' korreliert. Initialisiert werden die Werte, als ob sich die Earables in Ausgangsposition befinden (Kopf gerade). Wir haben hierbei die Gewichtung $weight$ von der Samplingrate abhängig gemacht, sodass geringerer Samplerate die Angleichung nicht deutlich langsamer erfolgt:
 \begin{equation}
-	weight = freq * 2
+	weight = freq \cdot 2
 \end{equation}
 Vergleicht man nun (in der visuellen Vorstellung des Verfahrens) den Vektor $AvgAcc$ mit dem Vektor, der die \textbf{aktuelle Beschleunigung $Acc$} repräsentiert, kann man den \textbf{Winkel $\alpha$} für die Klassifikation nutzen.\\
 Im Algorithmus kann dabei der Cosinus des Winkels zwischen approximierter Standardbeschleunigung und aktueller Beschleunigung folgendermaßen berechnet werden:
 \begin{equation}
-	cos(\alpha) = \frac{avgAccX * AccX + avgAccY * AccY + avgAccZ * AccZ}{ AccAbs * AvgAccAbs },
+	cos(\alpha) = \frac{avgAccX \cdot AccX + avgAccY \cdot AccY + avgAccZ \cdot AccZ}{ AccAbs \cdot AvgAccAbs },
 \end{equation}
 wobei $AvgAccAbs = \sqrt{avgAccX^2+avgAccY^2+avgAccZ^2}$ ist.\\
 \newline
@@ -162,7 +162,7 @@ wobei $AvgAccAbs = \sqrt{avgAccX^2+avgAccY^2+avgAccZ^2}$ ist.\\
 	Diese Klassifikation hat sich als Erfahrungswert geeignet.
 	Zusätzlich kann auch das Threshold jetzt relativ zur durchschnittlichen Beschleunigung berechnet werden:
 	\begin{equation}
-		AccAbs > 1.15 * AvgAccAbs
+		AccAbs > 1.15 \cdot AvgAccAbs
 	\end{equation}
 	
 	So kann eine falsche Kalibrierung der Sensoren ausgeglichen werden.
