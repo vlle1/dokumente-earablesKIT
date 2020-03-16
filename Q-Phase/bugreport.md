@@ -11,13 +11,11 @@
 # wenn man ein zu kleines Display hat, wird manches abgeschnitten!! (von Jan)
   - z.B. bei Laufmodus (aktiv)
   - es könnte sich jemand das hier anschauen :) https://docs.microsoft.com/de-de/xamarin/xamarin-forms/user-interface/layouts/flex-layout (von valle)
+  
 # wenn man im Musikmodus ein paar mal öfter auf Start/Stopp klickt stürzt die App schnell ab (von Valle)
   - zuverlässig reproduzierbar, sobald man den Button 3 bis 4 mal kurz hintereinander drückt.
 
-# [wip] Püp-üp Hinweis (valle)
-  - beim Verbinden: anzeigen, dass Verbindung gerade hergestellt wird, damit Nutzer nicht weg klickt.
-  
-# Akzent TTS ( unassigned - nicht soo wichtig)
+# Akzent TTS (unassigned - mittelwichtig)
   - Listen and Perform z.B. auf deutsch zu deutscher Aussprache usw. zwingen müsste machbar sein: https://docs.microsoft.com/de-de/xamarin/essentials/text-to-speech
 ### (Auf deutsch) Im Listen and Perform modus sagt die gute Frau "Nächste Aktivität Komma Eins Null Liegestütze" (von Erwin) - das ist nur bei dir so, es hängt von der Systemsprache ab!! das kann man fixen (s.o.)
 ### (Auf englisch) Im Listen and Perform modus sagt die gute Frau "Next Activiti Eins Null Liegstütze" (von Erwin)
@@ -26,12 +24,10 @@
   - (probably fixed) Message when going out of music mode should be removed! (was a debug message)
 
 # Listen and perform (unassigned - nicht soo wichtig)
-  - Darstellungsform der Buttons ändern: add sollte in der Tabelle angezeigt werden, damit klar ist, dass man was am ende anfügt.
-  - Standardmäßiges Workout klären.
   - Feature: Anfeuern ("noch 5 usw.")
   
 # Settings Hinweis (unassigned - nicht so wichtig)
-  - Beim Ändern der Sprache sollte der Hinweis angezeigt werden, dass man die App neu starten soll. (have you tried turning the earables off and on again?)
+  - Beim Ändern der Sprache sollte der Hinweis angezeigt werden, dass man die App neu starten soll.
   
 # Listen and perform (WICHTIG)
   - Ausführungen von Liegestütze werden nicht korekt gespeichert (aber korrekt runtergezählt während Ausführung), aber nur wenn die App auf Englisch
@@ -64,8 +60,13 @@
   - (fixed) Einstellen funktioniert noch nicht zuverlässig (hinkt immer eine Einstellung hinterher oder so?)
   - (fixed) wenn man die App neu startet, wird die in den Einstellungen angezeigte Samplingrate zurückgesetzt (- fehlt hier logik?)
 
-
+# Listen and Perform
+  - (fixed) Popup sollte beim Ändern der Aktivität bei cancel nix löschen und generell nich "add activity" sagen - text wurde angepasst
 # Impressum 
   - (fixed) Impressum fehlt noch... (benni)
 # Timer im Zählmodus hat ADHS
   - (fixed) auch die Millisekunden sind zuverlässig dreistellig, sodass die Zahl nicht immer hin und her springt.
+
+# Püp-üp Hinweis (valle)
+  - (fixed) beim Verbinden: anzeigen, dass Verbindung gerade hergestellt wird, damit Nutzer nicht weg klickt.
+  
