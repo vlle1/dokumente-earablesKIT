@@ -29,16 +29,7 @@
 # Settings Hinweis (unassigned - nicht so wichtig)
   - Beim Ändern der Sprache sollte der Hinweis angezeigt werden, dass man die App neu starten soll.
   
-# Listen and perform (WICHTIG)
-  - Ausführungen von Liegestütze werden nicht korekt gespeichert (aber korrekt runtergezählt während Ausführung), aber nur wenn die App auf Englisch
-	eingestellt ist!!! Sit-ups werden korrekt gespeichert, der Bug tritt im Countmode nicht auf. 
-  - Bug tritt nicht auf wenn die App auf Deutsch eingestellt ist
-  - Rekonstruktion
-   - 1. App auf Englisch stellen und neu Starten
-   - 2. Verbinden, in Listen&Perform wechseln, beliebigen Trainingsplan mit Liegestützen erstellen (Getestet: 3 Liegestütze, 5 Pause, 3 Sit-ups)
-   - 3. Modus Starten, Trainingsplan abarbeiten
-   - 4. Resultatspopup zeigt 0 Liegestütze und korrekte Anzahl ausgeführter Sit-ups an. (Angezeigt beim Test: 0 Liegestütze, 3 Sit-ups)
-   - 5. Im Dataoverview werden nur die Sit-ups gespeichert
+
 
 
  ------- erledigt --------
@@ -51,6 +42,17 @@
   - (fixed) "you have taken 123 seps done" (Stepmode) - grammatikalische Struktur in Nachrichten berücksichtigen
   - (fixed) Data Overview (valle)
   - (fixed) Shouldn't say "welcome to", Strings besser formatieren.
+  
+ # Listen and perform (WICHTIG) 
+  - Ausführungen von Liegestütze werden nicht korekt gespeichert (aber korrekt runtergezählt während Ausführung), aber nur wenn die App auf Englisch
+	eingestellt ist!!! Sit-ups werden korrekt gespeichert, der Bug tritt im Countmode nicht auf. 
+  - Bug tritt nicht auf wenn die App auf Deutsch eingestellt ist
+  - Rekonstruktion
+   - 1. App auf Englisch stellen und neu Starten
+   - 2. Verbinden, in Listen&Perform wechseln, beliebigen Trainingsplan mit Liegestützen erstellen (Getestet: 3 Liegestütze, 5 Pause, 3 Sit-ups)
+   - 3. Modus Starten, Trainingsplan abarbeiten
+   - 4. Resultatspopup zeigt 0 Liegestütze und korrekte Anzahl ausgeführter Sit-ups an. (Angezeigt beim Test: 0 Liegestütze, 3 Sit-ups)
+   - 5. Im Dataoverview werden nur die Sit-ups gespeichert
   
 # Frequenz - Berechnung anpassen (valle)
   - (fixed) -- statt 0, falls stehend
