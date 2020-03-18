@@ -380,8 +380,6 @@ Die Testszenarien setzen sich aus den im Pflichtenheft genannten Testfällen (T)
 
 
 
-\section{Test-Coverage}
-
 \section{Bib Test App}
 
 Da wir für die Bluetoothverbindung in unserer Bibliothek das NuGet \glqq{}lBluetooth LE plugin for Xamarin\grqq{} benutzen erschwert uns dies das Testen mit XUnit tests, da wir hier nicht, wie beim Rest des Projektes, mit Reflection arbeiten können, weil es sich bei der \glqq{}obersten Klasse\grqq{} um eine staitc Klasse handelt, die nur ein static Property besitzt, welches nur ein Getter und kein Setter bereitstellt. Um unsere Bibliothek trotzdem zu testen haben wir uns dafür entschieden eine eigene Test App für die Bibliothek zu bauen. So sind wir in der Lage, mit kleine Szenarien, die nur unsere Bibliothek betreffen, zielgerichtete Tests durchzuführen.
@@ -661,7 +659,7 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 \end{figure}
 \FloatBarrier
 
-\subsubsection{Push button drücken}
+\subsubsection{Push Button drücken}
 \begin{tabular}{ | p{12cm} | c| }
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -672,7 +670,7 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 	\hline
 \end{tabular}
 
-\subsubsection{Bluetooth status auslesen}
+\subsubsection{Bluetooth Status auslesen}
 \begin{tabular}{ | p{12cm} | c| }
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -690,7 +688,12 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 \end{tabular}
 
 
+\section{Test-Coverage}
 
+\subsection{Bibliothek}
+Bei dem Extrahieren der Rohdaten aus den Bytes der Earables wird keine Verbindung zu den Earables gebraucht, weswegen wir hierfür auch xUnit Tests schreiben konnten.
+\\ \\ 
+\includegraphics[width=1\textwidth]{./bilder/BibTestCoverage/Testcoverage.PNG}
 
 \section{Regressionstests}
 
@@ -699,7 +702,6 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 \section{Anhang}
 \subsection{Unit Test Reports}
 \subsubsection{Bibliothek}
-(Die Klassen IMUDataExtructor konnte erfolgreich getestet werden)
 \subsubsection{App}
 
 \subsection{Links}
