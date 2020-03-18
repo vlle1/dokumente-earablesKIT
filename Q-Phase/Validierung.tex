@@ -687,6 +687,57 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 	\hline
 \end{tabular}
 
+\section{RealLifeTest}	%name WIP
+\paragraph{Einleitung}
+Diese Tests wurden mit Testpersonen ausgeführt, die nicht an der Entwicklung der App beteiligt waren. Wir haben dabei fünf Testpersonen ($P_1 \text{ bis } P_5$) die gleichen Abläufe in der App durchlaufen lassen.
+\paragraph{Vorbereitung}
+Die Verbindung zu den Earables wurde bereits vor dem Testdurchlauf hergestellt.
+Die App wurde gestartet.\\
+An die Tespersonen wurden folgende Hinweise gegeben:
+\begin{itemize}
+	\item Der Modus soll erst in Startposition gestartet werden.
+	\item Situps sollen so ausführt werden, wie es vorgemacht wird (Bewegung vom Boden aus bis in die aufrechte Sitzposition)
+	\item Vor jedem Test wird der Testperson mitgeteilt, welcher Modus und wie viele Wiederholungen gemacht werden sollen.
+	\item Beim Zählen der Schritte sollte \textit{zügig gegangen} werden, nicht gerannt oder geschlendert (damit die Tests einheitlich sind).
+\end{itemize}
+
+\subsection{Zählmodus}
+\subsubsection{10 Liegestützen}
+%hier Kommentare zu euren Testpersonen ergänzen
+Bei $P_5$ wurde die zweite Liegestütze nicht erkannt, die siebte dafür doppelt.
+\subsubsection{10 SitUps}
+%hier Kommentare zu euren Testpersonen ergänzen
+Bei $P_5$ musste die Übung wiederholt werden, da bei erstem Durchlauf die Verbindung zu den Kopfhöhrern abgebrochen ist.
+\subsection{Laufmodus}
+%hier Kommentare zu euren Testpersonen ergänzen
+%bei P5 keine Kommentare
+\subsubsection{30 Schritte am Stück}
+%hier Kommentare zu euren Testpersonen ergänzen
+$P_5$ ist direkt nach Starten der Aktivität losgelaufen, trotzdem war das Ergebnis korrekt.
+\subsubsection{20 Schritte, dann stoppen, dann wieder 20 Schritte}
+$P_5$ ist schon während dem Starten losgelaufen, hier wurden drei Schritte unterschlagen; das stehen bleiben wurde korrekt erkannt, beim wieder los laufen wurde wieder ein Schritt unterschlagen.
+\subsection{Listen And Perform}
+\subsubsection{8 SitUps, 10 Sekunden Pause, 8 Liegestützen}
+%hier Kommentare zu euren Testpersonen ergänzen
+Bei $P_5$ hat das Einstellen des Trainingsplans selbstständig funktioniert, bei der Durchführung wurden drei SitUps unterschlagen. $P_5$ reagierte etwas verwirrt, dass der Trainingsplan diesen Schritt noch nicht vollständig abgearbeitet hatte.
+\subsection{Statistik der RealLifeTests}
+\begin{tabular}{ | l | c | c | c | c | c | c |}
+	\hline
+	\textbf{Übung} & \textbf{Anzahl} & $P_1$ & $P_2$ & $P_3$ & $P_4$ & $P_5$\\
+	\hline
+	Liegestützen & 10 & ? & ? & ? & ? & 10 \\
+	\hline
+	SitUps & 10 & ? & ? & ? & ? & 9 \\
+	\hline
+	Schritte & 30 & ? & ? & ? & ? & 30 \\
+	\hline
+	Schritte (mit stoppen) & 40 & ? & ? & ? & ? & 36 \\
+	\hline
+\end{tabular}\\
+\paragraph{Anmerkungen}
+%% @David vielleicht könnte man die Ergebnisse noch irgendwie kürzer zusammenfassen bzw. ein Toleranzniveau festlegen und alle ergebnisfelder dementsprechend grün / gelb / rot markieren
+Da ListenAndPerform immer läuft, bis alle Bewegungen korrekt erkannt wurden, kann hier keine Statistik geliefert werden.
+
 
 \section{Test-Coverage}
 
@@ -694,6 +745,7 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 Bei dem Extrahieren der Rohdaten aus den Bytes der Earables wird keine Verbindung zu den Earables gebraucht, weswegen wir hierfür auch xUnit Tests schreiben konnten.
 \\ \\ 
 \includegraphics[width=1\textwidth]{./bilder/BibTestCoverage/Testcoverage.PNG}
+
 
 \section{Regressionstests}
 
