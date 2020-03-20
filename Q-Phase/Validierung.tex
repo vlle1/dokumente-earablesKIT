@@ -121,7 +121,7 @@ Das nachfolgende Dokument spiegelt den Ablauf unserer Qualitätssicherungsphase 
 \end{tabular}
 \fi
 Die Testszenarien setzen sich aus den im Pflichtenheft genannten Testfällen (T) zusammen.
-
+Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definitionsphase), alle Änderungen an den Szenarien werden im Folgenden vor dem entsprechenden Szenario erwähnt.
 
 \subsection{Laufmodus}
 Änderungen: Keine
@@ -149,7 +149,7 @@ Die Testszenarien setzen sich aus den im Pflichtenheft genannten Testfällen (T)
 	\hline
 	& Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an. & \testok \\
 	\hline
-	& Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu "stehend". & \testok \\
+	& Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. & \testok \\
 	\hline	
 \end{tabular}
 
@@ -379,14 +379,45 @@ Die Testszenarien setzen sich aus den im Pflichtenheft genannten Testfällen (T)
 \end{tabular}
 
 
+\section{Test Coverage der xUnit-Tests}
+\paragraph{Einleitung}
+Im Folgenden ist die Testüberdeckung für die xUnit-Tests aufgelistet, das heißt welcher Anteil der Code-Zeilen des Projektes in den Tests durchlaufen wird.
 
-\section{Bib Test App}
+\subsection{Bibliothek}
+Bei dem Extrahieren der Rohdaten aus den Bytes der Earables wird keine Verbindung zu den Earables gebraucht, weswegen wir hierfür auch xUnit Tests schreiben konnten.
+\\ \\ 
+\includegraphics[width=1\textwidth]{./bilder/BibTestCoverage/Testcoverage.PNG}
 
-Da wir für die Bluetoothverbindung in unserer Bibliothek das NuGet \glqq{}lBluetooth LE plugin for Xamarin\grqq{} benutzen erschwert uns dies das Testen mit XUnit tests, da wir hier nicht, wie beim Rest des Projektes, mit Reflection arbeiten können, weil es sich bei der \glqq{}obersten Klasse\grqq{} um eine staitc Klasse handelt, die nur ein static Property besitzt, welches nur ein Getter und kein Setter bereitstellt. Um unsere Bibliothek trotzdem zu testen haben wir uns dafür entschieden eine eigene Test App für die Bibliothek zu bauen. So sind wir in der Lage, mit kleine Szenarien, die nur unsere Bibliothek betreffen, zielgerichtete Tests durchzuführen.
-Mit der Test App werden alle Funktionalitäten getestet, die die Bibliothek bereitstellt. Diese sind das Suchen von Geräten über Bluetooth, das Verbinden mit Bluetooth Geräten (speziell mit Earables), das Trennen von Bluetooth Geräten, das Setzen des LPF für das Gyroscope, das Auslesen des LPF für das Gyroscope, das Setzen des LPF für den Accelerometer, das Auslesen des LPF für den Accelerometer, das Starten des samplings, das Stoppen des samplings, das Setzen der Samplingrate, das Auslesen der Samplingrate, das Setzen der Range des Gyroscopes, das Auslesen des Scalefactors für das Gyroscope (hängt von der Range ab und wird für die Erzeugung der Rohdaten benötigt), das Setzen der Range des Accelerometers, das Auslesen des Scalefactors für den Accelerometer (hängt von der Range ab und wird für die Erzeugung der Rohdaten benötigt), das Anzeigen der Battery Voltage und das Ermitteln des Verbindungdsstatuses.
 
-\subsection{Test Szenarien}
 
+\section{Test App für die Bibliothek}
+\subsection{Motivation}
+Die Bibliothek wird als NuGet-Package veröffentilcht. Daher wollten wir besonders hier einen hohen Wert auf die Korrektheit legen und umfassend testen.\\
+Da wir für die Bluetoothverbindung in unserer Bibliothek das NuGet \glqq{}lBluetooth LE plugin for Xamarin\grqq{} benutzen, erschwert uns dies das Testen mit xUnit tests. Wir können hier nicht, wie beim Rest des Projektes, mit Reflection arbeiten, weil es sich bei der \glqq{}obersten Klasse\grqq{} um eine static Klasse handelt. Diese besitzt nur eine static Property, welche man nicht mocken kann, da kein Setter bereitstellt wird.\\
+ Um unsere Bibliothek trotzdem zu testen, haben wir uns dafür entschieden eine eigene Test App für die Bibliothek zu bauen. So sind wir in der Lage, mit kleine Szenarien, die nur unsere Bibliothek betreffen, zielgerichtete Tests durchzuführen.
+ \subsection{Funktionsweise}
+Mit der Test App werden alle Funktionalitäten getestet, die die Bibliothek bereitstellt. Diese sind:
+\begin{itemize}
+	\item das Suchen von Geräten über Bluetooth
+	\item das Verbinden mit Bluetooth Geräten (speziell mit Earables)
+	\item das Trennen von Bluetooth Geräten
+	\item das Setzen des LPF für das Gyroskop
+	\item das Auslesen des LPF für das Gyroskop
+	\item das Setzen des LPF für den Accelerometer
+	\item das Auslesen des LPF für den Accelerometer
+	\item das Starten des Samplings
+	\item das Stoppen des Samplings
+	\item das Setzen der Samplingrate
+	\item das Auslesen der Samplingrate
+	\item das Setzen der Range des Gyroskops
+	\item das Auslesen des Scalefactors für das Gyroskop (hängt von der Range ab und wird für die Erzeugung der Rohdaten benötigt)
+	\item das Setzen der Range des Accelerometers
+	\item das Auslesen des Scalefactors für den Accelerometer (hängt von der Range ab und wird für die Erzeugung der Rohdaten benötigt)
+	\item das Anzeigen der Battery Voltage und das Ermitteln des Verbindungdsstatuses
+\end{itemize}
+
+\subsection{Testszenarien}
+Da da Test App für die Bibliothek nicht in der Definitionsphase geplant wurde, sondern nur zum Testen in der Testphase geschrieben wurde, mussten hier neue Testszenarien entwickelt werden. Diese sind im Folgenden mit Testergebnis aufgeführt. Die geteste Funktionalität umfasst die Anforderungen aus dem Pflichtenheft sehr ausführlich und detailreich.
 \subsubsection{Verbinden mit den Earables}
 \begin{tabular}{ | p{12cm} | c| }
 	\hline
@@ -687,7 +718,7 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 	\hline
 \end{tabular}
 
-\section{RealLifeTest}	%name WIP
+\section{Nutzertests}
 \paragraph{Einleitung}
 Diese Tests wurden mit Testpersonen ausgeführt, die nicht an der Entwicklung der App beteiligt waren. Wir haben dabei fünf Testpersonen ($P_1 \text{ bis } P_5$) die gleichen Abläufe in der App durchlaufen lassen.
 \paragraph{Vorbereitung}
@@ -704,34 +735,34 @@ An die Tespersonen wurden folgende Hinweise gegeben:
 \subsection{Zählmodus}
 \subsubsection{10 Liegestützen}
 %hier Kommentare zu euren Testpersonen ergänzen
-Bei $P_1$ wurden alle Liegestütze beim ersten Mal erkannt.
-Bei $P_2$ wurden die ersten 3 Liegestütze zu schnell durchgeführt weswegen sie nur als eine gezählt wurde. 
-Bei $P_4$ wurden alle Liegestütze beim ersten Mal erkannt.
-Bei $P_5$ wurde die zweite Liegestütze nicht erkannt, die siebte dafür doppelt.
+Bei $P_1$ wurden alle Liegestütze beim ersten Mal erkannt.\\
+Bei $P_2$ wurden die ersten 3 Liegestütze zu schnell durchgeführt weswegen sie nur als eine gezählt wurde.\\
+Bei $P_4$ wurden alle Liegestütze beim ersten Mal erkannt.\\
+Bei $P_5$ wurde die zweite Liegestütze nicht erkannt, die siebte dafür doppelt.\\
 \subsubsection{10 SitUps}
 %hier Kommentare zu euren Testpersonen ergänzen
-Bei $P_1$ wurden die letzten beiden Sit-ups wegen unzureichender Bewegung in die aufrechte Sitzposition nicht erkannt.
-Bei $P_2$ wurden die Sit-Ups sehr schlecht erkannt, obwohl die Ausführung korrekt war.
-Bei $P_4$ gab es Probleme mit der korrekten Ausführung, weshalb mehr gemacht wurden mussten, sodass alle erkannt werden.
+Bei $P_1$ wurden die letzten beiden Sit-ups wegen unzureichender Bewegung in die aufrechte Sitzposition nicht erkannt.\\
+Bei $P_2$ wurden die Sit-Ups sehr schlecht erkannt, obwohl die Ausführung korrekt war.\\
+Bei $P_4$ gab es Probleme mit der korrekten Ausführung, weshalb mehr gemacht wurden mussten, sodass alle erkannt werden.\\
 Bei $P_5$ musste die Übung wiederholt werden, da bei erstem Durchlauf die Verbindung zu den Kopfhöhrern abgebrochen ist.
 \subsection{Laufmodus}
 %hier Kommentare zu euren Testpersonen ergänzen
 %bei P5 keine Kommentare
 \subsubsection{30 Schritte am Stück}
 %hier Kommentare zu euren Testpersonen ergänzen
-Bei $P_1$ wurden die ersten 7 Schritte nicht erkannt, danach jedoch alle Weiteren.
-Nachdem der Laufmodus beendet wurde und das Pop Up erschienen ist, ist die App, bei $P_2$  abgestürzt.
-Bei $P_4$ wurde korrekt gemessen. 
+Bei $P_1$ wurden die ersten 7 Schritte nicht erkannt, danach jedoch alle Weiteren.\\
+Nachdem der Laufmodus beendet wurde und das Pop Up erschienen ist, ist die App, bei $P_2$  abgestürzt.\\
+Bei $P_4$ wurde korrekt gemessen.\\
 $P_5$ ist direkt nach Starten der Aktivität losgelaufen, trotzdem war das Ergebnis korrekt.
 \subsubsection{20 Schritte, dann stoppen, dann wieder 20 Schritte}
-Bei  $P_1$ und $P_4$ wurde korrekt gemessen. Das Stehenbleiben wurde beachtet und erkannt.
-$P_5$ ist schon während dem Starten losgelaufen, hier wurden drei Schritte unterschlagen; das Stehenbleiben wurde korrekt erkannt, beim wieder Loslaufen wurde erneut ein Schritt unterschlagen.
+Bei  $P_1$ und $P_4$ wurde korrekt gemessen. Das Stehenbleiben wurde beachtet und erkannt.\\
+$P_5$ ist schon während dem Starten losgelaufen, hier wurden drei Schritte unterschlagen; das Stehenbleiben wurde korrekt erkannt, beim wieder Loslaufen wurde erneut ein Schritt unterschlagen.\\
 \subsection{Listen And Perform}
 \subsubsection{8 SitUps, 10 Sekunden Pause, 8 Liegestützen}
 %hier Kommentare zu euren Testpersonen ergänzen
-Bei $P_1$ verlief die Trainingsplanerstellung reibungslos, nur die Ausführung der fünften Liegestütze musste wiederholt werden.
-Die Erstellung des Trainingsplans hat bei $P_2$ ohne Probleme funktioniert. Die Erkennung der Sit-Ups lief überdurchschnittlich schlecht ab. Es wurden von 18 Sit-Ups zwei erkannt. Der Test konnte nur dadurch fortgeführt werden, dass $P_2$ die Earables aus den Ohren genommen hat und die Sit-Up Bewegung simuliert hat, da $P_2$ keine Kordination mehr hatte. Die simulierten Sit-Ups wurden besser erkannt als die richtigen. Bei den Liegestützen hat $P_2$ die ersten 3 Liegestütze zu schnell durchgeführt weswegen sie nur als eine gezählt wurde. 
-$P_4$ hat seinen Trainingsplan selbstständig eingestellt und hat die Übungen durchgeführt. Die SitUps wurden nicht richtig erkannt; es waren 4 zu wenig. Diese wurden dann simuliert, um die weiteren Funktionen zu testen.  
+Bei $P_1$ verlief die Trainingsplanerstellung reibungslos, nur die Ausführung der fünften Liegestütze musste wiederholt werden.\\
+Die Erstellung des Trainingsplans hat bei $P_2$ ohne Probleme funktioniert. Die Erkennung der Sit-Ups lief überdurchschnittlich schlecht ab. Es wurden von 18 Sit-Ups zwei erkannt. Der Test konnte nur dadurch fortgeführt werden, dass $P_2$ die Earables aus den Ohren genommen hat und die Sit-Up Bewegung simuliert hat, da $P_2$ keine Kordination mehr hatte. Die simulierten Sit-Ups wurden besser erkannt als die richtigen. Bei den Liegestützen hat $P_2$ die ersten 3 Liegestütze zu schnell durchgeführt weswegen sie nur als eine gezählt wurde.\\
+$P_4$ hat seinen Trainingsplan selbstständig eingestellt und hat die Übungen durchgeführt. Die SitUps wurden nicht richtig erkannt; es waren 4 zu wenig. Diese wurden dann simuliert, um die weiteren Funktionen zu testen.\\
 Bei $P_5$ hat das Einstellen des Trainingsplans selbstständig funktioniert, bei der Durchführung wurden drei SitUps unterschlagen. $P_5$ reagierte etwas verwirrt, dass der Trainingsplan diesen Schritt noch nicht vollständig abgearbeitet hatte.
 \subsection{Statistik der RealLifeTests}
 \begin{tabular}{ | l | c | c | c | c | c | c |}
@@ -750,17 +781,6 @@ Bei $P_5$ hat das Einstellen des Trainingsplans selbstständig funktioniert, bei
 \paragraph{Anmerkungen}
 %% @David vielleicht könnte man die Ergebnisse noch irgendwie kürzer zusammenfassen bzw. ein Toleranzniveau festlegen und alle ergebnisfelder dementsprechend grün / gelb / rot markieren
 Da ListenAndPerform immer läuft, bis alle Bewegungen korrekt erkannt wurden, kann hier keine Statistik geliefert werden.
-
-
-\section{Test-Coverage}
-
-\subsection{Bibliothek}
-Bei dem Extrahieren der Rohdaten aus den Bytes der Earables wird keine Verbindung zu den Earables gebraucht, weswegen wir hierfür auch xUnit Tests schreiben konnten.
-\\ \\ 
-\includegraphics[width=1\textwidth]{./bilder/BibTestCoverage/Testcoverage.PNG}
-
-
-\section{Regressionstests}
 
 \section{Beschreibung Fehler}
 
