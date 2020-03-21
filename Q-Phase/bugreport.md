@@ -21,7 +21,7 @@
 ### (Auf englisch) Im Listen and Perform modus sagt die gute Frau "Next Activiti Eins Null Liegstütze" (von Erwin)
 # Muic Mode ( unassigned - nicht soo wichtig)
   - Gif seems to take some time loading!
-  - (probably fixed) Message when going out of music mode should be removed! (was a debug message)
+  - (fixed) Message when going out of music mode should be removed! (was a debug message)
 
 # Listen and perform (unassigned - nicht soo wichtig)
   - Feature: Anfeuern ("noch 5 usw.")
@@ -72,3 +72,5 @@
 # Püp-üp Hinweis (valle)
   - (fixed) beim Verbinden: anzeigen, dass Verbindung gerade hergestellt wird, damit Nutzer nicht weg klickt.
   
+  # MusicMode
+  - (fixed) Label ändert sich nicht
