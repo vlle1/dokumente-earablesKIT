@@ -105,7 +105,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Einleitung}
-Das nachfolgende Dokument spiegelt den Ablauf unserer Qualitätssicherungsphase wieder.
+In diesem Dokument wird festgehalten wie zuverlässig und vor allem wie Korrekt der Code ist, den wir in der Implementierungsphase angefertigt haben. Dabei kommen die Testszenarien, die wir im Pflichtenheft spezifiziert haben zum Einsatz und helfen uns dabei die Korrektheit unserer App zu sichern.
+Zusätzlich wurden xUnit-Tests geschrieben, welche große Bereiche unseres Codes abdecken. Die Codecoverage wurde mit ReSharper ermittelt und im Dokument, durch aussagekräftige Diagramme, visualisiert. Für unsere Bibliothek haben wir zusätzlich eine Test App geschrieben, die uns, mit neu angefertigten Szenarien, dabei hilft die Korrektheit sicher zu stellen. Außerdem haben wir 5 Probanden gefunden, die sich bereiterklärt haben unsere App auszuprobieren. Ihre Kritik und Anmerkungen haben wir als Input genommen, um die App noch nutzerfreundlicher und besser zu machen.
 
 
 \section{Testszenarien}
@@ -761,7 +762,7 @@ $P_5$ ist schon während dem Starten losgelaufen, hier wurden drei Schritte unte
 \subsubsection{8 SitUps, 10 Sekunden Pause, 8 Liegestützen}
 %hier Kommentare zu euren Testpersonen ergänzen
 Bei $P_1$ verlief die Trainingsplanerstellung reibungslos, nur die Ausführung der fünften Liegestütze musste wiederholt werden.\\
-Die Erstellung des Trainingsplans hat bei $P_2$ ohne Probleme funktioniert. Die Erkennung der Sit-Ups lief überdurchschnittlich schlecht ab. Es wurden von 18 Sit-Ups zwei erkannt. Der Test konnte nur dadurch fortgeführt werden, dass $P_2$ die Earables aus den Ohren genommen hat und die Sit-Up Bewegung simuliert hat, da $P_2$ keine Kordination mehr hatte. Die simulierten Sit-Ups wurden besser erkannt als die richtigen. Bei den Liegestützen hat $P_2$ die ersten 3 Liegestütze zu schnell durchgeführt weswegen sie nur als eine gezählt wurde.\\
+Die Erstellung des Trainingsplans hat bei $P_2$ ohne Probleme funktioniert. Die Erkennung der Sit-Ups lief überdurchschnittlich schlecht ab. Es wurden, von 18 Sit-Ups, zwei erkannt. Der Test konnte nur dadurch fortgeführt werden, dass $P_2$ die Earables aus den Ohren genommen hat und die Sit-Up Bewegung simulierte, da $P_2$ keine Koordination mehr hatte. Die simulierten Sit-Ups wurden besser erkannt als die richtigen. Bei den Liegestützen hat $P_2$ die ersten 3 Liegestütze zu schnell durchgeführt weswegen sie nur als eine gezählt wurde.\\
 $P_4$ hat seinen Trainingsplan selbstständig eingestellt und hat die Übungen durchgeführt. Die SitUps wurden nicht richtig erkannt; es waren 4 zu wenig. Diese wurden dann simuliert, um die weiteren Funktionen zu testen.\\
 Bei $P_5$ hat das Einstellen des Trainingsplans selbstständig funktioniert, bei der Durchführung wurden drei SitUps unterschlagen. $P_5$ reagierte etwas verwirrt, dass der Trainingsplan diesen Schritt noch nicht vollständig abgearbeitet hatte.
 \subsection{Statistik der Nutzertests}
