@@ -123,6 +123,7 @@ Das nachfolgende Dokument spiegelt den Ablauf unserer Qualitätssicherungsphase 
 Die Testszenarien setzen sich aus den im Pflichtenheft genannten Testfällen (T) zusammen.
 Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definitionsphase), alle Änderungen an den Szenarien werden im Folgenden vor dem entsprechenden Szenario erwähnt.
 
+
 \subsection{Laufmodus}
 Änderungen: Keine
 \\
@@ -377,6 +378,7 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	/T150/ & Das Smartphone verliert die Bluetooth Verbindung zu den Earables und das Pop-up erscheint. & \testok  \\
 	\hline
 \end{tabular}
+
 
 
 \section{Test Coverage der xUnit-Tests}
@@ -782,9 +784,35 @@ Bei $P_5$ hat das Einstellen des Trainingsplans selbstständig funktioniert, bei
 %% @David vielleicht könnte man die Ergebnisse noch irgendwie kürzer zusammenfassen bzw. ein Toleranzniveau festlegen und alle ergebnisfelder dementsprechend grün / gelb / rot markieren
 Da ListenAndPerform immer läuft, bis alle Bewegungen korrekt erkannt wurden, kann hier keine Statistik geliefert werden.
 
+
+\section{Test-Coverage}
+
+\subsection{Bibliothek}
+Bei dem Extrahieren der Rohdaten aus den Bytes der Earables wird keine Verbindung zu den Earables gebraucht, weswegen wir hierfür auch xUnit Tests schreiben konnten.
+\\ \\ 
+\includegraphics[width=1\textwidth]{./bilder/BibTestCoverage/Testcoverage.PNG}
+
+
+\section{Regressionstests}
+
 \section{Beschreibung Fehler}
 %%david
+\begin{itemize}
+	\item[] \textsf{Szenario \glqq Zählmodus\grqq:} Die App zeigte nicht immer den korrekten Wert an.
+										Das lag allerdings an dem Algorithmus, der bis zu 10\% Abweichung ermöglichte.
+	\item[] \textsf{Szenario \glqq Einstellungen\grqq:} Die gespeicherten Vorgangsdaten können nicht in den Einstellungen gelöscht werden, sondern in der extra dafür vorgesehenen Seite \glqq Dateimanagemen\grqq.
+	\item[] \textsf{Szenario \glqq Einstellungen\grqq:} Die Samplerate wird nicht gespeichert. Sie wird bei jedem Neustart der Kopfhörer zurück gesetzt.
+	\item[] \textsf{Szenario \glqq Erstnutzung\grqq:} Bei der Erstnutzung wird der Nutzer nicht aufgefordert seinen Namen und seine Schrittlänge einzugeben.
+	Diese Funktion wurde von uns entfernt, da sie nicht mehr benötigt wurde.
+	\item[] \textsf{Szenario \glqq Vorgangsdaten importieren/exportieren\grqq:} Beim Löschen der Daten ist die App aus unbekannten Gründen abgestürzt.
+\end{itemize}
+
+
 \section{Anhang}
+\subsection{Unit Test Reports}
+\subsubsection{Bibliothek}
+\subsubsection{App}
+
 \subsection{Links}
 \subsubsection{Bibliothek}
 NuGet Package: \url{https://www.nuget.org/packages/EarablesBLE}\\
