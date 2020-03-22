@@ -331,7 +331,8 @@ Der Punkt \glqq Der Nutzer klickt auf SAVE\grqq{} wurde hinzugefügt. Außerdem 
 
 
 \subsection{Vorgangsdaten importieren/exportieren}
-Änderungen: \glqq Import/Export\grqq{} wurde in \glqq Dateimanagement\grqq umbenannt.
+\paragraph{Änderungen}
+\glqq Import/Export\grqq{} wurde in \glqq Dateimanagement\grqq umbenannt.
 \\
 \\
 \begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
@@ -351,11 +352,9 @@ Der Punkt \glqq Der Nutzer klickt auf SAVE\grqq{} wurde hinzugefügt. Außerdem 
 	& Die Daten sind alle wieder vorhanden so als ob der Nutzer sie nie gelöscht hätte. & \testok \\
 	\hline
 \end{tabular}
-
+\paragraph{Anmerkungen}
+Bei einem Testdurchlauf kam es leider zu einem nicht reproduzierbaren Absturz der App (beim Klicken auf Löschen). 
 \subsection{Trainingsdaten anschauen}
-Änderungen: -
-\\
-\\
 \begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
 	\hline
 	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -369,9 +368,6 @@ Der Punkt \glqq Der Nutzer klickt auf SAVE\grqq{} wurde hinzugefügt. Außerdem 
 \end{tabular}
 
 \subsection{Pop-up}
-Änderungen: -
-\\
-\\
 \begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
 	\hline
 	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -401,19 +397,20 @@ Der Punkt \glqq Der Nutzer klickt auf SAVE\grqq{} wurde hinzugefügt. Außerdem 
 Im Folgenden ist die Testüberdeckung für die xUnit-Tests aufgelistet, das heißt welcher Anteil der Code-Zeilen des Projektes in den Tests durchlaufen wird.
 
 \subsection{Bibliothek}
-Bei unserer Bibliothek haben wir, mit xUnit-Tests alles getestet, was ohne eine Verbindung  möglich war. Dies beinhaltet die Klassen IMUDataEntry, Gyroscope, Accelerometer und IMUDataExtractor.
+Bei unserer Bibliothek haben wir mit xUnit-Tests alles getestet, was ohne eine Verbindung  möglich war. Dies beinhaltet die Klassen IMUDataEntry, Gyroskop, Accelerometer und IMUDataExtractor.
 \\ \\ 
 \includegraphics[width=1\textwidth]{./bilder/BibTestCoverage/Testcoverage.PNG}
 \subsection{Model}
-Bei unserm Model haben wir nahezu alles getestet. Die Algorithmen haben wir mit voraufgezeichneten Daten gefüttert und gezählt wie viele Aktivitäten der Algorithmus erkannt hat. So konnten wir die Algorithmen mit gemockten Daten auf Korrektheit testen. Vergleichbar ist dies mit dem SettingsService. \\Zudem haben wir bei allen Tests mit der internen Reflection gearbeitet. Somit konnten wir den Serviceprovider im Servicemanager mocken. Über diesen können dann die gemockten Services zurückgegeben werden, damit die zu testende Klasse ohne Abhängigkeiten getestet werden kann.\\
+Bei unserem Model haben wir nahezu alles getestet. Die Algorithmen haben wir mit voraufgezeichneten Daten gefüttert und gezählt, wie viele Aktivitäten der Algorithmus erkannt hat. So konnten wir die Algorithmen mit gemockten Daten auf Korrektheit testen. Vergleichbar ist dies mit dem SettingsService. \\Zudem haben wir bei allen Tests mit der internen Reflection gearbeitet. Somit konnten wir den Serviceprovider im Servicemanager mocken. Über diesen können dann die gemockten Services zurückgegeben werden, damit die zu testende Klasse ohne Abhängigkeiten getestet werden kann.\\
 
-\includegraphics[width=1\textwidth]{./bilder/Coverage/CoverageModel.PNG}
+\includegraphics[width=0.85\textwidth]{./bilder/Coverage/CoverageModel.PNG}
 
 \subsection{ViewModel}
-Wir haben jedes ViewModel getestet. Dabei haben wir die 100\% Coverage angepeilt. Diese konnten wir nicht in jedem ViewModel erreichen, da es statische Methoden und Properties gibt, die nicht gemockt werden können. Bei diesen handelt es sich oft um spezifische Device Methoden. Auch im Viewmodel haben wir mit der internen Reflection gearbeitet, da jedes Viewmodel eine Relation zu mindestens einem anderen Service besitzt.\\
+Wir haben jedes ViewModel getestet. Dabei haben wir die 100\% Coverage angepeilt. Diese konnten wir nicht in jedem ViewModel erreichen, da es statische Methoden und Properties gibt, die nicht gemockt werden können. Bei diesen handelt es sich oft um spezifische Device Methoden. 
+\\Auch im Viewmodel haben wir mit der internen Reflection gearbeitet, da jedes Viewmodel eine Relation zu mindestens einem anderen Service besitzt.\\
 \newline
 \includegraphics[width=1\textwidth]{./bilder/Coverage/CoverageViewModels.PNG}
-
+\clearpage
 \section{Test App für die Bibliothek}
 \subsection{Motivation}
 Die Bibliothek wird als NuGet-Package veröffentlicht. Daher wollten wir besonders hier einen hohen Wert auf die Korrektheit legen und umfassend testen.\\
@@ -492,7 +489,7 @@ Da da Test App für die Bibliothek nicht in der Definitionsphase geplant wurde, 
 \end{figure}
 \FloatBarrier
 
-Hinweis: Für die nachfolgenden Szenarien wird angenommen, dass die App bereits gestartet ist und eine Verbindung zu den Earable besteht.
+\paragraph{Hinweis}Für die nachfolgenden Szenarien wird angenommen, dass die App bereits gestartet ist und eine Verbindung zu den Earables besteht.
 
 \subsubsection{Sampling starten}
 \begin{tabular}{ | p{12cm} | c| }
@@ -517,14 +514,14 @@ Hinweis: Für die nachfolgenden Szenarien wird angenommen, dass die App bereits 
 \end{figure}
 \FloatBarrier
 
-\subsubsection{Setzen des LPF für das Gyroscope}
+\subsubsection{Setzen des LPF für das Gyroskop}
 \begin{tabular}{ | p{12cm} | c| }
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
 	\hline
 	Der Nutzer drückt den Button \glqq Get Gyro LPF\grqq{}. & \testok \\
 	\hline
-	Es wird angezeigt dass der LPF für das Gyroscope 5Hz beträgt . & \testok \\
+	Es wird angezeigt dass der LPF für das Gyroskop 5Hz beträgt . & \testok \\
 	\hline
 	Der Nutzer drückt den Button \glqq Set Gyro LPF\grqq{}. & \testok \\
 	\hline
@@ -534,13 +531,13 @@ Hinweis: Für die nachfolgenden Szenarien wird angenommen, dass die App bereits 
 	\hline
 	Der Nutzer drückt den Button \glqq Get Gyro LPF\grqq{}. & \testok \\
 	\hline
-	Es wird angezeigt, dass der LPF für das Gyroscope 41Hz beträgt . & \testok \\
+	Es wird angezeigt, dass der LPF für das Gyroskop 41Hz beträgt . & \testok \\
 	\hline
 \end{tabular}
 \\ \\ \\ \\
 \begin{figure}[h]
 	\centering
-    \subfigure[App fordert den Nutzer, nach drücken des Buttons \glqq{Set Gyro LPF}, auf einen LPF für das Gyroscope  auszuwählen]{\includegraphics[width=0.4\textwidth]{./bilder/BibTestApp/GyroLPF.jpeg}}
+    \subfigure[App fordert den Nutzer, nach drücken des Buttons \glqq{Set Gyro LPF}, auf einen LPF für das Gyroskop  auszuwählen]{\includegraphics[width=0.4\textwidth]{./bilder/BibTestApp/GyroLPF.jpeg}}
 \end{figure}
 \FloatBarrier
 
@@ -614,7 +611,7 @@ Hinweis: Für die nachfolgenden Szenarien wird angenommen, dass die App bereits 
 \end{figure}
 \FloatBarrier
 
-\subsubsection{Gyro Range verändern}
+\subsubsection{Wertebereich des Gyroskops verändern}
 \begin{tabular}{ | p{12cm} | c| }
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -648,16 +645,17 @@ Hinweis: Für die nachfolgenden Szenarien wird angenommen, dass die App bereits 
 	Der Nutzer drückt den Button \glqq{}Stop Sampling\grqq{}. & \testok \\
 	\hline
 \end{tabular}
-\\ \\
-Hinweis: Der Scale Factor hängt von der gewählten Range ab.
+
+\paragraph{Hinweis}
+Der Scale Factor hängt von der gewählten Range ab.
 \\ \\ \\ \\
 \begin{figure}[h]
 	\centering
-    \subfigure[App fordert den Nutzer, nach drücken des Buttons \glqq{Set Gyro Range}, auf einen Range für das Gyroscope auszuwählen]{\includegraphics[width=0.4\textwidth]{./bilder/BibTestApp/GyroRange.jpeg}}
+    \subfigure[App fordert den Nutzer, nach drücken des Buttons \glqq{Set Gyro Range}, auf einen Range für das Gyroskop auszuwählen]{\includegraphics[width=0.4\textwidth]{./bilder/BibTestApp/GyroRange.jpeg}}
 \end{figure}
 \FloatBarrier
 
-\subsubsection{Acc Range verändern}
+\subsubsection{Wertebereich des Beschleunigungssensors verändern}
 \begin{tabular}{ | p{12cm} | c| }
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -691,16 +689,16 @@ Hinweis: Der Scale Factor hängt von der gewählten Range ab.
 	Der Nutzer drückt den Button \glqq{}Stop Sampling\grqq{}. & \testok \\
 	\hline
 \end{tabular}
-\\ \\
-Hinweis: Der Scale Factor hängt von der gewählten Range ab.
+\paragraph{Hinweis}
+Der Scale Factor hängt von der gewählten Range ab.
 \\ \\ \\ \\
 \begin{figure}[h]
 	\centering
     \subfigure[App fordert den Nutzer, nach drücken des Buttons \glqq{Set Acc Range}, auf einen Range für den Accelerometer auszuwählen]{\includegraphics[width=0.4\textwidth]{./bilder/BibTestApp/AccRange.jpeg}}
 \end{figure}
 \FloatBarrier
-
-\subsubsection{BatteryVoltage auslesen}
+\clearpage
+\subsubsection{Akkuspannung auslesen}
 \begin{tabular}{ | p{12cm} | c| }
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -716,8 +714,8 @@ Hinweis: Der Scale Factor hängt von der gewählten Range ab.
     \subfigure[App zeigt dem Nutzer, nach drücken des Buttons \glqq{Set Battervoltage}, den aktuellen Wert der Batterievotage an]{\includegraphics[width=0.4\textwidth]{./bilder/BibTestApp/BatteryVoltage.jpeg}}
 \end{figure}
 \FloatBarrier
-
-\subsubsection{Push Button drücken}
+\clearpage
+\subsubsection{Pushbutton drücken}
 \begin{tabular}{ | p{12cm} | c| }
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -728,7 +726,7 @@ Hinweis: Der Scale Factor hängt von der gewählten Range ab.
 	\hline
 \end{tabular}
 
-\subsubsection{Bluetooth Status auslesen}
+\subsubsection{Bluetoothstatus auslesen}
 \begin{tabular}{ | p{12cm} | c| }
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -744,7 +742,7 @@ Hinweis: Der Scale Factor hängt von der gewählten Range ab.
 	Es wird angezeigt, dass Bluetooth am Handy ausgeschaltet ist. & \testok \\
 	\hline
 \end{tabular}
-
+\clearpage
 \section{Nutzertests}
 \paragraph{Einleitung}
 Diese Tests wurden mit Testpersonen ausgeführt, die nicht an der Entwicklung der App beteiligt waren. Wir haben dabei fünf Testpersonen ($P_1 \text{ bis } P_5$) die gleichen Abläufe in der App durchlaufen lassen.
@@ -763,13 +761,15 @@ An die Tespersonen wurden folgende Hinweise gegeben:
 \subsubsection{10 Liegestützen}
 %hier Kommentare zu euren Testpersonen ergänzen
 Bei $P_1$ wurden alle Liegestütze beim ersten Mal erkannt.\\
-Bei $P_2$ wurden die ersten 3 Liegestütze zu schnell durchgeführt weswegen sie nur als eine gezählt wurden.\\
+Bei $P_2$ wurden die ersten drei Liegestütze zu schnell durchgeführt weswegen sie nur als eine gezählt wurden.\\
+Bei $P_3$ wurden die Liegestütze sehr langsam ausgeführt, weshalb nicht alle erkannt wurden.\\
 Bei $P_4$ wurden alle Liegestütze beim ersten Mal erkannt.\\
 Bei $P_5$ wurde die zweite Liegestütze nicht erkannt, die siebte dafür doppelt.\\
 \subsubsection{10 SitUps}
 %hier Kommentare zu euren Testpersonen ergänzen
 Bei $P_1$ wurden die letzten beiden Sit-ups wegen unzureichender Bewegung in die aufrechte Sitzposition nicht erkannt.\\
 Bei $P_2$ wurden die Sit-Ups sehr schlecht erkannt, obwohl die Ausführung korrekt war.\\
+Bei $P_3$ wurden die SitUps sehr langsam ausgeführt, weshalb nicht alle erkannt wurden.\\
 Bei $P_4$ gab es Probleme mit der korrekten Ausführung, weshalb mehr gemacht wurden mussten, sodass alle erkannt werden.\\
 Bei $P_5$ musste die Übung wiederholt werden, da bei erstem Durchlauf die Verbindung zu den Kopfhöhrern abgebrochen ist.
 \subsection{Laufmodus}
@@ -788,8 +788,8 @@ $P_5$ ist schon während dem Starten losgelaufen, hier wurden drei Schritte unte
 \subsubsection{8 SitUps, 10 Sekunden Pause, 8 Liegestützen}
 %hier Kommentare zu euren Testpersonen ergänzen
 Bei $P_1$ verlief die Trainingsplanerstellung reibungslos, nur die Ausführung der fünften Liegestütze musste wiederholt werden.\\
-Die Erstellung des Trainingsplans hat bei $P_2$ ohne Probleme funktioniert. Die Erkennung der Sit-Ups lief überdurchschnittlich schlecht ab. Es wurden, von 18 Sit-Ups, zwei erkannt. Der Test konnte nur dadurch fortgeführt werden, dass $P_2$ die Earables aus den Ohren genommen hat und die Sit-Up Bewegung simulierte, da $P_2$ keine Koordination mehr hatte. Die simulierten Sit-Ups wurden besser erkannt als die richtigen. Bei den Liegestützen hat $P_2$ die ersten 3 Liegestütze zu schnell durchgeführt weswegen sie nur als eine gezählt wurden.\\
-$P_4$ hat seinen Trainingsplan selbstständig eingestellt und hat die Übungen durchgeführt. Die SitUps wurden nicht richtig erkannt; es waren 4 zu wenig. Diese wurden dann simuliert, um die weiteren Funktionen zu testen.\\
+Die Erstellung des Trainingsplans hat bei $P_2$ ohne Probleme funktioniert. Die Erkennung der Sit-Ups lief überdurchschnittlich schlecht ab. Es wurden von 18 Sit-Ups zwei erkannt. Bei den Liegestützen hat $P_2$ die ersten drei Liegestützen zu schnell durchgeführt, weswegen sie nur als eine gezählt wurden.\\
+$P_4$ hat seinen Trainingsplan selbstständig eingestellt und hat die Übungen durchgeführt. Die SitUps wurden nicht richtig erkannt; es waren vier zu wenig. Diese wurden dann simuliert, um die weiteren Funktionen zu testen.\\
 Bei $P_5$ hat das Einstellen des Trainingsplans selbstständig funktioniert, bei der Durchführung wurden drei SitUps unterschlagen. $P_5$ reagierte etwas verwirrt, dass der Trainingsplan diesen Schritt noch nicht vollständig abgearbeitet hatte.
 \subsection{Statistik der Nutzertests}
 \begin{tabular}{ | l | c | c | c | c | c | c |}
@@ -810,29 +810,43 @@ Bei $P_5$ hat das Einstellen des Trainingsplans selbstständig funktioniert, bei
 Da ListenAndPerform immer läuft, bis alle Bewegungen korrekt erkannt wurden, kann hier keine Statistik geliefert werden.
 
 
-\section{Beschreibung Fehler}
-%%david
+\section{In der Qualitätssicherungsphase gefixte Bugs}
+\paragraph{Anmerkung}
+Im Folgenden werden nicht alle gefixten Bugs aufgelistet, sondern nur eine Auswahl an interessanten oder relevanten Bugs.
+
+
+\subsection{Dialog \glqq{}Edit\grqq{} in Listen\&Perform}
 \begin{itemize}
-	\item[] \textsf{Szenario \glqq Zählmodus\grqq:} Die App zeigte nicht immer den korrekten Wert an.
-										Das lag allerdings an dem Algorithmus, der bis zu 10\% Abweichung ermöglichte.
-	\item[] \textsf{Szenario \glqq Einstellungen\grqq:} Die gespeicherten Vorgangsdaten können nicht in den Einstellungen gelöscht werden, sondern in der extra dafür vorgesehenen Seite \glqq Dateimanagemen\grqq.
-	\item[] \textsf{Szenario \glqq Einstellungen\grqq:} Die Samplerate wird nicht gespeichert. Sie wird bei jedem Neustart der Kopfhörer zurück gesetzt.
-	\item[] \textsf{Szenario \glqq Erstnutzung\grqq:} Bei der Erstnutzung wird der Nutzer nicht aufgefordert seinen Namen und seine Schrittlänge einzugeben.
-	Diese Funktion wurde von uns entfernt, da sie nicht mehr benötigt wurde.
-	\item[] \textsf{Szenario \glqq Vorgangsdaten importieren/exportieren\grqq:} Beim Löschen der Daten ist die App aus unbekannten Gründen abgestürzt.
+	\item Dialog wegklicken führte zu Löschung, sollte aber da bleiben.
+	\item Dialog zeigte \glqq{}add activity\grqq{} statt \glqq{}edit activity\grqq{}. Jetzt wird stattdessen einfach der Name der Aktivität angezeigt, was deutlich intuitiver ist.
 \end{itemize}
+\subsection{Resource Stings: sprachliche Eigenheiten}
+Bestimmte Sätze haben im Englischen/Deutschen eine andere grammatikalische Struktur, daher können die Resources nicht eins zu eins verwendet werden. Beispiel: \glqq{}Du hast 12 Schritte gemacht\grqq{} bzw. \glqq{}You have taken 12 Steps\grqq{}.
+
+\subsection{Speicherung der Daten in Listen\&Perform}
+Ausführungen von Liegestütze wurden nicht korrekt gespeichert (aber korrekt runtergezählt während Ausführung), aber nur wenn die App auf Englisch eingestellt war. SitUps werden korrekt gespeichert, der Bug tritt im Countmode nicht auf.
+
+\subsection{Anzeige der Schrittfrequenz}
+Die Schrittfrequenz wurde sehr ungenau berechnet, da nur alle drei Sekunden die Schritte der letzten drei Sekunden betrachtet wurden.\\
+Stattdessen wird jetzt lineare Regression verwendet.
+
+\subsection{Speicherung der SamplingRate}
+Einstellen der SamplingRate funktionierte nicht zuverlässig, da die Kommunikation in der App an die Earables nicht richtig eingebaut war.
+
+\subsection{Label des Timers im Zählmodus springt hin und her}
+Je nach Anzahl der Stellen der Millisekunden hat sich das Label verschoben und war so schwer leserlich.\\
+Jetzt werden die Stellen mit führenden Nullen aufgefüllt.
+
+\subsection{Verbesserung: Nutzerfeedback bei Verbindung}
+Während dem Herstellen der Verbindung mit den Earables wurde keinerlei Hinweis angezeigt, dass dies manchmal ein bisschen länger dauern kann (wenige Sekunden). Nutzer sind das nicht gewohnt, daher wurde dies ergänzt.
 
 
+\clearpage
 \section{Anhang}
-\subsection{Unit Test Reports}
-\subsubsection{Bibliothek}
-\subsubsection{App}
-
-\subsection{Links}
-\subsubsection{Bibliothek}
+\subsection{Bibliothek}
 NuGet Package: \url{https://www.nuget.org/packages/EarablesBLE}\\
 GitHub Repository: \url{https://github.com/vlle1/lib-earablesKIT}
-\subsubsection{App und BibTestApp}
+\subsection{App und BibTestApp}
 GitHub Repository: \url{https://github.com/vlle1/earablesKIT}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
