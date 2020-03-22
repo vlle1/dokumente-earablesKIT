@@ -392,7 +392,7 @@ Bei dem Extrahieren der Rohdaten aus den Bytes der Earables wird keine Verbindun
 
 \section{Test App für die Bibliothek}
 \subsection{Motivation}
-Die Bibliothek wird als NuGet-Package veröffentilcht. Daher wollten wir besonders hier einen hohen Wert auf die Korrektheit legen und umfassend testen.\\
+Die Bibliothek wird als NuGet-Package veröffentlicht. Daher wollten wir besonders hier einen hohen Wert auf die Korrektheit legen und umfassend testen.\\
 Da wir für die Bluetoothverbindung in unserer Bibliothek das NuGet \glqq{}lBluetooth LE plugin for Xamarin\grqq{} benutzen, erschwert uns dies das Testen mit xUnit tests. Wir können hier nicht, wie beim Rest des Projektes, mit Reflection arbeiten, weil es sich bei der \glqq{}obersten Klasse\grqq{} um eine static Klasse handelt. Diese besitzt nur eine static Property, welche man nicht mocken kann, da kein Setter bereitstellt wird.\\
  Um unsere Bibliothek trotzdem zu testen, haben wir uns dafür entschieden eine eigene Test App für die Bibliothek zu bauen. So sind wir in der Lage, mit kleine Szenarien, die nur unsere Bibliothek betreffen, zielgerichtete Tests durchzuführen.
  \subsection{Funktionsweise}
