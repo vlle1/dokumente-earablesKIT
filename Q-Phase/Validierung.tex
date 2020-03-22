@@ -399,7 +399,6 @@ Im Folgenden ist die Testüberdeckung für die xUnit-Tests aufgelistet, das hei�
 Bei unserer Bibliothek haben wir, mit xUnit-Tests alles getestet, was ohne eine Verbindung  möglich war. Dies beinhaltet die Klassen IMUDataEntry, Gyroscope, Accelerometer und IMUDataExtractor.
 \\ \\ 
 \includegraphics[width=1\textwidth]{./bilder/BibTestCoverage/Testcoverage.PNG}
-\newpage
 \subsection{Model}
 Bei unserm Model haben wir nahezu alles getestet. Die Algorithmen haben wir mit voraufgezeichneten Daten gefüttert und gezählt wie viele Aktivitäten der Algorithmus erkannt hat. So konnten wir die Algorithmen mit gemockten Daten auf Korrektheit testen. Vergleichbar ist dies mit dem SettingsService. \\Zudem haben wir bei allen Tests mit der internen Reflection gearbeitet. Somit konnten wir den Serviceprovider im Servicemanager mocken. Über diesen können dann die gemockten Services zurückgegeben werden, damit die zu testende Klasse ohne Abhängigkeiten getestet werden kann.\\
 
