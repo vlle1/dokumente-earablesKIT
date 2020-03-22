@@ -471,7 +471,7 @@ Da da Test App für die Bibliothek nicht in der Definitionsphase geplant wurde, 
 \end{figure}
 \FloatBarrier
 
-Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gestartet ist und eine Verbindung zu den Earable besteht.
+Hinweis: Für die nachfolgenden Szenarien wird angenommen, dass die App bereits gestartet ist und eine Verbindung zu den Earable besteht.
 
 \subsubsection{Sampling starten}
 \begin{tabular}{ | p{12cm} | c| }
@@ -496,8 +496,7 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 \end{figure}
 \FloatBarrier
 
-%%mit einer anderen app die daten aufzeichnen und vregleichen ob beide das gleiche anzeigen
-\subsubsection{Setzen der LPF für das Gyroscope}
+\subsubsection{Setzen des LPF für das Gyroscope}
 \begin{tabular}{ | p{12cm} | c| }
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -514,7 +513,7 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 	\hline
 	Der Nutzer drückt den Button \glqq{}Get Gyro LPF\grqq{}. & \testok \\
 	\hline
-	Es wird angezeigt dass der LPF für das Gyroscope 41Hz beträgt . & \testok \\
+	Es wird angezeigt, dass der LPF für das Gyroscope 41Hz beträgt . & \testok \\
 	\hline
 \end{tabular}
 \\ \\ \\ \\
@@ -524,7 +523,7 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 \end{figure}
 \FloatBarrier
 
-\subsubsection{Setzen der LPF für den Accelerometer}
+\subsubsection{Setzen des LPF für den Accelerometer}
 \begin{tabular}{ | p{12cm} | c| }
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -541,7 +540,7 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 	\hline
 	Der Nutzer drückt den Button \glqq{}Get Acc LPF\grqq{}. & \testok \\
 	\hline
-	Es wird angezeigt dass der LPF für den Accelerometer 41Hz beträgt . & \testok \\
+	Es wird angezeigt, dass der LPF für den Accelerometer 41Hz beträgt . & \testok \\
 	\hline
 \end{tabular}
 \\ \\ \\ \\
@@ -628,10 +627,12 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 	Der Nutzer drückt den Button \glqq{}Stop Sampling\grqq{}. & \testok \\
 	\hline
 \end{tabular}
+\\ \\
+Hinweis: Der Scale Factor hängt von der gewählten Range ab.
 \\ \\ \\ \\
 \begin{figure}[h]
 	\centering
-    \subfigure[App fordert den Nutzer, nach drücken des Buttons \glqq{Set Gyrp Range}, auf einen Range für das Gyroscope auszuwählen]{\includegraphics[width=0.4\textwidth]{./bilder/BibTestApp/GyroRange.jpeg}}
+    \subfigure[App fordert den Nutzer, nach drücken des Buttons \glqq{Set Gyro Range}, auf einen Range für das Gyroscope auszuwählen]{\includegraphics[width=0.4\textwidth]{./bilder/BibTestApp/GyroRange.jpeg}}
 \end{figure}
 \FloatBarrier
 
@@ -669,10 +670,12 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 	Der Nutzer drückt den Button \glqq{}Stop Sampling\grqq{}. & \testok \\
 	\hline
 \end{tabular}
+\\ \\
+Hinweis: Der Scale Factor hängt von der gewählten Range ab.
 \\ \\ \\ \\
 \begin{figure}[h]
 	\centering
-    \subfigure[App fordert den Nutzer, nach drücken des Buttons \glqq{Set Gyrp Range}, auf einen Range für das Gyroscope auszuwählen]{\includegraphics[width=0.4\textwidth]{./bilder/BibTestApp/GyroRange.jpeg}}
+    \subfigure[App fordert den Nutzer, nach drücken des Buttons \glqq{Set Acc Range}, auf einen Range für den Accelerometer auszuwählen]{\includegraphics[width=0.4\textwidth]{./bilder/BibTestApp/AccRange.jpeg}}
 \end{figure}
 \FloatBarrier
 
@@ -698,9 +701,9 @@ Hinweis: Für die nachfolgenden Tests wird angenommen, dass die App bereits gest
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
 	\hline
-	Der Nutzer drückt denden Knopf an den Earables. & \testok \\
+	Der Nutzer drückt den Knopf an den Earables. & \testok \\
 	\hline
-	Auf der Console, im Debug Modus, wird eine Zeile gedruckt, die dem Nutzer mitteilt, dass der Knopf an den Earables gedrückt wurde. & \testok \\
+	Auf der Console, im Debug Modus, wird eine Zeile ausgegeben, die dem Nutzer mitteilt, dass der Knopf an den Earables gedrückt wurde. & \testok \\
 	\hline
 \end{tabular}
 
