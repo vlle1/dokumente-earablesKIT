@@ -75,12 +75,10 @@
 	\cellcolor{green!25} OK
 }
 
-\newcommand{\testntb}[0]{
-	\cellcolor{gray!25} \-
-}
+\newcommand{\testntb}[0]{NTB}
 
 \newcommand{\testfailed}[0]{
-	\cellcolor{red!25} OK
+	\cellcolor{red!25} FAILED
 }
 
 \newenvironment{usecase}{\tabularhead}
@@ -105,10 +103,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CONTENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Einleitung}
-In diesem Dokument wird festgehalten, wie zuverlässig und vor allem wie korrekt der Code ist, den wir in der Implementierungsphase angefertigt haben. Dabei kommen die Testszenarien, die wir im Pflichtenheft spezifiziert haben zum Einsatz und helfen uns dabei die Korrektheit unserer App zu sichern.\\
-Zusätzlich wurden xUnit-Tests geschrieben, welche große Bereiche unseres Codes abdecken. Die Testabdeckung wurde mit ReSharper ermittelt und im Dokument durch aussagekräftige Diagramme visualisiert.\\
-Für unsere Bibliothek haben wir zusätzlich eine Test App geschrieben, die uns mit neu angefertigten Szenarien dabei hilft, die Korrektheit sicher zu stellen. Außerdem haben wir 5 Probanden gefunden, die sich bereiterklärt haben, unsere App auszuprobieren. Ihre Kritik und Anmerkungen haben wir als Input genommen, um die App noch nutzerfreundlicher und besser zu machen.
-
+In diesem Dokument wird festgehalten, wie zuverlässig und vor allem wie korrekt der Code ist, den wir in der Implementierungsphase angefertigt haben.
+Dabei kommen die Testszenarien, die wir im Pflichtenheft spezifiziert haben, zum Einsatz und helfen uns dabei, die Korrektheit unserer App zu sichern.
+Zusätzlich wurden xUnit-Tests geschrieben, welche große Bereiche unseres Codes abdecken.\\
+Die Codecoverage wurde mit ReSharper ermittelt und im Dokument durch aussagekräftige Diagramme visualisiert.
+Für unsere Bibliothek haben wir zusätzlich eine Test App geschrieben, die uns mit neu angefertigten Szenarien dabei hilft, die Korrektheit sicher zu stellen.\\
+Außerdem haben wir 5 Probanden gefunden, die sich bereiterklärt haben, unsere App auszuprobieren.
+Mit Hilfe ihrer Kritik und ihrer Anmerkungen haben wir die App noch nutzerfreundlicher und besser gemacht.
 
 \section{Testszenarien}
 
@@ -124,7 +125,14 @@ Für unsere Bibliothek haben wir zusätzlich eine Test App geschrieben, die uns 
 \fi
 Die Testszenarien setzen sich aus den im Pflichtenheft genannten Testfällen (T) zusammen.
 Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definitionsphase), alle Änderungen an den Szenarien werden im Folgenden vor dem entsprechenden Szenario erwähnt.
-
+\\
+Die Überdeckung der Szenarientests beträgt 98,75\%.\\
+Erfolgreich waren 92,5\% der insgesamt 80 Tests.
+\\ \\
+Bedeutungen der Ergebnisse: \\
+OK: In allen Testläufen erfolgreich\\
+FAILED: In mindestens einem Testlauf nicht erfolgreich\\
+NTB: Konnte nicht getestet werden\\
 
 \subsection{Laufmodus}
 Änderungen: Keine
@@ -136,23 +144,23 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	\hline
 	/T070/ & Der Nutzer startet die App. & \testok \\
 	\hline
-	& Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & \testok \\
+	/T140/ & Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & \testok \\
 	\hline
-	& Nach dem Startvorgang der App wird in den Modus \glqq Laufmodus\grqq{} gewechselt. & \testok \\
+	/T070/ & Nach dem Startvorgang der App wird in den Modus \glqq Laufmodus\grqq{} gewechselt. & \testok \\
 	\hline
 	/T104/ & Falls es schon einen Laufvorgang zuvor gab, werden nun die Anzahl der zurückgelegten Schritte und die zurückgelegte Distanz angezeigt.& \testok \\
 	\hline
 	& Die Earables werden korrekt am Ohr des Nutzers angebracht. & \testok \\
 	\hline
-	& Der Nutzer startet den Laufmodus. & \testok \\
+	/T075/ & Der Nutzer startet den Laufmodus. & \testok \\
 	\hline
-	& Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an. & \testok \\
+	/T100/ & Die App zeigt dem Nutzer den Status \glqq stehend\grqq{} an. & \testok \\
 	\hline
-	& Die App zeigt dem Nutzer die aktuelle Schrittfrequenz und die Anzahl der bisher. & \testok \\
+	/T101/ & Die App zeigt dem Nutzer die aktuelle Schrittfrequenz und die Anzahl der bisher gegangenen Schritte. & \testok \\
 	\hline
-	& Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an. & \testok \\
+	/T100/ & Sobald der Nutzer anfängt zu gehen zeigt die App \glqq gehend\grqq{} an. & \testok \\
 	\hline
-	& Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. & \testok \\
+	/T100/ & Sobald der Nutzer wieder still steht ändert sich der Zustand wieder zurück zu \glqq stehend\grqq. & \testok \\
 	\hline	
 \end{tabular}
 
@@ -167,21 +175,21 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	\hline
 	/T070/ & Der Nutzer startet die App. & \testok \\
 	\hline
-	& Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & \testok \\
+	/T140/ & Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & \testok \\
 	\hline
 	/T090/ & Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Zählmodus\grqq . & \testok \\
 	\hline
 	& Die Earables werden korrekt am Ohr des Nutzers angebracht. & \testok  \\
 	\hline
-	& Der Nutzer wählt eine verfügbare Übung aus. & \testok  \\
+	/T200/ & Der Nutzer wählt eine verfügbare Übung aus. & \testok  \\
 	\hline
-	& Der Nutzer startet den gewählten Vorgang. & \testok  \\
+	/T075/ & Der Nutzer startet den gewählten Vorgang. & \testok  \\
 	\hline
-	& Der Nutzer führt die Übung 15 (natürliche Zahl) mal aus. & \testok  \\
+	/T170/, /T180/ & Der Nutzer führt die Übung 15 (natürliche Zahl) mal aus. & \testok  \\
 	\hline
-	& Der Nutzer stoppt den laufenden Vorgang. & \testok  \\
+	/T080/ & Der Nutzer stoppt den laufenden Vorgang. & \testok  \\
 	\hline
-	/T200/ & Die App zeigt 15 an. & \testok  \\
+	/T200/ & Die App zeigt 15 an. & \testfailed  \\
 	\hline
 \end{tabular}
 
@@ -195,17 +203,17 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	\hline
 	/T070/ & Der Nutzer startet die App. & \testok \\
 	\hline
-	& Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & \testok \\
+	/T140/ & Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & \testok \\
 	\hline
-	& Der Nutzer spielt Musik mit der vorinstallierten Musik-App ab. & \testok \\
+	& Der Nutzer spielt Musik mit der vorinstallierten Musik-App ab. & \testntb \\
 	\hline
-	& Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Music Mode\grqq . & \testok \\
+	/T090/ & Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Music Mode\grqq . & \testok \\
 	\hline
 	& Die Earables werden korrekt am Ohr des Nutzers angebracht. & \testok \\
 	\hline
 	& Der Nutzer beginnt zu gehen. & \testok  \\
 	\hline
-	& Der Nutzer startet den gewählten Vorgang. & \testok  \\
+	/T075/ & Der Nutzer startet den gewählten Vorgang. & \testok  \\
 	\hline
 	& Der Nutzer hört auf zu gehen. & \testok  \\
 	\hline
@@ -228,7 +236,7 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	\hline
 	/T070/ & Der Nutzer startet die App. & \testok \\
 	\hline
-	& Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & \testok  \\
+	/T140/ & Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & \testok  \\
 	\hline
 	/F090/ & Nach dem Startvorgang der App wechselt der Nutzer in den Modus \glqq Lauschen\&Agieren\grqq . & \testok  \\
 	\hline
@@ -242,9 +250,9 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	\hline
 	& Der Nutzer führt die Übung aus. & \testok  \\
 	\hline
-	& Die letzten beiden Schritte werden so lange wiederholt, bis alle ausgewählten Übungen erledigt sind. & \testok  \\
+	/T222/ & Die letzten beiden Schritte werden so lange wiederholt, bis alle ausgewählten Übungen erledigt sind. & \testok  \\
 	\hline
-	& Der Vorgang wird automatisch beendet. & \testok  \\
+	& Der Vorgang wird automatisch beendet. & \testfailed \\
 	\hline
 	/T223/ & Die App zeigt die benötigte Zeit für den Vorgang an. & \testok  \\
 	\hline
@@ -260,15 +268,15 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	\hline
 	/T070/ & Der Nutzer startet die App. & \testok \\
 	\hline
-	& Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & \testok  \\
+	/T140/ & Der Nutzer verbindet in der App die Earables, über BLE mit seinem Smartphone. & \testok  \\
 	\hline
-	& Nach dem Startvorgang der App wechselt der Nutzer in die Ansicht \glqq Einstellungen\grqq . & \testok \\
+	/T090/ & Nach dem Startvorgang der App wechselt der Nutzer in die Ansicht \glqq Einstellungen\grqq . & \testok \\
 	\hline
 	/T250/ & Der Nutzer ändert seinen Namen. & \testok  \\
 	\hline
 	/T260/ & Der Nutzer ändert die Sprache auf Deutsch & \testok  \\
 	\hline
-	/T270/ & Dem Nutzer löscht die gespeicherten Vorgangsdaten. & \testok  \\
+	/T270/ & Dem Nutzer löscht die gespeicherten Vorgangsdaten. & \testfailed  \\
 	\hline
 	/T280/ & Dem Nutzer ändert die Samplingrate & \testok  \\
 	\hline
@@ -280,9 +288,9 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	\hline
 	/T070/ & Der Nutzer startet die App. & \testok  \\
 	\hline
-	& Der Nutzer wechselt in die Ansicht \glqq Einstellungen\grqq . & \testok  \\
+	/T090/ & Der Nutzer wechselt in die Ansicht \glqq Einstellungen\grqq . & \testok  \\
 	\hline
-	& Die Einstellungen sind exakt so, wie sie vorher eingestellt wurden. & \testok  \\
+	& Die Einstellungen sind exakt so, wie sie vorher eingestellt wurden. & \testfailed  \\
 	\hline
 \end{tabular}
 
@@ -297,15 +305,15 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	\hline
 	/T070/ & Der Nutzer startet die App. & \testok \\
 	\hline
-	/T290/ & Der Nutzer wird aufgefordert seinen Namen und seine Schrittlänge zu setzen. & \testok  \\
+	/T290/ & Der Nutzer wird aufgefordert seinen Namen und seine Schrittlänge zu setzen. & \testfailed  \\
 	\hline
-	& Der Nutzer wählt im Hamburgermenü den Reiter Einstellungen aus. & \testok  \\
+	/T090/ & Der Nutzer wählt im Hamburgermenü den Reiter Einstellungen aus. & \testok  \\
 	\hline
 	/T260/ & Der Nutzer ändert die Sprache auf Deutsch. & \testok  \\
 	\hline
 	& Der Nutzer klickt auf \glqq SAVE\grqq . & \testok  \\
 	\hline
-	& Danach wechselt der Nutzer in den \glqq Laufmodus\grqq . & \testok  \\
+	/T090/ & Danach wechselt der Nutzer in den \glqq Laufmodus\grqq . & \testok  \\
 	\hline
 	& Der Nutzer schließt die App. & \testok  \\
 	\hline
@@ -327,11 +335,11 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	\hline
 	/T070/ & Der Nutzer startet die App. & \testok \\
 	\hline
-	& Der Nutzer wählt über das Hamburgermenü den Reiter \glqq Dateimanagement\grqq . & \testok  \\
+	/T090/ & Der Nutzer wählt über das Hamburgermenü den Reiter \glqq Dateimanagement\grqq . & \testok  \\
 	\hline
-	& Der Nutzer exportiert seine Daten. & \testok \\
+	/T300/ & Der Nutzer exportiert seine Daten. & \testok \\
 	\hline
-	/T270/ & Der Nutzer löscht seine Daten. & \testok \\
+	/T270/ & Der Nutzer löscht seine Daten. & \testfailed \\
 	\hline
 	/T300/ & Der Nutzer importiert seine Daten aus einer CSV-Datei. & \testok \\
 	\hline
@@ -349,7 +357,7 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	\hline
 	/T070/ & Der Nutzer startet die App. & \testok \\
 	\hline
-	& Der Nutzer wechselt über das Hamburgermenü in die Datenübersicht. & \testok  \\
+	/T090/ & Der Nutzer wechselt über das Hamburgermenü in die Datenübersicht. & \testok  \\
 	\hline
 	/T320/ & Dem Nutzer werden die letzten Trainingsdaten der letzten 30 Vorgangstage angezeigt. & \testok  \\
 	\hline
@@ -365,15 +373,15 @@ Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definition
 	\hline
 	/T070/ & Der Nutzer startet die App. & \testok \\
 	\hline
-	& Das Pop-up Fenster erscheint. & \testok  \\
+	/T140/ & Das Pop-up Fenster erscheint. & \testok  \\
 	\hline
 	/T160/ & Der Nutzer klickt das Pop-up weg. & \testok  \\
 	\hline
-	& Der Nutzer versucht einen Laufvorgang zu starten. & \testok  \\
+	/T075/ & Der Nutzer versucht einen Laufvorgang zu starten. & \testok  \\
 	\hline
-	& Das Pop-up erscheint. & \testok  \\
+	/T165/ & Das Pop-up erscheint. & \testok  \\
 	\hline
-	& Der Nutzer stellt eine Verbindung zu den Earables her. & \testok  \\
+	/T140/ & Der Nutzer stellt eine Verbindung zu den Earables her. & \testok  \\
 	\hline
 	& Der Nutzer entfernt sich mit seinem Smartphone von de Earables. & \testok  \\
 	\hline
@@ -502,17 +510,17 @@ Hinweis: Für die nachfolgenden Szenarien wird angenommen, dass die App bereits 
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
 	\hline
-	Der Nutzer drückt den Button \glqq{}Get Gyro LPF\grqq{}. & \testok \\
+	Der Nutzer drückt den Button \glqq Get Gyro LPF\grqq{}. & \testok \\
 	\hline
 	Es wird angezeigt dass der LPF für das Gyroscope 5Hz beträgt . & \testok \\
 	\hline
-	Der Nutzer drückt den Button \glqq{}Set Gyro LPF\grqq{}. & \testok \\
+	Der Nutzer drückt den Button \glqq Set Gyro LPF\grqq{}. & \testok \\
 	\hline
 	Der Nutzer wählt 41Hz als LPF aus. & \testok \\
 	\hline
 	Es wird angezeigt, dass der LPF auf 41Hz gesetzt wird . & \testok \\
 	\hline
-	Der Nutzer drückt den Button \glqq{}Get Gyro LPF\grqq{}. & \testok \\
+	Der Nutzer drückt den Button \glqq Get Gyro LPF\grqq{}. & \testok \\
 	\hline
 	Es wird angezeigt, dass der LPF für das Gyroscope 41Hz beträgt . & \testok \\
 	\hline
@@ -529,11 +537,11 @@ Hinweis: Für die nachfolgenden Szenarien wird angenommen, dass die App bereits 
 	\hline
 	\textbf{Beschreibung} & \textbf{Bestanden}\\
 	\hline
-	Der Nutzer drückt den Button \glqq{}Get Acc LPF\grqq{}. & \testok \\
+	Der Nutzer drückt den Button \glqq Get Acc LPF\grqq{}. & \testok \\
 	\hline
 	Es wird angezeigt dass der LPF für den Acc 5Hz beträgt . & \testok \\
 	\hline
-	Der Nutzer drückt den Button \glqq{}Set Acc LPF\grqq{}. & \testok \\
+	Der Nutzer drückt den Button \glqq Set Acc LPF\grqq{}. & \testok \\
 	\hline
 	Der Nutzer wählt 184Hz als LPF aus. & \testok \\
 	\hline
