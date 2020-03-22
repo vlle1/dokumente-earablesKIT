@@ -109,8 +109,7 @@ Zusätzlich wurden xUnit-Tests geschrieben, welche große Bereiche unseres Codes
 Die Codecoverage wurde mit ReSharper ermittelt und im Dokument durch aussagekräftige Diagramme visualisiert.
 Für unsere Bibliothek haben wir zusätzlich eine Test App geschrieben, die uns mit neu angefertigten Szenarien dabei hilft, die Korrektheit sicher zu stellen.\\
 Außerdem haben wir 5 Probanden gefunden, die sich bereiterklärt haben, unsere App auszuprobieren.
-Mit Hilfe ihrer Kritik und ihrer Anmerkungen haben wir die App noch nutzerfreundlicher und besser gemacht.
-
+Mit Hilfe ihrer Kritik und ihren Anmerkungen konnten wir die App noch nutzerfreundlicher und besser machen.
 \section{Testszenarien}
 
 %Table template:
@@ -123,21 +122,21 @@ Mit Hilfe ihrer Kritik und ihrer Anmerkungen haben wir die App noch nutzerfreund
 	\hline	
 \end{tabular}
 \fi
+\paragraph{Einleitung}
 Die Testszenarien setzen sich aus den im Pflichtenheft genannten Testfällen (T) zusammen.
 Die Testszenarien wurden schon vor der Entwicklung festgelegt (in der Definitionsphase), alle Änderungen an den Szenarien werden im Folgenden vor dem entsprechenden Szenario erwähnt.
 \\
 Die Überdeckung der Szenarientests beträgt 98,75\%.\\
 Erfolgreich waren 92,5\% der insgesamt 80 Tests.
-\\ \\
-Bedeutungen der Ergebnisse: \\
-OK: In allen Testläufen erfolgreich\\
-FAILED: In mindestens einem Testlauf nicht erfolgreich\\
-NTB: Konnte nicht getestet werden\\
 
+\paragraph{Legende} 
+\begin{itemize}
+	\item OK: In allen Testläufen erfolgreich
+	\item FAILED: In mindestens einem Testlauf nicht erfolgreich
+	\item NTB: Konnte nicht getestet werden
+\end{itemize}
+\clearpage
 \subsection{Laufmodus}
-Änderungen: Keine
-\\
-\\
 \begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
 	\hline
 	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -166,9 +165,6 @@ NTB: Konnte nicht getestet werden\\
 
 
 \subsection{Zählmodus}
-Änderungen: Keine
-\\
-\\
 \begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
 	\hline
 	\textbf{Testfall} & \textbf{Beschreibung} & \textbf{Bestanden}\\
@@ -192,9 +188,13 @@ NTB: Konnte nicht getestet werden\\
 	/T200/ & Die App zeigt 15 an. & \testfailed  \\
 	\hline
 \end{tabular}
-
+\paragraph{Anmerkungen}
+Die App zeigte in 2 von 3 Fällen am Ende nich exakt 15 an.\\
+Im ersten Fall (bei SitUps) wurden nur 10 erkannt, im zweiten Fall (bei Liegestützen) wurde eine Liegestütze doppelt erkannt. 
+\clearpage
 \subsection{Start/Stop Musikmodus}
-Änderungen: Die Funktion wurde aus dem Laufmodus in den Modus \glqq Musik Modus\grqq{} umbenannt.
+\paragraph{Änderungen}
+Die Funktion wurde aus dem Laufmodus in den Modus \glqq Musik Modus\grqq{} umbenannt.
 \\
 \\
 \begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
@@ -224,10 +224,12 @@ NTB: Konnte nicht getestet werden\\
 	/T210/ & Die Musik startet automatisch wieder. & \testok  \\
 	\hline
 \end{tabular}
-
+\paragraph{Anmerkungen}
+Das Abspielen der Musik wurde in der Implemetierungsphase nicht über eine externe Musik-App realisiert (siehe Implementierungsprotokoll). 
 
 \subsection{Lauschen\&Agieren}
-Änderungen:
+\paragraph{Änderungen}
+Der Lauschen\&Agieren Modus wird nicht mehr automatisch beendet, sondern durch den Nutzer.  
 \\
 \\
 \begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
@@ -257,9 +259,10 @@ NTB: Konnte nicht getestet werden\\
 	/T223/ & Die App zeigt die benötigte Zeit für den Vorgang an. & \testok  \\
 	\hline
 \end{tabular}
-
 \subsection{Einstellungen}
-Änderungen: Die Standardsprache ist Englisch, daher wurde /T260/ auf Deutsch geändert.
+\paragraph{Änderungen}
+Die Standardsprache ist Englisch, daher wurde /T260/ auf Deutsch geändert.\\
+Das Löschen der Vorgangsdaten wurde auf eine andere Seite in der App verlegt.
 \\
 \\
 \begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
@@ -293,10 +296,12 @@ NTB: Konnte nicht getestet werden\\
 	& Die Einstellungen sind exakt so, wie sie vorher eingestellt wurden. & \testfailed  \\
 	\hline
 \end{tabular}
-
+\paragraph{Anmerkungen}
+Die Samplerate wurde nicht gespeichert. Dieser Bug wurde behoben.
 
 \subsection{Erstnutzung}
-Änderungen: Der Punkt \glqq Der Nutzer klickt auf SAVE\grqq{} wurde hinzugefügt. Außerdem wurde die Sprache von Englisch auf Deutsch geändert.
+\paragraph{Änderungen}
+Der Punkt \glqq Der Nutzer klickt auf SAVE\grqq{} wurde hinzugefügt. Außerdem wurde die Sprache von Englisch auf Deutsch geändert. Die Aufforderung bei Erstnutzung (Wunschkriterium) wurde nicht implementiert.
 \\
 \\
 \begin{tabular}{ |p{1.5cm} | p{12cm} | c| }
